@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquadri&Box | Avalie nossa Qualidade</title>
 
+    <meta name="description" content="Especialistas em Esquadrias de Alumínio, Box para Banheiro e Vidros Temperados.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        /* LOGO QUADRADO COM PONTAS QUEBRADAS */
+        .logo { 
+            width: 150px; 
+            height: 150px; 
+            object-fit: contain; 
+            padding: 10px;
+            border-radius: 22px; /* Pontas quebradas/arredondadas */
+            border: 3px solid #facc15; 
+            background: white; 
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 { font-size: 26px; margin-bottom: 5px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        h2 { font-size: 17px; color: #facc15; margin-bottom: 25px; font-weight: normal; }
+        
+        #instrucao { font-size: 16px; color: #e2e8f0; margin-bottom: 20px; }
+
+        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn {
+            font-size: 40px; color: #475569; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .star-btn.active { color: #facc15; transform: scale(1.25); text-shadow: 0 0 20px rgba(250, 204, 21, 0.6); }
+
+        textarea {
+            width: 100%; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 15px;
+            color: white; padding: 15px; margin-bottom: 15px;
+            resize: none; outline: none; font-family: inherit; font-size: 15px;
+        }
+        textarea::placeholder { color: rgba(255,255,255,0.5); }
+
+        .botao {
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 18px; border-radius: 50px;
+            font-weight: 800; font-size: 16px; text-decoration: none;
+            transition: 0.3s; border: none; cursor: pointer;
+        }
+
+        .google { background: #facc15; color: #000; animation: pulsar 2s infinite; }
+        .whatsapp { background: #22c55e; color: white; animation: pulsar 2s infinite; }
+
+        .botao::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg); animation: brilhoPassando 3s infinite;
+        }
+
+        @keyframes brilhoPassando { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
+        @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        .hidden { display: none; }
+
+        /* RODAPÉ MAIS VISÍVEL */
+        .footer { 
+            margin-top: 35px; 
+            font-size: 13px; 
+            color: #ffffff; /* Cor branca para não ficar apagado */
+            border-top: 1px solid rgba(255,255,255,0.2); 
+            padding-top: 25px;
+            line-height: 1.8;
+        }
+        .footer a { color: #22c55e; text-decoration: none; font-weight: 800; border-bottom: 1px solid #22c55e; }
+        .footer b { color: #facc15; }
+    </style>
+</head>
+    <script src="https://t.contentsquare.net/uxa/7bc1302beb4f7.js"></script>
+<body>
+
+<div class="container">
+    <img src="esquadri-e-box.png" class="logo" alt="Esquadri&Box">
+
+    <h1>Esquadri&Box</h1>
+    <h2>Excelência em Alumínio e Vidros</h2>
+    
+    <p id="instrucao">Toque nas estrelas para avaliar nosso serviço:</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Isso é fantástico! 🎉</p>
+        <p>Sua satisfação nos motiva. Que tal nos dar uma força no Google?</p>
+        <a href="https://g.page/r/CZ0VbTVJUwwmEAE/review" target="_blank" class="botao google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Sentimos muito... 😔</p>
+        <p>Nosso objetivo é a perfeição. Em que podemos melhorar para te atender melhor?</p>
+        <textarea id="texto-melhoria" placeholder="Sua opinião é fundamental para nós..."></textarea>
+        <button onclick="enviarWhatsApp()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> ENVIAR PARA O GERENTE
+        </button>
+    </div>
+
+    <div class="footer">
+        <div>🔒 CONEXÃO PROTEGIDA | © 2026</div>
+        <div>
+            Desenvolvido por 
+            <a href="https://wa.me/5511954950044?text=Quero%20saber%20sobre%20link%20de%20avaliacoes%20do%20Google" target="_blank">
+                ImpulsoWeb10
+            </a>
+        </div>
+        <div style="margin-top: 5px;">Suporte Especializado <b>Esquadri&Box</b></div>
+    </div>
+
+<script>
+    let notaSelecionada = 0;
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        const stars = document.querySelectorAll('.star-btn');
+        const bom = document.getElementById('feedback-bom');
+        const ruim = document.getElementById('feedback-ruim');
+        const instrucao = document.getElementById('instrucao');
+
+        stars.forEach((s, i) => {
+            if (i < n) s.classList.add('active');
+            else s.classList.remove('active');
+        });
+
+        instrucao.classList.add('hidden');
+
+        if (n >= 4) {
+            bom.classList.remove('hidden');
+            ruim.classList.add('hidden');
+            // Efeito de Festa / Confetes
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#facc15', '#22c55e', '#ffffff']
+            });
+        } else {
+            ruim.classList.remove('hidden');
+            bom.classList.add('hidden');
+        }
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        const telefoneEsquadria = "5511945656193"; // WhatsApp do cliente Esquadria
+        
+        if (!texto) { 
+            alert("Por favor, digite uma breve sugestão para podermos te ajudar."); 
+            return; 
+        }
+
+        const mensagem = encodeURIComponent(`Feedback Esquadri&Box (${notaSelecionada} estrelas): ${texto}`);
+        window.open(`https://wa.me/${telefoneEsquadria}?text=${mensagem}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
