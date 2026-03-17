@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Fretadão</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .container { max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px); padding: 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); text-align: center; }
+        
+        .logo-box { width: 100%; margin-bottom: 20px; transition: 0.5s ease; }
+        .logo { width: 100%; max-width: 280px; height: auto; border-radius: 20px; border: 3px solid #facc15; background: white; transition: 0.5s; }
+        .logo-small .logo { max-width: 190px; }
+
+        /* CARINHA AO LADO DA FRASE */
+        .status-wrapper { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 15px;
+            min-height: 30px;
+        }
+        #status-txt { font-weight: 700; color: #facc15; font-size: 18px; }
+        #carinha { font-size: 24px; }
+        
+        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn { font-size: 45px; color: #475569; cursor: pointer; transition: 0.3s; }
+        .star-btn.active { color: #facc15; }
+
+        textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 15px; color: white; padding: 15px; margin-bottom: 15px; outline: none; resize: none; font-family: inherit; font-size: 14px; height: 100px; }
+
+        .img-fretadao { width: 100%; border-radius: 20px; margin-bottom: 15px; border: 2px solid #facc15; display: none; transform: scale(0.5); opacity: 0; animation: crescendoEaparecendo 1.5s ease-out forwards; }
+
+        /* BOTÃO AMARELO COM PULSO E BRILHO */
+        .google { 
+            background: #facc15; 
+            color: #000; 
+            font-weight: 800; 
+            padding: 18px; 
+            border-radius: 50px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            text-decoration: none; 
+            animation: pulse 2s infinite; 
+            position: relative; 
+            overflow: hidden; 
+            margin-top: 10px; 
+        }
+        .google::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: -100%; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); 
+            animation: shine 3s infinite; 
+        }
+        
+        .whatsapp { background: #22c55e; color: white; padding: 18px; border-radius: 50px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; width: 100%; border: none; cursor: pointer; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); } 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); } }
+        @keyframes shine { to { left: 100%; } }
+        @keyframes crescendoEaparecendo { to { opacity: 1; transform: scale(1); } }
+
+        .footer { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .slogan-seo { font-style: italic; color: #facc15; font-size: 13px; display: block; margin-bottom: 15px; min-height: 40px; }
+        .vendas-link { font-size: 11px; color: #cbd5e1; margin-bottom: 10px; display: block; line-height: 1.4; }
+        .vendas-link a { color: #38bdf8; text-decoration: none; font-weight: bold; border-bottom: 1px solid #38bdf8; }
+        .dev { font-size: 11px; color: #64748b; }
+        .dev a { color: #22c55e; text-decoration: none; font-weight: bold; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+    <script src="https://t.contentsquare.net/uxa/7bc1302beb4f7.js"></script>
+<body>
+
+<div class="container">
+    <div class="logo-box" id="logo-wrap">
+        <img src="fretadao.png" class="logo" alt="Fretadão">
+    </div>
+
+    <h1 style="font-size: 22px; margin-bottom: 5px;">Fretadão</h1>
+    <p id="instrucao" style="font-size: 14px; color: #cbd5e1; margin-bottom: 15px;">Sua avaliação é muito valiosa para nós!</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div class="status-wrapper hidden" id="feedback-status">
+        <span id="status-txt"></span>
+        <span id="carinha"></span>
+    </div>
+
+    <div id="area-feedback" class="hidden">
+        <textarea id="texto-cliente"></textarea>
+        <div id="bloco-ruim" class="hidden">
+            <button onclick="enviarGerente()" class="whatsapp"><i class="fab fa-whatsapp"></i> ENVIAR AO GERENTE</button>
+        </div>
+    </div>
+
+    <div id="bloco-bom" class="hidden">
+        <img src="fretadaopai.png" class="img-fretadao" id="img-bus">
+        <a href="https://www.google.com/search?sca_esv=728cb637a3a48d4c&sxsrf=ANbL-n5ZDXrF4zJkovsuNRwaDVKdnwrqVw:1773599399723&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOW38ihEJL9ML2wQioW5g9t-FKz34cg_ScaTJa5Z3YbInXzGLwzDOo-FT_jizCn0E7ZgjxIdXUl-E4006D9ngMCp-Vsf7&q=Fretad%C3%A3o+Coment%C3%A1rios&sa=X&ved=2ahUKEwij4MbRxKKTAxV4pJUCHWSAIC4Q0bkNegQIGxAH&biw=1366&bih=615&dpr=1#lrd=0x94ce5804ccf2f1ab:0x83ac86aaa25e4687,3,,,," class="google" target="_blank">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div class="footer">
+        <span id="slogan-seo" class="slogan-seo">"Fretadão: Levando pessoas, movendo histórias."</span>
+        <span class="vendas-link">
+            Deseja ter um link personalizado para sua empresa? 
+            <a href="https://wa.me/5511954950044?text=Olá Robson, vi o link do Fretadão e quero um sistema para minha empresa." target="_blank">Saiba mais</a>
+        </span>
+        <div class="dev">Desenvolvido por: <a href="https://impulsoweb10.com.br" target="_blank"><b>ImpulsoWeb10</b></a></div>
+    </div>
+</div>
+
+<script>
+    function avaliar(n) {
+        const stars = document.querySelectorAll('.star-btn');
+        const carinha = document.getElementById('carinha');
+        const statusTxt = document.getElementById('status-txt');
+        const slogan = document.getElementById('slogan-seo');
+        const txtInput = document.getElementById('texto-cliente');
+        const statusWrapper = document.getElementById('feedback-status');
+        
+        stars.forEach((s, i) => { i < n ? s.classList.add('active') : s.classList.remove('active'); });
+        document.getElementById('logo-wrap').classList.add('logo-small');
+        document.getElementById('instrucao').classList.add('hidden');
+        
+        statusWrapper.classList.remove('hidden');
+
+        if (n === 1) {
+            carinha.innerText = "☹️"; statusTxt.innerText = "Sentimos muito."; 
+            txtInput.placeholder = "Nos conte o que houve para podermos nos desculpar e resolver."; 
+            slogan.innerText = "Sua segurança e satisfação são nossas metas diárias."; exibirArea(true);
+        } else if (n === 2) {
+            carinha.innerText = "😐"; statusTxt.innerText = "Nos desculpe."; 
+            txtInput.placeholder = "Sua opinião é essencial para corrigirmos nossas falhas."; 
+            slogan.innerText = "Ouvir você nos ajuda a evoluir a cada viagem."; exibirArea(true);
+        } else if (n === 3) {
+            carinha.innerText = "🙂"; statusTxt.innerText = "Obrigado por avisar."; 
+            txtInput.placeholder = "Como podemos melhorar para chegar às 5 estrelas?"; 
+            slogan.innerText = "Transporte de excelência se constrói com feedback."; exibirArea(true);
+        } else {
+            carinha.innerText = "😍"; statusTxt.innerText = "Gratidão!"; 
+            slogan.innerText = "O melhor fretamento executivo agradece a sua confiança!"; 
+            exibirArea(false); 
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+        }
+    }
+
+    function exibirArea(isRuim) {
+        const areaFeedback = document.getElementById('area-feedback');
+        const blocoBom = document.getElementById('bloco-bom');
+        const blocoRuim = document.getElementById('bloco-ruim');
+        const img = document.getElementById('img-bus');
+
+        if (isRuim) {
+            areaFeedback.classList.remove('hidden'); blocoRuim.classList.remove('hidden'); 
+            blocoBom.classList.add('hidden'); img.style.display = "none";
+        } else {
+            areaFeedback.classList.add('hidden'); blocoRuim.classList.add('hidden'); 
+            blocoBom.classList.remove('hidden'); img.style.display = "block";
+        }
+    }
+
+    function enviarGerente() {
+        const msg = document.getElementById('texto-cliente').value;
+        window.open(`https://wa.me/5511972082305?text=Feedback Fretadão: ${msg}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
