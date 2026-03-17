@@ -1,1 +1,210 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óptica Lionda | Unidade II</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; }
+
+        .container {
+            max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px); padding: 30px 20px; border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            text-align: center; position: relative;
+        }
+
+        /* LOGO COM ESPAÇO BRANCO REDUZIDO */
+        .logo { 
+            width: 180px; height: auto; object-fit: contain; 
+            padding: 4px; /* Espaço branco diminuído */
+            border-radius: 20px; border: 3px solid #facc15; 
+            background: white; margin: 0 auto 15px;
+            transition: transform 0.4s ease; display: block;
+        }
+        .logo-compacta { transform: scale(0.8); margin-bottom: -15px; }
+
+        h1 { font-size: 26px; margin-bottom: 2px; }
+        h2 { font-size: 16px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
+        
+        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; margin-bottom: 15px; min-height: 24px; }
+
+        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
+        .star-btn.active { color: #facc15; transform: scale(1.1); }
+
+        /* ANIMAÇÃO DA IMAGEM: CRESCENDO E PULSANDO */
+        .img-retangular {
+            width: 90%; height: 140px; object-fit: cover; border-radius: 15px;
+            margin: 0 auto 20px; border: 2px solid #facc15; display: block;
+            transform: scale(0);
+            animation: crescerEPulsar 2.5s forwards ease-in-out;
+        }
+
+        @keyframes crescerEPulsar {
+            0% { transform: scale(0); opacity: 0; }
+            40% { transform: scale(1.05); opacity: 1; }
+            60% { transform: scale(1); }
+            80% { transform: scale(1.03); box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        textarea {
+            width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 15px; color: white; padding: 12px; margin-bottom: 12px; resize: none; outline: none;
+        }
+
+        .botao {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 16px; border-radius: 50px; font-weight: 800;
+            text-decoration: none; transition: 0.3s; border: none; cursor: pointer; 
+            margin-bottom: 10px; position: relative; overflow: hidden;
+        }
+
+        /* BOTAO AMARELO PULSANDO COM BRILHO INTERNO */
+        .google { 
+            background: #facc15; color: #000; 
+            animation: pulsarBotao 2s infinite;
+        }
+
+        .google::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transform: skewX(-25deg); animation: brilhoMetalic 3s infinite;
+        }
+
+        @keyframes pulsarBotao {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes brilhoMetalic {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        .whatsapp { background: #22c55e; color: white; }
+
+        .hidden { display: none; }
+
+        /* RODAPÉ E CORES */
+        .footer { margin-top: 25px; font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        
+        .frase-personalizada { display: block; margin-top: 12px; font-size: 13px; font-weight: 700; color: #fff; }
+        
+        .saiba-mais { color: #facc15; text-decoration: none; text-transform: uppercase; margin-left: 5px; }
+        
+        .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; } /* Verde agora */
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="lionda-oculos.png" class="logo" id="main-logo" alt="Logo">
+
+    <h1 id="titulo">Óptica Lionda</h1>
+    <h2 id="subtitulo">Unidade II</h2>
+    
+    <p id="instrucao">Como foi sua experiência hoje?</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onmouseover="setFrase(1)" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(2)" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(3)" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(4)" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(5)" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <img src="optica-lionda.png" class="img-retangular" alt="Sucesso">
+        <p style="font-size: 17px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
+        <a href="https://www.google.com/maps/place/%C3%93tica+Lionda/@-23.4210109,-46.3495786,17z/data=!4m8!3m7!1s0x94ce7d399227cfdd:0xd2612d44d239ba82!8m2!3d-23.4210109!4d-46.3495786!9m1!1b1!16s%2Fg%2F11k6sxfh2t?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="botao google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 12px; color: #facc15;" id="msg-desculpa">Sentimos muito... 😔</p>
+        <textarea id="texto-melhoria" rows="3" placeholder="Conte para nós como podemos melhorar..."></textarea>
+        <button onclick="enviarWhatsApp()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> FALAR COM O GERENTE
+        </button>
+    </div>
+
+    <div class="footer">
+        <div id="info-loja">
+            <b>📍 Estrada Pedro da Cunha Albuquerque Lopes, 2235</b><br>
+            Perobal, Itaquaquecetuba - SP<br>
+            <i class="fas fa-phone-alt" style="margin-top:5px;"></i> (11) 99982-2103
+        </div>
+        
+        <span class="frase-personalizada">
+            Deseja um link "assim" personalizado para sua empresa? 
+            <a href="https://wa.me/5511954950044" target="_blank" class="saiba-mais">Saiba mais</a>
+        </span>
+        
+        <div style="margin-top: 15px; opacity: 0.8;">
+            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-impulsoweb">ImpulsoWeb10</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let notaSelecionada = 0;
+    
+    const frasesInput = {
+        1: "Sentimos muito. 😔",
+        2: "Sentimos muito. 😟",
+        3: "Sentimos muito. 😐",
+        4: "Muito bom! 😊",
+        5: "Excelente! 😍"
+    };
+
+    const frasesDesculpas = {
+        1: "Sentimos muito por sua experiência ruim. 😔 Vamos melhorar.",
+        2: "Sentimos muito... 😟 Queremos corrigir nossas falhas.",
+        3: "Sentimos muito. 😐 Como podemos ser nota 10?"
+    };
+
+    function setFrase(n) {
+        if(notaSelecionada === 0) document.getElementById('instrucao').innerText = frasesInput[n];
+    }
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        document.querySelectorAll('.star-btn').forEach((s, i) => {
+            i < n ? s.classList.add('active') : s.classList.remove('active');
+        });
+
+        document.getElementById('main-logo').classList.add('logo-compacta');
+        document.getElementById('instrucao').classList.add('hidden');
+
+        if (n >= 4) {
+            document.getElementById('feedback-bom').classList.remove('hidden');
+            document.getElementById('feedback-ruim').classList.add('hidden');
+            confetti({ particleCount: 100, spread: 60, origin: { y: 0.8 } });
+        } else {
+            document.getElementById('msg-desculpa').innerText = frasesDesculpas[n];
+            document.getElementById('feedback-ruim').classList.remove('hidden');
+            document.getElementById('feedback-bom').classList.add('hidden');
+        }
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        if (!texto) { alert("Por favor, conte-nos como podemos melhorar."); return; }
+        window.open(`https://wa.me/5511999822103?text=Feedback Unidade II (${notaSelecionada} estrelas): ${texto}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
