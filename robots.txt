@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avaliar.impulsoweb10.com.br/sitemap.xml
+
+Disallow: /temp/
+Disallow: /testes/
