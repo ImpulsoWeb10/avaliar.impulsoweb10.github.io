@@ -1,1 +1,229 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óptica Lionda | Avalie nossa Qualidade</title>
+
+    <meta name="description" content="Especialistas em Lentes de Grau e Armações Modernas. Sua saúde visual é nossa prioridade na Óptica Lionda.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            padding: 30px 20px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        /* LOGO COM RESPIRO AJUSTADO */
+        .logo { 
+            width: 160px; 
+            height: auto; 
+            object-fit: contain; 
+            padding: 5px;
+            border-radius: 22px;
+            border: 3px solid #facc15; 
+            background: white; 
+            margin: 0 auto 15px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+        }
+
+        /* DIMINUI NA SEGUNDA TELA */
+        .logo-compacta {
+            transform: scale(0.7);
+            margin-bottom: -10px;
+        }
+
+        h1 { font-size: 24px; margin-bottom: 2px; color: #fff; }
+        h2 { font-size: 15px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
+        
+        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; min-height: 24px; margin-bottom: 15px; }
+
+        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn {
+            font-size: 40px; color: #475569; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .star-btn.active { color: #facc15; transform: scale(1.15); text-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
+
+        /* IMAGEM QUE SURGE DO ZERO E PULSA */
+        .img-comemorativa {
+            width: 90%; 
+            height: 140px; 
+            object-fit: cover; 
+            border-radius: 20px;
+            margin: 0 auto 15px; 
+            border: 2px solid #facc15;
+            display: block;
+            opacity: 0;
+            transform: scale(0);
+            animation: surgirEPulsar 2.5s forwards ease-out;
+        }
+
+        @keyframes surgirEPulsar {
+            0% { opacity: 0; transform: scale(0); }
+            40% { opacity: 1; transform: scale(1.05); }
+            60% { transform: scale(1); }
+            80% { transform: scale(1.03); box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        textarea {
+            width: 100%; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 15px;
+            color: white; padding: 12px; margin-bottom: 12px;
+            resize: none; outline: none; font-family: inherit;
+        }
+
+        .botao {
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 16px; border-radius: 50px;
+            font-weight: 800; font-size: 15px; text-decoration: none;
+            transition: 0.3s; border: none; cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* BOTAO AMARELO COM BRILHO E PULSO */
+        .google { background: #facc15; color: #000; animation: pulsarBtn 2s infinite; }
+        .google::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(-20deg); animation: brilhoPassando 3s infinite;
+        }
+
+        .whatsapp { background: #22c55e; color: white; }
+
+        @keyframes brilhoPassando { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
+        @keyframes pulsarBtn { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        .hidden { display: none; }
+
+        .footer { 
+            margin-top: 25px; font-size: 11px; color: #cbd5e1; 
+            border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .venda-link { color: #facc15; text-decoration: none; font-weight: 700; font-size: 12px; display: inline-block; margin-top: 10px;}
+        .marca-footer { color: #22c55e; text-decoration: none; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="logo-optica-lionda.png" class="logo" id="main-logo" alt="Óptica Lionda">
+
+    <h1 id="main-title">Óptica Lionda</h1>
+    <h2 id="sub-title">Excelência em Saúde Visual</h2>
+    
+    <p id="instrucao">Como foi sua experiência hoje?</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onmouseover="setFrase(1)" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(2)" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(3)" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(4)" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onmouseover="setFrase(5)" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <img src="casal-oculos.png" class="img-comemorativa" id="img-sucesso">
+        <p style="font-size: 17px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
+        <a href="https://www.google.com/search?client=firefox-b-d&q=lionda&lqi=CgZsaW9uZGFI-aHO9MywgIAIWgwQABgAIgZsaW9uZGGSAQhvcHRpY2lhbg#rlimm=14069717634906596944&lrd=0x94ce63199b503025:0xc341ada4f6a82650,3,,,,,&sv=CAMS8wEaxgEKBmxjbF9wdhImCgNwdnESH0NnMHZaeTh4TVdwdE56azNORGQwSWdZS0FCQUNHQUkSdgoDbHFpEm9DZ1pzYVc5dVpHRkktYUhPOU15d2dJQUlXZ3dRQUJnQUlnWnNhVzl1WkdHU0FRaHZjSFJwWTJsaGJxb0JBT29CSWdvZ0NBb1NIRU5KUVVKSmFFSk5jbUpIY0VSdFVVRXlVRFpKU25CVmRqWlZOemMSCAoDZnZyEgExGhJsb2NhbC1wbGFjZS12aWV3ZXIgDCokCg5sY2wtcGxhY2UtdGlsZRIQcHYtL2cvMTFqbTc5NzQ3dBgBMAEYCiCqnf0yMAE">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 12px; color: #facc15;" id="msg-desculpa">Sentimos muito... 😔</p>
+        <textarea id="texto-melhoria" rows="3" placeholder="Conte para nós como podemos melhorar..."></textarea>
+        <button onclick="enviarWhatsApp()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> FALAR COM O GERENTE
+        </button>
+    </div>
+
+    <div class="footer">
+        <div>
+            <b>📍 R. Joaquim Caetano - Parque Piratininga</b><br>
+            Itaquaquecetuba - SP, 08583-670<br>
+            📞 Telefone: (11) 97131-9233
+        </div>
+
+        <a href="https://wa.me/5511954950044?text=Olá, quero um link 'assim' personalizado para minha empresa!" target="_blank" class="venda-link">
+            Deseja um link "assim" personalizado para sua empresa? Saiba mais
+        </a>
+
+        <div style="margin-top: 15px; opacity: 0.8;">
+            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-footer">ImpulsoWeb10</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let notaSelecionada = 0;
+    
+    const frasesAcalmar = {
+        1: "Sentimos muito. 😔 Vamos ouvir você para melhorar.",
+        2: "Sentimos muito. 😟 Sua opinião é essencial para nós.",
+        3: "Sentimos muito. 😐 Como podemos ser nota 10 para você?",
+        4: "Muito bom! 😊",
+        5: "Excelente! 😍"
+    };
+
+    function setFrase(n) {
+        if(notaSelecionada === 0) document.getElementById('instrucao').innerText = frasesAcalmar[n];
+    }
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        const stars = document.querySelectorAll('.star-btn');
+        stars.forEach((s, i) => { i < n ? s.classList.add('active') : s.classList.remove('active'); });
+
+        document.getElementById('main-logo').classList.add('logo-compacta');
+        document.getElementById('instrucao').classList.add('hidden');
+
+        if (n >= 4) {
+            document.getElementById('feedback-bom').classList.remove('hidden');
+            document.getElementById('feedback-ruim').classList.add('hidden');
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        } else {
+            document.getElementById('msg-desculpa').innerText = frasesAcalmar[n];
+            document.getElementById('feedback-ruim').classList.remove('hidden');
+            document.getElementById('feedback-bom').classList.add('hidden');
+        }
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        if (!texto) { alert("Por favor, conte-nos como podemos melhorar."); return; }
+        window.open(`https://wa.me/5511971319233?text=Feedback Óptica Lionda (${notaSelecionada} estrelas): ${texto}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
