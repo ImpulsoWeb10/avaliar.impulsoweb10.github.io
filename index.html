@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Avaliações | ImpulsoWeb10</title>
     
-    <title>Central de Avaliações | ImpulsoWeb10 - No Topo do Google</title>
-    <meta name="description" content="Aumente a autoridade da sua empresa no Google Maps. Central de feedbacks estratégicos da ImpulsoWeb10.">
-    <meta name="author" content="ImpulsoWeb10">
-    <meta name="robots" content="index, follow">
-
     <style>
         :root {
             --bg-dark: #050707;
@@ -18,248 +14,142 @@
             --text-primary: #ffffff;
             --text-secondary: #a0a8a8;
             --border-dim: #1a2222;
-            --cta-orange: #ff4d00; /* Cor de destaque extra para o botão de venda */
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: var(--bg-dark);
             margin: 0;
             color: var(--text-secondary);
             overflow-x: hidden;
         }
 
-        /* EFEITO DE LUZ DE FUNDO */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px 30px;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: var(--text-primary);
-            letter-spacing: -1px;
-        }
-
+        /* HEADER E LAYOUT */
+        header { text-align: center; padding: 50px 20px; }
+        h1 { margin: 0; font-size: 2.2rem; color: var(--text-primary); }
         h1 span { color: var(--neon-green); }
-
-        .subtitle {
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 15px auto 25px;
-            line-height: 1.5;
-        }
-
-        /* BOTÃO CHAMATIVO (PEÇA SEU LINK) */
+        
         .cta-main {
             display: inline-block;
             background: var(--neon-green);
             color: #000;
-            padding: 16px 32px;
+            padding: 14px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 900;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px var(--neon-green-dim);
-            transition: 0.3s;
+            margin: 20px 0 40px;
             animation: pulse 2s infinite;
-            margin-bottom: 40px;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 227, 145, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(56, 227, 145, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 227, 145, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(56, 227, 145, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0); }
         }
 
-        .cta-main:hover {
-            transform: scale(1.1);
-            background: #fff;
-            box-shadow: 0 0 30px var(--neon-green);
-        }
+        main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* GRID 2x2 */
         .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             width: 100%;
             max-width: 600px;
-            margin-bottom: 60px;
         }
 
+        /* CARD CLICÁVEL */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-dim);
             border-radius: 20px;
             padding: 25px 15px;
             text-align: center;
-            transition: 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: 0.3s;
+            cursor: help; /* Indica que tem informação extra */
         }
 
-        .card:hover {
-            border-color: var(--neon-green);
-            background: #111a1a;
-            transform: translateY(-5px);
-        }
+        .card:hover { border-color: var(--neon-green); transform: translateY(-3px); }
 
-        .card img {
-            max-height: 55px;
-            max-width: 100px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-        }
-
-        .card h3 {
-            font-size: 13px;
-            color: var(--text-primary);
-            margin: 5px 0 15px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .card img { max-height: 50px; margin-bottom: 10px; pointer-events: none; }
 
         .btn-avaliar {
             display: block;
-            background: transparent;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
+            background: var(--neon-green);
+            color: #000;
             padding: 8px;
             border-radius: 10px;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
-            transition: 0.3s;
+            margin-top: 15px;
+            pointer-events: auto; /* Garante que o link funcione independente do modal */
         }
 
-        .card:hover .btn-avaliar {
-            background: var(--neon-green);
-            color: #000;
-        }
-
-        /* MARKETING SECTION */
-        .impulsoweb-box {
-            background: linear-gradient(145deg, #0d1212, #102a2a);
-            width: 100%;
-            max-width: 600px;
-            border-radius: 24px;
-            padding: 40px 25px;
-            text-align: center;
-            border: 1px solid var(--border-dim);
-            margin-bottom: 40px;
-        }
-
-        .impulsoweb-box h2 {
-            color: var(--neon-green);
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-
-        .impulsoweb-box p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* FOOTER & BADGES */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border-dim);
-        }
-
-        .badges {
-            display: flex;
+        /* ESTILO DO MODAL */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
         }
 
-        .badge-item {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(255,255,255,0.05);
-            padding: 6px 12px;
-            border-radius: 4px;
-            border: 1px solid var(--border-dim);
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-green);
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 30px var(--neon-green-dim);
         }
 
-        .footer-link {
+        .close-modal {
+            position: absolute;
+            right: 20px; top: 15px;
             color: var(--neon-green);
-            text-decoration: none;
-            font-weight: bold;
+            font-size: 24px;
+            cursor: pointer;
         }
 
-        /* CELULAR */
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            .container { gap: 10px; }
-            .card { padding: 15px 10px; }
-            .btn-avaliar { font-size: 10px; }
-        }
+        .modal h2 { color: var(--neon-green); margin-top: 10px; }
+        .modal p { line-height: 1.6; margin: 20px 0; color: var(--text-primary); }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-dim); margin-top: 40px; }
+        .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
     </style>
 </head>
-
 <body>
-    <div class="bg-glow"></div>
 
     <header>
         <h1>Central de <span>Avaliações</span></h1>
-        <p class="subtitle">Aumente sua reputação digital clicando em uma das empresas parceiras abaixo.</p>
-        
-        <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-main">
-            QUERO MEU LINK DE AVALIAÇÃO AGORA 🚀
-        </a>
+        <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-main">PEÇA SEU LINK AQUI 🚀</a>
     </header>
 
     <main>
         <div class="container" id="clientesContainer"></div>
-
-        <section class="impulsoweb-box">
-            <h2>Como a ImpulsoWeb10 te ajuda?</h2>
-            <p>Estar no Google não é suficiente. Você precisa estar no <strong>TOP 3</strong>. Nossa metodologia de <strong>SEO Local</strong> e <strong>Gestão de Reputação</strong> faz o algoritmo do Google priorizar o seu negócio, atraindo mais clientes qualificados sem gastar fortunas em anúncios.</p>
-            <br>
-            <a href="https://wa.me/SEUNUMERO" target="_blank" style="color: var(--neon-green); text-decoration: underline; font-weight: bold; font-size: 14px;">
-                Falar com um especialista em SEO Local
-            </a>
-        </section>
     </main>
 
-    <footer>
-        <div class="badges">
-            <span class="badge-item">🔒 SSL Certificado</span>
-            <span class="badge-item">🛡️ Ambiente Seguro</span>
-            <span class="badge-item">⚡ High Speed</span>
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                </div>
         </div>
-        <p>© 2026 Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a></p>
-        <p style="font-size: 10px; opacity: 0.5;">Todos os direitos reservados • @impulsoweb10</p>
+    </div>
+
+    <footer>
+        <p>© 2026 Desenvolvido por <a href="#" class="footer-link">ImpulsoWeb10</a></p>
+        <p style="font-size: 10px;">🔒 Conexão Segura SSL | @Todos os direitos reservados</p>
     </footer>
 
     <script src="clientes.js"></script>
@@ -269,16 +159,47 @@
             if (!container) return;
 
             clientes.forEach(cliente => {
-                const card = `
-                    <article class="card">
-                        <img src="${cliente.pasta}/${cliente.logo}" alt="Empresa ${cliente.nome}" loading="lazy">
-                        <h3>${cliente.nome}</h3>
-                        <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar ⭐</a>
-                    </article>
+                const card = document.createElement('article');
+                card.className = 'card';
+                // Adiciona o evento de abrir modal ao clicar no card
+                card.onclick = (e) => {
+                    // Se clicar no botão "Avaliar", não abre o modal (deixa o link funcionar)
+                    if(e.target.classList.contains('btn-avaliar')) return;
+                    openModal(cliente);
+                };
+
+                card.innerHTML = `
+                    <img src="${cliente.pasta}/${cliente.logo}" alt="Logo ${cliente.nome}">
+                    <h3>${cliente.nome}</h3>
+                    <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
                 `;
-                container.innerHTML += card;
+                container.appendChild(card);
             });
         });
+
+        function openModal(cliente) {
+            const modal = document.getElementById("infoModal");
+            const body = document.getElementById("modalBody");
+            
+            body.innerHTML = `
+                <h2>${cliente.nome}</h2>
+                <p>Ao avaliar a <strong>${cliente.nome}</strong>, você ajuda outras pessoas a encontrarem um serviço de qualidade e fortalece a economia local.</p>
+                <p style="font-size: 0.9rem; color: #38e391;">Sua nota 5 estrelas faz toda a diferença!</p>
+                <a href="${cliente.pasta}/" class="btn-avaliar" style="display:inline-block; width:80%;">Ir para Avaliação</a>
+            `;
+            
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("infoModal").style.display = "none";
+        }
+
+        // Fecha se clicar fora do conteúdo
+        window.onclick = function(event) {
+            const modal = document.getElementById("infoModal");
+            if (event.target == modal) closeModal();
+        }
     </script>
 </body>
 </html>
