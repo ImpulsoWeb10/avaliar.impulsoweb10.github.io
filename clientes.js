@@ -21,8 +21,8 @@ const clientes = [
     logo: "esquadri-e-box.png"
   },
   {
-    nome: "Amor Pro Patinhas",
-    pasta: "amorpropatinhas",
+    nome: "Amor Por Patinhas",
+    pasta: "amorporpatinhas",
     logo: "logo.png"
   },
   {
