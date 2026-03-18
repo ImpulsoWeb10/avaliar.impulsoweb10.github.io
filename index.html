@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">lionda
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Central de Avaliações | ImpulsoWeb10</title>
 
 <style>
@@ -103,78 +103,39 @@ footer {
 </header>
 
 <main>
-<div class="container">
-
-    <div class="container">
-
-    <div class="card">
-        <img src="opticalionda/opticalionda.png">
-        <h3>Óptica Lionda</h3>
-        <a href="opticalionda/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="analiliamcake/logoanaliliamcake.png">
-        <h3>Ana Liliam Cake</h3>
-        <a href="analiliamcake/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="qualyquimy/qualyquimy.png">
-        <h3>QualyQuimy</h3>
-        <a href="qualyquimy/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="esquadriebox/esquadri-e-box.png">
-        <h3>Esquadriebox</h3>
-        <a href="esquadriebox/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="amor-por-patinhas.png">
-        <h3>Amor Por Patinhas</h3>
-        <a href="amorporpatinhas/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="fretadao.png">
-        <h3>Fretadão</h3>
-        <a href="fretadao/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="itapuacenter-logo.png">
-        <h3>Itapuã Center</h3>
-        <a href="itapua-center/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="lelidecor.png">
-        <h3>Lelidecor</h3>
-        <a href="lelidecor/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="luciano-cabeleireiro/logo.png">
-        <h3>Luciano Cabeleireiro</h3>
-        <a href="luciano-cabeleireiro/" class="btn">Avaliar ⭐</a>
-    </div>
-
-    <div class="card">
-        <img src="opticaliondall/logo.png">
-        <h3>Óptica LiondaII</h3>
-        <a href="opticaliondall/" class="btn">Avaliar ⭐</a>
-    </div>
-
-</div>
-
-</div>
+    <!-- AGORA É AUTOMÁTICO -->
+    <div class="container" id="clientesContainer"></div>
 </main>
 
 <footer>
     © 2026 ImpulsoWeb10
 </footer>
+
+<!-- SCRIPT DOS CLIENTES -->
+<script src="clientes.js"></script>
+
+<!-- SCRIPT AUTOMÁTICO -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("clientesContainer");
+
+    if (!container) {
+        console.error("Container não encontrado");
+        return;
+    }
+
+    clientes.forEach(cliente => {
+        const card = `
+            <div class="card">
+                <img src="${cliente.pasta}/${cliente.logo}" alt="${cliente.nome}">
+                <h3>${cliente.nome}</h3>
+                <a href="${cliente.pasta}/" class="btn">Avaliar ⭐</a>
+            </div>
+        `;
+        container.innerHTML += card;
+    });
+});
+</script>
 
 </body>
 </html>
