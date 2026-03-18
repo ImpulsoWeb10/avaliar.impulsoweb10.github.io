@@ -1,165 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Central de Avaliações | ImpulsoWeb10</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Central de Avaliações | Melhores Empresas no Google | ImpulsoWeb10</title>
+    <meta name="description" content="Avalie as melhores empresas da região. Ajude negócios locais a crescerem no Google com sua nota e comentário. Rápido, fácil e seguro.">
+    <meta name="keywords" content="avaliação google, feedback empresas, pesquisar satisfação, ImpulsoWeb10">
+    <meta name="robots" content="index, follow">
 
-<style>
-/* NOVAS VARIÁVEIS DE CORES INSPIRADAS NA REFERÊNCIA */
-:root {
-    --bg-dark: #070a0a;             /* Verde-escuro profundo (fundo principal) */
-    --card-bg: #0d1212;             /* Verde ligeiramente mais claro (para o 'modal') */
-    --neon-green: #38e391;          /* Verde reluzente brilhante (para botoes e detalhes) */
-    --neon-green-dim: rgba(56, 227, 145, 0.4); /* Neon sutil para bordas */
-    --text-primary: #fcfdfd;        /* Texto quase branco */
-    --text-secondary: #c1c5c5;      /* Texto cinza-claro */
-    --border-dim: #1d2525;          /* Borda escura sutil */
-}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Central de Avaliações de Empresas Locais",
+          "description": "Plataforma de coleta de feedbacks e avaliações para o Google Maps."
+        }
+      ]
+    }
+    </script>
 
-body {
-    font-family: Arial, sans-serif;
-    /* Fundo escuro principal */
-    background: var(--bg-dark);
-    margin: 0;
-    /* Texto global claro */
-    color: var(--text-secondary);
-}
+    <style>
+        :root {
+            --bg-dark: #070a0a;
+            --card-bg: #0d1212;
+            --neon-green: #38e391;
+            --neon-green-dim: rgba(56, 227, 145, 0.4);
+            --text-primary: #fcfdfd;
+            --text-secondary: #c1c5c5;
+            --border-dim: #1d2525;
+        }
 
-header {
-    text-align: center;
-    padding: 40px 20px;
-    /* Header sutilmente mais claro, sem borda branca */
-    background: rgba(13, 18, 18, 0.5);
-    border-bottom: 1px solid var(--border-dim);
-}
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-dark);
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    /* Título claro */
-    color: var(--text-primary);
-}
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: radial-gradient(circle at top, #102a2a 0%, var(--bg-dark) 100%);
+            border-bottom: 1px solid var(--border-dim);
+        }
 
-main {
-    display: flex;
-    justify-content: center;
-    padding: 40px 10px;
-    /* ADICIONADO: Um sutil degradê radial no fundo para simular a luz central da referência */
-    background: radial-gradient(circle at center, #102a2a 0%, var(--bg-dark) 70%);
-}
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green-dim);
+        }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1000px;
-}
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
 
-/* CARTÕES TRANSFORMADOS EM 'BOTOES MODAL' ESCUROS */
-.card {
-    background: var(--card-bg); /* Fundo modal escuro */
-    border-radius: 16px; /* Cantos mais arredondados */
-    padding: 20px;
-    text-align: center;
-    /* Borda muito sutil */
-    border: 1px solid var(--border-dim);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 15px;
+        }
 
-/* EFEITO DE HOVER: Brilho de borda e leve elevação */
-.card:hover {
-    transform: translateY(-5px);
-    border-color: var(--neon-green-dim);
-    box-shadow: 0 0 15px var(--neon-green-dim);
-}
+        /* LAYOUT DE DOIS EM DOIS */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
 
-.card img {
-    max-height: 70px;
-    margin-bottom: 10px;
-    /* ADICIONADO: Garante que os logos apareçam bem no fundo escuro, caso tenham transparência */
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
-}
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 1px solid var(--border-dim);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.card h3 {
-    font-size: 15px;
-    margin: 10px 0;
-    /* Nome da empresa em texto secundário claro */
-    color: var(--text-primary);
-}
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green-dim);
+        }
 
-/* BOTÃO RELUZENTE COM BRILHO NEON */
-.btn {
-    display: inline-block;
-    padding: 10px 16px; /* Sutilmente maior */
-    font-size: 12px;
-    border-radius: 8px;
-    /* Fundo verde neon brilhante */
-    background: var(--neon-green);
-    /* Texto escuro no botão brilhante para contraste */
-    color: #000;
-    text-decoration: none;
-    font-weight: bold; /* Adicionado negrito */
-    text-transform: uppercase; /* Adicionado uppercase para visual mais moderno */
-    transition: all 0.2s ease-in-out;
-    /* Brilho reluzente sutil padrão */
-    box-shadow: 0 0 8px var(--neon-green-dim);
-}
+        .card img {
+            max-height: 60px;
+            max-width: 80%;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
 
-.btn:hover {
-    /* Brilho reluzente intenso no hover */
-    background: #5effb1; /* Verde neon ainda mais claro */
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--neon-green);
-}
+        .card h3 {
+            font-size: 14px;
+            margin: 10px 0 15px;
+            color: var(--text-primary);
+        }
 
-footer {
-    text-align: center;
-    padding: 30px;
-    font-size: 12px;
-    /* Texto do footer mais discreto */
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border-dim);
-}
-</style>
+        .btn {
+            display: block;
+            width: 80%;
+            padding: 10px 0;
+            font-size: 11px;
+            border-radius: 30px;
+            background: var(--neon-green);
+            color: #000;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(56, 227, 145, 0.2);
+        }
+
+        /* SEÇÃO FAQ (SEO & MARKETING) */
+        .faq-section {
+            width: 100%;
+            max-width: 650px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-dim);
+            padding-top: 40px;
+        }
+
+        .faq-section h2 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: #0d1212;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid var(--neon-green);
+        }
+
+        .faq-item h4 {
+            margin: 0 0 8px 0;
+            color: var(--neon-green);
+            font-size: 1rem;
+        }
+
+        .faq-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 12px;
+            color: #555;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        /* RESPONSIVO PARA CELULAR */
+        @media (max-width: 480px) {
+            .container { gap: 10px; }
+            h1 { font-size: 1.8rem; }
+            .btn { font-size: 10px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Central de Avaliações</h1>
-    <p>Escolha uma empresa para avaliar ⭐</p>
+    <h1>Central de Experiência</h1>
+    <p class="subtitle">Sua opinião constrói confiança. Escolha uma das empresas abaixo e deixe sua avaliação oficial no Google. ⭐⭐⭐⭐⭐</p>
 </header>
 
 <main>
     <div class="container" id="clientesContainer"></div>
+
+    <section class="faq-section">
+        <h2>Perguntas Frequentes (FAQ)</h2>
+        
+        <div class="faq-item">
+            <h4>Por que devo avaliar uma empresa?</h4>
+            <p>Sua avaliação ajuda outros clientes a tomarem decisões seguras e permite que as empresas melhorem seus serviços constantemente.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>É seguro deixar meu feedback?</h4>
+            <p>Sim! Você será redirecionado para a plataforma oficial do Google, garantindo total transparência e segurança na sua opinião.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Como minha nota ajuda no Google?</h4>
+            <p>Empresas com mais avaliações positivas aparecem primeiro nas buscas, ganhando mais visibilidade e autoridade no mercado local.</p>
+        </div>
+    </section>
 </main>
 
 <footer>
-    © 2026 ImpulsoWeb10
+    © 2026 ImpulsoWeb10 - Soluções em Marketing Digital e Reputação Online.
 </footer>
 
 <script src="clientes.js"></script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("clientesContainer");
+    if (!container) return;
 
-    if (!container) {
-        console.error("Container não encontrado");
-        return;
-    }
-
-    // A lógica de loops e montagem dos cards permanece idêntica
     clientes.forEach(cliente => {
         const card = `
-            <div class="card">
-                <img src="${cliente.pasta}/${cliente.logo}" alt="${cliente.nome}">
+            <article class="card">
+                <img src="${cliente.pasta}/${cliente.logo}" alt="Logo ${cliente.nome}" loading="lazy">
                 <h3>${cliente.nome}</h3>
-                <a href="${cliente.pasta}/" class="btn">Avaliar ⭐</a>
-            </div>
+                <a href="${cliente.pasta}/" class="btn" title="Clique para avaliar ${cliente.nome}">Avaliar Agora</a>
+            </article>
         `;
         container.innerHTML += card;
     });
