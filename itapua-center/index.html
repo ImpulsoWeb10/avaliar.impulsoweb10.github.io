@@ -1,1 +1,147 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Itapuã Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .container { max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px); padding: 40px 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); text-align: center; }
+        .logo { width: 150px; height: 100px; object-fit: contain; padding: 10px; border-radius: 22px; border: 3px solid #facc15; background: white; margin: 0 auto 20px; }
+        h1 { font-size: 26px; margin-bottom: 5px; color: #fff; }
+        h2 { font-size: 17px; color: #facc15; margin-bottom: 25px; font-weight: normal; }
+        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn { font-size: 40px; color: #475569; cursor: pointer; transition: 0.3s; }
+        .star-btn.active { color: #facc15; transform: scale(1.25); text-shadow: 0 0 20px rgba(250, 204, 21, 0.6); }
+        .botao { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; font-size: 16px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; margin-bottom: 10px; }
+        .google { background: #facc15; color: #000; animation: pulse 2s infinite; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+        .hidden { display: none; }
+        
+        /* MODAL LINDÃO */
+        #modal-instrucao {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.96); display: none; align-items: center;
+            justify-content: center; z-index: 10000; padding: 25px;
+        }
+        .modal-card {
+            background: #1e293b; padding: 35px 25px; border-radius: 35px;
+            border: 2px solid #facc15; text-align: center; max-width: 380px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .modal-card i { font-size: 50px; color: #facc15; margin-bottom: 15px; display: block; }
+        .modal-card p { font-size: 17px; line-height: 1.6; color: #f8fafc; margin-bottom: 25px; font-weight: 500; }
+
+        @keyframes bounceIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); } 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); } }
+        
+        .img-resultado { width: 100%; max-height: 180px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.1); }
+        .footer { margin-top: 35px; font-size: 13px; color: #ffffff; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 25px; }
+    </style>
+</head>
+<body>
+
+<div id="modal-instrucao">
+    <div class="modal-card">
+        <i class="fab fa-instagram"></i>
+        <p>"Após nos avaliar no Google, por gentileza, nos siga na página do Instagram que está aberta, assim que voltar na página."</p>
+        <button onclick="prosseguirParaGoogle()" class="botao google">
+            <i class="fab fa-google"></i> OK, VAMOS AVALIAR!
+        </button>
+    </div>
+</div>
+
+<div class="container">
+    <img src="itapua-center-materiais-de-construcao.png" class="logo" alt="Logo">
+    <h1>Itapuã Center</h1>
+    <h2>Materiais de Construção</h2>
+    
+    <p id="instrucao">Toque nas estrelas para avaliar nosso atendimento:</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <img src="itapua-center.png" class="img-resultado">
+        <p style="font-size: 18px; margin-bottom: 15px;">Ficamos felizes! 🎉</p>
+        
+        <button onclick="abrirModalInstrucao()" class="botao google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </button>
+
+        <a href="https://www.instagram.com/itapua_center?utm_source=qr&igsh=MW9vbDl1OGtsbGU4Yw==" target="_blank" class="botao instagram">
+            <i class="fab fa-instagram"></i> NOS SIGA NO INSTAGRAM
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p>Pedimos desculpas... 😔</p>
+        <textarea id="texto-melhoria" style="width:100%; background:rgba(255,255,255,0.1); border-radius:15px; color:white; padding:15px; margin-top:10px; border:1px solid rgba(255,255,255,0.2);" placeholder="O que ocorreu?"></textarea>
+        <button onclick="enviarWhatsApp()" class="botao" style="background:#22c55e; color:white; margin-top:10px;">FALAR COM O GERENTE</button>
+    </div>
+
+    <div class="footer">
+        <div>🔒 CONEXÃO PROTEGIDA | © 2026</div>
+        <div>Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" style="color:#22c55e; text-decoration:none; font-weight:800;">ImpulsoWeb10</a></div>
+    </div>
+</div>
+
+<script>
+    let notaSelecionada = 0;
+    const urlGoogle = "https://g.page/r/CWSPsbcmiCwZEBM/review/";
+    const urlInsta = "https://www.instagram.com/itapua_center?utm_source=qr&igsh=MW9vbDl1OGtsbGU4Yw==";
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        document.querySelectorAll('.star-btn').forEach((s, i) => { i < n ? s.classList.add('active') : s.classList.remove('active'); });
+        document.getElementById('instrucao').classList.add('hidden');
+        
+        if (n >= 4) {
+            document.getElementById('feedback-bom').classList.remove('hidden');
+            document.getElementById('feedback-ruim').classList.add('hidden');
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        } else {
+            document.getElementById('feedback-ruim').classList.remove('hidden');
+            document.getElementById('feedback-bom').classList.add('hidden');
+        }
+    }
+
+    // DISPARA O MODAL QUANDO CLICA NO BOTÃO DO GOOGLE
+    function abrirModalInstrucao() {
+        document.getElementById('modal-instrucao').style.display = 'flex';
+    }
+
+    // DISPARA OS LINKS AO CLICAR NO "OK" DO MODAL
+    function prosseguirParaGoogle() {
+        // Abre o Google
+        window.open(urlGoogle, '_blank');
+        
+        // Esconde o modal
+        document.getElementById('modal-instrucao').style.display = 'none';
+
+        // Abre o Instagram em segundo plano após 2 segundos
+        setTimeout(() => {
+            window.open(urlInsta, '_blank');
+        }, 2000);
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        if (!texto) { alert("Por favor, conte-nos."); return; }
+        window.open(`https://wa.me/5511945320614?text=Feedback Itapuã Center (${notaSelecionada} estrelas): ${texto}`, '_blank');
+    }
+</script>
+</body>
+</html>
