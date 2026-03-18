@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Avaliações | ImpulsoWeb10</title>
     
+    <title>Central de Avaliações | ImpulsoWeb10 - No Topo do Google</title>
+    <meta name="description" content="Aumente a autoridade da sua empresa no Google Maps. Central de feedbacks estratégicos da ImpulsoWeb10.">
+    <meta name="author" content="ImpulsoWeb10">
+    <meta name="robots" content="index, follow">
+
     <style>
         :root {
             --bg-dark: #050707;
@@ -17,36 +21,51 @@
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: var(--bg-dark);
             margin: 0;
             color: var(--text-secondary);
             overflow-x: hidden;
         }
 
-        /* HEADER E LAYOUT */
-        header { text-align: center; padding: 50px 20px; }
-        h1 { margin: 0; font-size: 2.2rem; color: var(--text-primary); }
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header { text-align: center; padding: 60px 20px 30px; }
+        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
         h1 span { color: var(--neon-green); }
-        
+        .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; line-height: 1.5; }
+
         .cta-main {
             display: inline-block;
             background: var(--neon-green);
             color: #000;
-            padding: 14px 28px;
+            padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 900;
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
-            margin: 20px 0 40px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px var(--neon-green-dim);
+            transition: 0.3s;
             animation: pulse 2s infinite;
+            margin-bottom: 40px;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(56, 227, 145, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 227, 145, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(56, 227, 145, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 227, 145, 0); }
         }
 
         main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
@@ -57,149 +76,156 @@
             gap: 15px;
             width: 100%;
             max-width: 600px;
+            margin-bottom: 60px;
         }
 
-        /* CARD CLICÁVEL */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-dim);
             border-radius: 20px;
             padding: 25px 15px;
             text-align: center;
-            transition: 0.3s;
-            cursor: help; /* Indica que tem informação extra */
+            transition: 0.3s ease;
+            cursor: pointer;
         }
 
-        .card:hover { border-color: var(--neon-green); transform: translateY(-3px); }
+        .card:hover { border-color: var(--neon-green); background: #111a1a; transform: translateY(-5px); }
 
-        .card img { max-height: 50px; margin-bottom: 10px; pointer-events: none; }
+        .card img { max-height: 55px; margin-bottom: 15px; pointer-events: none; }
+
+        .card h3 { font-size: 13px; color: var(--text-primary); margin: 5px 0 15px; pointer-events: none; }
 
         .btn-avaliar {
             display: block;
-            background: var(--neon-green);
-            color: #000;
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
             padding: 8px;
             border-radius: 10px;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
-            margin-top: 15px;
-            pointer-events: auto; /* Garante que o link funcione independente do modal */
+            pointer-events: auto;
         }
 
-        /* ESTILO DO MODAL */
+        /* MODAL ESTILIZADO */
         .modal {
-            display: none; 
+            display: none;
             position: fixed;
             z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
-            align-items: center;
-            justify-content: center;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            align-items: center; justify-content: center;
         }
 
         .modal-content {
             background: var(--card-bg);
-            border: 2px solid var(--neon-green);
-            padding: 30px;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 400px;
+            border: 1px solid var(--neon-green);
+            padding: 40px 30px;
+            border-radius: 30px;
+            width: 85%; max-width: 400px;
             text-align: center;
             position: relative;
-            box-shadow: 0 0 30px var(--neon-green-dim);
+            box-shadow: 0 0 40px rgba(56, 227, 145, 0.2);
         }
 
-        .close-modal {
-            position: absolute;
-            right: 20px; top: 15px;
-            color: var(--neon-green);
-            font-size: 24px;
-            cursor: pointer;
+        .modal h2 { color: var(--neon-green); margin-bottom: 15px; }
+        .modal p { color: #fff; line-height: 1.6; font-size: 1.1rem; }
+        .close-modal { position: absolute; top: 20px; right: 20px; color: var(--neon-green); font-size: 25px; cursor: pointer; }
+
+        /* MARKETING & FOOTER */
+        .impulsoweb-box {
+            background: linear-gradient(145deg, #0d1212, #102a2a);
+            width: 100%; max-width: 600px;
+            border-radius: 24px; padding: 40px 25px;
+            text-align: center; border: 1px solid var(--border-dim);
+            margin-bottom: 40px;
         }
 
-        .modal h2 { color: var(--neon-green); margin-top: 10px; }
-        .modal p { line-height: 1.6; margin: 20px 0; color: var(--text-primary); }
-
-        /* FOOTER */
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-dim); margin-top: 40px; }
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-dim); }
         .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
+        .badge-item { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; margin: 0 5px; }
     </style>
 </head>
+
 <body>
+    <div class="bg-glow"></div>
 
     <header>
         <h1>Central de <span>Avaliações</span></h1>
-        <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-main">PEÇA SEU LINK AQUI 🚀</a>
+        <p class="subtitle">Toque em uma empresa para conhecer sua qualidade ou clique em avaliar.</p>
+        <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO AGORA 🚀</a>
     </header>
 
     <main>
         <div class="container" id="clientesContainer"></div>
+
+        <section class="impulsoweb-box">
+            <h2>Como a ImpulsoWeb10 te ajuda?</h2>
+            <p>Estar no Google não é suficiente. Você precisa estar no <strong>TOP 3</strong>. Nossa metodologia faz o algoritmo priorizar o seu negócio.</p>
+            <br>
+            <a href="https://wa.me/5511954950044" target="_blank" style="color: var(--neon-green); font-weight: bold;">Falar com um especialista</a>
+        </section>
     </main>
 
-    <div id="infoModal" class="modal">
+    <div id="modalInfo" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody">
-                </div>
+            <span class="close-modal">&times;</span>
+            <div id="modalData"></div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 Desenvolvido por <a href="#" class="footer-link">ImpulsoWeb10</a></p>
-        <p style="font-size: 10px;">🔒 Conexão Segura SSL | @Todos os direitos reservados</p>
+        <div style="margin-bottom: 20px;">
+            <span class="badge-item">🔒 SSL Certificado</span>
+            <span class="badge-item">🛡️ Ambiente Seguro</span>
+        </div>
+        <p>© 2026 Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a></p>
     </footer>
 
     <script src="clientes.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const container = document.getElementById("clientesContainer");
+            const modal = document.getElementById("modalInfo");
+            const modalData = document.getElementById("modalData");
+            const closeBtn = document.querySelector(".close-modal");
+
             if (!container) return;
 
             clientes.forEach(cliente => {
-                const card = document.createElement('article');
-                card.className = 'card';
-                // Adiciona o evento de abrir modal ao clicar no card
-                card.onclick = (e) => {
-                    // Se clicar no botão "Avaliar", não abre o modal (deixa o link funcionar)
-                    if(e.target.classList.contains('btn-avaliar')) return;
-                    openModal(cliente);
-                };
-
+                const card = document.createElement("article");
+                card.className = "card";
+                
                 card.innerHTML = `
-                    <img src="${cliente.pasta}/${cliente.logo}" alt="Logo ${cliente.nome}">
+                    <img src="${cliente.pasta}/${cliente.logo}" alt="${cliente.nome}">
                     <h3>${cliente.nome}</h3>
                     <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
                 `;
+
+                // Evento para abrir modal (se não clicar direto no botão)
+                card.addEventListener("click", (e) => {
+                    if (e.target.classList.contains('btn-avaliar')) return;
+                    
+                    // Frase padrão caso não exista a descrição no clientes.js
+                    const fraseQualidade = cliente.descricao || "Empresa referência em qualidade, atendimento exclusivo e compromisso com a satisfação total do cliente.";
+
+                    modalData.innerHTML = `
+                        <h2>${cliente.nome}</h2>
+                        <p>"${fraseQualidade}"</p>
+                        <br>
+                        <a href="${cliente.pasta}/" class="cta-main" style="width: 80%; font-size: 12px; animation: none;">Avaliar no Google</a>
+                    `;
+                    modal.style.display = "flex";
+                });
+
                 container.appendChild(card);
             });
+
+            closeBtn.onclick = () => modal.style.display = "none";
+            window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
         });
-
-        function openModal(cliente) {
-            const modal = document.getElementById("infoModal");
-            const body = document.getElementById("modalBody");
-            
-            body.innerHTML = `
-                <h2>${cliente.nome}</h2>
-                <p>Ao avaliar a <strong>${cliente.nome}</strong>, você ajuda outras pessoas a encontrarem um serviço de qualidade e fortalece a economia local.</p>
-                <p style="font-size: 0.9rem; color: #38e391;">Sua nota 5 estrelas faz toda a diferença!</p>
-                <a href="${cliente.pasta}/" class="btn-avaliar" style="display:inline-block; width:80%;">Ir para Avaliação</a>
-            `;
-            
-            modal.style.display = "flex";
-        }
-
-        function closeModal() {
-            document.getElementById("infoModal").style.display = "none";
-        }
-
-        // Fecha se clicar fora do conteúdo
-        window.onclick = function(event) {
-            const modal = document.getElementById("infoModal");
-            if (event.target == modal) closeModal();
-        }
     </script>
 </body>
 </html>
