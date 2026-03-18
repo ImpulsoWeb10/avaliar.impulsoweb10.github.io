@@ -6,36 +6,47 @@
 <title>Central de Avaliações | ImpulsoWeb10</title>
 
 <style>
+/* NOVAS VARIÁVEIS DE CORES INSPIRADAS NA REFERÊNCIA */
 :root {
-    --primary: #111827;
-    --bg: #f9fafb;
-    --text: #111;
-    --white: #fff;
+    --bg-dark: #070a0a;             /* Verde-escuro profundo (fundo principal) */
+    --card-bg: #0d1212;             /* Verde ligeiramente mais claro (para o 'modal') */
+    --neon-green: #38e391;          /* Verde reluzente brilhante (para botoes e detalhes) */
+    --neon-green-dim: rgba(56, 227, 145, 0.4); /* Neon sutil para bordas */
+    --text-primary: #fcfdfd;        /* Texto quase branco */
+    --text-secondary: #c1c5c5;      /* Texto cinza-claro */
+    --border-dim: #1d2525;          /* Borda escura sutil */
 }
 
 body {
     font-family: Arial, sans-serif;
-    background: var(--bg);
+    /* Fundo escuro principal */
+    background: var(--bg-dark);
     margin: 0;
-    color: var(--text);
+    /* Texto global claro */
+    color: var(--text-secondary);
 }
 
 header {
     text-align: center;
     padding: 40px 20px;
-    background: var(--white);
-    border-bottom: 1px solid #eee;
+    /* Header sutilmente mais claro, sem borda branca */
+    background: rgba(13, 18, 18, 0.5);
+    border-bottom: 1px solid var(--border-dim);
 }
 
 h1 {
     margin: 0;
     font-size: 1.8rem;
+    /* Título claro */
+    color: var(--text-primary);
 }
 
 main {
     display: flex;
     justify-content: center;
     padding: 40px 10px;
+    /* ADICIONADO: Um sutil degradê radial no fundo para simular a luz central da referência */
+    background: radial-gradient(circle at center, #102a2a 0%, var(--bg-dark) 70%);
 }
 
 .container {
@@ -46,51 +57,71 @@ main {
     max-width: 1000px;
 }
 
+/* CARTÕES TRANSFORMADOS EM 'BOTOES MODAL' ESCUROS */
 .card {
-    background: white;
-    border-radius: 12px;
+    background: var(--card-bg); /* Fundo modal escuro */
+    border-radius: 16px; /* Cantos mais arredondados */
     padding: 20px;
     text-align: center;
-    border: 1px solid #eee;
-    transition: 0.2s;
+    /* Borda muito sutil */
+    border: 1px solid var(--border-dim);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
+/* EFEITO DE HOVER: Brilho de borda e leve elevação */
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: var(--neon-green-dim);
+    box-shadow: 0 0 15px var(--neon-green-dim);
 }
 
 .card img {
     max-height: 70px;
     margin-bottom: 10px;
+    /* ADICIONADO: Garante que os logos apareçam bem no fundo escuro, caso tenham transparência */
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
 }
 
 .card h3 {
     font-size: 15px;
     margin: 10px 0;
+    /* Nome da empresa em texto secundário claro */
+    color: var(--text-primary);
 }
 
+/* BOTÃO RELUZENTE COM BRILHO NEON */
 .btn {
     display: inline-block;
-    padding: 8px 14px;
+    padding: 10px 16px; /* Sutilmente maior */
     font-size: 12px;
     border-radius: 8px;
-    background: #111827;
-    color: #fff;
+    /* Fundo verde neon brilhante */
+    background: var(--neon-green);
+    /* Texto escuro no botão brilhante para contraste */
+    color: #000;
     text-decoration: none;
-    transition: 0.2s;
+    font-weight: bold; /* Adicionado negrito */
+    text-transform: uppercase; /* Adicionado uppercase para visual mais moderno */
+    transition: all 0.2s ease-in-out;
+    /* Brilho reluzente sutil padrão */
+    box-shadow: 0 0 8px var(--neon-green-dim);
 }
 
 .btn:hover {
-    background: black;
+    /* Brilho reluzente intenso no hover */
+    background: #5effb1; /* Verde neon ainda mais claro */
     transform: scale(1.05);
+    box-shadow: 0 0 15px var(--neon-green);
 }
 
 footer {
     text-align: center;
     padding: 30px;
     font-size: 12px;
-    color: #666;
+    /* Texto do footer mais discreto */
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-dim);
 }
 </style>
 </head>
@@ -103,7 +134,6 @@ footer {
 </header>
 
 <main>
-    <!-- AGORA É AUTOMÁTICO -->
     <div class="container" id="clientesContainer"></div>
 </main>
 
@@ -111,10 +141,8 @@ footer {
     © 2026 ImpulsoWeb10
 </footer>
 
-<!-- SCRIPT DOS CLIENTES -->
 <script src="clientes.js"></script>
 
-<!-- SCRIPT AUTOMÁTICO -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("clientesContainer");
@@ -124,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    // A lógica de loops e montagem dos cards permanece idêntica
     clientes.forEach(cliente => {
         const card = `
             <div class="card">
