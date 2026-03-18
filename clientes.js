@@ -36,7 +36,7 @@ const clientes = [
     logo: "logo.png"
   },
   {
-    nome: "Lelidecor",
+    nome: "Leelidecor",
     pasta: "lelidecor",
     logo: "logo.png"
   },
