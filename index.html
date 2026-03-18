@@ -5,10 +5,28 @@
     <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Central de Avaliações | ImpulsoWeb10 - No Topo do Google</title>
-    <meta name="description" content="Aumente a autoridade da sua empresa no Google Maps. Central de feedbacks estratégicos da ImpulsoWeb10.">
+    <!-- SEO FORTE -->
+    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
+    <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
+    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
     <meta name="author" content="ImpulsoWeb10">
     <meta name="robots" content="index, follow">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
+    <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
+    <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
+
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
     <style>
         :root {
@@ -42,8 +60,11 @@
         }
 
         header { text-align: center; padding: 60px 20px 30px; }
+
         h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
+
         h1 span { color: var(--neon-green); }
+
         .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; line-height: 1.5; }
 
         .cta-main {
@@ -109,7 +130,6 @@
             pointer-events: auto;
         }
 
-        /* MODAL ESTILIZADO */
         .modal {
             display: none;
             position: fixed;
@@ -135,7 +155,6 @@
         .modal p { color: #fff; line-height: 1.6; font-size: 1.1rem; }
         .close-modal { position: absolute; top: 20px; right: 20px; color: var(--neon-green); font-size: 25px; cursor: pointer; }
 
-        /* MARKETING & FOOTER */
         .impulsoweb-box {
             background: linear-gradient(145deg, #0d1212, #102a2a);
             width: 100%; max-width: 600px;
@@ -154,9 +173,16 @@
     <div class="bg-glow"></div>
 
     <header>
-        <h1>Central de <span>Avaliações</span></h1>
-        <p class="subtitle">Toque em uma empresa para conhecer sua qualidade ou clique em avaliar.</p>
-        <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO AGORA 🚀</a>
+        <!-- AJUSTE SEO AQUI -->
+        <h1>Avaliação de Empresas e Fornecedores no Google</h1>
+
+        <p class="subtitle">
+            Veja avaliações reais de clientes e ajude outras pessoas a escolher melhor.
+        </p>
+
+        <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">
+            QUERO MEU LINK DE AVALIAÇÃO AGORA 🚀
+        </a>
     </header>
 
     <main>
@@ -164,9 +190,14 @@
 
         <section class="impulsoweb-box">
             <h2>Como a ImpulsoWeb10 te ajuda?</h2>
-            <p>Estar no Google não é suficiente. Você precisa estar no <strong>TOP 3</strong>. Nossa metodologia faz o algoritmo priorizar o seu negócio.</p>
+            <p>
+                A ImpulsoWeb10 ajuda empresas a crescerem no Google através de avaliações reais e estratégia de reputação online.
+                Estar no Google não é suficiente. Você precisa estar no <strong>TOP 3</strong>.
+            </p>
             <br>
-            <a href="https://wa.me/5511954950044" target="_blank" style="color: var(--neon-green); font-weight: bold;">Falar com um especialista</a>
+            <a href="https://wa.me/5511954950044" target="_blank" style="color: var(--neon-green); font-weight: bold;">
+                Falar com um especialista
+            </a>
         </section>
     </main>
 
@@ -182,7 +213,11 @@
             <span class="badge-item">🔒 SSL Certificado</span>
             <span class="badge-item">🛡️ Ambiente Seguro</span>
         </div>
-        <p>© 2026 Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a></p>
+        <p>© 2026 Desenvolvido por 
+            <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">
+                ImpulsoWeb10
+            </a>
+        </p>
     </footer>
 
     <script src="clientes.js?v=2"></script>
@@ -200,16 +235,14 @@
                 card.className = "card";
                 
                 card.innerHTML = `
-                    <img src="${cliente.pasta}/${cliente.logo}" alt="${cliente.nome}">
+                    <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
                     <h3>${cliente.nome}</h3>
                     <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
                 `;
 
-                // Evento para abrir modal (se não clicar direto no botão)
                 card.addEventListener("click", (e) => {
                     if (e.target.classList.contains('btn-avaliar')) return;
                     
-                    // Frase padrão caso não exista a descrição no clientes.js
                     const fraseQualidade = cliente.descricao || "Empresa referência em qualidade, atendimento exclusivo e compromisso com a satisfação total do cliente.";
 
                     modalData.innerHTML = `
