@@ -5,27 +5,34 @@
     <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO FORTE -->
-    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
-    <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
-    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
+    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10 - Reputação Digital</title>
+    <meta name="description" content="Plataforma oficial da ImpulsoWeb10 para avaliar empresas e fornecedores. Melhore sua reputação no Google Maps e receba feedback real de clientes.">
+    <link rel="canonical" href="https://avaliar.impulsoweb10.com.br/">
+    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps, feedback clientes">
     <meta name="author" content="ImpulsoWeb10">
     <meta name="robots" content="index, follow">
 
-    <!-- OPEN GRAPH -->
     <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
-    <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
+    <meta property="og:description" content="Melhore sua presença digital. Avalie e seja avaliado com transparência.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
     <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- GOOGLE ANALYTICS -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} 
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ImpulsoWeb10 Avaliações",
+      "url": "https://avaliar.impulsoweb10.com.br/",
+      "description": "Plataforma de gestão de reputação e avaliações de empresas.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "author": {
+        "@type": "Organization",
+        "name": "ImpulsoWeb10"
+      }
+    }
     </script>
 
     <style>
@@ -40,246 +47,204 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--bg-dark);
             margin: 0;
             color: var(--text-secondary);
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .bg-glow {
             position: fixed;
-            top: 0; left: 50%;
+            top: -100px; left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            max-width: 800px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
+            max-width: 900px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 227, 145, 0.1) 0%, transparent 70%);
             z-index: -1;
             pointer-events: none;
         }
 
-        header { text-align: center; padding: 60px 20px 30px; }
-
-        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
-
-        .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; }
+        header { text-align: center; padding: 80px 20px 40px; }
+        h1 { margin: 0; font-size: 2.8rem; color: var(--text-primary); letter-spacing: -1.5px; line-height: 1.1; }
+        .subtitle { font-size: 1.2rem; max-width: 600px; margin: 20px auto 30px; }
 
         .cta-main {
             display: inline-block;
             background: var(--neon-green);
             color: #000;
-            padding: 16px 32px;
+            padding: 18px 36px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 900;
-            box-shadow: 0 0 20px var(--neon-green-dim);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px var(--neon-green-dim);
         }
+        .cta-main:hover { transform: scale(1.05); box-shadow: 0 15px 40px var(--neon-green-dim); }
 
         main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
+        /* Grade de Clientes Semântica */
         .container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 60px;
+            max-width: 900px;
+            margin-bottom: 80px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-dim);
-            border-radius: 20px;
-            padding: 25px 15px;
+            border-radius: 24px;
+            padding: 30px 20px;
             text-align: center;
-            cursor: pointer;
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+        .card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
 
         .card img {
-            max-height: 55px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 6px rgba(56, 227, 145, 0.6));
+            max-height: 60px;
+            max-width: 180px;
+            margin: 0 auto 20px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(56, 227, 145, 0.3));
         }
 
-        .card h3 { color: var(--text-primary); }
+        .card h2 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 15px; }
 
         .btn-avaliar {
-            display: block;
-            background: rgba(56,227,145,0.2);
+            background: rgba(56,227,145,0.1);
             color: var(--neon-green);
             border: 1px solid var(--neon-green);
-            padding: 8px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 0.9rem;
             font-weight: bold;
+            transition: 0.2s;
         }
+        .btn-avaliar:hover { background: var(--neon-green); color: #000; }
 
-        .btn-avaliar:hover {
-            background: rgba(56,227,145,0.35);
-        }
-
-        /* FAQ SANFONA */
-        .faq-item { border-bottom: 1px solid var(--border-dim); }
-
+        /* FAQ OTIMIZADA */
+        .faq-section { max-width: 700px; width: 100%; margin-bottom: 80px; }
+        .faq-item { border-bottom: 1px solid var(--border-dim); background: rgba(255,255,255,0.02); margin-bottom: 10px; border-radius: 10px; }
         .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            color: var(--neon-green);
-            text-align: left;
-            padding: 15px;
-            cursor: pointer;
-            font-weight: bold;
+            width: 100%; background: none; border: none; color: #fff;
+            text-align: left; padding: 20px; cursor: pointer;
+            font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between;
         }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 15px;
-        }
-
-        .faq-answer p { color: #fff; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s ease; padding: 0 20px; }
+        .faq-answer p { margin-bottom: 20px; line-height: 1.6; }
 
         /* MODAL */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none; position: fixed; z-index: 1000;
             left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
             align-items: center; justify-content: center;
         }
-
         .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--neon-green);
-            padding: 40px 30px;
-            border-radius: 30px;
-            width: 85%; max-width: 400px;
-            text-align: center;
-            position: relative;
+            background: var(--card-bg); border: 1px solid var(--neon-green);
+            padding: 40px; border-radius: 30px; width: 90%; max-width: 450px;
+            text-align: center; position: relative;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: var(--neon-green);
-            font-size: 25px;
-            cursor: pointer;
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-dim); }
+        .badge-group { margin-bottom: 25px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .badge-item { font-size: 12px; background: #1a2222; padding: 8px 16px; border-radius: 8px; color: #eee; }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .container { grid-template-columns: 1fr; }
         }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border-dim);
-        }
-
-        .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
-        .badge-item { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; margin: 0 5px; }
     </style>
 </head>
 
 <body>
-<div class="bg-glow"></div>
+<div class="bg-glow" aria-hidden="true"></div>
 
 <header>
     <h1>Avaliação de Empresas e Fornecedores no Google</h1>
-    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas a escolher melhor.</p>
-    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO 🚀</a>
+    <p class="subtitle">Descubra empresas confiáveis e fortaleça sua reputação online com avaliações reais e verificadas.</p>
+    <a href="https://wa.me/5511954950044" target="_blank" rel="noopener" class="cta-main">SOLICITAR MEU LINK DE AVALIAÇÃO</a>
 </header>
 
 <main>
-    <div class="container" id="clientesContainer"></div>
+    <section class="container" id="clientesContainer" aria-label="Lista de empresas para avaliação"></section>
 
-    <section style="max-width:600px; width:100%; margin-bottom:60px;">
-        <h2 style="color:#fff; text-align:center;">Perguntas Frequentes</h2>
+    <section class="faq-section">
+        <h2 style="color:#fff; text-align:center; margin-bottom:30px;">Dúvidas Frequentes sobre Avaliações</h2>
 
-        <div class="faq-item">
-            <button class="faq-question">Como a ImpulsoWeb10 pode ajudar?</button>
-            <div class="faq-answer"><p>Aumenta sua visibilidade no Google com avaliações reais.</p></div>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" itemprop="name">Como a ImpulsoWeb10 pode ajudar meu negócio? <span>+</span></button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Nós conectamos seus clientes diretamente ao seu perfil no Google Maps, facilitando o recebimento de avaliações reais que aumentam sua nota e autoridade nas buscas locais.</p>
+            </div>
         </div>
 
-        <div class="faq-item">
-            <button class="faq-question">Por que avaliações são importantes?</button>
-            <div class="faq-answer"><p>Geram confiança e melhor posicionamento.</p></div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">Como funciona?</button>
-            <div class="faq-answer"><p>Você recebe um link personalizado.</p></div>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" itemprop="name">Por que as estrelas no Google são importantes? <span>+</span></button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Empresas com mais avaliações positivas aparecem primeiro nos resultados de pesquisa. Além disso, 90% dos consumidores leem avaliações antes de fechar um negócio.</p>
+            </div>
         </div>
     </section>
 </main>
 
-<div id="modalInfo" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
+<footer role="contentinfo">
+    <div class="badge-group">
+        <span class="badge-item">🔒 Conexão SSL Segura</span>
+        <span class="badge-item">🛡️ Dados Protegidos</span>
+        <span class="badge-item">⭐ Verificado pelo Google</span>
+    </div>
+    <p>© 2026 <strong>ImpulsoWeb10</strong> - Todos os direitos reservados.</p>
+    <p><small>Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" style="color:var(--neon-green); text-decoration:none;">ImpulsoWeb10</a></small></p>
+</footer>
+
+<div id="modalInfo" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog">
+        <span class="close-modal" style="cursor:pointer; position:absolute; right:20px; top:15px; font-size:30px;">&times;</span>
         <div id="modalData"></div>
     </div>
 </div>
 
-<footer>
-    <div style="margin-bottom: 20px;">
-        <span class="badge-item">🔒 SSL Certificado</span>
-        <span class="badge-item">🛡️ Ambiente Seguro</span>
-    </div>
-    <p>© 2026 Desenvolvido por 
-        <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a>
-    </p>
-</footer>
-
-<script src="clientes.js?v=2"></script>
+<script src="clientes.js?v=2" defer></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("clientesContainer");
-    const modal = document.getElementById("modalInfo");
-    const modalData = document.getElementById("modalData");
-    const closeBtn = document.querySelector(".close-modal");
-
-    clientes.forEach(cliente => {
-        const card = document.createElement("article");
-        card.className = "card";
-
-        card.innerHTML = `
-            <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
-            <h3>${cliente.nome}</h3>
-            <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
-        `;
-
-        card.addEventListener("click", (e) => {
-            if (e.target.classList.contains('btn-avaliar')) return;
-
-            modalData.innerHTML = `
-                <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
-                <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
-                <br>
-                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
+    
+    // Simulação de carregamento (clientes vem do arquivo externo)
+    if (typeof clientes !== 'undefined') {
+        clientes.forEach(cliente => {
+            const article = document.createElement("article");
+            article.className = "card";
+            article.innerHTML = `
+                <img src="${cliente.pasta}/${cliente.logo}" alt="Logo da empresa ${cliente.nome}" loading="lazy">
+                <h2>${cliente.nome}</h2>
+                <p style="font-size:13px; margin-bottom:20px;">Clique abaixo para deixar sua experiência no Google Maps.</p>
+                <a href="${cliente.pasta}/" class="btn-avaliar">AVALIAR AGORA ⭐</a>
             `;
-
-            modal.style.display = "flex";
+            container.appendChild(article);
         });
+    }
 
-        container.appendChild(card);
-    });
-
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
-
-    // SANFONA
+    // FAQ Accordion
     document.querySelectorAll(".faq-question").forEach(btn => {
         btn.addEventListener("click", () => {
             const answer = btn.nextElementSibling;
-
-            document.querySelectorAll(".faq-answer").forEach(a => {
-                if (a !== answer) a.style.maxHeight = null;
-            });
-
-            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+            const isOpen = answer.style.maxHeight !== "0px" && answer.style.maxHeight !== "";
+            
+            // Fecha todos
+            document.querySelectorAll(".faq-answer").forEach(a => a.style.maxHeight = null);
+            
+            // Abre o clicado
+            answer.style.maxHeight = isOpen ? null : answer.scrollHeight + "px";
         });
     });
 });
