@@ -5,6 +5,7 @@ const clientes = [
     logo: "logo-optica-lionda.png",
     descricao: "Referência em saúde visual e estilo. Oferecemos as melhores lentes e armações com um atendimento técnico especializado e humano."
   },
+  {
    nome: "Óptica Lionda",
     pasta: "opticaliondaII",
     logo: "logo.png",
