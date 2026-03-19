@@ -2,20 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10 - Reputação no Google</title>
     
-    <meta name="description" content="Melhore a reputação de empresas no Google Maps. Veja avaliações reais e ajude fornecedores locais a crescerem com feedbacks verificados.">
-    <meta name="keywords" content="avaliar empresas, avaliação google maps, reputação digital, feedback fornecedores">
+    <!-- SEO FORTE -->
+    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
+    <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
+    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
+    <meta name="author" content="ImpulsoWeb10">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://avaliar.impulsoweb10.com.br/">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
+    <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
+    <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
+
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
     <style>
         :root {
             --bg-dark: #050707;
             --card-bg: #0d1212;
             --neon-green: #38e391;
-            --neon-glow: rgba(56, 227, 145, 0.6);
+            --neon-green-dim: rgba(56, 227, 145, 0.4);
             --text-primary: #ffffff;
             --text-secondary: #a0a8a8;
             --border-dim: #1a2222;
@@ -26,131 +44,174 @@
             background: var(--bg-dark);
             margin: 0;
             color: var(--text-secondary);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header { text-align: center; padding: 80px 20px 40px; }
-        h1 { color: #fff; font-size: 2.8rem; letter-spacing: -1.5px; margin-bottom: 10px; }
-        .subtitle { font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-        /* GRID: UM DO LADO DO OUTRO */
+        header { text-align: center; padding: 60px 20px 30px; }
+
+        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
+
+        .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; }
+
+        .cta-main {
+            display: inline-block;
+            background: var(--neon-green);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            box-shadow: 0 0 20px var(--neon-green-dim);
+        }
+
+        main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 60px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-dim);
-            border-radius: 24px;
-            padding: 40px 30px;
+            border-radius: 20px;
+            padding: 25px 15px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s ease;
+            cursor: pointer;
         }
-        .card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
 
         .card img {
-            max-height: 65px;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 8px var(--neon-glow));
+            max-height: 55px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 6px rgba(56, 227, 145, 0.6));
         }
 
-        .card h2 { color: #fff; font-size: 1.5rem; margin-bottom: 20px; }
+        .card h3 { color: var(--text-primary); }
 
-        /* BOTÃO VERDE PULSANDO COM BRILHO */
-        .btn-trigger {
-            background: var(--neon-green);
-            color: #000;
-            border: none;
-            padding: 16px 30px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 0.95rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px var(--neon-glow);
-            animation: pulse 2s infinite;
-            transition: 0.3s;
+        .btn-avaliar {
+            display: block;
+            background: rgba(56,227,145,0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 8px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(56, 227, 145, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(56, 227, 145, 0); }
+        .btn-avaliar:hover {
+            background: rgba(56,227,145,0.35);
         }
 
-        .btn-trigger:hover { transform: scale(1.05); background: #fff; box-shadow: 0 0 30px var(--neon-green); }
+        /* FAQ SANFONA */
+        .faq-item { border-bottom: 1px solid var(--border-dim); }
 
-        /* FAQ SANFONA (ESTRATÉGICO PARA SEO) */
-        .faq-section { max-width: 800px; margin: 0 auto 100px; padding: 0 20px; }
-        .faq-section h2 { text-align: center; color: #fff; margin-bottom: 30px; }
-        .faq-item { border-bottom: 1px solid var(--border-dim); margin-bottom: 10px; }
         .faq-question {
-            width: 100%; background: none; border: none; color: var(--neon-green);
-            text-align: left; padding: 20px; cursor: pointer;
-            font-weight: bold; font-size: 1.1rem; display: flex; justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--neon-green);
+            text-align: left;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
         }
-        .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 20px; }
-        .faq-answer p { padding-bottom: 20px; color: #eee; }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .faq-answer p { color: #fff; }
 
         /* MODAL */
         .modal {
-            display: none; position: fixed; z-index: 9999;
+            display: none;
+            position: fixed;
+            z-index: 1000;
             left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
             align-items: center; justify-content: center;
         }
-        .modal-content {
-            background: #000; border: 2px solid var(--neon-green);
-            padding: 50px 30px; border-radius: 30px; width: 90%; max-width: 480px;
-            text-align: center; position: relative;
-            box-shadow: 0 0 50px rgba(56, 227, 145, 0.3);
-        }
-        .close-modal { position: absolute; top: 20px; right: 25px; color: var(--neon-green); font-size: 35px; cursor: pointer; }
 
-        /* RODAPÉ */
-        footer {
-            text-align: center; padding: 60px 20px;
-            border-top: 1px solid var(--border-dim);
-            background: #080a0a;
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-green);
+            padding: 40px 30px;
+            border-radius: 30px;
+            width: 85%; max-width: 400px;
+            text-align: center;
+            position: relative;
         }
-        .footer-badges { margin-bottom: 20px; display: flex; justify-content: center; gap: 15px; }
-        .badge { background: #1a2222; padding: 8px 15px; border-radius: 5px; font-size: 12px; }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--neon-green);
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
+        .badge-item { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; margin: 0 5px; }
     </style>
 </head>
+
 <body>
+<div class="bg-glow"></div>
 
 <header>
-    <h1>Avaliação de Empresas e Fornecedores</h1>
-    <p class="subtitle">Sua opinião ajuda o Google a identificar os melhores serviços. Escolha uma empresa abaixo e deixe seu feedback.</p>
+    <h1>Avaliação de Empresas e Fornecedores no Google</h1>
+    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas a escolher melhor.</p>
+    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO 🚀</a>
 </header>
 
 <main>
-    <section class="container" id="clientesContainer" aria-label="Empresas parceiras"></section>
+    <div class="container" id="clientesContainer"></div>
 
-    <section class="faq-section">
-        <h2>Perguntas Frequentes</h2>
-        
+    <section style="max-width:600px; width:100%; margin-bottom:60px;">
+        <h2 style="color:#fff; text-align:center;">Perguntas Frequentes</h2>
+
         <div class="faq-item">
-            <button class="faq-question">Como funciona a avaliação? <span>+</span></button>
-            <div class="faq-answer"><p>Basta escolher a empresa, clicar no botão "Avaliar" e você será direcionado ao perfil oficial no Google Maps para deixar sua nota e comentário.</p></div>
+            <button class="faq-question">Como a ImpulsoWeb10 pode ajudar?</button>
+            <div class="faq-answer"><p>Aumenta sua visibilidade no Google com avaliações reais.</p></div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">Por que minha avaliação é importante? <span>+</span></button>
-            <div class="faq-answer"><p>Avaliações reais ajudam empresas de qualidade a ganharem destaque no Google, além de auxiliarem outros consumidores em suas decisões.</p></div>
+            <button class="faq-question">Por que avaliações são importantes?</button>
+            <div class="faq-answer"><p>Geram confiança e melhor posicionamento.</p></div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">É seguro avaliar por aqui? <span>+</span></button>
-            <div class="faq-answer"><p>Sim! Nosso portal apenas facilita o caminho até o Google Maps, garantindo que você chegue ao perfil correto da empresa verificada.</p></div>
+            <button class="faq-question">Como funciona?</button>
+            <div class="faq-answer"><p>Você recebe um link personalizado.</p></div>
         </div>
     </section>
 </main>
@@ -162,62 +223,65 @@
     </div>
 </div>
 
-<footer role="contentinfo">
-    <div class="footer-badges">
-        <span class="badge">🛡️ Ambiente Seguro</span>
-        <span class="badge">🔒 SSL Certificado</span>
-        <span class="badge">⭐ Google Partner</span>
+<footer>
+    <div style="margin-bottom: 20px;">
+        <span class="badge-item">🔒 SSL Certificado</span>
+        <span class="badge-item">🛡️ Ambiente Seguro</span>
     </div>
-    <p>© 2026 Desenvolvido por <strong><a href="https://wa.me/5511954950044" target="_blank" style="color:var(--neon-green); text-decoration:none;">ImpulsoWeb10</a></strong></p>
+    <p>© 2026 Desenvolvido por 
+        <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a>
+    </p>
 </footer>
 
 <script src="clientes.js?v=2"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("clientesContainer");
     const modal = document.getElementById("modalInfo");
     const modalData = document.getElementById("modalData");
     const closeBtn = document.querySelector(".close-modal");
 
-    // Gerar Cards dinamicamente
-    if (typeof clientes !== 'undefined') {
-        clientes.forEach(cliente => {
-            const article = document.createElement("article");
-            article.className = "card";
-            article.innerHTML = `
-                <img src="${cliente.pasta}/${cliente.logo}" alt="Logotipo ${cliente.nome}" loading="lazy">
-                <h2>${cliente.nome}</h2>
-                <button class="btn-trigger">Avaliar Agora ⭐</button>
+    clientes.forEach(cliente => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
+            <h3>${cliente.nome}</h3>
+            <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+        `;
+
+        card.addEventListener("click", (e) => {
+            if (e.target.classList.contains('btn-avaliar')) return;
+
+            modalData.innerHTML = `
+                <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
+                <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
+                <br>
+                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
             `;
 
-            // Botão abre o Modal com texto SEO
-            article.querySelector(".btn-trigger").addEventListener("click", () => {
-                modalData.innerHTML = `
-                    <h2 style="color:var(--neon-green)">Avaliar ${cliente.nome}</h2>
-                    <p>Você está prestes a fortalecer a <strong>reputação digital</strong> desta empresa. Avaliações com fotos e textos detalhados ajudam ainda mais no rankeamento do Google!</p>
-                    <a href="${cliente.pasta}/" target="_blank" class="btn-trigger" style="display:inline-block; text-decoration:none; margin-top:10px;">ABRIR NO GOOGLE MAPS 🚀</a>
-                `;
-                modal.style.display = "flex";
-            });
-
-            container.appendChild(article);
+            modal.style.display = "flex";
         });
-    }
 
-    // Lógica da FAQ (Sanfona)
-    document.querySelectorAll(".faq-question").forEach(question => {
-        question.addEventListener("click", () => {
-            const answer = question.nextElementSibling;
-            const isOpen = answer.style.maxHeight !== "0px" && answer.style.maxHeight !== "";
-            
-            document.querySelectorAll(".faq-answer").forEach(a => a.style.maxHeight = null);
-            answer.style.maxHeight = isOpen ? null : answer.scrollHeight + "px";
-        });
+        container.appendChild(card);
     });
 
-    // Fechar Modal
     closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+
+    // SANFONA
+    document.querySelectorAll(".faq-question").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const answer = btn.nextElementSibling;
+
+            document.querySelectorAll(".faq-answer").forEach(a => {
+                if (a !== answer) a.style.maxHeight = null;
+            });
+
+            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+        });
+    });
 });
 </script>
 </body>
