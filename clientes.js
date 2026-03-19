@@ -6,10 +6,11 @@ const clientes = [
     descricao: "Referência em saúde visual e estilo. Oferecemos as melhores lentes e armações com um atendimento técnico especializado e humano."
   },
   {
-   nome: "Óptica Lionda",
+    nome: "Óptica Lionda II",
     pasta: "opticaliondaII",
     logo: "logo.png",
     descricao: "Referência em saúde visual e estilo. Oferecemos as melhores lentes e armações com um atendimento técnico especializado e humano."
+  },
   {
     nome: "Ana Liliam Cake",
     pasta: "analiliamcake",
