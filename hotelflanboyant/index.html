@@ -3,191 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Flamboyant | Avaliação</title>
+<title>Avalie Nossa Empresa</title>
 
 <style>
-/* TELA ESCURA PREMIUM */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #0a0a0a; 
-    color: #ffffff; 
-    margin: 0; 
-    min-height: 100vh; 
-    display: flex; 
-    flex-direction: column;
-}
-.container { padding: 20px; flex: 1; }
-
-/* LOGO COM BRILHO PULSANTE */
-.logo-box {
-    display: inline-block;
-    padding: 15px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 10px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-.logo-box::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: shine 2.5s infinite;
-}
-@keyframes shine { 100% { left: 100%; } }
-.logo { max-width: 180px; }
-
-h1 { font-size: 19px; margin: 10px 0; }
-
-/* ESTRELAS */
-.stars { font-size: 42px; margin: 15px 0; }
-.star { color: #333; transition: .3s; cursor: pointer; display: inline-block; }
-
-.pulsing { 
-    animation: pulse-star 0.8s infinite; 
-    color: #FFD700 !important; 
-    text-shadow: 0 0 15px #FFD700;
-}
-@keyframes pulse-star { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-/* AREA DINÂMICA */
-#feedbackArea { display: none; animation: fadeIn 0.4s ease; margin-top: 10px; }
-
-/* CAIXA DE DIÁLOGO DINÂMICA */
-#feedbackText {
-    width: 90%;
-    max-width: 320px;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #444;
-    background: #1a1a1a;
-    color: #fff;
-    font-size: 14px;
-    transition: all 0.4s ease;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* CLASSES DE PROPORÇÃO DA CAIXA */
-.caixa-grande { height: 120px; border-color: #ff4444 !important; }
-.caixa-pequena { height: 45px; opacity: 0.6; font-size: 12px !important; }
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    text-align:center;
+}
+
+.container{
+    max-width:420px;
+    margin:60px auto;
+    padding:30px;
+}
+
+.logo{
+    width:120px;
+    margin-bottom:15px;
+}
+
+/* TITULOS */
+
+h1{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+h2{
+    font-size:20px;
+    margin-bottom:15px;
+    font-weight:normal;
+}
+
+p{
+    font-size:16px;
+    margin-bottom:30px;
+    color:#cbd5e1;
+}
 
 /* BOTÕES */
-.btn-container { 
-    display: flex; flex-direction: column; 
-    gap: 12px; align-items: center; margin-top: 20px; 
+
+.botao{
+    position:relative;
+    display:block;
+    width:85%;
+    margin:0 auto 18px auto;
+    padding:13px;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:30px; /* mais arredondado */
+    overflow:hidden;
+    transition:0.3s;
+    font-size:15px; /* levemente menor */
 }
-.btn-base {
-    text-decoration: none; font-weight: bold; 
-    border-radius: 12px; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* GOOGLE PREMIUM */
+
+.google{
+    background:#facc15;
+    color:#000;
+    animation:pulsar 2s infinite;
+    box-shadow:0 0 15px rgba(250,204,21,0.6);
 }
 
-.btn-whatsapp { background: #25D366; color: #fff; }
-.btn-google { background: #FFD700; color: #000; }
-
-/* TAMANHOS DOS BOTÕES */
-.btn-destaque { width: 280px; height: 58px; font-size: 17px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); animation: pulse-btn 1.5s infinite; }
-.btn-discreto { width: 160px; height: 35px; font-size: 11px; opacity: 0.5; }
-
-@keyframes pulse-btn {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+/* ESTRELAS LOADING */
+.estrelas{
+    display:block;
+    font-size:20px;
+    letter-spacing:4px;
+    margin-bottom:6px;
+    animation:estrelaMove 2s linear infinite;
 }
 
-footer { background: #000; padding: 15px; font-size: 11px; color: #444; border-top: 1px solid #111; }
-footer a { color: #666; text-decoration: none; }
+@keyframes estrelaMove{
+    0%{opacity:0.3; letter-spacing:2px;}
+    50%{opacity:1; letter-spacing:6px;}
+    100%{opacity:0.3; letter-spacing:2px;}
+}
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+/* WHATS PREMIUM */
+
+.whatsapp{
+    background:#22c55e;
+    color:white;
+    animation:pulsar 2.2s infinite;
+    box-shadow:0 0 15px rgba(34,197,94,0.6);
+}
+
+/* brilho automático passando */
+.whatsapp::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
+    animation:brilhoPassando 3s infinite;
+}
+
+@keyframes brilhoPassando{
+    0%{left:-100%;}
+    100%{left:200%;}
+}
+
+/* PULSAR */
+
+@keyframes pulsar{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.06);}
+    100%{transform:scale(1);}
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:25px;
+    font-size:12px;
+    color:#94a3b8;
+}
+
+.footer div{
+    margin-top:6px;
+}
+
+.footer a{
+    color:#22c55e;
+    text-decoration:none;
+    font-weight:bold;
+}
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-    <div class="logo-box">
-        <img src="logo.jpeg" class="logo">
-    </div>
+    <img src="COLE_AQUI_LINK_DA_LOGO" class="logo">
 
-    <h1>Como foi sua estadia?</h1>
-    
-    <div class="stars">
-        <span class="star" onclick="avaliar(1, this)">★</span>
-        <span class="star" onclick="avaliar(2, this)">★</span>
-        <span class="star" onclick="avaliar(3, this)">★</span>
-        <span class="star" onclick="avaliar(4, this)">★</span>
-        <span class="star" onclick="avaliar(5, this)">★</span>
-    </div>
+    <h1>NOME DA SUA EMPRESA</h1>
+    <h2>Sua opinião é muito importante para nós!</h2>
+    <p>Se você ficou satisfeito com nosso serviço, deixe sua avaliação no Google ou fale conosco pelo WhatsApp. 🚀</p>
 
-    <div id="feedbackArea">
-        <p id="fraseTopo" style="font-weight: bold; margin-bottom: 12px;"></p>
+    <a href="COLE_AQUI_LINK_GOOGLE" target="_blank" class="botao google">
+        <span class="estrelas">★★★★★</span>
+        Avaliar no Google
+    </a>
+
+    <a href="https://wa.me/55SEUNUMEROAQUI" target="_blank" class="botao whatsapp">
+        💬 Falar no WhatsApp
+    </a>
+
+    <div class="footer">
+        <div>© 2026 NOME_DA_EMPRESA - Todos os direitos reservados</div>
         
-        <textarea id="feedbackText"></textarea>
-        
-        <div class="btn-container" id="btnContainer"></div>
+        <div>
+            🔒 Site Seguro | Conexão Protegida SSL
+        </div>
+
+        <div>
+            Desenvolvido por 
+            <a href="https://wa.me/5511954950044?text=Quero%20saber%20sobre%20landpage%20ou%20site%20da%20ImpulsoWeb10" target="_blank">
+                ImpulsoWeb10
+            </a>
+        </div>
     </div>
 
 </div>
-
-<footer>
-    Desenvolvido por: <a href="https://wa.me/5511954950044" target="_blank">Impulsoweb10</a>
-</footer>
-
-<script>
-let notaAtual = 0;
-
-function avaliar(nota, elemento) {
-    notaAtual = nota;
-    document.querySelectorAll('.star').forEach(s => s.classList.remove('pulsing'));
-    elemento.classList.add('pulsing');
-
-    const area = document.getElementById("feedbackArea");
-    const frase = document.getElementById("fraseTopo");
-    const caixa = document.getElementById("feedbackText");
-    const container = document.getElementById("btnContainer");
-
-    area.style.display = "block";
-
-    // ESTRATÉGIA NOTA 1-3 (RECLAMAÇÃO PRIVADA)
-    if (nota <= 3) {
-        frase.innerHTML = "Sentimos muito 😔 em que podemos melhorar?";
-        
-        // Caixa de texto ganha destaque (maior)
-        caixa.className = "caixa-grande";
-        caixa.placeholder = "Descreva aqui sua insatisfação para nossa gerência...";
-        
-        // Botão WhatsApp Gigante, Google vira link pequeno
-        container.innerHTML = `
-            <button class="btn-base btn-whatsapp btn-destaque" onclick="enviar()">ENVIAR PARA GERÊNCIA VIA WHATSAPP</button>
-            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-discreto">Avaliar no Google</a>
-        `;
-    } 
-    // ESTRATÉGIA NOTA 4-5 (SUCESSO PÚBLICO)
-    else {
-        frase.innerHTML = "Que alegria! 😍 nos ajude com sua nota:";
-        
-        // Caixa de texto fica pequena (secundária)
-        caixa.className = "caixa-pequena";
-        caixa.placeholder = "Deixe um elogio rápido (opcional)...";
-
-        // Botão Google Gigante, WhatsApp vira link pequeno
-        container.innerHTML = `
-            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-destaque">FINALIZAR NO GOOGLE ⭐⭐⭐⭐⭐</a>
-            <button class="btn-base btn-whatsapp btn-discreto" onclick="enviar()">Enviar Elogio via Whats</button>
-        `;
-    }
-}
-
-function enviar() {
-    const texto = document.getElementById("feedbackText").value;
-    const fone = "5511954950044";
-    const msg = `*Relatório de Estadia*%0A*Estrelas:* ${notaAtual}%0A*Feedback:* ${texto || 'O cliente não digitou.'}`;
-    window.open(`https://wa.me/${fone}?text=${msg}`, '_blank');
-}
-</script>
 
 </body>
 </html>
