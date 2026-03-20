@@ -10,31 +10,21 @@
 body{font-family:Arial;text-align:center;background:#ccffcc;margin:0}
 .container{padding:30px}
 
-/* LOGO ENTRANDO LATERAL */
-.logo-wrap{position:relative;width:240px;height:120px;margin:0 auto 15px;overflow:hidden}
-.logo-half{position:absolute;top:0;width:50%;height:100%;overflow:hidden}
-.logo-left{left:-120px}
-.logo-right{right:-120px}
-.logo-half img{width:240px}
-
-.logo-show .logo-left{animation:leftIn 2s forwards}
-.logo-show .logo-right{animation:rightIn 2s forwards}
-
-@keyframes leftIn{to{left:0}}
-@keyframes rightIn{to{right:0}}
+/* LOGO */
+.logo-box{margin-bottom:10px}
+.logo{max-width:220px}
 
 h1{font-size:22px}
 
 /* ESTRELAS */
 .stars{font-size:42px;margin-top:15px}
-.star{cursor:pointer;margin:0 3px}
-.star.white{color:#fff;text-shadow:0 0 5px #999}
-.star.blue{color:#00aaff;animation:pulseBlue 1s infinite}
+.star{color:#ccc;cursor:pointer;margin:0 4px;transition:.3s}
+.star:hover{transform:scale(1.2)}
+.star.blue{color:#00e5ff;animation:pulseBlue 1s infinite}
 
-@keyframes pulseBlue{0%{text-shadow:0 0 5px #00aaff}50%{text-shadow:0 0 20px #00aaff}100%{text-shadow:0 0 5px #00aaff}}
+@keyframes pulseBlue{0%{text-shadow:0 0 5px #00e5ff}50%{text-shadow:0 0 20px #00e5ff}100%{text-shadow:0 0 5px #00e5ff}}
 
-.frase{margin-top:20px;font-size:14px;color:#333}
-.counter{margin-top:10px;font-size:13px;color:#555}
+.frase{margin-top:20px;font-size:15px;color:#333;min-height:40px}
 
 /* BOTAO GOOGLE */
 .google-btn{
@@ -54,10 +44,10 @@ h1{font-size:22px}
 
 /* RODAPE */
 .footer{
- margin-top:30px;
+ margin-top:40px;
  padding:15px;
  border-radius:12px;
- background:linear-gradient(90deg,#00ff99,#00cc66);
+ background:linear-gradient(90deg,#ffd166,#ff9f1c);
  color:#000;
  font-size:13px;
 }
@@ -68,28 +58,26 @@ h1{font-size:22px}
 <body>
 <div class="container">
 
-<div class="logo-wrap logo-show">
- <div class="logo-half logo-left"><img src="logo.jpeg"></div>
- <div class="logo-half logo-right"><img src="logo.jpeg"></div>
+<div class="logo-box">
+ <img src="logo.jpeg" class="logo">
 </div>
 
-<h1>Como foi sua experiência?</h1>
-<p>Hotel Flamboyant ⭐</p>
+<h1>Como foi sua experiência no Hotel Flamboyant?</h1>
+<p>Toque nas estrelas ⭐</p>
 
 <div class="stars">
- <span class="star white" onclick="avaliar(1)">★</span>
- <span class="star white" onclick="avaliar(2)">★</span>
- <span class="star white" onclick="avaliar(3)">★</span>
- <span class="star white" onclick="avaliar(4)">★</span>
+ <span class="star" onclick="avaliar(1)">★</span>
+ <span class="star" onclick="avaliar(2)">★</span>
+ <span class="star" onclick="avaliar(3)">★</span>
+ <span class="star" onclick="avaliar(4)">★</span>
  <span class="star blue" onclick="avaliar(5)">★</span>
 </div>
 
 <p id="frase" class="frase"></p>
-<p class="counter">⭐ +479 avaliações realizadas</p>
 
 <a id="googleBtn" href="avaliar.html" class="google-btn">AVALIAR NO GOOGLE</a>
 
-<div class="footer" style="background:linear-gradient(90deg,#ffd166,#ff9f1c);box-shadow:0 0 15px rgba(255,160,0,0.6);">
+<div class="footer">
  <div style="margin-bottom:6px;font-weight:bold;">Gostaria de um link personalizado assim para sua empresa? <a href="https://wa.me/5511954950055">Saiba mais!</a></div>
  Desenvolvido por: <a href="https://wa.me/5511954950055">ImpulsoWeb10</a>
 </div>
@@ -100,11 +88,11 @@ h1{font-size:22px}
 
 <script>
 const frases={
-1:"Você sabia? Localização é um dos fatores mais importantes em hotéis.",
-2:"Curiosidade: custo-benefício é o que mais atrai hóspedes hoje.",
-3:"Conforto influencia diretamente na avaliação dos clientes.",
-4:"Hotéis bem localizados recebem mais avaliações positivas.",
-5:"Atendimento de qualidade é o segredo das 5 estrelas ⭐"
+1:"A localização de um hotel impacta diretamente na experiência do hóspede.",
+2:"Custo-benefício é um dos fatores mais avaliados por clientes.",
+3:"Conforto e limpeza são essenciais para boas avaliações.",
+4:"Um bom atendimento aumenta a chance de recomendação.",
+5:"Avaliações positivas ajudam outros clientes a escolher melhor."
 };
 
 function avaliar(nota){
@@ -124,7 +112,7 @@ function avaliar(nota){
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avaliar</title>
+<title>Avaliar Hotel Flamboyant</title>
 <style>
 body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center}
 .container{padding:40px 20px}
