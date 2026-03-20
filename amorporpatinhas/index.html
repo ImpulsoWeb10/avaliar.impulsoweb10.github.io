@@ -17,141 +17,173 @@
             background-color: #e0f2f1;
             background-image: radial-gradient(at 0% 0%, hsla(160,100%,95%,1) 0, transparent 50%), 
                               radial-gradient(at 100% 100%, hsla(330,100%,98%,1) 0, transparent 50%);
-            color: #334155;
-            text-align: center;
-            min-height: 100vh;
+            color: #334155; text-align: center; min-height: 100vh;
             display: flex; align-items: center; justify-content: center; padding: 20px;
         }
 
         .container { 
-            max-width: 400px; width: 100%; padding: 40px 30px; 
-            background-color: #f1f1f1;
-            background-image: url("https://www.transparenttextures.com/patterns/p6.png");
-            border: 2px solid #ffffff;
-            border-radius: 35px; 
+            max-width: 400px; width: 100%; padding: 30px; 
+            background-color: #f1f1f1; border-radius: 35px; 
             box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
         }
         
         .logo { 
-            width: 160px; height: 160px; object-fit: contain; padding: 5px; 
-            border-radius: 50%; border: 4px solid #ff69b4; background: #ffffff; 
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2); display: block; margin: 0 auto;
+            width: 120px; height: 120px; object-fit: contain; border-radius: 50%; 
+            border: 4px solid #ff69b4; background: #ffffff; margin-bottom: 10px;
         }
         
-        .nome-loja { 
-            font-family: 'Pacifico', cursive; font-size: 32px; color: #ff69b4; 
-            text-shadow: 2px 2px 0px #fff; margin-top: 10px; margin-bottom: 10px; 
+        .nome-loja { font-family: 'Pacifico', cursive; font-size: 26px; color: #ff69b4; margin-bottom: 20px; }
+
+        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; }
+        .star-btn { font-size: 45px; color: #cbd5e1; cursor: pointer; transition: 0.3s; }
+        .star-btn.active { color: #facc15; transform: scale(1.1); }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; align-items: center;
+            justify-content: center; z-index: 1000; padding: 15px;
         }
 
-        h1 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 20px; font-weight: 700; }
-        h2 { font-size: 22px; margin-bottom: 15px; font-weight: 700; color: #0f172a; }
-
-        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 8px; }
-        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: all 0.3s; }
-        .star-btn.active { color: #facc15; transform: scale(1.2); }
-
-        textarea {
-            width: 100%; background: #ffffff; border: 1px solid #d1d5db;
-            border-radius: 15px; padding: 15px; margin-bottom: 15px; 
-            font-family: inherit; resize: none; outline: none; font-size: 14px;
+        .modal-content {
+            background: white; padding: 25px; border-radius: 30px;
+            max-width: 380px; width: 100%; position: relative;
+            animation: bounceIn 0.5s;
         }
 
-        .botao {
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .instrucao { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #0f172a; line-height: 1.4; }
+
+        /* 1. BOTÃO GOOGLE AMARELO PULSANDO */
+        .btn-google {
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 18px; font-size: 16px; font-weight: 800;
-            border-radius: 20px; border: none; cursor: pointer; text-decoration: none;
-            transition: 0.3s;
+            background: #facc15; color: #000; padding: 16px; font-weight: 800;
+            border-radius: 15px; text-decoration: none; margin-bottom: 20px;
+            animation: pulsarBotao 1.5s infinite; border: none; width: 100%; font-size: 15px;
         }
 
-        .whatsapp { background: #22c55e; color: white; animation: pulsar 1.8s infinite; }
-        @keyframes pulsar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        @keyframes pulsarBotao {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(250, 204, 21, 0); }
+            100% { transform: scale(1); }
+        }
 
-        .hidden { display: none; }
+        /* 2. CAIXA DE MENSAGEM */
+        .label-msg { font-size: 13px; margin-bottom: 8px; font-weight: bold; display: block; text-align: left; color: #475569; }
+        textarea {
+            width: 100%; height: 80px; background: #f1f5f9; border: 1px solid #cbd5e1;
+            border-radius: 12px; padding: 12px; font-family: inherit; resize: none;
+            margin-bottom: 12px; outline: none; font-size: 14px;
+        }
 
-        .footer { margin-top: 40px; font-size: 12px; color: #64748b; border-top: 1px solid #e5e7eb; padding-top: 25px; }
-        .ssl-msg { font-weight: bold; color: #059669; margin-bottom: 8px; display: block; }
-        .hero-msg { font-weight: bold; color: #ff69b4; margin-bottom: 15px; font-size: 18px; }
-        .dev-link { color: #f59e0b; text-decoration: none; font-weight: 800; }
+        .btn-whats {
+            background: #22c55e; color: white; padding: 12px; width: 100%;
+            border-radius: 12px; border: none; font-weight: bold; cursor: pointer;
+            margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        /* 3. IMAGEM DA VETERINÁRIA */
+        .img-vet {
+            width: 100%; border-radius: 15px; margin-top: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        .btn-fechar {
+            background: none; border: none; color: #94a3b8; font-weight: 700;
+            cursor: pointer; text-decoration: underline; font-size: 13px; margin-top: 10px;
+        }
+
+        .footer { margin-top: 25px; font-size: 11px; color: #94a3b8; }
     </style>
 </head>
 
 <body>
 
 <div class="container">
-    <div class="logo-box">
-        <img src="logo.png" class="logo" alt="Logo" onerror="this.src='https://via.placeholder.com/160/FFFFFF/FF69B4?text=Patinhas'">
-        <div class="nome-loja">Amor por Patinhas</div>
-    </div>
+    <img src="amor-por-patinhas.png" class="logo" alt="Logo">
+    <div class="nome-loja">Amor por Patinhas</div>
 
-    <h1>Feedback Oficial</h1>
-    <h2 id="titulo-dinamico">Como foi sua experiência? 🐾</h2>
+    <h2>Como foi sua experiência?</h2>
+    <p style="margin: 15px 0; color: #64748b;">Toque nas estrelas para começar:</p>
 
     <div class="rating-box">
-        <i class="fas fa-star star-btn" onclick="selecionarNota(1)"></i>
-        <i class="fas fa-star star-btn" onclick="selecionarNota(2)"></i>
-        <i class="fas fa-star star-btn" onclick="selecionarNota(3)"></i>
-        <i class="fas fa-star star-btn" onclick="selecionarNota(4)"></i>
-        <i class="fas fa-star star-btn" onclick="selecionarNota(5)"></i>
+        <i class="fas fa-star star-btn" onclick="abrirModalFeedback(1)"></i>
+        <i class="fas fa-star star-btn" onclick="abrirModalFeedback(2)"></i>
+        <i class="fas fa-star star-btn" onclick="abrirModalFeedback(3)"></i>
+        <i class="fas fa-star star-btn" onclick="abrirModalFeedback(4)"></i>
+        <i class="fas fa-star star-btn" onclick="abrirModalFeedback(5)"></i>
     </div>
 
-    <div id="feedback-area" class="hidden">
-        <p style="font-weight: bold; margin-bottom: 10px;">Conte-nos o que achou:</p>
-        <textarea id="texto-melhoria" placeholder="Escreva seu comentário aqui..."></textarea>
+    <div class="footer">Sistema de Avaliação - ImpulsoWeb10</div>
+</div>
+
+<div class="modal-overlay" id="modalFeedback">
+    <div class="modal-content">
+        <p class="instrucao">Clique no Botão amarelo "Avaliar no Google" ou deixe uma msg para o Gerente no WhatsApp.</p>
+
+        <a href="https://g.page/r/CS5Xk3_P3_i7EAE/review" target="_blank" class="btn-google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+
+        <span class="label-msg">Sugestões ou críticas, relate aqui...</span>
+        <textarea id="textoFeedback" placeholder="Digite aqui seu comentário opcional..."></textarea>
         
-        <button onclick="enviarFeedbackDuplo()" class="botao whatsapp">
-            <i class="fab fa-whatsapp"></i> ENVIAR AVALIAÇÃO
+        <button onclick="enviarParaGerente()" class="btn-whats">
+            <i class="fab fa-whatsapp"></i> ENVIAR PARA O GERENTE
         </button>
-        <p style="font-size: 11px; color: #94a3b8; margin-top: 10px;">
-            Ao clicar, você será guiado para o WhatsApp e o Google.
-        </p>
-    </div>
 
-    <div class="footer">
-        <div id="msg-especial" class="hero-msg"></div>
-        <span class="ssl-msg"><i class="fas fa-shield-alt"></i> SITE SEGURO - CERTIFICADO SSL</span>
-        <div>Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" class="dev-link">ImpulsoWeb10</a></div>
+        <button class="btn-fechar" onclick="fecharModal()">Voltar</button>
+
+        <img src="veterinaria.png" class="img-vet" alt="Veterinária Amor por Patinhas" onerror="this.src='https://via.placeholder.com/350x180?text=Equipe+Amor+por+Patinhas'">
     </div>
 </div>
 
 <script>
-    let notaSelecionada = 0;
-    const urlGoogle = "https://g.page/r/CS5Xk3_P3_i7EAE/review";
+    let notaSugerida = 0;
 
-    function selecionarNota(n) {
-        notaSelecionada = n;
+    function abrirModalFeedback(n) {
+        notaSugerida = n;
+        
+        // Marcar estrelas no fundo
         const stars = document.querySelectorAll('.star-btn');
-        const feedbackArea = document.getElementById('feedback-area');
-        const msgEspecial = document.getElementById('msg-especial');
-
         stars.forEach((s, i) => {
-            if (i < n) s.classList.add('active');
-            else s.classList.remove('active');
+            s.classList.toggle('active', i < n);
         });
 
-        feedbackArea.classList.remove('hidden');
+        // Abrir Modal
+        document.getElementById('modalFeedback').style.display = 'flex';
         
-        if (n >= 4) {
-            msgEspecial.innerText = "Você é um herói dos animais! 🐾";
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        } else {
-            msgEspecial.innerText = "";
+        // Confete apenas se for nota boa (4 ou 5)
+        if(n >= 4) {
+            confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
         }
     }
 
-    function enviarFeedbackDuplo() {
-        const texto = document.getElementById('texto-melhoria').value;
-        const telefone = "5511954950044"; 
-        const mensagem = encodeURIComponent(`Avaliação Amor por Patinhas: ${notaSelecionada} Estrelas\nComentário: ${texto}`);
-        
-        // 1. Abre o Google em uma aba nova
-        window.open(urlGoogle, '_blank');
+    function fecharModal() {
+        document.getElementById('modalFeedback').style.display = 'none';
+    }
 
-        // 2. Abre o WhatsApp (pode ser na mesma ou em outra aba)
-        // Usamos um pequeno delay (delay) para garantir que o navegador não bloqueie o segundo popup
-        setTimeout(() => {
-            window.location.href = `https://wa.me/${telefone}?text=${mensagem}`;
-        }, 500);
+    function enviarParaGerente() {
+        const msgEscrita = document.getElementById('textoFeedback').value;
+        const numGerente = "5511955883909";
+        const linkWhats = `https://wa.me/${numGerente}?text=` + encodeURIComponent(`Nova Avaliação: ${notaSugerida} estrelas\nFeedback: ${msgEscrita}`);
+        window.open(linkWhats, '_blank');
+    }
+
+    // Fecha o modal se clicar fora dele
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalFeedback');
+        if (event.target == modal) {
+            fecharModal();
+        }
     }
 </script>
+
 </body>
 </html>
