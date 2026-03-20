@@ -1,182 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avalie Nossa Empresa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Flamboyant Itaqua | Avalie sua Estadia</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <meta name="description" content="Sua opinião é fundamental para o Hotel Flamboyant em Itaquaquecetuba. Avalie nosso conforto e atendimento.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#0f172a,#1e293b);
-    color:white;
-    text-align:center;
-}
+    <style>
+        /* CONFIGURAÇÕES GERAIS */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-.container{
-    max-width:420px;
-    margin:60px auto;
-    padding:30px;
-}
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.logo{
-    width:120px;
-    margin-bottom:15px;
-}
+        .container {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 40px 25px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
 
-/* TITULOS */
+        /* LOGO COM BRILHO */
+        .logo-box {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            border: 3px solid #facc15;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-h1{
-    font-size:26px;
-    margin-bottom:10px;
-}
+        .logo-box::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transform: skewX(-20deg); animation: brilhoLogo 3s infinite;
+        }
 
-h2{
-    font-size:20px;
-    margin-bottom:15px;
-    font-weight:normal;
-}
+        @keyframes brilhoLogo { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
 
-p{
-    font-size:16px;
-    margin-bottom:30px;
-    color:#cbd5e1;
-}
+        .logo { width: 100%; height: 100%; object-fit: contain; }
 
-/* BOTÕES */
+        h1 { font-size: 24px; margin-bottom: 5px; color: #fff; }
+        h2 { font-size: 15px; color: #facc15; margin-bottom: 25px; font-weight: normal; text-transform: uppercase; letter-spacing: 1px; }
+        
+        #instrucao { font-size: 16px; color: #cbd5e1; margin-bottom: 20px; }
 
-.botao{
-    position:relative;
-    display:block;
-    width:85%;
-    margin:0 auto 18px auto;
-    padding:13px;
-    text-decoration:none;
-    font-weight:bold;
-    border-radius:30px; /* mais arredondado */
-    overflow:hidden;
-    transition:0.3s;
-    font-size:15px; /* levemente menor */
-}
-/* GOOGLE PREMIUM */
+        /* ESTRELAS */
+        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 10px; }
+        .star-btn {
+            font-size: 42px; color: #334155; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .star-btn.active { color: #facc15; transform: scale(1.2); text-shadow: 0 0 20px rgba(250, 204, 21, 0.5); }
 
-.google{
-    background:#facc15;
-    color:#000;
-    animation:pulsar 2s infinite;
-    box-shadow:0 0 15px rgba(250,204,21,0.6);
-}
+        /* CAIXA DE TEXTO */
+        textarea {
+            width: 100%; background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 15px;
+            color: white; padding: 15px; margin-bottom: 15px;
+            resize: none; outline: none; font-family: inherit; font-size: 14px;
+        }
 
-/* ESTRELAS LOADING */
-.estrelas{
-    display:block;
-    font-size:20px;
-    letter-spacing:4px;
-    margin-bottom:6px;
-    animation:estrelaMove 2s linear infinite;
-}
+        /* BOTOES */
+        .botao {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 18px; border-radius: 50px;
+            font-weight: 800; font-size: 16px; text-decoration: none;
+            transition: 0.3s; border: none; cursor: pointer;
+            margin-bottom: 10px;
+        }
 
-@keyframes estrelaMove{
-    0%{opacity:0.3; letter-spacing:2px;}
-    50%{opacity:1; letter-spacing:6px;}
-    100%{opacity:0.3; letter-spacing:2px;}
-}
+        .google { background: #facc15; color: #000; animation: pulsar 2s infinite; }
+        .whatsapp { background: #22c55e; color: white; }
 
-/* WHATS PREMIUM */
+        @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
-.whatsapp{
-    background:#22c55e;
-    color:white;
-    animation:pulsar 2.2s infinite;
-    box-shadow:0 0 15px rgba(34,197,94,0.6);
-}
+        .hidden { display: none; }
 
-/* brilho automático passando */
-.whatsapp::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:50%;
-    height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
-    animation:brilhoPassando 3s infinite;
-}
-
-@keyframes brilhoPassando{
-    0%{left:-100%;}
-    100%{left:200%;}
-}
-
-/* PULSAR */
-
-@keyframes pulsar{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.06);}
-    100%{transform:scale(1);}
-}
-
-/* FOOTER */
-
-.footer{
-    margin-top:25px;
-    font-size:12px;
-    color:#94a3b8;
-}
-
-.footer div{
-    margin-top:6px;
-}
-
-.footer a{
-    color:#22c55e;
-    text-decoration:none;
-    font-weight:bold;
-}
-</style>
+        /* RODAPÉ */
+        .footer { 
+            margin-top: 30px; font-size: 12px; color: #94a3b8; 
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+        }
+        .info-hotel { font-size: 11px; margin-bottom: 15px; line-height: 1.5; color: #cbd5e1; }
+        .footer a { color: #facc15; text-decoration: none; font-weight: 700; }
+        .frase-top { font-style: italic; margin-bottom: 10px; display: block; color: #facc15; }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-
-    <img src="COLE_AQUI_LINK_DA_LOGO" class="logo">
-
-    <h1>NOME DA SUA EMPRESA</h1>
-    <h2>Sua opinião é muito importante para nós!</h2>
-    <p>Se você ficou satisfeito com nosso serviço, deixe sua avaliação no Google ou fale conosco pelo WhatsApp. 🚀</p>
-
-    <a href="COLE_AQUI_LINK_GOOGLE" target="_blank" class="botao google">
-        <span class="estrelas">★★★★★</span>
-        Avaliar no Google
-    </a>
-
-    <a href="https://wa.me/55SEUNUMEROAQUI" target="_blank" class="botao whatsapp">
-        💬 Falar no WhatsApp
-    </a>
-
-    <div class="footer">
-        <div>© 2026 NOME_DA_EMPRESA - Todos os direitos reservados</div>
-        
-        <div>
-            🔒 Site Seguro | Conexão Protegida SSL
-        </div>
-
-        <div>
-            Desenvolvido por 
-            <a href="https://wa.me/5511954950044?text=Quero%20saber%20sobre%20landpage%20ou%20site%20da%20ImpulsoWeb10" target="_blank">
-                ImpulsoWeb10
-            </a>
-        </div>
+    <div class="logo-box">
+        <img src="logo.jpeg" class="logo" alt="Hotel Flamboyant">
     </div>
 
+    <h1>Hotel Flamboyant</h1>
+    <h2>Itaquaquecetuba - SP</h2>
+    
+    <div class="info-hotel">
+        <i class="fas fa-map-marker-alt"></i> Estr. de Santa Isabel, 6400 - Cuiabá<br>
+        <i class="fas fa-phone"></i> (11) 4648-5799
+    </div>
+
+    <p id="instrucao">Como foi sua experiência conosco?</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Ficamos muito felizes! 😍</p>
+        <p style="margin-bottom: 20px; font-size: 14px; color: #cbd5e1;">Sua avaliação positiva ajuda outros viajantes a nos encontrarem.</p>
+        
+        <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" target="_blank" class="botao google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Sentimos muito... 😔</p>
+        <textarea id="texto-melhoria" placeholder="O que podemos fazer para melhorar sua próxima estadia?"></textarea>
+        <button onclick="enviarWhatsApp()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> FALAR COM A GERÊNCIA
+        </button>
+        <p style="font-size: 11px; margin-top: 10px; color: #94a3b8;">Sua mensagem será enviada direto para o nosso WhatsApp.</p>
+    </div>
+
+    <div class="footer">
+        <span class="frase-top">"Conforto e hospitalidade em Itaquaquecetuba."</span>
+        <div>🔒 AMBIENTE SEGURO | © 2026</div>
+        <div style="margin-top: 8px;">
+            Desenvolvido por 
+            <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a>
+        </div>
+    </div>
 </div>
+
+<script>
+    let notaSelecionada = 0;
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        const stars = document.querySelectorAll('.star-btn');
+        const bom = document.getElementById('feedback-bom');
+        const ruim = document.getElementById('feedback-ruim');
+        const instrucao = document.getElementById('instrucao');
+
+        // Ativa as estrelas até a nota clicada
+        stars.forEach((s, i) => {
+            if (i < n) s.classList.add('active');
+            else s.classList.remove('active');
+        });
+
+        // Esconde a instrução inicial
+        instrucao.classList.add('hidden');
+
+        // Lógica de exibição baseada na nota
+        if (n >= 4) {
+            bom.classList.remove('hidden');
+            ruim.classList.add('hidden');
+            // Disparar confetes
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#facc15', '#ffffff', '#22c55e']
+            });
+        } else {
+            ruim.classList.remove('hidden');
+            bom.classList.add('hidden');
+        }
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        const telefone = "5511954950044"; // Seu contato de suporte/gerência
+        
+        if (!texto) { 
+            alert("Por favor, conte-nos brevemente o que houve."); 
+            return; 
+        }
+
+        const mensagem = encodeURIComponent(`*Feedback Hotel Flamboyant*%0A*Nota:* ${notaSelecionada} estrelas ⭐%0A*Comentário:* ${texto}`);
+        window.open(`https://wa.me/${telefone}?text=${mensagem}`, '_blank');
+    }
+</script>
 
 </body>
 </html>
