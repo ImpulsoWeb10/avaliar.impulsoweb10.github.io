@@ -33,80 +33,45 @@
         }
         
         .logo { 
-            width: 160px; height: 160px; box-sizing: border-box; 
-            object-fit: contain; padding: 5px; border-radius: 50%; 
-            border: 4px solid #ff69b4; background: #ffffff; 
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2); 
-            display: block; margin: 0 auto;
+            width: 160px; height: 160px; object-fit: contain; padding: 5px; 
+            border-radius: 50%; border: 4px solid #ff69b4; background: #ffffff; 
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2); display: block; margin: 0 auto;
         }
         
         .nome-loja { 
-            font-family: 'Pacifico', cursive; 
-            font-size: 32px; 
-            color: #ff69b4; 
-            text-shadow: 2px 2px 0px #fff, 4px 4px 10px rgba(0,0,0,0.1);
-            margin-top: 10px; margin-bottom: 10px; 
-            line-height: 1.2;
-            white-space: nowrap; 
+            font-family: 'Pacifico', cursive; font-size: 32px; color: #ff69b4; 
+            text-shadow: 2px 2px 0px #fff; margin-top: 10px; margin-bottom: 10px; 
         }
 
         h1 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 20px; font-weight: 700; }
         h2 { font-size: 22px; margin-bottom: 15px; font-weight: 700; color: #0f172a; }
 
-        .rating-box { margin-bottom: 30px; display: flex; justify-content: center; gap: 8px; }
-        .star-btn { 
-            font-size: 42px; color: #cbd5e1; cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
+        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: all 0.3s; }
         .star-btn.active { color: #facc15; transform: scale(1.2); }
 
         textarea {
             width: 100%; background: #ffffff; border: 1px solid #d1d5db;
-            border-radius: 15px; color: #334155; padding: 15px; margin-bottom: 20px; 
+            border-radius: 15px; padding: 15px; margin-bottom: 15px; 
             font-family: inherit; resize: none; outline: none; font-size: 14px;
         }
-
-        textarea::placeholder { color: #94a3b8; font-style: italic; }
 
         .botao {
             display: flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 18px; font-size: 16px; font-weight: 800;
-            border-radius: 20px; transition: 0.3s; border: none; cursor: pointer; text-decoration: none;
-            position: relative; overflow: hidden;
+            border-radius: 20px; border: none; cursor: pointer; text-decoration: none;
+            transition: 0.3s;
         }
 
-        /* IMAGEM FIXA DE FEEDBACK POSITIVO */
-        .img-feedback {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .google { background: #facc15; color: #000; animation: pulsar 1.8s infinite ease-in-out; }
-        
-        .google::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            animation: brilho-passante 3s infinite;
-        }
-
-        .whatsapp { background: #22c55e; color: white; }
-
-        @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes brilho-passante { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+        .whatsapp { background: #22c55e; color: white; animation: pulsar 1.8s infinite; }
+        @keyframes pulsar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
         .hidden { display: none; }
 
         .footer { margin-top: 40px; font-size: 12px; color: #64748b; border-top: 1px solid #e5e7eb; padding-top: 25px; }
-        .cta-vendas { display: block; margin-bottom: 15px; font-size: 13px; color: #475569; line-height: 1.4; padding: 0 10px; }
-        .cta-vendas a { color: #2563eb; text-decoration: none; font-weight: 700; border-bottom: 1px solid #2563eb; }
         .ssl-msg { font-weight: bold; color: #059669; margin-bottom: 8px; display: block; }
-        .hero-msg { font-weight: bold; color: #ff69b4; margin-bottom: 15px; font-size: 18px; min-height: 24px; }
-        .footer .dev-link { color: #f59e0b; text-decoration: none; font-weight: 800; }
+        .hero-msg { font-weight: bold; color: #ff69b4; margin-bottom: 15px; font-size: 18px; }
+        .dev-link { color: #f59e0b; text-decoration: none; font-weight: 800; }
     </style>
 </head>
 
@@ -114,7 +79,7 @@
 
 <div class="container">
     <div class="logo-box">
-        <img src="logo.png" class="logo" alt="Logo Amor por Patinhas" onerror="this.src='https://via.placeholder.com/160/FFFFFF/FF69B4?text=Patinhas'">
+        <img src="amor-por-patinhas.png" class="logo" alt="Logo" onerror="this.src='https://via.placeholder.com/160/FFFFFF/FF69B4?text=Patinhas'">
         <div class="nome-loja">Amor por Patinhas</div>
     </div>
 
@@ -122,34 +87,27 @@
     <h2 id="titulo-dinamico">Como foi sua experiência? 🐾</h2>
 
     <div class="rating-box">
-        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+        <i class="fas fa-star star-btn" onclick="selecionarNota(1)"></i>
+        <i class="fas fa-star star-btn" onclick="selecionarNota(2)"></i>
+        <i class="fas fa-star star-btn" onclick="selecionarNota(3)"></i>
+        <i class="fas fa-star star-btn" onclick="selecionarNota(4)"></i>
+        <i class="fas fa-star star-btn" onclick="selecionarNota(5)"></i>
     </div>
 
-    <div id="feedback-bom" class="hidden">
-        <img src="amor-por-patas.png" class="img-feedback" alt="Amor por Patas">
-        <a href="https://g.page/r/CS5Xk3_P3_i7EAE/review" target="_blank" class="botao google">
-            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-        </a>
-    </div>
-
-    <div id="feedback-ruim" class="hidden">
-        <p style="font-size: 18px; margin-bottom: 15px;">Sentimos muito... 😔</p>
-        <textarea id="texto-melhoria" placeholder="Por gentileza, o que ocorreu para melhorarmos?"></textarea>
-        <button onclick="enviarWhatsApp()" class="botao whatsapp">
-            <i class="fab fa-whatsapp"></i> ENVIAR PARA O GERENTE
+    <div id="feedback-area" class="hidden">
+        <p style="font-weight: bold; margin-bottom: 10px;">Conte-nos o que achou:</p>
+        <textarea id="texto-melhoria" placeholder="Escreva seu comentário aqui..."></textarea>
+        
+        <button onclick="enviarFeedbackDuplo()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> ENVIAR AVALIAÇÃO
         </button>
+        <p style="font-size: 11px; color: #94a3b8; margin-top: 10px;">
+            Ao clicar, você será guiado para o WhatsApp e o Google.
+        </p>
     </div>
 
     <div class="footer">
         <div id="msg-especial" class="hero-msg"></div>
-        <span class="cta-vendas">
-            Gostou desse sistema? Tenha um link personalizado para sua empresa. 
-            <a href="https://wa.me/5511954950044?text=Ol%C3%A1%2C%20vi%20o%20link%20de%20avalia%C3%A7%C3%A3o%20e%20gostaria%20de%20um%20personalizado%20para%20minha%20empresa!" target="_blank">Clique aqui</a>
-        </span>
         <span class="ssl-msg"><i class="fas fa-shield-alt"></i> SITE SEGURO - CERTIFICADO SSL</span>
         <div>Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" class="dev-link">ImpulsoWeb10</a></div>
     </div>
@@ -157,12 +115,12 @@
 
 <script>
     let notaSelecionada = 0;
-    function avaliar(n) {
+    const urlGoogle = "https://g.page/r/CS5Xk3_P3_i7EAE/review";
+
+    function selecionarNota(n) {
         notaSelecionada = n;
         const stars = document.querySelectorAll('.star-btn');
-        const bom = document.getElementById('feedback-bom');
-        const ruim = document.getElementById('feedback-ruim');
-        const titulo = document.getElementById('titulo-dinamico');
+        const feedbackArea = document.getElementById('feedback-area');
         const msgEspecial = document.getElementById('msg-especial');
 
         stars.forEach((s, i) => {
@@ -170,25 +128,29 @@
             else s.classList.remove('active');
         });
 
+        feedbackArea.classList.remove('hidden');
+        
         if (n >= 4) {
-            titulo.innerText = "Nos ajude com sua avaliação";
             msgEspecial.innerText = "Você é um herói dos animais! 🐾";
-            bom.classList.remove('hidden');
-            ruim.classList.add('hidden');
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff69b4', '#facc15', '#ffffff'] });
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         } else {
-            titulo.innerText = "Sua opinião é vital! 💬";
             msgEspecial.innerText = "";
-            ruim.classList.remove('hidden');
-            bom.classList.add('hidden');
         }
     }
 
-    function enviarWhatsApp() {
+    function enviarFeedbackDuplo() {
         const texto = document.getElementById('texto-melhoria').value;
         const telefone = "5511955883909"; 
-        const mensagem = encodeURIComponent(`Feedback Amor por Patinhas (${notaSelecionada} estrelas): ${texto}`);
-        window.open(`https://wa.me/${telefone}?text=${mensagem}`, '_blank');
+        const mensagem = encodeURIComponent(`Avaliação Amor por Patinhas: ${notaSelecionada} Estrelas\nComentário: ${texto}`);
+        
+        // 1. Abre o Google em uma aba nova
+        window.open(urlGoogle, '_blank');
+
+        // 2. Abre o WhatsApp (pode ser na mesma ou em outra aba)
+        // Usamos um pequeno delay (delay) para garantir que o navegador não bloqueie o segundo popup
+        setTimeout(() => {
+            window.location.href = `https://wa.me/${telefone}?text=${mensagem}`;
+        }, 500);
     }
 </script>
 </body>
