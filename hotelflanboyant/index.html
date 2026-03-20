@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Flamboyant em Itaquaquecetuba | Avaliação</title>
-<meta name="description" content="Avalie o Hotel Flamboyant em Itaquaquecetuba SP. Hospedagem confortável, ótimo custo-benefício e localização próxima à Santa Isabel.">
 
 <style>
 body{
@@ -19,9 +18,6 @@ body{
 }
 .logo{
     max-width:260px;
-}
-h1{
-    font-size:22px;
 }
 .stars{
     font-size:42px;
@@ -41,15 +37,24 @@ h1{
     font-size:14px;
     color:#555;
 }
-
-/* CONTADOR */
 .counter{
     margin-top:10px;
     font-size:13px;
     color:#888;
 }
 
-/* SANFONA */
+/* TREMER TELA */
+.shake{
+    animation:shake 0.3s;
+}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    50%{transform:translateX(5px)}
+    75%{transform:translateX(-5px)}
+    100%{transform:translateX(0)}
+}
+
 .accordion{
     margin-top:25px;
     text-align:left;
@@ -73,14 +78,12 @@ h1{
     padding:15px;
     border-radius:8px;
     margin-top:5px;
-    font-size:14px;
-    color:#333;
 }
 </style>
 </head>
 
 <body>
-<div class="container">
+<div class="container" id="container">
 
 <img src="logo.jpeg" class="logo">
 
@@ -96,27 +99,23 @@ h1{
 </div>
 
 <p id="frase" class="frase"></p>
-
 <p class="counter">⭐ +479 avaliações realizadas</p>
+<p style="font-size:13px;color:#888;">🔊 Toque nas estrelas</p>
 
-<p style="font-size:13px;color:#888;">🔊 Toque na tela para ouvir a mensagem</p>
-
-<!-- SANFONA -->
 <div class="accordion">
-    <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais do Hotel ▼</button>
+    <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais ▼</button>
     <div id="accordionContent" class="accordion-content">
-        ✔ Hotel em Itaquaquecetuba com ótima localização<br>
-        ✔ Próximo à Estrada de Santa Isabel<br>
-        ✔ Ambiente confortável e tranquilo<br>
+        ✔ Ótima localização<br>
+        ✔ Próximo à Santa Isabel<br>
+        ✔ Conforto e tranquilidade<br>
         ✔ Excelente custo-benefício
-        ✔ Atendimento de qualidade
     </div>
 </div>
 
 </div>
 
 <!-- AUDIO -->
-<audio id="audio">
+<audio id="audio" preload="auto">
   <source src="audio.m4a" type="audio/mp4">
 </audio>
 
@@ -130,21 +129,30 @@ const frases = {
 };
 
 function avaliar(nota){
+    const audio = document.getElementById("audio");
+    audio.play().catch(()=>{});
+
     document.getElementById("frase").innerText = frases[nota];
+
+    // vibração celular
+    if(navigator.vibrate){
+        navigator.vibrate(100);
+    }
+
+    // tremer tela
+    const c = document.getElementById("container");
+    c.classList.add("shake");
+    setTimeout(()=>c.classList.remove("shake"),300);
+
     setTimeout(()=>{
         window.location.href = "avaliar.html";
-    }, 800);
+    }, 1000);
 }
 
 function toggleAccordion(){
     const content = document.getElementById("accordionContent");
     content.style.display = content.style.display === "block" ? "none" : "block";
 }
-
-// tocar áudio no primeiro toque
-window.addEventListener("click", () => {
-    document.getElementById("audio").play();
-}, { once: true });
 </script>
 
 </body>
@@ -157,8 +165,7 @@ window.addEventListener("click", () => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avaliar Hotel Flamboyant no Google</title>
-<meta name="description" content="Deixe sua avaliação do Hotel Flamboyant em Itaquaquecetuba no Google. Sua opinião é muito importante.">
+<title>Avaliar Hotel Flamboyant</title>
 
 <style>
 body{
@@ -194,13 +201,9 @@ body{
 <div class="container">
 
 <h1>Quase lá! ⭐</h1>
-<p>Clique abaixo para avaliar o Hotel Flamboyant no Google</p>
+<p>Clique abaixo para avaliar no Google</p>
 
 <a href="https://g.page/r/CRECbD178tUDEAE/review" class="btn">AVALIAR NO GOOGLE</a>
-
-<p style="margin-top:20px;font-size:14px;">
-Hotel em Itaquaquecetuba • Próximo à Santa Isabel • Melhor custo-benefício
-</p>
 
 </div>
 </body>
