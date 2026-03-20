@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link de Avaliação - Comparativo</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(4px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #64748b; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes progressBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    @keyframes checkmark {
+      from { stroke-dashoffset: 50; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes ripple {
+      0% { transform: scale(0); opacity: 0.6; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+    @keyframes captionSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes captionPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .scene { display: none; position: absolute; inset: 0; }
+    .scene.active { display: flex; }
+    
+    .caption-box {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 90%;
+      width: 100%;
+      max-width: 500px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,182,212,0.15));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      text-align: center;
+      z-index: 100;
+      animation: captionSlideUp 0.6s ease-out forwards;
+    }
+    
+    .caption-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #d1d5db;
+      font-weight: 500;
+    }
+    
+    .caption-box .caption-highlight {
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-fade-left { animation: fadeInLeft 0.8s ease-out forwards; }
+    .animate-fade-right { animation: fadeInRight 0.8s ease-out forwards; }
+    .animate-scale { animation: scaleIn 0.6s ease-out forwards; }
+    .animate-slide-down { animation: slideDown 0.6s ease-out forwards; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-shake { animation: shake 0.5s ease-in-out; }
+
+    .delay-1 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-2 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-3 { animation-delay: 0.6s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-4 { animation-delay: 0.8s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-5 { animation-delay: 1.0s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-6 { animation-delay: 1.2s; opacity: 0; animation-fill-mode: forwards; }
+    .delay-7 { animation-delay: 1.4s; opacity: 0; animation-fill-mode: forwards; }
+
+    .typewriter-text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #64748b;
+      animation: typewriter 2s steps(40) forwards, blink-caret 0.75s step-end infinite;
+    }
+
+    .progress-fill {
+      animation: progressBar 1.5s ease-out forwards;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .bad-gradient-text {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .star-icon { color: #fbbf24; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-hidden relative" style="background: #0a0f1c; font-family: 'Outfit', sans-serif;">
+   <!-- Progress Bar -->
+   <div class="absolute top-0 left-0 right-0 z-50 h-1 bg-gray-800">
+    <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-500" style="width: 0%"></div>
+   </div><!-- Scene Counter -->
+   <div class="absolute top-4 right-4 z-50 text-gray-500 text-sm font-mono" id="scene-counter">
+    1/7
+   </div><!-- SCENE 1: Intro -->
+   <div id="scene-1" class="scene active flex-col items-center justify-center p-8">
+    <div class="text-center max-w-2xl mx-auto">
+     <div class="animate-scale mb-6">
+      <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+       <i data-lucide="star" class="w-10 h-10 text-white"></i>
+      </div>
+     </div>
+     <h1 id="main-title" class="text-4xl md:text-5xl font-900 text-white mb-4 animate-fade-up delay-1">Link de Avaliação Google</h1>
+     <p class="text-xl text-gray-400 animate-fade-up delay-2 font-light">Normal <span class="text-gray-600 mx-2">vs</span> Personalizado</p>
+     <div class="mt-8 animate-fade-up delay-3 flex items-center justify-center gap-2 text-emerald-400 text-sm">
+      <i data-lucide="play-circle" class="w-5 h-5"></i> <span>Descubra a diferença</span>
+     </div>
+    </div><!-- Decorative elements -->
+    <div class="absolute top-20 left-10 w-2 h-2 rounded-full bg-emerald-500 animate-float" style="animation-delay: 0s;"></div>
+    <div class="absolute top-40 right-20 w-3 h-3 rounded-full bg-cyan-500 animate-float" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-32 left-20 w-2 h-2 rounded-full bg-purple-500 animate-float" style="animation-delay: 2s;"></div>
+   </div><!-- SCENE 2: Normal Link -->
+   <div id="scene-2" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-2xl mx-auto w-full">
+     <div class="flex items-center gap-2 mb-6 animate-slide-down">
+      <div class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
+       <i data-lucide="link" class="w-4 h-4 text-red-400"></i>
+      </div><span class="text-red-400 font-600 text-sm uppercase tracking-wider">Link Normal</span>
+     </div>
+     <h2 class="text-3xl font-800 text-white mb-6 animate-fade-up delay-1">Como é o link <span class="bad-gradient-text">padrão</span>?</h2><!-- URL Display -->
+     <div class="glass-card rounded-xl p-4 mb-6 animate-fade-up delay-2">
+      <div class="flex items-center gap-2 mb-2">
+       <div class="w-3 h-3 rounded-full bg-red-500"></div>
+       <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+       <div class="w-3 h-3 rounded-full bg-green-500"></div><span class="text-gray-500 text-xs ml-2 font-mono">Barra de endereço</span>
+      </div>
+      <div class="bg-gray-900/80 rounded-lg p-3 overflow-x-auto">
+       <code class="text-red-400 text-xs md:text-sm font-mono break-all leading-relaxed"> https://www.google.com/maps/place/Sua+Empresa/@-23.55052,-46.633308,15z/data=!4m8!3m7!1s0x94ce59c8da0aa... </code>
+      </div>
+     </div><!-- Problems -->
+     <div class="space-y-3">
+      <div class="flex items-start gap-3 animate-fade-left delay-3">
+       <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="x" class="w-3 h-3 text-red-400"></i>
+       </div><span class="text-gray-300 text-sm">Link enorme e confuso</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-4">
+       <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="x" class="w-3 h-3 text-red-400"></i>
+       </div><span class="text-gray-300 text-sm">Cliente desiste antes de clicar</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-5">
+       <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="x" class="w-3 h-3 text-red-400"></i>
+       </div><span class="text-gray-300 text-sm">Abre o Google Maps, não a avaliação</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-6">
+       <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="x" class="w-3 h-3 text-red-400"></i>
+       </div><span class="text-gray-300 text-sm">Impossível de memorizar ou compartilhar</span>
+      </div>
+     </div>
+    </div>
+   </div><!-- SCENE 3: Customized Link -->
+   <div id="scene-3" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-2xl mx-auto w-full">
+     <div class="flex items-center gap-2 mb-6 animate-slide-down">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+       <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
+      </div><span class="text-emerald-400 font-600 text-sm uppercase tracking-wider">Link Personalizado</span>
+     </div>
+     <h2 class="text-3xl font-800 text-white mb-6 animate-fade-up delay-1">Agora veja o link <span class="gradient-text">personalizado</span></h2><!-- URL Display -->
+     <div class="glass-card rounded-xl p-4 mb-6 animate-fade-up delay-2 animate-pulse-glow">
+      <div class="flex items-center gap-2 mb-2">
+       <div class="w-3 h-3 rounded-full bg-red-500"></div>
+       <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+       <div class="w-3 h-3 rounded-full bg-green-500"></div><span class="text-gray-500 text-xs ml-2 font-mono">Barra de endereço</span>
+      </div>
+      <div class="bg-gray-900/80 rounded-lg p-3">
+       <code class="text-emerald-400 text-lg md:text-xl font-mono font-600" id="custom-url"> avalie.me/SuaEmpresa ⭐ </code>
+      </div>
+     </div><!-- Benefits -->
+     <div class="space-y-3">
+      <div class="flex items-start gap-3 animate-fade-left delay-3">
+       <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+       </div><span class="text-gray-300 text-sm">Curto, limpo e profissional</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-4">
+       <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+       </div><span class="text-gray-300 text-sm">Abre direto na tela de avaliação</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-5">
+       <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+       </div><span class="text-gray-300 text-sm">Fácil de lembrar e compartilhar</span>
+      </div>
+      <div class="flex items-start gap-3 animate-fade-left delay-6">
+       <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+       </div><span class="text-gray-300 text-sm">Transmite confiança ao cliente</span>
+      </div>
+     </div>
+    </div>
+   </div><!-- SCENE 4: Side by Side -->
+   <div id="scene-4" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-3xl mx-auto w-full">
+     <h2 class="text-2xl md:text-3xl font-800 text-white mb-8 text-center animate-fade-up">Comparação <span class="gradient-text">lado a lado</span></h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Normal -->
+      <div class="glass-card rounded-xl p-5 border-red-500/20 animate-fade-left delay-1">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-3 h-3 rounded-full bg-red-500"></div><span class="text-red-400 font-600 text-sm">NORMAL</span>
+       </div>
+       <div class="bg-gray-900/60 rounded-lg p-3 mb-4">
+        <code class="text-red-400/70 text-xs font-mono break-all">https://google.com/maps/place/...xc8da0aa...</code>
+       </div>
+       <div class="space-y-2">
+        <div class="flex items-center gap-2">
+         <i data-lucide="frown" class="w-4 h-4 text-red-400"></i> <span class="text-gray-400 text-xs">Confuso</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <i data-lucide="eye-off" class="w-4 h-4 text-red-400"></i> <span class="text-gray-400 text-xs">Não inspira confiança</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <i data-lucide="trending-down" class="w-4 h-4 text-red-400"></i> <span class="text-gray-400 text-xs">Baixa conversão</span>
+        </div>
+       </div>
+       <div class="mt-4 pt-4 border-t border-gray-700/50">
+        <div class="flex items-center justify-between">
+         <span class="text-gray-500 text-xs">Taxa de clique</span> <span class="text-red-400 font-700 text-lg">~12%</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+         <div class="bg-red-500 h-2 rounded-full" style="width: 12%"></div>
+        </div>
+       </div>
+      </div><!-- Customized -->
+      <div class="glass-card rounded-xl p-5 border-emerald-500/20 animate-fade-right delay-2" style="border: 1px solid rgba(16,185,129,0.3);">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-3 h-3 rounded-full bg-emerald-500"></div><span class="text-emerald-400 font-600 text-sm">PERSONALIZADO</span>
+       </div>
+       <div class="bg-gray-900/60 rounded-lg p-3 mb-4">
+        <code class="text-emerald-400 text-sm font-mono font-600" id="compare-url">avalie.me/SuaEmpresa</code>
+       </div>
+       <div class="space-y-2">
+        <div class="flex items-center gap-2">
+         <i data-lucide="smile" class="w-4 h-4 text-emerald-400"></i> <span class="text-gray-300 text-xs">Limpo e profissional</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i> <span class="text-gray-300 text-xs">Transmite confiança</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i> <span class="text-gray-300 text-xs">Alta conversão</span>
+        </div>
+       </div>
+       <div class="mt-4 pt-4 border-t border-emerald-700/30">
+        <div class="flex items-center justify-between">
+         <span class="text-gray-500 text-xs">Taxa de clique</span> <span class="text-emerald-400 font-700 text-lg">~68%</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+         <div class="bg-emerald-500 h-2 rounded-full progress-fill" style="width: 68%"></div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- SCENE 5: Benefits Deep Dive -->
+   <div id="scene-5" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-2xl mx-auto w-full">
+     <h2 class="text-2xl md:text-3xl font-800 text-white mb-2 text-center animate-fade-up">Benefícios do link <span class="gradient-text">personalizado</span></h2>
+     <p class="text-gray-500 text-sm text-center mb-8 animate-fade-up delay-1">Por que investir nisso?</p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="glass-card rounded-xl p-5 animate-scale delay-2">
+       <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-3">
+        <i data-lucide="star" class="w-5 h-5 text-amber-400"></i>
+       </div>
+       <h3 class="text-white font-700 mb-1 text-sm">Mais Avaliações</h3>
+       <p class="text-gray-400 text-xs leading-relaxed">Clientes avaliam com mais frequência quando o processo é simples.</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 animate-scale delay-3">
+       <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center mb-3">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-400"></i>
+       </div>
+       <h3 class="text-white font-700 mb-1 text-sm">Melhor Ranking</h3>
+       <p class="text-gray-400 text-xs leading-relaxed">Mais avaliações = melhor posicionamento no Google.</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 animate-scale delay-4">
+       <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center mb-3">
+        <i data-lucide="megaphone" class="w-5 h-5 text-purple-400"></i>
+       </div>
+       <h3 class="text-white font-700 mb-1 text-sm">Marketing Fácil</h3>
+       <p class="text-gray-400 text-xs leading-relaxed">Use em cartões, WhatsApp, QR Code e redes sociais.</p>
+      </div>
+      <div class="glass-card rounded-xl p-5 animate-scale delay-5">
+       <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-3">
+        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+       </div>
+       <h3 class="text-white font-700 mb-1 text-sm">Credibilidade</h3>
+       <p class="text-gray-400 text-xs leading-relaxed">Sua marca aparece no link, aumentando a confiança.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- SCENE 6: How It Works -->
+   <div id="scene-6" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-2xl mx-auto w-full">
+     <h2 class="text-2xl md:text-3xl font-800 text-white mb-2 text-center animate-fade-up">Como <span class="gradient-text">funciona</span>?</h2>
+     <p class="text-gray-500 text-sm text-center mb-8 animate-fade-up delay-1">3 passos simples</p>
+     <div class="space-y-4">
+      <div class="flex items-center gap-4 animate-fade-left delay-2">
+       <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-800 text-lg">
+        1
+       </div>
+       <div class="glass-card rounded-xl p-4 flex-1">
+        <h3 class="text-white font-600 text-sm">Envie o link ao cliente</h3>
+        <p class="text-gray-400 text-xs mt-1">Via WhatsApp, SMS, e-mail ou QR Code</p>
+       </div>
+      </div>
+      <div class="flex items-center gap-4 animate-fade-left delay-3">
+       <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-800 text-lg">
+        2
+       </div>
+       <div class="glass-card rounded-xl p-4 flex-1">
+        <h3 class="text-white font-600 text-sm">Cliente clica no link</h3>
+        <p class="text-gray-400 text-xs mt-1">Abre direto na tela de avaliação do Google</p>
+       </div>
+      </div>
+      <div class="flex items-center gap-4 animate-fade-left delay-4">
+       <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-800 text-lg">
+        3
+       </div>
+       <div class="glass-card rounded-xl p-4 flex-1">
+        <h3 class="text-white font-600 text-sm">Avaliação feita!</h3>
+        <p class="text-gray-400 text-xs mt-1">Em segundos, sem complicação</p>
+       </div>
+      </div>
+     </div><!-- Phone mockup -->
+     <div class="mt-6 flex justify-center animate-scale delay-5">
+      <div class="w-40 bg-gray-900 rounded-2xl p-2 border border-gray-700">
+       <div class="bg-gray-800 rounded-xl p-3 text-center">
+        <div class="flex justify-center gap-1 mb-2">
+         <i data-lucide="star" class="w-5 h-5 text-amber-400"></i> <i data-lucide="star" class="w-5 h-5 text-amber-400"></i> <i data-lucide="star" class="w-5 h-5 text-amber-400"></i> <i data-lucide="star" class="w-5 h-5 text-amber-400"></i> <i data-lucide="star" class="w-5 h-5 text-amber-400"></i>
+        </div>
+        <p class="text-gray-400 text-xs">Avalie agora!</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- SCENE 7: CTA -->
+   <div id="scene-7" class="scene flex-col items-center justify-center p-6">
+    <div class="max-w-2xl mx-auto w-full text-center">
+     <div class="animate-scale mb-6">
+      <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center animate-pulse-glow">
+       <i data-lucide="rocket" class="w-10 h-10 text-white"></i>
+      </div>
+     </div>
+     <h2 class="text-3xl md:text-4xl font-900 text-white mb-4 animate-fade-up delay-1" id="cta-heading">Personalize seu link agora!</h2>
+     <p class="text-gray-400 text-lg mb-8 animate-fade-up delay-2 font-light" id="business-display">Leve <span class="text-emerald-400 font-600">Sua Empresa</span> para o próximo nível</p>
+     <div class="animate-fade-up delay-3">
+      <div class="inline-flex items-center gap-3 glass-card rounded-2xl px-6 py-4 animate-pulse-glow">
+       <i data-lucide="link" class="w-5 h-5 text-emerald-400"></i> <span class="text-emerald-400 font-mono font-600" id="final-url">avalie.me/SuaEmpresa</span>
+      </div>
+     </div>
+     <div class="mt-8 flex flex-wrap justify-center gap-3 animate-fade-up delay-4">
+      <div class="flex items-center gap-1.5 bg-emerald-500/10 rounded-full px-3 py-1.5">
+       <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> <span class="text-emerald-300 text-xs font-500">Mais avaliações</span>
+      </div>
+      <div class="flex items-center gap-1.5 bg-cyan-500/10 rounded-full px-3 py-1.5">
+       <i data-lucide="check-circle" class="w-3.5 h-3.5 text-cyan-400"></i> <span class="text-cyan-300 text-xs font-500">Melhor ranking</span>
+      </div>
+      <div class="flex items-center gap-1.5 bg-purple-500/10 rounded-full px-3 py-1.5">
+       <i data-lucide="check-circle" class="w-3.5 h-3.5 text-purple-400"></i> <span class="text-purple-300 text-xs font-500">Mais clientes</span>
+      </div>
+     </div>
+    </div>
+   </div><!-- Navigation Controls -->
+   <div class="absolute bottom-6 left-0 right-0 z-50 flex items-center justify-center gap-4 px-6">
+    <button id="prev-btn" onclick="prevScene()" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed" disabled> <i data-lucide="chevron-left" class="w-5 h-5"></i> </button>
+    <div class="flex items-center gap-2" id="dots-container"></div><button id="next-btn" onclick="nextScene()" class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 flex items-center justify-center text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all"> <i data-lucide="chevron-right" class="w-5 h-5"></i> </button>
+   </div><!-- Auto-play toggle -->
+   <div class="absolute top-4 left-4 z-50">
+    <button id="autoplay-btn" onclick="toggleAutoplay()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white text-xs transition-all"> <i data-lucide="play" class="w-3 h-3" id="autoplay-icon"></i> <span id="autoplay-text">Auto</span> </button>
+   </div>
+  </div>
+  <script>
+    const TOTAL_SCENES = 7;
+    let currentScene = 1;
+    let autoplayInterval = null;
+    let isAutoplay = false;
+
+    // Captions for each scene
+    const captions = {
+      1: "Descubra como aumentar suas avaliações no Google com um link simples e profissional! 🎯",
+      2: "O link padrão do Google Maps é enorme, confuso e confunde os clientes. Taxa de clique: apenas 12% 😞",
+      3: "Com o link personalizado, tudo fica simples e profissional. Taxa de clique: 68%! 🚀",
+      4: "Veja a diferença lado a lado. O link personalizado é <span class='caption-highlight'>5.6x mais eficaz!</span>",
+      5: "Mais avaliações = melhor ranking no Google. Seu negócio sobe nas buscas! 📈",
+      6: "É simples: envie o link, cliente clica, avalia. Feito em segundos, sem complicação! ⚡",
+      7: "Personalize seu link agora e comece a receber mais avaliações hoje mesmo! 🎉"
+    };
+
+    function showCaption(sceneNum) {
+      const container = document.getElementById('caption-container');
+      container.innerHTML = '';
+      
+      if (captions[sceneNum]) {
+        const captionBox = document.createElement('div');
+        captionBox.className = 'caption-box';
+        captionBox.innerHTML = `<p>${captions[sceneNum]}</p>`;
+        container.appendChild(captionBox);
+      }
+    }
+
+    const defaultConfig = {
+      main_title: 'Link de Avaliação Google',
+      business_name: 'Sua Empresa',
+      cta_text: 'Personalize seu link agora!',
+      background_color: '#0a0f1c',
+      surface_color: 'rgba(255,255,255,0.05)',
+      text_color: '#ffffff',
+      primary_color: '#10b981',
+      secondary_color: '#64748b'
+    };
+
+    function applyConfig(config) {
+      const title = config.main_title || defaultConfig.main_title;
+      const business = config.business_name || defaultConfig.business_name;
+      const cta = config.cta_text || defaultConfig.cta_text;
+      const bg = config.background_color || defaultConfig.background_color;
+      const textCol = config.text_color || defaultConfig.text_color;
+      const primary = config.primary_color || defaultConfig.primary_color;
+
+      const el = (id) => document.getElementById(id);
+
+      if (el('main-title')) el('main-title').textContent = title;
+      if (el('cta-heading')) el('cta-heading').textContent = cta;
+
+      const customUrl = `avalie.me/${business.replace(/\s+/g, '')}`;
+      if (el('custom-url')) el('custom-url').textContent = customUrl + ' ⭐';
+      if (el('compare-url')) el('compare-url').textContent = customUrl;
+      if (el('final-url')) el('final-url').textContent = customUrl;
+
+      if (el('business-display')) {
+        el('business-display').innerHTML = `Leve <span class="font-600" style="color:${primary}">${business}</span> para o próximo nível`;
+      }
+
+      const app = el('app');
+      if (app) app.style.background = bg;
+
+      document.querySelectorAll('h1, h2, h3').forEach(h => {
+        if (!h.querySelector('.gradient-text') && !h.querySelector('.bad-gradient-text')) {
+          h.style.color = textCol;
+        }
+      });
+    }
+
+    // Element SDK init
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (v) => { config.secondary_color = v; window.elementSdk.setConfig({ secondary_color: v }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || 'Outfit',
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['main_title', config.main_title || defaultConfig.main_title],
+        ['business_name', config.business_name || defaultConfig.business_name],
+        ['cta_text', config.cta_text || defaultConfig.cta_text]
+      ])
+    });
+
+    // Navigation
+    function initDots() {
+      const container = document.getElementById('dots-container');
+      container.innerHTML = '';
+      for (let i = 1; i <= TOTAL_SCENES; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === currentScene ? 'bg-emerald-400 w-6' : 'bg-gray-600 hover:bg-gray-500'}`;
+        dot.onclick = () => goToScene(i);
+        container.appendChild(dot);
+      }
+    }
+
+    function goToScene(n) {
+      if (n < 1 || n > TOTAL_SCENES) return;
+      document.getElementById(`scene-${currentScene}`).classList.remove('active');
+      currentScene = n;
+      document.getElementById(`scene-${currentScene}`).classList.add('active');
+
+      document.getElementById('prev-btn').disabled = currentScene === 1;
+      document.getElementById('scene-counter').textContent = `${currentScene}/${TOTAL_SCENES}`;
+      document.getElementById('progress-bar').style.width = `${(currentScene / TOTAL_SCENES) * 100}%`;
+
+      initDots();
+      showCaption(currentScene);
+      lucide.createIcons();
+    }
+
+    function nextScene() { goToScene(currentScene + 1); }
+    function prevScene() { goToScene(currentScene - 1); }
+
+    function toggleAutoplay() {
+      isAutoplay = !isAutoplay;
+      const btn = document.getElementById('autoplay-btn');
+      const text = document.getElementById('autoplay-text');
+
+      if (isAutoplay) {
+        btn.classList.add('bg-emerald-500/20', 'border-emerald-500/30', 'text-emerald-400');
+        btn.classList.remove('bg-white/5', 'border-white/10', 'text-gray-400');
+        text.textContent = 'Pausar';
+        autoplayInterval = setInterval(() => {
+          if (currentScene < TOTAL_SCENES) {
+            nextScene();
+          } else {
+            goToScene(1);
+          }
+        }, 4000);
+      } else {
+        btn.classList.remove('bg-emerald-500/20', 'border-emerald-500/30', 'text-emerald-400');
+        btn.classList.add('bg-white/5', 'border-white/10', 'text-gray-400');
+        text.textContent = 'Auto';
+        clearInterval(autoplayInterval);
+      }
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextScene();
+      if (e.key === 'ArrowLeft') prevScene();
+      if (e.key === ' ') { e.preventDefault(); toggleAutoplay(); }
+    });
+
+    // Init
+    initDots();
+    applyConfig(defaultConfig);
+    showCaption(1);
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9df21979e091ae1a',t:'MTc3Mzk4MjI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
