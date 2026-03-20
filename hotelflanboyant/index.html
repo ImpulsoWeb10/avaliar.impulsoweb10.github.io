@@ -6,90 +6,102 @@
 <title>Hotel Flamboyant | Avaliação</title>
 
 <style>
-/* TELA ESCURA */
+/* TELA ESCURA PREMIUM */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: #121212; 
+    background: #0a0a0a; 
     color: #ffffff; 
     margin: 0; 
     min-height: 100vh; 
     display: flex; 
     flex-direction: column;
 }
-.container { padding: 30px; flex: 1; }
+.container { padding: 20px; flex: 1; }
 
-/* LOGO PREMIUM */
+/* LOGO COM BRILHO PULSANTE */
 .logo-box {
     display: inline-block;
     padding: 15px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
-.logo { max-width: 160px; }
+.logo-box::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shine 2.5s infinite;
+}
+@keyframes shine { 100% { left: 100%; } }
+.logo { max-width: 180px; }
 
-h1 { font-size: 20px; }
+h1 { font-size: 19px; margin: 10px 0; }
 
 /* ESTRELAS */
-.stars { font-size: 45px; margin: 20px 0; }
-.star { color: #444; transition: .3s; cursor: pointer; display: inline-block; }
+.stars { font-size: 42px; margin: 15px 0; }
+.star { color: #333; transition: .3s; cursor: pointer; display: inline-block; }
 
-/* EFEITO PULSAR NA ESTRELA CLICADA */
 .pulsing { 
     animation: pulse-star 0.8s infinite; 
-    color: gold !important; 
-    text-shadow: 0 0 20px gold;
+    color: #FFD700 !important; 
+    text-shadow: 0 0 15px #FFD700;
 }
-@keyframes pulse-star {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-}
+@keyframes pulse-star { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-/* CAIXA DE TEXTO */
-#feedbackArea { display: none; margin-top: 15px; animation: fadeIn 0.5s; }
+/* AREA DINÂMICA */
+#feedbackArea { display: none; animation: fadeIn 0.4s ease; margin-top: 10px; }
 
+/* CAIXA DE DIÁLOGO DINÂMICA */
 #feedbackText {
-    width: 100%; max-width: 300px; height: 80px;
-    padding: 12px; border-radius: 10px; border: 1px solid #333;
-    background: #1e1e1e; color: #fff; font-size: 14px;
+    width: 90%;
+    max-width: 320px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.4s ease;
 }
 
-/* BOTOES DINÂMICOS */
+/* CLASSES DE PROPORÇÃO DA CAIXA */
+.caixa-grande { height: 120px; border-color: #ff4444 !important; }
+.caixa-pequena { height: 45px; opacity: 0.6; font-size: 12px !important; }
+
+/* BOTÕES */
 .btn-container { 
     display: flex; flex-direction: column; 
-    gap: 15px; align-items: center; margin-top: 20px; 
+    gap: 12px; align-items: center; margin-top: 20px; 
 }
-
-/* Estilo Base */
 .btn-base {
     text-decoration: none; font-weight: bold; 
-    border-radius: 8px; border: none; cursor: pointer;
+    border-radius: 12px; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Botão WhatsApp */
 .btn-whatsapp { background: #25D366; color: #fff; }
+.btn-google { background: #FFD700; color: #000; }
 
-/* Botão Google */
-.btn-google { background: #ffd700; color: #000; }
-
-/* CLASSES DE TAMANHO */
-.btn-grande { width: 280px; height: 55px; font-size: 18px; animation: pulse-btn 1.5s infinite; }
-.btn-pequeno { width: 180px; height: 35px; font-size: 12px; opacity: 0.7; }
+/* TAMANHOS DOS BOTÕES */
+.btn-destaque { width: 280px; height: 58px; font-size: 17px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); animation: pulse-btn 1.5s infinite; }
+.btn-discreto { width: 160px; height: 35px; font-size: 11px; opacity: 0.5; }
 
 @keyframes pulse-btn {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 5px rgba(255,215,0,0.2); }
-    50% { transform: scale(1.03); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
 }
 
-/* RODAPÉ */
-footer { background: #000; padding: 15px; font-size: 11px; color: #555; border-top: 1px solid #222; }
-footer a { color: #888; text-decoration: none; }
+footer { background: #000; padding: 15px; font-size: 11px; color: #444; border-top: 1px solid #111; }
+footer a { color: #666; text-decoration: none; }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 
@@ -111,11 +123,11 @@ footer a { color: #888; text-decoration: none; }
     </div>
 
     <div id="feedbackArea">
-        <p id="fraseDinamica" style="font-weight: bold; margin-bottom: 10px;"></p>
+        <p id="fraseTopo" style="font-weight: bold; margin-bottom: 12px;"></p>
+        
         <textarea id="feedbackText"></textarea>
         
-        <div class="btn-container" id="btnContainer">
-            </div>
+        <div class="btn-container" id="btnContainer"></div>
     </div>
 
 </div>
@@ -125,48 +137,55 @@ footer a { color: #888; text-decoration: none; }
 </footer>
 
 <script>
-let notaGlobal = 0;
+let notaAtual = 0;
 
 function avaliar(nota, elemento) {
-    notaGlobal = nota;
+    notaAtual = nota;
     document.querySelectorAll('.star').forEach(s => s.classList.remove('pulsing'));
     elemento.classList.add('pulsing');
 
     const area = document.getElementById("feedbackArea");
-    const frase = document.getElementById("fraseDinamica");
+    const frase = document.getElementById("fraseTopo");
+    const caixa = document.getElementById("feedbackText");
     const container = document.getElementById("btnContainer");
-    const campoTexto = document.getElementById("feedbackText");
 
     area.style.display = "block";
 
-    // JOGADA: Notas 1 a 3 (Insatisfeito)
+    // ESTRATÉGIA NOTA 1-3 (RECLAMAÇÃO PRIVADA)
     if (nota <= 3) {
-        frase.innerHTML = "Sentimos muito 😔<br><span style='font-size:14px; color:#aaa;'>Em que podemos melhorar?</span>";
-        campoTexto.placeholder = "Conte-nos o que aconteceu...";
+        frase.innerHTML = "Sentimos muito 😔 em que podemos melhorar?";
         
-        // WhatsApp em destaque (Grande) e Google escondido (Pequeno)
+        // Caixa de texto ganha destaque (maior)
+        caixa.className = "caixa-grande";
+        caixa.placeholder = "Descreva aqui sua insatisfação para nossa gerência...";
+        
+        // Botão WhatsApp Gigante, Google vira link pequeno
         container.innerHTML = `
-            <button class="btn-base btn-whatsapp btn-grande" onclick="enviar()">ENVIAR FEEDBACK NO WHATSAPP</button>
-            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-pequeno">Avaliá no Google</a>
+            <button class="btn-base btn-whatsapp btn-destaque" onclick="enviar()">ENVIAR PARA GERÊNCIA VIA WHATSAPP</button>
+            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-discreto">Avaliar no Google</a>
         `;
     } 
-    // JOGADA: Notas 4 e 5 (Satisfeito)
+    // ESTRATÉGIA NOTA 4-5 (SUCESSO PÚBLICO)
     else {
-        frase.innerHTML = "Que alegria! 😍<br><span style='font-size:14px; color:#aaa;'>Sua opinião nos ajuda muito!</span>";
-        campoTexto.placeholder = "Deixe um elogio...";
+        frase.innerHTML = "Que alegria! 😍 nos ajude com sua nota:";
+        
+        // Caixa de texto fica pequena (secundária)
+        caixa.className = "caixa-pequena";
+        caixa.placeholder = "Deixe um elogio rápido (opcional)...";
 
-        // Google em destaque (Grande) e WhatsApp secundário (Pequeno)
+        // Botão Google Gigante, WhatsApp vira link pequeno
         container.innerHTML = `
-            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-grande">AVALIAR NO GOOGLE AGORA</a>
-            <button class="btn-base btn-whatsapp btn-pequeno" onclick="enviar()">Enviar pelo WhatsApp</button>
+            <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-base btn-google btn-destaque">FINALIZAR NO GOOGLE ⭐⭐⭐⭐⭐</a>
+            <button class="btn-base btn-whatsapp btn-discreto" onclick="enviar()">Enviar Elogio via Whats</button>
         `;
     }
 }
 
 function enviar() {
     const texto = document.getElementById("feedbackText").value;
-    const msg = `*Feedback Hotel Flamboyant*%0A*Nota:* ${notaGlobal} Estrelas%0A*Comentário:* ${texto || 'Sem comentário.'}`;
-    window.open(`https://wa.me/5511954950044?text=${msg}`, '_blank');
+    const fone = "5511954950044";
+    const msg = `*Relatório de Estadia*%0A*Estrelas:* ${notaAtual}%0A*Feedback:* ${texto || 'O cliente não digitou.'}`;
+    window.open(`https://wa.me/${fone}?text=${msg}`, '_blank');
 }
 </script>
 
