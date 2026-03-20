@@ -4,102 +4,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Flamboyant | Avaliação</title>
+<title>Hotel Flamboyant em Itaquaquecetuba | Avaliação</title>
+<meta name="description" content="Avalie o Hotel Flamboyant em Itaquaquecetuba SP. Hospedagem confortável e ótimo custo-benefício.">
 
 <style>
-body{font-family:Arial;text-align:center;background:#ccffcc;margin:0}
+body{font-family:Arial;text-align:center;background:#f5f5f5;margin:0}
 .container{padding:30px}
 
-/* LOGO */
-.logo-box{margin-bottom:10px}
+/* LOGO PREMIUM */
+.logo-box{
+ display:inline-block;
+ padding:15px;
+ border-radius:20px;
+ background:rgba(255,255,255,0.6);
+ backdrop-filter:blur(10px);
+ box-shadow:0 4px 20px rgba(0,0,0,0.15);
+ position:relative;
+ overflow:hidden;
+}
+.logo-box::after{
+ content:"";
+ position:absolute;
+ top:0;left:-100%;
+ width:100%;height:100%;
+ background:linear-gradient(120deg,transparent,rgba(255,255,255,0.7),transparent);
+ animation:shine 3s infinite;
+}
+@keyframes shine{100%{left:100%}}
 .logo{max-width:220px}
 
 h1{font-size:22px}
 
 /* ESTRELAS */
 .stars{font-size:42px;margin-top:15px}
-.star{color:#ccc;cursor:pointer;margin:0 4px;transition:.3s}
-.star:hover{transform:scale(1.2)}
-.star.blue{color:#00e5ff;animation:pulseBlue 1s infinite}
+.star{color:#ccc;transition:.3s;cursor:pointer}
+.star:hover{color:gold;transform:scale(1.3);text-shadow:0 0 10px gold}
 
-@keyframes pulseBlue{0%{text-shadow:0 0 5px #00e5ff}50%{text-shadow:0 0 20px #00e5ff}100%{text-shadow:0 0 5px #00e5ff}}
+.frase{margin-top:20px;font-size:14px;color:#555}
+.counter{margin-top:10px;font-size:13px;color:#888}
 
-.frase{margin-top:20px;font-size:15px;color:#333;min-height:40px}
+/* TREMER */
+.shake{animation:shake .3s}
+@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}
 
-/* BOTAO GOOGLE */
-.google-btn{
- display:inline-block;
- margin-top:25px;
- padding:15px 25px;
- font-size:18px;
- background:yellow;
- color:#000;
- text-decoration:none;
- border-radius:10px;
- opacity:0;
- transform:scale(0.5);
-}
-.show{opacity:1;transform:scale(1);animation:pulse 1s infinite;transition:.4s}
-@keyframes pulse{0%{box-shadow:0 0 10px yellow}50%{box-shadow:0 0 30px yellow}100%{box-shadow:0 0 10px yellow}}
+/* SANFONA */
+.accordion{margin-top:25px;text-align:left;max-width:400px;margin:auto}
+.accordion-btn{width:100%;padding:12px;border:none;background:#222;color:#fff;border-radius:8px}
+.accordion-content{display:none;background:#fff;padding:15px;border-radius:8px;margin-top:5px}
 
-/* RODAPE */
-.footer{
- margin-top:40px;
- padding:15px;
- border-radius:12px;
- background:linear-gradient(90deg,#ffd166,#ff9f1c);
- color:#000;
+/* BOTAO AUDIO */
+.audio-btn{
+ margin-top:10px;
  font-size:13px;
+ color:#666;
+ cursor:pointer;
 }
-.footer a{color:#000;font-weight:bold;text-decoration:none}
 </style>
 </head>
 
 <body>
-<div class="container">
+<div class="container" id="container">
 
 <div class="logo-box">
  <img src="logo.jpeg" class="logo">
 </div>
 
 <h1>Como foi sua experiência no Hotel Flamboyant?</h1>
-<p>Toque nas estrelas ⭐</p>
+<p>Hotel em Itaquaquecetuba ⭐</p>
 
 <div class="stars">
  <span class="star" onclick="avaliar(1)">★</span>
  <span class="star" onclick="avaliar(2)">★</span>
  <span class="star" onclick="avaliar(3)">★</span>
  <span class="star" onclick="avaliar(4)">★</span>
- <span class="star blue" onclick="avaliar(5)">★</span>
+ <span class="star" onclick="avaliar(5)">★</span>
 </div>
 
 <p id="frase" class="frase"></p>
+<p class="counter">⭐ +479 avaliações realizadas</p>
 
-<a id="googleBtn" href="avaliar.html" class="google-btn">AVALIAR NO GOOGLE</a>
+<div class="audio-btn" onclick="forcarAudio()">🔊 Ativar áudio</div>
 
-<div class="footer">
- <div style="margin-bottom:6px;font-weight:bold;">Gostaria de um link personalizado assim para sua empresa? <a href="https://wa.me/5511954950055">Saiba mais!</a></div>
- Desenvolvido por: <a href="https://wa.me/5511954950055">ImpulsoWeb10</a>
+<div class="accordion">
+ <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais ▼</button>
+ <div id="accordionContent" class="accordion-content">
+  ✔ Ótima localização<br>
+  ✔ Próximo à Santa Isabel<br>
+  ✔ Conforto e tranquilidade<br>
+  ✔ Excelente custo-benefício
+ </div>
 </div>
 
 </div>
 
-<audio id="audio"><source src="audio.m4a" type="audio/mp4"></audio>
+<!-- AUDIO -->
+<audio id="audio" preload="auto">
+ <source src="audio.m4a" type="audio/mp4">
+</audio>
 
 <script>
 const frases={
-1:"A localização de um hotel impacta diretamente na experiência do hóspede.",
-2:"Custo-benefício é um dos fatores mais avaliados por clientes.",
-3:"Conforto e limpeza são essenciais para boas avaliações.",
-4:"Um bom atendimento aumenta a chance de recomendação.",
-5:"Avaliações positivas ajudam outros clientes a escolher melhor."
+1:"Hospedagem simples em Itaquaquecetuba",
+2:"Hotel com bom custo-benefício",
+3:"Hotel confortável em Itaquaquecetuba",
+4:"Ótima localização",
+5:"Excelente atendimento"
 };
 
+function tocarAudio(){
+ const a=document.getElementById("audio");
+ if(a){a.play().catch(()=>{});} 
+}
+
+function forcarAudio(){
+ tocarAudio();
+}
+
 function avaliar(nota){
- document.getElementById("audio").play().catch(()=>{});
+ tocarAudio();
  document.getElementById("frase").innerText=frases[nota];
- document.getElementById("googleBtn").classList.add("show");
+
  if(navigator.vibrate){navigator.vibrate([50,30,80]);}
+
+ const c=document.getElementById("container");
+ c.classList.add("shake");
+ setTimeout(()=>c.classList.remove("shake"),300);
+
+ setTimeout(()=>{window.location.href="avaliar.html"},1000);
+}
+
+function toggleAccordion(){
+ const c=document.getElementById("accordionContent");
+ c.style.display=c.style.display==="block"?"none":"block";
 }
 </script>
 
