@@ -1,157 +1,207 @@
+<!-- ===================== PAGINA 1 - index.html ===================== -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Flamboyant em Itaquaquecetuba | Avaliação</title>
-<meta name="description" content="Avalie o Hotel Flamboyant em Itaquaquecetuba SP. Hospedagem confortável e ótimo custo-benefício.">
+<meta name="description" content="Avalie o Hotel Flamboyant em Itaquaquecetuba SP. Hospedagem confortável, ótimo custo-benefício e localização próxima à Santa Isabel.">
 
 <style>
-body{font-family:Arial;text-align:center;background:#f5f5f5;margin:0; min-height: 100vh; display: flex; flex-direction: column;}
-.container{padding:30px; flex: 1;}
-
-/* LOGO PREMIUM */
-.logo-box{
- display:inline-block;
- padding:15px;
- border-radius:20px;
- background:rgba(255,255,255,0.6);
- backdrop-filter:blur(10px);
- box-shadow:0 4px 20px rgba(0,0,0,0.15);
- position:relative;
- overflow:hidden;
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#f5f5f5;
+    margin:0;
 }
-.logo-box::after{
- content:"";
- position:absolute;
- top:0;left:-100%;
- width:100%;height:100%;
- background:linear-gradient(120deg,transparent,rgba(255,255,255,0.7),transparent);
- animation:shine 3s infinite;
+.container{
+    padding:30px;
 }
-@keyframes shine{100%{left:100%}}
-.logo{max-width:220px}
-
-h1{font-size:22px}
-
-/* ESTRELAS */
-.stars{font-size:42px;margin-top:15px}
-.star{color:#ccc;transition:.3s;cursor:pointer; display: inline-block;}
-.star:hover{color:gold;transform:scale(1.3);text-shadow:0 0 10px gold}
-
-/* EFEITO PULSAR AO CLICAR */
-.pulsing { animation: pulse-yellow 0.5s infinite; color: gold !important; }
-@keyframes pulse-yellow {
-  0% { transform: scale(1); text-shadow: 0 0 0px gold; }
-  50% { transform: scale(1.5); text-shadow: 0 0 20px gold; }
-  100% { transform: scale(1); text-shadow: 0 0 0px gold; }
+.logo{
+    max-width:260px;
+}
+h1{
+    font-size:22px;
+}
+.stars{
+    font-size:42px;
+    cursor:pointer;
+    margin-top:15px;
+}
+.star{
+    color:#ccc;
+    transition:0.3s;
+}
+.star:hover{
+    color:gold;
+    transform:scale(1.2);
+}
+.frase{
+    margin-top:20px;
+    font-size:14px;
+    color:#555;
 }
 
-.frase{margin-top:20px;font-size:14px;color:#555}
-.counter{margin-top:10px;font-size:13px;color:#888}
-
-/* TREMER */
-.shake{animation:shake .3s}
-@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}
+/* CONTADOR */
+.counter{
+    margin-top:10px;
+    font-size:13px;
+    color:#888;
+}
 
 /* SANFONA */
-.accordion{margin-top:25px;text-align:left;max-width:400px;margin:20px auto}
-.accordion-btn{width:100%;padding:12px;border:none;background:#222;color:#fff;border-radius:8px; cursor: pointer;}
-.accordion-content{display:none;background:#fff;padding:15px;border-radius:8px;margin-top:5px; line-height: 1.6;}
-
-/* BOTAO AUDIO */
-.audio-btn{margin-top:10px;font-size:13px;color:#666;cursor:pointer;}
-
-/* RODAPÉ */
-footer { background: #eee; padding: 15px; font-size: 12px; color: #666; border-top: 1px solid #ddd; }
-footer a { color: #007bff; text-decoration: none; font-weight: bold; }
+.accordion{
+    margin-top:25px;
+    text-align:left;
+    max-width:400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.accordion-btn{
+    width:100%;
+    padding:12px;
+    font-size:16px;
+    border:none;
+    background:#222;
+    color:#fff;
+    cursor:pointer;
+    border-radius:8px;
+}
+.accordion-content{
+    display:none;
+    background:#fff;
+    padding:15px;
+    border-radius:8px;
+    margin-top:5px;
+    font-size:14px;
+    color:#333;
+}
 </style>
 </head>
 
 <body>
-<div class="container" id="container">
+<div class="container">
 
-<div class="logo-box">
- <img src="logo.jpeg" class="logo">
-</div>
+<img src="logo.jpeg" class="logo">
 
 <h1>Como foi sua experiência no Hotel Flamboyant?</h1>
-<p>Hotel em Itaquaquecetuba ⭐</p>
+<p>Hotel em Itaquaquecetuba com conforto e ótimo custo-benefício ⭐</p>
 
-<div class="stars" id="star-container">
- <span class="star" onclick="avaliar(1, this)">★</span>
- <span class="star" onclick="avaliar(2, this)">★</span>
- <span class="star" onclick="avaliar(3, this)">★</span>
- <span class="star" onclick="avaliar(4, this)">★</span>
- <span class="star" onclick="avaliar(5, this)">★</span>
+<div class="stars">
+    <span class="star" onclick="avaliar(1)">★</span>
+    <span class="star" onclick="avaliar(2)">★</span>
+    <span class="star" onclick="avaliar(3)">★</span>
+    <span class="star" onclick="avaliar(4)">★</span>
+    <span class="star" onclick="avaliar(5)">★</span>
 </div>
 
 <p id="frase" class="frase"></p>
+
 <p class="counter">⭐ +479 avaliações realizadas</p>
 
-<div class="audio-btn" onclick="forcarAudio()">🔊 Ativar áudio</div>
+<p style="font-size:13px;color:#888;">🔊 Toque na tela para ouvir a mensagem</p>
 
+<!-- SANFONA -->
 <div class="accordion">
- <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais ▼</button>
- <div id="accordionContent" class="accordion-content">
-   <strong>Sua melhor escolha na região:</strong><br>
-   ✔ Ótima localização<br>
-   ✔ Próximo à Santa Isabel<br>
-   ✔ Conforto e tranquilidade<br>
-   ✔ Excelente custo-benefício
- </div>
+    <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais do Hotel ▼</button>
+    <div id="accordionContent" class="accordion-content">
+        ✔ Hotel em Itaquaquecetuba com ótima localização<br>
+        ✔ Próximo à Estrada de Santa Isabel<br>
+        ✔ Ambiente confortável e tranquilo<br>
+        ✔ Excelente custo-benefício
+        ✔ Atendimento de qualidade
+    </div>
 </div>
 
 </div>
 
-<footer>
-  Desenvolvido por: <a href="https://wa.me/5511954950044" target="_blank">Impulsoweb10</a>
-</footer>
-
-<audio id="audio" preload="auto">
- <source src="audio.m4a" type="audio/mp4">
+<!-- AUDIO -->
+<audio id="audio">
+  <source src="audio.m4a" type="audio/mp4">
 </audio>
 
 <script>
-const frases={
-1:"Hospedagem simples em Itaquaquecetuba",
-2:"Hotel com bom custo-benefício",
-3:"Hotel confortável em Itaquaquecetuba",
-4:"Ótima localização",
-5:"Excelente atendimento"
+const frases = {
+1: "Hospedagem simples em Itaquaquecetuba próxima à Santa Isabel",
+2: "Hotel acessível em Itaquaquecetuba com bom custo-benefício",
+3: "Hotel confortável em Itaquaquecetuba SP",
+4: "Ótima localização para quem busca hotel em Itaquaquecetuba",
+5: "Melhor hotel em Itaquaquecetuba com excelente atendimento"
 };
 
-function tocarAudio(){
- const a=document.getElementById("audio");
- if(a){a.play().catch(()=>{});} 
-}
-
-function forcarAudio(){
- tocarAudio();
-}
-
-function avaliar(nota, elemento){
- tocarAudio();
- document.getElementById("frase").innerText=frases[nota];
-
- // Adiciona efeito pulsar na estrela clicada
- elemento.classList.add("pulsing");
-
- if(navigator.vibrate){navigator.vibrate([50,30,80]);}
-
- const c=document.getElementById("container");
- c.classList.add("shake");
- setTimeout(()=>c.classList.remove("shake"),300);
-
- // Redireciona após 1.2 segundos para dar tempo de ver o pulso
- setTimeout(()=>{window.location.href="avaliar.html"},1200);
+function avaliar(nota){
+    document.getElementById("frase").innerText = frases[nota];
+    setTimeout(()=>{
+        window.location.href = "avaliar.html";
+    }, 800);
 }
 
 function toggleAccordion(){
- const c=document.getElementById("accordionContent");
- c.style.display=c.style.display==="block"?"none":"block";
+    const content = document.getElementById("accordionContent");
+    content.style.display = content.style.display === "block" ? "none" : "block";
 }
+
+// tocar áudio no primeiro toque
+window.addEventListener("click", () => {
+    document.getElementById("audio").play();
+}, { once: true });
 </script>
 
+</body>
+</html>
+
+
+<!-- ===================== PAGINA 2 - avaliar.html ===================== -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliar Hotel Flamboyant no Google</title>
+<meta name="description" content="Deixe sua avaliação do Hotel Flamboyant em Itaquaquecetuba no Google. Sua opinião é muito importante.">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#000;
+    color:#fff;
+    text-align:center;
+}
+.container{
+    padding:40px 20px;
+}
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:20px 30px;
+    font-size:20px;
+    background:yellow;
+    color:#000;
+    text-decoration:none;
+    border-radius:10px;
+    animation:pulse 1s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 10px yellow;}
+    50%{box-shadow:0 0 30px yellow;}
+    100%{box-shadow:0 0 10px yellow;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Quase lá! ⭐</h1>
+<p>Clique abaixo para avaliar o Hotel Flamboyant no Google</p>
+
+<a href="https://g.page/r/CRECbD178tUDEAE/review" class="btn">AVALIAR NO GOOGLE</a>
+
+<p style="margin-top:20px;font-size:14px;">
+Hotel em Itaquaquecetuba • Próximo à Santa Isabel • Melhor custo-benefício
+</p>
+
+</div>
 </body>
 </html>
