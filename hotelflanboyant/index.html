@@ -3,153 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Flamboyant em Itaquaquecetuba | Avaliação</title>
-<meta name="description" content="Avalie o Hotel Flamboyant em Itaquaquecetuba SP. Hospedagem confortável e ótimo custo-benefício.">
+<title>Hotel Flamboyant | Avaliação</title>
 
 <style>
-body{font-family:Arial;text-align:center;background:#f5f5f5;margin:0; min-height: 100vh; display: flex; flex-direction: column;}
-.container{padding:30px; flex: 1;}
+/* FUNDO VERDE NEON */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #39FF14; /* Verde Neon */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    padding: 30px;
+    flex: 1;
+}
 
 /* LOGO PREMIUM */
-.logo-box{
- display:inline-block;
- padding:15px;
- border-radius:20px;
- background:rgba(255,255,255,0.6);
- backdrop-filter:blur(10px);
- box-shadow:0 4px 20px rgba(0,0,0,0.15);
- position:relative;
- overflow:hidden;
+.logo-box {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
-.logo-box::after{
- content:"";
- position:absolute;
- top:0;left:-100%;
- width:100%;height:100%;
- background:linear-gradient(120deg,transparent,rgba(255,255,255,0.7),transparent);
- animation:shine 3s infinite;
-}
-@keyframes shine{100%{left:100%}}
-.logo{max-width:220px}
 
-h1{font-size:22px}
+.logo { max-width: 180px; }
+
+h1 { font-size: 22px; color: #000; }
 
 /* ESTRELAS */
-.stars{font-size:42px;margin-top:15px}
-.star{color:#ccc;transition:.3s;cursor:pointer; display: inline-block;}
-.star:hover{color:gold;transform:scale(1.3);text-shadow:0 0 10px gold}
+.stars { font-size: 50px; margin: 20px 0; }
+.star { color: #555; transition: .3s; cursor: pointer; display: inline-block; }
+.star:hover { color: #fff; transform: scale(1.2); }
 
-/* EFEITO PULSAR AO CLICAR */
-.pulsing { animation: pulse-yellow 0.5s infinite; color: gold !important; }
-@keyframes pulse-yellow {
-  0% { transform: scale(1); text-shadow: 0 0 0px gold; }
-  50% { transform: scale(1.5); text-shadow: 0 0 20px gold; }
-  100% { transform: scale(1); text-shadow: 0 0 0px gold; }
+/* EFEITO PULSAR NA ESTRELA */
+.pulsing { 
+    animation: pulse-white 0.6s infinite; 
+    color: #fff !important; 
+    text-shadow: 0 0 15px #fff;
+}
+@keyframes pulse-white {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
 }
 
-.frase{margin-top:20px;font-size:14px;color:#555}
-.counter{margin-top:10px;font-size:13px;color:#888}
+/* BOTÃO GOOGLE (INICIALMENTE ESCONDIDO) */
+#google-btn-container {
+    display: none; /* Escondido */
+    margin-top: 30px;
+    animation: slideUp 0.5s ease-out;
+}
 
-/* TREMER */
-.shake{animation:shake .3s}
-@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-google {
+    display: inline-block;
+    padding: 18px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: pulse-btn 1.5s infinite;
+}
+
+@keyframes pulse-btn {
+    0% { transform: scale(1); box-shadow: 0 0 0px rgba(0,0,0,0.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,0,0,0.4); }
+    100% { transform: scale(1); box-shadow: 0 0 0px rgba(0,0,0,0.5); }
+}
 
 /* SANFONA */
-.accordion{margin-top:25px;text-align:left;max-width:400px;margin:20px auto}
-.accordion-btn{width:100%;padding:12px;border:none;background:#222;color:#fff;border-radius:8px; cursor: pointer;}
-.accordion-content{display:none;background:#fff;padding:15px;border-radius:8px;margin-top:5px; line-height: 1.6;}
-
-/* BOTAO AUDIO */
-.audio-btn{margin-top:10px;font-size:13px;color:#666;cursor:pointer;}
+.accordion { margin: 30px auto; max-width: 350px; text-align: left; }
+.accordion-btn { 
+    width: 100%; padding: 12px; border: none; 
+    background: #000; color: #fff; border-radius: 8px; cursor: pointer;
+}
+.accordion-content { 
+    display: none; background: rgba(255,255,255,0.9); 
+    padding: 15px; border-radius: 0 0 8px 8px; 
+}
 
 /* RODAPÉ */
-footer { background: #eee; padding: 15px; font-size: 12px; color: #666; border-top: 1px solid #ddd; }
-footer a { color: #007bff; text-decoration: none; font-weight: bold; }
+footer {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    font-size: 13px;
+}
+footer a { color: #39FF14; text-decoration: none; font-weight: bold; }
+
 </style>
 </head>
 
 <body>
-<div class="container" id="container">
 
-<div class="logo-box">
- <img src="logo.jpeg" class="logo">
-</div>
+<div class="container">
+    <div class="logo-box">
+        <img src="logo.jpeg" class="logo" alt="Hotel Flamboyant">
+    </div>
 
-<h1>Como foi sua experiência no Hotel Flamboyant?</h1>
-<p>Hotel em Itaquaquecetuba ⭐</p>
+    <h1>Como foi sua experiência conosco?</h1>
+    <p>Sua opinião é muito importante para o Hotel Flamboyant!</p>
 
-<div class="stars" id="star-container">
- <span class="star" onclick="avaliar(1, this)">★</span>
- <span class="star" onclick="avaliar(2, this)">★</span>
- <span class="star" onclick="avaliar(3, this)">★</span>
- <span class="star" onclick="avaliar(4, this)">★</span>
- <span class="star" onclick="avaliar(5, this)">★</span>
-</div>
+    <div class="stars">
+        <span class="star" onclick="avaliar(1, this)">★</span>
+        <span class="star" onclick="avaliar(2, this)">★</span>
+        <span class="star" onclick="avaliar(3, this)">★</span>
+        <span class="star" onclick="avaliar(4, this)">★</span>
+        <span class="star" onclick="avaliar(5, this)">★</span>
+    </div>
 
-<p id="frase" class="frase"></p>
-<p class="counter">⭐ +479 avaliações realizadas</p>
+    <p id="frase" style="font-weight: bold; min-height: 20px;"></p>
 
-<div class="audio-btn" onclick="forcarAudio()">🔊 Ativar áudio</div>
+    <div id="google-btn-container">
+        <a href="https://g.page/r/ChIJUXWXBQC3zkQR0ndES89mRso/review" class="btn-google">
+            AVALIAR NO GOOGLE AGORA
+        </a>
+    </div>
 
-<div class="accordion">
- <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais ▼</button>
- <div id="accordionContent" class="accordion-content">
-   <strong>Sua melhor escolha na região:</strong><br>
-   ✔ Ótima localização<br>
-   ✔ Próximo à Santa Isabel<br>
-   ✔ Conforto e tranquilidade<br>
-   ✔ Excelente custo-benefício
- </div>
-</div>
-
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion()">Ver diferenciais ▼</button>
+        <div id="accordionContent" class="accordion-content">
+            <strong>Sua melhor escolha na região:</strong><br><br>
+            ✔ Ótima localização em Itaquaquecetuba<br>
+            ✔ Próximo à Rodovia Santa Isabel<br>
+            ✔ Quartos higienizados e confortáveis<br>
+            ✔ Atendimento VIP 24h
+        </div>
+    </div>
 </div>
 
 <footer>
-  Desenvolvido por: <a href="https://wa.me/5511954950044" target="_blank">Impulsoweb10</a>
+    Desenvolvido por: <a href="https://wa.me/5511954950044" target="_blank">Impulsoweb10</a>
 </footer>
 
-<audio id="audio" preload="auto">
- <source src="audio.m4a" type="audio/mp4">
-</audio>
-
 <script>
-const frases={
-1:"Hospedagem simples em Itaquaquecetuba",
-2:"Hotel com bom custo-benefício",
-3:"Hotel confortável em Itaquaquecetuba",
-4:"Ótima localização",
-5:"Excelente atendimento"
+const frases = {
+    1: "Sentimos muito. Como podemos melhorar?",
+    2: "Agradecemos o feedback. Vamos evoluir!",
+    3: "Obrigado! Esperamos você novamente.",
+    4: "Que bom que gostou! Volte sempre.",
+    5: "Excelente! Você é um cliente especial."
 };
 
-function tocarAudio(){
- const a=document.getElementById("audio");
- if(a){a.play().catch(()=>{});} 
+function avaliar(nota, elemento) {
+    // Remove pulsação de outras estrelas e adiciona na clicada
+    document.querySelectorAll('.star').forEach(s => s.classList.remove('pulsing'));
+    elemento.classList.add('pulsing');
+
+    // Mostra a frase correspondente
+    document.getElementById("frase").innerText = frases[nota];
+
+    // Faz aparecer o botão do Google
+    document.getElementById("google-btn-container").style.display = "block";
+
+    // Vibração no celular
+    if(navigator.vibrate){ navigator.vibrate(50); }
 }
 
-function forcarAudio(){
- tocarAudio();
-}
-
-function avaliar(nota, elemento){
- tocarAudio();
- document.getElementById("frase").innerText=frases[nota];
-
- // Adiciona efeito pulsar na estrela clicada
- elemento.classList.add("pulsing");
-
- if(navigator.vibrate){navigator.vibrate([50,30,80]);}
-
- const c=document.getElementById("container");
- c.classList.add("shake");
- setTimeout(()=>c.classList.remove("shake"),300);
-
- // Redireciona após 1.2 segundos para dar tempo de ver o pulso
- setTimeout(()=>{window.location.href="avaliar.html"},1200);
-}
-
-function toggleAccordion(){
- const c=document.getElementById("accordionContent");
- c.style.display=c.style.display==="block"?"none":"block";
+function toggleAccordion() {
+    const c = document.getElementById("accordionContent");
+    c.style.display = c.style.display === "block" ? "none" : "block";
 }
 </script>
 
