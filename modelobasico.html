@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Avaliação - Cliente</title>
+<title>Avaliação</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
@@ -18,9 +18,9 @@ gtag('config', 'G-XXXXXXX');
 <style>
 body {
   font-family: Arial;
+  background: #f5f5f5;
   text-align: center;
   padding: 20px;
-  background: #f5f5f5;
 }
 
 .container {
@@ -28,21 +28,36 @@ body {
   margin: auto;
 }
 
+h2 {
+  margin-bottom: 10px;
+}
+
+.stars {
+  font-size: 35px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.active {
+  color: gold;
+}
+
 button {
   width: 100%;
   padding: 15px;
   margin: 8px 0;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
 }
 
 .whats { background: #25D366; color: white; }
 .google { background: #4285F4; color: white; }
-.tel { background: #333; color: white; }
-.social { background: #E1306C; color: white; }
-.site { background: #555; color: white; }
 
 footer {
   margin-top: 40px;
@@ -57,13 +72,17 @@ footer {
 <div class="container">
 
 <h2 id="nomeEmpresa"></h2>
+<p>Como foi sua experiência?</p>
 
-<button id="btnWhats" class="whats" onclick="abrirWhatsappCliente()">WhatsApp</button>
-<button id="btnTel" class="tel" onclick="ligarCliente()">Ligar</button>
-<button id="btnGoogle" class="google" onclick="abrirGoogle()">Avaliar no Google</button>
-<button id="btnSite" class="site" onclick="abrirSiteCliente()">Site</button>
-<button id="btnInsta" class="social" onclick="abrirInstagram()">Instagram</button>
-<button id="btnFace" class="social" onclick="abrirFacebook()">Facebook</button>
+<div class="stars">
+  <span class="star" onclick="avaliar(1)">★</span>
+  <span class="star" onclick="avaliar(2)">★</span>
+  <span class="star" onclick="avaliar(3)">★</span>
+  <span class="star" onclick="avaliar(4)">★</span>
+  <span class="star" onclick="avaliar(5)">★</span>
+</div>
+
+<div id="acoes"></div>
 
 </div>
 
@@ -74,66 +93,54 @@ const CONFIG = {
   nomeEmpresa: "Ótica Lionda",
 
   whatsappCliente: "5511999999999",
-  telefoneCliente: "",
   linkGoogle: "https://g.page/r/SEULINK/review",
-  siteCliente: "",
-  instagram: "",
-  facebook: "",
 
   seuWhatsapp: "5511954950044",
-  seuSite: "https://impulsoweb10.com.br",
-  suaMarca: "ImpulsoWeb10"
+  seuSite: "https://impulsoweb10.com.br"
 };
 </script>
 
 <!-- SCRIPT -->
 <script>
-function track(evento) {
+function track(evento, estrelas) {
   gtag('event', evento, {
     cliente: CONFIG.cliente,
-    empresa: CONFIG.nomeEmpresa
+    estrelas: estrelas
   });
 }
 
-function abrirWhatsappCliente() {
-  if (!CONFIG.whatsappCliente) return;
-  track('clique_whatsapp_cliente');
+function avaliar(nota) {
+  let stars = document.querySelectorAll('.star');
+
+  stars.forEach((s, i) => {
+    s.classList.toggle('active', i < nota);
+  });
+
+  track('avaliacao', nota);
+
+  let acoes = document.getElementById("acoes");
+
+  if (nota <= 3) {
+    acoes.innerHTML = `
+      <p>😕 Sentimos muito! Fale conosco para resolver.</p>
+      <button class="whats" onclick="abrirWhatsapp(${nota})">Falar no WhatsApp</button>
+    `;
+  } else {
+    acoes.innerHTML = `
+      <p>😍 Que bom! Nos ajude com sua avaliação no Google.</p>
+      <button class="google" onclick="abrirGoogle(${nota})">Avaliar no Google</button>
+    `;
+  }
+}
+
+function abrirWhatsapp(nota) {
+  track('clique_whatsapp_cliente', nota);
   window.open(`https://wa.me/${CONFIG.whatsappCliente}`, '_blank');
 }
 
-function ligarCliente() {
-  if (!CONFIG.telefoneCliente) return;
-  track('clique_telefone');
-  window.location.href = `tel:${CONFIG.telefoneCliente}`;
-}
-
-function abrirGoogle() {
-  if (!CONFIG.linkGoogle) return;
-  track('clique_google_review');
+function abrirGoogle(nota) {
+  track('clique_google_review', nota);
   window.open(CONFIG.linkGoogle, '_blank');
-}
-
-function abrirSiteCliente() {
-  if (!CONFIG.siteCliente) return;
-  track('clique_site_cliente');
-  window.open(CONFIG.siteCliente, '_blank');
-}
-
-function abrirInstagram() {
-  if (!CONFIG.instagram) return;
-  track('clique_instagram');
-  window.open(CONFIG.instagram, '_blank');
-}
-
-function abrirFacebook() {
-  if (!CONFIG.facebook) return;
-  track('clique_facebook');
-  window.open(CONFIG.facebook, '_blank');
-}
-
-function abrirWhatsappImpulso() {
-  track('clique_whatsapp_impulso');
-  window.open(`https://wa.me/${CONFIG.seuWhatsapp}`, '_blank');
 }
 
 function abrirImpulso() {
@@ -141,21 +148,13 @@ function abrirImpulso() {
   window.open(CONFIG.seuSite, '_blank');
 }
 
-// AUTO CONFIG
-window.onload = function() {
-  document.getElementById("nomeEmpresa").innerText = CONFIG.nomeEmpresa;
+function abrirWhatsappImpulso() {
+  track('clique_whatsapp_impulso');
+  window.open(`https://wa.me/${CONFIG.seuWhatsapp}`, '_blank');
+}
 
-  function esconder(id, valor) {
-    if (!valor) document.getElementById(id).style.display = "none";
-  }
-
-  esconder("btnWhats", CONFIG.whatsappCliente);
-  esconder("btnTel", CONFIG.telefoneCliente);
-  esconder("btnGoogle", CONFIG.linkGoogle);
-  esconder("btnSite", CONFIG.siteCliente);
-  esconder("btnInsta", CONFIG.instagram);
-  esconder("btnFace", CONFIG.facebook);
-};
+// Nome empresa
+document.getElementById("nomeEmpresa").innerText = CONFIG.nomeEmpresa;
 </script>
 
 <!-- RODAPÉ -->
@@ -172,10 +171,10 @@ Desenvolvido por
 
 <p>
 Deseja um link personalizado para sua empresa?<br>
-⭐ Aumente suas avaliações no Google e atraia mais clientes.
+⭐ Aumente suas avaliações no Google.
 </p>
 
-<button onclick="abrirWhatsappImpulso()" style="background:#25D366; color:white; padding:10px 15px; border:none; border-radius:6px;">
+<button onclick="abrirWhatsappImpulso()" style="background:#25D366; color:white;">
 Falar com especialista
 </button>
 
