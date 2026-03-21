@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Avaliação - Cliente</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXX');
+</script>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.whats { background: #25D366; color: white; }
+.google { background: #4285F4; color: white; }
+.tel { background: #333; color: white; }
+.social { background: #E1306C; color: white; }
+.site { background: #555; color: white; }
+
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #555;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2 id="nomeEmpresa"></h2>
+
+<button id="btnWhats" class="whats" onclick="abrirWhatsappCliente()">WhatsApp</button>
+<button id="btnTel" class="tel" onclick="ligarCliente()">Ligar</button>
+<button id="btnGoogle" class="google" onclick="abrirGoogle()">Avaliar no Google</button>
+<button id="btnSite" class="site" onclick="abrirSiteCliente()">Site</button>
+<button id="btnInsta" class="social" onclick="abrirInstagram()">Instagram</button>
+<button id="btnFace" class="social" onclick="abrirFacebook()">Facebook</button>
+
+</div>
+
+<!-- CONFIG -->
+<script>
+const CONFIG = {
+  cliente: "otica_lionda",
+  nomeEmpresa: "Ótica Lionda",
+
+  whatsappCliente: "5511999999999",
+  telefoneCliente: "",
+  linkGoogle: "https://g.page/r/SEULINK/review",
+  siteCliente: "",
+  instagram: "",
+  facebook: "",
+
+  seuWhatsapp: "5511954950044",
+  seuSite: "https://impulsoweb10.com.br",
+  suaMarca: "ImpulsoWeb10"
+};
+</script>
+
+<!-- SCRIPT -->
+<script>
+function track(evento) {
+  gtag('event', evento, {
+    cliente: CONFIG.cliente,
+    empresa: CONFIG.nomeEmpresa
+  });
+}
+
+function abrirWhatsappCliente() {
+  if (!CONFIG.whatsappCliente) return;
+  track('clique_whatsapp_cliente');
+  window.open(`https://wa.me/${CONFIG.whatsappCliente}`, '_blank');
+}
+
+function ligarCliente() {
+  if (!CONFIG.telefoneCliente) return;
+  track('clique_telefone');
+  window.location.href = `tel:${CONFIG.telefoneCliente}`;
+}
+
+function abrirGoogle() {
+  if (!CONFIG.linkGoogle) return;
+  track('clique_google_review');
+  window.open(CONFIG.linkGoogle, '_blank');
+}
+
+function abrirSiteCliente() {
+  if (!CONFIG.siteCliente) return;
+  track('clique_site_cliente');
+  window.open(CONFIG.siteCliente, '_blank');
+}
+
+function abrirInstagram() {
+  if (!CONFIG.instagram) return;
+  track('clique_instagram');
+  window.open(CONFIG.instagram, '_blank');
+}
+
+function abrirFacebook() {
+  if (!CONFIG.facebook) return;
+  track('clique_facebook');
+  window.open(CONFIG.facebook, '_blank');
+}
+
+function abrirWhatsappImpulso() {
+  track('clique_whatsapp_impulso');
+  window.open(`https://wa.me/${CONFIG.seuWhatsapp}`, '_blank');
+}
+
+function abrirImpulso() {
+  track('clique_impulso_web10');
+  window.open(CONFIG.seuSite, '_blank');
+}
+
+// AUTO CONFIG
+window.onload = function() {
+  document.getElementById("nomeEmpresa").innerText = CONFIG.nomeEmpresa;
+
+  function esconder(id, valor) {
+    if (!valor) document.getElementById(id).style.display = "none";
+  }
+
+  esconder("btnWhats", CONFIG.whatsappCliente);
+  esconder("btnTel", CONFIG.telefoneCliente);
+  esconder("btnGoogle", CONFIG.linkGoogle);
+  esconder("btnSite", CONFIG.siteCliente);
+  esconder("btnInsta", CONFIG.instagram);
+  esconder("btnFace", CONFIG.facebook);
+};
+</script>
+
+<!-- RODAPÉ -->
+<footer>
+
+<p>
+Desenvolvido por 
+<a href="https://impulsoweb10.com.br" onclick="abrirImpulso()">
+<strong>ImpulsoWeb10</strong>
+</a>
+</p>
+
+<p>🔒 Conexão segura (SSL)</p>
+
+<p>
+Deseja um link personalizado para sua empresa?<br>
+⭐ Aumente suas avaliações no Google e atraia mais clientes.
+</p>
+
+<button onclick="abrirWhatsappImpulso()" style="background:#25D366; color:white; padding:10px 15px; border:none; border-radius:6px;">
+Falar com especialista
+</button>
+
+</footer>
+
+</body>
+</html>
