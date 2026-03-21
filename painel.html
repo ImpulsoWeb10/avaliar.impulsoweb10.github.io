@@ -1,132 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Pro - ImpulsoWeb10</title>
-    <style>
-        :root { --green: #38e391; --dark: #050707; --card: #0d1212; --border: #1a2222; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--dark); color: #fff; padding: 20px; }
-        .card { background: var(--card); padding: 25px; border-radius: 20px; max-width: 500px; margin: auto; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { color: var(--green); margin-bottom: 20px; }
-        
-        label { display: block; text-align: left; font-size: 11px; color: #aaa; margin-top: 15px; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid var(--border); background: #000; color: #fff; box-sizing: border-box; }
-        
-        /* Estilo do Seletor de Modelo */
-        select { border: 1px solid var(--green); cursor: pointer; font-weight: bold; color: var(--green); }
-
-        button { width: 100%; padding: 15px; background: var(--green); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        button:hover { background: #2dbd79; transform: scale(1.02); }
-
-        #outputArea { margin-top: 25px; display: none; text-align: left; }
-        .code-box { background: #000; color: var(--green); padding: 15px; border-radius: 8px; font-size: 11px; white-space: pre-wrap; border: 1px dashed var(--green); max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
-        .copy-btn { background: var(--border); color: var(--green); border: 1px solid var(--green); padding: 8px; font-size: 12px; margin-bottom: 20px; width: auto; display: inline-block; }
-    </style>
-</head>
-<body>
-
 <div class="card">
     <h2>Gerador ImpulsoWeb10</h2>
-
-    <label>Escolha o Modelo (Design)</label>
-    <select id="modeloSelect">
-        <option value="direto">Modelo X - Redirecionamento Direto (Rápido)</option>
-        <option value="landing">Modelo Y - Mini Landing Page (Completo)</option>
+    
+    <label>ESCOLHA O DESIGN (MODELO)</label>
+    <select id="modelo">
+        <option value="1">Modelo 1 - Dark Neon (Padrão)</option>
+        <option value="2">Modelo 2 - Clean White (Claro)</option>
+        <option value="3">Modelo 3 - Blue Corporate (Azul)</option>
     </select>
 
-    <label>Nome da Empresa</label>
+    <label>NOME DA EMPRESA</label>
     <input id="nome" placeholder="Ex: Óptica Lionda">
     
-    <label>Slug da Pasta (Link Curto)</label>
-    <input id="slug" placeholder="Ex: opticalionda">
+    <label>LINK GOOGLE (AVALIAÇÃO)</label>
+    <input id="google" placeholder="Cole o link aqui">
 
-    <label>Link Google Maps</label>
-    <input id="google" placeholder="Link de avaliação">
-    
-    <div id="camposExtras">
-        <label>WhatsApp (Ex: 5511999999999)</label>
-        <input id="whats" placeholder="Somente números">
-        
-        <label>Instagram (Ex: @optica_lionda)</label>
-        <input id="insta" placeholder="Apenas o nome do usuário">
-    </div>
-
-    <button onclick="gerar()">GERAR CÓDIGO HTML</button>
-
-    <div id="outputArea">
-        <label>Código para o index.html da pasta:</label>
-        <div id="codigoGerado" class="code-box"></div>
-        <button class="copy-btn" onclick="copiar('codigoGerado')">Copiar HTML</button>
-
-        <label>Bloco para o seu arquivo clientes.js:</label>
-        <div id="codigoJS" class="code-box"></div>
-        <button class="copy-btn" onclick="copiar('codigoJS')">Copiar Bloco JS</button>
-    </div>
+    <button onclick="gerarLinkMágico()">GERAR LINK DO CLIENTE</button>
+    <p id="linkFinal" style="display:none;"></p>
 </div>
 
 <script>
-function gerar() {
-    const modelo = document.getElementById('modeloSelect').value;
-    const nome = document.getElementById('nome').value;
-    const slug = document.getElementById('slug').value.toLowerCase().trim();
-    const google = document.getElementById('google').value;
-    const whats = document.getElementById('whats').value;
-    const insta = document.getElementById('insta').value.replace('@', '');
+function gerarLinkMágico() {
+    const mod = document.getElementById('modelo').value;
+    const nome = encodeURIComponent(document.getElementById('nome').value);
+    const google = btoa(document.getElementById('google').value);
+    // ... pega whats e insta ...
 
-    let htmlFinal = "";
-
-    if (modelo === "direto") {
-        // MODELO X - APENAS REDIRECIONAMENTO
-        htmlFinal = `<script>window.location.href="${google}";<\/script>`;
-    } else {
-        // MODELO Y - MINI PÁGINA
-        htmlFinal = `<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar ${nome}</title>
-    <style>
-        body { font-family: sans-serif; background: #050707; color: white; text-align: center; padding: 40px 20px; }
-        .box { max-width: 400px; margin: auto; background: #0d1212; padding: 30px; border-radius: 25px; border: 1px solid #38e391; }
-        img { max-width: 100px; margin-bottom: 20px; filter: drop-shadow(0 0 5px #38e391); }
-        .btn { display: block; padding: 15px; margin: 10px 0; border-radius: 12px; text-decoration: none; font-weight: bold; }
-        .g { background: #38e391; color: #000; }
-        .w { border: 1px solid #25D366; color: #25D366; ${whats ? '' : 'display:none;'} }
-        .i { border: 1px solid #E1306C; color: #E1306C; ${insta ? '' : 'display:none;'} }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <img src="logo.png">
-        <h2>${nome}</h2>
-        <a href="${google}" class="btn g">AVALIAR NO GOOGLE</a>
-        ${whats ? `<a href="https://wa.me/${whats}" class="btn w">WHATSAPP</a>` : ''}
-        ${insta ? `<a href="https://instagram.com/${insta}" class="btn i">INSTAGRAM</a>` : ''}
-    </div>
-</body>
-</html>`;
-    }
-
-    // Gerar Bloco JS para a vitrine
-    const jsFinal = `{ 
-    nome: "${nome}", 
-    pasta: "${slug}", 
-    logo: "logo.png", 
-    descricao: "Cliente parceiro ImpulsoWeb10." 
-},`;
-
-    document.getElementById('codigoGerado').innerText = htmlFinal;
-    document.getElementById('codigoJS').innerText = jsFinal;
-    document.getElementById('outputArea').style.display = 'block';
-}
-
-function copiar(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
-    alert("Copiado!");
+    // O link agora leva o ID do modelo (?m=1, ?m=2...)
+    const link = `${window.location.origin}/v.html?m=${mod}&n=${nome}&g=${google}`;
+    
+    document.getElementById('linkFinal').innerText = link;
+    document.getElementById('linkFinal').style.display = 'block';
 }
 </script>
-</body>
-</html>
