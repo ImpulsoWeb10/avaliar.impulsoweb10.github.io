@@ -21,46 +21,49 @@
         }
 
         .logo { 
-            width: 180px; height: auto; object-fit: contain; 
+            width: 160px; height: auto; object-fit: contain; 
             padding: 4px; border-radius: 20px; border: 3px solid #facc15; 
             background: white; margin: 0 auto 15px;
             transition: transform 0.4s ease; display: block;
         }
         .logo-compacta { transform: scale(0.8); margin-bottom: -15px; }
 
-        h1 { font-size: 26px; margin-bottom: 2px; }
-        h2 { font-size: 16px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
+        h1 { font-size: 24px; margin-bottom: 2px; }
+        h2 { font-size: 15px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
         
-        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; margin-bottom: 15px; min-height: 24px; }
+        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; margin-bottom: 15px; }
 
         .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
         .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
         .star-btn.active { color: #facc15; transform: scale(1.1); }
 
         .img-retangular {
-            width: 90%; height: 140px; object-fit: cover; border-radius: 15px;
-            margin: 0 auto 20px; border: 2px solid #facc15; display: block;
+            width: 90%; height: 130px; object-fit: cover; border-radius: 15px;
+            margin: 0 auto 15px; border: 2px solid #facc15; display: block;
             transform: scale(0); animation: crescer 0.5s forwards ease-in-out;
         }
         @keyframes crescer { to { transform: scale(1); } }
+
+        .botao {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 15px; border-radius: 50px; font-weight: 800;
+            text-decoration: none; transition: 0.3s; border: none; cursor: pointer; 
+            margin-bottom: 10px; font-size: 14px;
+        }
+
+        .google { background: #facc15; color: #000; animation: pulsarBotao 2s infinite; }
+        .whatsapp { background: #22c55e; color: white; }
+        .social-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .insta-color { color: #E1306C; }
+        .face-color { color: #1877F2; }
+
+        .hidden { display: none; }
+        @keyframes pulsarBotao { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
         textarea {
             width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
             border-radius: 15px; color: white; padding: 12px; margin-bottom: 12px; resize: none; outline: none;
         }
-
-        .botao {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 16px; border-radius: 50px; font-weight: 800;
-            text-decoration: none; transition: 0.3s; border: none; cursor: pointer; 
-            margin-bottom: 10px; position: relative; overflow: hidden;
-        }
-
-        .google { background: #facc15; color: #000; animation: pulsarBotao 2s infinite; }
-        .whatsapp { background: #22c55e; color: white; }
-        .hidden { display: none; }
-
-        @keyframes pulsarBotao { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
         .footer { margin-top: 25px; font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; }
@@ -69,10 +72,9 @@
 <body>
 
 <div class="container">
-    <img src="" class="logo" id="main-logo" alt="Logo">
-
+    <img src="" class="logo" id="main-logo">
     <h1 id="txtNome"></h1>
-    <h2 id="txtSubtitulo"></h2>
+    <h2 id="txtSub"></h2>
     
     <p id="instrucao">Como foi sua experiência hoje?</p>
 
@@ -85,10 +87,17 @@
     </div>
 
     <div id="feedback-bom" class="hidden">
-        <img id="imgSucesso" src="" class="img-retangular" alt="Sucesso">
-        <p style="font-size: 17px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
-        <a id="linkGoogle" href="#" target="_blank" class="botao google">
+        <img id="imgSucesso" src="" class="img-retangular">
+        <p style="font-size: 16px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
+        <a id="linkG" href="#" target="_blank" class="botao google">
             <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+        
+        <a id="btnInsta" href="#" target="_blank" class="botao social-btn hidden">
+            <i class="fab fa-instagram insta-color"></i> Seguir no Instagram
+        </a>
+        <a id="btnFace" href="#" target="_blank" class="botao social-btn hidden">
+            <i class="fab fa-facebook face-color"></i> Curtir no Facebook
         </a>
     </div>
 
@@ -103,36 +112,48 @@
     <div class="footer">
         <div id="info-loja"></div>
         <div style="margin-top: 15px; opacity: 0.8;">
-            © 2026 | Desenvolvido por <a href="#" class="marca-impulsoweb">ImpulsoWeb10</a>
+            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-impulsoweb">ImpulsoWeb10</a>
         </div>
     </div>
 </div>
 
 <script>
-    // PEGA OS DADOS DO LINK MÁGICO
     const params = new URLSearchParams(window.location.search);
+    
+    // Captura de Dados
     const nome = decodeURIComponent(params.get('n') || 'Empresa');
     const sub = decodeURIComponent(params.get('s') || '');
     const logo = params.get('l') || 'logo.png';
     const foto = params.get('f') || 'sucesso.png';
     const whats = params.get('w');
-    const googleLink = atob(params.get('g') || 'aHR0cHM6Ly9nb29nbGUuY29t'); // Decodifica o link do Google
+    const googleLink = atob(params.get('g') || 'aHR0cHM6Ly9nb29nbGUuY29t');
     const endereco = decodeURIComponent(params.get('e') || '');
+    const insta = params.get('ig');
+    const face = params.get('fb');
 
-    // PREENCHE A PÁGINA
+    // Preenchimento Inicial
     document.getElementById('txtNome').innerText = nome;
-    document.getElementById('txtSubtitulo').innerText = sub;
+    document.getElementById('txtSub').innerText = sub;
     document.getElementById('main-logo').src = logo;
     document.getElementById('imgSucesso').src = foto;
-    document.getElementById('linkGoogle').href = googleLink;
+    document.getElementById('linkG').href = googleLink;
     document.getElementById('info-loja').innerHTML = endereco;
     document.title = "Avaliar " + nome;
+
+    // Lógica das Redes Sociais
+    if(insta) {
+        document.getElementById('btnInsta').href = `https://instagram.com/${insta}`;
+        document.getElementById('btnInsta').classList.remove('hidden');
+    }
+    if(face) {
+        document.getElementById('btnFace').href = `https://facebook.com/${face}`;
+        document.getElementById('btnFace').classList.remove('hidden');
+    }
 
     function avaliar(n) {
         document.querySelectorAll('.star-btn').forEach((s, i) => {
             i < n ? s.classList.add('active') : s.classList.remove('active');
         });
-
         document.getElementById('main-logo').classList.add('logo-compacta');
         document.getElementById('instrucao').classList.add('hidden');
         document.getElementById('ratingBox').classList.add('hidden');
@@ -148,9 +169,8 @@
     function enviarWhatsApp() {
         const msg = document.getElementById('texto-melhoria').value;
         if(!msg) return alert("Por favor, conte-nos o que houve.");
-        window.open(`https://wa.me/${whats}?text=Feedback Insatisfeito: ${msg}`, '_blank');
+        window.open(`https://wa.me/${whats}?text=Feedback Unidade: ${sub} - Mensagem: ${msg}`, '_blank');
     }
 </script>
-
 </body>
 </html>
