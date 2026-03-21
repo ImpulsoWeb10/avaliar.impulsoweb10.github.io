@@ -68,4 +68,14 @@ const clientes = [
     logo: "logo.png", 
     descricao: "Domínio técnico em cortes e tratamentos capilares. Visual renovado com quem entende de estilo e valoriza a sua autoestima." 
   }
+  
+  {
+nome: "lidia lindona",
+pasta: "lidia",
+logo: "https://unsplash.com/pt-br/fotografias/uma-figura-solitaria-esta-em-pe-em-uma-duna-de-areia-ao-por-do-sol-gzxxKNmrwHY",
+subtitulo: "",
+instagram: "@TINTASQUALYQUIMY",
+facebook: ""
+},
+  
 ];
