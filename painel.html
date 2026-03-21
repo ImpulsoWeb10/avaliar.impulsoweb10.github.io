@@ -9,44 +9,42 @@
     <style>
         :root { --primary: #22c55e; --bg: #f8fafc; --text: #1e293b; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 650px; margin: 20px auto; background: #fff; padding: 35px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .container { max-width: 700px; margin: 20px auto; background: #fff; padding: 35px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
         h2 { color: var(--primary); text-align: center; margin-bottom: 25px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin: 12px 0 5px; }
-        input, select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; background: #fdfdfd; box-sizing: border-box; }
+        input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; background: #fdfdfd; box-sizing: border-box; font-family: inherit; }
         button { width: 100%; padding: 18px; background: var(--primary); color: white; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-size: 16px; transition: 0.3s; }
-        button:hover { transform: scale(1.02); background: #16a34a; }
+        button:hover { transform: scale(1.01); background: #16a34a; }
 
-        /* RESULTADOS */
         .result-area { display: none; margin-top: 35px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
-        .output-group { margin-bottom: 20px; position: relative; }
-        .code-box { background: #f1f5f9; padding: 15px; border-radius: 12px; font-size: 12px; color: #475569; border: 1px dashed var(--primary); word-break: break-all; margin-top: 5px; }
-        .btn-copy { background: #334155; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; cursor: pointer; margin-top: 8px; float: right; transition: 0.2s; }
-        .btn-copy:active { transform: scale(0.95); }
+        .output-group { margin-bottom: 25px; }
+        .code-box { background: #f1f5f9; padding: 15px; border-radius: 12px; font-size: 11px; color: #475569; border: 1px dashed var(--primary); word-break: break-all; margin-top: 5px; line-height: 1.4; }
+        .btn-copy { background: #334155; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 11px; cursor: pointer; margin-top: 8px; float: right; }
         
-        #qrcode-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 20px; }
-        #qrcode { margin-bottom: 10px; }
+        #qrcode-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 20px; background: #fff; }
+        .instrucao-tag { background: #eef2ff; color: #4f46e5; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🚀 Gerador de Clientes</h2>
+    <h2>🚀 Gerador de Estrutura</h2>
     
     <div class="form-grid">
         <div>
-            <label>Nome do Cliente</label>
+            <label>Nome da Empresa</label>
             <input id="n" placeholder="Ex: Óptica Lidia">
         </div>
         <div>
             <label>Subtítulo (Unidade)</label>
-            <input id="s" placeholder="Ex: Unidade I">
+            <input id="s" placeholder="Ex: Unidade II">
         </div>
     </div>
 
     <div class="form-grid">
         <div>
-            <label>Nome da Pasta (Slug)</label>
+            <label>Pasta no GitHub (Slug)</label>
             <input id="slug" placeholder="Ex: lidia">
         </div>
         <div>
@@ -55,82 +53,98 @@
         </div>
     </div>
 
-    <label>Link de Avaliação do Google</label>
-    <input id="g" placeholder="Cole o link completo do Google Maps">
+    <label>Link de Avaliação do Google Maps</label>
+    <input id="g" placeholder="Link que abre direto nas 5 estrelas">
 
-    <label>Endereço Completo</label>
-    <input id="e" placeholder="Rua exemplo, 100 - Bairro">
+    <label>Endereço Completo (Exibido no Rodapé)</label>
+    <input id="e" placeholder="Rua exemplo, 100 - Bairro, Cidade">
 
     <div class="form-grid">
         <div>
-            <label>Link da Logo</label>
+            <label>Instagram (sem @)</label>
+            <input id="insta" placeholder="optica_lidia">
+        </div>
+        <div>
+            <label>Facebook (usuário)</label>
+            <input id="face" placeholder="opticalidia">
+        </div>
+    </div>
+
+    <div class="form-grid">
+        <div>
+            <label>URL da Logo</label>
             <input id="l" placeholder="logo.png">
         </div>
         <div>
-            <label>Link Foto Sucesso</label>
+            <label>URL Foto Sucesso</label>
             <input id="f" placeholder="sucesso.png">
         </div>
     </div>
 
-    <button onclick="gerarEstrutura()">GERAR TUDO AGORA ⚡</button>
+    <button onclick="gerarTudo()">GERAR ESTRUTURA E QR CODE ⚡</button>
 
     <div id="result-area" class="result-area">
         
         <div id="qrcode-container">
-            <label>QR CODE (Link Curto)</label>
+            <label>QR CODE PRONTO</label>
             <div id="qrcode"></div>
-            <p style="font-size: 10px; color: #94a3b8;" id="linkCurtoTxt"></p>
+            <p style="font-size: 11px; margin-top:10px;" id="linkCurtoTxt"></p>
         </div>
 
         <div class="output-group">
-            <label>📁 1. CÓDIGO PARA A PASTA (index.html do cliente)</label>
-            <p style="font-size: 10px; color: #64748b; margin-bottom: 5px;">Crie a pasta no GitHub, crie um index.html e cole isso dentro:</p>
+            <span class="instrucao-tag">PASSO 1: NO GITHUB</span>
+            <label>Criar arquivo: <b>/index.html</b> dentro da pasta <b><span class="folder-name"></span></b></label>
             <div id="codeIndex" class="code-box"></div>
-            <button class="btn-copy" onclick="copy('codeIndex')">COPIAR HTML DA PASTA</button>
+            <button class="btn-copy" onclick="copy('codeIndex')">COPIAR HTML DO REDIRECIONADOR</button>
         </div>
 
         <div class="output-group" style="clear:both; padding-top:20px;">
-            <label>🏠 2. BLOCO PARA A VITRINE (clientes.js ou index principal)</label>
-            <p style="font-size: 10px; color: #64748b; margin-bottom: 5px;">Cole este bloco na sua lista de clientes para ele aparecer no seu portfólio:</p>
+            <span class="instrucao-tag">PASSO 2: NA SUA VITRINE</span>
+            <label>Colar no seu arquivo: <b>clientes.js</b> (ou index principal)</label>
             <div id="codeJS" class="code-box"></div>
-            <button class="btn-copy" onclick="copy('codeJS')">COPIAR BLOCO DA VITRINE</button>
+            <button class="btn-copy" onclick="copy('codeJS')">COPIAR BLOCO DO CLIENTE</button>
         </div>
 
     </div>
 </div>
 
 <script>
-function gerarEstrutura() {
-    const slug = document.getElementById('slug').value.toLowerCase().trim();
+function gerarTudo() {
+    const slug = document.getElementById('slug').value.toLowerCase().trim() || 'cliente';
     const nome = document.getElementById('n').value;
     const sub = document.getElementById('s').value;
     const whats = document.getElementById('w').value;
-    const google = btoa(document.getElementById('g').value);
+    const google = btoa(document.getElementById('g').value); // Encode Base64
     const endereco = encodeURIComponent(document.getElementById('e').value);
+    const insta = document.getElementById('insta').value;
+    const face = document.getElementById('face').value;
     const logo = document.getElementById('l').value || 'logo.png';
     const foto = document.getElementById('f').value || 'sucesso.png';
 
-    // URL base do seu site (ajusta automático)
+    // Montagem do Link Mágico com os novos campos (Redes Sociais)
     const baseUrl = window.location.origin;
-    const linkMagico = `${baseUrl}/v.html?n=${encodeURIComponent(nome)}&s=${encodeURIComponent(sub)}&l=${logo}&f=${foto}&e=${endereco}&w=${whats}&g=${google}`;
+    const linkMagico = `${baseUrl}/v.html?n=${encodeURIComponent(nome)}&s=${encodeURIComponent(sub)}&l=${logo}&f=${foto}&e=${endereco}&w=${whats}&g=${google}&ig=${insta}&fb=${face}`;
     const linkCurto = `${baseUrl}/${slug}`;
+
+    // Atualiza nomes na tela
+    document.querySelectorAll('.folder-name').forEach(el => el.innerText = slug);
 
     // Gerar QR Code
     document.getElementById('qrcode').innerHTML = "";
-    new QRCode(document.getElementById("qrcode"), {
-        text: linkCurto, width: 150, height: 150
-    });
+    new QRCode(document.getElementById("qrcode"), { text: linkCurto, width: 160, height: 160 });
     document.getElementById('linkCurtoTxt').innerText = linkCurto;
 
-    // Campo 1: Pasta do Cliente
+    // Código 1: index.html da pasta
     document.getElementById('codeIndex').innerText = `<script>window.location.href="${linkMagico}";<\/script>`;
 
-    // Campo 2: Vitrine/clientes.js
+    // Código 2: clientes.js
     const blocoJS = `{ 
     nome: "${nome}", 
     pasta: "${slug}", 
     logo: "${logo}", 
-    subtitulo: "${sub}" 
+    subtitulo: "${sub}",
+    instagram: "${insta}",
+    facebook: "${face}"
 },`;
     document.getElementById('codeJS').innerText = blocoJS;
 
@@ -140,7 +154,7 @@ function gerarEstrutura() {
 function copy(id) {
     const text = document.getElementById(id).innerText;
     navigator.clipboard.writeText(text);
-    alert("Copiado! Agora é só colar no GitHub.");
+    alert("Copiado! Agora cole no local indicado.");
 }
 </script>
 
