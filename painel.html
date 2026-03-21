@@ -1,29 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>Gerador de Links</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gerador de Links - ImpulsoWeb10</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f5f5f5;
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #4facfe;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.copy {
+  background: #25D366;
+}
+
+#qrcode {
+  margin-top: 15px;
+}
+</style>
+
 </head>
-<body style="font-family:Arial; padding:20px;">
+<body>
+
+<div class="card">
 
 <h2>Gerar Link do Cliente</h2>
 
-<input id="nome" placeholder="Nome cliente"><br><br>
-<input id="whats" placeholder="WhatsApp"><br><br>
-<input id="google" placeholder="Link Google"><br><br>
+<input id="nome" placeholder="Nome cliente">
+<input id="whats" placeholder="WhatsApp (somente números)">
+<input id="google" placeholder="Link Google">
 
 <button onclick="gerar()">Gerar Link</button>
 
 <p id="resultado"></p>
 
+<button class="copy" onclick="copiar()">Copiar Link</button>
+
+<div id="qrcode"></div>
+
+</div>
+
+<!-- QR CODE LIB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
+let linkGerado = "";
+
 function gerar() {
   let nome = document.getElementById("nome").value;
   let whats = document.getElementById("whats").value;
   let google = document.getElementById("google").value;
 
-  let link = `${window.location.origin}/index.html?cliente=${nome}&whats=${whats}&google=${encodeURIComponent(google)}`;
+  linkGerado = `${window.location.origin}/index.html?cliente=${nome}&whats=${whats}&google=${encodeURIComponent(google)}`;
 
-  document.getElementById("resultado").innerText = link;
+  document.getElementById("resultado").innerText = linkGerado;
+
+  document.getElementById("qrcode").innerHTML = "";
+  new QRCode(document.getElementById("qrcode"), linkGerado);
+}
+
+function copiar() {
+  if (!linkGerado) return alert("Gere um link primeiro");
+
+  navigator.clipboard.writeText(linkGerado);
+  alert("Link copiado!");
 }
 </script>
 
