@@ -1,291 +1,174 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO FORTE -->
-    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
-    <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
-    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
-    <meta name="author" content="ImpulsoWeb10">
-    <meta name="robots" content="index, follow">
-
-    <!-- OPEN GRAPH -->
-    <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
-    <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
-    <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
-
-    <!-- GOOGLE ANALYTICS -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} 
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
-    <style>
-        :root {
-            --bg-dark: #050707;
-            --card-bg: #0d1212;
-            --neon-green: #38e391;
-            --neon-green-dim: rgba(56, 227, 145, 0.4);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a8a8;
-            --border-dim: #1a2222;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg-dark);
-            margin: 0;
-            color: var(--text-secondary);
-            overflow-x: hidden;
-        }
-
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        header { text-align: center; padding: 60px 20px 30px; }
-
-        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); }
-
-        .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; }
-
-        .cta-main {
-            display: inline-block;
-            background: var(--neon-green);
-            color: #000;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 900;
-            box-shadow: 0 0 20px var(--neon-green-dim);
-            cursor:pointer;
-        }
-
-        main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 60px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-dim);
-            border-radius: 20px;
-            padding: 25px 15px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .card img {
-            max-height: 55px;
-            margin-bottom: 15px;
-        }
-
-        .card h3 { color: var(--text-primary); }
-
-        .btn-avaliar {
-            display: block;
-            background: rgba(56,227,145,0.2);
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 8px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            color: var(--neon-green);
-            text-align: left;
-            padding: 15px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-answer p { color: #fff; }
-
-        .modal {
-            display: none;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-        }
-
-        footer { text-align: center; padding: 40px 20px; }
-    </style>
-</head>
-
-<body>
-<div class="bg-glow"></div>
-
-<header>
-    <h1>Avaliação de Empresas e Fornecedores no Google</h1>
-    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas.</p>
-    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK 🚀</a>
-</header>
-
-<main>
-    <div class="container" id="clientesContainer"></div>
-
-    <section style="max-width:600px; width:100%;">
-        <h2 style="color:#fff;">Perguntas Frequentes</h2>
-
-        <button class="faq-question">Como funciona?</button>
-        <div class="faq-answer"><p>Você envia o link.</p></div>
-
-        <button class="faq-question">Por que usar?</button>
-        <div class="faq-answer"><p>Aumenta avaliações.</p></div>
-    </section>
-</main>
-
-<div id="modalInfo" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">X</span>
-        <div id="modalData"></div>
-    </div>
-</div>
-
-<footer>
-    <p>© 2026 ImpulsoWeb10</p>
-</footer>
+<!-- MANTÉM TODO SEU HTML EXATAMENTE IGUAL ACIMA -->
 
 <script src="clientes.js?v=2"></script>
 
 <script>
-function getParam(n){return new URLSearchParams(window.location.search).get(n);}
-const clienteParam=getParam("cliente");
-
-function track(e,d={}){
-  try{if(typeof gtag!=="undefined"){gtag('event',e,d)}}catch{}
+// ==========================
+// CONFIG
+// ==========================
+function getParam(nome){
+  return new URLSearchParams(window.location.search).get(nome);
 }
 
-document.addEventListener("DOMContentLoaded",function(){
+const clienteParam = getParam("cliente");
 
-// ===== MODO CLIENTE BONITO =====
+// ==========================
+// TRACK (ANALYTICS)
+// ==========================
+function track(evento, dados = {}){
+  try{
+    if(typeof gtag !== "undefined"){
+      gtag('event', evento, dados);
+    }
+  }catch(e){}
+}
+
+// ==========================
+// TUDO RODA DEPOIS QUE CARREGAR
+// ==========================
+document.addEventListener("DOMContentLoaded", function () {
+
+// ==========================
+// 🔥 MODO CLIENTE (SEM QUEBRAR LAYOUT)
+// ==========================
 if(clienteParam){
 
-  const nome=getParam("cliente")||"Cliente";
-  const whats=getParam("whats")||"";
-  const google=getParam("google")||"";
-  const logo=getParam("logo")||"";
+  const nome = getParam("cliente") || "Cliente";
+  const whats = getParam("whats") || "";
+  const google = getParam("google") || "";
+  const logo = getParam("logo") || "";
 
-  track("pagina_cliente",{cliente:nome});
+  track("pagina_cliente_aberta", { cliente: nome });
 
-  document.querySelector("main")?.remove();
+  // REMOVE APENAS A LISTA (não mexe no resto)
+  const container = document.getElementById("clientesContainer");
+  if(container) container.innerHTML = "";
 
-  const header=document.querySelector("header");
+  // ALTERA APENAS O CONTEÚDO CENTRAL
+  const main = document.querySelector("main");
 
-  header.innerHTML=`
-    ${logo?`<img src="${logo}" style="max-height:70px;margin-bottom:10px;">`:""}
-    <h1>${nome}</h1>
-    <p class="subtitle">Como foi sua experiência?</p>
+  if(main){
+    main.innerHTML = `
+      <div style="text-align:center; max-width:600px; width:100%; margin:auto;">
 
-    <div style="font-size:40px;">
-      <span onclick="avaliar(1)">⭐</span>
-      <span onclick="avaliar(2)">⭐</span>
-      <span onclick="avaliar(3)">⭐</span>
-      <span onclick="avaliar(4)">⭐</span>
-      <span onclick="avaliar(5)">⭐</span>
-    </div>
+        ${logo ? `<img src="${logo}" style="max-height:70px; margin-bottom:15px;">` : ""}
 
-    <div id="acoes"></div>
-  `;
+        <h2 style="color:#fff;">${nome}</h2>
+        <p class="subtitle">Como foi sua experiência?</p>
 
-  window.avaliar=function(n){
-    track("avaliacao",{cliente:nome,nota:n});
-    const a=document.getElementById("acoes");
+        <div style="font-size:35px; cursor:pointer;">
+          <span onclick="avaliar(1)">⭐</span>
+          <span onclick="avaliar(2)">⭐</span>
+          <span onclick="avaliar(3)">⭐</span>
+          <span onclick="avaliar(4)">⭐</span>
+          <span onclick="avaliar(5)">⭐</span>
+        </div>
 
-    if(n<=3){
-      a.innerHTML=`<a class="cta-main" onclick="window.open('https://wa.me/${whats}')">WhatsApp</a>`;
-    }else{
-      a.innerHTML=`<a class="cta-main" onclick="window.open('${google}')">Google</a>`;
+        <div id="acoes" style="margin-top:20px;"></div>
+
+      </div>
+    `;
+  }
+
+  // FUNÇÕES
+  window.avaliar = function(nota){
+    track("avaliacao", { cliente: nome, estrelas: nota });
+
+    const acoes = document.getElementById("acoes");
+
+    if(nota <= 3){
+      acoes.innerHTML = `
+        <a class="cta-main" onclick="abrirWhats()">Falar no WhatsApp</a>
+      `;
+    } else {
+      acoes.innerHTML = `
+        <a class="cta-main" onclick="abrirGoogle()">Avaliar no Google</a>
+      `;
     }
+  };
+
+  window.abrirWhats = function(){
+    track("clique_whatsapp", { cliente: nome });
+    window.open(`https://wa.me/${whats}`, '_blank');
+  };
+
+  window.abrirGoogle = function(){
+    track("clique_google", { cliente: nome });
+    window.open(google, '_blank');
   };
 
   return;
 }
 
-// ===== PORTFÓLIO =====
-const container=document.getElementById("clientesContainer");
-const modal=document.getElementById("modalInfo");
-const modalData=document.getElementById("modalData");
+// ==========================
+// 🟢 SEU PORTFÓLIO NORMAL
+// ==========================
+const container = document.getElementById("clientesContainer");
+const modal = document.getElementById("modalInfo");
+const modalData = document.getElementById("modalData");
+const closeBtn = document.querySelector(".close-modal");
 
-document.querySelector(".cta-main")?.addEventListener("click",()=>track("click_header"));
-
-if(typeof clientes!=="undefined"){
-clientes.forEach(c=>{
-    const card=document.createElement("article");
-    card.className="card";
-
-    card.innerHTML=`
-        <img src="${c.pasta}/${c.logo}">
-        <h3>${c.nome}</h3>
-        <a href="${c.pasta}/" class="btn-avaliar">Avaliar</a>
-    `;
-
-    card.querySelector(".btn-avaliar").addEventListener("click",()=>track("click_cliente",{nome:c.nome}));
-
-    card.onclick=(e)=>{
-        if(e.target.classList.contains('btn-avaliar')) return;
-
-        modalData.innerHTML=`<h2>${c.nome}</h2><p>${c.descricao||''}</p>`;
-        modal.style.display="flex";
-    };
-
-    container.appendChild(card);
+// TRACK BOTÃO PRINCIPAL
+document.querySelector(".cta-main")?.addEventListener("click", () => {
+  track("clique_header");
 });
+
+if (typeof clientes !== 'undefined') {
+    clientes.forEach(cliente => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
+            <h3>${cliente.nome}</h3>
+            <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+        `;
+
+        // TRACK BOTÃO
+        card.querySelector(".btn-avaliar").addEventListener("click", () => {
+            track("clique_avaliar", { cliente: cliente.nome });
+        });
+
+        card.addEventListener("click", (e) => {
+            if (e.target.classList.contains('btn-avaliar')) return;
+
+            track("abrir_modal", { cliente: cliente.nome });
+
+            modalData.innerHTML = `
+                <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
+                <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
+                <br>
+                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
+            `;
+
+            modal.style.display = "flex";
+        });
+
+        container.appendChild(card);
+    });
+}
+
+// FECHAR MODAL
+if(closeBtn){
+  closeBtn.onclick = () => modal.style.display = "none";
+}
+
+window.onclick = (e) => {
+  if (e.target == modal) modal.style.display = "none";
 }
 
 // FAQ
-document.querySelectorAll(".faq-question").forEach(b=>{
- b.onclick=()=>{
-  const a=b.nextElementSibling;
-  a.style.maxHeight=a.style.maxHeight?null:a.scrollHeight+"px";
- }
+document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const answer = btn.nextElementSibling;
+
+        document.querySelectorAll(".faq-answer").forEach(a => {
+            if (a !== answer) a.style.maxHeight = null;
+        });
+
+        answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+    });
 });
 
 });
 </script>
-
-</body>
-</html>
