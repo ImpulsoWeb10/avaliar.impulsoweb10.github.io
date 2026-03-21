@@ -61,7 +61,7 @@
 
         header { text-align: center; padding: 60px 20px 30px; }
 
-        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
+        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); }
 
         .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; }
 
@@ -74,6 +74,7 @@
             text-decoration: none;
             font-weight: 900;
             box-shadow: 0 0 20px var(--neon-green-dim);
+            cursor:pointer;
         }
 
         main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
@@ -99,7 +100,6 @@
         .card img {
             max-height: 55px;
             margin-bottom: 15px;
-            filter: drop-shadow(0 0 6px rgba(56, 227, 145, 0.6));
         }
 
         .card h3 { color: var(--text-primary); }
@@ -116,12 +116,6 @@
             font-weight: bold;
         }
 
-        .btn-avaliar:hover {
-            background: rgba(56,227,145,0.35);
-        }
-
-        .faq-item { border-bottom: 1px solid var(--border-dim); }
-
         .faq-question {
             width: 100%;
             background: none;
@@ -137,7 +131,6 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            padding: 0 15px;
         }
 
         .faq-answer p { color: #fff; }
@@ -145,40 +138,20 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0; top: 0; width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            align-items: center; justify-content: center;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-content {
             background: var(--card-bg);
-            border: 1px solid var(--neon-green);
-            padding: 40px 30px;
-            border-radius: 30px;
-            width: 85%; max-width: 400px;
-            text-align: center;
-            position: relative;
+            padding: 30px;
+            border-radius: 20px;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: var(--neon-green);
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border-dim);
-        }
-
-        .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
-        .badge-item { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; margin: 0 5px; }
+        footer { text-align: center; padding: 40px 20px; }
     </style>
 </head>
 
@@ -187,64 +160,48 @@
 
 <header>
     <h1>Avaliação de Empresas e Fornecedores no Google</h1>
-    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas a escolher melhor.</p>
-    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO 🚀</a>
+    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas.</p>
+    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK 🚀</a>
 </header>
 
 <main>
     <div class="container" id="clientesContainer"></div>
 
-    <section style="max-width:600px; width:100%; margin-bottom:60px;">
-        <h2 style="color:#fff; text-align:center;">Perguntas Frequentes</h2>
+    <section style="max-width:600px; width:100%;">
+        <h2 style="color:#fff;">Perguntas Frequentes</h2>
 
-        <div class="faq-item">
-            <button class="faq-question">Como a ImpulsoWeb10 pode ajudar?</button>
-            <div class="faq-answer"><p>Aumenta sua visibilidade no Google com avaliações reais.</p></div>
-        </div>
+        <button class="faq-question">Como funciona?</button>
+        <div class="faq-answer"><p>Você envia o link.</p></div>
 
-        <div class="faq-item">
-            <button class="faq-question">Por que avaliações são importantes?</button>
-            <div class="faq-answer"><p>Geram confiança e melhor posicionamento.</p></div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">Como funciona?</button>
-            <div class="faq-answer"><p>Você recebe um link personalizado.</p></div>
-        </div>
+        <button class="faq-question">Por que usar?</button>
+        <div class="faq-answer"><p>Aumenta avaliações.</p></div>
     </section>
 </main>
 
 <div id="modalInfo" class="modal">
     <div class="modal-content">
-        <span class="close-modal">&times;</span>
+        <span class="close-modal">X</span>
         <div id="modalData"></div>
     </div>
 </div>
 
 <footer>
-    <div style="margin-bottom: 20px;">
-        <span class="badge-item">🔒 SSL Certificado</span>
-        <span class="badge-item">🛡️ Ambiente Seguro</span>
-    </div>
-    <p>© 2026 Desenvolvido por 
-        <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a>
-    </p>
+    <p>© 2026 ImpulsoWeb10</p>
 </footer>
 
 <script src="clientes.js?v=2"></script>
 
 <script>
-// ===== CONFIG =====
-function getParam(nome){return new URLSearchParams(window.location.search).get(nome);}
-const clienteParam = getParam("cliente");
+function getParam(n){return new URLSearchParams(window.location.search).get(n);}
+const clienteParam=getParam("cliente");
 
-function track(evento,dados={}){
-  try{ if(typeof gtag!=="undefined"){ gtag('event',evento,dados);} }catch(e){}
+function track(e,d={}){
+  try{if(typeof gtag!=="undefined"){gtag('event',e,d)}}catch{}
 }
 
 document.addEventListener("DOMContentLoaded",function(){
 
-// ===== MODO CLIENTE =====
+// ===== MODO CLIENTE BONITO =====
 if(clienteParam){
 
   const nome=getParam("cliente")||"Cliente";
@@ -252,53 +209,37 @@ if(clienteParam){
   const google=getParam("google")||"";
   const logo=getParam("logo")||"";
 
-  track("pagina_cliente_aberta",{cliente:nome});
+  track("pagina_cliente",{cliente:nome});
 
-  document.querySelector("header")?.remove();
   document.querySelector("main")?.remove();
-  document.querySelector("footer")?.remove();
-  document.getElementById("modalInfo")?.remove();
 
-  const box=document.createElement("div");
-  box.style.maxWidth="400px";
-  box.style.margin="80px auto";
-  box.style.textAlign="center";
+  const header=document.querySelector("header");
 
-  box.innerHTML=`
-    ${logo?`<img src="${logo}" style="max-height:60px;margin-bottom:10px;">`:""}
-    <h2 style="color:#fff;">${nome}</h2>
-    <p>Como foi sua experiência?</p>
-    <div style="font-size:30px;">
+  header.innerHTML=`
+    ${logo?`<img src="${logo}" style="max-height:70px;margin-bottom:10px;">`:""}
+    <h1>${nome}</h1>
+    <p class="subtitle">Como foi sua experiência?</p>
+
+    <div style="font-size:40px;">
       <span onclick="avaliar(1)">⭐</span>
       <span onclick="avaliar(2)">⭐</span>
       <span onclick="avaliar(3)">⭐</span>
       <span onclick="avaliar(4)">⭐</span>
       <span onclick="avaliar(5)">⭐</span>
     </div>
+
     <div id="acoes"></div>
   `;
 
-  document.body.appendChild(box);
+  window.avaliar=function(n){
+    track("avaliacao",{cliente:nome,nota:n});
+    const a=document.getElementById("acoes");
 
-  window.avaliar=function(nota){
-    track("avaliacao",{cliente:nome,estrelas:nota});
-    const acoes=document.getElementById("acoes");
-
-    if(nota<=3){
-      acoes.innerHTML=`<button onclick="abrirWhats()" class="cta-main">WhatsApp</button>`;
+    if(n<=3){
+      a.innerHTML=`<a class="cta-main" onclick="window.open('https://wa.me/${whats}')">WhatsApp</a>`;
     }else{
-      acoes.innerHTML=`<button onclick="abrirGoogle()" class="cta-main">Google</button>`;
+      a.innerHTML=`<a class="cta-main" onclick="window.open('${google}')">Google</a>`;
     }
-  };
-
-  window.abrirWhats=function(){
-    track("clique_whatsapp",{cliente:nome});
-    window.open(`https://wa.me/${whats}`,'_blank');
-  };
-
-  window.abrirGoogle=function(){
-    track("clique_google",{cliente:nome});
-    window.open(google,'_blank');
   };
 
   return;
@@ -308,62 +249,39 @@ if(clienteParam){
 const container=document.getElementById("clientesContainer");
 const modal=document.getElementById("modalInfo");
 const modalData=document.getElementById("modalData");
-const closeBtn=document.querySelector(".close-modal");
 
-document.querySelector(".cta-main")?.addEventListener("click",()=>track("clique_header"));
+document.querySelector(".cta-main")?.addEventListener("click",()=>track("click_header"));
 
 if(typeof clientes!=="undefined"){
-clientes.forEach(cliente=>{
-
+clientes.forEach(c=>{
     const card=document.createElement("article");
     card.className="card";
 
     card.innerHTML=`
-        <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
-        <h3>${cliente.nome}</h3>
-        <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+        <img src="${c.pasta}/${c.logo}">
+        <h3>${c.nome}</h3>
+        <a href="${c.pasta}/" class="btn-avaliar">Avaliar</a>
     `;
 
-    card.querySelector(".btn-avaliar").addEventListener("click",()=>{
-        track("clique_avaliar",{cliente:cliente.nome});
-    });
+    card.querySelector(".btn-avaliar").addEventListener("click",()=>track("click_cliente",{nome:c.nome}));
 
-    card.addEventListener("click",(e)=>{
+    card.onclick=(e)=>{
         if(e.target.classList.contains('btn-avaliar')) return;
 
-        track("abrir_modal",{cliente:cliente.nome});
-
-        modalData.innerHTML=`
-            <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
-            <p style="color:#fff;">${cliente.descricao||''}</p>
-            <br>
-            <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
-        `;
-
+        modalData.innerHTML=`<h2>${c.nome}</h2><p>${c.descricao||''}</p>`;
         modal.style.display="flex";
-    });
+    };
 
     container.appendChild(card);
 });
 }
 
-if(closeBtn && modal){
-  closeBtn.onclick=()=>modal.style.display="none";
-}
-
-window.onclick=(e)=>{ if(e.target==modal) modal.style.display="none"; }
-
 // FAQ
-document.querySelectorAll(".faq-question").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-        const answer=btn.nextElementSibling;
-
-        document.querySelectorAll(".faq-answer").forEach(a=>{
-            if(a!==answer) a.style.maxHeight=null;
-        });
-
-        answer.style.maxHeight=answer.style.maxHeight?null:answer.scrollHeight+"px";
-    });
+document.querySelectorAll(".faq-question").forEach(b=>{
+ b.onclick=()=>{
+  const a=b.nextElementSibling;
+  a.style.maxHeight=a.style.maxHeight?null:a.scrollHeight+"px";
+ }
 });
 
 });
