@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gerador de Links</title>
+</head>
+<body style="font-family:Arial; padding:20px;">
+
+<h2>Gerar Link do Cliente</h2>
+
+<input id="nome" placeholder="Nome cliente"><br><br>
+<input id="whats" placeholder="WhatsApp"><br><br>
+<input id="google" placeholder="Link Google"><br><br>
+
+<button onclick="gerar()">Gerar Link</button>
+
+<p id="resultado"></p>
+
+<script>
+function gerar() {
+  let nome = document.getElementById("nome").value;
+  let whats = document.getElementById("whats").value;
+  let google = document.getElementById("google").value;
+
+  let link = `${window.location.origin}/index.html?cliente=${nome}&whats=${whats}&google=${encodeURIComponent(google)}`;
+
+  document.getElementById("resultado").innerText = link;
+}
+</script>
+
+</body>
+</html>
