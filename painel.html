@@ -2,84 +2,84 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle | ImpulsoWeb10</title>
+    <title>Gerador Pro | ImpulsoWeb10</title>
     <style>
-        :root { --primary: #2dbd79; --bg: #f0f4f8; --card-bg: #ffffff; --text: #2d3436; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; }
-        .container { max-width: 500px; margin: auto; background: var(--card-bg); padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
-        h2 { color: var(--primary); margin-top: 0; font-weight: 800; letter-spacing: -1px; }
-        p { font-size: 14px; color: #636e72; margin-bottom: 25px; }
-        
-        label { display: block; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #b2bec3; margin-top: 15px; letter-spacing: 1px; }
-        input, select { width: 100%; padding: 14px; margin-top: 5px; border-radius: 12px; border: 1px solid #dfe6e9; background: #fff; box-sizing: border-box; font-size: 15px; transition: 0.3s; }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(45, 189, 121, 0.1); }
-        
-        button { width: 100%; padding: 16px; background: var(--primary); color: white; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; margin-top: 25px; font-size: 16px; box-shadow: 0 8px 20px rgba(45, 189, 121, 0.2); transition: 0.3s; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(45, 189, 121, 0.3); }
-
-        .result-box { display: none; margin-top: 30px; text-align: left; border-top: 2px solid #f1f2f6; pt: 20px; }
-        .link-display { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 12px; color: #2d3436; border: 1px dashed var(--primary); word-break: break-all; margin: 10px 0; }
-        .copy-btn { background: #636e72; margin-top: 5px; padding: 10px; font-size: 12px; }
+        :root { --primary: #22c55e; --accent: #facc15; --bg: #f8fafc; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: #334155; padding: 20px; }
+        .card { max-width: 600px; margin: 20px auto; background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        h2 { color: var(--primary); text-align: center; margin-bottom: 25px; }
+        label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin: 15px 0 5px; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; background: #fdfdfd; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { width: 100%; padding: 16px; background: var(--primary); color: white; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-size: 16px; transition: 0.3s; }
+        button:hover { transform: scale(1.02); background: #16a34a; }
+        #linkDisplay { display: none; margin-top: 25px; padding: 15px; background: #f1f5f9; border: 1px dashed var(--primary); border-radius: 12px; word-break: break-all; font-size: 12px; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h2>Painel ImpulsoWeb10</h2>
+        
+        <div class="grid">
+            <div>
+                <label>Título (Empresa)</label>
+                <input id="n" placeholder="Ex: Óptica Lionda">
+            </div>
+            <div>
+                <label>Subtítulo (Unidade)</label>
+                <input id="s" placeholder="Ex: Unidade II">
+            </div>
+        </div>
 
-<div class="container">
-    <h2>ImpulsoWeb10</h2>
-    <p>Gere links dinâmicos e profissionais para seus clientes em segundos.</p>
+        <label>URL da Logo (ou logo.png)</label>
+        <input id="l" placeholder="Link da logo ou deixe logo.png">
 
-    <label>Estilo do Cartão</label>
-    <select id="modelo">
-        <option value="dark">Modelo Dark Neon (Elegante)</option>
-        <option value="light">Modelo Light Clean (Minimalista)</option>
-        <option value="blue">Modelo Blue Tech (Corporativo)</option>
-    </select>
+        <label>URL da Foto de Sucesso (Ex: foto-loja.png)</label>
+        <input id="f" placeholder="Aparece quando ganha 5 estrelas">
 
-    <label>Nome da Empresa</label>
-    <input id="nome" placeholder="Ex: Óptica Lionda">
+        <label>Endereço Completo (Rodapé)</label>
+        <input id="e" placeholder="Rua, Número, Bairro, Cidade">
 
-    <label>WhatsApp (com DDD)</label>
-    <input id="whats" placeholder="Ex: 5511954950044">
+        <div class="grid">
+            <div>
+                <label>WhatsApp Gerente (5511...)</label>
+                <input id="w" placeholder="Somente números">
+            </div>
+            <div>
+                <label>Link Google Maps</label>
+                <input id="g" placeholder="Cole o link de avaliação">
+            </div>
+        </div>
 
-    <label>Link de Avaliação Google</label>
-    <input id="google" placeholder="Cole o link longo do Maps aqui">
+        <button onclick="gerar()">GERAR LINK INTELIGENTE 🚀</button>
 
-    <button onclick="gerarLink()">GERAR LINK DO CLIENTE</button>
-
-    <div id="result-box" class="result-box">
-        <label>1. Link Dinâmico (Para o redirecionador):</label>
-        <div id="linkFinal" class="link-display"></div>
-        <button class="copy-btn" onclick="copiar('linkFinal')">Copiar Link Mágico</button>
-
-        <label>2. Código p/ Pasta no GitHub (index.html):</label>
-        <div id="codigoPasta" class="link-display"></div>
-        <button class="copy-btn" onclick="copiar('codigoPasta')">Copiar Código p/ Pasta</button>
+        <div id="linkDisplay"></div>
+        <button id="btnCopy" style="display:none; background:#334155;" onclick="copy()">Copiar Link</button>
     </div>
-</div>
 
-<script>
-function gerarLink() {
-    const m = document.getElementById('modelo').value;
-    const n = encodeURIComponent(document.getElementById('nome').value);
-    const w = document.getElementById('whats').value;
-    const g = btoa(document.getElementById('google').value); // Codifica link longo
+    <script>
+        function gerar() {
+            const d = {
+                n: encodeURIComponent(document.getElementById('n').value),
+                s: encodeURIComponent(document.getElementById('s').value),
+                l: document.getElementById('l').value || 'logo.png',
+                f: document.getElementById('f').value || 'sucesso.png',
+                e: encodeURIComponent(document.getElementById('e').value),
+                w: document.getElementById('w').value,
+                g: btoa(document.getElementById('g').value) // Codifica link longo
+            };
 
-    // Link Mágico (Dinâmico)
-    const baseUrl = window.location.origin + "/v.html";
-    const linkMagico = `${baseUrl}?m=${m}&n=${n}&w=${w}&g=${g}`;
+            const link = `${window.location.origin}/v.html?n=${d.n}&s=${d.s}&l=${d.l}&f=${d.f}&e=${d.e}&w=${d.w}&g=${d.g}`;
+            const out = document.getElementById('linkDisplay');
+            out.innerText = link;
+            out.style.display = 'block';
+            document.getElementById('btnCopy').style.display = 'block';
+        }
 
-    // Mostra Resultados
-    document.getElementById('linkFinal').innerText = linkMagico;
-    document.getElementById('codigoPasta').innerText = `<script>window.location.href="${linkMagico}";<\/script>`;
-    document.getElementById('result-box').style.display = 'block';
-}
-
-function copiar(id) {
-    navigator.clipboard.writeText(document.getElementById(id).innerText);
-    alert("Copiado!");
-}
-</script>
-
+        function copy() {
+            navigator.clipboard.writeText(document.getElementById('linkDisplay').innerText);
+            alert("Link copiado!");
+        }
+    </script>
 </body>
 </html>
