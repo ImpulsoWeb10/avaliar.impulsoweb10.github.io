@@ -1,152 +1,288 @@
-<script>
-// ==========================
-// CONFIG DINÂMICO
-// ==========================
-function getParam(nome) {
-  return new URLSearchParams(window.location.search).get(nome);
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO FORTE -->
+    <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
+    <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
+    <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
+    <meta name="author" content="ImpulsoWeb10">
+    <meta name="robots" content="index, follow">
 
-const clienteParam = getParam("cliente");
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
+    <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
+    <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
 
-// ==========================
-// EVENTOS (ANALYTICS)
-// ==========================
-function track(evento, dados = {}) {
-  if (typeof gtag !== "undefined") {
-    gtag('event', evento, dados);
-  }
-}
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
-// ==========================
-// MODO CLIENTE (DINÂMICO)
-// ==========================
-if (clienteParam) {
+    <style>
+        :root {
+            --bg-dark: #050707;
+            --card-bg: #0d1212;
+            --neon-green: #38e391;
+            --neon-green-dim: rgba(56, 227, 145, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8a8;
+            --border-dim: #1a2222;
+        }
 
-  const nome = getParam("cliente");
-  const whats = getParam("whats");
-  const google = getParam("google");
-  const logo = getParam("logo");
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            margin: 0;
+            color: var(--text-secondary);
+            overflow-x: hidden;
+        }
 
-  track("pagina_cliente_aberta", { cliente: nome });
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(56, 227, 145, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-  document.body.innerHTML = `
-    <div style="text-align:center; padding:30px; font-family:Arial;">
+        header { text-align: center; padding: 60px 20px 30px; }
 
-      ${logo ? `<img src="${logo}" style="width:80px; margin-bottom:10px;">` : ""}
+        h1 { margin: 0; font-size: 2.5rem; color: var(--text-primary); letter-spacing: -1px; }
 
-      <h2>${nome}</h2>
-      <p>Como foi sua experiência?</p>
+        .subtitle { font-size: 1.1rem; max-width: 500px; margin: 15px auto 25px; }
 
-      <div style="font-size:35px; cursor:pointer;">
-        <span onclick="avaliar(1)">★</span>
-        <span onclick="avaliar(2)">★</span>
-        <span onclick="avaliar(3)">★</span>
-        <span onclick="avaliar(4)">★</span>
-        <span onclick="avaliar(5)">★</span>
-      </div>
+        .cta-main {
+            display: inline-block;
+            background: var(--neon-green);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            box-shadow: 0 0 20px var(--neon-green-dim);
+        }
 
-      <div id="acoes" style="margin-top:20px;"></div>
+        main { display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-dim);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card img {
+            max-height: 55px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 6px rgba(56, 227, 145, 0.6));
+        }
+
+        .card h3 { color: var(--text-primary); }
+
+        .btn-avaliar {
+            display: block;
+            background: rgba(56,227,145,0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 8px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .btn-avaliar:hover {
+            background: rgba(56,227,145,0.35);
+        }
+
+        /* FAQ SANFONA */
+        .faq-item { border-bottom: 1px solid var(--border-dim); }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--neon-green);
+            text-align: left;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .faq-answer p { color: #fff; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            align-items: center; justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-green);
+            padding: 40px 30px;
+            border-radius: 30px;
+            width: 85%; max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--neon-green);
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .footer-link { color: var(--neon-green); text-decoration: none; font-weight: bold; }
+        .badge-item { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; margin: 0 5px; }
+    </style>
+</head>
+
+<body>
+<div class="bg-glow"></div>
+
+<header>
+    <h1>Avaliação de Empresas e Fornecedores no Google</h1>
+    <p class="subtitle">Veja avaliações reais de clientes e ajude outras pessoas a escolher melhor.</p>
+    <a href="https://wa.me/5511954950044" target="_blank" class="cta-main">QUERO MEU LINK DE AVALIAÇÃO 🚀</a>
+</header>
+
+<main>
+    <div class="container" id="clientesContainer"></div>
+
+    <section style="max-width:600px; width:100%; margin-bottom:60px;">
+        <h2 style="color:#fff; text-align:center;">Perguntas Frequentes</h2>
+
+        <div class="faq-item">
+            <button class="faq-question">Como a ImpulsoWeb10 pode ajudar?</button>
+            <div class="faq-answer"><p>Aumenta sua visibilidade no Google com avaliações reais.</p></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Por que avaliações são importantes?</button>
+            <div class="faq-answer"><p>Geram confiança e melhor posicionamento.</p></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Como funciona?</button>
+            <div class="faq-answer"><p>Você recebe um link personalizado.</p></div>
+        </div>
+    </section>
+</main>
+
+<div id="modalInfo" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="modalData"></div>
     </div>
-  `;
+</div>
 
-  window.avaliar = function(nota) {
-    track("avaliacao", { cliente: nome, estrelas: nota });
+<footer>
+    <div style="margin-bottom: 20px;">
+        <span class="badge-item">🔒 SSL Certificado</span>
+        <span class="badge-item">🛡️ Ambiente Seguro</span>
+    </div>
+    <p>© 2026 Desenvolvido por 
+        <a href="https://wa.me/5511954950044" target="_blank" class="footer-link">ImpulsoWeb10</a>
+    </p>
+</footer>
 
-    const acoes = document.getElementById("acoes");
-
-    if (nota <= 3) {
-      acoes.innerHTML = `
-        <p>😕 Vamos resolver isso</p>
-        <button onclick="abrirWhats()" style="padding:12px; background:#25D366; color:#fff; border:none; border-radius:8px;">
-          Falar no WhatsApp
-        </button>
-      `;
-    } else {
-      acoes.innerHTML = `
-        <p>😍 Nos avalie no Google</p>
-        <button onclick="abrirGoogle()" style="padding:12px; background:#4285F4; color:#fff; border:none; border-radius:8px;">
-          Avaliar no Google
-        </button>
-      `;
-    }
-  };
-
-  window.abrirWhats = function() {
-    track("clique_whatsapp_cliente", { cliente: nome });
-    window.open(`https://wa.me/${whats}`, '_blank');
-  };
-
-  window.abrirGoogle = function() {
-    track("clique_google_review", { cliente: nome });
-    window.open(google, '_blank');
-  };
-
-}
-
-// ==========================
-// MODO PORTFÓLIO (SEU ORIGINAL)
-// ==========================
-if (!clienteParam) {
-
+<script src="clientes.js?v=2"></script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
-
     const container = document.getElementById("clientesContainer");
     const modal = document.getElementById("modalInfo");
     const modalData = document.getElementById("modalData");
     const closeBtn = document.querySelector(".close-modal");
 
-    if (typeof clientes !== 'undefined') {
-        clientes.forEach(cliente => {
-            const card = document.createElement("article");
-            card.className = "card";
+    clientes.forEach(cliente => {
+        const card = document.createElement("article");
+        card.className = "card";
 
-            card.innerHTML = `
-                <img src="${cliente.pasta}/${cliente.logo}">
-                <h3>${cliente.nome}</h3>
-                <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+        card.innerHTML = `
+            <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
+            <h3>${cliente.nome}</h3>
+            <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+        `;
+
+        card.addEventListener("click", (e) => {
+            if (e.target.classList.contains('btn-avaliar')) return;
+
+            modalData.innerHTML = `
+                <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
+                <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
+                <br>
+                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
             `;
 
-            card.addEventListener("click", (e) => {
-                if (e.target.classList.contains('btn-avaliar')) return;
-
-                modalData.innerHTML = `
-                    <h2 style="color:#38e391;">${cliente.nome}</h2>
-                    <p>${cliente.descricao || ''}</p>
-                    <a href="${cliente.pasta}/" class="cta-main">AVALIAR</a>
-                `;
-                modal.style.display = "flex";
-            });
-
-            container.appendChild(card);
+            modal.style.display = "flex";
         });
-    }
+
+        container.appendChild(card);
+    });
 
     closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
 
+    // SANFONA
     document.querySelectorAll(".faq-question").forEach(btn => {
         btn.addEventListener("click", () => {
             const answer = btn.nextElementSibling;
-            const span = btn.querySelector("span");
 
             document.querySelectorAll(".faq-answer").forEach(a => {
-                if (a !== answer) {
-                    a.style.maxHeight = null;
-                    a.previousElementSibling.querySelector("span").innerText = "+";
-                }
+                if (a !== answer) a.style.maxHeight = null;
             });
 
-            if (answer.style.maxHeight) {
-                answer.style.maxHeight = null;
-                span.innerText = "+";
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                span.innerText = "-";
-            }
+            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
         });
     });
-
 });
-}
 </script>
+</body>
+</html>
