@@ -9,14 +9,20 @@
     body { font-family: 'Segoe UI', Arial, sans-serif; background: #050707; color: #fff; text-align: center; padding: 20px; }
     .card { background: #0d1212; padding: 30px; border-radius: 20px; max-width: 450px; margin: auto; border: 1px solid #1a2222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     h2 { color: #38e391; margin-bottom: 20px; }
-    label { display: block; text-align: left; font-size: 12px; color: #a0a8a8; margin-top: 10px; }
-    input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #1a2222; background: #050707; color: #fff; box-sizing: border-box; }
+    label { display: block; text-align: left; font-size: 11px; color: #a0a8a8; margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #1a2222; background: #050707; color: #fff; box-sizing: border-box; font-family: inherit; }
+    textarea { height: 60px; resize: none; }
     button { width: 100%; padding: 14px; margin-top: 15px; border: none; border-radius: 8px; background: #38e391; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
     button:hover { background: #2dbd79; transform: translateY(-2px); }
-    .copy-btn { background: #1a2222; color: #38e391; border: 1px solid #38e391; margin-top: 10px; font-size: 14px; }
-    #resultado, #codigoGithub { background: #000; padding: 10px; border-radius: 6px; font-size: 13px; color: #38e391; word-break: break-all; margin-top: 10px; border: 1px dashed #38e391; display: none; }
-    #qrcode { margin-top: 20px; display: flex; justify-content: center; background: #fff; padding: 10px; border-radius: 10px; display: none; margin-left: auto; margin-right: auto; width: fit-content; }
-    .section-title { font-size: 11px; color: #a0a8a8; text-transform: uppercase; margin-top: 20px; display: block; }
+    .copy-btn { background: #1a2222; color: #38e391; border: 1px solid #38e391; margin-top: 8px; font-size: 13px; padding: 8px; }
+    
+    #resultado, #codigoGithub, #codigoJS { 
+        background: #000; padding: 12px; border-radius: 6px; font-size: 12px; color: #38e391; 
+        word-break: break-all; margin-top: 10px; border: 1px dashed #38e391; display: none; text-align: left; white-space: pre-wrap;
+    }
+
+    #qrcode { margin-top: 20px; display: none; justify-content: center; background: #fff; padding: 10px; border-radius: 10px; margin-left: auto; margin-right: auto; width: fit-content; }
+    .section-title { font-size: 11px; color: #38e391; text-transform: uppercase; margin-top: 25px; display: block; font-weight: bold; }
 </style>
 </head>
 <body>
@@ -24,24 +30,34 @@
 <div class="card">
     <h2>Painel ImpulsoWeb10</h2>
 
-    <label>NOME DA PASTA (Sem espaços ou acentos)</label>
+    <label>Nome da Empresa (Exibição)</label>
+    <input id="nomeCliente" placeholder="Ex: Óptica Lionda">
+
+    <label>Nome da Pasta (Slug)</label>
     <input id="slug" placeholder="ex: opticalionda" oninput="atualizarPreview()">
     
-    <label>LINK DO GOOGLE MAPS (Avaliação)</label>
-    <input id="google" placeholder="Cole o link longo aqui">
+    <label>Descrição Curta</label>
+    <textarea id="descCliente" placeholder="Breve resumo sobre a empresa..."></textarea>
+
+    <label>Link de Avaliação (Google Maps)</label>
+    <input id="google" placeholder="Cole o link do Google aqui">
 
     <button onclick="gerar()">GERAR SISTEMA 2 EM 1</button>
 
     <div id="areaResultados">
-        <span class="section-title">1. Link Curto para o Cliente:</span>
+        <span class="section-title">1. Link Curto (Para o Cliente):</span>
         <p id="resultado"></p>
         <button class="copy-btn" onclick="copiar('resultado')">Copiar Link Curto</button>
 
-        <span class="section-title">2. Código para o GitHub (index.html):</span>
+        <span class="section-title">2. Código p/ GitHub (Dentro da Pasta):</span>
         <p id="codigoGithub"></p>
-        <button class="copy-btn" onclick="copiar('codigoGithub')">Copiar Código p/ Pasta</button>
+        <button class="copy-btn" onclick="copiar('codigoGithub')">Copiar Código index.html</button>
 
-        <span class="section-title">3. QR Code:</span>
+        <span class="section-title">3. Bloco para clientes.js (Vitrine):</span>
+        <p id="codigoJS"></p>
+        <button class="copy-btn" onclick="copiar('codigoJS')">Copiar Bloco JS</button>
+
+        <span class="section-title">4. QR Code:</span>
         <div id="qrcode"></div>
     </div>
 </div>
@@ -51,45 +67,59 @@
 <script>
 let linkFinal = "";
 let scriptFinal = "";
+let jsFinal = "";
 
 function gerar() {
-    let slug = document.getElementById("slug").value.trim().toLowerCase().replace(/\s+/g, '-');
+    let nome = document.getElementById("nomeCliente").value.trim();
+    let slug = document.getElementById("slug").value.trim().toLowerCase();
+    let desc = document.getElementById("descCliente").value.trim();
     let google = document.getElementById("google").value.trim();
 
-    if(!slug || !google) return alert("Preencha a pasta e o link do Google!");
+    if(!nome || !slug || !google) return alert("Por favor, preencha o Nome, a Pasta e o Link do Google!");
 
-    // 1. Gera o Link Curto Limpo
-    linkFinal = `${window.location.origin}/${slug}`;
+    // 1. Link para o cliente enviar
+    linkFinal = `https://avaliar.impulsoweb10.com.br/${slug}`;
     
-    // 2. Gera o Script de Redirecionamento para você colar no GitHub
+    // 2. Script para colocar no index.html da pasta nova
     scriptFinal = `<script>window.location.href="${google}";<\/script>`;
 
-    // Mostrar resultados
+    // 3. Bloco para colar no arquivo clientes.js
+    jsFinal = `{ 
+    nome: "${nome}", 
+    pasta: "${slug}", 
+    logo: "logo.png", 
+    descricao: "${desc || 'Referência em qualidade e atendimento.'}" 
+},`;
+
+    // Exibir na tela
     document.getElementById("resultado").innerText = linkFinal;
     document.getElementById("resultado").style.display = "block";
     
     document.getElementById("codigoGithub").innerText = scriptFinal;
     document.getElementById("codigoGithub").style.display = "block";
 
-    // QR Code
+    document.getElementById("codigoJS").innerText = jsFinal;
+    document.getElementById("codigoJS").style.display = "block";
+
+    // Gerar QR Code
     document.getElementById("qrcode").innerHTML = "";
     document.getElementById("qrcode").style.display = "flex";
     new QRCode(document.getElementById("qrcode"), {
         text: linkFinal,
-        width: 150,
-        height: 150
+        width: 140,
+        height: 140
     });
 }
 
 function copiar(id) {
     let texto = document.getElementById(id).innerText;
     navigator.clipboard.writeText(texto);
-    alert("Copiado com sucesso!");
+    alert("Copiado!");
 }
 
 function atualizarPreview() {
     let input = document.getElementById("slug");
-    input.value = input.value.toLowerCase().replace(/\s+/g, '-');
+    input.value = input.value.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 </script>
 
