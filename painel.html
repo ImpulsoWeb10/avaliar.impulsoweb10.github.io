@@ -3,100 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Gerador de Links - ImpulsoWeb10</title>
 
 <style>
-body {
-  font-family: Arial;
-  background: #f5f5f5;
-  text-align: center;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 6px;
-  background: #4facfe;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.copy {
-  background: #25D366;
-}
-
-#qrcode {
-  margin-top: 15px;
-}
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #050707; color: #fff; text-align: center; padding: 20px; }
+    .card { background: #0d1212; padding: 30px; border-radius: 20px; max-width: 450px; margin: auto; border: 1px solid #1a2222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    h2 { color: #38e391; margin-bottom: 20px; }
+    label { display: block; text-align: left; font-size: 12px; color: #a0a8a8; margin-top: 10px; }
+    input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #1a2222; background: #050707; color: #fff; box-sizing: border-box; }
+    button { width: 100%; padding: 14px; margin-top: 15px; border: none; border-radius: 8px; background: #38e391; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #2dbd79; transform: translateY(-2px); }
+    .copy-btn { background: #1a2222; color: #38e391; border: 1px solid #38e391; margin-top: 10px; font-size: 14px; }
+    #resultado, #codigoGithub { background: #000; padding: 10px; border-radius: 6px; font-size: 13px; color: #38e391; word-break: break-all; margin-top: 10px; border: 1px dashed #38e391; display: none; }
+    #qrcode { margin-top: 20px; display: flex; justify-content: center; background: #fff; padding: 10px; border-radius: 10px; display: none; margin-left: auto; margin-right: auto; width: fit-content; }
+    .section-title { font-size: 11px; color: #a0a8a8; text-transform: uppercase; margin-top: 20px; display: block; }
 </style>
-
 </head>
 <body>
 
 <div class="card">
+    <h2>Painel ImpulsoWeb10</h2>
 
-<h2>Gerar Link do Cliente</h2>
+    <label>NOME DA PASTA (Sem espaços ou acentos)</label>
+    <input id="slug" placeholder="ex: opticalionda" oninput="atualizarPreview()">
+    
+    <label>LINK DO GOOGLE MAPS (Avaliação)</label>
+    <input id="google" placeholder="Cole o link longo aqui">
 
-<input id="nome" placeholder="Nome cliente">
-<input id="whats" placeholder="WhatsApp (somente números)">
-<input id="google" placeholder="Link Google">
+    <button onclick="gerar()">GERAR SISTEMA 2 EM 1</button>
 
-<button onclick="gerar()">Gerar Link</button>
+    <div id="areaResultados">
+        <span class="section-title">1. Link Curto para o Cliente:</span>
+        <p id="resultado"></p>
+        <button class="copy-btn" onclick="copiar('resultado')">Copiar Link Curto</button>
 
-<p id="resultado"></p>
+        <span class="section-title">2. Código para o GitHub (index.html):</span>
+        <p id="codigoGithub"></p>
+        <button class="copy-btn" onclick="copiar('codigoGithub')">Copiar Código p/ Pasta</button>
 
-<button class="copy" onclick="copiar()">Copiar Link</button>
-
-<div id="qrcode"></div>
-
+        <span class="section-title">3. QR Code:</span>
+        <div id="qrcode"></div>
+    </div>
 </div>
 
-<!-- QR CODE LIB -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-let linkGerado = "";
+let linkFinal = "";
+let scriptFinal = "";
 
 function gerar() {
-  let nome = document.getElementById("nome").value;
-  let whats = document.getElementById("whats").value;
-  let google = document.getElementById("google").value;
+    let slug = document.getElementById("slug").value.trim().toLowerCase().replace(/\s+/g, '-');
+    let google = document.getElementById("google").value.trim();
 
-  linkGerado = `${window.location.origin}/index.html?cliente=${nome}&whats=${whats}&google=${encodeURIComponent(google)}`;
+    if(!slug || !google) return alert("Preencha a pasta e o link do Google!");
 
-  document.getElementById("resultado").innerText = linkGerado;
+    // 1. Gera o Link Curto Limpo
+    linkFinal = `${window.location.origin}/${slug}`;
+    
+    // 2. Gera o Script de Redirecionamento para você colar no GitHub
+    scriptFinal = `<script>window.location.href="${google}";<\/script>`;
 
-  document.getElementById("qrcode").innerHTML = "";
-  new QRCode(document.getElementById("qrcode"), linkGerado);
+    // Mostrar resultados
+    document.getElementById("resultado").innerText = linkFinal;
+    document.getElementById("resultado").style.display = "block";
+    
+    document.getElementById("codigoGithub").innerText = scriptFinal;
+    document.getElementById("codigoGithub").style.display = "block";
+
+    // QR Code
+    document.getElementById("qrcode").innerHTML = "";
+    document.getElementById("qrcode").style.display = "flex";
+    new QRCode(document.getElementById("qrcode"), {
+        text: linkFinal,
+        width: 150,
+        height: 150
+    });
 }
 
-function copiar() {
-  if (!linkGerado) return alert("Gere um link primeiro");
+function copiar(id) {
+    let texto = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(texto);
+    alert("Copiado com sucesso!");
+}
 
-  navigator.clipboard.writeText(linkGerado);
-  alert("Link copiado!");
+function atualizarPreview() {
+    let input = document.getElementById("slug");
+    input.value = input.value.toLowerCase().replace(/\s+/g, '-');
 }
 </script>
 
