@@ -1,34 +1,85 @@
-<div class="card">
-    <h2>Gerador ImpulsoWeb10</h2>
-    
-    <label>ESCOLHA O DESIGN (MODELO)</label>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle | ImpulsoWeb10</title>
+    <style>
+        :root { --primary: #2dbd79; --bg: #f0f4f8; --card-bg: #ffffff; --text: #2d3436; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; }
+        .container { max-width: 500px; margin: auto; background: var(--card-bg); padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary); margin-top: 0; font-weight: 800; letter-spacing: -1px; }
+        p { font-size: 14px; color: #636e72; margin-bottom: 25px; }
+        
+        label { display: block; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #b2bec3; margin-top: 15px; letter-spacing: 1px; }
+        input, select { width: 100%; padding: 14px; margin-top: 5px; border-radius: 12px; border: 1px solid #dfe6e9; background: #fff; box-sizing: border-box; font-size: 15px; transition: 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(45, 189, 121, 0.1); }
+        
+        button { width: 100%; padding: 16px; background: var(--primary); color: white; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; margin-top: 25px; font-size: 16px; box-shadow: 0 8px 20px rgba(45, 189, 121, 0.2); transition: 0.3s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(45, 189, 121, 0.3); }
+
+        .result-box { display: none; margin-top: 30px; text-align: left; border-top: 2px solid #f1f2f6; pt: 20px; }
+        .link-display { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 12px; color: #2d3436; border: 1px dashed var(--primary); word-break: break-all; margin: 10px 0; }
+        .copy-btn { background: #636e72; margin-top: 5px; padding: 10px; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ImpulsoWeb10</h2>
+    <p>Gere links dinâmicos e profissionais para seus clientes em segundos.</p>
+
+    <label>Estilo do Cartão</label>
     <select id="modelo">
-        <option value="1">Modelo 1 - Dark Neon (Padrão)</option>
-        <option value="2">Modelo 2 - Clean White (Claro)</option>
-        <option value="3">Modelo 3 - Blue Corporate (Azul)</option>
+        <option value="dark">Modelo Dark Neon (Elegante)</option>
+        <option value="light">Modelo Light Clean (Minimalista)</option>
+        <option value="blue">Modelo Blue Tech (Corporativo)</option>
     </select>
 
-    <label>NOME DA EMPRESA</label>
+    <label>Nome da Empresa</label>
     <input id="nome" placeholder="Ex: Óptica Lionda">
-    
-    <label>LINK GOOGLE (AVALIAÇÃO)</label>
-    <input id="google" placeholder="Cole o link aqui">
 
-    <button onclick="gerarLinkMágico()">GERAR LINK DO CLIENTE</button>
-    <p id="linkFinal" style="display:none;"></p>
+    <label>WhatsApp (com DDD)</label>
+    <input id="whats" placeholder="Ex: 5511954950044">
+
+    <label>Link de Avaliação Google</label>
+    <input id="google" placeholder="Cole o link longo do Maps aqui">
+
+    <button onclick="gerarLink()">GERAR LINK DO CLIENTE</button>
+
+    <div id="result-box" class="result-box">
+        <label>1. Link Dinâmico (Para o redirecionador):</label>
+        <div id="linkFinal" class="link-display"></div>
+        <button class="copy-btn" onclick="copiar('linkFinal')">Copiar Link Mágico</button>
+
+        <label>2. Código p/ Pasta no GitHub (index.html):</label>
+        <div id="codigoPasta" class="link-display"></div>
+        <button class="copy-btn" onclick="copiar('codigoPasta')">Copiar Código p/ Pasta</button>
+    </div>
 </div>
 
 <script>
-function gerarLinkMágico() {
-    const mod = document.getElementById('modelo').value;
-    const nome = encodeURIComponent(document.getElementById('nome').value);
-    const google = btoa(document.getElementById('google').value);
-    // ... pega whats e insta ...
+function gerarLink() {
+    const m = document.getElementById('modelo').value;
+    const n = encodeURIComponent(document.getElementById('nome').value);
+    const w = document.getElementById('whats').value;
+    const g = btoa(document.getElementById('google').value); // Codifica link longo
 
-    // O link agora leva o ID do modelo (?m=1, ?m=2...)
-    const link = `${window.location.origin}/v.html?m=${mod}&n=${nome}&g=${google}`;
-    
-    document.getElementById('linkFinal').innerText = link;
-    document.getElementById('linkFinal').style.display = 'block';
+    // Link Mágico (Dinâmico)
+    const baseUrl = window.location.origin + "/v.html";
+    const linkMagico = `${baseUrl}?m=${m}&n=${n}&w=${w}&g=${g}`;
+
+    // Mostra Resultados
+    document.getElementById('linkFinal').innerText = linkMagico;
+    document.getElementById('codigoPasta').innerText = `<script>window.location.href="${linkMagico}";<\/script>`;
+    document.getElementById('result-box').style.display = 'block';
+}
+
+function copiar(id) {
+    navigator.clipboard.writeText(document.getElementById(id).innerText);
+    alert("Copiado!");
 }
 </script>
+
+</body>
+</html>
