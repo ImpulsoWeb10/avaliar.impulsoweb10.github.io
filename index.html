@@ -5,21 +5,18 @@
     <meta name="google-site-verification" content="H0X_Y32S7UtBxajFIRBsI01P5COkoMmY9bC-Pm-4u7w" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO FORTE -->
     <title>Avaliar Empresas e Fornecedores | ImpulsoWeb10</title>
     <meta name="description" content="Avalie empresas e fornecedores. Veja avaliações reais de clientes e aumente sua reputação no Google com a ImpulsoWeb10.">
     <meta name="keywords" content="avaliar empresas, avaliação de fornecedores, reputação google, avaliações google maps">
     <meta name="author" content="ImpulsoWeb10">
     <meta name="robots" content="index, follow">
 
-    <!-- OPEN GRAPH -->
     <meta property="og:title" content="Central de Avaliações - ImpulsoWeb10">
     <meta property="og:description" content="Veja avaliações reais e fortaleça sua reputação no Google.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/">
     <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/imagem-preview.jpg">
 
-    <!-- GOOGLE ANALYTICS -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -245,10 +242,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = document.createElement("article");
         card.className = "card";
 
+        // Ajuste aqui: link dinâmico sem o .html (usando a pasta/slug)
+        const linkDestino = `${cliente.slug}/`;
+
         card.innerHTML = `
-            <img src="${cliente.pasta}/${cliente.logo}" alt="Avaliar ${cliente.nome}">
+            <img src="${cliente.logo}" alt="Avaliar ${cliente.nome}">
             <h3>${cliente.nome}</h3>
-            <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
+            <a href="${linkDestino}" class="btn-avaliar">Avaliar Agora ⭐</a>
         `;
 
         card.addEventListener("click", (e) => {
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
                 <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
                 <br>
-                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
+                <a href="${linkDestino}" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
             `;
 
             modal.style.display = "flex";
