@@ -1,5 +1,3 @@
-<!-- MANTÉM TODO SEU HTML EXATAMENTE IGUAL ACIMA -->
-
 <script src="clientes.js?v=2"></script>
 
 <script>
@@ -13,7 +11,7 @@ function getParam(nome){
 const clienteParam = getParam("cliente");
 
 // ==========================
-// TRACK (ANALYTICS)
+// ANALYTICS
 // ==========================
 function track(evento, dados = {}){
   try{
@@ -24,12 +22,12 @@ function track(evento, dados = {}){
 }
 
 // ==========================
-// TUDO RODA DEPOIS QUE CARREGAR
-// ==========================
 document.addEventListener("DOMContentLoaded", function () {
 
+try {
+
 // ==========================
-// 🔥 MODO CLIENTE (SEM QUEBRAR LAYOUT)
+// 🔥 MODO CLIENTE (SEGURO)
 // ==========================
 if(clienteParam){
 
@@ -40,18 +38,13 @@ if(clienteParam){
 
   track("pagina_cliente_aberta", { cliente: nome });
 
-  // REMOVE APENAS A LISTA (não mexe no resto)
-  const container = document.getElementById("clientesContainer");
-  if(container) container.innerHTML = "";
-
-  // ALTERA APENAS O CONTEÚDO CENTRAL
   const main = document.querySelector("main");
 
   if(main){
     main.innerHTML = `
-      <div style="text-align:center; max-width:600px; width:100%; margin:auto;">
+      <div style="text-align:center; max-width:600px; margin:auto;">
 
-        ${logo ? `<img src="${logo}" style="max-height:70px; margin-bottom:15px;">` : ""}
+        ${logo ? `<img src="${logo}" style="max-height:70px;margin-bottom:15px;">` : ""}
 
         <h2 style="color:#fff;">${nome}</h2>
         <p class="subtitle">Como foi sua experiência?</p>
@@ -70,51 +63,51 @@ if(clienteParam){
     `;
   }
 
-  // FUNÇÕES
   window.avaliar = function(nota){
     track("avaliacao", { cliente: nome, estrelas: nota });
 
     const acoes = document.getElementById("acoes");
+    if(!acoes) return;
 
     if(nota <= 3){
-      acoes.innerHTML = `
-        <a class="cta-main" onclick="abrirWhats()">Falar no WhatsApp</a>
-      `;
+      acoes.innerHTML = `<a class="cta-main" onclick="abrirWhats()">WhatsApp</a>`;
     } else {
-      acoes.innerHTML = `
-        <a class="cta-main" onclick="abrirGoogle()">Avaliar no Google</a>
-      `;
+      acoes.innerHTML = `<a class="cta-main" onclick="abrirGoogle()">Google</a>`;
     }
   };
 
   window.abrirWhats = function(){
     track("clique_whatsapp", { cliente: nome });
-    window.open(`https://wa.me/${whats}`, '_blank');
+    if(whats) window.open(`https://wa.me/${whats}`, '_blank');
   };
 
   window.abrirGoogle = function(){
     track("clique_google", { cliente: nome });
-    window.open(google, '_blank');
+    if(google) window.open(google, '_blank');
   };
 
   return;
 }
 
 // ==========================
-// 🟢 SEU PORTFÓLIO NORMAL
+// 🟢 PORTFÓLIO (SEGURO)
 // ==========================
 const container = document.getElementById("clientesContainer");
 const modal = document.getElementById("modalInfo");
 const modalData = document.getElementById("modalData");
 const closeBtn = document.querySelector(".close-modal");
 
-// TRACK BOTÃO PRINCIPAL
-document.querySelector(".cta-main")?.addEventListener("click", () => {
-  track("clique_header");
-});
+// BOTÃO HEADER
+const btnHeader = document.querySelector(".cta-main");
+if(btnHeader){
+  btnHeader.addEventListener("click", () => track("clique_header"));
+}
 
-if (typeof clientes !== 'undefined') {
+// 👇 AQUI EVITA O ERRO PRINCIPAL
+if (typeof clientes !== 'undefined' && container) {
+
     clientes.forEach(cliente => {
+
         const card = document.createElement("article");
         card.className = "card";
 
@@ -124,24 +117,26 @@ if (typeof clientes !== 'undefined') {
             <a href="${cliente.pasta}/" class="btn-avaliar">Avaliar Agora ⭐</a>
         `;
 
-        // TRACK BOTÃO
-        card.querySelector(".btn-avaliar").addEventListener("click", () => {
-            track("clique_avaliar", { cliente: cliente.nome });
-        });
+        const btn = card.querySelector(".btn-avaliar");
+
+        if(btn){
+          btn.addEventListener("click", () => {
+              track("clique_avaliar", { cliente: cliente.nome });
+          });
+        }
 
         card.addEventListener("click", (e) => {
             if (e.target.classList.contains('btn-avaliar')) return;
 
-            track("abrir_modal", { cliente: cliente.nome });
-
-            modalData.innerHTML = `
-                <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
-                <p style="color:#fff;">${cliente.descricao || 'Empresa de alta qualidade.'}</p>
-                <br>
-                <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
-            `;
-
-            modal.style.display = "flex";
+            if(modal && modalData){
+              modalData.innerHTML = `
+                  <h2 style="color: var(--neon-green);">${cliente.nome}</h2>
+                  <p style="color:#fff;">${cliente.descricao || ''}</p>
+                  <br>
+                  <a href="${cliente.pasta}/" class="cta-main" style="font-size:12px;">Avaliar Agora</a>
+              `;
+              modal.style.display = "flex";
+            }
         });
 
         container.appendChild(card);
@@ -149,7 +144,7 @@ if (typeof clientes !== 'undefined') {
 }
 
 // FECHAR MODAL
-if(closeBtn){
+if(closeBtn && modal){
   closeBtn.onclick = () => modal.style.display = "none";
 }
 
@@ -169,6 +164,10 @@ document.querySelectorAll(".faq-question").forEach(btn => {
         answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
     });
 });
+
+} catch(err){
+  console.error("ERRO DETECTADO:", err);
+}
 
 });
 </script>
