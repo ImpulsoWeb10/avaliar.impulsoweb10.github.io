@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel ImpulsoWeb10 | Gerador Tanque de Guerra</title>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
         :root { --primary: #22c55e; --bg: #f1f5f9; --accent: #4f46e5; --text: #1e293b; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin: 0; }
@@ -33,7 +31,6 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="header">
         <h2>🚀 Gerador Tanque de Guerra</h2>
@@ -103,17 +100,10 @@
             <div id="qrcode"></div>
             <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px; font-size: 16px;"></p>
         </div>
-
         <div>
             <button class="btn-copy" onclick="copy('codeIndex')">COPIAR</button>
             <label>1. Código para o index.html (Pasta do Cliente)</label>
             <div id="codeIndex" class="code-box"></div>
-        </div>
-
-        <div>
-            <button class="btn-copy" onclick="copy('codeJS')">COPIAR</button>
-            <label>2. Código para o clientes.js (Sua Vitrine)</label>
-            <div id="codeJS" class="code-box"></div>
         </div>
     </div>
 </div>
@@ -143,8 +133,6 @@ function gerarTudo() {
 
     const baseUrl = window.location.origin;
     const gBase64 = btoa(d.gRaw);
-    
-    // LINK MÁGICO COM "TIMESTAMP" PARA FORÇAR ATUALIZAÇÃO DE CACHE (&v=)
     const linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&e=${encodeURIComponent(d.e)}&w=${d.w}&g=${gBase64}&ig=${d.ig}`;
     const urlFinal = `${baseUrl}/${d.slug}`;
 
@@ -160,12 +148,6 @@ function gerarTudo() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliar ${d.n} | Oficial</title>
     <link rel="icon" type="image/png" href="${d.l}">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=${d.ga}"><\/script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date()); gtag('config', '${d.ga}');
-    <\/script>
     <script>setTimeout(function(){ window.location.href = "${linkMagico}"; }, 500);<\/script>
 </head>
 <body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;text-align:center;">
@@ -179,9 +161,7 @@ function gerarTudo() {
 </html>`;
 
     document.getElementById('codeIndex').innerText = htmlTanque;
-    document.getElementById('codeJS').innerText = `{ nome: "${d.n}", slug: "${d.slug}", logo: "${d.l}", tema: "${d.t}" },`;
     document.getElementById('result-area').style.display = 'block';
-    window.scrollTo({ top: document.getElementById('result-area').offsetTop, behavior: 'smooth' });
 }
 
 function copy(id) {
