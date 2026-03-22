@@ -9,19 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
+        :root { --accent: #22c55e; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; transition: 0.5s; }
-        .container { max-width: 400px; width: 100%; padding: 30px; border-radius: 35px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); transition: 0.5s; }
-        .logo { width: 120px; height: 120px; object-fit: contain; border-radius: 20px; border: 3px solid var(--accent); background: white; margin: 0 auto 15px; display: block; }
-        h1 { font-size: 22px; margin-bottom: 5px; }
-        h2 { font-size: 14px; color: var(--accent); margin-bottom: 25px; opacity: 0.9; }
-        .star-btn { font-size: 40px; color: #475569; cursor: pointer; transition: 0.3s; margin: 0 4px; }
+        body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; transition: 0.5s; background: #f1f5f9; }
+        .container { max-width: 400px; width: 100%; padding: 40px 30px; border-radius: 40px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); transition: 0.5s; background: #fff; }
+        .logo { width: 110px; height: 110px; object-fit: cover; border-radius: 25px; border: 3px solid var(--accent); background: white; margin: 0 auto 15px; display: block; }
+        h1 { font-size: 24px; margin-bottom: 5px; font-weight: 700; }
+        h2 { font-size: 14px; color: var(--accent); margin-bottom: 25px; font-weight: 700; text-transform: uppercase; }
+        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: 0.3s; margin: 0 4px; }
         .star-btn.active { color: var(--accent); transform: scale(1.1); }
-        .botao { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 15px; font-size: 14px; border: none; cursor: pointer; }
+        .botao { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 15px; font-size: 15px; border: none; cursor: pointer; }
         .google { background: var(--accent); color: #000; }
         .whatsapp { background: #22c55e; color: white; }
         .hidden { display: none; }
-        textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; color: inherit; padding: 12px; margin-top: 15px; outline: none; }
+        textarea { width: 100%; background: rgba(150,150,150,0.1); border: 1px solid rgba(150,150,150,0.2); border-radius: 15px; color: inherit; padding: 15px; margin-top: 15px; outline: none; font-family: inherit; }
     </style>
 </head>
 <body>
@@ -43,54 +44,61 @@
     </div>
 
     <div id="feedback-bom" class="hidden">
-        <p>Ficamos muito felizes! 🎉</p>
+        <p style="font-weight: 700; margin-bottom: 10px;">Ficamos muito felizes! 🎉</p>
         <a id="linkG" href="#" target="_blank" class="botao google"><i class="fab fa-google"></i> AVALIAR NO GOOGLE</a>
     </div>
 
     <div id="feedback-ruim" class="hidden">
-        <p>Sentimos muito. Como podemos melhorar?</p>
-        <textarea id="msg" rows="3"></textarea>
+        <p style="font-weight: 700;">Sentimos muito. Como podemos melhorar?</p>
+        <textarea id="msg" rows="3" placeholder="Sua mensagem..."></textarea>
         <button onclick="irWhats()" class="botao whatsapp"><i class="fab fa-whatsapp"></i> FALAR COM GERENTE</button>
     </div>
 </div>
 
 <script>
-    const p = new URLSearchParams(window.location.search);
-    const tema = p.get('t') || '1';
+    const urlP = new URLSearchParams(window.location.search);
+    const tId = urlP.get('t') || '2';
 
-    // CORES DOS TEMAS
-    const estilos = {
-        '1': { bg: '#0f172a', card: '#1e293b', text: '#ffffff', accent: '#facc15' }, // Dark
-        '2': { bg: '#f1f5f9', card: '#ffffff', text: '#1e293b', accent: '#22c55e' }, // Clean
-        '3': { bg: '#000000', card: '#111111', text: '#ffffff', accent: '#d4af37' }  // Luxury
+    const temas = {
+        '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' },
+        '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' },
+        '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' }
     };
 
-    const s = estilos[tema];
-    document.body.style.backgroundColor = s.bg;
-    document.getElementById('box').style.backgroundColor = s.card;
-    document.getElementById('box').style.color = s.text;
-    document.documentElement.style.setProperty('--accent', s.accent);
+    const sel = temas[tId] || temas['2'];
 
-    // DADOS DO CLIENTE
-    document.getElementById('nome').innerText = p.get('n') || 'Empresa';
-    document.getElementById('sub').innerText = p.get('s') || '';
-    document.getElementById('imgLogo').src = p.get('l') || 'logo.png';
-    document.getElementById('linkG').href = atob(p.get('g') || '');
+    // Aplicação Direta e Forçada
+    document.body.style.background = sel.b;
+    document.getElementById('box').style.background = sel.c;
+    document.getElementById('box').style.color = sel.t;
+    document.documentElement.style.setProperty('--accent', sel.a);
+
+    document.getElementById('nome').innerText = urlP.get('n') || 'Empresa';
+    document.getElementById('sub').innerText = urlP.get('s') || '';
+    document.getElementById('imgLogo').src = urlP.get('l') || 'logo.png';
+    
+    try {
+        const decodedG = atob(urlP.get('g'));
+        document.getElementById('linkG').href = decodedG;
+    } catch(e) { console.error("Erro link"); }
 
     function votar(n) {
         document.querySelectorAll('.star-btn').forEach((el, i) => i < n ? el.classList.add('active') : el.classList.remove('active'));
-        document.getElementById('etapa1').classList.add('hidden');
-        if(n >= 4) {
-            document.getElementById('feedback-bom').classList.remove('hidden');
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
-        } else {
-            document.getElementById('feedback-ruim').classList.remove('hidden');
-        }
+        setTimeout(() => {
+            document.getElementById('etapa1').classList.add('hidden');
+            if(n >= 4) {
+                document.getElementById('feedback-bom').classList.remove('hidden');
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+            } else {
+                document.getElementById('feedback-ruim').classList.remove('hidden');
+            }
+        }, 300);
     }
 
     function irWhats() {
         const m = document.getElementById('msg').value;
-        window.open(`https://wa.me/${p.get('w')}?text=Feedback: ${m}`, '_blank');
+        const w = urlP.get('w');
+        window.open(`https://wa.me/${w}?text=Feedback: ${encodeURIComponent(m)}`, '_blank');
     }
 </script>
 </body>
