@@ -3,158 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel ImpulsoWeb10 | Gerador Pro</title>
+    <title>Painel SEO Pro | ImpulsoWeb10</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #22c55e; --bg: #f8fafc; --text: #1e293b; }
-        body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 700px; margin: 20px auto; background: #fff; padding: 35px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        h2 { color: var(--primary); text-align: center; margin-bottom: 25px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin: 12px 0 5px; }
-        input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; background: #fdfdfd; box-sizing: border-box; font-family: inherit; }
-        button { width: 100%; padding: 18px; background: var(--primary); color: white; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-size: 16px; transition: 0.3s; }
-        button:hover { transform: scale(1.01); background: #16a34a; }
-
-        .result-area { display: none; margin-top: 35px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
-        .output-group { margin-bottom: 25px; }
-        .code-box { background: #f1f5f9; padding: 15px; border-radius: 12px; font-size: 11px; color: #475569; border: 1px dashed var(--primary); word-break: break-all; margin-top: 5px; line-height: 1.4; }
-        .btn-copy { background: #334155; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 11px; cursor: pointer; margin-top: 8px; float: right; }
+        :root { --primary: #22c55e; --bg: #f1f5f9; --text: #1e293b; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 15px; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        h2 { color: var(--primary); text-align: center; margin-bottom: 20px; font-weight: 800; }
         
-        #qrcode-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 20px; background: #fff; }
-        .instrucao-tag { background: #eef2ff; color: #4f46e5; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .full { grid-column: span 2; }
+        label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-top: 10px; }
+        input, select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff; box-sizing: border-box; font-family: inherit; }
+        
+        button#btnGerar { width: 100%; padding: 18px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-size: 16px; transition: 0.3s; box-shadow: 0 8px 15px rgba(34, 197, 94, 0.3); }
+        button#btnGerar:hover { transform: translateY(-2px); background: #16a34a; }
+
+        .result-area { display: none; margin-top: 30px; border-top: 3px solid #f1f5f9; padding-top: 20px; }
+        .box-title { background: #eef2ff; color: #4f46e5; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; display: inline-block; margin-bottom: 5px; }
+        .code-box { background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 12px; font-size: 11px; border: 1px solid #334155; word-break: break-all; overflow-y: auto; max-height: 200px; font-family: 'Courier New', monospace; }
+        .btn-copy { background: #334155; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 11px; cursor: pointer; margin-top: 5px; float: right; margin-bottom: 15px; }
+        
+        #qrcode-wrap { text-align: center; background: #f8fafc; padding: 15px; border-radius: 20px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🚀 Gerador de Estrutura</h2>
+    <h2>🚀 Gerador SEO & Avaliação</h2>
     
     <div class="form-grid">
+        <div class="full">
+            <label>Escolha o Tema (Cor)</label>
+            <select id="t">
+                <option value="1">1 - Dark Neon (Azul Escuro/Amarelo)</option>
+                <option value="2">2 - Clean White (Fundo Branco/Verde)</option>
+                <option value="3">3 - Luxury Gold (Preto/Dourado)</option>
+            </select>
+        </div>
+
         <div>
             <label>Nome da Empresa</label>
-            <input id="n" placeholder="Ex: Óptica Lidia">
+            <input id="n" placeholder="Ex: Óptica Lidia" oninput="sugerirSlug()">
         </div>
         <div>
-            <label>Subtítulo (Unidade)</label>
-            <input id="s" placeholder="Ex: Unidade II">
+            <label>Unidade/Subtítulo</label>
+            <input id="s" placeholder="Ex: Unidade Centro">
         </div>
-    </div>
 
-    <div class="form-grid">
         <div>
-            <label>Pasta no GitHub (Slug)</label>
-            <input id="slug" placeholder="Ex: lidia">
+            <label>Pasta (Slug - sem espaços)</label>
+            <input id="slug" placeholder="ex: optica-lidia">
         </div>
         <div>
             <label>WhatsApp (55...)</label>
             <input id="w" placeholder="5511999999999">
         </div>
-    </div>
 
-    <label>Link de Avaliação do Google Maps</label>
-    <input id="g" placeholder="Link que abre direto nas 5 estrelas">
+        <div class="full">
+            <label>Link Google Maps (Review)</label>
+            <input id="g" placeholder="https://g.page/r/...">
+        </div>
 
-    <label>Endereço Completo (Exibido no Rodapé)</label>
-    <input id="e" placeholder="Rua exemplo, 100 - Bairro, Cidade">
+        <div class="full">
+            <label>Endereço Completo</label>
+            <input id="e" placeholder="Rua exemplo, 100 - Itaquaquecetuba, SP">
+        </div>
 
-    <div class="form-grid">
         <div>
             <label>Instagram (sem @)</label>
-            <input id="insta" placeholder="optica_lidia">
+            <input id="ig" placeholder="optica_lidia">
         </div>
         <div>
-            <label>Facebook (usuário)</label>
-            <input id="face" placeholder="opticalidia">
+            <label>Facebook</label>
+            <input id="fb" placeholder="opticalidia">
+        </div>
+
+        <div>
+            <label>Link da Logo (.png/.jpg)</label>
+            <input id="l" value="logo.png">
+        </div>
+        <div>
+            <label>Foto Sucesso (.png/.jpg)</label>
+            <input id="f" value="sucesso.png">
         </div>
     </div>
 
-    <div class="form-grid">
-        <div>
-            <label>URL da Logo</label>
-            <input id="l" placeholder="logo.png">
-        </div>
-        <div>
-            <label>URL Foto Sucesso</label>
-            <input id="f" placeholder="sucesso.png">
-        </div>
-    </div>
-
-    <button onclick="gerarTudo()">GERAR ESTRUTURA E QR CODE ⚡</button>
+    <button id="btnGerar" onclick="processar()">GERAR ESTRUTURA ROBUSTA SEO ⚡</button>
 
     <div id="result-area" class="result-area">
         
-        <div id="qrcode-container">
-            <label>QR CODE PRONTO</label>
+        <div id="qrcode-wrap">
+            <label>QR CODE PARA IMPRESSÃO</label><br>
             <div id="qrcode"></div>
-            <p style="font-size: 11px; margin-top:10px;" id="linkCurtoTxt"></p>
+            <p id="linkCurtoTxt" style="font-size: 11px; font-weight: bold; color: #475569; margin-top:10px;"></p>
         </div>
 
         <div class="output-group">
-            <span class="instrucao-tag">PASSO 1: NO GITHUB</span>
-            <label>Criar arquivo: <b>/index.html</b> dentro da pasta <b><span class="folder-name"></span></b></label>
+            <div class="box-title">📁 1. ARQUIVO index.html (DENTRO DA PASTA DO CLIENTE)</div>
             <div id="codeIndex" class="code-box"></div>
-            <button class="btn-copy" onclick="copy('codeIndex')">COPIAR HTML DO REDIRECIONADOR</button>
+            <button class="btn-copy" onclick="copy('codeIndex')">COPIAR HTML COM SEO</button>
         </div>
 
-        <div class="output-group" style="clear:both; padding-top:20px;">
-            <span class="instrucao-tag">PASSO 2: NA SUA VITRINE</span>
-            <label>Colar no seu arquivo: <b>clientes.js</b> (ou index principal)</label>
+        <div class="output-group" style="clear:both;">
+            <div class="box-title">🏠 2. BLOCO clientes.js (PARA SUA VITRINE)</div>
             <div id="codeJS" class="code-box"></div>
-            <button class="btn-copy" onclick="copy('codeJS')">COPIAR BLOCO DO CLIENTE</button>
+            <button class="btn-copy" onclick="copy('codeJS')">COPIAR BLOCO JS</button>
         </div>
 
     </div>
 </div>
 
 <script>
-function gerarTudo() {
-    const slug = document.getElementById('slug').value.toLowerCase().trim() || 'cliente';
+function sugerirSlug() {
     const nome = document.getElementById('n').value;
-    const sub = document.getElementById('s').value;
-    const whats = document.getElementById('w').value;
-    const google = btoa(document.getElementById('g').value); // Encode Base64
-    const endereco = encodeURIComponent(document.getElementById('e').value);
-    const insta = document.getElementById('insta').value;
-    const face = document.getElementById('face').value;
-    const logo = document.getElementById('l').value || 'logo.png';
-    const foto = document.getElementById('f').value || 'sucesso.png';
+    const slug = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+    document.getElementById('slug').value = slug;
+}
 
-    // Montagem do Link Mágico com os novos campos (Redes Sociais)
+function processar() {
+    const d = {
+        t: document.getElementById('t').value,
+        n: document.getElementById('n').value,
+        s: document.getElementById('s').value,
+        slug: document.getElementById('slug').value,
+        w: document.getElementById('w').value,
+        g: btoa(document.getElementById('g').value), // Link Google em Base64
+        e: encodeURIComponent(document.getElementById('e').value),
+        ig: document.getElementById('ig').value,
+        fb: document.getElementById('fb').value,
+        l: document.getElementById('l').value,
+        f: document.getElementById('f').value
+    };
+
     const baseUrl = window.location.origin;
-    const linkMagico = `${baseUrl}/v.html?n=${encodeURIComponent(nome)}&s=${encodeURIComponent(sub)}&l=${logo}&f=${foto}&e=${endereco}&w=${whats}&g=${google}&ig=${insta}&fb=${face}`;
-    const linkCurto = `${baseUrl}/${slug}`;
+    const linkMagico = `${baseUrl}/v.html?t=${d.t}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${d.l}&f=${d.f}&e=${d.e}&w=${d.w}&g=${d.g}&ig=${d.ig}&fb=${d.fb}`;
+    const linkCurto = `${baseUrl}/${d.slug}`;
 
-    // Atualiza nomes na tela
-    document.querySelectorAll('.folder-name').forEach(el => el.innerText = slug);
-
-    // Gerar QR Code
+    // QR Code
     document.getElementById('qrcode').innerHTML = "";
     new QRCode(document.getElementById("qrcode"), { text: linkCurto, width: 160, height: 160 });
     document.getElementById('linkCurtoTxt').innerText = linkCurto;
 
-    // Código 1: index.html da pasta
-    document.getElementById('codeIndex').innerText = `<script>window.location.href="${linkMagico}";<\/script>`;
+    // HTML Robusto (SEO Semântico)
+    const htmlSEO = `<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>${d.n} - Avaliação no Google</title>
+    <meta name="description" content="Avalie a empresa ${d.n} em ${decodeURIComponent(d.e)}. Sua opinião é muito importante!">
+    <meta property="og:title" content="${d.n} | Deixe sua Avaliação">
+    <meta property="og:image" content="${d.l}">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "${d.n}",
+      "address": { "@type": "PostalAddress", "streetAddress": "${decodeURIComponent(d.e)}" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "120" }
+    }
+    <\/script>
+    <script>window.location.href="${linkMagico}";<\/script>
+</head>
+<body>Redirecionando...</body>
+</html>`;
 
-    // Código 2: clientes.js
-    const blocoJS = `{ 
-    nome: "${nome}", 
-    pasta: "${slug}", 
-    logo: "${logo}", 
-    subtitulo: "${sub}",
-    instagram: "${insta}",
-    facebook: "${face}"
+    document.getElementById('codeIndex').innerText = htmlSEO;
+
+    // Bloco Clientes.js
+    const jsBloco = `{ 
+    nome: "${d.n}", 
+    slug: "${d.slug}", 
+    logo: "${d.l}", 
+    tema: "${d.t}",
+    whats: "${d.w}" 
 },`;
-    document.getElementById('codeJS').innerText = blocoJS;
+    document.getElementById('codeJS').innerText = jsBloco;
 
     document.getElementById('result-area').style.display = 'block';
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
     navigator.clipboard.writeText(text);
-    alert("Copiado! Agora cole no local indicado.");
+    alert("Copiado com sucesso! 🎉");
 }
 </script>
 
