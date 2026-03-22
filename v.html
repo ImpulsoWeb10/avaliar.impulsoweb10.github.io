@@ -9,40 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <style>
+    <style id="theme-style">
+        /* Base do Layout */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; }
+        body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; transition: 0.5s; }
 
         .container {
-            max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(12px); padding: 30px 20px; border-radius: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            text-align: center; position: relative;
+            max-width: 420px; width: 100%; padding: 30px 20px; border-radius: 35px;
+            text-align: center; position: relative; transition: 0.5s;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
         }
 
         .logo { 
-            width: 160px; height: auto; object-fit: contain; 
-            padding: 4px; border-radius: 20px; border: 3px solid #facc15; 
-            background: white; margin: 0 auto 15px;
-            transition: transform 0.4s ease; display: block;
+            width: 150px; height: auto; object-fit: contain; 
+            padding: 5px; border-radius: 20px; border: 3px solid var(--accent); 
+            background: white; margin: 0 auto 15px; display: block;
         }
-        .logo-compacta { transform: scale(0.8); margin-bottom: -15px; }
 
-        h1 { font-size: 24px; margin-bottom: 2px; }
-        h2 { font-size: 15px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
+        h1 { font-size: 24px; margin-bottom: 2px; color: var(--text); }
+        h2 { font-size: 15px; color: var(--accent); margin-bottom: 20px; font-weight: normal; }
         
-        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; margin-bottom: 15px; }
+        #instrucao { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
 
         .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
         .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
-        .star-btn.active { color: #facc15; transform: scale(1.1); }
+        .star-btn.active { color: var(--accent); transform: scale(1.1); }
 
         .img-retangular {
             width: 90%; height: 130px; object-fit: cover; border-radius: 15px;
-            margin: 0 auto 15px; border: 2px solid #facc15; display: block;
-            transform: scale(0); animation: crescer 0.5s forwards ease-in-out;
+            margin: 0 auto 15px; border: 2px solid var(--accent); display: block;
         }
-        @keyframes crescer { to { transform: scale(1); } }
 
         .botao {
             display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -51,27 +47,20 @@
             margin-bottom: 10px; font-size: 14px;
         }
 
-        .google { background: #facc15; color: #000; animation: pulsarBotao 2s infinite; }
+        .google { background: var(--accent); color: #000; font-weight: 900; }
         .whatsapp { background: #22c55e; color: white; }
-        .social-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
-        .insta-color { color: #E1306C; }
-        .face-color { color: #1877F2; }
+        .social-btn { background: rgba(255,255,255,0.1); color: var(--text); border: 1px solid rgba(255,255,255,0.2); }
 
         .hidden { display: none; }
-        @keyframes pulsarBotao { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+        textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 15px; color: var(--text); padding: 12px; margin-bottom: 12px; outline: none; }
 
-        textarea {
-            width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 15px; color: white; padding: 12px; margin-bottom: 12px; resize: none; outline: none;
-        }
-
-        .footer { margin-top: 25px; font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .footer { margin-top: 25px; font-size: 11px; color: var(--text); opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="main-container">
     <img src="" class="logo" id="main-logo">
     <h1 id="txtNome"></h1>
     <h2 id="txtSub"></h2>
@@ -92,18 +81,13 @@
         <a id="linkG" href="#" target="_blank" class="botao google">
             <i class="fab fa-google"></i> AVALIAR NO GOOGLE
         </a>
-        
-        <a id="btnInsta" href="#" target="_blank" class="botao social-btn hidden">
-            <i class="fab fa-instagram insta-color"></i> Seguir no Instagram
-        </a>
-        <a id="btnFace" href="#" target="_blank" class="botao social-btn hidden">
-            <i class="fab fa-facebook face-color"></i> Curtir no Facebook
-        </a>
+        <a id="btnInsta" href="#" target="_blank" class="botao social-btn hidden"><i class="fab fa-instagram"></i> Instagram</a>
+        <a id="btnFace" href="#" target="_blank" class="botao social-btn hidden"><i class="fab fa-facebook"></i> Facebook</a>
     </div>
 
     <div id="feedback-ruim" class="hidden">
-        <p style="font-size: 18px; margin-bottom: 12px; color: #facc15;">Sentimos muito... 😔</p>
-        <textarea id="texto-melhoria" rows="3" placeholder="Conte para nós como podemos melhorar..."></textarea>
+        <p style="font-size: 16px; margin-bottom: 12px;">Sentimos muito... 😔</p>
+        <textarea id="texto-melhoria" rows="3" placeholder="Conte o que houve..."></textarea>
         <button onclick="enviarWhatsApp()" class="botao whatsapp">
             <i class="fab fa-whatsapp"></i> FALAR COM O GERENTE
         </button>
@@ -111,56 +95,47 @@
 
     <div class="footer">
         <div id="info-loja"></div>
-        <div style="margin-top: 15px; opacity: 0.8;">
-            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-impulsoweb">ImpulsoWeb10</a>
-        </div>
+        <div style="margin-top: 10px;">© 2026 | Via <a href="#" class="marca-impulsoweb">ImpulsoWeb10</a></div>
     </div>
 </div>
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    
-    // Captura de Dados
-    const nome = decodeURIComponent(params.get('n') || 'Empresa');
-    const sub = decodeURIComponent(params.get('s') || '');
-    const logo = params.get('l') || 'logo.png';
-    const foto = params.get('f') || 'sucesso.png';
-    const whats = params.get('w');
-    const googleLink = atob(params.get('g') || 'aHR0cHM6Ly9nb29nbGUuY29t');
-    const endereco = decodeURIComponent(params.get('e') || '');
-    const insta = params.get('ig');
-    const face = params.get('fb');
+    const tema = params.get('t') || '1';
 
-    // Preenchimento Inicial
-    document.getElementById('txtNome').innerText = nome;
-    document.getElementById('txtSub').innerText = sub;
-    document.getElementById('main-logo').src = logo;
-    document.getElementById('imgSucesso').src = foto;
-    document.getElementById('linkG').href = googleLink;
-    document.getElementById('info-loja').innerHTML = endereco;
-    document.title = "Avaliar " + nome;
+    // CONFIGURAÇÃO DE TEMAS
+    const temas = {
+        '1': { bg: 'linear-gradient(135deg, #0f172a, #1e293b)', card: 'rgba(255, 255, 255, 0.08)', text: '#ffffff', accent: '#facc15' },
+        '2': { bg: '#f1f5f9', card: '#ffffff', text: '#1e293b', accent: '#22c55e' },
+        '3': { bg: '#000000', card: '#111111', text: '#ffffff', accent: '#d4af37' }
+    };
 
-    // Lógica das Redes Sociais
-    if(insta) {
-        document.getElementById('btnInsta').href = `https://instagram.com/${insta}`;
-        document.getElementById('btnInsta').classList.remove('hidden');
-    }
-    if(face) {
-        document.getElementById('btnFace').href = `https://facebook.com/${face}`;
-        document.getElementById('btnFace').classList.remove('hidden');
-    }
+    const sel = temas[tema];
+    document.body.style.background = sel.bg;
+    document.body.style.color = sel.text;
+    document.getElementById('main-container').style.background = sel.card;
+    document.documentElement.style.setProperty('--accent', sel.accent);
+    document.documentElement.style.setProperty('--text', sel.text);
+
+    // DADOS DO LINK
+    document.getElementById('txtNome').innerText = params.get('n') || 'Empresa';
+    document.getElementById('txtSub').innerText = params.get('s') || '';
+    document.getElementById('main-logo').src = params.get('l') || 'logo.png';
+    document.getElementById('imgSucesso').src = params.get('f') || 'sucesso.png';
+    document.getElementById('linkG').href = atob(params.get('g') || '');
+    document.getElementById('info-loja').innerText = decodeURIComponent(params.get('e') || '');
+
+    // REDES SOCIAIS
+    if(params.get('ig')) { document.getElementById('btnInsta').href = `https://instagram.com/${params.get('ig')}`; document.getElementById('btnInsta').classList.remove('hidden'); }
+    if(params.get('fb')) { document.getElementById('btnFace').href = `https://facebook.com/${params.get('fb')}`; document.getElementById('btnFace').classList.remove('hidden'); }
 
     function avaliar(n) {
-        document.querySelectorAll('.star-btn').forEach((s, i) => {
-            i < n ? s.classList.add('active') : s.classList.remove('active');
-        });
-        document.getElementById('main-logo').classList.add('logo-compacta');
+        document.querySelectorAll('.star-btn').forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
         document.getElementById('instrucao').classList.add('hidden');
         document.getElementById('ratingBox').classList.add('hidden');
-
         if (n >= 4) {
             document.getElementById('feedback-bom').classList.remove('hidden');
-            confetti({ particleCount: 100, spread: 60, origin: { y: 0.8 } });
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
         } else {
             document.getElementById('feedback-ruim').classList.remove('hidden');
         }
@@ -168,8 +143,7 @@
 
     function enviarWhatsApp() {
         const msg = document.getElementById('texto-melhoria').value;
-        if(!msg) return alert("Por favor, conte-nos o que houve.");
-        window.open(`https://wa.me/${whats}?text=Feedback Unidade: ${sub} - Mensagem: ${msg}`, '_blank');
+        window.open(`https://wa.me/${params.get('w')}?text=Feedback: ${msg}`, '_blank');
     }
 </script>
 </body>
