@@ -26,7 +26,7 @@
         button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; transition: 0.3s; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); }
         button#btnGerar:hover { transform: scale(1.02); background: #16a34a; }
         .result-area { display: none; margin-top: 40px; border-top: 3px solid #f1f5f9; padding-top: 30px; }
-        .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 12px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #334155; }
+        .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #334155; }
         .btn-copy { background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; float: right; margin-bottom: 10px; }
         #qrcode-wrap { text-align: center; padding: 30px; background: #f8fafc; border-radius: 25px; margin-bottom: 30px; border: 2px dashed #e2e8f0; }
         #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 10px; }
@@ -37,7 +37,7 @@
 <div class="container">
     <div class="header">
         <h2>🚀 Gerador Tanque de Guerra</h2>
-        <p>ImpulsoWeb10 | Sistema de Avaliação Blindado</p>
+        <p>ImpulsoWeb10 | SEO & Automação</p>
     </div>
     
     <div class="section-title"><i class="fas fa-eye"></i> 1. Visual e Tema</div>
@@ -63,19 +63,19 @@
             <input id="n" placeholder="Ex: Estética Lídia" oninput="autoSlug()">
         </div>
         <div class="field">
-            <label>Subtítulo (Frase de efeito)</label>
-            <input id="s" placeholder="Ex: Sua opinião é muito importante!">
+            <label>Subtítulo (Frase Curta)</label>
+            <input id="s" placeholder="Ex: Avaliação Oficial">
         </div>
         <div class="field full">
             <label>Endereço Completo</label>
-            <input id="e" placeholder="Rua exemplo, 100 - Bairro - Cidade/SP">
+            <input id="e" placeholder="Rua, Número - Bairro - Cidade/SP">
         </div>
     </div>
 
     <div class="section-title"><i class="fas fa-share-alt"></i> 3. Links e Redes</div>
     <div class="grid">
         <div class="field full">
-            <label>Link Direto do Google Maps (Avaliação)</label>
+            <label>Link Direto do Google Maps (Review)</label>
             <input id="g" placeholder="Cole o link de avaliação aqui">
         </div>
         <div class="field">
@@ -96,11 +96,10 @@
         </div>
     </div>
 
-    <button id="btnGerar" onclick="gerarTudo()">GERAR ESTRUTURA BLINDADA ⚡</button>
+    <button id="btnGerar" onclick="gerarTudo()">GERAR ESTRUTURA ATUALIZADA ⚡</button>
 
     <div id="result-area" class="result-area">
         <div id="qrcode-wrap">
-            <label style="display:block; margin-bottom:15px;">QR Code do Cliente</label>
             <div id="qrcode"></div>
             <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px; font-size: 16px;"></p>
         </div>
@@ -145,17 +144,15 @@ function gerarTudo() {
     const baseUrl = window.location.origin;
     const gBase64 = btoa(d.gRaw);
     
-    // LINK MÁGICO CORRIGIDO PARA ENVIAR O TEMA
-    const linkMagico = `${baseUrl}/v.html?t=${d.t}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&e=${encodeURIComponent(d.e)}&w=${d.w}&g=${gBase64}&ig=${d.ig}`;
+    // LINK MÁGICO COM "TIMESTAMP" PARA FORÇAR ATUALIZAÇÃO DE CACHE (&v=)
+    const linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&e=${encodeURIComponent(d.e)}&w=${d.w}&g=${gBase64}&ig=${d.ig}`;
     const urlFinal = `${baseUrl}/${d.slug}`;
 
-    // Gerar QR Code
     const qrDiv = document.getElementById('qrcode');
     qrDiv.innerHTML = "";
     new QRCode(qrDiv, { text: urlFinal, width: 160, height: 160 });
     document.getElementById('linkCurtoTxt').innerText = urlFinal;
 
-    // GERAR O HTML QUE VAI PARA A PASTA DO CLIENTE
     const htmlTanque = `<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -174,7 +171,7 @@ function gerarTudo() {
 <body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;text-align:center;">
     <div style="background:white;padding:40px;border-radius:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);max-width:320px;">
         <img src="${d.l}" style="width:80px;height:80px;border-radius:15px;margin-bottom:20px;">
-        <h2 style="font-size:18px;">Conectando com ${d.n}...</h2>
+        <h2 style="font-size:18px;">Conectando...</h2>
         <div style="margin:20px auto;width:30px;height:30px;border:3px solid #f3f3f3;border-top:3px solid #22c55e;border-radius:50%;animation:spin 1s linear infinite;"></div>
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
@@ -189,7 +186,7 @@ function gerarTudo() {
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Copiado com sucesso! 🚀"));
+    navigator.clipboard.writeText(text).then(() => alert("Copiado! 🚀"));
 }
 </script>
 </body>
