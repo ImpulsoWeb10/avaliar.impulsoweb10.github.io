@@ -68,6 +68,7 @@ const clientes = [
     logo: "logo.png", 
     descricao: "Domínio técnico em cortes e tratamentos capilares. Visual renovado com quem entende de estilo e valoriza a sua autoestima." 
   }
+  { nome: "Estética lidia", slug: "estetica-lidia", logo: "https://lh3.googleusercontent.com/a-/ALV-UjUN9pMljOGoQmIPEVG_QQJgHqUuJbY-8ZLVKCEHirk80KVdxzb_=s360-w360-h360", tema: "2" },
   
   {
 nome: "lidia lindona",
