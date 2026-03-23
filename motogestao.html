@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoGestão - Lucro Real</title>
+    <style>
+        :root { --primary: #fbbf24; --secondary: #1e293b; --success: #22c55e; --danger: #ef4444; }
+        body { font-family: sans-serif; background: #0f172a; color: white; margin: 0; padding: 20px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        h1 { color: var(--primary); font-size: 22px; text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; box-sizing: border-box; }
+        .btn-calc { width: 100%; padding: 15px; background: var(--primary); border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .res-item { background: #334155; padding: 15px; border-radius: 10px; text-align: center; }
+        .res-item span { display: block; font-size: 10px; color: #94a3b8; }
+        .res-item b { font-size: 18px; }
+        .lucro-final { grid-column: span 2; background: var(--success); color: #000; }
+    </style>
+</head>
+<body>
+
+    <h1>🛵 MOTO GESTÃO v1.0</h1>
+
+    <div class="card">
+        <div class="input-group">
+            <label>Ganho Bruto do Dia (R$)</label>
+            <input type="number" id="ganho" placeholder="Ex: 250.00">
+        </div>
+        <div class="input-group">
+            <label>KM Rodados no Dia</label>
+            <input type="number" id="km" placeholder="Ex: 120">
+        </div>
+        <div class="input-group">
+            <label>Preço do Litro Gasolina (R$)</label>
+            <input type="number" id="gasosa" value="5.80">
+        </div>
+        <button class="btn-calc" onclick="calcular()">CALCULAR LUCRO REAL 💸</button>
+    </div>
+
+    <div class="result-grid" id="resultados" style="display: none;">
+        <div class="res-item">
+            <span>Gasto Combustível</span>
+            <b id="c-gasosa" style="color: var(--danger);">R$ 0,00</b>
+        </div>
+        <div class="res-item">
+            <span>Reserva Manutenção</span>
+            <b id="c-manut" style="color: var(--danger);">R$ 0,00</b>
+        </div>
+        <div class="res-item lucro-final">
+            <span>LUCRO LÍQUIDO (O que é seu de verdade)</span>
+            <b id="c-lucro">R$ 0,00</b>
+        </div>
+    </div>
+
+    <script>
+        function calcular() {
+            const ganho = parseFloat(document.getElementById('ganho').value);
+            const km = parseFloat(document.getElementById('km').value);
+            const precoGas = parseFloat(document.getElementById('gasosa').value);
+
+            if(!ganho || !km) return alert("Preencha os ganhos e KM!");
+
+            // Médias base: Moto faz 35km/l | Manutenção custa aprox. R$ 0,15 por KM (pneu, óleo, relação)
+            const gastoGas = (km / 35) * precoGas;
+            const gastoManut = km * 0.15;
+            const lucro = ganho - gastoGas - gastoManut;
+
+            document.getElementById('c-gasosa').innerText = `R$ ${gastoGas.toFixed(2)}`;
+            document.getElementById('c-manut').innerText = `R$ ${gastoManut.toFixed(2)}`;
+            document.getElementById('c-lucro').innerText = `R$ ${lucro.toFixed(2)}`;
+            
+            document.getElementById('resultados').style.display = 'grid';
+        }
+    </script>
+</body>
+</html>
