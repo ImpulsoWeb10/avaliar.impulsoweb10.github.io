@@ -52,12 +52,11 @@ body {
     position: absolute;
 }
 
-/* PAREDE */
+/* PAREDE SIMPLES */
 .parede {
     width: 300px;
     height: 180px;
     margin: 20px auto;
-    border-radius: 10px;
     display: flex;
 }
 
@@ -65,9 +64,30 @@ body {
     flex: 1;
 }
 
+/* MODO CASA (FAKE 3D) */
+.casa {
+    width: 300px;
+    height: 200px;
+    margin: 20px auto;
+    display: none;
+    perspective: 800px;
+}
+
+.quarto {
+    width: 100%;
+    height: 100%;
+    transform: rotateX(15deg);
+    display: flex;
+}
+
+.parede3d {
+    flex: 1;
+    margin: 2px;
+}
+
 /* BOTÕES */
 button.acao {
-    margin: 10px;
+    margin: 8px;
     padding: 12px 20px;
     background: #28a745;
     color: white;
@@ -89,21 +109,33 @@ button.acao {
 
 <div id="app" style="display:none">
 
+    <!-- TRIANGULO -->
     <div id="triangulo" class="triangulo">
         <div id="p" class="principal"></div>
         <div id="s1" class="sec1"></div>
         <div id="s2" class="sec2"></div>
     </div>
 
-    <div class="parede">
+    <!-- VISUAL NORMAL -->
+    <div id="normal" class="parede">
         <div id="w1" class="lado"></div>
         <div id="w2" class="lado"></div>
         <div id="w3" class="lado"></div>
     </div>
 
+    <!-- CASA 3D -->
+    <div id="casa" class="casa">
+        <div class="quarto">
+            <div id="c1" class="parede3d"></div>
+            <div id="c2" class="parede3d"></div>
+            <div id="c3" class="parede3d"></div>
+        </div>
+    </div>
+
     <h3 id="nome"></h3>
 
     <button class="acao" onclick="girar()">Girar combinação</button>
+    <button class="acao" onclick="toggleCasa()">👁 Ver em ambiente</button>
     <button class="acao" onclick="comprar()">Quero esse kit</button>
 
 </div>
@@ -113,8 +145,8 @@ button.acao {
 let angulo = 0;
 let atual = [];
 let tipoAtual = "";
+let modoCasa = false;
 
-/* KITS */
 const dados = {
 
 sala: [
@@ -153,12 +185,24 @@ function girar(){
     document.getElementById("s1").style.background = k.cores[1];
     document.getElementById("s2").style.background = k.cores[2];
 
-    /* PAREDE */
+    /* NORMAL */
     document.getElementById("w1").style.background = k.cores[0];
     document.getElementById("w2").style.background = k.cores[1];
     document.getElementById("w3").style.background = k.cores[2];
 
+    /* CASA */
+    document.getElementById("c1").style.background = k.cores[0];
+    document.getElementById("c2").style.background = k.cores[1];
+    document.getElementById("c3").style.background = k.cores[2];
+
     document.getElementById("nome").innerText = k.nome;
+}
+
+function toggleCasa(){
+    modoCasa = !modoCasa;
+
+    document.getElementById("casa").style.display = modoCasa ? "block" : "none";
+    document.getElementById("normal").style.display = modoCasa ? "none" : "flex";
 }
 
 function comprar(){
