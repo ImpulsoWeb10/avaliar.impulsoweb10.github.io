@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulador Qualy Quimy</title>
 
+<link rel="manifest" href="manifest.json">
+
 <style>
 body {
     font-family: Arial;
@@ -15,7 +17,7 @@ body {
 /* MENU */
 .menu button {
     padding: 12px;
-    margin: 10px;
+    margin: 8px;
     border: none;
     border-radius: 8px;
     background: #222;
@@ -23,7 +25,7 @@ body {
     cursor: pointer;
 }
 
-/* AMBIENTE BASE */
+/* AMBIENTE */
 .ambiente {
     width: 350px;
     height: 220px;
@@ -38,6 +40,16 @@ body {
 .parede {
     flex: 1;
     transition: 0.5s;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+
+/* LUZ */
+.luz {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
 }
 
 /* CHÃO E TETO */
@@ -57,10 +69,8 @@ body {
     background: #ddd;
 }
 
-/* ===== SALA ===== */
-.sala {
-    display: flex;
-}
+/* SALA */
+.sala { display: flex; }
 
 .sofa {
     position: absolute;
@@ -86,10 +96,8 @@ body {
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
-/* ===== QUARTO ===== */
-.quarto {
-    display: flex;
-}
+/* QUARTO */
+.quarto { display: flex; }
 
 .cama {
     position: absolute;
@@ -103,10 +111,8 @@ body {
     transition: 0.5s;
 }
 
-/* ===== FACHADA ===== */
-.fachada {
-    display: flex;
-}
+/* FACHADA */
+.fachada { display: flex; }
 
 .porta {
     position: absolute;
@@ -130,8 +136,8 @@ body {
 
 /* BOTÕES */
 button.acao {
-    margin: 10px;
-    padding: 12px 20px;
+    margin: 8px;
+    padding: 12px 18px;
     background: #28a745;
     color: white;
     border: none;
@@ -158,6 +164,7 @@ button.acao {
     <div id="s3" class="parede"></div>
     <div class="sofa"></div>
     <div class="mesa"></div>
+    <div class="luz"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
@@ -168,6 +175,7 @@ button.acao {
     <div id="q2" class="parede"></div>
     <div id="q3" class="parede"></div>
     <div class="cama"></div>
+    <div class="luz"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
@@ -179,79 +187,105 @@ button.acao {
     <div id="f3" class="parede"></div>
     <div class="porta"></div>
     <div class="janela"></div>
+    <div class="luz"></div>
     <div class="chao"></div>
 </div>
 
 <h3 id="nome"></h3>
 
-<button class="acao" onclick="trocar()">🎨 Trocar combinação</button>
-<button class="acao" onclick="comprar()">🛒 Quero esse kit</button>
+<button class="acao" onclick="trocar()">🎨 Trocar</button>
+<button class="acao" onclick="modo()">🌗 Dia/Noite</button>
+<button class="acao" onclick="favoritar()">❤️ Favoritar</button>
+<button class="acao" onclick="comprar()">🛒 Comprar</button>
 
 <script>
 
 let atual = {};
+let tipoAtual = "sala";
+let noite = false;
+
+const textura = "https://www.transparenttextures.com/patterns/concrete-wall.png";
 
 const dados = {
-
 sala: [
 {nome:"Kit Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
 {nome:"Kit Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
 ],
-
 quarto: [
 {nome:"Kit Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]},
 {nome:"Kit Quarto Relax", cores:["#eaf6ff","#bcdffb","#5dade2"]}
 ],
-
 fachada: [
 {nome:"Kit Fachada Elegante", cores:["#eee","#555","#222"]},
 {nome:"Kit Fachada Natural", cores:["#f4e1c1","#a67c52","#5c4033"]}
 ]
-
 };
-
-let tipoAtual = "sala";
 
 function mostrar(tipo){
     tipoAtual = tipo;
-
-    document.querySelectorAll(".ambiente").forEach(a => a.style.display = "none");
-    document.getElementById(tipo).style.display = "flex";
-
+    document.querySelectorAll(".ambiente").forEach(a => a.style.display="none");
+    document.getElementById(tipo).style.display="flex";
     trocar();
+}
+
+function aplicarTextura(){
+    document.querySelectorAll(".parede").forEach(p=>{
+        p.style.backgroundImage = `url(${textura})`;
+    });
 }
 
 function trocar(){
     let lista = dados[tipoAtual];
-    let k = lista[Math.floor(Math.random() * lista.length)];
+    let k = lista[Math.floor(Math.random()*lista.length)];
     atual = k;
 
-    if(tipoAtual === "sala"){
-        s1.style.background = k.cores[0];
-        s2.style.background = k.cores[1];
-        s3.style.background = k.cores[2];
-        document.querySelector(".sofa").style.background = k.cores[2];
+    if(tipoAtual==="sala"){
+        s1.style.background=k.cores[0];
+        s2.style.background=k.cores[1];
+        s3.style.background=k.cores[2];
+        document.querySelector(".sofa").style.background=k.cores[2];
     }
 
-    if(tipoAtual === "quarto"){
-        q1.style.background = k.cores[0];
-        q2.style.background = k.cores[1];
-        q3.style.background = k.cores[2];
-        document.querySelector(".cama").style.background = k.cores[2];
+    if(tipoAtual==="quarto"){
+        q1.style.background=k.cores[0];
+        q2.style.background=k.cores[1];
+        q3.style.background=k.cores[2];
+        document.querySelector(".cama").style.background=k.cores[2];
     }
 
-    if(tipoAtual === "fachada"){
-        f1.style.background = k.cores[0];
-        f2.style.background = k.cores[1];
-        f3.style.background = k.cores[2];
+    if(tipoAtual==="fachada"){
+        f1.style.background=k.cores[0];
+        f2.style.background=k.cores[1];
+        f3.style.background=k.cores[2];
     }
 
-    document.getElementById("nome").innerText = atual.nome;
+    aplicarTextura();
+    nome.innerText = atual.nome;
+}
+
+function modo(){
+    noite = !noite;
+    let filtro = noite ? "brightness(0.6)" : "brightness(1)";
+    document.querySelectorAll(".ambiente").forEach(el=>{
+        el.style.filter = filtro;
+    });
+}
+
+function favoritar(){
+    localStorage.setItem("kitFavorito", JSON.stringify(atual));
+    alert("Salvo!");
 }
 
 function comprar(){
-    let texto = "Quero o " + atual.nome + " da Tintas Qualy Quimy";
-    window.open("https://wa.me/55SEUNUMERO?text=" + encodeURIComponent(texto));
+    let texto = "Quero o "+atual.nome+" da Qualy Quimy";
+    window.open("https://wa.me/55SEUNUMERO?text="+encodeURIComponent(texto));
+}
+
+/* carregar favorito */
+let fav = localStorage.getItem("kitFavorito");
+if(fav){
+    atual = JSON.parse(fav);
+    nome.innerText = atual.nome;
 }
 
 mostrar("sala");
