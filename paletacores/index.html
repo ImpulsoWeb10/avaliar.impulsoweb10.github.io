@@ -28,13 +28,16 @@ body{
     width:350px;
     height:200px;
     margin:20px auto;
-    display:none;
     position:relative;
-    display:flex;
+    display:none;
+    border-radius:10px;
+    overflow:hidden;
 }
 
 .parede{
-    flex:1;
+    width:33.33%;
+    height:100%;
+    float:left;
     transition:0.5s;
 }
 
@@ -49,9 +52,10 @@ body{
     transform:translateX(-50%);
     width:150px;
     height:40px;
+    border-radius:8px;
 }
 
-/* INSPIRAÇÃO */
+/* GALERIA */
 #galeria{
     display:flex;
     overflow-x:auto;
@@ -66,6 +70,7 @@ body{
     cursor:pointer;
 }
 
+/* PALETA */
 #paleta{
     display:flex;
     justify-content:center;
@@ -78,6 +83,7 @@ body{
     margin:5px;
     border-radius:8px;
     cursor:pointer;
+    border:2px solid #fff;
 }
 
 /* BOTÕES */
@@ -88,21 +94,20 @@ button.acao{
     color:#fff;
     border:none;
     border-radius:8px;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h2>🎨 Simulador com Inspiração</h2>
+<h2>🎨 Simulador Inteligente</h2>
 
 <div class="menu">
     <button onclick="mostrar('sala')">Sala</button>
-    <button onclick="mostrar('quarto')">Quarto</button>
-    <button onclick="mostrar('fachada')">Fachada</button>
 </div>
 
-<!-- AMBIENTE -->
+<!-- SALA -->
 <div id="sala" class="ambiente">
     <div id="p1" class="parede"></div>
     <div id="p2" class="parede"></div>
@@ -112,9 +117,7 @@ button.acao{
     <div class="teto"></div>
 </div>
 
-<h3 id="nome"></h3>
-
-<button class="acao" onclick="trocar()">🎨 Trocar</button>
+<button class="acao" onclick="trocar()">🎨 Gerar Combinação</button>
 
 <hr>
 
@@ -132,27 +135,52 @@ button.acao{
 
 <script>
 
-let tipoAtual="sala";
-
-/* MOSTRAR AMBIENTE */
+/* MOSTRAR */
 function mostrar(tipo){
-    tipoAtual=tipo;
     document.querySelectorAll(".ambiente").forEach(a=>a.style.display="none");
-    document.getElementById("sala").style.display="flex";
+    document.getElementById(tipo).style.display="block";
 }
 
-/* TROCAR */
+/* GERAR COMBINAÇÃO */
 function trocar(){
-    let cores=["#eee","#999","#2c3e50"];
-    aplicarCores(cores);
+    let base = randomColor();
+
+    aplicarCores([
+        base,
+        clarear(base,40),
+        escurecer(base,40)
+    ]);
 }
 
 /* APLICAR CORES */
 function aplicarCores(cores){
-    p1.style.background=cores[0];
-    p2.style.background=cores[1];
-    p3.style.background=cores[2];
+    document.getElementById("p1").style.background=cores[0];
+    document.getElementById("p2").style.background=cores[1];
+    document.getElementById("p3").style.background=cores[2];
     document.querySelector(".sofa").style.background=cores[2];
+}
+
+/* RANDOM */
+function randomColor(){
+    return "#"+Math.floor(Math.random()*16777215).toString(16);
+}
+
+/* CLAREAR */
+function clarear(hex,percent){
+    let num=parseInt(hex.replace("#",""),16);
+    let r=(num>>16)+percent;
+    let g=((num>>8)&0x00FF)+percent;
+    let b=(num&0x0000FF)+percent;
+    return `rgb(${r},${g},${b})`;
+}
+
+/* ESCURECER */
+function escurecer(hex,percent){
+    let num=parseInt(hex.replace("#",""),16);
+    let r=(num>>16)-percent;
+    let g=((num>>8)&0x00FF)-percent;
+    let b=(num&0x0000FF)-percent;
+    return `rgb(${r},${g},${b})`;
 }
 
 /* INSPIRAÇÃO */
@@ -170,7 +198,7 @@ function gerarPaleta(ctx){
     let data=ctx.getImageData(0,0,300,200).data;
     let cores=[];
 
-    for(let i=0;i<data.length;i+=50){
+    for(let i=0;i<data.length;i+=80){
         let r=data[i];
         let g=data[i+1];
         let b=data[i+2];
@@ -191,18 +219,32 @@ function mostrarPaleta(lista){
         c.className="cor";
         c.style.background=cor;
 
-        c.onclick=()=>usarCor(cor);
+        c.onclick=()=>{
+            aplicarCores([
+                cor,
+                clarearRgb(cor,40),
+                escurecerRgb(cor,40)
+            ]);
+        };
 
         div.appendChild(c);
     });
 }
 
-/* USAR COR */
-function usarCor(cor){
-    p1.style.background=cor;
+/* RGB HELPERS */
+function clarearRgb(rgb,amt){
+    let [r,g,b]=rgb.match(/\d+/g);
+    return `rgb(${+r+amt},${+g+amt},${+b+amt})`;
 }
 
+function escurecerRgb(rgb,amt){
+    let [r,g,b]=rgb.match(/\d+/g);
+    return `rgb(${r-amt},${g-amt},${b-amt})`;
+}
+
+/* INICIAL */
 mostrar("sala");
+trocar();
 
 </script>
 
