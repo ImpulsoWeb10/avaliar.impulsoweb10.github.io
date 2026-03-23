@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador de Cores Qualy</title>
+<title>Simulador Qualy Quimy</title>
 
 <style>
 body {
     font-family: Arial;
-    background: #f4f4f4;
+    background: #f5f5f5;
     text-align: center;
 }
 
@@ -16,31 +16,41 @@ h1 {
     margin-top: 20px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
-    max-width: 600px;
-    margin: 20px auto;
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.cor {
-    height: 80px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 2px solid #ddd;
+.triangulo {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 200px solid #ccc;
+    margin: 40px auto;
+    transition: transform 0.6s;
+    position: relative;
 }
 
-.selecionadas {
+.faixa {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+}
+
+.cores {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 20px;
 }
 
-.box {
-    width: 100px;
-    height: 100px;
+.cor {
+    width: 80px;
+    height: 80px;
     border-radius: 10px;
 }
 
@@ -51,77 +61,70 @@ button {
     color: white;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Escolha suas cores</h1>
+<div class="logo">Tintas Qualy Quimy</div>
 
-<div class="grid" id="paleta"></div>
+<h1>Gire e descubra sua combinação</h1>
 
-<h2>Combinação</h2>
+<div id="triangulo" class="triangulo"></div>
 
-<div class="selecionadas">
-    <div id="c1" class="box"></div>
-    <div id="c2" class="box"></div>
-    <div id="c3" class="box"></div>
+<div class="cores">
+    <div id="c1" class="cor"></div>
+    <div id="c2" class="cor"></div>
+    <div id="c3" class="cor"></div>
 </div>
 
-<button onclick="comprar()">Quero essa combinação</button>
+<h2 id="kit"></h2>
+
+<button onclick="girar()">Girar</button>
+<button onclick="comprar()">Quero esse kit</button>
 
 <script>
 
-const cores = [
-    {nome:"Branco", cor:"#ffffff"},
-    {nome:"Gelo", cor:"#f1f1f1"},
-    {nome:"Cinza Claro", cor:"#dcdcdc"},
-    {nome:"Palha", cor:"#e6d2b5"},
-    {nome:"Areia", cor:"#d2b48c"},
-    {nome:"Amarelo Ouro", cor:"#f4c542"},
-    {nome:"Verde Cana", cor:"#7fbf7f"},
-    {nome:"Salmão", cor:"#fa8072"},
-    {nome:"Laranja", cor:"#f28c28"},
-    {nome:"Azul Petróleo", cor:"#2c5d63"},
-    {nome:"Coral", cor:"#ff6f61"},
-    {nome:"Magenta", cor:"#d81b60"},
-    {nome:"Vinho", cor:"#722f37"},
-    {nome:"Azul Celestial", cor:"#4fc3f7"},
-    {nome:"Cinza Médio", cor:"#888888"},
-    {nome:"Preto", cor:"#000000"}
+let angulo = 0;
+
+const kits = [
+    {
+        nome: "Kit Sala Moderna",
+        cores: ["#ffffff", "#888888", "#2c3e50"]
+    },
+    {
+        nome: "Kit Parede Interna Premium",
+        cores: ["#f4e1c1", "#d2b48c", "#a67c52"]
+    },
+    {
+        nome: "Kit Grafiato + Fundo",
+        cores: ["#dcdcdc", "#555555", "#222222"]
+    },
+    {
+        nome: "Kit Ambiente Sofisticado",
+        cores: ["#ffffff", "#c0392b", "#2c3e50"]
+    }
 ];
 
-let selecionadas = [];
+function girar() {
+    angulo += 120;
+    document.getElementById("triangulo").style.transform = `rotate(${angulo}deg)`;
 
-function carregar() {
-    let html = "";
-    cores.forEach((c, i) => {
-        html += `<div class="cor" style="background:${c.cor}" onclick="selecionar(${i})"></div>`;
-    });
-    document.getElementById("paleta").innerHTML = html;
-}
+    let k = kits[Math.floor(Math.random() * kits.length)];
 
-function selecionar(i) {
-    if (selecionadas.length < 3) {
-        selecionadas.push(cores[i]);
-    } else {
-        selecionadas.shift();
-        selecionadas.push(cores[i]);
-    }
+    document.getElementById("c1").style.background = k.cores[0];
+    document.getElementById("c2").style.background = k.cores[1];
+    document.getElementById("c3").style.background = k.cores[2];
 
-    document.getElementById("c1").style.background = selecionadas[0]?.cor || "transparent";
-    document.getElementById("c2").style.background = selecionadas[1]?.cor || "transparent";
-    document.getElementById("c3").style.background = selecionadas[2]?.cor || "transparent";
+    document.getElementById("kit").innerText = k.nome;
 }
 
 function comprar() {
-    let texto = "Quero essa combinação de cores: ";
-    selecionadas.forEach(c => texto += c.nome + ", ");
-    window.open("https://wa.me/55SEUNUMERO?text=" + encodeURIComponent(texto));
+    let texto = document.getElementById("kit").innerText;
+    window.open("https://wa.me/55SEUNUMERO?text=Quero o " + encodeURIComponent(texto));
 }
-
-carregar();
 
 </script>
 
