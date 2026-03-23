@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br" itemscope itemtype="https://schema.org/LocalBusiness">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title id="metaTitle">Avaliação Oficial</title>
-    <meta name="description" id="metaDesc" content="Página oficial de feedback e satisfação do cliente. Sua opinião é fundamental para nossa melhoria contínua.">
-    <link rel="canonical" href="" id="canonicalLink">
+    <meta name="description" id="metaDesc" content="Página oficial de feedback. Sua opinião ajuda a melhorar nossos serviços.">
     
-    <meta property="og:type" content="business.business">
-    <meta property="og:title" id="ogTitle" content="Avaliação Oficial">
-    <meta property="og:image" id="ogImage" content="logo.png">
+    <script type="application/ld+json" id="schema-json"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
@@ -19,87 +15,91 @@
     <style>
         :root { --accent: #22c55e; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; background: #f1f5f9; opacity: 0; transition: opacity 0.5s; }
+        body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; background: #f1f5f9; transition: opacity 0.5s; opacity: 0; }
         body.visible { opacity: 1; }
         
-        /* Semântica de Container */
-        main.container { max-width: 420px; width: 100%; padding: 40px 30px; border-radius: 40px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.2); background: #fff; }
+        .container { max-width: 420px; width: 100%; padding: 40px 25px; border-radius: 40px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.15); background: #fff; position: relative; }
         
-        .logo { width: 110px; height: 110px; object-fit: cover; border-radius: 25px; border: 3px solid var(--accent); margin-bottom: 15px; }
-        h1 { font-size: 24px; font-weight: 700; margin-bottom: 5px; itemprop="name"; }
-        .subtitle { font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; font-weight: 700; }
+        .logo { width: 100px; height: 100px; object-fit: cover; border-radius: 25px; border: 3px solid var(--accent); margin-bottom: 15px; background: #fff; }
+        h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: inherit; }
+        .subtitle { font-size: 13px; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
         
-        .rating-area { margin: 20px 0; }
-        .star-btn { font-size: 45px; color: #cbd5e1; cursor: pointer; transition: 0.2s; margin: 0 5px; background: none; border: none; outline: none; }
-        .star-btn.active { color: var(--accent); transform: scale(1.15); }
+        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: 0.2s; margin: 0 4px; background: none; border: none; }
+        .star-btn.active { color: var(--accent); transform: scale(1.1); }
         
-        .btn-action { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 15px; transition: 0.3s; border: none; cursor: pointer; font-size: 15px; }
+        .btn-action { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 12px; transition: 0.3s; font-size: 14px; border: none; cursor: pointer; }
         .google { background: var(--accent); color: #000; }
         .whatsapp { background: #25d366; color: #fff; }
+        .social-btn { background: #e2e8f0; color: #475569; font-size: 12px; padding: 10px; }
+        
         .hidden { display: none !important; }
         
-        /* SEO Footer Oculto */
-        footer.seo-content { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+        /* Informações de Rodapé (SEO) */
+        .footer-info { margin-top: 25px; font-size: 11px; color: #94a3b8; line-height: 1.4; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        
+        /* FAQ Oculto para Robôs */
+        .faq-seo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
     </style>
 </head>
 <body id="corpo">
 
-<main class="container" role="main">
+<main class="container">
     <header>
-        <img src="" class="logo" id="imgLogo" alt="Logotipo da Empresa" itemprop="image">
-        <h1 id="nome">Carregando...</h1>
-        <p class="subtitle" id="sub" itemprop="description"></p>
+        <img src="" class="logo" id="imgLogo" alt="Logo da Empresa">
+        <h1 id="nome">...</h1>
+        <p class="subtitle" id="sub"></p>
     </header>
 
-    <section id="etapa1" aria-label="Avaliação de Estrelas">
-        <p style="font-weight: 700; margin-bottom: 20px;">Como foi sua experiência conosco?</p>
-        <div class="rating-area" role="radiogroup" aria-label="Escolha de 1 a 5 estrelas">
-            <button class="fas fa-star star-btn" onclick="votar(1)" aria-label="1 estrela"></button>
-            <button class="fas fa-star star-btn" onclick="votar(2)" aria-label="2 estrelas"></button>
-            <button class="fas fa-star star-btn" onclick="votar(3)" aria-label="3 estrelas"></button>
-            <button class="fas fa-star star-btn" onclick="votar(4)" aria-label="4 estrelas"></button>
-            <button class="fas fa-star star-btn" onclick="votar(5)" aria-label="5 estrelas"></button>
+    <section id="etapa1">
+        <p style="font-weight: 700; margin-bottom: 15px;">Como foi sua experiência?</p>
+        <div class="rating-area">
+            <button class="fas fa-star star-btn" onclick="votar(1)"></button>
+            <button class="fas fa-star star-btn" onclick="votar(2)"></button>
+            <button class="fas fa-star star-btn" onclick="votar(3)"></button>
+            <button class="fas fa-star star-btn" onclick="votar(4)"></button>
+            <button class="fas fa-star star-btn" onclick="votar(5)"></button>
         </div>
     </section>
 
-    <section id="feedback-bom" class="hidden" aria-label="Feedback Positivo">
-        <article>
-            <p style="font-weight: 700; font-size: 18px;">Excelente escolha! 🎉</p>
-            <p style="font-size: 14px; margin-bottom: 20px; opacity: 0.8;">Sua satisfação é nossa prioridade. Poderia compartilhar sua experiência no Google?</p>
-            <a id="linkG" href="#" onclick="trackClick('Google')" target="_blank" class="btn-action google" rel="noopener noreferrer">
-                <i class="fab fa-google"></i> AVALIAR NO GOOGLE MAPS
-            </a>
-        </article>
+    <section id="feedback-bom" class="hidden">
+        <p style="font-weight: 700; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
+        <a id="linkG" href="#" target="_blank" class="btn-action google"><i class="fab fa-google"></i> AVALIAR NO GOOGLE</a>
+        
+        <div id="extra-links" style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <a id="linkInsta" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fab fa-instagram"></i> Instagram</a>
+            <a id="linkMaps" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fas fa-location-dot"></i> Como Chegar</a>
+        </div>
     </section>
 
-    <section id="feedback-ruim" class="hidden" aria-label="Feedback para Melhoria">
-        <article>
-            <p style="font-weight: 700; margin-bottom: 10px;">Sua opinião importa muito.</p>
-            <label for="msg" class="hidden">Descreva o que podemos melhorar</label>
-            <textarea id="msg" rows="3" placeholder="Conte-nos o que houve para podermos te ajudar..." style="width:100%; padding:12px; border-radius:15px; margin-bottom:10px; border:1px solid #ddd; font-family: inherit;"></textarea>
-            <button onclick="irWhats()" class="btn-action whatsapp">
-                <i class="fab fa-whatsapp"></i> CONVERSAR COM O GERENTE
-            </button>
-        </article>
+    <section id="feedback-ruim" class="hidden">
+        <p style="font-weight: 700; margin-bottom: 10px;">Como podemos melhorar?</p>
+        <textarea id="msg" rows="3" placeholder="Escreva aqui seu feedback..." style="width:100%; padding:12px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:10px; font-family: inherit;"></textarea>
+        <button onclick="irWhats()" class="btn-action whatsapp"><i class="fab fa-whatsapp"></i> FALAR COM GERENTE</button>
     </section>
+
+    <footer class="footer-info">
+        <p id="txtEnd"></p>
+        <p style="margin-top: 5px;">© <span id="ano"></span> <span id="nomeFooter"></span></p>
+    </footer>
+
+    <div class="faq-seo" id="faq-area"></div>
 </main>
 
-<footer class="seo-content">
-    <h2>Avaliações para <span class="nome-emp"></span></h2>
-    <p>Esta é a central oficial de atendimento ao cliente para <span class="nome-emp"></span>. Facilitamos o processo de feedback para garantir a melhor experiência em serviços locais.</p>
-</footer>
-
 <script>
+    const urlP = new URLSearchParams(window.location.search);
+    
     window.onload = function() {
-        const urlP = new URLSearchParams(window.location.search);
-        
-        // PARAMETRIZAÇÃO
         const n = urlP.get('n') || 'Empresa Local';
-        const s = urlP.get('s') || 'Feedback do Cliente';
+        const s = urlP.get('s') || 'Avaliação Oficial';
         const t = urlP.get('t') || '2';
+        const l = urlP.get('l') || 'logo.png';
         const ga = urlP.get('ga');
+        const end = urlP.get('end');
+        const ig = urlP.get('ig');
+        const gmaps = urlP.get('gmaps');
+        const faq = urlP.get('faq');
 
-        // TEMAS (MANTIDOS)
+        // Configuração do Tema
         const temas = {
             '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' },
             '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' },
@@ -108,27 +108,26 @@
         };
         const sel = temas[t] || temas['2'];
         document.body.style.backgroundColor = sel.b;
-        document.getElementById('box')?.style ? document.getElementById('box').style.backgroundColor = sel.c : null; 
-        // Correção seletor
         document.querySelector('.container').style.backgroundColor = sel.c;
         document.querySelector('.container').style.color = sel.t;
         document.documentElement.style.setProperty('--accent', sel.a);
 
-        // SEO E CONTEÚDO
+        // Preenchimento de Dados
         document.getElementById('nome').innerText = n;
-        document.querySelectorAll('.nome-emp').forEach(el => el.innerText = n);
+        document.getElementById('nomeFooter').innerText = n;
         document.getElementById('sub').innerText = s;
-        document.getElementById('imgLogo').src = urlP.get('l') || 'logo.png';
-        
-        // META TAGS SEMÂNTICAS
-        document.title = `Avaliar ${n} | Central de Feedback`;
-        document.getElementById('ogTitle').content = `Avaliar ${n} | Google Maps`;
-        document.getElementById('canonicalLink').href = window.location.href;
+        document.getElementById('imgLogo').src = l;
+        document.getElementById('ano').innerText = new Date().getFullYear();
+        document.title = `Avaliar ${n} | Canal Oficial`;
+
+        if(end) document.getElementById('txtEnd').innerText = end;
+        if(ig) { document.getElementById('linkInsta').href = ig; document.getElementById('linkInsta').classList.remove('hidden'); }
+        if(gmaps) { document.getElementById('linkMaps').href = gmaps; document.getElementById('linkMaps').classList.remove('hidden'); }
         
         try { document.getElementById('linkG').href = atob(urlP.get('g')); } catch(e) {}
 
-        // ANALYTICS
-        if(ga) {
+        // Injeção de Analytics GA4
+        if(ga && ga !== 'G-XXXXXXXXXX') {
             const script = document.createElement('script');
             script.src = `https://www.googletagmanager.com/gtag/js?id=${ga}`;
             document.head.appendChild(script);
@@ -137,11 +136,32 @@
             gtag('js', new Date()); gtag('config', ga);
         }
 
+        // SEO Semântico: FAQ e JSON-LD
+        if(faq) {
+            const faqList = faq.split(',');
+            faqList.forEach(q => {
+                const p = document.createElement('p');
+                p.innerText = q.trim();
+                document.getElementById('faq-area').appendChild(p);
+            });
+        }
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": n,
+            "image": l,
+            "address": { "@type": "PostalAddress", "streetAddress": end || "" }
+        };
+        document.getElementById('schema-json').text = JSON.stringify(schema);
+
         document.body.classList.add('visible');
     };
 
     function votar(n) {
-        document.querySelectorAll('.star-btn').forEach((el, i) => i < n ? el.classList.add('active') : el.classList.remove('active'));
+        const stars = document.querySelectorAll('.star-btn');
+        stars.forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
+        
         setTimeout(() => {
             document.getElementById('etapa1').classList.add('hidden');
             if(n >= 4) {
@@ -154,9 +174,9 @@
     }
 
     function irWhats() {
-        const urlP = new URLSearchParams(window.location.search);
-        const m = document.getElementById('msg').value;
-        window.open(`https://wa.me/${urlP.get('w')}?text=Novo Feedback Recebido: ${encodeURIComponent(m)}`, '_blank');
+        const w = urlP.get('w');
+        const msg = document.getElementById('msg').value;
+        window.open(`https://wa.me/${w}?text=Feedback: ${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
 </body>
