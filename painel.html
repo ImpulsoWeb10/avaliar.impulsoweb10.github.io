@@ -18,7 +18,6 @@
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
         
-        /* Campo com botão de fechar */
         .field { display: flex; flex-direction: column; margin-bottom: 10px; position: relative; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1px solid #e2e8f0; transition: 0.3s; }
         .field.hidden { display: none; }
         
@@ -27,16 +26,13 @@
         
         label { font-size: 10px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
         input, select, textarea { padding: 10px; border-radius: 8px; border: 2px solid #e2e8f0; background: #fff; font-family: inherit; font-size: 14px; width: 100%; box-sizing: border-box; }
-        input:focus { border-color: var(--accent); outline: none; }
 
-        .btn-reset { font-size: 11px; background: #fff; border: 1px solid var(--accent); color: var(--accent); padding: 4px 10px; border-radius: 5px; cursor: pointer; }
+        .btn-reset { font-size: 11px; background: #fff; border: 1px solid var(--accent); color: var(--accent); padding: 4px 10px; border-radius: 50px; cursor: pointer; margin-bottom: 10px; }
 
         button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); transition: 0.3s; }
-        button#btnGerar:hover { transform: scale(1.01); background: #16a34a; }
         
         .result-area { display: none; margin-top: 40px; border-top: 3px solid #f1f5f9; padding-top: 30px; }
-        .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #334155; }
-        
+        .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; }
         #qrcode-wrap { text-align: center; padding: 30px; background: #f8fafc; border-radius: 25px; margin-bottom: 30px; border: 2px dashed #e2e8f0; }
         #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 10px; }
     </style>
@@ -50,10 +46,10 @@
         <button class="btn-reset" onclick="window.location.reload()">Restaurar Campos Ocultos</button>
     </div>
     
-    <div class="section-title"><span><i class="fas fa-palette"></i> 1. Identidade e Rastreamento</span></div>
+    <div class="section-title"><span><i class="fas fa-palette"></i> 1. Visual e Tracking</span></div>
     <div class="grid">
         <div class="field" id="f-tema">
-            <button class="remove-btn" onclick="hideField('f-tema')"><i class="fas fa-times-circle"></i></button>
+            <button class="remove-btn" onclick="hideField('f-tema')">×</button>
             <label>Tema Visual</label>
             <select id="t">
                 <option value="1">Tema 1: Dark Neon</option>
@@ -63,71 +59,70 @@
             </select>
         </div>
         <div class="field" id="f-ga">
-            <button class="remove-btn" onclick="hideField('f-ga')"><i class="fas fa-times-circle"></i></button>
+            <button class="remove-btn" onclick="hideField('f-ga')">×</button>
             <label>Google Analytics ID</label>
             <input id="ga" placeholder="G-XXXXXXXXXX">
         </div>
-        <div class="field" id="f-logo">
-            <button class="remove-btn" onclick="hideField('f-logo')"><i class="fas fa-times-circle"></i></button>
-            <label>Link da Logo (.png ou .jpg)</label>
+        <div class="field">
+            <label>Link da Logo</label>
             <input id="l" value="logo.png">
         </div>
     </div>
 
-    <div class="section-title"><span><i class="fas fa-building"></i> 2. Cadastro da Empresa</span></div>
+    <div class="section-title"><span><i class="fas fa-id-card"></i> 2. Dados do Cliente</span></div>
     <div class="grid">
         <div class="field">
-            <label>Nome da Empresa *</label>
-            <input id="n" placeholder="Ex: Estética Avançada Lídia" oninput="autoSlug()">
+            <label>Nome da Empresa</label>
+            <input id="n" placeholder="Nome do Negócio" oninput="autoSlug()">
         </div>
         <div class="field">
-            <label>Subtítulo / Slogan</label>
-            <input id="s" placeholder="Ex: Sua beleza em boas mãos">
+            <label>Slogan / Subtítulo</label>
+            <input id="s" placeholder="Ex: A melhor pizza da região">
         </div>
         <div class="field">
-            <label>Pasta no GitHub (Slug)</label>
-            <input id="slug" placeholder="ex: estetica-lidia">
+            <label>Pasta GitHub (Slug)</label>
+            <input id="slug" placeholder="ex: pizzaria-do-ze">
         </div>
         <div class="field" id="f-end">
-            <button class="remove-btn" onclick="hideField('f-end')"><i class="fas fa-times-circle"></i></button>
-            <label>Endereço Completo (SEO)</label>
-            <input id="end" placeholder="Rua exemplo, 123 - Centro">
+            <button class="remove-btn" onclick="hideField('f-end')">×</button>
+            <label>Endereço SEO</label>
+            <input id="end" placeholder="Rua, Número, Bairro, Cidade">
         </div>
     </div>
 
-    <div class="section-title"><span><i class="fas fa-share-nodes"></i> 3. Redes Sociais e Localização</span></div>
+    <div class="section-title"><span><i class="fas fa-link"></i> 3. Links e Localização</span></div>
     <div class="grid">
         <div class="field">
-            <label>Link Google Review (Avaliação) *</label>
-            <input id="g" placeholder="Cole o link de avaliação">
-        </div>
-        <div class="field" id="f-gmaps">
-            <button class="remove-btn" onclick="hideField('f-gmaps')"><i class="fas fa-times-circle"></i></button>
-            <label>Link Google Maps (Localização)</label>
-            <input id="gmaps" placeholder="Link de 'Como chegar'">
+            <label>Link Google Review (Avaliação)</label>
+            <input id="g" placeholder="Cole o link de avaliação aqui">
         </div>
         <div class="field">
-            <label>WhatsApp (DDD + Número)</label>
+            <label>WhatsApp (55 + DDD + Número)</label>
             <input id="w" placeholder="5511999999999">
         </div>
-        <div class="field" id="f-insta">
-            <button class="remove-btn" onclick="hideField('f-insta')"><i class="fas fa-times-circle"></i></button>
-            <label>Instagram (Perfil)</label>
-            <input id="insta" placeholder="Link do perfil">
+        <div class="field" id="f-ig">
+            <button class="remove-btn" onclick="hideField('f-ig')">×</button>
+            <label>Instagram URL</label>
+            <input id="ig" placeholder="Link do perfil">
         </div>
         <div class="field" id="f-fb">
-            <button class="remove-btn" onclick="hideField('f-fb')"><i class="fas fa-times-circle"></i></button>
-            <label>Facebook (Página)</label>
+            <button class="remove-btn" onclick="hideField('f-fb')">×</button>
+            <label>Facebook URL</label>
             <input id="fb" placeholder="Link da página">
+        </div>
+        <div class="field" id="f-maps">
+            <button class="remove-btn" onclick="hideField('f-maps')">×</button>
+            <label>Link Localização (Maps)</label>
+            <input id="gmaps" placeholder="Link do 'Como Chegar'">
         </div>
     </div>
 
-    <div class="section-title"><span><i class="fas fa-align-left"></i> 4. Conteúdo Extra (FAQ / SEO)</span></div>
-    <div class="grid">
+    <div class="section-title"><span><i class="fas fa-question"></i> 4. FAQ Oculto (SEO)</span></div>
+    <div class="grid" style="grid-template-columns: 1fr;">
         <div class="field" id="f-faq">
-            <button class="remove-btn" onclick="hideField('f-faq')"><i class="fas fa-times-circle"></i></button>
-            <label>FAQ - Perguntas Frequentes (Separe por vírgula)</label>
-            <textarea id="faq" placeholder="Ex: Qual o horário? , Aceita cartão?"></textarea>
+            <button class="remove-btn" onclick="hideField('f-faq')">×</button>
+            <label>Perguntas Frequentes (Separe por vírgula)</label>
+            <textarea id="faq" placeholder="Aceita Pix?, Tem estacionamento?, Qual o horário?"></textarea>
         </div>
     </div>
 
@@ -136,20 +131,16 @@
     <div id="result-area" class="result-area">
         <div id="qrcode-wrap">
             <div id="qrcode"></div>
-            <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px; font-size: 16px;"></p>
+            <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px;"></p>
         </div>
-        <div>
-            <button style="float:right; padding:8px 15px; cursor:pointer; background: var(--accent); color:white; border:none; border-radius:8px;" onclick="copy('codeIndex')">COPIAR CÓDIGO</button>
-            <label>Código para o index.html (Pasta do Cliente)</label>
-            <div id="codeIndex" class="code-box"></div>
-        </div>
+        <button style="float:right; padding:5px 10px; cursor:pointer;" onclick="copy('codeIndex')">COPIAR</button>
+        <label>Código para o index.html da pasta</label>
+        <div id="codeIndex" class="code-box"></div>
     </div>
 </div>
 
 <script>
-function hideField(id) {
-    document.getElementById(id).classList.add('hidden');
-}
+function hideField(id) { document.getElementById(id).classList.add('hidden'); }
 
 function autoSlug() {
     const nome = document.getElementById('n').value;
@@ -165,29 +156,27 @@ function gerarTudo() {
         ga: document.getElementById('ga').value,
         slug: document.getElementById('slug').value,
         w: document.getElementById('w').value,
-        gRaw: document.getElementById('g').value,
+        gRaw: document.getElementById('g').value.trim(),
         l: document.getElementById('l').value,
-        // Novos campos
         end: document.getElementById('end').value,
-        gmaps: document.getElementById('gmaps').value,
-        insta: document.getElementById('insta').value,
+        ig: document.getElementById('ig').value,
         fb: document.getElementById('fb').value,
+        gmaps: document.getElementById('gmaps').value,
         faq: document.getElementById('faq').value
     };
 
-    if(!d.n || !d.gRaw) { alert("Nome e Link do Google são obrigatórios!"); return; }
-
     const baseUrl = window.location.origin;
-    const gBase64 = btoa(d.gRaw);
     
-    // Montagem do link dinâmico com todos os parâmetros
+    // CORREÇÃO DEFINITIVA DO LINK DO GOOGLE
+    const gBase64 = btoa(encodeURIComponent(d.gRaw));
+    
     let linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&w=${d.w}&g=${gBase64}`;
     
     if(d.ga) linkMagico += `&ga=${d.ga}`;
     if(d.end) linkMagico += `&end=${encodeURIComponent(d.end)}`;
-    if(d.gmaps) linkMagico += `&gmaps=${encodeURIComponent(d.gmaps)}`;
-    if(d.insta) linkMagico += `&ig=${encodeURIComponent(d.insta)}`;
+    if(d.ig) linkMagico += `&ig=${encodeURIComponent(d.ig)}`;
     if(d.fb) linkMagico += `&fb=${encodeURIComponent(d.fb)}`;
+    if(d.gmaps) linkMagico += `&gmaps=${encodeURIComponent(d.gmaps)}`;
     if(d.faq) linkMagico += `&faq=${encodeURIComponent(d.faq)}`;
 
     const urlFinal = `${baseUrl}/${d.slug}`;
@@ -198,17 +187,16 @@ function gerarTudo() {
     document.getElementById('linkCurtoTxt').innerText = urlFinal;
 
     const htmlIndex = `<!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar ${d.n} | Oficial</title>
+    <title>Avaliar ${d.n}</title>
     <script>setTimeout(function(){ window.location.href = "${linkMagico}"; }, 500);<\/script>
 </head>
 <body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;">
     <div style="background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.1);max-width:300px;">
         <img src="${d.l}" style="width:80px;height:80px;border-radius:20px;margin-bottom:20px;object-fit:cover;">
-        <h2 style="font-size:18px;color:#1e293b;">Conectando...</h2>
+        <h2 style="font-size:18px;">Conectando...</h2>
     </div>
 </body>
 </html>`;
@@ -219,7 +207,7 @@ function gerarTudo() {
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Copiado! Cole no index.html do cliente."));
+    navigator.clipboard.writeText(text).then(() => alert("Copiado!"));
 }
 </script>
 </body>
