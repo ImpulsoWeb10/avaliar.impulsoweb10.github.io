@@ -55,11 +55,10 @@
     window.onload = function() {
         const urlP = new URLSearchParams(window.location.search);
         const tId = urlP.get('t') || '2';
-        cconst temas = {
-            '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' }, // Dark Neon
-            '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' }, // Clean
-            '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' }, // Luxury Gold
-            '4': { b: '#fff5f5', c: '#ffffff', t: '#1e293b', a: '#e11d48' }  // Red Modern (NOVO!)
+        const temas = {
+            '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' },
+            '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' },
+            '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' }
         };
         const sel = temas[tId] || temas['2'];
         document.body.style.backgroundColor = sel.b;
