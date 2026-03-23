@@ -12,7 +12,6 @@ body {
     text-align: center;
 }
 
-/* MENU */
 .menu button {
     padding: 10px;
     margin: 5px;
@@ -23,7 +22,6 @@ body {
     cursor: pointer;
 }
 
-/* AMBIENTE */
 .ambiente {
     width: 350px;
     height: 220px;
@@ -34,7 +32,6 @@ body {
     border-radius: 10px;
 }
 
-/* PAREDES */
 .parede {
     flex: 1;
     transition: 0.5s;
@@ -42,7 +39,6 @@ body {
     background-blend-mode: multiply;
 }
 
-/* LUZ */
 .luz {
     position: absolute;
     width: 100%;
@@ -50,7 +46,6 @@ body {
     background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
 }
 
-/* CHÃO E TETO */
 .chao {
     position: absolute;
     bottom: 0;
@@ -78,19 +73,6 @@ body {
     width: 180px;
     height: 50px;
     border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-    transition: 0.5s;
-}
-
-.mesa {
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 20px;
-    background: #8b5a2b;
-    border-radius: 5px;
 }
 
 /* QUARTO */
@@ -103,8 +85,6 @@ body {
     transform: translateX(-50%);
     width: 160px;
     height: 50px;
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 /* FACHADA */
@@ -128,7 +108,6 @@ body {
     background: #87ceeb;
 }
 
-/* BOTÕES */
 button.acao {
     margin: 5px;
     padding: 10px;
@@ -139,8 +118,7 @@ button.acao {
     cursor: pointer;
 }
 
-/* FOTO */
-#canvas {
+canvas {
     margin-top: 10px;
     border-radius: 10px;
 }
@@ -149,27 +127,24 @@ button.acao {
 
 <body>
 
-<h2 id="titulo">🎨 Simulador</h2>
+<h2>🎨 Simulador Qualy Quimy</h2>
 
 <div class="menu">
-    <button onclick="mostrar('sala')">🏡 Sala</button>
-    <button onclick="mostrar('quarto')">🛏️ Quarto</button>
-    <button onclick="mostrar('fachada')">🏠 Fachada</button>
+    <button onclick="mostrar('sala')">Sala</button>
+    <button onclick="mostrar('quarto')">Quarto</button>
+    <button onclick="mostrar('fachada')">Fachada</button>
 </div>
 
-<!-- SALA -->
 <div id="sala" class="ambiente sala">
     <div id="s1" class="parede"></div>
     <div id="s2" class="parede"></div>
     <div id="s3" class="parede"></div>
     <div class="sofa"></div>
-    <div class="mesa"></div>
     <div class="luz"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
 
-<!-- QUARTO -->
 <div id="quarto" class="ambiente quarto">
     <div id="q1" class="parede"></div>
     <div id="q2" class="parede"></div>
@@ -180,7 +155,6 @@ button.acao {
     <div class="teto"></div>
 </div>
 
-<!-- FACHADA -->
 <div id="fachada" class="ambiente fachada">
     <div id="f1" class="parede"></div>
     <div id="f2" class="parede"></div>
@@ -193,21 +167,22 @@ button.acao {
 
 <h3 id="nome"></h3>
 
-<button class="acao" onclick="trocar()">🎨 Trocar</button>
-<button class="acao" onclick="modo()">🌗 Dia/Noite</button>
-<button class="acao" onclick="favoritar()">❤️ Favoritar</button>
-<button class="acao" onclick="comprar()">🛒 Comprar</button>
+<button class="acao" onclick="trocar()">Trocar</button>
+<button class="acao" onclick="modo()">Dia/Noite</button>
+<button class="acao" onclick="comprar()">Comprar</button>
 
 <hr>
 
 <h3>📸 Teste na sua casa</h3>
 
-<input type="file" id="upload" accept="image/*">
+<input type="file" id="upload" accept="image/*"><br><br>
+
+<label>Intensidade</label><br>
+<input type="range" id="intensidade" min="0" max="1" step="0.05" value="0.5">
 
 <br><br>
 
-<label>Intensidade:</label><br>
-<input type="range" id="intensidade" min="0" max="1" step="0.05" value="0.5">
+<button class="acao" onclick="alternarAntesDepois()">Antes / Depois</button>
 
 <br><br>
 
@@ -219,18 +194,15 @@ let atual = {};
 let tipoAtual = "sala";
 let noite = false;
 
-const textura = "https://www.transparenttextures.com/patterns/concrete-wall.png";
-
 const dados = {
-sala: [
+sala:[
 {nome:"Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
 {nome:"Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
 ],
-quarto: [
-{nome:"Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]},
-{nome:"Quarto Relax", cores:["#eaf6ff","#bcdffb","#5dade2"]}
+quarto:[
+{nome:"Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]}
 ],
-fachada: [
+fachada:[
 {nome:"Fachada Elegante", cores:["#eee","#555","#222"]}
 ]
 };
@@ -240,12 +212,6 @@ function mostrar(tipo){
     document.querySelectorAll(".ambiente").forEach(a=>a.style.display="none");
     document.getElementById(tipo).style.display="flex";
     trocar();
-}
-
-function aplicarTextura(){
-    document.querySelectorAll(".parede").forEach(p=>{
-        p.style.backgroundImage = `url(${textura})`;
-    });
 }
 
 function trocar(){
@@ -273,26 +239,17 @@ function trocar(){
         f3.style.background=k.cores[2];
     }
 
-    aplicarTextura();
     nome.innerText = atual.nome;
-
     corAtual = k.cores[0];
-    desenhar();
 }
 
-/* DIA/NOITE */
+/* DIA NOITE */
 function modo(){
-    noite = !noite;
+    noite=!noite;
     let filtro = noite ? "brightness(0.6)" : "brightness(1)";
     document.querySelectorAll(".ambiente").forEach(el=>{
         el.style.filter = filtro;
     });
-}
-
-/* FAVORITO */
-function favoritar(){
-    localStorage.setItem("kitFavorito", JSON.stringify(atual));
-    alert("Salvo!");
 }
 
 /* WHATSAPP */
@@ -304,43 +261,86 @@ function comprar(){
 /* FOTO REAL */
 let img = new Image();
 let corAtual = "#ffffff";
+let imagemOriginal = null;
+let mostrandoOriginal = false;
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const intensidadeInput = document.getElementById("intensidade");
 
 upload.addEventListener("change", function(e){
     let file = e.target.files[0];
     let reader = new FileReader();
 
     reader.onload = function(event){
-        img.onload = desenhar;
+        img.onload = function(){
+            ctx.drawImage(img,0,0,canvas.width,canvas.height);
+            imagemOriginal = ctx.getImageData(0,0,canvas.width,canvas.height);
+        }
         img.src = event.target.result;
     }
 
     reader.readAsDataURL(file);
 });
 
-intensidade.addEventListener("input", desenhar);
+canvas.addEventListener("click", function(e){
 
-function desenhar(){
     if(!img.src) return;
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    let x = e.offsetX;
+    let y = e.offsetY;
+    let intensidade = parseFloat(intensidadeInput.value);
 
-    let intensidadeValor = intensidade.value;
+    let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    let data = imageData.data;
 
-    ctx.globalCompositeOperation = "multiply";
-    ctx.globalAlpha = intensidadeValor;
+    let index = (y * canvas.width + x) * 4;
+    let r = data[index];
+    let g = data[index+1];
+    let b = data[index+2];
 
-    ctx.fillStyle = corAtual;
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(let i=0;i<data.length;i+=4){
 
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
+        let dr = Math.abs(data[i]-r);
+        let dg = Math.abs(data[i+1]-g);
+        let db = Math.abs(data[i+2]-b);
+
+        if(dr<40 && dg<40 && db<40){
+
+            data[i] = mix(data[i], hexToRgb(corAtual).r, intensidade);
+            data[i+1] = mix(data[i+1], hexToRgb(corAtual).g, intensidade);
+            data[i+2] = mix(data[i+2], hexToRgb(corAtual).b, intensidade);
+        }
+    }
+
+    ctx.putImageData(imageData,0,0);
+});
+
+function mix(base, cor, intensidade){
+    return base*(1-intensidade)+cor*intensidade;
 }
 
-/* INICIAL */
+function hexToRgb(hex){
+    let bigint = parseInt(hex.replace("#",""),16);
+    return {
+        r:(bigint>>16)&255,
+        g:(bigint>>8)&255,
+        b:bigint&255
+    };
+}
+
+function alternarAntesDepois(){
+    if(!imagemOriginal) return;
+
+    if(mostrandoOriginal){
+        ctx.putImageData(imagemOriginal,0,0);
+        mostrandoOriginal=false;
+    } else {
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        mostrandoOriginal=true;
+    }
+}
+
 mostrar("sala");
 
 </script>
