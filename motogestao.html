@@ -3,77 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão - Lucro Real</title>
+    <title>MotoGestão Pro - ImpulsoWeb10</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #fbbf24; --secondary: #1e293b; --success: #22c55e; --danger: #ef4444; }
-        body { font-family: sans-serif; background: #0f172a; color: white; margin: 0; padding: 20px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 20px; }
-        h1 { color: var(--primary); font-size: 22px; text-align: center; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; box-sizing: border-box; }
-        .btn-calc { width: 100%; padding: 15px; background: var(--primary); border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        :root { --primary: #fbbf24; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --success: #22c55e; --danger: #ef4444; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 100px; }
         
-        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .res-item { background: #334155; padding: 15px; border-radius: 10px; text-align: center; }
-        .res-item span { display: block; font-size: 10px; color: #94a3b8; }
-        .res-item b { font-size: 18px; }
-        .lucro-final { grid-column: span 2; background: var(--success); color: #000; }
+        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 20px; }
+        .header h1 { font-size: 20px; margin: 0; color: var(--primary); }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .stat-card { background: var(--card); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #334155; }
+        .stat-card span { font-size: 10px; text-transform: uppercase; color: #94a3b8; display: block; }
+        .stat-card b { font-size: 18px; display: block; margin-top: 5px; }
+
+        .form-add { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; box-sizing: border-box; }
+        
+        .btn-add { width: 100%; background: var(--primary); color: #000; border: none; padding: 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        .entrega-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary); }
+        .entrega-info { font-size: 13px; }
+        .entrega-val { font-weight: bold; color: var(--success); }
+
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--success); color: #000; padding: 15px; text-align: center; font-weight: bold; box-shadow: 0 -5px 15px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
 
-    <h1>🛵 MOTO GESTÃO v1.0</h1>
-
-    <div class="card">
-        <div class="input-group">
-            <label>Ganho Bruto do Dia (R$)</label>
-            <input type="number" id="ganho" placeholder="Ex: 250.00">
-        </div>
-        <div class="input-group">
-            <label>KM Rodados no Dia</label>
-            <input type="number" id="km" placeholder="Ex: 120">
-        </div>
-        <div class="input-group">
-            <label>Preço do Litro Gasolina (R$)</label>
-            <input type="number" id="gasosa" value="5.80">
-        </div>
-        <button class="btn-calc" onclick="calcular()">CALCULAR LUCRO REAL 💸</button>
+    <div class="header">
+        <h1><i class="fas fa-motorcycle"></i> MOTO GESTÃO PRO</h1>
+        <small>Controle de Ganhos e Desgaste</small>
     </div>
 
-    <div class="result-grid" id="resultados" style="display: none;">
-        <div class="res-item">
-            <span>Gasto Combustível</span>
-            <b id="c-gasosa" style="color: var(--danger);">R$ 0,00</b>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <span>Combustível (Est.)</span>
+            <b id="gas-total" style="color: var(--danger);">R$ 0,00</b>
         </div>
-        <div class="res-item">
-            <span>Reserva Manutenção</span>
-            <b id="c-manut" style="color: var(--danger);">R$ 0,00</b>
+        <div class="stat-card">
+            <span>Manutenção (Provisão)</span>
+            <b id="manut-total" style="color: var(--danger);">R$ 0,00</b>
         </div>
-        <div class="res-item lucro-final">
-            <span>LUCRO LÍQUIDO (O que é seu de verdade)</span>
-            <b id="c-lucro">R$ 0,00</b>
+    </div>
+
+    <div class="form-add">
+        <label>Valor da Entrega (R$)</label>
+        <input type="number" id="valor" placeholder="Quanto ganhou?" step="0.01">
+        
+        <label style="margin-top:10px; display:block;">KM Rodados (Aprox.)</label>
+        <input type="number" id="km" placeholder="Distância percorrida">
+        
+        <button class="btn-add" onclick="addEntrega()">
+            <i class="fas fa-plus-circle"></i> LANÇAR ENTREGA
+        </button>
+    </div>
+
+    <h3 style="font-size: 14px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 5px;">HISTÓRICO DE HOJE</h3>
+    <div id="lista-entregas">
         </div>
+
+    <div class="summary-fixed" id="total-liquido">
+        LUCRO LÍQUIDO REAL: R$ 0,00
     </div>
 
     <script>
-        function calcular() {
-            const ganho = parseFloat(document.getElementById('ganho').value);
-            const km = parseFloat(document.getElementById('km').value);
-            const precoGas = parseFloat(document.getElementById('gasosa').value);
+        let faturamento = 0;
+        let kmTotal = 0;
+        const PRECO_GAS = 5.80; // Média
+        const KM_LITRO = 35;    // Média Moto
+        const CUSTO_MANUT_KM = 0.15; // Pneu, Óleo, Relação
 
-            if(!ganho || !km) return alert("Preencha os ganhos e KM!");
+        function addEntrega() {
+            const v = parseFloat(document.getElementById('valor').value);
+            const k = parseFloat(document.getElementById('km').value);
 
-            // Médias base: Moto faz 35km/l | Manutenção custa aprox. R$ 0,15 por KM (pneu, óleo, relação)
-            const gastoGas = (km / 35) * precoGas;
-            const gastoManut = km * 0.15;
-            const lucro = ganho - gastoGas - gastoManut;
+            if(!v || !k) { alert("Informe o valor e os KM!"); return; }
 
-            document.getElementById('c-gasosa').innerText = `R$ ${gastoGas.toFixed(2)}`;
-            document.getElementById('c-manut').innerText = `R$ ${gastoManut.toFixed(2)}`;
-            document.getElementById('c-lucro').innerText = `R$ ${lucro.toFixed(2)}`;
+            faturamento += v;
+            kmTotal += k;
+
+            // Criar item na lista
+            const lista = document.getElementById('lista-entregas');
+            const item = document.createElement('div');
+            item.className = 'entrega-item';
+            item.innerHTML = `
+                <div class="entrega-info">
+                    <b>Entrega #${lista.children.length + 1}</b><br>
+                    <small>${k} KM rodados</small>
+                </div>
+                <div class="entrega-val">+ R$ ${v.toFixed(2)}</div>
+            `;
+            lista.prepend(item);
+
+            atualizarPainel();
             
-            document.getElementById('resultados').style.display = 'grid';
+            // Limpar campos
+            document.getElementById('valor').value = '';
+            document.getElementById('km').value = '';
+        }
+
+        function atualizarPainel() {
+            const gastoGas = (kmTotal / KM_LITRO) * PRECO_GAS;
+            const gastoManut = kmTotal * CUSTO_MANUT_KM;
+            const lucroReal = faturamento - gastoGas - gastoManut;
+
+            document.getElementById('gas-total').innerText = `R$ ${gastoGas.toFixed(2)}`;
+            document.getElementById('manut-total').innerText = `R$ ${gastoManut.toFixed(2)}`;
+            document.getElementById('total-liquido').innerText = `LUCRO LÍQUIDO REAL: R$ ${lucroReal.toFixed(2)}`;
         }
     </script>
 </body>
