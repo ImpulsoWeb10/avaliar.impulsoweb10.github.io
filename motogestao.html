@@ -7,25 +7,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* CORES BASEADAS NO SEU LOGO */
         :root { 
-            --primary: #f58220; /* Laranja do logo */
-            --secondary: #004a80; /* Azul do logo */
-            --bg: #0d1212; /* Fundo escuro conforme seu site atual */
+            --primary: #f58220; 
+            --secondary: #004a80; 
+            --bg: #0d1212; 
             --card: #1a2222; 
             --text: #ffffff;
             --success: #22c55e;
             --danger: #ef4444;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 120px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 120px; overflow-x: hidden; }
         
-        /* TELA DE ATIVAÇÃO */
         #ativacao { position: fixed; inset: 0; background: var(--bg); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .ativacao-card { background: var(--card); padding: 30px; border-radius: 25px; border: 2px solid var(--primary); width: 100%; max-width: 400px; text-align: center; }
         .logo-img { width: 180px; margin-bottom: 20px; }
 
-        /* PAINEL */
         .header-logo { text-align: center; padding: 15px 0; }
         .header-logo img { width: 140px; }
         
@@ -40,16 +37,13 @@
         .entrega-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; border-left: 4px solid var(--secondary); align-items: center; }
         .fab { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; border: none; font-size: 24px; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
         
-        /* SUMMARY */
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; font-size: 16px; border-top: 3px solid var(--primary); }
         
-        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: flex-end; }
         .modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 25px; box-sizing: border-box; }
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .menu-btn { background: #2a3535; border: none; padding: 15px; border-radius: 12px; color: white; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; font-weight: bold; }
 
-        /* RECIBO */
         #render-target { position: absolute; left: -9999px; top: 0; width: 350px; background: white; color: black; padding: 25px; font-family: monospace; border: 1px solid #000; }
     </style>
 </head>
@@ -57,7 +51,8 @@
 
     <div id="ativacao">
         <div class="ativacao-card">
-            <img src="impulsoweb10.jpg" alt="Logo" class="logo-img"> <p style="font-size: 14px; color: #94a3b8; margin-bottom: 25px;">Acesse o painel oficial para Motoboys.</p>
+            <img src="impulsoweb10.jpg" alt="Logo ImpulsoWeb10" class="logo-img">
+            <p style="font-size: 14px; color: #94a3b8; margin-bottom: 25px;">O seu painel de controle financeiro.</p>
             <input type="text" id="lead-nome" placeholder="Seu Nome / Empresa">
             <input type="number" id="lead-zap" placeholder="WhatsApp (DDD + Número)">
             <button class="btn-add" onclick="ativarSistema()">ATIVAR AGORA 🚀</button>
@@ -65,8 +60,7 @@
     </div>
 
     <div id="conteudo-principal" style="display: none;">
-        <div class="header-logo">
-            <img src="impulsoweb10.jpg" alt="ImpulsoWeb10"> </div>
+        <div class="header-logo"><img src="impulsoweb10.jpg" alt="Logo"></div>
 
         <div class="config-section">
             <label>Operador</label>
@@ -75,19 +69,23 @@
 
         <div class="form-add">
             <label>Destino / Cliente</label>
-            <input type="text" id="cliente" placeholder="Onde foi a entrega?">
+            <input type="text" id="cliente" placeholder="Ex: Pizzaria, Hamburgueria...">
+            
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Valor R$</label><input type="number" id="valor" placeholder="0,00" step="0.01"></div>
-                <div style="flex:1"><label>KM</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>Valor Ganho R$</label><input type="number" id="valor" placeholder="0,00" step="0.01"></div>
+                <div style="flex:1"><label>Distância KM</label><input type="number" id="km" placeholder="0"></div>
             </div>
+
+            <label>Despesas Extras (Lanche, Óleo, etc)</label>
+            <input type="number" id="despesa" placeholder="0,00" step="0.01" style="border-color: var(--danger);">
+            
             <button class="btn-add" onclick="lancar()">+ LANÇAR NO EXTRATO</button>
         </div>
 
         <div id="lista-tela"></div>
 
         <button class="fab" onclick="abrirMenu()"><i class="fas fa-rocket"></i></button>
-
-        <div class="summary-fixed" id="footer-lucro">LUCRO ESTIMADO: R$ 0,00</div>
+        <div class="summary-fixed" id="footer-lucro">LUCRO REAL: R$ 0,00</div>
 
         <div id="modalMenu" class="modal" onclick="this.style.display='none'"><div class="modal-content" onclick="event.stopPropagation()">
             <div class="menu-grid">
@@ -96,72 +94,132 @@
                 <button class="menu-btn" onclick="salvarImagem()"><i class="fas fa-image" style="color:#6366f1"></i>SALVAR PRINT</button>
                 <button class="menu-btn" onclick="suporte()"><i class="fas fa-headset" style="color:var(--primary)"></i>FALAR COM SUPORTE</button>
             </div>
-            <button class="menu-btn" style="width:100%; margin-top:10px; background:rgba(239, 68, 68, 0.1); color:var(--danger);" onclick="location.reload()">ZERAR TUDO</button>
+            <button class="menu-btn" style="width:100%; margin-top:10px; background:rgba(239, 68, 68, 0.1); color:var(--danger);" onclick="zerarDia()">ZERAR TUDO (NOVO DIA)</button>
         </div></div>
     </div>
 
     <div id="render-target">
-        <div style="text-align:center"><img src="impulsoweb10.jpg" style="width:100px;"></div> <div style="border-bottom: 2px solid #000; text-align: center; margin-bottom: 10px; padding-bottom: 5px;">
+        <div style="text-align:center"><img src="impulsoweb10.jpg" style="width:100px;"></div>
+        <div style="border-bottom: 2px solid #000; text-align: center; margin-bottom: 10px; padding-bottom: 5px;">
             <h3 id="rec-empresa" style="margin:5px 0;"></h3>
             <p id="rec-data" style="font-size:10px; margin:0;"></p>
         </div>
         <div id="rec-corpo"></div>
         <div style="margin-top:15px; border-top: 2px solid #000; padding-top:10px;">
             <div style="display:flex; justify-content:space-between"><span>TOTAL BRUTO:</span> <b id="rec-bruto"></b></div>
-            <div style="display:flex; justify-content:space-between"><span>CUSTOS:</span> <b id="rec-custo"></b></div>
-            <div style="display:flex; justify-content:space-between; font-size:16px; margin-top:5px; background:#eee"><span>LUCRO REAL:</span> <b id="rec-lucro"></b></div>
+            <div style="display:flex; justify-content:space-between"><span>CUSTOS KM:</span> <b id="rec-custo-km"></b></div>
+            <div style="display:flex; justify-content:space-between; color:red"><span>DESPESAS EXTRAS:</span> <b id="rec-despesa"></b></div>
+            <div style="display:flex; justify-content:space-between; font-size:16px; margin-top:5px; background:#eee"><span>LUCRO LÍQUIDO:</span> <b id="rec-lucro"></b></div>
         </div>
-        <p style="text-align:center; font-size:9px; margin-top:20px;">Powered by ImpulsoWeb10</p>
+        <p style="text-align:center; font-size:9px; margin-top:20px;">Desenvolvido por ImpulsoWeb10</p>
     </div>
 
     <script>
-        let dados = { faturamento: 0, km: 0, entregas: [] };
+        // MEMÓRIA LOCAL: Recupera o que já foi salvo ou cria novo
+        let dados = JSON.parse(localStorage.getItem('motoDados_v5')) || { faturamento: 0, km: 0, despesasExtra: 0, entregas: [] };
         const SEU_NUMERO = "5511954950044"; 
+
+        // Ao abrir a página, verifica se já está logado
+        window.onload = function() {
+            const user = localStorage.getItem('motoUser');
+            if(user) {
+                document.getElementById('empresa').value = user;
+                document.getElementById('ativacao').style.display = "none";
+                document.getElementById('conteudo-principal').style.display = "block";
+                renderizarLista();
+                atualizarCalculos();
+            }
+        };
 
         function ativarSistema() {
             const nome = document.getElementById('lead-nome').value;
             const zap = document.getElementById('lead-zap').value;
             if(!nome || !zap) return alert("Preencha seus dados!");
+            
+            localStorage.setItem('motoUser', nome.toUpperCase());
             document.getElementById('empresa').value = nome.toUpperCase();
-            const aviso = encodeURIComponent(`🚀 *NOVO PARCEIRO:* ${nome}\n📱 Zap: ${zap}\n_Painel ImpulsoWeb10 Ativado!_`);
-            window.open(`https://wa.me/${SEU_NUMERO}?text=${aviso}`);
+            
+            window.open(`https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent('🚀 *ATIVAÇÃO:* ' + nome + '\n📱 Zap: ' + zap)}`);
+            
             document.getElementById('ativacao').style.display = "none";
             document.getElementById('conteudo-principal').style.display = "block";
             atualizarCalculos();
         }
 
         function lancar() {
-            const v = parseFloat(document.getElementById('valor').value);
-            const k = parseFloat(document.getElementById('km').value);
+            const v = parseFloat(document.getElementById('valor').value) || 0;
+            const k = parseFloat(document.getElementById('km').value) || 0;
+            const d = parseFloat(document.getElementById('despesa').value) || 0;
             const c = document.getElementById('cliente').value || "Entrega";
-            if(!v || !k) return alert("Informe Valor e KM!");
-            dados.faturamento += v; dados.km += k;
-            dados.entregas.push({cliente: c, valor: v, km: k});
-            const item = document.createElement('div');
-            item.className = 'entrega-item';
-            item.innerHTML = `<div><b>${c}</b><br><small>${k} KM</small></div> <b>R$ ${v.toFixed(2)}</b>`;
-            document.getElementById('lista-tela').prepend(item);
+
+            if(v === 0 && d === 0) return alert("Lançamento vazio!");
+
+            dados.faturamento += v; 
+            dados.km += k;
+            dados.despesasExtra += d;
+            dados.entregas.push({cliente: c, valor: v, km: k, despesa: d});
+            
+            saveAndSync();
+            
+            document.getElementById('valor').value = ''; 
+            document.getElementById('km').value = ''; 
+            document.getElementById('despesa').value = '';
+            document.getElementById('cliente').value = '';
+        }
+
+        function saveAndSync() {
+            localStorage.setItem('motoDados_v5', JSON.stringify(dados));
+            renderizarLista();
             atualizarCalculos();
-            document.getElementById('valor').value = ''; document.getElementById('km').value = ''; document.getElementById('cliente').value = '';
+        }
+
+        function renderizarLista() {
+            const lista = document.getElementById('lista-tela');
+            lista.innerHTML = "";
+            [...dados.entregas].reverse().forEach(e => {
+                const item = document.createElement('div');
+                item.className = 'entrega-item';
+                let infoExtra = e.despesa > 0 ? `<br><small style="color:var(--danger)">Gasto: R$ ${e.despesa.toFixed(2)}</small>` : "";
+                item.innerHTML = `<div><b>${e.cliente}</b><br><small>${e.km} KM</small>${infoExtra}</div> <b>R$ ${e.valor.toFixed(2)}</b>`;
+                lista.appendChild(item);
+            });
         }
 
         function atualizarCalculos() {
-            const custo = (dados.km / 35 * 5.80) + (dados.km * 0.15);
-            const lucro = dados.faturamento - custo;
-            document.getElementById('footer-lucro').innerText = `LUCRO ESTIMADO: R$ ${lucro.toFixed(2)}`;
+            const custoKm = (dados.km / 35 * 5.80) + (dados.km * 0.15); // Gasolina + Manutenção
+            const lucroTotal = dados.faturamento - custoKm - dados.despesasExtra;
+
+            document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${lucroTotal.toFixed(2)}`;
+            
+            // Atualiza Recibo
             document.getElementById('rec-empresa').innerText = document.getElementById('empresa').value;
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
             document.getElementById('rec-bruto').innerText = `R$ ${dados.faturamento.toFixed(2)}`;
-            document.getElementById('rec-custo').innerText = `R$ ${custo.toFixed(2)}`;
-            document.getElementById('rec-lucro').innerText = `R$ ${lucro.toFixed(2)}`;
+            document.getElementById('rec-custo-km').innerText = `R$ ${custoKm.toFixed(2)}`;
+            document.getElementById('rec-despesa').innerText = `R$ ${dados.despesasExtra.toFixed(2)}`;
+            document.getElementById('rec-lucro').innerText = `R$ ${lucroTotal.toFixed(2)}`;
+            
             let html = "";
-            dados.entregas.forEach(e => { html += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ccc; padding:3px 0; font-size:11px;"><span>${e.cliente}</span> <span>R$ ${e.valor.toFixed(2)}</span></div>`; });
+            dados.entregas.forEach(e => { 
+                html += `<div style="display:flex; justify-content:space-between; border-bottom:1px dashed #ccc; padding:3px 0; font-size:10px;">
+                    <span>${e.cliente}</span> <span>R$ ${e.valor.toFixed(2)}</span>
+                </div>`; 
+            });
             document.getElementById('rec-corpo').innerHTML = html;
+        }
+
+        function zerarDia() {
+            if(confirm("Deseja apagar as corridas de hoje e começar um novo dia?")) {
+                dados = { faturamento: 0, km: 0, despesasExtra: 0, entregas: [] };
+                localStorage.removeItem('motoDados_v5');
+                saveAndSync();
+                alert("Pronto para o próximo turno!");
+            }
         }
 
         function abrirMenu() { document.getElementById('modalMenu').style.display = 'flex'; }
         function gerarPDF() { window.print(); }
-        function suporte() { window.open(`https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent("Opa ImpulsoWeb! Tenho uma dúvida sobre o app.")}`); }
+        function suporte() { window.open(`https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent("Opa! Preciso de uma ajuda aqui no MotoGestão Pro.")}`); }
 
         function salvarImagem() {
             const target = document.getElementById('render-target');
@@ -176,10 +234,13 @@
 
         function enviarZap() {
             const empresa = document.getElementById('empresa').value;
-            const custo = (dados.km / 35 * 5.80) + (dados.km * 0.15);
+            const custoKm = (dados.km / 35 * 5.80) + (dados.km * 0.15);
+            const lucroFinal = dados.faturamento - custoKm - dados.despesasExtra;
             let msg = `🚀 *EXTRATO IMPULSOWEB10 - ${empresa}*\n──────────────────\n`;
-            dados.entregas.forEach((e, i) => { msg += `${i+1}. *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`; });
-            msg += `──────────────────\n💰 *Total:* R$ ${dados.faturamento.toFixed(2)}\n⛽ *Gastos:* R$ ${custo.toFixed(2)}\n✅ *LUCRO REAL: R$ ${(dados.faturamento - custo).toFixed(2)}*\n──────────────────\n_Acelere com a ImpulsoWeb10!_`;
+            dados.entregas.forEach((e, i) => { 
+                msg += `${i+1}. *${e.cliente}*: R$ ${e.valor.toFixed(2)} ${e.despesa > 0 ? '(Gasto: R$'+e.despesa+')' : ''}\n`; 
+            });
+            msg += `──────────────────\n💰 *Bruto:* R$ ${dados.faturamento.toFixed(2)}\n⛽ *Custo KM:* R$ ${custoKm.toFixed(2)}\n🍔 *Despesas Extras:* R$ ${dados.despesasExtra.toFixed(2)}\n✅ *LUCRO LÍQUIDO: R$ ${lucroFinal.toFixed(2)}*\n──────────────────\n_by ImpulsoWeb10_`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
         }
     </script>
