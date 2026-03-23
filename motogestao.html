@@ -14,49 +14,73 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 180px; overflow-x: hidden; }
         
-        /* HEADER DINÂMICO ASIMÉTRICO V12 */
+        /* HEADER DINÂMICO AUMENTADO V13 */
         #header-principal {
             background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); 
-            padding: 25px 20px; border-radius: 0 0 40px 40px; margin: -15px -15px 25px -15px;
+            padding: 30px 20px; border-radius: 0 0 45px 45px; margin: -15px -15px 25px -15px;
             display: flex; align-items: center; justify-content: flex-start; gap: 20px;
             box-shadow: 0 15px 35px rgba(245, 130, 32, 0.4);
             transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             border-bottom: 4px solid var(--secondary);
         }
 
+        /* LOGO COM BRILHO PASSANDO */
         .logo-box { 
-            width: 90px; height: 90px; border-radius: 20px; 
+            width: 100px; height: 100px; border-radius: 22px; 
             border: 3px solid #fff; box-shadow: 0 8px 15px rgba(0,0,0,0.3);
             position: relative; overflow: hidden; background: #fff;
             transition: all 0.6s ease; flex-shrink: 0;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* TEXTO DA RED LINE MAIOR */
-        .red-line-text { text-align: left; transition: all 0.4s ease; }
-        .red-line-text h2 { margin: 0; font-size: 18px; color: #000; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
-        .red-line-text p { margin: 6px 0 0; font-size: 13px; font-weight: 800; color: #fff; opacity: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        /* EFEITO DE BRILHO (SHINE) */
+        .logo-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
 
-        /* MODO FOCO (LOGO NO CENTRO) */
+        @keyframes shine {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+        
+        /* RED LINE TEXTO AUMENTADO */
+        .red-line-text { text-align: left; transition: all 0.4s ease; }
+        .red-line-text h2 { margin: 0; font-size: 20px; color: #000; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
+        .red-line-text p { margin: 8px 0 0; font-size: 14px; font-weight: 800; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); text-transform: uppercase; }
+
+        /* MODO FOCO */
         .modo-foco #header-principal { 
             background: var(--bg); padding: 10px; border-bottom: 2px solid var(--primary); 
             border-radius: 0; justify-content: center; box-shadow: none;
         }
         .modo-foco .red-line-text { display: none; width: 0; opacity: 0; }
-        .modo-foco .logo-box { width: 130px; height: 130px; transform: rotate(0deg); margin: 0 auto; }
+        .modo-foco .logo-box { width: 140px; height: 140px; margin: 0 auto; }
 
-        /* INTERFACE */
-        .form-add { background: var(--card); padding: 20px; border-radius: 25px; border: 1px solid #334155; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        /* INTERFACE E BOTÕES */
+        .form-add { background: var(--card); padding: 20px; border-radius: 25px; border: 1px solid #334155; margin-bottom: 20px; }
         label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin: 10px 0 5px; }
-        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #080c0c; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); background: #000; }
+        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #080c0c; color: white; box-sizing: border-box; outline: none; }
         
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
         .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 20px; }
 
-        .entrega-card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); position: relative; }
-        .gasto-tag { font-size: 11px; color: var(--danger); display: block; margin-top: 5px; font-style: italic; }
+        .entrega-card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); }
+        .gasto-tag { font-size: 11px; color: var(--danger); display: block; margin-top: 5px; }
 
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 2000; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; }
         .recibo-card { background: white; color: black; padding: 30px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; }
@@ -68,8 +92,8 @@
         <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg" alt="Logo"></div>
             <div class="red-line-text">
-                <h2>SISTEMA Nº1<br><span style="background:#000; color:#fff; padding: 0 5px; border-radius: 3px;">ELITE MOTO</span></h2>
-                <p>PARE DE PERDER DINHEIRO!</p>
+                <h2>SISTEMA Nº1<br><span style="background:#000; color:#fff; padding: 0 6px; border-radius: 3px;">ELITE MOTO</span></h2>
+                <p>PARE DE PERDER TEMPO E DINHEIRO!</p>
             </div>
         </header>
 
@@ -120,26 +144,34 @@
     <div id="modalRecibo" class="overlay">
         <div id="recibo-area" class="recibo-card">
             <div style="text-align:center">
-                <img src="impulsoweb10.jpg" style="width:60px; border-radius:10px; margin-bottom:10px;">
-                <h3 style="margin:0;">RELATÓRIO DE ELITE</h3>
+                <img src="impulsoweb10.jpg" style="width:60px; border-radius:10px;">
+                <h3 style="margin:5px 0;">RELATÓRIO DE ELITE</h3>
                 <small id="rec-data"></small>
             </div>
-            <hr style="border:1px dashed #eee; margin:15px 0;">
+            <hr>
             <div id="rec-corpo"></div>
-            <hr style="border:1px dashed #eee; margin:15px 0;">
+            <hr>
             <div id="rec-resumo-financeiro"></div>
         </div>
         <div style="width:100%; max-width:380px; margin-top:20px;">
             <button class="btn-main" onclick="baixarPDF()">📥 BAIXAR PDF</button>
-            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 ENVIAR WHATSAPP</button>
-            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR E ZERAR TUDO</button>
+            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 WHATSAPP</button>
+            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR TUDO</button>
+        </div>
+    </div>
+
+    <div id="modalHistorico" class="overlay">
+        <div class="form-add" style="width:100%; max-width:350px;">
+            <h2>HISTÓRICO</h2>
+            <div id="lista-hist"></div>
+            <button class="btn-main" onclick="document.getElementById('modalHistorico').style.display='none'">FECHAR</button>
         </div>
     </div>
 
     <script>
-        let entregas = JSON.parse(localStorage.getItem('moto_v12_data')) || [];
+        let entregas = JSON.parse(localStorage.getItem('moto_v13_data')) || [];
         let gastosTemp = [];
-        let historico = JSON.parse(localStorage.getItem('moto_v12_hist')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_v13_hist')) || [];
 
         function ativarModoFoco() { document.getElementById('body-app').classList.add('modo-foco'); }
         function desativarModoFoco() { if(document.getElementById('cliente').value === "") { document.getElementById('body-app').classList.remove('modo-foco'); } }
@@ -162,7 +194,7 @@
             if(v <= 0) return alert("Insira o valor!");
             
             entregas.push({cliente: c, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0)});
-            localStorage.setItem('moto_v12_data', JSON.stringify(entregas));
+            localStorage.setItem('moto_v13_data', JSON.stringify(entregas));
 
             const audio = document.getElementById('audio-cash');
             audio.currentTime = 0;
@@ -195,24 +227,21 @@
             let b=0, k=0, g=0, html = "";
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG;
-                html += `<div style="margin-bottom:8px;"><b>${e.cliente}</b>: R$ ${e.valor.toFixed(2)}`;
-                e.gastos.forEach(gt => html += `<div style="font-size:10px; color:#555; padding-left:10px;">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</div>`);
-                html += `</div>`;
+                html += `<div style="margin-bottom:8px;"><b>${e.cliente}</b>: R$ ${e.valor.toFixed(2)}</div>`;
             });
             const cKm = (k / 35 * 6.00) + (k * 0.15);
             document.getElementById('rec-corpo').innerHTML = html;
-            document.getElementById('rec-resumo-financeiro').innerHTML = `<div style="background:#000; color:#fff; padding:10px; display:flex; justify-content:space-between; font-size:18px;"><span>LUCRO:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>`;
+            document.getElementById('rec-resumo-financeiro').innerHTML = `<div style="background:#000; color:#fff; padding:10px; display:flex; justify-content:space-between;"><span>LUCRO:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>`;
         }
 
         function enviarWhatsApp() {
             let b=0, k=0, g=0, txt = `🏁 *EXTRATO MOTO ELITE*\n\n`;
             entregas.forEach(e => {
                 txt += `📦 *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
-                e.gastos.forEach(gt => txt += `   └ 💸 ${gt.tipo}: R$ ${gt.valor.toFixed(2)}\n`);
                 b += e.valor; k += e.km; g += e.totalG;
             });
             const cKm = (k / 35 * 6.00) + (k * 0.15);
-            txt += `\n✅ *LUCRO REAL: R$ ${(b - cKm - g).toFixed(2)}*`;
+            txt += `\n✅ *LUCRO: R$ ${(b - cKm - g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
@@ -221,14 +250,14 @@
             html2canvas(document.querySelector("#recibo-area")).then(canvas => {
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 0);
-                pdf.save(`extrato_elite.pdf`);
+                pdf.save(`extrato.pdf`);
             });
         }
 
         function arquivarEFechar() {
             historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
-            localStorage.setItem('moto_v12_hist', JSON.stringify(historico));
-            localStorage.removeItem('moto_v12_data');
+            localStorage.setItem('moto_v13_hist', JSON.stringify(historico));
+            localStorage.removeItem('moto_v13_data');
             location.reload();
         }
 
