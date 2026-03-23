@@ -3,199 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro - ImpulsoWeb10</title>
+    <title>MotoGestão Pro - Recibos Profissionais</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #fbbf24; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --success: #22c55e; --danger: #ef4444; --accent: #6366f1; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 100px; }
         
         .header { text-align: center; padding: 15px 0; border-bottom: 1px solid #334155; margin-bottom: 20px; }
-        .header h1 { font-size: 18px; margin: 0; color: var(--primary); letter-spacing: 1px; }
-        
-        /* Stats */
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .stat-card { background: var(--card); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #334155; position: relative; overflow: hidden; }
-        .stat-card span { font-size: 9px; text-transform: uppercase; color: #94a3b8; display: block; font-weight: bold; }
-        .stat-card b { font-size: 18px; display: block; margin-top: 5px; }
+        .header h1 { font-size: 18px; margin: 0; color: var(--primary); text-transform: uppercase; }
 
-        /* Inputs */
+        /* Configurações da Empresa/Entregador */
+        .config-section { background: rgba(99, 102, 241, 0.1); border: 1px dashed var(--accent); padding: 15px; border-radius: 15px; margin-bottom: 20px; }
+        
+        /* Inputs Estilizados */
         .form-add { background: var(--card); padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        label { font-size: 11px; color: var(--primary); font-weight: bold; text-transform: uppercase; }
-        input { width: 100%; padding: 14px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; box-sizing: border-box; }
+        label { font-size: 11px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin-top: 10px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 15px; box-sizing: border-box; }
         
-        .btn-add { width: 100%; background: var(--primary); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
-        .btn-add:active { transform: scale(0.95); }
+        .btn-add { width: 100%; background: var(--primary); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* Lista */
-        .entrega-item { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--primary); animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-        .entrega-info b { font-size: 14px; color: #fff; }
-        .entrega-info small { color: #94a3b8; }
-        .entrega-val { font-weight: 800; color: var(--success); font-size: 16px; }
+        /* Lista de Entregas */
+        .entrega-item { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--primary); }
+        .entrega-info b { font-size: 14px; color: #fff; display: block; }
+        .entrega-info small { color: #94a3b8; font-size: 11px; }
 
-        /* Floating Action Button (FAB) */
-        .fab { position: fixed; bottom: 85px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4); cursor: pointer; z-index: 100; border: none; }
+        /* Menu Modal e Botões */
+        .fab { position: fixed; bottom: 85px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4); z-index: 100; border: none; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 200; align-items: flex-end; }
+        .modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 30px 20px; box-sizing: border-box; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .menu-btn { background: #334155; border: none; padding: 18px; border-radius: 15px; color: white; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; font-weight: bold; }
+        .menu-btn i { font-size: 20px; color: var(--primary); }
 
-        /* Footer Total */
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--success); color: #000; padding: 18px; text-align: center; font-weight: 900; font-size: 16px; box-shadow: 0 -5px 20px rgba(0,0,0,0.4); z-index: 90; border-radius: 20px 20px 0 0; }
+        /* Barra de Lucro Fixo */
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--success); color: #000; padding: 18px; text-align: center; font-weight: 900; font-size: 15px; z-index: 90; border-radius: 20px 20px 0 0; }
 
-        /* Modal Estilizado */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 200; align-items: flex-end; }
-        .modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 30px 20px; box-sizing: border-box; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        
-        .modal-title { text-align: center; margin-bottom: 25px; color: var(--primary); font-weight: bold; }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .menu-btn { background: #334155; border: none; padding: 20px; border-radius: 15px; color: white; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .menu-btn i { font-size: 24px; color: var(--primary); }
-        .menu-btn.whatsapp i { color: #25d366; }
-        .menu-btn.pdf i { color: #ff4444; }
-
-        /* Área de Impressão (Invisível na tela) */
-        #recibo-print { display: none; background: white; color: black; padding: 20px; font-family: monospace; }
+        /* ESTILO DO RECIBO (O que sai no PDF/Impressão) */
+        #area-recibo { display: none; }
         @media print {
-            body * { display: none; }
-            #recibo-print { display: block; }
+            body * { display: none !important; }
+            #area-recibo { 
+                display: block !important; 
+                background: white !important; 
+                color: black !important; 
+                padding: 40px !important; 
+                width: 100%;
+                font-family: 'Courier New', Courier, monospace;
+            }
+            .print-header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+            .print-row { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px dashed #ccc; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1><i class="fas fa-bolt"></i> MOTO GESTÃO PRO</h1>
+        <h1><i class="fas fa-motorcycle"></i> MOTO GESTÃO PRO</h1>
     </div>
 
-    <div class="stat-grid">
-        <div class="stat-card">
-            <span>Desgaste (Gas+Manut)</span>
-            <b id="custo-total" style="color: var(--danger);">R$ 0,00</b>
-        </div>
-        <div class="stat-card">
-            <span>KM Total Hoje</span>
-            <b id="km-total-display">0 KM</b>
-        </div>
+    <div class="config-section">
+        <label><i class="fas fa-id-card"></i> Sua Empresa / Seu Nome</label>
+        <input type="text" id="minha-empresa" placeholder="Ex: Robson Entregas Express" oninput="atualizarRecibo()">
     </div>
 
     <div class="form-add">
-        <label>Valor Recebido</label>
-        <input type="number" id="valor" placeholder="R$ 0,00" inputmode="decimal">
-        
-        <label>KM da Corrida</label>
-        <input type="number" id="km" placeholder="KM" inputmode="numeric">
+        <label>Nome do Cliente / Estabelecimento</label>
+        <input type="text" id="cliente-nome" placeholder="Ex: Pizzaria do Zé">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label>Valor (R$)</label>
+                <input type="number" id="valor" placeholder="0,00" inputmode="decimal">
+            </div>
+            <div>
+                <label>KM Rodado</label>
+                <input type="number" id="km" placeholder="KM" inputmode="numeric">
+            </div>
+        </div>
         
         <button class="btn-add" onclick="addEntrega()">
-            <i class="fas fa-plus"></i> LANÇAR AGORA
+            <i class="fas fa-plus"></i> LANÇAR ENTREGA
         </button>
     </div>
 
     <div id="lista-entregas"></div>
 
-    <button class="fab" onclick="toggleModal()">
-        <i class="fas fa-ellipsis-v"></i>
-    </button>
+    <button class="fab" onclick="toggleModal()"><i class="fas fa-bars"></i></button>
 
-    <div class="summary-fixed" id="total-liquido">
-        LUCRO REAL: R$ 0,00
-    </div>
+    <div class="summary-fixed" id="total-liquido">LUCRO REAL: R$ 0,00</div>
 
-    <div id="actionModal" class="modal" onclick="closeModal(event)">
+    <div id="actionModal" class="modal" onclick="this.style.display='none'">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-title">AÇÕES DO ESCRITÓRIO</div>
             <div class="menu-grid">
-                <button class="menu-btn whatsapp" onclick="enviarWhats()">
-                    <i class="fab fa-whatsapp"></i>
-                    ENVIAR RESUMO
+                <button class="menu-btn" onclick="enviarWhats()">
+                    <i class="fab fa-whatsapp"></i> RESUMO WHATS
                 </button>
-                <button class="menu-btn" onclick="gerarRecibo()">
-                    <i class="fas fa-receipt"></i>
-                    GERAR RECIBO
+                <button class="menu-btn" onclick="gerarPDF()">
+                    <i class="fas fa-file-pdf"></i> GERAR PDF/RECIBO
                 </button>
-                <button class="menu-btn pdf" onclick="window.print()">
-                    <i class="fas fa-file-pdf"></i>
-                    SALVAR PDF
+                <button class="menu-btn" onclick="window.location.reload()">
+                    <i class="fas fa-sync"></i> RESETAR DIA
                 </button>
-                <button class="menu-btn" onclick="limparTudo()">
-                    <i class="fas fa-trash"></i>
-                    LIMPAR DIA
+                <button class="menu-btn" onclick="alert('Funcionalidade de imagem em breve!')">
+                    <i class="fas fa-image"></i> SALVAR IMAGEM
                 </button>
             </div>
-            <button style="width:100%; margin-top:20px; padding:10px; background:none; border:none; color:#94a3b8; font-weight:bold;" onclick="toggleModal()">FECHAR</button>
         </div>
     </div>
 
-    <div id="recibo-print">
-        <h2 style="text-align:center">RECIBO DE ENTREGA</h2>
+    <div id="area-recibo">
+        <div class="print-header">
+            <h2 id="r-minha-empresa">NOME DA EMPRESA</h2>
+            <p>Recibo de Prestação de Serviço</p>
+        </div>
+        <p><b>Data:</b> <span id="r-data"></span></p>
+        <p><b>Cliente:</b> <span id="r-cliente"></span></p>
         <hr>
-        <p>Data: <span id="r-data"></span></p>
-        <p>Entregador: Autônomo</p>
+        <div id="r-itens"></div>
         <hr>
-        <h3>TOTAL DO DIA: <span id="r-total"></span></h3>
-        <p>KM Rodados: <span id="r-km"></span></p>
-        <br>
-        <p style="text-align:center">Obrigado pela preferência!</p>
+        <div class="print-row" style="font-size: 20px; font-weight: bold;">
+            <span>TOTAL A RECEBER:</span>
+            <span id="r-total-geral">R$ 0,00</span>
+        </div>
+        <p style="margin-top: 50px; text-align: center; border-top: 1px solid #000;">Assinatura do Prestador</p>
     </div>
 
     <script>
         let faturamento = 0;
         let kmGeral = 0;
+        let listaEntregas = [];
 
         function addEntrega() {
             const v = parseFloat(document.getElementById('valor').value);
             const k = parseFloat(document.getElementById('km').value);
-            if(!v || !k) return;
+            const c = document.getElementById('cliente-nome').value || "Cliente Particular";
+
+            if(!v || !k) return alert("Preencha Valor e KM!");
 
             faturamento += v;
             kmGeral += k;
+            listaEntregas.push({cliente: c, valor: v, km: k});
 
             const lista = document.getElementById('lista-entregas');
             const item = document.createElement('div');
             item.className = 'entrega-item';
             item.innerHTML = `
                 <div class="entrega-info">
-                    <b>Corrida #${lista.children.length + 1}</b><br>
+                    <b>${c}</b>
                     <small>${k} KM rodados</small>
                 </div>
                 <div class="entrega-val">R$ ${v.toFixed(2)}</div>
             `;
             lista.prepend(item);
             atualizar();
+            
+            // Limpa campos mas mantém o nome da empresa
             document.getElementById('valor').value = '';
             document.getElementById('km').value = '';
+            document.getElementById('cliente-nome').value = '';
         }
 
         function atualizar() {
             const custo = (kmGeral / 35 * 5.80) + (kmGeral * 0.15);
             const lucro = faturamento - custo;
-
-            document.getElementById('custo-total').innerText = `R$ ${custo.toFixed(2)}`;
-            document.getElementById('km-total-display').innerText = `${kmGeral} KM`;
             document.getElementById('total-liquido').innerText = `LUCRO REAL: R$ ${lucro.toFixed(2)}`;
-            
-            // Atualiza dados do recibo invisível
-            document.getElementById('r-total').innerText = `R$ ${faturamento.toFixed(2)}`;
-            document.getElementById('r-km').innerText = kmGeral;
-            document.getElementById('r-data').innerText = new Date().toLocaleDateString();
         }
 
         function toggleModal() {
             const m = document.getElementById('actionModal');
-            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        function closeModal(e) { document.getElementById('actionModal').style.display = 'none'; }
+        function gerarPDF() {
+            const minhaEmpresa = document.getElementById('minha-empresa').value || "Entregador Autônomo";
+            document.getElementById('r-minha-empresa').innerText = minhaEmpresa.toUpperCase();
+            document.getElementById('r-data').innerText = new Date().toLocaleString();
+            document.getElementById('r-total-geral').innerText = `R$ ${faturamento.toFixed(2)}`;
+            
+            let htmlItens = "";
+            listaEntregas.forEach((ent, index) => {
+                htmlItens += `<div class="print-row"><span>Corrida #${index+1} - ${ent.cliente}</span> <span>R$ ${ent.valor.toFixed(2)}</span></div>`;
+            });
+            document.getElementById('r-itens').innerHTML = htmlItens;
 
-        function enviarWhats() {
-            const msg = encodeURIComponent(`🛵 *Resumo MotoGestão*\n💰 Bruto: R$ ${faturamento.toFixed(2)}\n⛽ Desgaste: ${document.getElementById('custo-total').innerText}\n🏁 KM: ${kmGeral}\n✅ *Lucro Líquido: ${document.getElementById('total-liquido').innerText.split(': ')[1]}*`);
-            window.open(`https://wa.me/?text=${msg}`);
-        }
-
-        function gerarRecibo() {
-            alert("Preparando recibo para impressão...");
+            // Comando de Impressão
             window.print();
         }
 
-        function limparTudo() {
-            if(confirm("Deseja zerar os dados de hoje?")) window.location.reload();
+        function enviarWhats() {
+            const minhaEmpresa = document.getElementById('minha-empresa').value || "Motoboy";
+            const msg = encodeURIComponent(`🛵 *RECIBO - ${minhaEmpresa.toUpperCase()}*\n\n💰 Total Bruto: R$ ${faturamento.toFixed(2)}\n🏁 KM Total: ${kmGeral}km\n\n✅ *Lucro Líquido: ${document.getElementById('total-liquido').innerText.split(': ')[1]}*`);
+            window.open(`https://wa.me/?text=${msg}`);
         }
     </script>
 </body>
