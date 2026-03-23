@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulador Qualy Quimy</title>
 
-<link rel="manifest" href="manifest.json">
-
 <style>
 body {
     font-family: Arial;
@@ -16,8 +14,8 @@ body {
 
 /* MENU */
 .menu button {
-    padding: 12px;
-    margin: 8px;
+    padding: 10px;
+    margin: 5px;
     border: none;
     border-radius: 8px;
     background: #222;
@@ -93,7 +91,6 @@ body {
     height: 20px;
     background: #8b5a2b;
     border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 /* QUARTO */
@@ -108,7 +105,6 @@ body {
     height: 50px;
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-    transition: 0.5s;
 }
 
 /* FACHADA */
@@ -121,7 +117,6 @@ body {
     width: 45px;
     height: 70px;
     background: #3e2723;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 .janela {
@@ -131,25 +126,30 @@ body {
     width: 40px;
     height: 30px;
     background: #87ceeb;
-    border: 2px solid #333;
 }
 
 /* BOTÕES */
 button.acao {
-    margin: 8px;
-    padding: 12px 18px;
+    margin: 5px;
+    padding: 10px;
     background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
 }
+
+/* FOTO */
+#canvas {
+    margin-top: 10px;
+    border-radius: 10px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>🎨 Simulador Qualy Quimy</h2>
+<h2 id="titulo">🎨 Simulador</h2>
 
 <div class="menu">
     <button onclick="mostrar('sala')">🏡 Sala</button>
@@ -198,6 +198,21 @@ button.acao {
 <button class="acao" onclick="favoritar()">❤️ Favoritar</button>
 <button class="acao" onclick="comprar()">🛒 Comprar</button>
 
+<hr>
+
+<h3>📸 Teste na sua casa</h3>
+
+<input type="file" id="upload" accept="image/*">
+
+<br><br>
+
+<label>Intensidade:</label><br>
+<input type="range" id="intensidade" min="0" max="1" step="0.05" value="0.5">
+
+<br><br>
+
+<canvas id="canvas" width="320" height="200"></canvas>
+
 <script>
 
 let atual = {};
@@ -208,22 +223,21 @@ const textura = "https://www.transparenttextures.com/patterns/concrete-wall.png"
 
 const dados = {
 sala: [
-{nome:"Kit Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
-{nome:"Kit Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
+{nome:"Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
+{nome:"Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
 ],
 quarto: [
-{nome:"Kit Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]},
-{nome:"Kit Quarto Relax", cores:["#eaf6ff","#bcdffb","#5dade2"]}
+{nome:"Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]},
+{nome:"Quarto Relax", cores:["#eaf6ff","#bcdffb","#5dade2"]}
 ],
 fachada: [
-{nome:"Kit Fachada Elegante", cores:["#eee","#555","#222"]},
-{nome:"Kit Fachada Natural", cores:["#f4e1c1","#a67c52","#5c4033"]}
+{nome:"Fachada Elegante", cores:["#eee","#555","#222"]}
 ]
 };
 
 function mostrar(tipo){
     tipoAtual = tipo;
-    document.querySelectorAll(".ambiente").forEach(a => a.style.display="none");
+    document.querySelectorAll(".ambiente").forEach(a=>a.style.display="none");
     document.getElementById(tipo).style.display="flex";
     trocar();
 }
@@ -261,8 +275,12 @@ function trocar(){
 
     aplicarTextura();
     nome.innerText = atual.nome;
+
+    corAtual = k.cores[0];
+    desenhar();
 }
 
+/* DIA/NOITE */
 function modo(){
     noite = !noite;
     let filtro = noite ? "brightness(0.6)" : "brightness(1)";
@@ -271,23 +289,58 @@ function modo(){
     });
 }
 
+/* FAVORITO */
 function favoritar(){
     localStorage.setItem("kitFavorito", JSON.stringify(atual));
     alert("Salvo!");
 }
 
+/* WHATSAPP */
 function comprar(){
-    let texto = "Quero o "+atual.nome+" da Qualy Quimy";
+    let texto = "Quero o "+atual.nome;
     window.open("https://wa.me/55SEUNUMERO?text="+encodeURIComponent(texto));
 }
 
-/* carregar favorito */
-let fav = localStorage.getItem("kitFavorito");
-if(fav){
-    atual = JSON.parse(fav);
-    nome.innerText = atual.nome;
+/* FOTO REAL */
+let img = new Image();
+let corAtual = "#ffffff";
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+upload.addEventListener("change", function(e){
+    let file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(event){
+        img.onload = desenhar;
+        img.src = event.target.result;
+    }
+
+    reader.readAsDataURL(file);
+});
+
+intensidade.addEventListener("input", desenhar);
+
+function desenhar(){
+    if(!img.src) return;
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+    let intensidadeValor = intensidade.value;
+
+    ctx.globalCompositeOperation = "multiply";
+    ctx.globalAlpha = intensidadeValor;
+
+    ctx.fillStyle = corAtual;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
 }
 
+/* INICIAL */
 mostrar("sala");
 
 </script>
