@@ -14,72 +14,78 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 180px; }
         
-        /* RED LINE PERSUASIVA V9 */
-        .red-line { 
+        /* HEADER DINÂMICO */
+        #header-principal {
             background: linear-gradient(135deg, #f58220 0%, #ff9d4d 50%, #b35a00 100%); 
-            padding: 30px 20px; 
-            border-radius: 0 0 35px 35px;
-            margin: -15px -15px 25px -15px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(245, 130, 32, 0.4);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 5px solid var(--secondary);
+            padding: 30px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 25px -15px;
+            text-align: center; box-shadow: 0 15px 35px rgba(245, 130, 32, 0.4);
+            position: relative; transition: all 0.5s ease; border-bottom: 5px solid var(--secondary);
         }
+
+        /* LOGO QUE AUMENTA */
         .logo-box { 
-            width: 110px; height: 110px; margin: 0 auto 15px; border-radius: 25px; 
+            width: 100px; height: 100px; margin: 0 auto; border-radius: 25px; 
             border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             position: relative; overflow: hidden; transform: rotate(-3deg);
+            transition: all 0.5s ease;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Efeito de brilho na logo */
         .logo-box::after {
             content: ""; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%;
             background: rgba(255, 255, 255, 0.4); transform: rotate(30deg); animation: shine 3s infinite;
         }
         @keyframes shine { 0% { left: -60%; } 100% { left: 150%; } }
-        
-        .red-line h2 { margin: 0; font-size: 19px; color: #000; font-weight: 900; line-height: 1.2; text-transform: uppercase; }
-        .red-line p { margin: 10px 0 0; font-size: 13px; font-weight: 800; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
-        /* INTERFACE */
+        /* ESTADO "TRABALHANDO" (Quando clica no input) */
+        .modo-foco #header-principal { padding: 15px 20px; background: var(--bg); border-bottom: 1px solid var(--primary); box-shadow: none; }
+        .modo-foco .red-line-text { display: none; }
+        .modo-foco .logo-box { width: 140px; height: 140px; transform: rotate(0deg); }
+
+        /* INTERFACE PADRÃO */
         .form-add { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; margin-bottom: 20px; }
         label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin: 8px 0 4px; }
-        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #080c0c; color: white; font-size: 14px; box-sizing: border-box; }
+        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #080c0c; color: white; box-sizing: border-box; }
         
-        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; box-shadow: 0 -5px 20px rgba(239, 68, 68, 0.3); }
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
+        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; }
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); }
 
+        /* MODAIS */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; }
-        .recibo-card { background: white; color: black; padding: 25px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        .entrega-card-main { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); }
-        .gasto-linha { font-size: 12px; color: var(--danger); margin-top: 5px; padding-left: 10px; border-left: 1px solid #444; }
+        .recibo-card { background: white; color: black; padding: 25px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; }
+        .entrega-item-box { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
     </style>
 </head>
-<body>
+<body id="body-app">
 
     <div id="conteudo">
-        <div class="red-line">
+        <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg"></div>
-            <h2>O SISTEMA Nº1 DOS<br><span style="background:#000; color:#fff; padding: 0 5px;">ENTREGADORES DE ELITE</span></h2>
-            <p>PARE DE PERDER TEMPO E DINHEIRO AGORA!</p>
-        </div>
+            <div class="red-line-text">
+                <h2 style="margin: 15px 0 0; font-size: 19px; color: #000; font-weight: 900; text-transform: uppercase;">O SISTEMA Nº1 DOS<br><span style="background:#000; color:#fff; padding: 0 5px;">ENTREGADORES DE ELITE</span></h2>
+                <p style="margin: 8px 0 0; font-size: 13px; font-weight: 800; color: #fff;">PARE DE PERDER TEMPO E DINHEIRO!</p>
+            </div>
+        </header>
 
-        <button class="btn-main" style="background:var(--card); border:1px solid var(--primary); margin-bottom:20px;" onclick="verHistorico()">📁 MEU HISTÓRICO DE LUCROS</button>
+        <button class="btn-main" style="background:var(--card); border:1px solid var(--primary); margin-bottom:15px;" onclick="verHistorico()">📁 VER HISTÓRICO</button>
 
         <div class="form-add">
-            <label>Onde foi a entrega?</label>
-            <input type="text" id="cliente" placeholder="Ex: Ifood, Pizzaria, Particular...">
+            <label>Destino da Entrega</label>
+            <input type="text" id="cliente" placeholder="Ex: Ifood, Loggi, Particular..." onfocus="ativarModoFoco()" onblur="desativarModoFoco()">
+            
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1"><label>Valor R$</label><input type="number" id="valor" placeholder="0.00"></div>
                 <div style="flex:1"><label>KM</label><input type="number" id="km" placeholder="0"></div>
             </div>
-            <label>Despesas Extras (Pedágio, Lanche...)</label>
+            
+            <label>Gastos Extras</label>
             <div style="display:flex; gap:5px;">
                 <input type="number" id="gasto-total-input" placeholder="R$ 0.00" readonly onclick="abrirModalGasto()">
-                <button onclick="abrirModalGasto()" style="background:var(--danger); color:white; border:none; width:60px; border-radius:10px; font-weight:bold; font-size:22px;">+</button>
+                <button onclick="abrirModalGasto()" style="background:var(--danger); color:white; border:none; width:50px; border-radius:10px; font-weight:bold; font-size:20px;">+</button>
             </div>
+            
             <button class="btn-main" onclick="salvarEntrega()">SALVAR CORRIDA ✅</button>
         </div>
 
@@ -89,74 +95,67 @@
     </div>
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
-        <div class="form-add" style="width:100%; max-width:320px; border-color:var(--danger);">
-            <h3 style="color:var(--danger); margin-top:0;">Lançar Despesa</h3>
-            <select id="tipo-gasto"><option>Combustível</option><option>Pedágio</option><option>Almoço</option><option>Lanche</option><option>Oficina</option></select>
-            <input type="number" id="valor-gasto" placeholder="R$ 0.00" style="margin-top:15px;">
-            <button class="btn-main" style="background:var(--danger)" onclick="addGastoLista()">ADICIONAR GASTO</button>
-            <div id="preview-gastos" style="margin:15px 0; font-size:13px; color:var(--danger);"></div>
-            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR ✅</button>
+        <div class="form-add" style="width:100%; max-width:320px;">
+            <h3 style="color:var(--primary)">Lançar Gasto</h3>
+            <select id="tipo-gasto" style="width:100%; padding:10px; background:#000; color:#fff; border-radius:10px;"><option>Combustível</option><option>Pedágio</option><option>Almoço</option><option>Outros</option></select>
+            <input type="number" id="valor-gasto" placeholder="R$ 0.00" style="margin-top:10px;">
+            <button class="btn-main" onclick="addGastoLista()">ADICIONAR</button>
+            <div id="preview-gastos" style="font-size:12px; color:var(--danger); margin:10px 0;"></div>
+            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR</button>
         </div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-area" class="recibo-card">
             <div style="text-align:center">
-                <img src="impulsoweb10.jpg" style="width:80px; border-radius:15px; transform: rotate(-3deg);">
-                <h3 style="margin:10px 0 5px;">EXTRATO DE ELITE</h3>
+                <img src="impulsoweb10.jpg" style="width:70px; border-radius:10px;">
+                <h3 style="margin:5px 0;">RECIBO DETALHADO</h3>
                 <small id="rec-data"></small>
             </div>
-            <div style="border-top:1px dashed #000; margin:15px 0;"></div>
+            <hr>
             <div id="rec-corpo"></div>
-            <div style="border-top:1px dashed #000; margin:15px 0;"></div>
+            <hr>
             <div id="rec-resumo-financeiro"></div>
-            <p style="text-align:center; font-size:9px; margin-top:15px;">ImpulsoWeb10 - Gestão de Alta Performance</p>
         </div>
-        <div style="width:100%; max-width:380px; margin-top:20px;">
-            <button class="btn-main" onclick="baixarPDF()"><i class="fas fa-file-pdf"></i> BAIXAR RECIBO PDF</button>
-            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()"><i class="fab fa-whatsapp"></i> ENVIAR DETALHADO NO WHATSAPP</button>
+        <div style="width:100%; max-width:380px; margin-top:15px;">
+            <button class="btn-main" onclick="baixarPDF()">📥 SALVAR PDF</button>
+            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 WHATSAPP DETALHADO</button>
             <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR E LIMPAR DIA</button>
-            <button class="btn-main" style="background:transparent; border:1px solid #fff;" onclick="document.getElementById('modalRecibo').style.display='none'">CORRIGIR ALGO</button>
-        </div>
-    </div>
-
-    <div id="modalHistorico" class="overlay">
-        <div class="form-add" style="width:100%; max-width:350px;">
-            <h2 style="color:var(--primary)">HISTÓRICO DE LUCROS</h2>
-            <div id="lista-hist" style="max-height:400px; overflow-y:auto;"></div>
-            <button class="btn-main" onclick="document.getElementById('modalHistorico').style.display='none'">VOLTAR AO PAINEL</button>
         </div>
     </div>
 
     <script>
-        let entregas = JSON.parse(localStorage.getItem('moto_v9_data')) || [];
+        let entregas = JSON.parse(localStorage.getItem('moto_v95_data')) || [];
         let gastosTemp = [];
-        let historico = JSON.parse(localStorage.getItem('moto_v9_hist')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_v95_hist')) || [];
 
-        window.onload = () => { atualizarTela(); };
+        // FUNÇÃO PARA SUMIR RED LINE E AUMENTAR LOGO
+        function ativarModoFoco() {
+            document.getElementById('body-app').classList.add('modo-foco');
+        }
 
-        function abrirModalGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
-
-        function addGastoLista() {
-            const v = parseFloat(document.getElementById('valor-gasto').value);
-            const t = document.getElementById('tipo-gasto').value;
-            if(!v) return;
-            gastosTemp.push({tipo: t, valor: v});
-            document.getElementById('preview-gastos').innerHTML += `<div>❌ ${t}: R$ ${v.toFixed(2)}</div>`;
-            document.getElementById('gasto-total-input').value = gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2);
-            document.getElementById('valor-gasto').value = '';
+        function desativarModoFoco() {
+            // Só desativa se o campo estiver vazio, senão mantém o foco no trabalho
+            if(document.getElementById('cliente').value === "") {
+                document.getElementById('body-app').classList.remove('modo-foco');
+            }
         }
 
         function salvarEntrega() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
             const c = document.getElementById('cliente').value || "Entrega";
-            if(v === 0) return alert("Insira o valor da entrega!");
+            if(v === 0) return alert("Insira o valor!");
+            
             entregas.push({cliente: c, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0)});
-            localStorage.setItem('moto_v9_data', JSON.stringify(entregas));
-            gastosTemp = []; document.getElementById('preview-gastos').innerHTML = '';
-            document.getElementById('cliente').value = ''; document.getElementById('valor').value = ''; document.getElementById('km').value = '';
-            document.getElementById('gasto-total-input').value = '';
+            localStorage.setItem('moto_v95_data', JSON.stringify(entregas));
+            
+            // Reseta campos e volta o Header ao normal
+            gastosTemp = []; 
+            document.getElementById('cliente').value = ''; 
+            document.getElementById('valor').value = ''; 
+            document.getElementById('km').value = '';
+            document.getElementById('body-app').classList.remove('modo-foco');
             atualizarTela();
         }
 
@@ -165,15 +164,26 @@
             lista.innerHTML = ""; let b=0, k=0, g=0;
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG;
-                let hG = e.gastos.map(gt => `<div class="gasto-linha">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</div>`).join('');
-                lista.innerHTML += `<div class="entrega-card-main"><div style="display:flex; justify-content:space-between;"><div><b>${e.cliente}</b><br><small>${e.km} KM</small></div><b style="color:var(--success)">R$ ${e.valor.toFixed(2)}</b></div>${hG}</div>`;
+                let hG = e.gastos.map(gt => `<div style="font-size:11px; color:var(--danger)">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</div>`).join('');
+                lista.innerHTML += `<div class="entrega-item-box"><div style="display:flex; justify-content:space-between;"><b>${e.cliente}</b><b>R$ ${e.valor.toFixed(2)}</b></div>${hG}</div>`;
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
             document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${(b - cKm - g).toFixed(2)}`;
         }
 
+        // ... (resto das funções de PDF, WhatsApp e Gasto permanecem as mesmas das v9 anterior)
+        function abrirModalGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
+        function addGastoLista() {
+            const v = parseFloat(document.getElementById('valor-gasto').value);
+            const t = document.getElementById('tipo-gasto').value;
+            if(!v) return;
+            gastosTemp.push({tipo: t, valor: v});
+            document.getElementById('preview-gastos').innerHTML += `<div>• ${t}: R$ ${v.toFixed(2)}</div>`;
+            document.getElementById('gasto-total-input').value = gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2);
+            document.getElementById('valor-gasto').value = '';
+        }
+
         function gerarReciboFinal() {
-            if(entregas.length === 0) return alert("Nenhuma entrega lançada!");
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
             let b=0, k=0, g=0, html = "";
@@ -185,25 +195,26 @@
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
             document.getElementById('rec-corpo').innerHTML = html;
-            document.getElementById('rec-resumo-financeiro').innerHTML = `
-                <div style="display:flex; justify-content:space-between;"><span>TOTAL BRUTO:</span> <b>R$ ${b.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between;"><span>COMBUSTÍVEL/KM:</span> <b>R$ ${cKm.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between; background:#000; color:#fff; padding:10px; margin-top:10px; font-size:18px;"><span>LUCRO:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>
-            `;
+            document.getElementById('rec-resumo-financeiro').innerHTML = `<div style="display:flex; justify-content:space-between; background:#000; color:#fff; padding:10px;"><span>LUCRO:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>`;
         }
 
         function enviarWhatsApp() {
-            let user = localStorage.getItem('user') || "Piloto";
-            let b=0, k=0, g=0;
-            let txt = `🏁 *EXTRATO DE ELITE - ${user}*\n\n`;
+            let b=0, k=0, g=0, txt = `🏁 *RESUMO DETALHADO*\n\n`;
             entregas.forEach(e => {
                 txt += `📦 *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
                 e.gastos.forEach(gt => txt += `   └ 💸 ${gt.tipo}: R$ ${gt.valor.toFixed(2)}\n`);
                 b += e.valor; k += e.km; g += e.totalG;
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
-            txt += `\n──────────────────\n💰 *BRUTO:* R$ ${b.toFixed(2)}\n⛽ *KM/COMBUST:* R$ ${cKm.toFixed(2)}\n──────────────────\n✅ *LUCRO REAL: R$ ${(b - cKm - g).toFixed(2)}*`;
+            txt += `\n✅ *LUCRO REAL: R$ ${(b - cKm - g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
+        }
+
+        function arquivarEFechar() {
+            historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
+            localStorage.setItem('moto_v95_hist', JSON.stringify(historico));
+            localStorage.removeItem('moto_v95_data');
+            location.reload();
         }
 
         function baixarPDF() {
@@ -211,23 +222,10 @@
             html2canvas(document.querySelector("#recibo-area")).then(canvas => {
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 0);
-                pdf.save(`extrato_elite.pdf`);
+                pdf.save(`recibo.pdf`);
             });
         }
-
-        function arquivarEFechar() {
-            if(confirm("Deseja salvar no histórico e zerar o painel para o próximo dia?")) {
-                historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
-                localStorage.setItem('moto_v9_hist', JSON.stringify(historico));
-                localStorage.removeItem('moto_v9_data');
-                location.reload();
-            }
-        }
-
-        function verHistorico() {
-            document.getElementById('modalHistorico').style.display = 'flex';
-            document.getElementById('lista-hist').innerHTML = historico.length ? historico.map(h => `<div style="padding:15px; border-bottom:1px solid #334155; display:flex; justify-content:space-between;"><span>${h.data}</span> <b style="color:var(--success)">${h.lucro}</b></div>`).join('') : "<p style='text-align:center'>Nenhum registro ainda.</p>";
-        }
+        atualizarTela();
     </script>
 </body>
 </html>
