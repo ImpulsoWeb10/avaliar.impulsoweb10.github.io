@@ -9,23 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #22c55e; --bg: #f1f5f9; --accent: #4f46e5; --text: #1e293b; }
-        body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin: 0; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
-        .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #f1f5f9; }
-        .header h2 { color: var(--primary); font-size: 28px; margin: 0; font-weight: 800; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
+        .header h2 { color: var(--primary); font-size: 28px; font-weight: 800; margin: 0; }
         .section-title { background: #eef2ff; color: var(--accent); padding: 10px 15px; border-radius: 10px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin: 25px 0 15px; display: flex; align-items: center; gap: 10px; border-left: 4px solid var(--accent); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .full { grid-column: span 1; }
-        @media (min-width: 600px) { .full { grid-column: span 2; } }
         .field { display: flex; flex-direction: column; margin-bottom: 5px; }
         label { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; }
         input, select { padding: 12px; border-radius: 12px; border: 2px solid #f1f5f9; background: #fdfdfd; font-family: inherit; font-size: 14px; width: 100%; box-sizing: border-box; }
-        input:focus { border-color: var(--accent); outline: none; background: #fff; }
-        button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; transition: 0.3s; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); }
+        button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); transition: 0.3s; }
         button#btnGerar:hover { transform: scale(1.02); background: #16a34a; }
         .result-area { display: none; margin-top: 40px; border-top: 3px solid #f1f5f9; padding-top: 30px; }
         .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #334155; }
-        .btn-copy { background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; float: right; margin-bottom: 10px; }
         #qrcode-wrap { text-align: center; padding: 30px; background: #f8fafc; border-radius: 25px; margin-bottom: 30px; border: 2px dashed #e2e8f0; }
         #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 10px; }
     </style>
@@ -45,6 +41,7 @@
                 <option value="1">Tema 1: Dark Neon (Azul/Amarelo)</option>
                 <option value="2" selected>Tema 2: Clean White (Branco/Verde)</option>
                 <option value="3">Tema 3: Luxury Gold (Preto/Dourado)</option>
+                <option value="4">Tema 4: Red Modern (Vermelho/Pizzaria)</option>
             </select>
         </div>
         <div class="field">
@@ -57,35 +54,27 @@
     <div class="grid">
         <div class="field">
             <label>Nome da Empresa</label>
-            <input id="n" placeholder="Ex: Estética Lídia" oninput="autoSlug()">
+            <input id="n" placeholder="Ex: Pizzaria do Zé" oninput="autoSlug()">
         </div>
         <div class="field">
             <label>Subtítulo (Frase Curta)</label>
             <input id="s" placeholder="Ex: Avaliação Oficial">
         </div>
-        <div class="field full">
-            <label>Endereço Completo</label>
-            <input id="e" placeholder="Rua, Número - Bairro - Cidade/SP">
+        <div class="field">
+            <label>Pasta no GitHub (Slug)</label>
+            <input id="slug" placeholder="ex: pizzaria-ze">
         </div>
     </div>
 
     <div class="section-title"><i class="fas fa-share-alt"></i> 3. Links e Redes</div>
     <div class="grid">
-        <div class="field full">
-            <label>Link Direto do Google Maps (Review)</label>
-            <input id="g" placeholder="Cole o link de avaliação aqui">
-        </div>
         <div class="field">
-            <label>Pasta no GitHub (Slug)</label>
-            <input id="slug" placeholder="ex: estetica-lidia">
+            <label>Link Google Review</label>
+            <input id="g" placeholder="Cole o link do Google">
         </div>
         <div class="field">
             <label>WhatsApp (DDD + Número)</label>
             <input id="w" placeholder="5511999999999">
-        </div>
-        <div class="field">
-            <label>Instagram (Sem @)</label>
-            <input id="ig" placeholder="ex: opticalidia">
         </div>
         <div class="field">
             <label>Link da Logo</label>
@@ -101,8 +90,8 @@
             <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px; font-size: 16px;"></p>
         </div>
         <div>
-            <button class="btn-copy" onclick="copy('codeIndex')">COPIAR</button>
-            <label>1. Código para o index.html (Pasta do Cliente)</label>
+            <button style="float:right; padding:5px 10px; cursor:pointer;" onclick="copy('codeIndex')">COPIAR</button>
+            <label>Código para o index.html da pasta do cliente</label>
             <div id="codeIndex" class="code-box"></div>
         </div>
     </div>
@@ -122,18 +111,14 @@ function gerarTudo() {
         t: document.getElementById('t').value,
         ga: document.getElementById('ga').value,
         slug: document.getElementById('slug').value,
-        e: document.getElementById('e').value,
         w: document.getElementById('w').value,
         gRaw: document.getElementById('g').value,
-        l: document.getElementById('l').value,
-        ig: document.getElementById('ig').value
+        l: document.getElementById('l').value
     };
-
-    if(!d.n || !d.slug || !d.gRaw) { alert("Preencha Nome, Pasta e Link do Google!"); return; }
 
     const baseUrl = window.location.origin;
     const gBase64 = btoa(d.gRaw);
-    const linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&e=${encodeURIComponent(d.e)}&w=${d.w}&g=${gBase64}&ig=${d.ig}`;
+    const linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&w=${d.w}&g=${gBase64}`;
     const urlFinal = `${baseUrl}/${d.slug}`;
 
     const qrDiv = document.getElementById('qrcode');
@@ -146,17 +131,14 @@ function gerarTudo() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar ${d.n} | Oficial</title>
-    <link rel="icon" type="image/png" href="${d.l}">
+    <title>Avaliar ${d.n}</title>
     <script>setTimeout(function(){ window.location.href = "${linkMagico}"; }, 500);<\/script>
 </head>
-<body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;text-align:center;">
-    <div style="background:white;padding:40px;border-radius:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);max-width:320px;">
+<body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;">
+    <div style="background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
         <img src="${d.l}" style="width:80px;height:80px;border-radius:15px;margin-bottom:20px;">
-        <h2 style="font-size:18px;">Conectando...</h2>
-        <div style="margin:20px auto;width:30px;height:30px;border:3px solid #f3f3f3;border-top:3px solid #22c55e;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <h2>Conectando...</h2>
     </div>
-    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 </body>
 </html>`;
 
@@ -166,7 +148,7 @@ function gerarTudo() {
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Copiado! 🚀"));
+    navigator.clipboard.writeText(text).then(() => alert("Copiado!"));
 }
 </script>
 </body>
