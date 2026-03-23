@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro - V3.0</title>
+    <title>MotoGestão Pro - V3.1</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,10 +21,8 @@
         
         .btn-add { width: 100%; background: var(--primary); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-        /* Lista de Entregas na Tela */
         .entrega-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; border-left: 4px solid var(--primary); }
 
-        /* Floating Menu */
         .fab { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; border: none; font-size: 24px; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: flex-end; }
         .modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 25px; box-sizing: border-box; }
@@ -33,9 +31,8 @@
         
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--success); color: #000; padding: 15px; text-align: center; font-weight: 900; z-index: 90; }
 
-        /* ESTILO DO RECIBO (EXCLUSIVO PARA PDF E IMAGEM) */
         #render-target { 
-            position: absolute; left: -9999px; top: 0; /* Escondido da tela normal */
+            position: absolute; left: -9999px; top: 0;
             width: 400px; background: white; color: black; padding: 30px; font-family: monospace; 
         }
         .recibo-header { border-bottom: 2px solid #000; text-align: center; margin-bottom: 15px; }
@@ -52,7 +49,7 @@
     <div class="header"><h1>MOTO GESTÃO PRO</h1></div>
 
     <div class="config-section">
-        <label>Seu Nome / Nome da Empresa</label>
+        <label>Sua Empresa / Seu Nome</label>
         <input type="text" id="empresa" placeholder="Sua Marca">
     </div>
 
@@ -62,7 +59,7 @@
         <div style="display:flex; gap:10px;">
             <div style="flex:1">
                 <label>Valor R$</label>
-                <input type="number" id="valor" placeholder="0,00">
+                <input type="number" id="valor" placeholder="0,00" step="0.01">
             </div>
             <div style="flex:1">
                 <label>KM</label>
@@ -118,7 +115,6 @@
             dados.km += k;
             dados.entregas.push({cliente: c, valor: v, km: k});
 
-            // Atualiza tela
             const item = document.createElement('div');
             item.className = 'entrega-item';
             item.innerHTML = `<div><b>${c}</b><br><small>${k} KM</small></div> <b>R$ ${v.toFixed(2)}</b>`;
@@ -135,7 +131,6 @@
             const lucro = dados.faturamento - custo;
             document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${lucro.toFixed(2)}`;
             
-            // Prepara área oculta para o PDF/Imagem
             document.getElementById('rec-empresa').innerText = document.getElementById('empresa').value || "MOTOBY";
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
             document.getElementById('rec-bruto').innerText = `R$ ${dados.faturamento.toFixed(2)}`;
@@ -144,7 +139,7 @@
             
             let html = "";
             dados.entregas.forEach(e => {
-                html += `<div class="recibo-row"><span>${e.cliente} (${e.km}km)</span> <span>R$ ${e.valor.toFixed(2)}</span></div>`;
+                html += `<div class="recibo-row"><span>${e.cliente}</span> <span>R$ ${e.valor.toFixed(2)}</span></div>`;
             });
             document.getElementById('rec-corpo').innerHTML = html;
         }
@@ -169,8 +164,28 @@
         }
 
         function enviarZap() {
-            const resumo = encodeURIComponent(`🛵 *RESUMO DO DIA*\n\n💰 Bruto: R$ ${dados.faturamento.toFixed(2)}\n⛽ Custos: R$ ${(dados.km/35*5.80 + dados.km*0.15).toFixed(2)}\n✅ *Lucro Real: R$ ${(dados.faturamento - (dados.km/35*5.80 + dados.km*0.15)).toFixed(2)}*`);
-            window.open(`https://wa.me/?text=${resumo}`);
+            const empresa = document.getElementById('empresa').value || "Motoboy";
+            const custoTotal = (dados.km / 35 * 5.80) + (dados.km * 0.15);
+            const lucroReal = dados.faturamento - custoTotal;
+
+            // Montando o Resumo Detalhado
+            let mensagem = `🛵 *RELATÓRIO: ${empresa.toUpperCase()}*\n`;
+            mensagem += `📅 Data: ${new Date().toLocaleDateString()}\n`;
+            mensagem += `──────────────────\n`;
+            
+            dados.entregas.forEach((e, i) => {
+                mensagem += `${i+1}. *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
+            });
+
+            mensagem += `──────────────────\n`;
+            mensagem += `💰 *Total Bruto:* R$ ${dados.faturamento.toFixed(2)}\n`;
+            mensagem += `⛽ *Custos (Gas/Manut):* R$ ${custoTotal.toFixed(2)}\n`;
+            mensagem += `🏁 *KM Total:* ${dados.km}km\n`;
+            mensagem += `──────────────────\n`;
+            mensagem += `💵 *LUCRO LÍQUIDO: R$ ${lucroReal.toFixed(2)}*\n\n`;
+            mensagem += `_Gerado por ImpulsoWeb10_`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(mensagem)}`);
         }
     </script>
 </body>
