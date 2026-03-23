@@ -13,7 +13,6 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 120px; }
         
-        /* TELA DE ATIVAÇÃO */
         #ativacao { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .ativacao-card { background: var(--card); padding: 30px; border-radius: 25px; border: 2px solid var(--primary); width: 100%; max-width: 400px; text-align: center; }
         .logo-img { width: 160px; margin-bottom: 20px; }
@@ -23,26 +22,25 @@
         
         .form-add { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; margin-bottom: 20px; }
         label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px; }
-        input, select { width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #334155; background: #080c0c; color: white; font-size: 15px; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #334155; background: #080c0c; color: white; font-size: 14px; box-sizing: border-box; }
         
-        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
 
         /* MODAL DE DESPESAS ELEGANTE */
         .modal-despesa { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
-        .modal-despesa-content { background: var(--card); width: 100%; max-width: 350px; border-radius: 25px; padding: 25px; border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(245, 130, 32, 0.2); }
-        .mini-list { background: #080c0c; border-radius: 10px; margin: 15px 0; max-height: 120px; overflow-y: auto; text-align: left; }
-        .mini-item { padding: 8px 12px; font-size: 12px; border-bottom: 1px solid #1a2222; display: flex; justify-content: space-between; color: var(--danger); }
+        .modal-despesa-content { background: var(--card); width: 100%; max-width: 350px; border-radius: 25px; padding: 25px; border: 1px solid var(--primary); text-align: center; }
+        .mini-list { background: #080c0c; border-radius: 10px; margin: 15px 0; max-height: 120px; overflow-y: auto; text-align: left; border: 1px solid #1a2222; }
+        .mini-item { padding: 10px; font-size: 12px; border-bottom: 1px solid #1a2222; display: flex; justify-content: space-between; color: var(--danger); }
         
-        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 10px; width: 100%; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
-        .btn-finish { background: var(--success); color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: 900; cursor: pointer; }
+        .btn-add-modal { background: var(--danger); color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; margin-bottom: 10px; }
+        .btn-finish-modal { background: var(--success); color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: 900; }
 
-        /* LISTA DE ENTREGAS */
-        .entrega-item { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; border-left: 5px solid var(--secondary); }
+        .entrega-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; border-left: 4px solid var(--secondary); align-items: center; }
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); }
         .fab { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; border: none; font-size: 24px; z-index: 100; }
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; font-size: 18px; border-top: 3px solid var(--primary); }
 
-        /* RECIBO OCULTO */
-        #render-target { position: absolute; left: -9999px; top: 0; width: 350px; background: white; color: black; padding: 25px; font-family: monospace; }
+        /* RECIBO */
+        #render-target { position: absolute; left: -9999px; top: 0; width: 350px; background: white; color: black; padding: 25px; font-family: monospace; border: 1px solid #000; }
     </style>
 </head>
 <body>
@@ -52,23 +50,29 @@
             <img src="impulsoweb10.jpg" alt="Logo" class="logo-img">
             <input type="text" id="lead-nome" placeholder="Seu Nome">
             <input type="number" id="lead-zap" placeholder="WhatsApp">
-            <button class="btn-main" onclick="ativarSistema()">ATIVAR AGORA 🚀</button>
+            <button class="btn-main" onclick="ativarSistema()">ATIVAR PAINEL 🚀</button>
         </div>
     </div>
 
     <div id="conteudo-principal" style="display: none;">
         <div class="header-logo"><img src="impulsoweb10.jpg" alt="Logo"></div>
-        
+
         <div class="form-add">
-            <label>Onde foi a entrega?</label>
-            <input type="text" id="cliente" placeholder="Ex: Ifood, Loggi, Particular...">
+            <label>Cliente / Destino</label>
+            <input type="text" id="cliente" placeholder="Ex: Ifood, Loggi...">
             
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Valor R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label>KM</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1"><label>KM Rodado</label><input type="number" id="km" placeholder="0"></div>
+            </div>
+
+            <label>Despesas (Clique no + para detalhar)</label>
+            <div style="display:flex; gap:5px;">
+                <input type="number" id="despesa-total-input" placeholder="Total R$ 0.00" readonly style="background: #111; cursor: pointer;" onclick="abrirModalDespesa()">
+                <button onclick="abrirModalDespesa()" style="background: var(--danger); border: none; color: white; padding: 0 20px; border-radius: 10px; font-weight: bold; font-size: 20px; height: 45px;">+</button>
             </div>
             
-            <button class="btn-main" onclick="abrirModalDespesa()">SALVAR LANÇAMENTO ✅</button>
+            <button class="btn-main" style="margin-top:10px" onclick="lancar()">SALVAR LANÇAMENTO ✅</button>
         </div>
 
         <div id="lista-tela"></div>
@@ -77,43 +81,46 @@
 
         <div id="modalDespesa" class="modal-despesa">
             <div class="modal-despesa-content">
-                <h3 style="margin-top:0; color:var(--primary)">Despesas extras?</h3>
-                <p style="font-size: 12px; color: #94a3b8;">Se houve gasto com pedágio, lanche ou combustível nesta entrega, adicione abaixo:</p>
+                <h3 style="color:var(--primary); margin-top:0;">Detalhar Despesas</h3>
                 
-                <select id="tipo-despesa">
+                <label>Tipo de Gasto</label>
+                <select id="tipo-despesa-modal">
                     <option value="Pedágio">⛽ Pedágio</option>
                     <option value="Combustível">⛽ Combustível</option>
                     <option value="Almoço">🍴 Almoço</option>
                     <option value="Lanche">🍔 Lanche</option>
-                    <option value="Outros">⚙️ Outros</option>
+                    <option value="Manutenção">⚙️ Manutenção</option>
+                    <option value="Outros">❓ Outros</option>
                 </select>
-                <input type="number" id="despesa-valor" placeholder="Valor R$ 0.00">
                 
-                <button class="btn-outline" onclick="addDespesaNaLista()">+ ADICIONAR GASTO</button>
+                <label>Valor R$</label>
+                <input type="number" id="valor-despesa-modal" placeholder="0.00">
+                
+                <button class="btn-add-modal" onclick="adicionarGastoNoModal()">+ ADICIONAR NA LISTA</button>
                 
                 <div class="mini-list" id="mini-list-ui"></div>
                 
-                <button class="btn-finish" onclick="finalizarLancamentoCompleto()">FINALIZAR TUDO ✅</button>
+                <button class="btn-finish-modal" onclick="fecharModalDespesa()">CONFIRMAR GASTOS ✅</button>
             </div>
         </div>
 
         <div id="modalMenu" class="modal" onclick="this.style.display='none'"><div class="modal-content" onclick="event.stopPropagation()">
             <div class="menu-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <button class="menu-btn" onclick="enviarZap()">WHATSAPP</button>
-                <button class="menu-btn" onclick="salvarImagem()">SALVAR PRINT</button>
+                <button class="menu-btn" style="background:#2a3535; color:white; border:none; padding:15px; border-radius:10px;" onclick="enviarZap()">WHATSAPP</button>
+                <button class="menu-btn" style="background:#2a3535; color:white; border:none; padding:15px; border-radius:10px;" onclick="salvarImagem()">PRINT</button>
             </div>
-            <button class="menu-btn" style="width:100%; margin-top:10px; color:var(--danger);" onclick="zerarDia()">ZERAR DIA</button>
+            <button class="menu-btn" style="width:100%; margin-top:10px; color:var(--danger); border:none; background:transparent;" onclick="zerarDia()">ZERAR TUDO</button>
         </div></div>
     </div>
 
     <div id="render-target">
         <div style="text-align:center"><img src="impulsoweb10.jpg" style="width:110px;"></div>
-        <div id="rec-corpo" style="margin-top:20px;"></div>
+        <div id="rec-corpo" style="margin-top:15px;"></div>
     </div>
 
     <script>
-        let dados = JSON.parse(localStorage.getItem('motoDados_v8')) || { entregas: [] };
-        let despesasAtuais = [];
+        let dados = JSON.parse(localStorage.getItem('motoDados_v9')) || { entregas: [] };
+        let listaTempDespesas = [];
         const SEU_NUMERO = "5511954950044";
 
         window.onload = function() {
@@ -131,48 +138,58 @@
             location.reload();
         }
 
-        // 1. Abre o modal elegante
+        // FUNÇÕES DO MODAL
         function abrirModalDespesa() {
-            const v = document.getElementById('valor').value;
-            if(!v) return alert("Informe o valor do ganho!");
-            despesasAtuais = [];
-            document.getElementById('mini-list-ui').innerHTML = '';
             document.getElementById('modalDespesa').style.display = 'flex';
         }
 
-        // 2. Adiciona despesa dentro do modal
-        function addDespesaNaLista() {
-            const val = parseFloat(document.getElementById('despesa-valor').value);
-            const tipo = document.getElementById('tipo-despesa').value;
-            if(!val) return;
-            
-            despesasAtuais.push({ tipo, valor: val });
+        function adicionarGastoNoModal() {
+            const v = parseFloat(document.getElementById('valor-despesa-modal').value);
+            const t = document.getElementById('tipo-despesa-modal').value;
+            if(!v) return;
+
+            listaTempDespesas.push({ tipo: t, valor: v });
             
             const item = document.createElement('div');
             item.className = 'mini-item';
-            item.innerHTML = `<span>${tipo}</span> <b>R$ ${val.toFixed(2)}</b>`;
+            item.innerHTML = `<span>${t}</span> <b>R$ ${v.toFixed(2)}</b>`;
             document.getElementById('mini-list-ui').appendChild(item);
-            document.getElementById('despesa-valor').value = '';
+            
+            document.getElementById('valor-despesa-modal').value = '';
+            atualizarInputPrincipal();
         }
 
-        // 3. Fecha o modal e grava tudo no banco
-        function finalizarLancamentoCompleto() {
+        function atualizarInputPrincipal() {
+            const total = listaTempDespesas.reduce((a, b) => a + b.valor, 0);
+            document.getElementById('despesa-total-input').value = total > 0 ? total.toFixed(2) : "";
+        }
+
+        function fecharModalDespesa() {
+            document.getElementById('modalDespesa').style.display = 'none';
+        }
+
+        // LANÇAMENTO PRINCIPAL
+        function lancar() {
             const c = document.getElementById('cliente').value || "Entrega";
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
-            const totalD = despesasAtuais.reduce((a, b) => a + b.valor, 0);
+            const totalD = listaTempDespesas.reduce((a, b) => a + b.valor, 0);
+
+            if(v === 0 && totalD === 0) return alert("Preencha os valores!");
 
             dados.entregas.push({
                 cliente: c, valor: v, km: k,
-                listaDespesas: [...despesasAtuais],
+                detalheDespesas: [...listaTempDespesas],
                 totalDespesa: totalD,
                 hora: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
             });
 
-            localStorage.setItem('motoDados_v8', JSON.stringify(dados));
-            document.getElementById('modalDespesa').style.display = 'none';
+            localStorage.setItem('motoDados_v9', JSON.stringify(dados));
             
-            // Limpa form principal
+            // Limpa tudo
+            listaTempDespesas = [];
+            document.getElementById('mini-list-ui').innerHTML = '';
+            document.getElementById('despesa-total-input').value = '';
             document.getElementById('cliente').value = '';
             document.getElementById('valor').value = '';
             document.getElementById('km').value = '';
@@ -189,9 +206,9 @@
                 b += e.valor; k += e.km; d += e.totalDespesa;
                 const item = document.createElement('div');
                 item.className = 'entrega-item';
-                let det = "";
-                e.listaDespesas.forEach(ld => det += `<br><small style="color:var(--danger)">- ${ld.tipo}: R$ ${ld.valor.toFixed(2)}</small>`);
-                item.innerHTML = `<div><b>${e.cliente}</b> <small>${e.hora}</small><br><small>${e.km} KM</small>${det}</div> <b>R$ ${e.valor.toFixed(2)}</b>`;
+                let txtD = "";
+                e.detalheDespesas.forEach(dd => txtD += `<br><small style="color:var(--danger)">└ ${dd.tipo}: R$ ${dd.valor.toFixed(2)}</small>`);
+                item.innerHTML = `<div><b>${e.cliente}</b> <small>${e.hora}</small><br><small>${e.km} KM</small>${txtD}</div> <b>R$ ${e.valor.toFixed(2)}</b>`;
                 lista.appendChild(item);
             });
 
@@ -199,29 +216,28 @@
             document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${(b - cKm - d).toFixed(2)}`;
         }
 
-        function zerarDia() { if(confirm("Zerar?")) { localStorage.removeItem('motoDados_v8'); location.reload(); } }
+        function zerarDia() { if(confirm("Deseja apagar tudo?")) { localStorage.removeItem('motoDados_v9'); location.reload(); } }
         
         function enviarZap() {
-            let txt = `🚀 *EXTRATO: ${localStorage.getItem('motoUser')}*\n\n`;
+            let user = localStorage.getItem('motoUser');
+            let txt = `🚀 *EXTRATO IMPULSOWEB - ${user}*\n\n`;
             let b = 0, k = 0, d = 0;
             dados.entregas.forEach(e => {
                 txt += `📦 *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
-                e.listaDespesas.forEach(ld => txt += ` └ 💸 ${ld.tipo}: R$ ${ld.valor.toFixed(2)}\n`);
+                e.detalheDespesas.forEach(dd => txt += `  └ 💸 ${dd.tipo}: R$ ${dd.valor.toFixed(2)}\n`);
                 b += e.valor; k += e.km; d += e.totalDespesa;
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
-            txt += `\n✅ *LUCRO: R$ ${(b - cKm - d).toFixed(2)}*`;
+            txt += `\n✅ *LUCRO LÍQUIDO: R$ ${(b - cKm - d).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
         function salvarImagem() {
             const target = document.getElementById('render-target');
             target.style.position = "static"; target.style.left = "0";
-            // Preenche recibo antes do print
-            let h = "";
+            let h = `<h3>RESUMO ${localStorage.getItem('motoUser')}</h3>`;
             dados.entregas.forEach(e => h += `<p>${e.cliente}: R$ ${e.valor.toFixed(2)}</p>`);
             document.getElementById('rec-corpo').innerHTML = h;
-            
             html2canvas(target).then(canvas => {
                 const link = document.createElement('a'); link.download = `extrato.png`;
                 link.href = canvas.toDataURL(); link.click();
