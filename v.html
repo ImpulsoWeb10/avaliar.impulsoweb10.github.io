@@ -24,20 +24,20 @@
         h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: inherit; }
         .subtitle { font-size: 13px; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
         
-        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: 0.2s; margin: 0 4px; background: none; border: none; }
+        .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: 0.2s; margin: 0 4px; background: none; border: none; outline: none; }
         .star-btn.active { color: var(--accent); transform: scale(1.1); }
         
         .btn-action { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 12px; transition: 0.3s; font-size: 14px; border: none; cursor: pointer; }
         .google { background: var(--accent); color: #000; }
         .whatsapp { background: #25d366; color: #fff; }
-        .social-btn { background: #e2e8f0; color: #475569; font-size: 12px; padding: 10px; }
+        .social-btn { background: #e2e8f0; color: #475569; font-size: 12px; padding: 10px; border-radius: 12px; }
         
         .hidden { display: none !important; }
         
-        /* Informações de Rodapé (SEO) */
-        .footer-info { margin-top: 25px; font-size: 11px; color: #94a3b8; line-height: 1.4; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        /* Safe Mode Style */
+        .safe-link { display: block; margin-top: 20px; font-size: 11px; color: #94a3b8; text-decoration: underline; opacity: 0.7; border-top: 1px dashed #eee; padding-top: 15px; }
         
-        /* FAQ Oculto para Robôs */
+        .footer-info { margin-top: 25px; font-size: 11px; color: #94a3b8; line-height: 1.4; border-top: 1px solid #f1f5f9; padding-top: 15px; }
         .faq-seo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
     </style>
 </head>
@@ -46,7 +46,7 @@
 <main class="container">
     <header>
         <img src="" class="logo" id="imgLogo" alt="Logo da Empresa">
-        <h1 id="nome">...</h1>
+        <h1 id="nome">Carregando...</h1>
         <p class="subtitle" id="sub"></p>
     </header>
 
@@ -67,14 +67,19 @@
         
         <div id="extra-links" style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
             <a id="linkInsta" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fab fa-instagram"></i> Instagram</a>
-            <a id="linkMaps" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fas fa-location-dot"></i> Como Chegar</a>
+            <a id="linkFB" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fab fa-facebook"></i> Facebook</a>
+            <a id="linkMaps" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fas fa-location-dot"></i> Endereço</a>
         </div>
     </section>
 
     <section id="feedback-ruim" class="hidden">
-        <p style="font-weight: 700; margin-bottom: 10px;">Como podemos melhorar?</p>
-        <textarea id="msg" rows="3" placeholder="Escreva aqui seu feedback..." style="width:100%; padding:12px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:10px; font-family: inherit;"></textarea>
+        <p style="font-weight: 700; margin-bottom: 10px;">Como podemos resolver agora?</p>
+        <textarea id="msg" rows="3" placeholder="Sua mensagem para o gerente..." style="width:100%; padding:12px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:10px; font-family: inherit;"></textarea>
         <button onclick="irWhats()" class="btn-action whatsapp"><i class="fab fa-whatsapp"></i> FALAR COM GERENTE</button>
+        
+        <a id="linkG-safe" href="#" target="_blank" class="safe-link">
+            Prefiro registrar minha opinião diretamente no Google
+        </a>
     </section>
 
     <footer class="footer-info">
@@ -96,15 +101,16 @@
         const ga = urlP.get('ga');
         const end = urlP.get('end');
         const ig = urlP.get('ig');
+        const fb = urlP.get('fb');
         const gmaps = urlP.get('gmaps');
         const faq = urlP.get('faq');
 
-        // Configuração do Tema
+        // Configuração de Temas
         const temas = {
-            '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' },
-            '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' },
-            '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' },
-            '4': { b: '#fff5f5', c: '#ffffff', t: '#1e293b', a: '#e11d48' }
+            '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' }, // Dark
+            '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' }, // Clean
+            '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' }, // Luxury
+            '4': { b: '#fff5f5', c: '#ffffff', t: '#1e293b', a: '#e11d48' }  // Red
         };
         const sel = temas[t] || temas['2'];
         document.body.style.backgroundColor = sel.b;
@@ -112,7 +118,7 @@
         document.querySelector('.container').style.color = sel.t;
         document.documentElement.style.setProperty('--accent', sel.a);
 
-        // Preenchimento de Dados
+        // Preenchimento de Conteúdo
         document.getElementById('nome').innerText = n;
         document.getElementById('nomeFooter').innerText = n;
         document.getElementById('sub').innerText = s;
@@ -120,13 +126,20 @@
         document.getElementById('ano').innerText = new Date().getFullYear();
         document.title = `Avaliar ${n} | Canal Oficial`;
 
+        // Links Dinâmicos (Se existirem no Painel)
         if(end) document.getElementById('txtEnd').innerText = end;
         if(ig) { document.getElementById('linkInsta').href = ig; document.getElementById('linkInsta').classList.remove('hidden'); }
+        if(fb) { document.getElementById('linkFB').href = fb; document.getElementById('linkFB').classList.remove('hidden'); }
         if(gmaps) { document.getElementById('linkMaps').href = gmaps; document.getElementById('linkMaps').classList.remove('hidden'); }
         
-        try { document.getElementById('linkG').href = atob(urlP.get('g')); } catch(e) {}
+        // Decodifica Link Google (Safe e Principal)
+        try { 
+            const linkGReal = atob(urlP.get('g'));
+            document.getElementById('linkG').href = linkGReal; 
+            document.getElementById('linkG-safe').href = linkGReal; 
+        } catch(e) {}
 
-        // Injeção de Analytics GA4
+        // Google Analytics GA4
         if(ga && ga !== 'G-XXXXXXXXXX') {
             const script = document.createElement('script');
             script.src = `https://www.googletagmanager.com/gtag/js?id=${ga}`;
@@ -136,10 +149,9 @@
             gtag('js', new Date()); gtag('config', ga);
         }
 
-        // SEO Semântico: FAQ e JSON-LD
+        // SEO: FAQ e JSON-LD
         if(faq) {
-            const faqList = faq.split(',');
-            faqList.forEach(q => {
+            faq.split(',').forEach(q => {
                 const p = document.createElement('p');
                 p.innerText = q.trim();
                 document.getElementById('faq-area').appendChild(p);
@@ -151,7 +163,8 @@
             "@type": "LocalBusiness",
             "name": n,
             "image": l,
-            "address": { "@type": "PostalAddress", "streetAddress": end || "" }
+            "address": { "@type": "PostalAddress", "streetAddress": end || "" },
+            "description": s
         };
         document.getElementById('schema-json').text = JSON.stringify(schema);
 
@@ -159,9 +172,7 @@
     };
 
     function votar(n) {
-        const stars = document.querySelectorAll('.star-btn');
-        stars.forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
-        
+        document.querySelectorAll('.star-btn').forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
         setTimeout(() => {
             document.getElementById('etapa1').classList.add('hidden');
             if(n >= 4) {
