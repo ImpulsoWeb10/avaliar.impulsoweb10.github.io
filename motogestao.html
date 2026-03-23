@@ -14,15 +14,15 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 180px; }
         
-        /* RED LINE / HEADLINE COM LOGO */
+        /* RED LINE / HEADLINE COM LOGO MAIOR */
         .red-line { 
             background: linear-gradient(135deg, #f58220, #b35a00); 
-            padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(245, 130, 32, 0.3); position: relative; overflow: hidden;
+            padding: 25px; border-radius: 20px; text-align: center; margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(245, 130, 32, 0.4); position: relative; overflow: hidden;
         }
         .logo-box { 
-            width: 70px; height: 70px; margin: 0 auto 10px; border-radius: 15px; 
-            overflow: hidden; border: 2px solid white; position: relative;
+            width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 20px; 
+            overflow: hidden; border: 3px solid white; position: relative;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         .logo-box::after {
@@ -30,7 +30,7 @@
             background: rgba(255, 255, 255, 0.4); transform: rotate(30deg); animation: shine 3s infinite;
         }
         @keyframes shine { 0% { left: -60%; } 100% { left: 150%; } }
-        .red-line h2 { margin: 0; font-size: 16px; color: #000; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .red-line h2 { margin: 0; font-size: 18px; color: #000; font-weight: 900; text-transform: uppercase; }
 
         /* INTERFACE */
         .form-add { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; margin-bottom: 20px; }
@@ -45,19 +45,18 @@
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; }
         .recibo-card { background: white; color: black; padding: 25px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; }
         
-        .entrega-item { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; }
-        
-        #ativacao { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .entrega-item { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--secondary); }
+        .bloco-gasto-recibo { font-size: 11px; margin-left: 10px; border-left: 1px solid #ddd; padding-left: 5px; color: #555; }
     </style>
 </head>
 <body>
 
-    <div id="ativacao">
+    <div id="ativacao" style="position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center;">
         <div>
-            <div class="logo-box" style="width:120px; height:120px;"><img src="impulsoweb10.jpg"></div>
+            <div class="logo-box" style="width:130px; height:130px;"><img src="impulsoweb10.jpg"></div>
             <h1 style="color:var(--primary)">MOTO GESTÃO</h1>
-            <input type="text" id="lead-nome" placeholder="Seu Nome">
-            <button class="btn-main" onclick="ativar()">ATIVAR MEU PAINEL 🚀</button>
+            <input type="text" id="lead-nome" placeholder="Seu Nome Profissional">
+            <button class="btn-main" onclick="ativar()">ATIVAR PAINEL 🚀</button>
         </div>
     </div>
 
@@ -67,31 +66,31 @@
             <h2>PARE DE PERDER DINHEIRO NAS RUAS!</h2>
         </div>
 
-        <button class="btn-main" style="background:var(--card); border:1px solid var(--primary); margin-bottom:15px;" onclick="verHistorico()">📁 VER HISTÓRICO DE DIAS</button>
+        <button class="btn-main" style="background:var(--card); border:1px solid var(--primary); margin-bottom:15px;" onclick="verHistorico()">📁 VER HISTÓRICO ANTERIOR</button>
 
         <div class="form-add">
-            <label>Onde foi a entrega?</label>
+            <label>Destino / Cliente</label>
             <input type="text" id="cliente" placeholder="Ex: Ifood, Loggi, Particular...">
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label>KM</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>Valor R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1"><label>KM Rodado</label><input type="number" id="km" placeholder="0"></div>
             </div>
-            <label>Gasto Extra</label>
+            <label>Despesa desta Entrega</label>
             <div style="display:flex; gap:5px;">
                 <input type="number" id="gasto-total-input" placeholder="R$ 0.00" readonly onclick="abrirModalGasto()">
-                <button onclick="abrirModalGasto()" style="background:var(--danger); border:none; color:white; width:50px; border-radius:10px; font-weight:bold;">+</button>
+                <button onclick="abrirModalGasto()" style="background:var(--danger); border:none; color:white; width:50px; border-radius:10px; font-weight:bold; font-size:20px;">+</button>
             </div>
-            <button class="btn-main" onclick="salvarEntrega()">SALVAR LANÇAMENTO ✅</button>
+            <button class="btn-main" onclick="salvarEntrega()">SALVAR ENTREGA ✅</button>
         </div>
 
         <div id="lista-entregas"></div>
-        <button class="btn-fim" onclick="gerarReciboFinal()">🚩 FIM DO EXPEDIENTE</button>
+        <button class="btn-fim" onclick="gerarReciboFinal()">🚩 FIM DO EXPEDIENTE (RESUMO)</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
     </div>
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
         <div class="form-add" style="width:100%; max-width:320px;">
-            <h3 style="color:var(--primary); margin-top:0;">Novo Gasto</h3>
+            <h3 style="color:var(--primary); margin-top:0;">Adicionar Gasto</h3>
             <select id="tipo-gasto"><option>Combustível</option><option>Pedágio</option><option>Almoço</option><option>Outros</option></select>
             <input type="number" id="valor-gasto" placeholder="R$ 0.00" style="margin-top:10px;">
             <button class="btn-main" onclick="addGastoLista()">ADICIONAR</button>
@@ -103,8 +102,8 @@
     <div id="modalRecibo" class="overlay">
         <div id="recibo-area" class="recibo-card">
             <div style="text-align:center">
-                <img src="impulsoweb10.jpg" style="width:60px; border-radius:10px;">
-                <h3 style="margin:5px 0;">FECHAMENTO DE TURNO</h3>
+                <img src="impulsoweb10.jpg" style="width:80px; border-radius:15px;">
+                <h3 style="margin:5px 0;">FECHAMENTO DETALHADO</h3>
                 <small id="rec-data"></small>
             </div>
             <hr>
@@ -112,26 +111,33 @@
             <hr>
             <div id="rec-resumo-financeiro"></div>
         </div>
-        <div style="width:100%; max-width:380px;">
-            <button class="btn-main" onclick="baixarPDF()">📥 SALVAR EM PDF</button>
-            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 ENVIAR WHATSAPP</button>
-            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR E LIMPAR DIA</button>
+        <div style="width:100%; max-width:380px; margin-top:15px;">
+            <button class="btn-main" onclick="baixarPDF()">📥 BAIXAR PDF</button>
+            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 MANDAR TUDO NO WHATSAPP</button>
+            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 SALVAR NO HISTÓRICO E LIMPAR</button>
             <button class="btn-main" style="background:transparent; border:1px solid #fff;" onclick="document.getElementById('modalRecibo').style.display='none'">VOLTAR</button>
         </div>
     </div>
 
     <div id="modalHistorico" class="overlay">
         <div class="form-add" style="width:100%; max-width:350px;">
-            <h2 style="color:var(--primary)">HISTÓRICO</h2>
+            <h2 style="color:var(--primary)">HISTÓRICO DE LUCROS</h2>
             <div id="lista-hist" style="max-height:300px; overflow-y:auto;"></div>
             <button class="btn-main" onclick="document.getElementById('modalHistorico').style.display='none'">FECHAR</button>
         </div>
     </div>
 
     <script>
-        let entregas = JSON.parse(localStorage.getItem('moto_entregas')) || [];
+        let entregas = JSON.parse(localStorage.getItem('moto_entregas_v8')) || [];
         let gastosTemp = [];
-        let historico = JSON.parse(localStorage.getItem('moto_hist')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_hist_v8')) || [];
+
+        function ativar() {
+            const n = document.getElementById('lead-nome').value;
+            if(!n) return;
+            localStorage.setItem('user', n.toUpperCase());
+            location.reload();
+        }
 
         window.onload = () => {
             if(localStorage.getItem('user')) {
@@ -141,13 +147,6 @@
             }
         };
 
-        function ativar() {
-            const n = document.getElementById('lead-nome').value;
-            if(!n) return;
-            localStorage.setItem('user', n.toUpperCase());
-            location.reload();
-        }
-
         function abrirModalGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
 
         function addGastoLista() {
@@ -155,7 +154,7 @@
             const t = document.getElementById('tipo-gasto').value;
             if(!v) return;
             gastosTemp.push({tipo: t, valor: v});
-            document.getElementById('preview-gastos').innerHTML += `<div>- ${t}: R$ ${v.toFixed(2)}</div>`;
+            document.getElementById('preview-gastos').innerHTML += `<div>• ${t}: R$ ${v.toFixed(2)}</div>`;
             document.getElementById('gasto-total-input').value = gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2);
             document.getElementById('valor-gasto').value = '';
         }
@@ -165,7 +164,7 @@
             const k = parseFloat(document.getElementById('km').value) || 0;
             const c = document.getElementById('cliente').value || "Entrega";
             entregas.push({cliente: c, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0)});
-            localStorage.setItem('moto_entregas', JSON.stringify(entregas));
+            localStorage.setItem('moto_entregas_v8', JSON.stringify(entregas));
             gastosTemp = []; document.getElementById('preview-gastos').innerHTML = '';
             document.getElementById('cliente').value = ''; document.getElementById('valor').value = ''; document.getElementById('km').value = '';
             document.getElementById('gasto-total-input').value = '';
@@ -177,7 +176,8 @@
             lista.innerHTML = ""; let b=0, k=0, g=0;
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG;
-                lista.innerHTML += `<div class="entrega-item"><div><b>${e.cliente}</b><br><small>${e.km} KM</small></div> <b>R$ ${e.valor.toFixed(2)}</b></div>`;
+                let txtG = e.gastos.map(gt => `<br><small style="color:var(--danger)">- ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</small>`).join('');
+                lista.innerHTML += `<div class="entrega-item"><div style="display:flex; justify-content:space-between; width:100%;"><div><b>${e.cliente}</b><br><small>${e.km} KM</small>${txtG}</div> <b>R$ ${e.valor.toFixed(2)}</b></div></div>`;
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
             document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b - cKm - g).toFixed(2)}`;
@@ -186,19 +186,34 @@
         function gerarReciboFinal() {
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
-            let b=0, k=0, g=0, htmlE = "<b>ENTREGAS:</b><br>", htmlG = "<b>GASTOS EXTRAS:</b><br>";
+            let b=0, k=0, g=0, html = "";
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG;
-                htmlE += `<div style="display:flex; justify-content:space-between; font-size:10px;"><span>${e.cliente}</span> <span>R$ ${e.valor.toFixed(2)}</span></div>`;
-                e.gastos.forEach(gt => htmlG += `<div style="display:flex; justify-content:space-between; font-size:10px; color:red;"><span>${gt.tipo}</span> <span>R$ ${gt.valor.toFixed(2)}</span></div>`);
+                html += `<div style="margin-bottom:10px;"><b>${e.cliente}</b>: R$ ${e.valor.toFixed(2)}`;
+                e.gastos.forEach(gt => html += `<div class="bloco-gasto-recibo">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</div>`);
+                html += `</div>`;
             });
             const cKm = (k / 35 * 5.80) + (k * 0.15);
-            document.getElementById('rec-corpo').innerHTML = htmlE + "<br>" + htmlG;
+            document.getElementById('rec-corpo').innerHTML = html;
             document.getElementById('rec-resumo-financeiro').innerHTML = `
-                <div style="display:flex; justify-content:space-between;"><span>BRUTO:</span> <b>R$ ${b.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between;"><span>CUSTO KM:</span> <b>R$ ${cKm.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between; font-size:16px; margin-top:10px; background:#000; color:#fff; padding:5px;"><span>LUCRO:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between;"><span>TOTAL BRUTO:</span> <b>R$ ${b.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between;"><span>GASTO COMBUSTÍVEL/KM:</span> <b>R$ ${cKm.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between; background:#000; color:#fff; padding:8px; margin-top:10px;"><span>LUCRO REAL:</span> <b>R$ ${(b - cKm - g).toFixed(2)}</b></div>
             `;
+        }
+
+        function enviarWhatsApp() {
+            let user = localStorage.getItem('user');
+            let b=0, k=0, g=0;
+            let txt = `🏁 *RESUMO DETALHADO - ${user}*\n\n`;
+            entregas.forEach(e => {
+                txt += `📦 *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
+                e.gastos.forEach(gt => txt += `   └ 💸 ${gt.tipo}: R$ ${gt.valor.toFixed(2)}\n`);
+                b += e.valor; k += e.km; g += e.totalG;
+            });
+            const cKm = (k / 35 * 5.80) + (k * 0.15);
+            txt += `\n──────────────────\n💰 *BRUTO:* R$ ${b.toFixed(2)}\n⛽ *KM/COMBUSTÍVEL:* R$ ${cKm.toFixed(2)}\n──────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b - cKm - g).toFixed(2)}*`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
         function baixarPDF() {
@@ -206,29 +221,22 @@
             html2canvas(document.querySelector("#recibo-area")).then(canvas => {
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 0);
-                pdf.save(`recibo_${localStorage.getItem('user')}.pdf`);
+                pdf.save(`extrato_${localStorage.getItem('user')}.pdf`);
             });
         }
 
-        function enviarWhatsApp() {
-            const lucro = document.getElementById('footer-lucro').innerText;
-            const txt = `🏁 *RESUMO DO DIA - ${localStorage.getItem('user')}*\n\n✅ *${lucro}*\n\nGerado por ImpulsoWeb10`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
-        }
-
         function arquivarEFechar() {
-            if(confirm("Deseja fechar o dia e limpar tudo?")) {
+            if(confirm("Deseja salvar no histórico e limpar o painel?")) {
                 historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
-                localStorage.setItem('moto_hist', JSON.stringify(historico));
-                localStorage.removeItem('moto_entregas');
+                localStorage.setItem('moto_hist_v8', JSON.stringify(historico));
+                localStorage.removeItem('moto_entregas_v8');
                 location.reload();
             }
         }
 
         function verHistorico() {
             document.getElementById('modalHistorico').style.display = 'flex';
-            const lista = document.getElementById('lista-hist');
-            lista.innerHTML = historico.map(h => `<div style="padding:10px; border-bottom:1px solid #334155; display:flex; justify-content:space-between;"><span>${h.data}</span> <b>${h.lucro}</b></div>`).join('');
+            document.getElementById('lista-hist').innerHTML = historico.map(h => `<div style="padding:10px; border-bottom:1px solid #334155; display:flex; justify-content:space-between;"><span>${h.data}</span> <b>${h.lucro}</b></div>`).join('');
         }
     </script>
 </body>
