@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador + Inspiração</title>
+<title>Simulador Premium</title>
 
 <style>
 body{
@@ -25,8 +25,8 @@ body{
 
 /* AMBIENTE */
 .ambiente{
-    width:350px;
-    height:200px;
+    width:360px;
+    height:220px;
     margin:20px auto;
     position:relative;
     display:none;
@@ -45,13 +45,13 @@ body{
 .chao{position:absolute;bottom:0;height:30px;width:100%;background:#999;}
 .teto{position:absolute;top:0;height:20px;width:100%;background:#ddd;}
 
-.sofa{
+.sofa, .cama{
     position:absolute;
-    bottom:30px;
+    bottom:35px;
     left:50%;
     transform:translateX(-50%);
-    width:150px;
-    height:40px;
+    width:160px;
+    height:45px;
     border-radius:8px;
 }
 
@@ -78,8 +78,8 @@ body{
 }
 
 .cor{
-    width:60px;
-    height:60px;
+    width:55px;
+    height:55px;
     margin:5px;
     border-radius:8px;
     cursor:pointer;
@@ -105,19 +105,46 @@ button.acao{
 
 <div class="menu">
     <button onclick="mostrar('sala')">Sala</button>
+    <button onclick="mostrar('quarto')">Quarto</button>
+    <button onclick="mostrar('externa')">Área Externa</button>
 </div>
 
 <!-- SALA -->
 <div id="sala" class="ambiente">
-    <div id="p1" class="parede"></div>
-    <div id="p2" class="parede"></div>
-    <div id="p3" class="parede"></div>
+    <div id="s1" class="parede"></div>
+    <div id="s2" class="parede"></div>
+    <div id="s3" class="parede"></div>
     <div class="sofa"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
 
-<button class="acao" onclick="trocar()">🎨 Gerar Combinação</button>
+<!-- QUARTO -->
+<div id="quarto" class="ambiente">
+    <div id="q1" class="parede"></div>
+    <div id="q2" class="parede"></div>
+    <div id="q3" class="parede"></div>
+    <div class="cama"></div>
+    <div class="chao"></div>
+    <div class="teto"></div>
+</div>
+
+<!-- EXTERNA -->
+<div id="externa" class="ambiente">
+    <div id="e1" class="parede"></div>
+    <div id="e2" class="parede"></div>
+    <div id="e3" class="parede"></div>
+    <div class="chao"></div>
+</div>
+
+<!-- BOTÕES DE COMBINAÇÃO -->
+<div>
+    <button class="acao" onclick="gerar('comp')">Complementar</button>
+    <button class="acao" onclick="gerar('ana')">Análoga</button>
+    <button class="acao" onclick="gerar('tri')">Tríade</button>
+    <button class="acao" onclick="gerar('mono')">Monocromática</button>
+    <button class="acao" onclick="gerar('split')">Comp. Dividida</button>
+</div>
 
 <hr>
 
@@ -135,65 +162,91 @@ button.acao{
 
 <script>
 
+let tipoAtual="sala";
+
 /* MOSTRAR */
 function mostrar(tipo){
+    tipoAtual=tipo;
     document.querySelectorAll(".ambiente").forEach(a=>a.style.display="none");
     document.getElementById(tipo).style.display="block";
 }
 
-/* GERAR COMBINAÇÃO */
-function trocar(){
-    let base = randomColor();
-
-    aplicarCores([
-        base,
-        clarear(base,40),
-        escurecer(base,40)
-    ]);
+/* HSL */
+function hsl(c){
+    return `hsl(${c.h}, ${c.s}%, ${c.l}%)`;
 }
 
-/* APLICAR CORES */
-function aplicarCores(cores){
-    document.getElementById("p1").style.background=cores[0];
-    document.getElementById("p2").style.background=cores[1];
-    document.getElementById("p3").style.background=cores[2];
-    document.querySelector(".sofa").style.background=cores[2];
+/* BASE */
+function baseCor(){
+    return {h:Math.random()*360,s:70,l:60};
 }
 
-/* RANDOM */
-function randomColor(){
-    return "#"+Math.floor(Math.random()*16777215).toString(16);
+/* COMBINAÇÕES */
+function comp(b){
+    return [b,{...b,h:(b.h+180)%360},{...b,h:(b.h+180)%360,l:40}];
 }
 
-/* CLAREAR */
-function clarear(hex,percent){
-    let num=parseInt(hex.replace("#",""),16);
-    let r=(num>>16)+percent;
-    let g=((num>>8)&0x00FF)+percent;
-    let b=(num&0x0000FF)+percent;
-    return `rgb(${r},${g},${b})`;
+function ana(b){
+    return [b,{...b,h:(b.h+30)%360},{...b,h:(b.h-30+360)%360}];
 }
 
-/* ESCURECER */
-function escurecer(hex,percent){
-    let num=parseInt(hex.replace("#",""),16);
-    let r=(num>>16)-percent;
-    let g=((num>>8)&0x00FF)-percent;
-    let b=(num&0x0000FF)-percent;
-    return `rgb(${r},${g},${b})`;
+function tri(b){
+    return [b,{...b,h:(b.h+120)%360},{...b,h:(b.h+240)%360}];
 }
 
-/* INSPIRAÇÃO */
+function mono(b){
+    return [b,{...b,l:80},{...b,l:30}];
+}
+
+function split(b){
+    return [b,{...b,h:(b.h+150)%360},{...b,h:(b.h+210)%360}];
+}
+
+/* GERAR */
+function gerar(tipo){
+    let b=baseCor();
+    let cores;
+
+    if(tipo==="comp") cores=comp(b);
+    if(tipo==="ana") cores=ana(b);
+    if(tipo==="tri") cores=tri(b);
+    if(tipo==="mono") cores=mono(b);
+    if(tipo==="split") cores=split(b);
+
+    aplicar(cores.map(hsl));
+}
+
+/* APLICAR */
+function aplicar(c){
+    if(tipoAtual==="sala"){
+        s1.style.background=c[0];
+        s2.style.background=c[1];
+        s3.style.background=c[2];
+        document.querySelector(".sofa").style.background=c[2];
+    }
+
+    if(tipoAtual==="quarto"){
+        q1.style.background=c[0];
+        q2.style.background=c[1];
+        q3.style.background=c[2];
+        document.querySelector(".cama").style.background=c[2];
+    }
+
+    if(tipoAtual==="externa"){
+        e1.style.background=c[0];
+        e2.style.background=c[1];
+        e3.style.background=c[2];
+    }
+}
+
+/* IMAGEM */
 function carregarImagem(img){
-    let canvas=document.getElementById("canvas");
     let ctx=canvas.getContext("2d");
-
     ctx.drawImage(img,0,0,300,200);
-
     gerarPaleta(ctx);
 }
 
-/* GERAR PALETA */
+/* PALETA */
 function gerarPaleta(ctx){
     let data=ctx.getImageData(0,0,300,200).data;
     let cores=[];
@@ -209,42 +262,29 @@ function gerarPaleta(ctx){
     mostrarPaleta(cores.slice(0,5));
 }
 
-/* MOSTRAR PALETA */
 function mostrarPaleta(lista){
-    let div=document.getElementById("paleta");
-    div.innerHTML="";
+    paleta.innerHTML="";
 
     lista.forEach(cor=>{
-        let c=document.createElement("div");
-        c.className="cor";
-        c.style.background=cor;
+        let div=document.createElement("div");
+        div.className="cor";
+        div.style.background=cor;
 
-        c.onclick=()=>{
-            aplicarCores([
+        div.onclick=()=>{
+            aplicar([
                 cor,
-                clarearRgb(cor,40),
-                escurecerRgb(cor,40)
+                cor,
+                cor
             ]);
         };
 
-        div.appendChild(c);
+        paleta.appendChild(div);
     });
-}
-
-/* RGB HELPERS */
-function clarearRgb(rgb,amt){
-    let [r,g,b]=rgb.match(/\d+/g);
-    return `rgb(${+r+amt},${+g+amt},${+b+amt})`;
-}
-
-function escurecerRgb(rgb,amt){
-    let [r,g,b]=rgb.match(/\d+/g);
-    return `rgb(${r-amt},${g-amt},${b-amt})`;
 }
 
 /* INICIAL */
 mostrar("sala");
-trocar();
+gerar("ana");
 
 </script>
 
