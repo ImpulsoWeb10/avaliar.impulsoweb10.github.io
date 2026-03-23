@@ -20,47 +20,32 @@ body {
     border-radius: 8px;
     background: #222;
     color: white;
+    cursor: pointer;
 }
 
-/* AMBIENTES */
+/* AMBIENTE BASE */
 .ambiente {
-    width: 320px;
-    height: 200px;
+    width: 350px;
+    height: 220px;
     margin: 20px auto;
     position: relative;
     display: none;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-/* SALA */
-.sala {
-    display: flex;
-}
-.sala .parede {
+/* PAREDES */
+.parede {
     flex: 1;
+    transition: 0.5s;
 }
 
-/* QUARTO */
-.quarto {
-    display: flex;
-}
-.quarto .parede {
-    flex: 1;
-}
-
-/* FACHADA */
-.fachada {
-    display: flex;
-}
-.fachada .parede {
-    flex: 1;
-}
-
-/* DETALHES VISUAIS */
+/* CHÃO E TETO */
 .chao {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30px;
+    height: 35px;
     background: #999;
 }
 
@@ -72,6 +57,77 @@ body {
     background: #ddd;
 }
 
+/* ===== SALA ===== */
+.sala {
+    display: flex;
+}
+
+.sofa {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    transition: 0.5s;
+}
+
+.mesa {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    background: #8b5a2b;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+/* ===== QUARTO ===== */
+.quarto {
+    display: flex;
+}
+
+.cama {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 50px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    transition: 0.5s;
+}
+
+/* ===== FACHADA ===== */
+.fachada {
+    display: flex;
+}
+
+.porta {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    width: 45px;
+    height: 70px;
+    background: #3e2723;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.janela {
+    position: absolute;
+    bottom: 60px;
+    left: 60%;
+    width: 40px;
+    height: 30px;
+    background: #87ceeb;
+    border: 2px solid #333;
+}
+
 /* BOTÕES */
 button.acao {
     margin: 10px;
@@ -80,13 +136,14 @@ button.acao {
     color: white;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Tintas Qualy Quimy</h2>
+<h2>🎨 Simulador Qualy Quimy</h2>
 
 <div class="menu">
     <button onclick="mostrar('sala')">🏡 Sala</button>
@@ -99,6 +156,8 @@ button.acao {
     <div id="s1" class="parede"></div>
     <div id="s2" class="parede"></div>
     <div id="s3" class="parede"></div>
+    <div class="sofa"></div>
+    <div class="mesa"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
@@ -108,6 +167,7 @@ button.acao {
     <div id="q1" class="parede"></div>
     <div id="q2" class="parede"></div>
     <div id="q3" class="parede"></div>
+    <div class="cama"></div>
     <div class="chao"></div>
     <div class="teto"></div>
 </div>
@@ -117,19 +177,20 @@ button.acao {
     <div id="f1" class="parede"></div>
     <div id="f2" class="parede"></div>
     <div id="f3" class="parede"></div>
+    <div class="porta"></div>
+    <div class="janela"></div>
     <div class="chao"></div>
 </div>
 
 <h3 id="nome"></h3>
 
-<button class="acao" onclick="trocar()">Trocar combinação</button>
-<button class="acao" onclick="comprar()">Quero esse kit</button>
+<button class="acao" onclick="trocar()">🎨 Trocar combinação</button>
+<button class="acao" onclick="comprar()">🛒 Quero esse kit</button>
 
 <script>
 
 let atual = {};
 
-/* KITS PROFISSIONAIS */
 const dados = {
 
 sala: [
@@ -166,21 +227,23 @@ function trocar(){
     atual = k;
 
     if(tipoAtual === "sala"){
-        document.getElementById("s1").style.background = k.cores[0];
-        document.getElementById("s2").style.background = k.cores[1];
-        document.getElementById("s3").style.background = k.cores[2];
+        s1.style.background = k.cores[0];
+        s2.style.background = k.cores[1];
+        s3.style.background = k.cores[2];
+        document.querySelector(".sofa").style.background = k.cores[2];
     }
 
     if(tipoAtual === "quarto"){
-        document.getElementById("q1").style.background = k.cores[0];
-        document.getElementById("q2").style.background = k.cores[1];
-        document.getElementById("q3").style.background = k.cores[2];
+        q1.style.background = k.cores[0];
+        q2.style.background = k.cores[1];
+        q3.style.background = k.cores[2];
+        document.querySelector(".cama").style.background = k.cores[2];
     }
 
     if(tipoAtual === "fachada"){
-        document.getElementById("f1").style.background = k.cores[0];
-        document.getElementById("f2").style.background = k.cores[1];
-        document.getElementById("f3").style.background = k.cores[2];
+        f1.style.background = k.cores[0];
+        f2.style.background = k.cores[1];
+        f3.style.background = k.cores[2];
     }
 
     document.getElementById("nome").innerText = atual.nome;
@@ -191,7 +254,6 @@ function comprar(){
     window.open("https://wa.me/55SEUNUMERO?text=" + encodeURIComponent(texto));
 }
 
-/* INICIAL */
 mostrar("sala");
 
 </script>
