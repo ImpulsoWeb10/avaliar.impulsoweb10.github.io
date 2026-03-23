@@ -14,27 +14,28 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 180px; overflow-x: hidden; }
         
-        /* HEADER DINÂMICO ASIMÉTRICO */
+        /* HEADER DINÂMICO ASIMÉTRICO V12 */
         #header-principal {
             background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); 
             padding: 25px 20px; border-radius: 0 0 40px 40px; margin: -15px -15px 25px -15px;
-            display: flex; align-items: center; justify-content: space-around;
+            display: flex; align-items: center; justify-content: flex-start; gap: 20px;
             box-shadow: 0 15px 35px rgba(245, 130, 32, 0.4);
             transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             border-bottom: 4px solid var(--secondary);
         }
 
         .logo-box { 
-            width: 85px; height: 85px; border-radius: 20px; 
+            width: 90px; height: 90px; border-radius: 20px; 
             border: 3px solid #fff; box-shadow: 0 8px 15px rgba(0,0,0,0.3);
             position: relative; overflow: hidden; background: #fff;
             transition: all 0.6s ease; flex-shrink: 0;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        .red-line-text { text-align: left; max-width: 60%; transition: all 0.4s ease; }
-        .red-line-text h2 { margin: 0; font-size: 15px; color: #000; font-weight: 900; line-height: 1.2; text-transform: uppercase; }
-        .red-line-text p { margin: 5px 0 0; font-size: 11px; font-weight: 800; color: #fff; opacity: 0.9; }
+        /* TEXTO DA RED LINE MAIOR */
+        .red-line-text { text-align: left; transition: all 0.4s ease; }
+        .red-line-text h2 { margin: 0; font-size: 18px; color: #000; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
+        .red-line-text p { margin: 6px 0 0; font-size: 13px; font-weight: 800; color: #fff; opacity: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
 
         /* MODO FOCO (LOGO NO CENTRO) */
         .modo-foco #header-principal { 
@@ -42,7 +43,7 @@
             border-radius: 0; justify-content: center; box-shadow: none;
         }
         .modo-foco .red-line-text { display: none; width: 0; opacity: 0; }
-        .modo-foco .logo-box { width: 120px; height: 120px; transform: rotate(0deg); margin: 0 auto; }
+        .modo-foco .logo-box { width: 130px; height: 130px; transform: rotate(0deg); margin: 0 auto; }
 
         /* INTERFACE */
         .form-add { background: var(--card); padding: 20px; border-radius: 25px; border: 1px solid #334155; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
@@ -51,14 +52,12 @@
         input:focus { border-color: var(--primary); background: #000; }
         
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
-        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; }
+        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 20px; }
 
-        /* ELEMENTOS DE LISTA */
         .entrega-card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); position: relative; }
         .gasto-tag { font-size: 11px; color: var(--danger); display: block; margin-top: 5px; font-style: italic; }
 
-        /* MODAIS */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 2000; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; }
         .recibo-card { background: white; color: black; padding: 30px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; }
     </style>
@@ -69,7 +68,7 @@
         <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg" alt="Logo"></div>
             <div class="red-line-text">
-                <h2>SISTEMA Nº1<br><span style="background:#000; color:#fff; padding: 0 4px;">ELITE MOTO</span></h2>
+                <h2>SISTEMA Nº1<br><span style="background:#000; color:#fff; padding: 0 5px; border-radius: 3px;">ELITE MOTO</span></h2>
                 <p>PARE DE PERDER DINHEIRO!</p>
             </div>
         </header>
@@ -97,7 +96,6 @@
         </div>
 
         <div id="lista-entregas"></div>
-        
         <button class="btn-fim" onclick="gerarReciboFinal()">🚩 FINALIZAR TURNO</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
     </div>
@@ -138,27 +136,13 @@
         </div>
     </div>
 
-    <div id="modalHistorico" class="overlay">
-        <div class="form-add" style="width:100%; max-width:350px;">
-            <h2 style="color:var(--primary)">HISTÓRICO</h2>
-            <div id="lista-hist" style="max-height:400px; overflow-y:auto;"></div>
-            <button class="btn-main" onclick="document.getElementById('modalHistorico').style.display='none'">FECHAR</button>
-        </div>
-    </div>
-
     <script>
-        let entregas = JSON.parse(localStorage.getItem('moto_v11_data')) || [];
+        let entregas = JSON.parse(localStorage.getItem('moto_v12_data')) || [];
         let gastosTemp = [];
-        let historico = JSON.parse(localStorage.getItem('moto_v11_hist')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_v12_hist')) || [];
 
         function ativarModoFoco() { document.getElementById('body-app').classList.add('modo-foco'); }
-
-        function desativarModoFoco() {
-            if(document.getElementById('cliente').value === "") {
-                document.getElementById('body-app').classList.remove('modo-foco');
-            }
-        }
-
+        function desativarModoFoco() { if(document.getElementById('cliente').value === "") { document.getElementById('body-app').classList.remove('modo-foco'); } }
         function abrirModalGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
 
         function addGastoLista() {
@@ -175,24 +159,19 @@
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
             const c = document.getElementById('cliente').value || "Corrida";
-            if(v <= 0) return alert("Insira o valor ganho!");
+            if(v <= 0) return alert("Insira o valor!");
             
             entregas.push({cliente: c, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0)});
-            localStorage.setItem('moto_v11_data', JSON.stringify(entregas));
+            localStorage.setItem('moto_v12_data', JSON.stringify(entregas));
 
-            // SOM DE CAIXA REGISTRADORA (RESETADO PARA TOCAR SEMPRE)
             const audio = document.getElementById('audio-cash');
             audio.currentTime = 0;
-            audio.play().catch(e => console.log("Som bloqueado pelo navegador"));
+            audio.play().catch(e => console.log("Som ativo"));
 
-            // RESET CAMPOS
             gastosTemp = []; 
-            document.getElementById('cliente').value = ''; 
-            document.getElementById('valor').value = ''; 
-            document.getElementById('km').value = '';
-            document.getElementById('gasto-total-input').value = '';
+            document.getElementById('cliente').value = ''; document.getElementById('valor').value = ''; 
+            document.getElementById('km').value = ''; document.getElementById('gasto-total-input').value = '';
             document.getElementById('preview-gastos').innerHTML = '';
-            
             document.getElementById('body-app').classList.remove('modo-foco');
             atualizarTela();
         }
@@ -233,7 +212,7 @@
                 b += e.valor; k += e.km; g += e.totalG;
             });
             const cKm = (k / 35 * 6.00) + (k * 0.15);
-            txt += `\n✅ *LUCRO LÍQUIDO: R$ ${(b - cKm - g).toFixed(2)}*`;
+            txt += `\n✅ *LUCRO REAL: R$ ${(b - cKm - g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
@@ -248,8 +227,8 @@
 
         function arquivarEFechar() {
             historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
-            localStorage.setItem('moto_v11_hist', JSON.stringify(historico));
-            localStorage.removeItem('moto_v11_data');
+            localStorage.setItem('moto_v12_hist', JSON.stringify(historico));
+            localStorage.removeItem('moto_v12_data');
             location.reload();
         }
 
