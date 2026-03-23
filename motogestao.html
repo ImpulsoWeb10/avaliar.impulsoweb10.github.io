@@ -11,40 +11,30 @@
             --primary: #f58220; --secondary: #004a80; --bg: #0d1212; 
             --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444;
         }
-
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 120px; }
-        
         #ativacao { position: fixed; inset: 0; background: var(--bg); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .ativacao-card { background: var(--card); padding: 30px; border-radius: 25px; border: 2px solid var(--primary); width: 100%; max-width: 400px; text-align: center; }
-        .logo-img { width: 180px; margin-bottom: 20px; }
-
+        .logo-img { width: 160px; margin-bottom: 20px; }
         .header-logo { text-align: center; padding: 10px 0; }
-        .header-logo img { width: 130px; }
-        
+        .header-logo img { width: 120px; }
         .config-section { background: rgba(245, 130, 32, 0.1); border: 1px dashed var(--primary); padding: 10px; border-radius: 15px; margin-bottom: 15px; text-align: center; }
-        .form-add { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        
+        .form-add { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; margin-bottom: 20px; }
         label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px; }
         input, select { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #334155; background: #080c0c; color: white; font-size: 14px; box-sizing: border-box; }
-        
         .btn-add { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
-
+        
+        /* Estilo para a mini lista de despesas antes de salvar */
+        #temp-despesas-list { background: rgba(239, 68, 68, 0.05); border-radius: 10px; margin-bottom: 10px; padding: 0; list-style: none; }
+        .temp-item { font-size: 11px; padding: 8px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; color: #ff9999; }
+        
         .entrega-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; border-left: 4px solid var(--secondary); align-items: center; }
-        .item-info { flex: 1; }
-        .item-valor { text-align: right; font-weight: bold; }
-        
         .fab { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; border: none; font-size: 24px; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
-        
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); }
-        
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: flex-end; }
         .modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 25px; box-sizing: border-box; }
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .menu-btn { background: #2a3535; border: none; padding: 15px; border-radius: 12px; color: white; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; font-weight: bold; }
-
-        /* RECIBO */
         #render-target { position: absolute; left: -9999px; top: 0; width: 350px; background: white; color: black; padding: 25px; font-family: monospace; border: 1px solid #000; }
-        .rec-section-title { background: #eee; padding: 5px; font-weight: bold; margin: 10px 0 5px; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body>
@@ -52,7 +42,7 @@
     <div id="ativacao">
         <div class="ativacao-card">
             <img src="impulsoweb10.jpg" alt="Logo" class="logo-img">
-            <input type="text" id="lead-nome" placeholder="Seu Nome / Empresa">
+            <input type="text" id="lead-nome" placeholder="Nome do Motoboy">
             <input type="number" id="lead-zap" placeholder="WhatsApp (DDD + Número)">
             <button class="btn-add" onclick="ativarSistema()">ATIVAR PAINEL 🚀</button>
         </div>
@@ -60,45 +50,40 @@
 
     <div id="conteudo-principal" style="display: none;">
         <div class="header-logo"><img src="impulsoweb10.jpg" alt="Logo"></div>
-
-        <div class="config-section">
-            <label>Operador Ativo</label>
-            <span id="label-user" style="font-weight: bold; color: var(--primary);"></span>
-        </div>
+        <div class="config-section"><label>Operador:</label><span id="label-user" style="font-weight: bold; color: var(--primary);"></span></div>
 
         <div class="form-add">
-            <label>Cliente / Destino</label>
-            <input type="text" id="cliente" placeholder="Ex: Pizzaria, Farmácia...">
+            <label>Local de Coleta/Entrega</label>
+            <input type="text" id="cliente" placeholder="Ex: Ifood, Pizzaria...">
             
             <div style="display:flex; gap:10px;">
                 <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00" step="0.01"></div>
-                <div style="flex:1"><label>KM</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>KM Rodado</label><input type="number" id="km" placeholder="0"></div>
             </div>
 
-            <div style="display:flex; gap:10px; align-items: flex-end;">
+            <label>Lançar Despesas Extras</label>
+            <div style="display:flex; gap:5px; align-items: flex-start; margin-bottom: 5px;">
                 <div style="flex:1.2">
-                    <label>Despesa Extra R$</label>
-                    <input type="number" id="despesa" placeholder="0.00" step="0.01">
+                    <input type="number" id="despesa-valor" placeholder="Valor R$" step="0.01" style="margin-bottom:0">
                 </div>
                 <div style="flex:1">
-                    <label>Tipo</label>
-                    <select id="tipo-despesa">
-                        <option value="">Nenhum</option>
+                    <select id="tipo-despesa" style="margin-bottom:0">
+                        <option value="Outros">Outros</option>
                         <option value="Pedágio">Pedágio</option>
                         <option value="Combustível">Combustível</option>
                         <option value="Almoço">Almoço</option>
                         <option value="Lanche">Lanche</option>
-                        <option value="Manutenção">Manutenção</option>
-                        <option value="Outros">Outros</option>
                     </select>
                 </div>
+                <button onclick="adicionarDespesaTemp()" style="background: var(--danger); border: none; color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 18px;">+</button>
             </div>
             
-            <button class="btn-add" onclick="lancar()">+ LANÇAR NO DIA</button>
+            <ul id="temp-despesas-list"></ul>
+            
+            <button class="btn-add" onclick="lancar()">SALVAR LANÇAMENTO ✅</button>
         </div>
 
         <div id="lista-tela"></div>
-
         <button class="fab" onclick="abrirMenu()"><i class="fas fa-bars"></i></button>
         <div class="summary-fixed" id="footer-lucro">LUCRO REAL: R$ 0,00</div>
 
@@ -109,34 +94,26 @@
                 <button class="menu-btn" onclick="salvarImagem()"><i class="fas fa-image" style="color:#6366f1"></i>SALVAR PRINT</button>
                 <button class="menu-btn" onclick="suporte()"><i class="fas fa-headset" style="color:var(--primary)"></i>SUPORTE</button>
             </div>
-            <button class="menu-btn" style="width:100%; margin-top:10px; background:rgba(239, 68, 68, 0.1); color:var(--danger);" onclick="zerarDia()">LIMPAR TUDO (NOVO DIA)</button>
+            <button class="menu-btn" style="width:100%; margin-top:10px; background:rgba(239, 68, 68, 0.1); color:var(--danger);" onclick="zerarDia()">LIMPAR TUDO</button>
         </div></div>
     </div>
 
     <div id="render-target">
         <div style="text-align:center"><img src="impulsoweb10.jpg" style="width:110px;"></div>
-        <div style="text-align:center; border-bottom: 2px solid #000; margin-bottom: 10px;">
-            <h3 id="rec-empresa" style="margin:5px 0;"></h3>
-            <p id="rec-data" style="font-size:10px; margin:0; padding-bottom:5px;"></p>
-        </div>
-        
-        <div class="rec-section-title">DETALHAMENTO DE ENTREGAS</div>
-        <div id="rec-corpo-entregas"></div>
-        
-        <div class="rec-section-title">DESPESAS EXTRAS DO DIA</div>
-        <div id="rec-corpo-despesas"></div>
-        
+        <div style="text-align:center; border-bottom: 2px solid #000; margin-bottom: 10px;"><h3 id="rec-empresa" style="margin:5px 0;"></h3><p id="rec-data" style="font-size:10px; margin:0; padding-bottom:5px;"></p></div>
+        <div style="background: #eee; padding: 5px; font-weight: bold; margin-bottom: 5px; font-size: 12px; text-align: center;">RESUMO DO DIA</div>
+        <div id="rec-corpo"></div>
         <div style="margin-top:15px; border-top: 2px solid #000; padding-top:10px;">
-            <div style="display:flex; justify-content:space-between; font-size:11px;"><span>FATURAMENTO BRUTO:</span> <b id="rec-bruto"></b></div>
-            <div style="display:flex; justify-content:space-between; font-size:11px;"><span>CUSTO KM (ESTIMADO):</span> <b id="rec-custo-km"></b></div>
-            <div style="display:flex; justify-content:space-between; font-size:11px; color:red"><span>TOTAL DESPESAS EXTRAS:</span> <b id="rec-total-despesa"></b></div>
+            <div style="display:flex; justify-content:space-between; font-size:11px;"><span>FATURAMENTO:</span> <b id="rec-bruto"></b></div>
+            <div style="display:flex; justify-content:space-between; font-size:11px;"><span>CUSTO KM:</span> <b id="rec-custo-km"></b></div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:red"><span>DESPESAS ADICIONAIS:</span> <b id="rec-total-despesa"></b></div>
             <div style="display:flex; justify-content:space-between; font-size:15px; margin-top:10px; background:#f0f0f0; padding:5px;"><span>LUCRO LÍQUIDO:</span> <b id="rec-lucro"></b></div>
         </div>
-        <p style="text-align:center; font-size:9px; margin-top:20px; color:#666;">Sistema ImpulsoWeb10 - Gestão de Entregas</p>
     </div>
 
     <script>
-        let dados = JSON.parse(localStorage.getItem('motoDados_v6')) || { faturamento: 0, km: 0, entregas: [] };
+        let dados = JSON.parse(localStorage.getItem('motoDados_v7')) || { faturamento: 0, km: 0, entregas: [] };
+        let despesasTemp = []; // Armazena despesas antes de salvar o lançamento principal
         const SEU_NUMERO = "5511954950044"; 
 
         window.onload = function() {
@@ -155,37 +132,55 @@
             const zap = document.getElementById('lead-zap').value;
             if(!nome || !zap) return alert("Preencha os campos!");
             localStorage.setItem('motoUser', nome.toUpperCase());
-            window.open(`https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent('🚀 *NOVO USUÁRIO:* ' + nome)}`);
+            window.open(`https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent('🚀 *ATIVAÇÃO:* ' + nome)}`);
             location.reload();
+        }
+
+        function adicionarDespesaTemp() {
+            const valorD = parseFloat(document.getElementById('despesa-valor').value);
+            const tipoD = document.getElementById('tipo-despesa').value;
+            if(!valorD || valorD <= 0) return alert("Informe o valor da despesa!");
+            
+            despesasTemp.push({ tipo: tipoD, valor: valorD });
+            
+            // Atualiza a listinha visual
+            const listaUI = document.getElementById('temp-despesas-list');
+            const item = document.createElement('li');
+            item.className = 'temp-item';
+            item.innerHTML = `<span>${tipoD}</span> <span>R$ ${valorD.toFixed(2)}</span>`;
+            listaUI.appendChild(item);
+            
+            document.getElementById('despesa-valor').value = '';
         }
 
         function lancar() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
-            const d = parseFloat(document.getElementById('despesa').value) || 0;
-            const t = document.getElementById('tipo-despesa').value;
             const c = document.getElementById('cliente').value || "Entrega";
 
-            if(v === 0 && d === 0) return alert("Nada para lançar!");
+            if(v === 0 && despesasTemp.length === 0) return alert("Nada para lançar!");
+
+            // Soma todas as despesas temporárias deste lançamento
+            const somaDespesas = despesasTemp.reduce((acc, curr) => acc + curr.valor, 0);
 
             dados.entregas.push({
                 cliente: c, 
                 valor: v, 
                 km: k, 
-                despesa: d,
-                tipoDespesa: t,
+                listaDespesas: [...despesasTemp], // Salva a lista de despesas individuais
+                totalDespesa: somaDespesas,
                 hora: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
             });
             
+            despesasTemp = []; // Reseta a lista temporária
+            document.getElementById('temp-despesas-list').innerHTML = ''; // Limpa a UI
+            
             saveAndSync();
-            document.getElementById('valor').value = ''; 
-            document.getElementById('km').value = ''; 
-            document.getElementById('despesa').value = '';
-            document.getElementById('cliente').value = '';
+            document.getElementById('valor').value = ''; document.getElementById('km').value = ''; document.getElementById('cliente').value = '';
         }
 
         function saveAndSync() {
-            localStorage.setItem('motoDados_v6', JSON.stringify(dados));
+            localStorage.setItem('motoDados_v7', JSON.stringify(dados));
             renderizarLista();
             atualizarCalculos();
         }
@@ -196,70 +191,51 @@
             [...dados.entregas].reverse().forEach(e => {
                 const item = document.createElement('div');
                 item.className = 'entrega-item';
-                let txtDespesa = e.despesa > 0 ? `<br><small style="color:var(--danger)">Gasto: R$ ${e.despesa.toFixed(2)} (${e.tipoDespesa})</small>` : "";
-                item.innerHTML = `
-                    <div class="item-info">
-                        <b>${e.cliente}</b> <small style="opacity:0.6">| ${e.hora}</small>
-                        <br><small>${e.km} KM</small>${txtDespesa}
-                    </div>
-                    <div class="item-valor">R$ ${e.valor.toFixed(2)}</div>
-                `;
+                let htmlDespesas = "";
+                if(e.listaDespesas && e.listaDespesas.length > 0) {
+                    e.listaDespesas.forEach(d => {
+                        htmlDespesas += `<br><small style="color:var(--danger)">- ${d.tipo}: R$ ${d.valor.toFixed(2)}</small>`;
+                    });
+                }
+                item.innerHTML = `<div><b>${e.cliente}</b> <small style="opacity:0.6">${e.hora}</small><br><small>${e.km} KM</small>${htmlDespesas}</div> <b>R$ ${e.valor.toFixed(2)}</b>`;
                 lista.appendChild(item);
             });
         }
 
         function atualizarCalculos() {
-            let totalBruto = 0;
-            let totalKm = 0;
-            let totalD = 0;
-            
-            dados.entregas.forEach(e => {
-                totalBruto += e.valor;
-                totalKm += e.km;
-                totalD += e.despesa;
-            });
+            let b = 0, k = 0, d = 0;
+            dados.entregas.forEach(e => { b += e.valor; k += e.km; d += e.totalDespesa; });
+            const cKm = (k / 35 * 5.80) + (k * 0.15);
+            const liq = b - cKm - d;
 
-            const custoKm = (totalKm / 35 * 5.80) + (totalKm * 0.15);
-            const lucroFinal = totalBruto - custoKm - totalD;
-
-            document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${lucroFinal.toFixed(2)}`;
-            
-            // UI Recibo
+            document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${liq.toFixed(2)}`;
             document.getElementById('rec-empresa').innerText = localStorage.getItem('motoUser');
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
-            document.getElementById('rec-bruto').innerText = `R$ ${totalBruto.toFixed(2)}`;
-            document.getElementById('rec-custo-km').innerText = `R$ ${custoKm.toFixed(2)}`;
-            document.getElementById('rec-total-despesa').innerText = `R$ ${totalD.toFixed(2)}`;
-            document.getElementById('rec-lucro').innerText = `R$ ${lucroFinal.toFixed(2)}`;
+            document.getElementById('rec-bruto').innerText = `R$ ${b.toFixed(2)}`;
+            document.getElementById('rec-custo-km').innerText = `R$ ${cKm.toFixed(2)}`;
+            document.getElementById('rec-total-despesa').innerText = `R$ ${d.toFixed(2)}`;
+            document.getElementById('rec-lucro').innerText = `R$ ${liq.toFixed(2)}`;
             
-            let htmlE = "";
-            let htmlD = "";
-            dados.entregas.forEach(e => { 
-                if(e.valor > 0) htmlE += `<div style="display:flex; justify-content:space-between; font-size:10px; padding:2px 0;"><span>${e.cliente}</span> <b>R$ ${e.valor.toFixed(2)}</b></div>`;
-                if(e.despesa > 0) htmlD += `<div style="display:flex; justify-content:space-between; font-size:10px; padding:2px 0;"><span>${e.tipoDespesa} (${e.cliente})</span> <b style="color:red">R$ ${e.despesa.toFixed(2)}</b></div>`;
+            let htmlRec = "";
+            dados.entregas.forEach(e => {
+                htmlRec += `<div style="border-bottom:1px solid #eee; padding:5px 0; font-size:10px;"><b>${e.cliente}</b> (R$ ${e.valor.toFixed(2)})`;
+                if(e.listaDespesas) e.listaDespesas.forEach(dis => {
+                    htmlRec += `<br><span style="color:red">- ${dis.tipo}: R$ ${dis.valor.toFixed(2)}</span>`;
+                });
+                htmlRec += `</div>`;
             });
-            document.getElementById('rec-corpo-entregas').innerHTML = htmlE || "<p style='font-size:10px'>Nenhuma entrega</p>";
-            document.getElementById('rec-corpo-despesas').innerHTML = htmlD || "<p style='font-size:10px'>Nenhuma despesa</p>";
+            document.getElementById('rec-corpo').innerHTML = htmlRec;
         }
 
-        function zerarDia() {
-            if(confirm("Deseja iniciar um novo dia?")) {
-                dados = { faturamento: 0, km: 0, entregas: [] };
-                localStorage.removeItem('motoDados_v6');
-                saveAndSync();
-            }
-        }
-
+        function zerarDia() { if(confirm("Zerar o dia?")) { dados = { faturamento: 0, km: 0, entregas: [] }; localStorage.removeItem('motoDados_v7'); saveAndSync(); } }
         function abrirMenu() { document.getElementById('modalMenu').style.display = 'flex'; }
         function gerarPDF() { window.print(); }
-        function suporte() { window.open(`https://wa.me/${SEU_NUMERO}?text=Dúvida no App`); }
-
+        function suporte() { window.open(`https://wa.me/${SEU_NUMERO}?text=Suporte MotoGestão`); }
         function salvarImagem() {
             const target = document.getElementById('render-target');
             target.style.position = "static"; target.style.left = "0";
             html2canvas(target).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `extrato.png`;
+                const link = document.createElement('a'); link.download = `extrato.png`;
                 link.href = canvas.toDataURL(); link.click();
                 target.style.position = "absolute"; target.style.left = "-9999px";
             });
@@ -267,24 +243,15 @@
 
         function enviarZap() {
             const user = localStorage.getItem('motoUser');
-            let totalB = 0, totalK = 0, totalD = 0;
-            let listE = "📦 *ENTREGAS:* \n", listD = "💸 *DESPESAS:* \n";
-
-            dados.entregas.forEach((e, i) => {
-                if(e.valor > 0) {
-                    listE += `${i+1}. ${e.cliente}: R$ ${e.valor.toFixed(2)}\n`;
-                    totalB += e.valor;
-                    totalK += e.km;
-                }
-                if(e.despesa > 0) {
-                    listD += `- ${e.tipoDespesa}: R$ ${e.despesa.toFixed(2)}\n`;
-                    totalD += e.despesa;
-                }
+            let b = 0, k = 0, d = 0, txt = `🚀 *EXTRATO: ${user}*\n\n`;
+            dados.entregas.forEach(e => {
+                txt += `📦 *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
+                if(e.listaDespesas) e.listaDespesas.forEach(dis => { txt += ` └ 💸 ${dis.tipo}: R$ ${dis.valor.toFixed(2)}\n`; });
+                b += e.valor; k += e.km; d += e.totalDespesa;
             });
-
-            const cKm = (totalK / 35 * 5.80) + (totalK * 0.15);
-            const msg = `🚀 *EXTRATO IMPULSOWEB10 - ${user}*\n\n${listE}\n${listD}\n💰 *Bruto:* R$ ${totalB.toFixed(2)}\n⛽ *Custo KM:* R$ ${cKm.toFixed(2)}\n🍔 *Despesas Extras:* R$ ${totalD.toFixed(2)}\n──────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(totalB - cKm - totalD).toFixed(2)}*`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+            const cKm = (k / 35 * 5.80) + (k * 0.15);
+            txt += `\n💰 *Bruto:* R$ ${b.toFixed(2)}\n⛽ *KM:* R$ ${cKm.toFixed(2)}\n💸 *Despesas:* R$ ${d.toFixed(2)}\n──────────────────\n✅ *LUCRO: R$ ${(b - cKm - d).toFixed(2)}*`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
     </script>
 </body>
