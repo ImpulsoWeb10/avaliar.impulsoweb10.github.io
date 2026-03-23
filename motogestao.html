@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro - V3.1</title>
+    <title>MotoGestão Pro - V3.2</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,6 +11,10 @@
     <style>
         :root { --primary: #fbbf24; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --success: #22c55e; --danger: #ef4444; --accent: #6366f1; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 120px; }
+        
+        /* Modal de Ativação (Bloqueio) */
+        #ativacao { position: fixed; inset: 0; background: var(--bg); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .ativacao-card { background: var(--card); padding: 30px; border-radius: 25px; border: 2px solid var(--primary); width: 100%; max-width: 400px; }
         
         .header { text-align: center; padding: 10px 0; color: var(--primary); }
         .config-section { background: rgba(99, 102, 241, 0.1); border: 1px dashed var(--accent); padding: 15px; border-radius: 15px; margin-bottom: 15px; }
@@ -31,10 +35,7 @@
         
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--success); color: #000; padding: 15px; text-align: center; font-weight: 900; z-index: 90; }
 
-        #render-target { 
-            position: absolute; left: -9999px; top: 0;
-            width: 400px; background: white; color: black; padding: 30px; font-family: monospace; 
-        }
+        #render-target { position: absolute; left: -9999px; top: 0; width: 400px; background: white; color: black; padding: 30px; font-family: monospace; }
         .recibo-header { border-bottom: 2px solid #000; text-align: center; margin-bottom: 15px; }
         .recibo-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #eee; padding: 5px 0; }
         
@@ -46,49 +47,68 @@
 </head>
 <body>
 
-    <div class="header"><h1>MOTO GESTÃO PRO</h1></div>
-
-    <div class="config-section">
-        <label>Sua Empresa / Seu Nome</label>
-        <input type="text" id="empresa" placeholder="Sua Marca">
-    </div>
-
-    <div class="form-add">
-        <label>Local / Cliente</label>
-        <input type="text" id="cliente" placeholder="Ex: Pizzaria, Farmácia...">
-        <div style="display:flex; gap:10px;">
-            <div style="flex:1">
-                <label>Valor R$</label>
-                <input type="number" id="valor" placeholder="0,00" step="0.01">
-            </div>
-            <div style="flex:1">
-                <label>KM</label>
-                <input type="number" id="km" placeholder="KM">
-            </div>
+    <div id="ativacao">
+        <div class="ativacao-card">
+            <i class="fas fa-motorcycle" style="font-size: 50px; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2 style="margin: 0 0 10px 0;">Ativar Painel</h2>
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 25px;">Para liberar o uso gratuito, informe seus dados.</p>
+            
+            <label style="text-align: left;">Seu Nome / Empresa</label>
+            <input type="text" id="lead-nome" placeholder="Ex: Robson Entregas">
+            
+            <label style="text-align: left;">Seu WhatsApp</label>
+            <input type="number" id="lead-zap" placeholder="DDD + Número">
+            
+            <button class="btn-add" style="margin-top: 20px;" onclick="ativarSistema()">LIBERAR ACESSO GRATUITO</button>
+            <p style="font-size: 10px; color: #475569; margin-top: 15px;">Desenvolvido por ImpulsoWeb10</p>
         </div>
-        <button class="btn-add" onclick="lancar()">LANÇAR CORRIDA</button>
     </div>
 
-    <div id="lista-tela"></div>
+    <div id="conteudo-principal" style="display: none;">
+        <div class="header"><h1>MOTO GESTÃO PRO</h1></div>
 
-    <button class="fab" onclick="abrirMenu()"><i class="fas fa-bars"></i></button>
+        <div class="config-section">
+            <label>Empresa Ativa</label>
+            <input type="text" id="empresa" readonly>
+        </div>
 
-    <div class="summary-fixed" id="footer-lucro">LUCRO REAL: R$ 0,00</div>
+        <div class="form-add">
+            <label>Local / Cliente</label>
+            <input type="text" id="cliente" placeholder="Ex: Pizzaria, Farmácia...">
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1">
+                    <label>Valor R$</label>
+                    <input type="number" id="valor" placeholder="0,00" step="0.01">
+                </div>
+                <div style="flex:1">
+                    <label>KM</label>
+                    <input type="number" id="km" placeholder="KM">
+                </div>
+            </div>
+            <button class="btn-add" onclick="lancar()">LANÇAR CORRIDA</button>
+        </div>
 
-    <div id="modalMenu" class="modal" onclick="this.style.display='none'">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="menu-grid">
-                <button class="menu-btn" onclick="enviarZap()"><i class="fab fa-whatsapp" style="color:#25d366"></i>WHATSAPP</button>
-                <button class="menu-btn" onclick="gerarPDF()"><i class="fas fa-file-pdf" style="color:#ef4444"></i>GERAR PDF</button>
-                <button class="menu-btn" onclick="salvarImagem()"><i class="fas fa-image" style="color:#6366f1"></i>SALVAR IMAGEM</button>
-                <button class="menu-btn" onclick="location.reload()"><i class="fas fa-sync"></i>RESETAR DIA</button>
+        <div id="lista-tela"></div>
+
+        <button class="fab" onclick="abrirMenu()"><i class="fas fa-bars"></i></button>
+
+        <div class="summary-fixed" id="footer-lucro">LUCRO REAL: R$ 0,00</div>
+
+        <div id="modalMenu" class="modal" onclick="this.style.display='none'">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="menu-grid">
+                    <button class="menu-btn" onclick="enviarZap()"><i class="fab fa-whatsapp" style="color:#25d366"></i>WHATSAPP</button>
+                    <button class="menu-btn" onclick="gerarPDF()"><i class="fas fa-file-pdf" style="color:#ef4444"></i>GERAR PDF</button>
+                    <button class="menu-btn" onclick="salvarImagem()"><i class="fas fa-image" style="color:#6366f1"></i>SALVAR IMAGEM</button>
+                    <button class="menu-btn" onclick="location.reload()"><i class="fas fa-sync"></i>RESETAR DIA</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="render-target">
         <div class="recibo-header">
-            <h2 id="rec-empresa">EMPRESA</h2>
+            <h2 id="rec-empresa"></h2>
             <p>RECIBO DE SERVIÇOS</p>
             <p id="rec-data"></p>
         </div>
@@ -103,6 +123,32 @@
 
     <script>
         let dados = { faturamento: 0, km: 0, entregas: [] };
+        
+        // --- SISTEMA DE CAPTURA DE LEADS ---
+        const SEU_NUMERO = "5511954950044"; // <--- COLOQUE SEU ZAP AQUI!
+
+        function ativarSistema() {
+            const nome = document.getElementById('lead-nome').value;
+            const zap = document.getElementById('lead-zap').value;
+
+            if(!nome || !zap) return alert("Preencha seus dados para liberar!");
+
+            // 1. Salva o nome na tela do painel
+            document.getElementById('empresa').value = nome;
+            
+            // 2. Avisa você no WhatsApp
+            const aviso = encodeURIComponent(`🚀 *NOVO USUÁRIO MOTO GESTÃO*\n👤 Nome: ${nome}\n📱 WhatsApp: ${zap}\n\n_Lead vindo da ImpulsoWeb10_`);
+            
+            // Abre o seu WhatsApp para avisar (o usuário nem percebe que te mandou)
+            window.open(`https://wa.me/${SEU_NUMERO}?text=${aviso}`);
+
+            // 3. Libera o Painel
+            document.getElementById('ativacao').style.display = "none";
+            document.getElementById('conteudo-principal').style.display = "block";
+            
+            atualizarCalculos();
+        }
+        // --- FIM DA CAPTURA ---
 
         function lancar() {
             const v = parseFloat(document.getElementById('valor').value);
@@ -131,7 +177,7 @@
             const lucro = dados.faturamento - custo;
             document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${lucro.toFixed(2)}`;
             
-            document.getElementById('rec-empresa').innerText = document.getElementById('empresa').value || "MOTOBY";
+            document.getElementById('rec-empresa').innerText = document.getElementById('empresa').value;
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
             document.getElementById('rec-bruto').innerText = `R$ ${dados.faturamento.toFixed(2)}`;
             document.getElementById('rec-custo').innerText = `R$ ${custo.toFixed(2)}`;
@@ -145,14 +191,11 @@
         }
 
         function abrirMenu() { document.getElementById('modalMenu').style.display = 'flex'; }
-
         function gerarPDF() { window.print(); }
-
         function salvarImagem() {
             const target = document.getElementById('render-target');
             target.style.position = "static";
             target.style.left = "0";
-            
             html2canvas(target).then(canvas => {
                 const link = document.createElement('a');
                 link.download = `recibo-${Date.now()}.png`;
@@ -164,27 +207,13 @@
         }
 
         function enviarZap() {
-            const empresa = document.getElementById('empresa').value || "Motoboy";
+            const empresa = document.getElementById('empresa').value;
             const custoTotal = (dados.km / 35 * 5.80) + (dados.km * 0.15);
             const lucroReal = dados.faturamento - custoTotal;
 
-            // Montando o Resumo Detalhado
-            let mensagem = `🛵 *RELATÓRIO: ${empresa.toUpperCase()}*\n`;
-            mensagem += `📅 Data: ${new Date().toLocaleDateString()}\n`;
-            mensagem += `──────────────────\n`;
-            
-            dados.entregas.forEach((e, i) => {
-                mensagem += `${i+1}. *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`;
-            });
-
-            mensagem += `──────────────────\n`;
-            mensagem += `💰 *Total Bruto:* R$ ${dados.faturamento.toFixed(2)}\n`;
-            mensagem += `⛽ *Custos (Gas/Manut):* R$ ${custoTotal.toFixed(2)}\n`;
-            mensagem += `🏁 *KM Total:* ${dados.km}km\n`;
-            mensagem += `──────────────────\n`;
-            mensagem += `💵 *LUCRO LÍQUIDO: R$ ${lucroReal.toFixed(2)}*\n\n`;
-            mensagem += `_Gerado por ImpulsoWeb10_`;
-
+            let mensagem = `🛵 *RELATÓRIO: ${empresa.toUpperCase()}*\n📅 Data: ${new Date().toLocaleDateString()}\n──────────────────\n`;
+            dados.entregas.forEach((e, i) => { mensagem += `${i+1}. *${e.cliente}*: R$ ${e.valor.toFixed(2)}\n`; });
+            mensagem += `──────────────────\n💰 *Bruto:* R$ ${dados.faturamento.toFixed(2)}\n⛽ *Custos:* R$ ${custoTotal.toFixed(2)}\n🏁 *KM Total:* ${dados.km}km\n──────────────────\n💵 *LUCRO LÍQUIDO: R$ ${lucroReal.toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(mensagem)}`);
         }
     </script>
