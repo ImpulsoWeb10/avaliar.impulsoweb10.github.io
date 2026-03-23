@@ -12,75 +12,73 @@ body {
     text-align: center;
 }
 
-h1 {
-    margin-top: 20px;
-}
-
 .logo {
     font-size: 22px;
     font-weight: bold;
-    margin-top: 10px;
+    margin: 15px;
 }
 
 .triangulo {
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 200px solid #ccc;
+    width: 200px;
+    height: 200px;
     margin: 40px auto;
-    transition: transform 0.6s;
     position: relative;
+    transform: rotate(0deg);
+    transition: transform 0.6s;
 }
 
-.faixa {
+/* Cor principal */
+.principal {
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
 }
 
-.cores {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+/* Cor secundária esquerda */
+.sec1 {
+    width: 100%;
+    height: 100%;
+    background: #888;
+    clip-path: polygon(50% 100%, 0% 100%, 25% 60%);
+    position: absolute;
 }
 
-.cor {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
+/* Cor secundária direita */
+.sec2 {
+    width: 100%;
+    height: 100%;
+    background: #444;
+    clip-path: polygon(50% 100%, 75% 60%, 100% 100%);
+    position: absolute;
 }
 
 button {
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 12px 20px;
     background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="logo">Tintas Qualy Quimy</div>
+<div class="logo.png">Tintas Qualy Quimy</div>
 
-<h1>Gire e descubra sua combinação</h1>
+<h2>Gire e descubra sua combinação</h2>
 
-<div id="triangulo" class="triangulo"></div>
-
-<div class="cores">
-    <div id="c1" class="cor"></div>
-    <div id="c2" class="cor"></div>
-    <div id="c3" class="cor"></div>
+<div id="triangulo" class="triangulo">
+    <div id="p" class="principal"></div>
+    <div id="s1" class="sec1"></div>
+    <div id="s2" class="sec2"></div>
 </div>
 
-<h2 id="kit"></h2>
+<h3 id="kit"></h3>
 
 <button onclick="girar()">Girar</button>
 <button onclick="comprar()">Quero esse kit</button>
@@ -103,7 +101,7 @@ const kits = [
         cores: ["#dcdcdc", "#555555", "#222222"]
     },
     {
-        nome: "Kit Ambiente Sofisticado",
+        nome: "Kit Sofisticado",
         cores: ["#ffffff", "#c0392b", "#2c3e50"]
     }
 ];
@@ -114,9 +112,9 @@ function girar() {
 
     let k = kits[Math.floor(Math.random() * kits.length)];
 
-    document.getElementById("c1").style.background = k.cores[0];
-    document.getElementById("c2").style.background = k.cores[1];
-    document.getElementById("c3").style.background = k.cores[2];
+    document.getElementById("p").style.background = k.cores[0];
+    document.getElementById("s1").style.background = k.cores[1];
+    document.getElementById("s2").style.background = k.cores[2];
 
     document.getElementById("kit").innerText = k.nome;
 }
