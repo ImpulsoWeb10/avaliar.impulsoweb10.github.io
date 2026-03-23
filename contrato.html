@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Prestação de Serviços - ImpulsoWeb10</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background: #f1f5f9; padding: 40px; color: #333; }
+        .folha-a4 {
+            background: #fff;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+        h1 { text-align: center; font-size: 18px; text-transform: uppercase; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { font-size: 14px; margin-top: 20px; text-transform: uppercase; color: #000; }
+        p { font-size: 13px; line-height: 1.6; margin-bottom: 10px; text-align: justify; }
+        .campo-editavel {
+            background: #fff8e1;
+            border-bottom: 1px dashed #ffa000;
+            padding: 2px 5px;
+            font-weight: bold;
+            color: #d32f2f;
+            cursor: pointer;
+        }
+        .assinaturas { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: center; }
+        .linha { border-top: 1px solid #333; margin-top: 40px; padding-top: 10px; font-size: 12px; }
+        
+        @media print {
+            body { background: none; padding: 0; }
+            .folha-a4 { box-shadow: none; margin: 0; width: 100%; }
+            .campo-editavel { background: none; border: none; color: #000; }
+            .no-print { display: none; }
+        }
+
+        .no-print {
+            text-align: center; margin-bottom: 20px; background: #22c55e; color: white; 
+            padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none;
+            display: block; width: fit-content; margin-left: auto; margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="no-print" onclick="window.print()">IMPRIMIR / SALVAR EM PDF</button>
+
+    <div class="folha-a4">
+        <h1>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE GESTÃO DE REPUTAÇÃO DIGITAL</h1>
+
+        <p><strong>CONTRATADA:</strong> <span class="campo-editavel" contenteditable="true">[Seu Nome ou Nome da Agência]</span>, CPF/CNPJ: <span class="campo-editavel" contenteditable="true">[Seu Documento]</span>.</p>
+        
+        <p><strong>CONTRATANTE:</strong> <span class="campo-editavel" contenteditable="true">[Nome da Empresa do Cliente]</span>, com sede em <span class="campo-editavel" contenteditable="true">[Endereço do Cliente]</span>, inscrita no CNPJ sob o nº <span class="campo-editavel" contenteditable="true">[CNPJ do Cliente]</span>.</p>
+
+        <h2>1. OBJETO DO SERVIÇO</h2>
+        <p>O presente contrato tem como objeto a implementação e manutenção do <strong>Sistema Tanque de Guerra v3.0</strong>, focado na gestão de avaliações no Google Meu Negócio, otimização de SEO Local (Microdados e FAQ) e filtragem inteligente de satisfação do cliente através de canais prioritários de suporte (WhatsApp).</p>
+
+        <h2>2. ESPECIFICAÇÕES TÉCNICAS</h2>
+        <p>A CONTRATADA entregará: (a) Link personalizado com filtro de satisfação; (b) QR Code para balcão/mesas; (c) Configuração de SEO Semântico para buscadores (Google/Bing); (d) Canal direto de contingência para feedbacks negativos.</p>
+
+        <h2>3. VALORES E CONDIÇÕES DE PAGAMENTO</h2>
+        <p>Pela execução do serviço de configuração inicial (Setup), o CONTRATANTE pagará o valor de <strong>R$ <span class="campo-editavel" contenteditable="true">250,00</span></strong> na assinatura deste instrumento.</p>
+        <p>Pela manutenção mensal, hospedagem e suporte técnico, o CONTRATANTE pagará o valor de <strong>R$ <span class="campo-editavel" contenteditable="true">50,00</span></strong>, vencendo todo dia <span class="campo-editavel" contenteditable="true">10</span> de cada mês.</p>
+
+        <h2>4. ÉTICA E CONFORMIDADE (SAFE MODE)</h2>
+        <p>O sistema opera sob o regime de Atendimento Prioritário, onde feedbacks insatisfatórios são encaminhados para resolução interna via WhatsApp, garantindo o direito do consumidor de registrar sua opinião em plataformas públicas através de link direto, mantendo a conformidade com as diretrizes de transparência do Google.</p>
+
+        <h2>5. PRAZO E RESCISÃO</h2>
+        <p>O contrato tem validade de <span class="campo-editavel" contenteditable="true">12 meses</span>, podendo ser rescindido por qualquer parte com aviso prévio de 30 dias.</p>
+
+        <p style="margin-top: 40px; text-align: center;">
+            <span class="campo-editavel" contenteditable="true">Cidade - UF</span>, <span id="data-hoje"></span>.
+        </p>
+
+        <div class="assinaturas">
+            <div class="linha">
+                <strong>CONTRATADA</strong><br>
+                <span class="campo-editavel" contenteditable="true">[Seu Nome]</span>
+            </div>
+            <div class="linha">
+                <strong>CONTRATANTE</strong><br>
+                <span class="campo-editavel" contenteditable="true">[Nome do Dono da Empresa]</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('data-hoje').innerText = new Date().toLocaleDateString('pt-br');
+    </script>
+</body>
+</html>
