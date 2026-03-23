@@ -3,131 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador Qualy Quimy</title>
+<title>Simulador + Inspiração</title>
 
 <style>
-body {
-    font-family: Arial;
-    background: #f5f5f5;
-    text-align: center;
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#f5f5f5;
 }
 
-.menu button {
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 8px;
-    background: #222;
-    color: white;
-    cursor: pointer;
+/* MENU */
+.menu button{
+    padding:10px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#222;
+    color:#fff;
+    cursor:pointer;
 }
 
-.ambiente {
-    width: 350px;
-    height: 220px;
-    margin: 20px auto;
-    position: relative;
-    display: none;
-    overflow: hidden;
-    border-radius: 10px;
+/* AMBIENTE */
+.ambiente{
+    width:350px;
+    height:200px;
+    margin:20px auto;
+    display:none;
+    position:relative;
+    display:flex;
 }
 
-.parede {
-    flex: 1;
-    transition: 0.5s;
-    background-size: cover;
-    background-blend-mode: multiply;
+.parede{
+    flex:1;
+    transition:0.5s;
 }
 
-.luz {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+/* ELEMENTOS */
+.chao{position:absolute;bottom:0;height:30px;width:100%;background:#999;}
+.teto{position:absolute;top:0;height:20px;width:100%;background:#ddd;}
+
+.sofa{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    width:150px;
+    height:40px;
 }
 
-.chao {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 35px;
-    background: #999;
+/* INSPIRAÇÃO */
+#galeria{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding:10px;
 }
 
-.teto {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 20px;
-    background: #ddd;
+#galeria img{
+    width:120px;
+    height:80px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-/* SALA */
-.sala { display: flex; }
-
-.sofa {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 50px;
-    border-radius: 10px;
+#paleta{
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
 }
 
-/* QUARTO */
-.quarto { display: flex; }
-
-.cama {
-    position: absolute;
-    bottom: 35px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 160px;
-    height: 50px;
+.cor{
+    width:60px;
+    height:60px;
+    margin:5px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-/* FACHADA */
-.fachada { display: flex; }
-
-.porta {
-    position: absolute;
-    bottom: 0;
-    left: 40%;
-    width: 45px;
-    height: 70px;
-    background: #3e2723;
-}
-
-.janela {
-    position: absolute;
-    bottom: 60px;
-    left: 60%;
-    width: 40px;
-    height: 30px;
-    background: #87ceeb;
-}
-
-button.acao {
-    margin: 5px;
-    padding: 10px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-canvas {
-    margin-top: 10px;
-    border-radius: 10px;
+/* BOTÕES */
+button.acao{
+    margin:5px;
+    padding:10px;
+    background:#28a745;
+    color:#fff;
+    border:none;
+    border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>🎨 Simulador Qualy Quimy</h2>
+<h2>🎨 Simulador com Inspiração</h2>
 
 <div class="menu">
     <button onclick="mostrar('sala')">Sala</button>
@@ -135,210 +102,104 @@ canvas {
     <button onclick="mostrar('fachada')">Fachada</button>
 </div>
 
-<div id="sala" class="ambiente sala">
-    <div id="s1" class="parede"></div>
-    <div id="s2" class="parede"></div>
-    <div id="s3" class="parede"></div>
+<!-- AMBIENTE -->
+<div id="sala" class="ambiente">
+    <div id="p1" class="parede"></div>
+    <div id="p2" class="parede"></div>
+    <div id="p3" class="parede"></div>
     <div class="sofa"></div>
-    <div class="luz"></div>
     <div class="chao"></div>
     <div class="teto"></div>
-</div>
-
-<div id="quarto" class="ambiente quarto">
-    <div id="q1" class="parede"></div>
-    <div id="q2" class="parede"></div>
-    <div id="q3" class="parede"></div>
-    <div class="cama"></div>
-    <div class="luz"></div>
-    <div class="chao"></div>
-    <div class="teto"></div>
-</div>
-
-<div id="fachada" class="ambiente fachada">
-    <div id="f1" class="parede"></div>
-    <div id="f2" class="parede"></div>
-    <div id="f3" class="parede"></div>
-    <div class="porta"></div>
-    <div class="janela"></div>
-    <div class="luz"></div>
-    <div class="chao"></div>
 </div>
 
 <h3 id="nome"></h3>
 
-<button class="acao" onclick="trocar()">Trocar</button>
-<button class="acao" onclick="modo()">Dia/Noite</button>
-<button class="acao" onclick="comprar()">Comprar</button>
+<button class="acao" onclick="trocar()">🎨 Trocar</button>
 
 <hr>
 
-<h3>📸 Teste na sua casa</h3>
+<h3>✨ Inspire-se</h3>
 
-<input type="file" id="upload" accept="image/*"><br><br>
+<div id="galeria">
+    <img src="https://images.unsplash.com/photo-1525310072745-f49212b5ac6d" onclick="carregarImagem(this)">
+    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" onclick="carregarImagem(this)">
+    <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" onclick="carregarImagem(this)">
+</div>
 
-<label>Intensidade</label><br>
-<input type="range" id="intensidade" min="0" max="1" step="0.05" value="0.5">
+<canvas id="canvas" width="300" height="200"></canvas>
 
-<br><br>
-
-<button class="acao" onclick="alternarAntesDepois()">Antes / Depois</button>
-
-<br><br>
-
-<canvas id="canvas" width="320" height="200"></canvas>
+<div id="paleta"></div>
 
 <script>
 
-let atual = {};
-let tipoAtual = "sala";
-let noite = false;
+let tipoAtual="sala";
 
-const dados = {
-sala:[
-{nome:"Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
-{nome:"Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
-],
-quarto:[
-{nome:"Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]}
-],
-fachada:[
-{nome:"Fachada Elegante", cores:["#eee","#555","#222"]}
-]
-};
-
+/* MOSTRAR AMBIENTE */
 function mostrar(tipo){
-    tipoAtual = tipo;
+    tipoAtual=tipo;
     document.querySelectorAll(".ambiente").forEach(a=>a.style.display="none");
-    document.getElementById(tipo).style.display="flex";
-    trocar();
+    document.getElementById("sala").style.display="flex";
 }
 
+/* TROCAR */
 function trocar(){
-    let lista = dados[tipoAtual];
-    let k = lista[Math.floor(Math.random()*lista.length)];
-    atual = k;
-
-    if(tipoAtual==="sala"){
-        s1.style.background=k.cores[0];
-        s2.style.background=k.cores[1];
-        s3.style.background=k.cores[2];
-        document.querySelector(".sofa").style.background=k.cores[2];
-    }
-
-    if(tipoAtual==="quarto"){
-        q1.style.background=k.cores[0];
-        q2.style.background=k.cores[1];
-        q3.style.background=k.cores[2];
-        document.querySelector(".cama").style.background=k.cores[2];
-    }
-
-    if(tipoAtual==="fachada"){
-        f1.style.background=k.cores[0];
-        f2.style.background=k.cores[1];
-        f3.style.background=k.cores[2];
-    }
-
-    nome.innerText = atual.nome;
-    corAtual = k.cores[0];
+    let cores=["#eee","#999","#2c3e50"];
+    aplicarCores(cores);
 }
 
-/* DIA NOITE */
-function modo(){
-    noite=!noite;
-    let filtro = noite ? "brightness(0.6)" : "brightness(1)";
-    document.querySelectorAll(".ambiente").forEach(el=>{
-        el.style.filter = filtro;
+/* APLICAR CORES */
+function aplicarCores(cores){
+    p1.style.background=cores[0];
+    p2.style.background=cores[1];
+    p3.style.background=cores[2];
+    document.querySelector(".sofa").style.background=cores[2];
+}
+
+/* INSPIRAÇÃO */
+function carregarImagem(img){
+    let canvas=document.getElementById("canvas");
+    let ctx=canvas.getContext("2d");
+
+    ctx.drawImage(img,0,0,300,200);
+
+    gerarPaleta(ctx);
+}
+
+/* GERAR PALETA */
+function gerarPaleta(ctx){
+    let data=ctx.getImageData(0,0,300,200).data;
+    let cores=[];
+
+    for(let i=0;i<data.length;i+=50){
+        let r=data[i];
+        let g=data[i+1];
+        let b=data[i+2];
+
+        cores.push(`rgb(${r},${g},${b})`);
+    }
+
+    mostrarPaleta(cores.slice(0,5));
+}
+
+/* MOSTRAR PALETA */
+function mostrarPaleta(lista){
+    let div=document.getElementById("paleta");
+    div.innerHTML="";
+
+    lista.forEach(cor=>{
+        let c=document.createElement("div");
+        c.className="cor";
+        c.style.background=cor;
+
+        c.onclick=()=>usarCor(cor);
+
+        div.appendChild(c);
     });
 }
 
-/* WHATSAPP */
-function comprar(){
-    let texto = "Quero o "+atual.nome;
-    window.open("https://wa.me/55SEUNUMERO?text="+encodeURIComponent(texto));
-}
-
-/* FOTO REAL */
-let img = new Image();
-let corAtual = "#ffffff";
-let imagemOriginal = null;
-let mostrandoOriginal = false;
-
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const intensidadeInput = document.getElementById("intensidade");
-
-upload.addEventListener("change", function(e){
-    let file = e.target.files[0];
-    let reader = new FileReader();
-
-    reader.onload = function(event){
-        img.onload = function(){
-            ctx.drawImage(img,0,0,canvas.width,canvas.height);
-            imagemOriginal = ctx.getImageData(0,0,canvas.width,canvas.height);
-        }
-        img.src = event.target.result;
-    }
-
-    reader.readAsDataURL(file);
-});
-
-canvas.addEventListener("click", function(e){
-
-    if(!img.src) return;
-
-    let x = e.offsetX;
-    let y = e.offsetY;
-    let intensidade = parseFloat(intensidadeInput.value);
-
-    let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
-    let data = imageData.data;
-
-    let index = (y * canvas.width + x) * 4;
-    let r = data[index];
-    let g = data[index+1];
-    let b = data[index+2];
-
-    for(let i=0;i<data.length;i+=4){
-
-        let dr = Math.abs(data[i]-r);
-        let dg = Math.abs(data[i+1]-g);
-        let db = Math.abs(data[i+2]-b);
-
-        if(dr<40 && dg<40 && db<40){
-
-            data[i] = mix(data[i], hexToRgb(corAtual).r, intensidade);
-            data[i+1] = mix(data[i+1], hexToRgb(corAtual).g, intensidade);
-            data[i+2] = mix(data[i+2], hexToRgb(corAtual).b, intensidade);
-        }
-    }
-
-    ctx.putImageData(imageData,0,0);
-});
-
-function mix(base, cor, intensidade){
-    return base*(1-intensidade)+cor*intensidade;
-}
-
-function hexToRgb(hex){
-    let bigint = parseInt(hex.replace("#",""),16);
-    return {
-        r:(bigint>>16)&255,
-        g:(bigint>>8)&255,
-        b:bigint&255
-    };
-}
-
-function alternarAntesDepois(){
-    if(!imagemOriginal) return;
-
-    if(mostrandoOriginal){
-        ctx.putImageData(imagemOriginal,0,0);
-        mostrandoOriginal=false;
-    } else {
-        ctx.drawImage(img,0,0,canvas.width,canvas.height);
-        mostrandoOriginal=true;
-    }
+/* USAR COR */
+function usarCor(cor){
+    p1.style.background=cor;
 }
 
 mostrar("sala");
