@@ -18,76 +18,63 @@ body {
     margin: 10px;
     border: none;
     border-radius: 8px;
-    background: #333;
+    background: #222;
     color: white;
 }
 
-/* TRIANGULO */
-.triangulo {
-    width: 220px;
-    height: 220px;
-    margin: 30px auto;
-    position: relative;
-    transition: transform 0.6s;
-}
-
-.principal {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    position: absolute;
-}
-
-.sec1 {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% 100%, 0% 100%, 25% 60%);
-    position: absolute;
-}
-
-.sec2 {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% 100%, 75% 60%, 100% 100%);
-    position: absolute;
-}
-
-/* PAREDE SIMPLES */
-.parede {
-    width: 300px;
-    height: 180px;
-    margin: 20px auto;
-    display: flex;
-}
-
-.lado {
-    flex: 1;
-}
-
-/* MODO CASA (FAKE 3D) */
-.casa {
-    width: 300px;
+/* AMBIENTES */
+.ambiente {
+    width: 320px;
     height: 200px;
     margin: 20px auto;
+    position: relative;
     display: none;
-    perspective: 800px;
 }
 
-.quarto {
-    width: 100%;
-    height: 100%;
-    transform: rotateX(15deg);
+/* SALA */
+.sala {
     display: flex;
 }
-
-.parede3d {
+.sala .parede {
     flex: 1;
-    margin: 2px;
+}
+
+/* QUARTO */
+.quarto {
+    display: flex;
+}
+.quarto .parede {
+    flex: 1;
+}
+
+/* FACHADA */
+.fachada {
+    display: flex;
+}
+.fachada .parede {
+    flex: 1;
+}
+
+/* DETALHES VISUAIS */
+.chao {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background: #999;
+}
+
+.teto {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20px;
+    background: #ddd;
 }
 
 /* BOTÕES */
 button.acao {
-    margin: 8px;
+    margin: 10px;
     padding: 12px 20px;
     background: #28a745;
     color: white;
@@ -102,113 +89,110 @@ button.acao {
 <h2>Tintas Qualy Quimy</h2>
 
 <div class="menu">
-    <button onclick="carregar('sala')">🏡 Sala Moderna</button>
-    <button onclick="carregar('interna')">🧱 Parede Interna</button>
-    <button onclick="carregar('grafiato')">🎨 Grafiato + Fundo</button>
+    <button onclick="mostrar('sala')">🏡 Sala</button>
+    <button onclick="mostrar('quarto')">🛏️ Quarto</button>
+    <button onclick="mostrar('fachada')">🏠 Fachada</button>
 </div>
 
-<div id="app" style="display:none">
-
-    <!-- TRIANGULO -->
-    <div id="triangulo" class="triangulo">
-        <div id="p" class="principal"></div>
-        <div id="s1" class="sec1"></div>
-        <div id="s2" class="sec2"></div>
-    </div>
-
-    <!-- VISUAL NORMAL -->
-    <div id="normal" class="parede">
-        <div id="w1" class="lado"></div>
-        <div id="w2" class="lado"></div>
-        <div id="w3" class="lado"></div>
-    </div>
-
-    <!-- CASA 3D -->
-    <div id="casa" class="casa">
-        <div class="quarto">
-            <div id="c1" class="parede3d"></div>
-            <div id="c2" class="parede3d"></div>
-            <div id="c3" class="parede3d"></div>
-        </div>
-    </div>
-
-    <h3 id="nome"></h3>
-
-    <button class="acao" onclick="girar()">Girar combinação</button>
-    <button class="acao" onclick="toggleCasa()">👁 Ver em ambiente</button>
-    <button class="acao" onclick="comprar()">Quero esse kit</button>
-
+<!-- SALA -->
+<div id="sala" class="ambiente sala">
+    <div id="s1" class="parede"></div>
+    <div id="s2" class="parede"></div>
+    <div id="s3" class="parede"></div>
+    <div class="chao"></div>
+    <div class="teto"></div>
 </div>
+
+<!-- QUARTO -->
+<div id="quarto" class="ambiente quarto">
+    <div id="q1" class="parede"></div>
+    <div id="q2" class="parede"></div>
+    <div id="q3" class="parede"></div>
+    <div class="chao"></div>
+    <div class="teto"></div>
+</div>
+
+<!-- FACHADA -->
+<div id="fachada" class="ambiente fachada">
+    <div id="f1" class="parede"></div>
+    <div id="f2" class="parede"></div>
+    <div id="f3" class="parede"></div>
+    <div class="chao"></div>
+</div>
+
+<h3 id="nome"></h3>
+
+<button class="acao" onclick="trocar()">Trocar combinação</button>
+<button class="acao" onclick="comprar()">Quero esse kit</button>
 
 <script>
 
-let angulo = 0;
-let atual = [];
-let tipoAtual = "";
-let modoCasa = false;
+let atual = {};
 
+/* KITS PROFISSIONAIS */
 const dados = {
 
 sala: [
-{nome:"Sala Moderna", cores:["#ffffff","#888888","#2c3e50"]},
-{nome:"Sala Clean", cores:["#f1f1f1","#dcdcdc","#999999"]}
+{nome:"Kit Sala Moderna", cores:["#ffffff","#888","#2c3e50"]},
+{nome:"Kit Sala Clean", cores:["#f5f5f5","#ddd","#aaa"]}
 ],
 
-interna: [
-{nome:"Interna Premium", cores:["#f4e1c1","#d2b48c","#a67c52"]},
-{nome:"Interna Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]}
+quarto: [
+{nome:"Kit Quarto Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]},
+{nome:"Kit Quarto Relax", cores:["#eaf6ff","#bcdffb","#5dade2"]}
 ],
 
-grafiato: [
-{nome:"Grafiato Cinza", cores:["#dcdcdc","#555","#222"]},
-{nome:"Grafiato Forte", cores:["#eee","#444","#111"]}
+fachada: [
+{nome:"Kit Fachada Elegante", cores:["#eee","#555","#222"]},
+{nome:"Kit Fachada Natural", cores:["#f4e1c1","#a67c52","#5c4033"]}
 ]
 
 };
 
-function carregar(tipo){
+let tipoAtual = "sala";
+
+function mostrar(tipo){
     tipoAtual = tipo;
-    document.getElementById("app").style.display = "block";
-    girar();
+
+    document.querySelectorAll(".ambiente").forEach(a => a.style.display = "none");
+    document.getElementById(tipo).style.display = "flex";
+
+    trocar();
 }
 
-function girar(){
-    angulo += 120;
-    document.getElementById("triangulo").style.transform = `rotate(${angulo}deg)`;
-
+function trocar(){
     let lista = dados[tipoAtual];
     let k = lista[Math.floor(Math.random() * lista.length)];
     atual = k;
 
-    /* TRIANGULO */
-    document.getElementById("p").style.background = k.cores[0];
-    document.getElementById("s1").style.background = k.cores[1];
-    document.getElementById("s2").style.background = k.cores[2];
+    if(tipoAtual === "sala"){
+        document.getElementById("s1").style.background = k.cores[0];
+        document.getElementById("s2").style.background = k.cores[1];
+        document.getElementById("s3").style.background = k.cores[2];
+    }
 
-    /* NORMAL */
-    document.getElementById("w1").style.background = k.cores[0];
-    document.getElementById("w2").style.background = k.cores[1];
-    document.getElementById("w3").style.background = k.cores[2];
+    if(tipoAtual === "quarto"){
+        document.getElementById("q1").style.background = k.cores[0];
+        document.getElementById("q2").style.background = k.cores[1];
+        document.getElementById("q3").style.background = k.cores[2];
+    }
 
-    /* CASA */
-    document.getElementById("c1").style.background = k.cores[0];
-    document.getElementById("c2").style.background = k.cores[1];
-    document.getElementById("c3").style.background = k.cores[2];
+    if(tipoAtual === "fachada"){
+        document.getElementById("f1").style.background = k.cores[0];
+        document.getElementById("f2").style.background = k.cores[1];
+        document.getElementById("f3").style.background = k.cores[2];
+    }
 
-    document.getElementById("nome").innerText = k.nome;
-}
-
-function toggleCasa(){
-    modoCasa = !modoCasa;
-
-    document.getElementById("casa").style.display = modoCasa ? "block" : "none";
-    document.getElementById("normal").style.display = modoCasa ? "none" : "flex";
+    document.getElementById("nome").innerText = atual.nome;
 }
 
 function comprar(){
     let texto = "Quero o " + atual.nome + " da Tintas Qualy Quimy";
     window.open("https://wa.me/55SEUNUMERO?text=" + encodeURIComponent(texto));
 }
+
+/* INICIAL */
+mostrar("sala");
 
 </script>
 
