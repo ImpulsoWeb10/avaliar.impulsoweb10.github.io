@@ -12,116 +12,158 @@ body {
     text-align: center;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 15px;
+/* MENU */
+.menu button {
+    padding: 12px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: white;
 }
 
+/* TRIANGULO */
 .triangulo {
-    width: 200px;
-    height: 200px;
-    margin: 40px auto;
+    width: 220px;
+    height: 220px;
+    margin: 30px auto;
     position: relative;
-    transform: rotate(0deg);
     transition: transform 0.6s;
 }
 
-/* Cor principal */
 .principal {
     width: 100%;
     height: 100%;
-    background: #ccc;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     position: absolute;
 }
 
-/* Cor secundária esquerda */
 .sec1 {
     width: 100%;
     height: 100%;
-    background: #888;
     clip-path: polygon(50% 100%, 0% 100%, 25% 60%);
     position: absolute;
 }
 
-/* Cor secundária direita */
 .sec2 {
     width: 100%;
     height: 100%;
-    background: #444;
     clip-path: polygon(50% 100%, 75% 60%, 100% 100%);
     position: absolute;
 }
 
-button {
-    margin-top: 15px;
+/* PAREDE */
+.parede {
+    width: 300px;
+    height: 180px;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: flex;
+}
+
+.lado {
+    flex: 1;
+}
+
+/* BOTÕES */
+button.acao {
+    margin: 10px;
     padding: 12px 20px;
     background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="logo.png">Tintas Qualy Quimy</div>
+<h2>Tintas Qualy Quimy</h2>
 
-<h2>Gire e descubra sua combinação</h2>
-
-<div id="triangulo" class="triangulo">
-    <div id="p" class="principal"></div>
-    <div id="s1" class="sec1"></div>
-    <div id="s2" class="sec2"></div>
+<div class="menu">
+    <button onclick="carregar('sala')">🏡 Sala Moderna</button>
+    <button onclick="carregar('interna')">🧱 Parede Interna</button>
+    <button onclick="carregar('grafiato')">🎨 Grafiato + Fundo</button>
 </div>
 
-<h3 id="kit"></h3>
+<div id="app" style="display:none">
 
-<button onclick="girar()">Girar</button>
-<button onclick="comprar()">Quero esse kit</button>
+    <div id="triangulo" class="triangulo">
+        <div id="p" class="principal"></div>
+        <div id="s1" class="sec1"></div>
+        <div id="s2" class="sec2"></div>
+    </div>
+
+    <div class="parede">
+        <div id="w1" class="lado"></div>
+        <div id="w2" class="lado"></div>
+        <div id="w3" class="lado"></div>
+    </div>
+
+    <h3 id="nome"></h3>
+
+    <button class="acao" onclick="girar()">Girar combinação</button>
+    <button class="acao" onclick="comprar()">Quero esse kit</button>
+
+</div>
 
 <script>
 
 let angulo = 0;
+let atual = [];
+let tipoAtual = "";
 
-const kits = [
-    {
-        nome: "Kit Sala Moderna",
-        cores: ["#ffffff", "#888888", "#2c3e50"]
-    },
-    {
-        nome: "Kit Parede Interna Premium",
-        cores: ["#f4e1c1", "#d2b48c", "#a67c52"]
-    },
-    {
-        nome: "Kit Grafiato + Fundo",
-        cores: ["#dcdcdc", "#555555", "#222222"]
-    },
-    {
-        nome: "Kit Sofisticado",
-        cores: ["#ffffff", "#c0392b", "#2c3e50"]
-    }
-];
+/* KITS */
+const dados = {
 
-function girar() {
+sala: [
+{nome:"Sala Moderna", cores:["#ffffff","#888888","#2c3e50"]},
+{nome:"Sala Clean", cores:["#f1f1f1","#dcdcdc","#999999"]}
+],
+
+interna: [
+{nome:"Interna Premium", cores:["#f4e1c1","#d2b48c","#a67c52"]},
+{nome:"Interna Suave", cores:["#fff5e1","#e6d2b5","#c2a47e"]}
+],
+
+grafiato: [
+{nome:"Grafiato Cinza", cores:["#dcdcdc","#555","#222"]},
+{nome:"Grafiato Forte", cores:["#eee","#444","#111"]}
+]
+
+};
+
+function carregar(tipo){
+    tipoAtual = tipo;
+    document.getElementById("app").style.display = "block";
+    girar();
+}
+
+function girar(){
     angulo += 120;
     document.getElementById("triangulo").style.transform = `rotate(${angulo}deg)`;
 
-    let k = kits[Math.floor(Math.random() * kits.length)];
+    let lista = dados[tipoAtual];
+    let k = lista[Math.floor(Math.random() * lista.length)];
+    atual = k;
 
+    /* TRIANGULO */
     document.getElementById("p").style.background = k.cores[0];
     document.getElementById("s1").style.background = k.cores[1];
     document.getElementById("s2").style.background = k.cores[2];
 
-    document.getElementById("kit").innerText = k.nome;
+    /* PAREDE */
+    document.getElementById("w1").style.background = k.cores[0];
+    document.getElementById("w2").style.background = k.cores[1];
+    document.getElementById("w3").style.background = k.cores[2];
+
+    document.getElementById("nome").innerText = k.nome;
 }
 
-function comprar() {
-    let texto = document.getElementById("kit").innerText;
-    window.open("https://wa.me/55SEUNUMERO?text=Quero o " + encodeURIComponent(texto));
+function comprar(){
+    let texto = "Quero o " + atual.nome + " da Tintas Qualy Quimy";
+    window.open("https://wa.me/55SEUNUMERO?text=" + encodeURIComponent(texto));
 }
 
 </script>
