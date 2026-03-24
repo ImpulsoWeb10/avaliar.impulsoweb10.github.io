@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v43 - Elite Final</title>
+    <title>MotoGestão Pro v44 - Elite Final</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ff0000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
-        /* RED LINE */
         .red-line-box { border-bottom: 5px solid #ff0000 !important; margin-bottom: 5px; display: inline-block; }
         .red-line-text { font-weight: 950 !important; color: #ffffff !important; text-transform: uppercase; font-size: 18px; letter-spacing: 1px; }
 
-        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 20px; border-radius: 0 0 30px 30px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); }
-        .logo-box { width: 50px; height: 50px; border-radius: 10px; border: 2px solid #fff; overflow: hidden; background: #fff; }
-        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+        #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .btn-google { background: #fff; color: #000; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; padding: 12px; border-radius: 10px; font-weight: bold; width: 100%; border: none; cursor: pointer; }
 
         .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
         #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; }
@@ -25,9 +23,7 @@
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; padding: 20px; flex-direction: column; overflow-y: auto; align-items: center; justify-content: center; }
-        
-        /* ESTILO MAQUININHA */
-        #recibo-visual { background: #fff; color: #000; padding: 20px; width: 100%; max-width: 280px; font-family: 'Courier New', Courier, monospace; font-size: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #recibo-visual { background: #fff; color: #000; padding: 20px; width: 100%; max-width: 280px; font-family: 'Courier New', monospace; font-size: 12px; }
         .gasto-vermelho { color: #ff0000; font-weight: bold; }
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); font-weight: bold; font-size: 18px; }
     </style>
@@ -36,50 +32,58 @@
 
     <audio id="som-money" src="https://www.soundjay.com/misc/sounds/cash-register-05.mp3"></audio>
 
-    <div id="app">
-        <header id="header-principal">
-            <div class="logo-box"><img src="impulsoweb10.jpg"></div>
-            <div>
-                <div class="red-line-box"><span class="red-line-text" style="font-size:14px;">SISTEMA DE GESTÃO ELITE</span></div>
-            </div>
+    <div id="tela-login">
+        <img src="impulsoweb10.jpg" style="width: 80px; border-radius: 10px; margin-bottom: 15px;">
+        <div class="red-line-box"><span class="red-line-text">SISTEMA DE GESTÃO ELITE</span></div>
+        
+        <div id="login-primeiro" style="width: 100%; max-width: 280px; margin-top: 30px;">
+            <input type="text" id="login-nome" placeholder="Seu Nome">
+            <input type="tel" id="login-celular" placeholder="WhatsApp">
+            <button class="btn-main" onclick="primeiroAcesso()">SOLICITAR ACESSO ➔</button>
+        </div>
+
+        <div id="login-recorrente" style="display:none; width: 100%; max-width: 280px; margin-top: 30px;">
+            <button class="btn-main" onclick="entrarPainel()">ENTRAR NO PAINEL ➔</button>
+            <button class="btn-google"><img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" width="18"> Entrar com Google</button>
+        </div>
+    </div>
+
+    <div id="app" style="display:none;">
+        <header style="background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 20px; border-radius: 0 0 30px 30px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary);">
+            <div style="width: 50px; height: 50px; border-radius: 10px; border: 2px solid #fff; overflow: hidden;"><img src="impulsoweb10.jpg" style="width:100%;"></div>
+            <div class="red-line-box"><span class="red-line-text" style="font-size:14px;">GESTÃO ELITE</span></div>
         </header>
 
-        <div style="background: var(--card); padding:15px; border-radius:20px; border:1px solid #333;">
-            <label style="font-size:10px; color:var(--primary); font-weight:bold;">META DE GANHO</label>
+        <div style="background: var(--card); padding:15px; border-radius:20px; border:1px solid #333; margin-top:15px;">
             <div class="meta-container"><div id="meta-bar"></div></div>
-            
             <input type="text" id="cidade" placeholder="Cidade / Destino">
             <select id="cliente" onchange="togglePacotes()">
                 <option value="Avulso">Avulso</option>
                 <option value="Shopee">Shopee</option>
                 <option value="Mercado Livre">Mercado Livre</option>
             </select>
-
-            <div id="area-pacotes" style="display:none; margin-top:10px; background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;">
+            <div id="area-pacotes" style="display:none; margin-top:10px;">
                 <div style="display:flex; gap:5px;">
                     <input type="number" id="qtd-pacotes" placeholder="Qtd" oninput="calcAutom()">
                     <input type="number" id="val-unitario" value="2.50" oninput="calcAutom()">
                 </div>
             </div>
-
             <div style="display:flex; gap:5px; margin-top:10px;">
                 <input type="number" id="valor" placeholder="R$ Ganho">
                 <input type="number" id="km" placeholder="KM Rota">
             </div>
-
-            <button class="btn-main" style="background:#333;" onclick="abrirModalGastos()">➕ ADICIONAR GASTOS (OPCIONAL)</button>
-            <button class="btn-main" onclick="registrarTudo()">REGISTRAR OPERAÇÃO 💰</button>
+            <button class="btn-main" style="background:#333;" onclick="abrirModalGastos()">➕ ADICIONAR GASTOS</button>
+            <button class="btn-main" onclick="registrarOperacao()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista" style="margin-top:15px;"></div>
-        
         <button onclick="gerarFechamento()" style="position:fixed; bottom:80px; left:15px; right:15px; background:var(--danger); color:#fff; border:none; padding:18px; border-radius:15px; font-weight:bold; z-index:100;">🚩 FECHAR EXPEDIENTE</button>
         <div class="summary-fixed" id="resumo-lucro">LUCRO: R$ 0,00</div>
     </div>
 
     <div id="modalGastos" class="overlay">
         <div style="background:var(--card); padding:20px; border-radius:20px; width:90%; max-width:300px; border:2px solid var(--primary);">
-            <h3 style="margin-top:0; color:var(--primary);">LANÇAR GASTOS</h3>
+            <label>ESCOLHA O GASTO</label>
             <select id="tipo-gasto">
                 <option value="Almoço">Almoço</option>
                 <option value="Gasolina Extra">Gasolina Extra</option>
@@ -87,34 +91,51 @@
                 <option value="Outros">Outros</option>
             </select>
             <input type="number" id="valor-gasto" placeholder="Valor R$">
-            <button class="btn-main" onclick="addGastoTemp()" style="background:var(--secondary);">+ ADICIONAR MAIS 1 GASTO</button>
-            <button class="btn-main" onclick="fecharModalGastos()" style="background:var(--success);">OK, TERMINADO</button>
-            <div id="lista-gastos-temp" style="font-size:10px; color:#aaa; margin-top:10px;"></div>
+            <button class="btn-main" onclick="addGastoTemp()" style="background:var(--secondary);">+ ADICIONAR MAIS GASTOS</button>
+            <button class="btn-main" onclick="document.getElementById('modalGastos').style.display='none'" style="background:var(--success);">OK, TERMINADO</button>
+            <div id="lista-gastos-temp" style="font-size:11px; color:#aaa; margin-top:10px;"></div>
         </div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
             <div style="text-align:center; border-bottom:1px dashed #000; padding-bottom:10px;">
-                <b>IMPULSO WEB 10 - ELITE</b><br>
-                <span>COMPROVANTE DE TURNO</span><br>
-                <small id="rec-data"></small>
+                <b>IMPULSO WEB 10 - ELITE</b><br><small id="rec-data"></small>
             </div>
             <div style="margin-top:10px;" id="rec-lista"></div>
             <div style="border-top:1px dashed #000; margin-top:10px; padding-top:10px;" id="rec-calculos"></div>
-            <div style="background:#000; color:#fff; text-align:center; padding:5px; margin-top:10px; font-weight:bold;">
-                LUCRO: <span id="rec-total"></span>
-            </div>
+            <div style="background:#000; color:#fff; text-align:center; padding:5px; margin-top:10px; font-weight:bold;">LUCRO: <span id="rec-total"></span></div>
         </div>
         <button class="btn-main" style="background:#fff; color:#000;" onclick="exportPDF()">📥 SALVAR PDF</button>
-        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR WHATSAPP</button>
-        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">✅ ZERAR TUDO</button>
+        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 WHATSAPP</button>
+        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">✅ FINALIZAR</button>
     </div>
 
     <script>
         let entregas = [];
         let gastosTemp = [];
-        let totalGastoAcumulado = 0;
+        let user = JSON.parse(localStorage.getItem('elite_user_v44'));
+
+        if(user) {
+            document.getElementById('login-primeiro').style.display = 'none';
+            document.getElementById('login-recorrente').style.display = 'block';
+        }
+
+        function primeiroAcesso() {
+            let n = document.getElementById('login-nome').value;
+            let c = document.getElementById('login-celular').value;
+            if(!n || !c) return alert("Preencha os dados!");
+            user = {nome: n, zap: c};
+            localStorage.setItem('elite_user_v44', JSON.stringify(user));
+            let msg = `🚀 *NOVO ACESSO ELITE*\n👤 Nome: ${n}\n📱 WhatsApp: ${c}`;
+            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent(msg)}`);
+            entrarPainel();
+        }
+
+        function entrarPainel() {
+            document.getElementById('tela-login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+        }
 
         function togglePacotes() {
             let cli = document.getElementById('cliente').value;
@@ -140,12 +161,9 @@
             }
         }
 
-        function fecharModalGastos() { document.getElementById('modalGastos').style.display = 'none'; }
-
-        function registrarTudo() {
+        function registrarOperacao() {
             let v = parseFloat(document.getElementById('valor').value) || 0;
-            if(v <= 0) return alert("Insira o valor ganho!");
-
+            if(v <= 0) return alert("Insira o valor!");
             entregas.push({
                 cid: document.getElementById('cidade').value || "Rota",
                 cli: document.getElementById('cliente').value,
@@ -153,17 +171,12 @@
                 km: parseFloat(document.getElementById('km').value) || 0,
                 gastos: [...gastosTemp]
             });
-
-            // SOM DE REGISTRO
             document.getElementById('som-money').play();
-
-            // Limpeza
             gastosTemp = [];
             document.getElementById('lista-gastos-temp').innerHTML = '';
             document.getElementById('valor').value = '';
             document.getElementById('cidade').value = '';
             document.getElementById('km').value = '';
-            
             atualizarPainel();
         }
 
@@ -175,9 +188,9 @@
                 e.gastos.forEach(g => gst += g.valor);
                 html += `<div style="background:var(--card); padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;"><b>${e.cid}</b> (${e.cli}) <span style="float:right">R$ ${e.val.toFixed(2)}</span></div>`;
             });
-            let gas = (kmt/35*6.20); let man = (kmt*0.15); let lucro = brt - gas - man - gst;
+            let lucro = brt - (kmt/35*6.20) - (kmt*0.15) - gst;
             document.getElementById('lista').innerHTML = html;
-            document.getElementById('resumo-lucro').innerText = `LUCRO ATUAL: R$ ${lucro.toFixed(2)}`;
+            document.getElementById('resumo-lucro').innerText = `LUCRO: R$ ${lucro.toFixed(2)}`;
             document.getElementById('meta-bar').style.width = Math.min((lucro/200)*100, 100) + "%";
         }
 
@@ -188,10 +201,7 @@
             entregas.forEach(e => {
                 brt += e.val; kmt += e.km;
                 hRotas += `<div>${e.cid.toUpperCase()} <span style="float:right">${e.val.toFixed(2)}</span></div>`;
-                e.gastos.forEach(g => {
-                    gst += g.valor;
-                    hGst += `<div class="gasto-vermelho">${g.tipo.toUpperCase()} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`;
-                });
+                e.gastos.forEach(g => { gst += g.valor; hGst += `<div class="gasto-vermelho">${g.tipo.toUpperCase()} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`; });
             });
             let gas = (kmt/35*6.20); let man = (kmt*0.15);
             document.getElementById('rec-lista').innerHTML = hRotas + "<br>" + hGst;
@@ -200,14 +210,14 @@
         }
 
         function exportZap() {
-            let brt = 0, kmt = 0, gst = 0, txt = `🏁 *RELATÓRIO ELITE*\n👤 Piloto: ${document.title}\n\n*ROTAS:*`;
+            let txt = `🏁 *RELATÓRIO ELITE*\n👤 Piloto: ${user.nome}\n\n*ROTAS:*`;
+            let brt = 0, kmt = 0, gst = 0;
             entregas.forEach(e => {
                 txt += `\n📍 ${e.cid}: R$ ${e.val.toFixed(2)}`;
                 brt += e.val; kmt += e.km;
                 e.gastos.forEach(g => { gst += g.valor; txt += `\n❌ ${g.tipo}: -R$ ${g.valor.toFixed(2)}`; });
             });
-            let gas = (kmt/35*6.20); let man = (kmt*0.15);
-            txt += `\n\n*RESUMO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${man.toFixed(2)}\n📏 KM: ${kmt}km\n────────────────\n✅ *LUCRO: R$ ${(brt-gas-man-gst).toFixed(2)}*`;
+            txt += `\n\n✅ *LUCRO FINAL: R$ ${(brt-(kmt/35*6.20)-(kmt*0.15)-gst).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
@@ -215,7 +225,7 @@
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
                 const pdf = new jspdf.jsPDF('p', 'mm', [80, 160]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
-                pdf.save(`FECHAMENTO_ELITE.pdf`);
+                pdf.save(`ELITE_TURNO.pdf`);
             });
         }
     </script>
