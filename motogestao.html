@@ -3,43 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v30 - ImpulsoWeb10</title>
+    <title>MotoGestão Pro v31 - ImpulsoWeb10</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
-        /* TELA DE ENTRADA */
-        #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
-        .red-line-text { border-bottom: 3px solid var(--danger); padding-bottom: 8px; font-weight: 900; color: #fff; text-transform: uppercase; font-size: 20px; margin-bottom: 30px; }
-
-        /* HEADER */
-        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 25px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); }
+        /* HEADER DINÂMICO */
+        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 25px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); transition: 0.5s; }
         .logo-box { width: 55px; height: 55px; border-radius: 12px; border: 2px solid #fff; overflow: hidden; background: #fff; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .status-online { background: #000; color: var(--success); font-size: 10px; font-weight: 900; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-top: 5px; box-shadow: 0 0 5px var(--success); }
+        
+        /* FRASES E STATUS */
+        .red-line-text { border-bottom: 3px solid var(--danger); padding-bottom: 5px; font-weight: 900; color: #fff; text-transform: uppercase; font-size: 16px; display: inline-block; }
+        .status-online { background: #000; color: var(--success); font-size: 10px; font-weight: 900; padding: 3px 10px; border-radius: 20px; display: none; margin-top: 5px; box-shadow: 0 0 5px var(--success); }
+
+        /* TELA DE LOGIN */
+        #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
 
         /* FORM */
         .form-add { background: var(--card); padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
         label { font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; margin-top: 8px; }
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
         
-        #area-pacotes { background: rgba(245, 130, 32, 0.05); padding: 10px; border-radius: 12px; margin-top: 10px; border: 1px dashed var(--primary); display: none; }
-        
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
-        .btn-historico-mini { background: transparent; border: 1px solid #444; color: #777; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; width: 120px; margin: 20px auto; display: block; text-transform: uppercase; }
+        .btn-historico-mini { background: transparent; border: 1px solid #333; color: #555; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; width: 140px; margin: 20px auto; display: block; text-transform: uppercase; cursor: pointer; }
 
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
         .entrega-card { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--primary); font-size: 13px; }
 
         /* RECIBO */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 2000; padding: 20px; flex-direction: column; align-items: center; overflow-y: auto; }
-        #recibo-visual { background: #fff; color: #000; padding: 25px; width: 100%; max-width: 320px; font-family: 'Courier New', Courier, monospace; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        #recibo-visual { background: #fff; color: #000; padding: 25px; width: 100%; max-width: 320px; font-family: 'Courier New', monospace; }
         .txt-red { color: #d32f2f; font-weight: bold; }
         .tarja-preta { background: #000; color: #fff; padding: 15px; margin: 20px -25px -25px -25px; text-align: center; font-size: 18px; font-weight: bold; }
     </style>
@@ -47,16 +46,14 @@
 <body>
 
     <div id="tela-login">
-        <img src="impulsoweb10.jpg" style="width: 110px; border-radius: 20px; margin-bottom: 20px; border: 2px solid var(--primary);">
-        <h2 class="red-line-text">SISTEMA DE GESTÃO ELITE</h2>
-        
-        <div id="area-manual" style="width: 100%; max-width: 280px; margin-top:10px;">
+        <img src="impulsoweb10.jpg" style="width: 110px; border-radius: 20px; margin-bottom: 20px;">
+        <div class="red-line-text">SISTEMA DE GESTÃO ELITE</div>
+        <div id="area-manual" style="width: 100%; max-width: 280px; margin-top:30px;">
             <input type="text" id="login-nome" placeholder="Seu Nome Completo">
             <input type="tel" id="login-celular" placeholder="WhatsApp">
             <button class="btn-main" onclick="salvarPrimeiroAcesso()">LIBERAR ACESSO 🚀</button>
         </div>
-        
-        <div id="area-hibrida" style="display:none; width: 100%; max-width: 280px; margin-top:10px;">
+        <div id="area-hibrida" style="display:none; width: 100%; max-width: 280px; margin-top:30px;">
             <button class="btn-main" onclick="liberarApp()">ENTRAR NO PAINEL ➔</button>
         </div>
     </div>
@@ -65,23 +62,23 @@
         <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg"></div>
             <div>
-                <h2 style="margin:0; font-size:16px; color:#000;">DASHBOARD OPERACIONAL</h2>
+                <div id="frase-red-header" class="red-line-text">SISTEMA DE GESTÃO ELITE</div>
                 <div id="status-display" class="status-online">● ONLINE - MOTOBOY</div>
             </div>
         </header>
 
         <div class="form-add">
             <label>Cidade / Destino</label>
-            <input type="text" id="cidade" placeholder="Onde foi a entrega?">
+            <input type="text" id="cidade" placeholder="Onde foi a entrega?" onfocus="ativarModoOnline()">
 
             <label>Cliente</label>
             <select id="cliente" onchange="togglePacotes()">
-                <option value="Avulso">Avulso (Particular)</option>
+                <option value="Avulso">Avulso</option>
                 <option value="Shopee">Shopee</option>
                 <option value="Mercado Livre">Mercado Livre</option>
             </select>
 
-            <div id="area-pacotes">
+            <div id="area-pacotes" style="display:none; background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; margin-top:10px;">
                 <div style="display:flex; gap:10px;">
                     <div style="flex:1"><label>Qtd Pacotes</label><input type="number" id="qtd-pacotes" value="0" oninput="calcularPacotes()"></div>
                     <div style="flex:1"><label>R$/Pacote</label><input type="number" id="custo-pacote" value="2.50" oninput="calcularPacotes()"></div>
@@ -89,40 +86,37 @@
             </div>
 
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Ganho Total R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
                 <div style="flex:1"><label>KM Rodada</label><input type="number" id="km" placeholder="0"></div>
             </div>
 
-            <label>Lançar Gasto Extra</label>
+            <label>Despesa Extra</label>
             <div style="display:flex; gap:5px;">
                 <input type="text" id="gasto-view" placeholder="R$ 0.00" readonly onclick="abrirGasto()" style="background:#111; cursor:pointer;">
-                <button onclick="abrirGasto()" style="background:var(--danger); border:none; width:50px; border-radius:10px; font-size:20px; color:white;">+</button>
+                <button onclick="abrirGasto()" style="background:var(--danger); border:none; width:50px; border-radius:10px; color:white; font-size:20px;">+</button>
             </div>
 
-            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR PEDIDO 💰</button>
+            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista-entregas"></div>
         
-        <button class="btn-historico-mini" onclick="alert('Histórico local sincronizado.')">📁 Ver Histórico</button>
+        <button class="btn-historico-mini" onclick="alert('Histórico de turnos carregado.')">📁 Ver Histórico</button>
 
-        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80; box-shadow: 0 5px 15px rgba(0,0,0,0.4);" onclick="abrirFechamento()">🚩 FECHAR COMPROVANTE</button>
+        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80; box-shadow: 0 4px 15px rgba(0,0,0,0.5);" onclick="abrirFechamento()">✅ FECHAR EXPEDIENTE E SALVAR</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
     </div>
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
         <div class="form-add" style="width:100%; max-width:300px;">
-            <h3 style="color:var(--danger); margin:0;">Lançar Despesa</h3>
+            <h3 style="color:var(--danger); margin:0;">Lançar Gasto</h3>
             <select id="tipo-gasto">
-                <option>Gasolina</option>
-                <option>Alimentação</option>
-                <option>Pedágio</option>
-                <option>Outros</option>
+                <option>Gasolina</option><option>Alimentação</option><option>Pedágio</option><option>Outros</option>
             </select>
             <input type="number" id="valor-gasto" placeholder="R$ 0.00">
-            <button class="btn-main" onclick="addGastoTemp()">ADICIONAR ITEM</button>
+            <button class="btn-main" onclick="addGastoTemp()">SOMAR</button>
             <div id="preview-gastos" style="margin:10px 0; color:var(--danger); font-size:11px;"></div>
-            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">OK ✅</button>
+            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR ✅</button>
         </div>
     </div>
 
@@ -134,25 +128,32 @@
                 <p id="rec-data" style="font-size:10px;"></p>
             </div>
             <div style="border-top: 1px dashed #000; margin:10px 0;"></div>
-            <div id="rec-corpo" style="font-size:11px; line-height:1.5;"></div>
+            <div id="rec-corpo" style="font-size:11px;"></div>
             <div style="border-top: 1px dashed #000; margin:10px 0;"></div>
             <div id="rec-detalhes" style="font-size:11px;"></div>
             <div class="tarja-preta">LUCRO LÍQUIDO<br><span id="total-final-preto">R$ 0,00</span></div>
         </div>
         <div style="width:100%; max-width:320px; margin-top:20px;">
-            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 SALVAR COMPROVANTE</button>
+            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 SALVAR PDF</button>
             <button class="btn-main" style="background:#25D366;" onclick="enviarZap()">🟢 WHATSAPP</button>
-            <button class="btn-main" style="background:var(--success);" onclick="encerrarESalvar()">✅ ENCERRAR EXPEDIENTE</button>
+            <button class="btn-main" style="background:var(--success);" onclick="encerrarESalvar()">✅ FINALIZAR TUDO</button>
         </div>
     </div>
 
     <script>
-        const audioSorte = new Audio('https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3');
-        let user = JSON.parse(localStorage.getItem('moto_v30_user'));
-        let entregas = JSON.parse(localStorage.getItem('moto_v30_data')) || [];
+        const sfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3');
+        let user = JSON.parse(localStorage.getItem('moto_v31_user'));
+        let entregas = JSON.parse(localStorage.getItem('moto_v31_data')) || [];
         let gastosTemp = [];
 
         window.onload = () => { if(user) { document.getElementById('area-manual').style.display = 'none'; document.getElementById('area-hibrida').style.display = 'block'; } };
+
+        function ativarModoOnline() {
+            document.getElementById('frase-red-header').style.display = 'none';
+            const st = document.getElementById('status-display');
+            st.style.display = 'inline-block';
+            st.innerText = `● ONLINE - ${user.nome.toUpperCase()}`;
+        }
 
         function togglePacotes() {
             const cli = document.getElementById('cliente').value;
@@ -172,14 +173,13 @@
             const c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha os dados!");
             user = { nome: n, celular: c };
-            localStorage.setItem('moto_v30_user', JSON.stringify(user));
+            localStorage.setItem('moto_v31_user', JSON.stringify(user));
             liberarApp();
         }
 
         function liberarApp() {
             document.getElementById('tela-login').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            document.getElementById('status-display').innerText = `● ONLINE - ${user.nome.toUpperCase()}`;
             atualizarTela();
         }
 
@@ -198,20 +198,10 @@
         function salvarEntrega() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
-            if(v <= 0) return alert("Insira um ganho válido!");
-
-            entregas.push({ 
-                cidade: document.getElementById('cidade').value || "S/C", 
-                cliente: document.getElementById('cliente').value, 
-                valor: v, 
-                km: k, 
-                pacotes: document.getElementById('qtd-pacotes').value, 
-                gastos: [...gastosTemp], 
-                totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) 
-            });
-
-            localStorage.setItem('moto_v30_data', JSON.stringify(entregas));
-            audioSorte.play(); // O SOM VOLTOU!
+            if(v <= 0) return alert("Insira um ganho!");
+            entregas.push({ cidade: document.getElementById('cidade').value || "Rota", cliente: document.getElementById('cliente').value, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) });
+            localStorage.setItem('moto_v31_data', JSON.stringify(entregas));
+            sfx.play();
             gastosTemp = [];
             document.getElementById('valor').value=''; document.getElementById('km').value=''; document.getElementById('gasto-view').value=''; document.getElementById('preview-gastos').innerHTML='';
             atualizarTela();
@@ -220,10 +210,7 @@
         function atualizarTela() {
             const lista = document.getElementById('lista-entregas');
             lista.innerHTML = ""; let b=0, k=0, g=0;
-            entregas.forEach(e => {
-                b += e.valor; k += e.km; g += e.totalG;
-                lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${e.cliente}</b><br>R$ ${e.valor.toFixed(2)} | ${e.km}km</div>`;
-            });
+            entregas.forEach(e => { b += e.valor; k += e.km; g += e.totalG; lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${e.cliente}</b><br>R$ ${e.valor.toFixed(2)} | ${e.km}km</div>`; });
             const gas = (k / 35 * 6.20); const mFutura = (k * 0.15);
             document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b-gas-mFutura-g).toFixed(2)}`;
         }
@@ -243,7 +230,7 @@
             document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-mReserva-g).toFixed(2)}`;
         }
 
-        function encerrarESalvar() { if(confirm("Deseja encerrar e limpar o turno?")) { localStorage.removeItem('moto_v30_data'); location.reload(); } }
+        function encerrarESalvar() { localStorage.removeItem('moto_v31_data'); location.reload(); }
 
         function baixarPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
