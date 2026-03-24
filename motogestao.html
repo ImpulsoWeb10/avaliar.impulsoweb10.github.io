@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v59 - Elite Platinum</title>
+    <title>MotoGestão Pro v60 - Elite Platinum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -111,6 +111,23 @@
         <div class="summary-fixed" id="resumo-lucro">LUCRO: R$ 0,00</div>
     </div>
 
+    <div id="modalGastos" class="overlay">
+        <div style="background:var(--card); padding:20px; border-radius:20px; width:85%; border:2px solid var(--primary);">
+            <h3 style="color:var(--primary); margin-top:0;">LANÇAR GASTO</h3>
+            <select id="tipo-gasto">
+                <option value="Almoço">Almoço 🍱</option>
+                <option value="Gasolina Extra">Gasolina Extra ⛽</option>
+                <option value="Pedágio">Pedágio 🛣️</option>
+                <option value="Lanche">Lanche/Água 🥤</option>
+                <option value="Manutenção">Manutenção Rápida 🔧</option>
+            </select>
+            <input type="number" id="valor-gasto" placeholder="Valor R$">
+            <button class="btn-main" onclick="addGastoTemp()">ADICIONAR GASTO</button>
+            <button class="btn-main" style="background:var(--success);" onclick="document.getElementById('modalGastos').style.display='none'">CONCLUIR / VOLTAR</button>
+            <div id="lista-gastos-temp" style="font-size:11px; color:#aaa; margin-top:15px; border-top:1px solid #333; padding-top:10px;"></div>
+        </div>
+    </div>
+
     <div id="modalAjuda" class="overlay">
         <div style="background:var(--card); padding:20px; border-radius:20px; width:90%; border:1px solid var(--primary); max-height: 85vh; overflow-y: auto;">
             <h2 style="color:var(--primary); margin-top:0;">🚀 COMO USAR</h2>
@@ -122,6 +139,32 @@
         </div>
     </div>
 
+    <div id="modalHistorico" class="overlay">
+        <div style="background:var(--card); padding:20px; border-radius:20px; width:90%; border:1px solid #444; max-height: 80vh; overflow-y: auto;">
+            <h3 style="color:var(--primary); margin-top:0;">HISTÓRICO</h3>
+            <div id="lista-historico-itens"></div>
+            <button class="btn-main" style="background:#333;" onclick="document.getElementById('modalHistorico').style.display='none'">FECHAR</button>
+        </div>
+    </div>
+
+    <div id="modalRecibo" class="overlay">
+        <div id="recibo-visual">
+            <div style="text-align:center; font-weight:bold; font-size:16px;">COMPROVANTE</div>
+            <div id="rec-data" style="text-align:center; font-size:10px;"></div>
+            <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+            <div id="rec-lista"></div>
+            <div style="border-top: 1px dashed #000; margin: 8px 0;"></div>
+            <div id="rec-calculos"></div>
+            <div id="rec-total-box" style="background:#000; color:#fff; text-align:center; padding:10px; margin-top:10px; font-weight:bold;">
+                LUCRO LÍQUIDO: <span id="rec-total"></span>
+            </div>
+            <div style="text-align:center; margin-top:15px; font-weight:bold;">IMPULSO WEB 10</div>
+        </div>
+        <button class="btn-main" style="background:#fff; color:#000;" onclick="exportPDF()">📥 SALVAR PDF</button>
+        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR WHATSAPP</button>
+        <button class="btn-main" style="background:var(--danger);" onclick="encerrarDia()">⚠️ ENCERRAR E LIMPAR DIA</button>
+    </div>
+
     <script>
         let entregas = []; let gastosTemp = [];
         let user = JSON.parse(localStorage.getItem('user_elite_v59'));
@@ -131,17 +174,13 @@
             document.getElementById('login-recorrente').style.display = 'block';
         }
 
-        // FUNÇÃO DE ACESSO COM ENVIO PARA O SEU WHATSAPP
         function primeiroAcesso() {
             let n = document.getElementById('login-nome').value;
             let c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
             localStorage.setItem('user_elite_v59', JSON.stringify(user));
-            
-            // ENVIA NOTIFICAÇÃO PARA O SEU WHATSAPP
             window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO LOGADO\nNOME: "+n+"\nZAP: "+c)}`);
-            
             entrarPainel();
         }
 
@@ -170,6 +209,21 @@
             document.getElementById('valor').value = (q * u).toFixed(2);
         }
 
+        // FUNÇÕES DO MODAL DE GASTOS
+        function abrirModalGastos() { 
+            document.getElementById('modalGastos').style.display = 'flex'; 
+        }
+
+        function addGastoTemp() {
+            let v = parseFloat(document.getElementById('valor-gasto').value) || 0;
+            if(v > 0) {
+                gastosTemp.push({tipo: document.getElementById('tipo-gasto').value, valor: v});
+                document.getElementById('lista-gastos-temp').innerHTML += `• ${document.getElementById('tipo-gasto').value}: R$ ${v.toFixed(2)}<br>`;
+                document.getElementById('valor-gasto').value = '';
+                atualizarPainel(); // Atualiza o lucro em tempo real no painel principal
+            }
+        }
+
         function registrarOperacao() {
             let v = parseFloat(document.getElementById('valor').value) || 0;
             if(v <= 0) return alert("Valor inválido!");
@@ -181,21 +235,70 @@
                 gastos: [...gastosTemp]
             });
             document.getElementById('som-money').currentTime = 0; document.getElementById('som-money').play();
-            gastosTemp = [];
+            gastosTemp = []; 
+            document.getElementById('lista-gastos-temp').innerHTML = '';
             document.getElementById('valor').value = ''; document.getElementById('cidade').value = ''; document.getElementById('km').value = '';
             atualizarPainel();
         }
 
         function atualizarPainel() {
             let brt = 0, kmt = 0, gst = 0;
-            entregas.forEach(e => { brt += e.val; kmt += e.km; e.gastos.forEach(g => gst += g.valor); });
+            entregas.forEach(e => { 
+                brt += e.val; 
+                kmt += e.km; 
+                e.gastos.forEach(g => gst += g.valor); 
+            });
+            // Soma também os gastos que estão no modal mas ainda não foram "registrados" em uma operação
+            gastosTemp.forEach(g => gst += g.valor);
+
             let lucro = brt - (kmt/35*6.20) - (kmt*0.15) - gst;
             document.getElementById('resumo-lucro').innerText = `LUCRO: R$ ${lucro.toFixed(2)}`;
             document.getElementById('meta-bar').style.width = Math.min((lucro/200)*100, 100) + "%";
             document.getElementById('lista').innerHTML = entregas.map(e => `<div style="background:#1a2222; padding:8px; margin-bottom:5px; border-radius:8px; font-size:11px; border-left:3px solid var(--primary);">${e.cid} (${e.cli}) - R$ ${e.val.toFixed(2)}</div>`).join('');
         }
-        
-        // Outras funções de fechar dia e histórico permanecem iguais...
+
+        function gerarFechamento() {
+            document.getElementById('modalRecibo').style.display = 'flex';
+            document.getElementById('rec-data').innerText = new Date().toLocaleString();
+            let brt = 0, kmt = 0, gst = 0, html = "";
+            entregas.forEach(e => {
+                brt += e.val; kmt += e.km;
+                html += `<div><b>${e.cli}:</b> ${e.cid} <span style="float:right">${e.val.toFixed(2)}</span></div>`;
+                e.gastos.forEach(g => { gst += g.valor; html += `<div style="color:red">↳ ${g.tipo} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`; });
+            });
+            let gasolina = (kmt/35*6.20);
+            let manutTotal = (kmt * 0.15);
+            document.getElementById('rec-lista').innerHTML = html + `<div style="color:blue">🕒 RESERVA MOTO (15%) <span style="float:right">-${manutTotal.toFixed(2)}</span></div>`;
+            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM: <span style="float:right">${kmt} KM</span><br>GASOLINA EST: <span style="float:right">-${gasolina.toFixed(2)}</span>`;
+            document.getElementById('rec-total').innerText = `R$ ${(brt - gasolina - manutTotal - gst).toFixed(2)}`;
+        }
+
+        function encerrarDia() {
+            let lucroFinal = document.getElementById('rec-total').innerText;
+            let hist = JSON.parse(localStorage.getItem('hist_elite')) || [];
+            hist.unshift({data: new Date().toLocaleDateString(), lucro: lucroFinal});
+            localStorage.setItem('hist_elite', JSON.stringify(hist));
+            location.reload();
+        }
+
+        function abrirHistorico() {
+            document.getElementById('modalHistorico').style.display = 'flex';
+            let hist = JSON.parse(localStorage.getItem('hist_elite')) || [];
+            document.getElementById('lista-historico-itens').innerHTML = hist.length ? hist.map(h => `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:8px; border-left:4px solid var(--success);">📅 ${h.data} <br> <b style="color:#22c55e">LUCRO: ${h.lucro}</b></div>`).join('') : '<p>Vazio.</p>';
+        }
+
+        function exportZap() {
+            let msg = `🏁 *FECHAMENTO ELITE*\n👤 *PILOTO:* ${user.nome}\n✅ *LUCRO LÍQUIDO: ${document.getElementById('rec-total').innerText}*`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+        }
+
+        function exportPDF() {
+            html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
+                const pdf = new jspdf.jsPDF('p', 'mm', [80, 160]);
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
+                pdf.save(`FECHAMENTO_${user.nome.split(' ')[0]}.pdf`);
+            });
+        }
     </script>
 </body>
 </html>
