@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v37 - Elite Absolute</title>
+    <title>MotoGestão Pro v38 - Elite Master</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ff0000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
-        /* A RED LINE QUE NÃO FALHA */
+        /* RED LINE BLINDADA */
         .red-line-box { border-bottom: 5px solid #ff0000 !important; margin-bottom: 5px; display: inline-block; }
         .red-line-text { font-weight: 950 !important; color: #ffffff !important; text-transform: uppercase; font-size: 18px; letter-spacing: 1px; }
         .sub-frase { color: #aaa; font-size: 9px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px; }
@@ -21,20 +21,22 @@
 
         .status-online { background: #000; color: var(--success); font-size: 11px; font-weight: 900; padding: 5px 12px; border-radius: 20px; display: none; border: 2px solid var(--success); text-transform: uppercase; }
 
-        /* LINHA DE META (PROGRESSO) */
-        .meta-container { background: #000; border-radius: 10px; height: 10px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
-        #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; }
+        /* BARRA DE META */
+        .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
+        #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; box-shadow: 0 0 10px var(--success); }
 
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
         .form-add { background: var(--card); padding: 15px; border-radius: 20px; border: 1px solid #333; margin-bottom: 10px; }
+        label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; }
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; }
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); }
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); font-weight: bold; font-size: 18px; }
         .btn-historico { background: none; border: 1px solid #333; color: #444; font-size: 10px; padding: 10px; margin: 40px auto; display: block; text-transform: uppercase; font-weight: bold; }
+        
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; padding: 20px; flex-direction: column; overflow-y: auto; align-items: center; }
-        #recibo-visual { background: #fff; color: #000; padding: 20px; width: 100%; max-width: 300px; font-family: 'Courier New', monospace; font-size: 12px; }
-        .tarja { background: #000; color: #fff; padding: 10px; text-align: center; font-weight: bold; margin-top: 10px; }
+        #recibo-visual { background: #fff; color: #000; padding: 20px; width: 100%; max-width: 300px; font-family: 'Courier New', monospace; font-size: 11px; }
+        .tarja { background: #000; color: #fff; padding: 10px; text-align: center; font-weight: bold; margin-top: 10px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -66,45 +68,59 @@
         </header>
 
         <div class="form-add">
-            <label style="font-size:10px; color:var(--primary); font-weight:bold;">LINHA DE META (PROGRESSO)</label>
+            <label>Linha de Meta (Progresso)</label>
             <div class="meta-container"><div id="meta-bar"></div></div>
             
             <input type="text" id="cidade" placeholder="Cidade / Destino" onfocus="focarTrabalho()">
-            <select id="cliente" onchange="checkCli()"><option>Avulso</option><option>Shopee</option><option>Mercado Livre</option></select>
+            <select id="cliente"><option>Avulso</option><option>Shopee</option><option>Mercado Livre</option></select>
             <div style="display:flex; gap:5px;">
                 <input type="number" id="valor" placeholder="R$ Ganho">
                 <input type="number" id="km" placeholder="KM">
             </div>
-            <button class="btn-main" onclick="addEntrega()">REGISTRAR 💰</button>
+
+            <div style="margin-top:10px; border-top: 1px solid #333; padding-top:10px;">
+                <label>Gastos Extras (Opcional)</label>
+                <div style="display:flex; gap:5px;">
+                    <input type="text" id="gasto-desc" placeholder="Ex: Almoço">
+                    <input type="number" id="gasto-val" placeholder="R$">
+                </div>
+            </div>
+            
+            <button class="btn-main" onclick="addEntrega()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista"></div>
         <button class="btn-historico" onclick="verHist()">📁 Ver Histórico Local</button>
         
-        <button onclick="gerarFechamento()" style="position:fixed; bottom:80px; left:15px; right:15px; background:var(--danger); color:#fff; border:none; padding:18px; border-radius:15px; font-weight:bold; z-index:100;">🚩 FECHAR EXPEDIENTE E SALVAR</button>
-        <div class="summary-fixed" id="resumo-lucro">LUCRO ATUAL: R$ 0,00</div>
+        <button onclick="gerarFechamento()" style="position:fixed; bottom:80px; left:15px; right:15px; background:var(--danger); color:#fff; border:none; padding:18px; border-radius:15px; font-weight:bold; z-index:100; box-shadow: 0 5px 15px rgba(255,0,0,0.3);">🚩 FECHAR EXPEDIENTE E SALVAR</button>
+        <div class="summary-fixed" id="resumo-lucro">LUCRO LÍQUIDO: R$ 0,00</div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
             <div style="text-align:center;">
-                <h3 style="margin:0;">RELATÓRIO DE TURNO</h3>
-                <small>IMPULSO WEB 10 - ELITE</small><br>
+                <h3 style="margin:0;">FECHAMENTO ELITE</h3>
+                <small>IMPULSO WEB 10</small><br>
                 <small id="rec-data"></small>
             </div>
             <hr>
+            <b>ENTREGAS:</b>
             <div id="rec-lista"></div>
+            <hr>
+            <b>GASTOS EXTRAS:</b>
+            <div id="rec-gastos"></div>
             <hr>
             <div id="rec-calculos"></div>
             <div class="tarja">LUCRO LÍQUIDO: <span id="rec-total"></span></div>
         </div>
-        <button class="btn-main" style="background:#000;" onclick="exportPDF()">📥 SALVAR PDF DETALHADO</button>
+        <button class="btn-main" style="background:#000;" onclick="exportPDF()">📥 SALVAR PDF COMPLETO</button>
         <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR PRO WHATSAPP</button>
-        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ LIMPAR E SALVAR</button>
+        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ LIMPAR E SALVAR NO HISTÓRICO</button>
     </div>
 
     <script>
         let dados = JSON.parse(localStorage.getItem('elite_data')) || [];
+        let gastos = JSON.parse(localStorage.getItem('elite_gastos')) || [];
         let user = JSON.parse(localStorage.getItem('elite_user'));
 
         if(user) document.getElementById('tela-login').style.display = 'none', document.getElementById('app').style.display = 'block', atualizar();
@@ -125,34 +141,45 @@
         }
 
         function addEntrega() {
-            let v = parseFloat(document.getElementById('valor').value);
-            if(!v) return;
-            dados.push({
-                cid: document.getElementById('cidade').value || "Rota",
-                cli: document.getElementById('cliente').value,
-                val: v,
-                km: parseFloat(document.getElementById('km').value) || 0
-            });
+            let v = parseFloat(document.getElementById('valor').value) || 0;
+            let gV = parseFloat(document.getElementById('gasto-val').value) || 0;
+            let gD = document.getElementById('gasto-desc').value;
+
+            if(v > 0) {
+                dados.push({
+                    cid: document.getElementById('cidade').value || "Rota",
+                    cli: document.getElementById('cliente').value,
+                    val: v,
+                    km: parseFloat(document.getElementById('km').value) || 0
+                });
+            }
+
+            if(gV > 0) {
+                gastos.push({ desc: gD || "Gasto Extra", val: gV });
+            }
+
             localStorage.setItem('elite_data', JSON.stringify(dados));
+            localStorage.setItem('elite_gastos', JSON.stringify(gastos));
+            
+            document.getElementById('valor').value = '';
+            document.getElementById('km').value = '';
+            document.getElementById('gasto-val').value = '';
+            document.getElementById('gasto-desc').value = '';
             atualizar();
         }
 
         function atualizar() {
-            let brt = 0, kmt = 0;
+            let brt = 0, kmt = 0, gst = 0;
             let html = "";
-            dados.forEach(d => {
-                brt += d.val; kmt += d.km;
-                html += `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;">
-                    <b>${d.cid}</b> (${d.cli}) <span style="float:right">R$ ${d.val.toFixed(2)}</span>
-                </div>`;
-            });
-            document.getElementById('lista').innerHTML = html;
+            dados.forEach(d => { brt += d.val; kmt += d.km; html += `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;"><b>${d.cid}</b> (${d.cli}) <span style="float:right">R$ ${d.val.toFixed(2)}</span></div>`; });
+            gastos.forEach(g => { gst += g.val; });
+            
             let gas = (kmt/35*6.20);
             let man = (kmt*0.15);
-            let lucro = brt - gas - man;
-            document.getElementById('resumo-lucro').innerText = `LUCRO LÍQUIDO: R$ ${lucro.toFixed(2)}`;
+            let lucro = brt - gas - man - gst;
             
-            // ATUALIZA BARRA DE META (Baseado em meta de R$ 200 por dia)
+            document.getElementById('lista').innerHTML = html;
+            document.getElementById('resumo-lucro').innerText = `LUCRO LÍQUIDO: R$ ${lucro.toFixed(2)}`;
             let perc = (lucro / 200) * 100;
             document.getElementById('meta-bar').style.width = Math.min(perc, 100) + "%";
         }
@@ -160,41 +187,43 @@
         function gerarFechamento() {
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
-            let brt = 0, kmt = 0, html = "";
-            dados.forEach(d => {
-                brt += d.val; kmt += d.km;
-                html += `<div>• ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}</div>`;
-            });
+            let brt = 0, kmt = 0, gst = 0, htmlEnt = "", htmlGst = "";
+            
+            dados.forEach(d => { brt += d.val; kmt += d.km; htmlEnt += `<div>• ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}</div>`; });
+            gastos.forEach(g => { gst += g.val; htmlGst += `<div>• ${g.desc}: R$ ${g.val.toFixed(2)}</div>`; });
+            
             let gas = (kmt/35*6.20);
             let man = (kmt*0.15);
-            document.getElementById('rec-lista').innerHTML = html;
+            document.getElementById('rec-lista').innerHTML = htmlEnt || "Nenhuma entrega";
+            document.getElementById('rec-gastos').innerHTML = htmlGst || "Nenhum gasto extra";
             document.getElementById('rec-calculos').innerHTML = `
-                BRUTO: R$ ${brt.toFixed(2)}<br>
+                GANHO BRUTO: R$ ${brt.toFixed(2)}<br>
                 DISTÂNCIA: ${kmt} KM<br>
-                GASTO GASOLINA: R$ ${gas.toFixed(2)}<br>
-                RESERVA MANUT: R$ ${man.toFixed(2)}
+                GASOLINA (MÉDIA): R$ ${gas.toFixed(2)}<br>
+                RESERVA MANUT: R$ ${man.toFixed(2)}<br>
+                GASTOS EXTRAS: R$ ${gst.toFixed(2)}
             `;
-            document.getElementById('rec-total').innerText = `R$ ${(brt-gas-man).toFixed(2)}`;
+            document.getElementById('rec-total').innerText = `R$ ${(brt-gas-man-gst).toFixed(2)}`;
         }
 
         function exportZap() {
+            let brt = 0, kmt = 0, gst = 0;
             let txt = `🏁 *RELATÓRIO ELITE*\n👤 Piloto: ${user.nome}\n\n*ENTREGAS:*`;
-            let brt = 0, kmt = 0;
-            dados.forEach(d => {
-                txt += `\n📍 ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}`;
-                brt += d.val; kmt += d.km;
-            });
+            dados.forEach(d => { txt += `\n📍 ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}`; brt += d.val; kmt += d.km; });
+            txt += `\n\n*GASTOS EXTRAS:*`;
+            gastos.forEach(g => { txt += `\n❌ ${g.desc}: R$ ${g.val.toFixed(2)}`; gst += g.val; });
+            
             let gas = (kmt/35*6.20);
             let man = (kmt*0.15);
-            txt += `\n\n*RESUMO FINANCEIRO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Manutenção: R$ ${man.toFixed(2)}\n📏 KM Total: ${kmt}km\n────────────────\n✅ *LUCRO: R$ ${(brt-gas-man).toFixed(2)}*`;
+            txt += `\n\n*RESUMO FINAL:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Reserva Manut: R$ ${man.toFixed(2)}\n🍔 Extras: R$ ${gst.toFixed(2)}\n📏 KM Total: ${kmt}km\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(brt-gas-man-gst).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
         function exportPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
-                const pdf = new jspdf.jsPDF('p', 'mm', [80, 150]);
+                const pdf = new jspdf.jsPDF('p', 'mm', [80, 180]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
-                pdf.save(`FECHAMENTO_ELITE.pdf`);
+                pdf.save(`ELITE_FECHAMENTO.pdf`);
             });
         }
 
@@ -203,12 +232,13 @@
             hist.push({data: new Date().toLocaleDateString(), lucro: document.getElementById('rec-total').innerText});
             localStorage.setItem('elite_hist', JSON.stringify(hist));
             localStorage.removeItem('elite_data');
+            localStorage.removeItem('elite_gastos');
             location.reload();
         }
 
         function verHist() {
             let h = JSON.parse(localStorage.getItem('elite_hist')) || [];
-            if(h.length == 0) return alert("Sem histórico.");
+            if(h.length == 0) return alert("Histórico vazio.");
             alert(h.map(i => `${i.data}: ${i.lucro}`).join('\n'));
         }
     </script>
