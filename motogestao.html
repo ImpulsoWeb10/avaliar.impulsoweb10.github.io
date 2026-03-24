@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v54 - Elite Platinum</title>
+    <title>MotoGestão Pro v55 - Elite Platinum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -147,7 +147,7 @@
     <script>
         let entregas = [];
         let gastosTemp = [];
-        let user = JSON.parse(localStorage.getItem('user_elite_v54'));
+        let user = JSON.parse(localStorage.getItem('user_elite_v55'));
 
         if(user) {
             document.getElementById('login-primeiro').style.display = 'none';
@@ -159,7 +159,7 @@
             let c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
-            localStorage.setItem('user_elite_v54', JSON.stringify(user));
+            localStorage.setItem('user_elite_v55', JSON.stringify(user));
             window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO\nNOME: "+n+"\nZAP: "+c)}`);
             entrarPainel();
         }
@@ -179,8 +179,13 @@
 
         function togglePacotes() {
             let cli = document.getElementById('cliente').value;
+            // AGORA SHOPEE E MERCADO LIVRE ATIVAM OS PACOTES
             document.getElementById('area-pacotes').style.display = (cli === 'Avulso' ? 'none' : 'block');
             document.getElementById('valor').readOnly = (cli !== 'Avulso');
+            if(cli === 'Avulso') {
+                document.getElementById('qtd-pacotes').value = '';
+                document.getElementById('valor').value = '';
+            }
         }
 
         function calcAutom() {
