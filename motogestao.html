@@ -41,8 +41,11 @@
 
     <div id="tela-login">
         <img src="impulsoweb10.jpg" style="width: 80px; border-radius: 10px; margin-bottom: 15px;">
-        <div class="red-line-box"><span class="red-line-text">GESTÃO ELITE</span></div>
-        <p style="font-size: 9px; color: #aaa; font-weight: bold;">IMPULSO WEB 10</p>
+        
+        <div class="red-line-box"><span class="red-line-text">SISTEMA DE GESTÃO DE ELITE</span></div>
+        <p style="font-size: 10px; color: #aaa; font-weight: bold; margin-top: 5px; max-width: 250px;">NÃO PERCA TEMPO NEM DINHEIRO, GESTÃO É A CHAVE DO LUCRO</p>
+        
+        <p style="font-size: 12px; color: var(--primary); font-weight: 900; margin-bottom: 20px;">IMPULSO WEB 10</p>
         
         <div id="login-primeiro" style="width: 100%; max-width: 280px;">
             <input type="text" id="login-nome" placeholder="Seu Nome Completo">
@@ -221,9 +224,11 @@
                 html += `<div><b>${e.cli}:</b> ${e.cid} <span style="float:right">${e.val.toFixed(2)}</span></div>`;
                 e.gastos.forEach(g => { gst += g.valor; html += `<div class="gasto-vermelho">↳ ${g.tipo} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`; });
             });
+            let gasolina = (kmt/35*6.20);
+            let manut = (kmt*0.15);
             document.getElementById('rec-lista').innerHTML = html;
-            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM: <span style="float:right">${kmt}</span><br>DESPESAS: <span style="float:right">-${(gst + (kmt/35*6.20) + (kmt*0.15)).toFixed(2)}</span>`;
-            document.getElementById('rec-total').innerText = `R$ ${(brt - (kmt/35*6.20) - (kmt*0.15) - gst).toFixed(2)}`;
+            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM: <span style="float:right">${kmt}</span><br>DESPESAS: <span style="float:right">-${(gst + gasolina + manut).toFixed(2)}</span>`;
+            document.getElementById('rec-total').innerText = `R$ ${(brt - gasolina - manut - gst).toFixed(2)}`;
         }
 
         function exportZap() {
