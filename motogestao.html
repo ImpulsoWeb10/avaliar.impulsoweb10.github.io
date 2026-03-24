@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v55 - Elite Platinum</title>
+    <title>MotoGestão Pro v56 - Elite Platinum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -18,8 +18,8 @@
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; }
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
-        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 15px; border-radius: 0 0 25px 25px; display: flex; align-items: center; gap: 10px; border-bottom: 3px solid var(--secondary); transition: 0.3s; }
-        #status-tag { display: none; background: var(--success); color: #000; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; border: 2px solid #fff; }
+        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 15px; border-radius: 0 0 25px 25px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 3px solid var(--secondary); transition: 0.3s; }
+        #status-tag { display: none; background: var(--success); color: #000; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; border: 2px solid #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
 
         .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
         #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; box-shadow: 0 0 10px var(--success); }
@@ -33,7 +33,10 @@
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); font-weight: bold; font-size: 18px; }
         
         .btn-small { background: #1a2222; color: #666; border: 1px solid #333; padding: 5px 10px; border-radius: 5px; font-size: 9px; cursor: pointer; margin-top: 15px; text-transform: uppercase; }
+        .btn-help { background: #fff; color: #000; border: none; padding: 4px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
         .hist-card { background: #1a2222; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 4px solid var(--success); text-align: left; width: 100%; box-sizing: border-box;}
+        
+        .ajuda-item { text-align: left; margin-bottom: 15px; font-size: 13px; border-left: 2px solid var(--primary); padding-left: 10px; }
     </style>
 </head>
 <body>
@@ -53,7 +56,6 @@
             <input type="tel" id="login-celular" placeholder="WhatsApp">
             <button class="btn-main" onclick="primeiroAcesso()">SOLICITAR ACESSO ➔</button>
         </div>
-
         <div id="login-recorrente" style="display:none; width: 100%; max-width: 280px;">
             <button class="btn-main" onclick="entrarPainel()">ACESSAR MEU PAINEL ➔</button>
         </div>
@@ -61,11 +63,14 @@
 
     <div id="app" style="display:none;">
         <header id="header-principal">
-            <img src="impulsoweb10.jpg" style="width: 40px; border-radius: 8px; border: 1px solid #fff;">
-            <div id="status-container">
-                <div class="red-line-box" id="box-titulo"><span class="red-line-text" style="font-size: 12px;">IMPULSO WEB 10</span></div>
-                <div id="status-tag"></div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="impulsoweb10.jpg" style="width: 35px; border-radius: 8px; border: 1px solid #fff;">
+                <div id="status-container">
+                    <div class="red-line-box" id="box-titulo"><span class="red-line-text" style="font-size: 12px;">IMPULSO WEB 10</span></div>
+                    <div id="status-tag"></div>
+                </div>
             </div>
+            <button class="btn-help" onclick="document.getElementById('modalAjuda').style.display='flex'">Como usar</button>
         </header>
 
         <div style="background: var(--card); padding:15px; border-radius:15px; margin-top:10px; border:1px solid #333;">
@@ -101,6 +106,20 @@
         
         <button class="btn-main" style="background:var(--danger); margin-top:20px;" onclick="gerarFechamento()">🚩 FECHAR EXPEDIENTE</button>
         <div class="summary-fixed" id="resumo-lucro">LUCRO: R$ 0,00</div>
+    </div>
+
+    <div id="modalAjuda" class="overlay">
+        <div style="background:var(--card); padding:20px; border-radius:20px; width:90%; border:1px solid var(--primary); max-height: 85vh; overflow-y: auto;">
+            <h2 style="color:var(--primary); margin-top:0;">🚀 PASSO A PASSO</h2>
+            <div class="ajuda-item"><b>1. Destino:</b> Digite a cidade para ficar Online no sistema.</div>
+            <div class="ajuda-item"><b>2. Cliente:</b> Escolha entre Avulso ou Plataformas (Shopee/ML).</div>
+            <div class="ajuda-item"><b>3. Pacotes:</b> Se for plataforma, o sistema calcula o valor total pela quantidade de pacotes entregues.</div>
+            <div class="ajuda-item"><b>4. Gastos:</b> Use o botão "+" para lançar almoço, gasolina extra ou lanche do momento.</div>
+            <div class="ajuda-item"><b>5. Registrar:</b> Clique em "Registrar Operação" para salvar aquela entrega no dia.</div>
+            <div class="ajuda-item"><b>6. Fechamento:</b> No fim do dia, clique em "Fechar Expediente". Lá você vê o lucro líquido já descontando os 15% da reserva da moto e gasolina estimada.</div>
+            <div class="ajuda-item"><b>7. Encerrar:</b> Após salvar seu PDF ou enviar no Zap, clique em "Encerrar Dia" para salvar no seu histórico permanente.</div>
+            <button class="btn-main" onclick="document.getElementById('modalAjuda').style.display='none'">ENTENDI!</button>
+        </div>
     </div>
 
     <div id="modalHistorico" class="overlay">
@@ -147,7 +166,7 @@
     <script>
         let entregas = [];
         let gastosTemp = [];
-        let user = JSON.parse(localStorage.getItem('user_elite_v55'));
+        let user = JSON.parse(localStorage.getItem('user_elite_v56'));
 
         if(user) {
             document.getElementById('login-primeiro').style.display = 'none';
@@ -159,7 +178,7 @@
             let c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
-            localStorage.setItem('user_elite_v55', JSON.stringify(user));
+            localStorage.setItem('user_elite_v56', JSON.stringify(user));
             window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO\nNOME: "+n+"\nZAP: "+c)}`);
             entrarPainel();
         }
@@ -174,18 +193,13 @@
             document.getElementById('box-titulo').style.display = 'none';
             let tag = document.getElementById('status-tag');
             tag.style.display = 'inline-block';
-            tag.innerText = `● ONLINE: ${user.nome.toUpperCase()}`;
+            tag.innerText = `● ONLINE: ${user.nome.split(' ')[0].toUpperCase()}`;
         }
 
         function togglePacotes() {
             let cli = document.getElementById('cliente').value;
-            // AGORA SHOPEE E MERCADO LIVRE ATIVAM OS PACOTES
             document.getElementById('area-pacotes').style.display = (cli === 'Avulso' ? 'none' : 'block');
             document.getElementById('valor').readOnly = (cli !== 'Avulso');
-            if(cli === 'Avulso') {
-                document.getElementById('qtd-pacotes').value = '';
-                document.getElementById('valor').value = '';
-            }
         }
 
         function calcAutom() {
