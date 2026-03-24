@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoGestão Pro - ImpulsoWeb10</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root { 
             --primary: #f58220; --secondary: #004a80; --bg: #0d1212; 
@@ -14,7 +23,7 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 180px; overflow-x: hidden; }
         
-        /* HEADER V14 - RED LINE AUMENTADA */
+        /* HEADER V15 - IMPACTO TOTAL */
         #header-principal {
             background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); 
             padding: 35px 20px; border-radius: 0 0 45px 45px; margin: -15px -15px 25px -15px;
@@ -24,7 +33,7 @@
             border-bottom: 5px solid var(--secondary);
         }
 
-        /* LOGO COM BRILHO */
+        /* LOGO COM BRILHO REALISTA */
         .logo-box { 
             width: 105px; height: 105px; border-radius: 22px; 
             border: 3px solid #fff; box-shadow: 0 8px 15px rgba(0,0,0,0.3);
@@ -43,24 +52,28 @@
         .red-line-text p { margin: 8px 0 0; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; }
 
         /* MODO FOCO */
-        .modo-foco #header-principal { background: var(--bg); padding: 10px; border-bottom: 2px solid var(--primary); border-radius: 0; justify-content: center; }
+        .modo-foco #header-principal { background: var(--bg); padding: 10px; border-bottom: 2px solid var(--primary); border-radius: 0; justify-content: center; box-shadow: none; }
         .modo-foco .red-line-text { display: none; }
         .modo-foco .logo-box { width: 140px; height: 140px; margin: 0 auto; }
 
-        /* CARDS E LISTA */
+        /* FORMULÁRIO */
         .form-add { background: var(--card); padding: 20px; border-radius: 25px; border: 1px solid #334155; margin-bottom: 20px; }
-        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #080c0c; color: white; box-sizing: border-box; }
-        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; text-transform: uppercase; margin-top: 15px; cursor: pointer; }
+        label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin: 10px 0 5px; }
+        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #080c0c; color: white; box-sizing: border-box; outline: none; }
         
-        .entrega-card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); font-size: 14px; }
+        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; text-transform: uppercase; margin-top: 15px; cursor: pointer; }
+        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 20px; }
+
+        /* LISTA */
+        .entrega-card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 5px solid var(--primary); animation: slideIn 0.3s; }
+        @keyframes slideIn { from { opacity:0; transform: translateX(-10px); } to { opacity:1; transform: translateX(0); } }
         .detalhe-gasto { color: var(--danger); font-size: 11px; display: block; margin-left: 10px; }
         .detalhe-manutencao { color: #aaa; font-size: 11px; display: block; margin-left: 10px; font-style: italic; }
 
-        .btn-fim { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--danger); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 900; z-index: 100; }
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 20px; }
-
+        /* MODAIS */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 2000; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; }
-        .recibo-card { background: white; color: black; padding: 25px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; font-size: 12px; }
+        .recibo-card { background: white; color: black; padding: 25px; border-radius: 5px; width: 100%; max-width: 380px; font-family: monospace; }
     </style>
 </head>
 <body id="body-app">
@@ -74,39 +87,40 @@
             </div>
         </header>
 
-        <button class="btn-main" style="background:rgba(245, 130, 32, 0.1); border:1px solid var(--primary); margin-bottom:15px;" onclick="verHistorico()">📁 VER HISTÓRICO</button>
+        <button class="btn-main" style="background:rgba(245, 130, 32, 0.1); border:1px solid var(--primary); margin-bottom:15px;" onclick="verHistorico()">📁 VER HISTÓRICO DE LUCRO</button>
 
         <div class="form-add">
-            <label style="font-size:10px; color:var(--primary); font-weight:bold;">DESTINO</label>
-            <input type="text" id="cliente" placeholder="Aonde vai entregar?" onfocus="ativarModoFoco()" onblur="desativarModoFoco()">
+            <label>CLIENTE / DESTINO</label>
+            <input type="text" id="cliente" placeholder="Ifood, Loggi, Particular..." onfocus="ativarModoFoco()" onblur="desativarModoFoco()">
             
             <div style="display:flex; gap:10px; margin-top:10px;">
-                <div style="flex:1"><label style="font-size:10px; color:var(--primary);">GANHO R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label style="font-size:10px; color:var(--primary);">KM</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>GANHO R$</label><input type="number" id="valor" placeholder="0.00" step="0.01"></div>
+                <div style="flex:1"><label>KM RODADO</label><input type="number" id="km" placeholder="0"></div>
             </div>
             
-            <div style="display:flex; gap:5px; align-items:flex-end; margin-top:10px;">
-                <div style="flex:1"><label style="font-size:10px; color:var(--primary);">GASTOS EXTRAS</label><input type="text" id="gasto-total-input" placeholder="R$ 0.00" readonly onclick="abrirModalGasto()"></div>
-                <button onclick="abrirModalGasto()" style="background:var(--danger); color:white; border:none; width:60px; height:45px; border-radius:12px; font-weight:bold; font-size:24px;">+</button>
+            <label style="margin-top:10px;">GASTOS EXTRAS (TAXAS, ALGO QUE PAGOU)</label>
+            <div style="display:flex; gap:5px;">
+                <input type="text" id="gasto-total-input" placeholder="R$ 0.00" readonly onclick="abrirModalGasto()" style="background:#000; cursor:pointer;">
+                <button onclick="abrirModalGasto()" style="background:var(--danger); color:white; border:none; width:65px; height:45px; border-radius:12px; font-weight:bold; font-size:24px;">+</button>
             </div>
             
             <button class="btn-main" onclick="salvarEntrega()">SALVAR CORRIDA 💰</button>
         </div>
 
         <div id="lista-entregas"></div>
-        <button class="btn-fim" onclick="gerarReciboFinal()">🚩 FINALIZAR DIA</button>
+        <button class="btn-fim" onclick="gerarReciboFinal()">🚩 FINALIZAR EXPEDIENTE</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
     </div>
 
-    <audio id="audio-cash"><source src="https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3" type="audio/mpeg"></audio>
+    <audio id="audio-cash" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3" type="audio/mpeg"></audio>
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
-        <div class="form-add" style="width:100%; max-width:320px;">
+        <div class="form-add" style="width:100%; max-width:320px; border-color: var(--danger);">
             <h3 style="color:var(--danger)">Lançar Gasto</h3>
-            <select id="tipo-gasto"><option>Combustível</option><option>Pedágio</option><option>Refeição</option><option>Oficina</option><option>Outros</option></select>
+            <select id="tipo-gasto"><option>Combustível</option><option>Pedágio</option><option>Refeição</option><option>Manutenção</option><option>Outros</option></select>
             <input type="number" id="valor-gasto" placeholder="Valor R$" style="margin-top:15px;">
             <button class="btn-main" style="background:var(--danger)" onclick="addGastoLista()">ADICIONAR</button>
-            <div id="preview-gastos" style="margin:15px 0; color:var(--danger); font-size:12px;"></div>
+            <div id="preview-gastos" style="margin:15px 0; color:var(--danger); font-size:12px; font-weight:bold;"></div>
             <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR ✅</button>
         </div>
     </div>
@@ -115,19 +129,18 @@
         <div id="recibo-area" class="recibo-card">
             <div style="text-align:center">
                 <img src="impulsoweb10.jpg" style="width:60px; border-radius:10px;">
-                <h3 style="margin:5px 0;">RELATÓRIO DETALHADO DE ELITE</h3>
+                <h3 style="margin:5px 0;">RELATÓRIO DETALHADO</h3>
                 <small id="rec-data"></small>
             </div>
             <hr style="border:1px dashed #000;">
             <div id="rec-corpo"></div>
             <hr style="border:1px dashed #000;">
             <div id="rec-resumo-financeiro"></div>
-            <div style="font-size:9px; color:#666; text-align:center; margin-top:10px;">Cálculos incluem manutenção e depreciação.</div>
         </div>
-        <div style="width:100%; max-width:380px; margin-top:15px;">
-            <button class="btn-main" onclick="baixarPDF()">📥 BAIXAR PDF COMPLETO</button>
-            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 ENVIAR WHATSAPP DETALHADO</button>
-            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR E ZERAR DIA</button>
+        <div style="width:100%; max-width:380px; margin-top:20px;">
+            <button class="btn-main" onclick="baixarPDF()">📥 BAIXAR PDF DETALHADO</button>
+            <button class="btn-main" style="background:#25D366" onclick="enviarWhatsApp()">🟢 WHATSAPP DETALHADO</button>
+            <button class="btn-main" style="background:var(--success)" onclick="arquivarEFechar()">💾 ARQUIVAR E ZERAR</button>
         </div>
     </div>
 
@@ -140,9 +153,9 @@
     </div>
 
     <script>
-        let entregas = JSON.parse(localStorage.getItem('moto_v14_data')) || [];
+        let entregas = JSON.parse(localStorage.getItem('moto_v15_data')) || [];
         let gastosTemp = [];
-        let historico = JSON.parse(localStorage.getItem('moto_v14_hist')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_v15_hist')) || [];
 
         function ativarModoFoco() { document.getElementById('body-app').classList.add('modo-foco'); }
         function desativarModoFoco() { if(document.getElementById('cliente').value === "") { document.getElementById('body-app').classList.remove('modo-foco'); } }
@@ -153,7 +166,7 @@
             const t = document.getElementById('tipo-gasto').value;
             if(!v) return;
             gastosTemp.push({tipo: t, valor: v});
-            document.getElementById('preview-gastos').innerHTML += `<div>• ${t}: R$ ${v.toFixed(2)}</div>`;
+            document.getElementById('preview-gastos').innerHTML += `<div>❌ ${t}: R$ ${v.toFixed(2)}</div>`;
             document.getElementById('gasto-total-input').value = `R$ ${gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2)}`;
             document.getElementById('valor-gasto').value = '';
         }
@@ -162,21 +175,15 @@
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
             const c = document.getElementById('cliente').value || "Corrida";
-            if(v <= 0) return alert("Insira o valor!");
+            if(v <= 0) return alert("Insira o valor ganho!");
             
-            // Cálculo de Manutenção (R$ 0,15 por KM para pneus, óleo, relação)
-            const manutencaoReserva = k * 0.15;
+            const manut = k * 0.15; // Provisão manutenção
+            entregas.push({ cliente: c, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0), manutencao: manut });
+            localStorage.setItem('moto_v15_data', JSON.stringify(entregas));
 
-            entregas.push({
-                cliente: c, 
-                valor: v, 
-                km: k, 
-                gastos: [...gastosTemp], 
-                totalG: gastosTemp.reduce((a,b)=>a+b.valor,0),
-                manutencao: manutencaoReserva
-            });
-            
-            localStorage.setItem('moto_v14_data', JSON.stringify(entregas));
+            // ANALYTICS: RASTREIO DE CORRIDA SALVA
+            gtag('event', 'salvar_corrida', { 'valor': v, 'km': k, 'cliente': c });
+
             const audio = document.getElementById('audio-cash');
             audio.currentTime = 0; audio.play().catch(()=>{});
 
@@ -193,15 +200,15 @@
             lista.innerHTML = ""; let b=0, k=0, g=0, m=0;
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG; m += e.manutencao;
-                let tagsG = e.gastos.map(gt => `<span class="detalhe-gasto">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</span>`).join('');
+                let hG = e.gastos.map(gt => `<span class="detalhe-gasto">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</span>`).join('');
                 lista.innerHTML += `<div class="entrega-card">
                     <div style="display:flex; justify-content:space-between;"><b>${e.cliente} (${e.km}km)</b><b style="color:var(--success)">R$ ${e.valor.toFixed(2)}</b></div>
-                    ${tagsG}
-                    <span class="detalhe-manutencao">└ Provisão Manutenção: R$ ${e.manutencao.toFixed(2)}</span>
+                    ${hG}
+                    <span class="detalhe-manutencao">└ Manutenção Futura: R$ ${e.manutencao.toFixed(2)}</span>
                 </div>`;
             });
-            const custoCombustivel = (k / 35 * 6.20); // Média Brasil
-            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b - custoCombustivel - g - m).toFixed(2)}`;
+            const combustivel = (k / 35 * 6.20);
+            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b - combustivel - g - m).toFixed(2)}`;
         }
 
         function gerarReciboFinal() {
@@ -211,34 +218,34 @@
             let b=0, k=0, g=0, m=0, html = "";
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG; m += e.manutencao;
-                html += `<div style="margin-bottom:10px;">
-                    <b>• ${e.cliente} (${e.km}km): R$ ${e.valor.toFixed(2)}</b><br>`;
-                e.gastos.forEach(gt => html += `<span style="color:red; font-size:10px;">  [Gasto] ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</span><br>`);
-                html += `<span style="color:gray; font-size:10px;">  [Manut.] Reserva: R$ ${e.manutencao.toFixed(2)}</span></div>`;
+                html += `<div style="margin-bottom:8px;"><b>• ${e.cliente} (${e.km}km): R$ ${e.valor.toFixed(2)}</b><br>`;
+                e.gastos.forEach(gt => html += `<span style="color:red; font-size:10px;">  └ Gasto: ${gt.tipo} R$ ${gt.valor.toFixed(2)}</span><br>`);
+                html += `<span style="color:gray; font-size:10px;">  └ Oficina: R$ ${e.manutencao.toFixed(2)}</span></div>`;
             });
-            const combustivel = (k / 35 * 6.20);
-            const lucroFinal = b - combustivel - g - m;
+            const comb = (k / 35 * 6.20);
             document.getElementById('rec-corpo').innerHTML = html;
             document.getElementById('rec-resumo-financeiro').innerHTML = `
-                <div style="display:flex; justify-content:space-between;"><span>TOTAL BRUTO:</span><b>R$ ${b.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between; color:red;"><span>TOTAL GASTOS:</span><b>R$ ${g.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between; color:orange;"><span>GASOLINA ESTIMADA:</span><b>R$ ${combustivel.toFixed(2)}</b></div>
-                <div style="display:flex; justify-content:space-between; color:gray;"><span>FUNDO MANUTENÇÃO:</span><b>R$ ${m.toFixed(2)}</b></div>
-                <div style="background:#000; color:#fff; padding:8px; margin-top:10px; display:flex; justify-content:space-between; font-size:16px;"><span>LUCRO LÍQUIDO:</span><b>R$ ${lucroFinal.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between;"><span>GANHO BRUTO:</span><b>R$ ${b.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between; color:red;"><span>GASTOS EXTRAS:</span><b>R$ ${g.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between; color:orange;"><span>GASOLINA:</span><b>R$ ${comb.toFixed(2)}</b></div>
+                <div style="display:flex; justify-content:space-between; color:gray;"><span>OFICINA (KM):</span><b>R$ ${m.toFixed(2)}</b></div>
+                <div style="background:#000; color:#fff; padding:10px; margin-top:10px; display:flex; justify-content:space-between; font-size:18px;"><span>LUCRO REAL:</span><b>R$ ${(b-comb-g-m).toFixed(2)}</b></div>
             `;
+            gtag('event', 'gerar_recibo', { 'lucro_final': (b-comb-g-m) });
         }
 
         function enviarWhatsApp() {
-            let b=0, k=0, g=0, m=0, txt = `🏁 *EXTRATO ELITE MOTO - IMPULSOWEB10*\n\n`;
+            let b=0, k=0, g=0, m=0, txt = `🏁 *EXTRATO ELITE - IMPULSOWEB10*\n\n`;
             entregas.forEach(e => {
-                txt += `📦 *${e.cliente}* (${e.km}km)\n   💰 Valor: R$ ${e.valor.toFixed(2)}\n`;
-                e.gastos.forEach(gt => txt += `   ❌ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}\n`);
-                txt += `   🛠️ Manut. Futura: R$ ${e.manutencao.toFixed(2)}\n\n`;
+                txt += `📦 *${e.cliente}* (${e.km}km)\n💰 Ganhou: R$ ${e.valor.toFixed(2)}\n`;
+                e.gastos.forEach(gt => txt += `❌ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}\n`);
+                txt += `🛠️ Oficina: R$ ${e.manutencao.toFixed(2)}\n\n`;
                 b += e.valor; k += e.km; g += e.totalG; m += e.manutencao;
             });
-            const combustivel = (k / 35 * 6.20);
-            txt += `──────────────────\n📊 *RESUMO FINANCEIRO*\nBruto: R$ ${b.toFixed(2)}\nGasolina: R$ ${combustivel.toFixed(2)}\nFundo Oficina: R$ ${m.toFixed(2)}\n──────────────────\n✅ *LUCRO REAL: R$ ${(b-combustivel-g-m).toFixed(2)}*`;
+            const comb = (k / 35 * 6.20);
+            txt += `──────────────────\n📊 *RESUMO DO TURNO*\nBruto: R$ ${b.toFixed(2)}\nGasolina: R$ ${comb.toFixed(2)}\nFundo Oficina: R$ ${m.toFixed(2)}\n──────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-comb-g-m).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
+            gtag('event', 'enviar_whatsapp');
         }
 
         function baixarPDF() {
@@ -246,20 +253,25 @@
             html2canvas(document.querySelector("#recibo-area")).then(canvas => {
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 0);
-                pdf.save(`relatorio_detalhado.pdf`);
+                pdf.save(`Relatorio_Elite.pdf`);
             });
+            gtag('event', 'baixar_pdf');
         }
 
         function arquivarEFechar() {
-            historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
-            localStorage.setItem('moto_v14_hist', JSON.stringify(historico));
-            localStorage.removeItem('moto_v14_data');
-            location.reload();
+            if(confirm("Deseja zerar o dia?")) {
+                historico.push({ data: new Date().toLocaleDateString(), lucro: document.getElementById('footer-lucro').innerText });
+                localStorage.setItem('moto_v15_hist', JSON.stringify(historico));
+                localStorage.removeItem('moto_v15_data');
+                gtag('event', 'arquivar_dia');
+                location.reload();
+            }
         }
 
         function verHistorico() {
             document.getElementById('modalHistorico').style.display = 'flex';
             document.getElementById('lista-hist').innerHTML = historico.map(h => `<div style="padding:15px; border-bottom:1px solid #334155; display:flex; justify-content:space-between;"><span>${h.data}</span> <b>${h.lucro}</b></div>`).join('');
+            gtag('event', 'ver_historico');
         }
         
         atualizarTela();
