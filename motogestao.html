@@ -209,7 +209,6 @@
             document.getElementById('valor').value = (q * u).toFixed(2);
         }
 
-        // FUNÇÕES DO MODAL DE GASTOS
         function abrirModalGastos() { 
             document.getElementById('modalGastos').style.display = 'flex'; 
         }
@@ -220,7 +219,7 @@
                 gastosTemp.push({tipo: document.getElementById('tipo-gasto').value, valor: v});
                 document.getElementById('lista-gastos-temp').innerHTML += `• ${document.getElementById('tipo-gasto').value}: R$ ${v.toFixed(2)}<br>`;
                 document.getElementById('valor-gasto').value = '';
-                atualizarPainel(); // Atualiza o lucro em tempo real no painel principal
+                atualizarPainel();
             }
         }
 
@@ -243,14 +242,8 @@
 
         function atualizarPainel() {
             let brt = 0, kmt = 0, gst = 0;
-            entregas.forEach(e => { 
-                brt += e.val; 
-                kmt += e.km; 
-                e.gastos.forEach(g => gst += g.valor); 
-            });
-            // Soma também os gastos que estão no modal mas ainda não foram "registrados" em uma operação
+            entregas.forEach(e => { brt += e.val; kmt += e.km; e.gastos.forEach(g => gst += g.valor); });
             gastosTemp.forEach(g => gst += g.valor);
-
             let lucro = brt - (kmt/35*6.20) - (kmt*0.15) - gst;
             document.getElementById('resumo-lucro').innerText = `LUCRO: R$ ${lucro.toFixed(2)}`;
             document.getElementById('meta-bar').style.width = Math.min((lucro/200)*100, 100) + "%";
@@ -287,8 +280,43 @@
             document.getElementById('lista-historico-itens').innerHTML = hist.length ? hist.map(h => `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:8px; border-left:4px solid var(--success);">📅 ${h.data} <br> <b style="color:#22c55e">LUCRO: ${h.lucro}</b></div>`).join('') : '<p>Vazio.</p>';
         }
 
+        // FUNÇÃO WHATSAPP DETALHADA COM ÍCONES
         function exportZap() {
-            let msg = `🏁 *FECHAMENTO ELITE*\n👤 *PILOTO:* ${user.nome}\n✅ *LUCRO LÍQUIDO: ${document.getElementById('rec-total').innerText}*`;
+            let brt = 0, kmt = 0, gst = 0;
+            let msg = `🏁 *FECHAMENTO IMPULSO WEB 10*\n`;
+            msg += `👤 *PILOTO:* ${user.nome}\n`;
+            msg += `📅 *DATA:* ${new Date().toLocaleDateString()}\n`;
+            msg += `─────────────────────\n\n`;
+            msg += `📍 *DETALHAMENTO DE ROTAS:*\n`;
+
+            entregas.forEach(e => {
+                msg += `🛵 *${e.cid}* (${e.cli})\n`;
+                msg += `💰 Ganho: R$ ${e.val.toFixed(2)}\n`;
+                if(e.km > 0) msg += `🛣️ Rota: ${e.km} KM\n`;
+                
+                brt += e.val; kmt += e.km;
+                
+                e.gastos.forEach(g => {
+                    gst += g.valor;
+                    msg += `   ⚠️ _${g.tipo}: -R$ ${g.valor.toFixed(2)}_\n`;
+                });
+                msg += `\n`;
+            });
+
+            let gasolina = (kmt/35*6.20);
+            let manutTotal = (kmt * 0.15);
+            let liquido = brt - gasolina - manutTotal - gst;
+
+            msg += `─────────────────────\n`;
+            msg += `📊 *RESUMO FINANCEIRO:*\n`;
+            msg += `💵 Bruto Total: R$ ${brt.toFixed(2)}\n`;
+            msg += `⛽ Gasto Combustível: -R$ ${gasolina.toFixed(2)}\n`;
+            msg += `🔧 Reserva Moto (15%): -R$ ${manutTotal.toFixed(2)}\n`;
+            msg += `🍔 Gastos Extras: -R$ ${gst.toFixed(2)}\n`;
+            msg += `─────────────────────\n`;
+            msg += `✅ *LUCRO LÍQUIDO: R$ ${liquido.toFixed(2)}*\n\n`;
+            msg += `🚀 *IMPULSO WEB 10 - GESTÃO DE ELITE*`;
+
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
         }
 
