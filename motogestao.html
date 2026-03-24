@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v39 - Elite Master</title>
+    <title>MotoGestão Pro v40 - Elite Final</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ff0000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
-        /* RED LINE BLINDADA */
+        /* RED LINE DEFINITIVA */
         .red-line-box { border-bottom: 5px solid #ff0000 !important; margin-bottom: 5px; display: inline-block; }
         .red-line-text { font-weight: 950 !important; color: #ffffff !important; text-transform: uppercase; font-size: 18px; letter-spacing: 1px; }
         .sub-frase { color: #aaa; font-size: 9px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px; }
@@ -73,32 +73,27 @@
             
             <input type="text" id="cidade" placeholder="Cidade / Destino" onfocus="focarTrabalho()">
             
-            <label>Tipo de Cliente</label>
+            <label>Cliente</label>
             <select id="cliente" onchange="togglePacotes()">
-                <option value="Avulso">Avulso (Valor Direto)</option>
-                <option value="Shopee">Shopee (Por Pacote)</option>
-                <option value="Mercado Livre">Mercado Livre (Por Pacote)</option>
+                <option value="Avulso">Avulso (Valor Único)</option>
+                <option value="Shopee">Shopee (Pacotes)</option>
+                <option value="Mercado Livre">Mercado Livre (Pacotes)</option>
             </select>
 
-            <div id="area-pacotes" style="display:none; margin-top:10px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px;">
+            <div id="area-pacotes" style="display:none; margin-top:10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;">
                 <div style="display:flex; gap:5px;">
                     <div style="flex:1;"><label>Qtd Pacotes</label><input type="number" id="qtd-pacotes" value="0" oninput="calcAutom()"></div>
-                    <div style="flex:1;"><label>R$ Unitário</label><input type="number" id="val-unitario" value="2.50" oninput="calcAutom()"></div>
+                    <div style="flex:1;"><label>R$ por Unid.</label><input type="number" id="val-unitario" value="2.50" oninput="calcAutom()"></div>
                 </div>
             </div>
 
             <div style="display:flex; gap:5px; margin-top:10px;">
-                <div style="flex:1;"><label>Ganho R$ Total</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1;"><label>KM Turno</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1;"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1;"><label>KM Rota</label><input type="number" id="km" placeholder="0"></div>
             </div>
 
-            <div style="margin-top:10px; border-top: 1px solid #333; padding-top:10px;">
-                <label>Gastos Extras (Comida, Pedágio...)</label>
-                <div style="display:flex; gap:5px;">
-                    <input type="text" id="gasto-desc" placeholder="Ex: Almoço">
-                    <input type="number" id="gasto-val" placeholder="R$">
-                </div>
-            </div>
+            <label>Gastos Extras (Almoço/Pedágio)</label>
+            <input type="number" id="gasto-total" placeholder="R$ 0.00">
             
             <button class="btn-main" onclick="addEntrega()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
@@ -113,28 +108,24 @@
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
             <div style="text-align:center;">
-                <h3 style="margin:0;">RELATÓRIO ELITE</h3>
+                <h3 style="margin:0;">FECHAMENTO ELITE</h3>
                 <small id="rec-data"></small>
             </div>
             <hr>
-            <b>DETALHE DAS ROTAS:</b>
+            <b>RESUMO DE ROTAS:</b>
             <div id="rec-lista"></div>
-            <hr>
-            <b>GASTOS EXTRAS:</b>
-            <div id="rec-gastos"></div>
             <hr>
             <div id="rec-calculos"></div>
             <div class="tarja">LUCRO LÍQUIDO: <span id="rec-total"></span></div>
         </div>
         <button class="btn-main" style="background:#000;" onclick="exportPDF()">📥 BAIXAR PDF</button>
-        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR WHATSAPP</button>
-        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ ZERAR E SALVAR HISTÓRICO</button>
+        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 WHATSAPP</button>
+        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ ZERAR E SALVAR</button>
     </div>
 
     <script>
-        let dados = JSON.parse(localStorage.getItem('elite_v39_data')) || [];
-        let gastos = JSON.parse(localStorage.getItem('elite_v39_gastos')) || [];
-        let user = JSON.parse(localStorage.getItem('elite_v39_user'));
+        let dados = JSON.parse(localStorage.getItem('elite_v40_data')) || [];
+        let user = JSON.parse(localStorage.getItem('elite_v40_user'));
 
         if(user) document.getElementById('tela-login').style.display = 'none', document.getElementById('app').style.display = 'block', atualizar();
 
@@ -142,7 +133,7 @@
             let n = document.getElementById('login-nome').value;
             if(!n) return alert("Nome?");
             user = {nome: n, zap: document.getElementById('login-celular').value};
-            localStorage.setItem('elite_v39_user', JSON.stringify(user));
+            localStorage.setItem('elite_v40_user', JSON.stringify(user));
             location.reload();
         }
 
@@ -176,7 +167,7 @@
 
         function addEntrega() {
             let v = parseFloat(document.getElementById('valor').value) || 0;
-            let gV = parseFloat(document.getElementById('gasto-val').value) || 0;
+            let gst = parseFloat(document.getElementById('gasto-total').value) || 0;
             let cli = document.getElementById('cliente').value;
 
             if(v > 0) {
@@ -185,32 +176,26 @@
                     cli: cli,
                     val: v,
                     km: parseFloat(document.getElementById('km').value) || 0,
-                    qtd: (cli !== 'Avulso') ? document.getElementById('qtd-pacotes').value : null
+                    qtd: (cli !== 'Avulso') ? document.getElementById('qtd-pacotes').value : null,
+                    gasto: gst
                 });
+                localStorage.setItem('elite_v40_data', JSON.stringify(dados));
+                ["valor", "km", "gasto-total", "qtd-pacotes", "cidade"].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.value = (id === 'qtd-pacotes' ? 0 : '');
+                });
+                atualizar();
             }
-
-            if(gV > 0) {
-                gastos.push({ desc: document.getElementById('gasto-desc').value || "Gasto Extra", val: gV });
-            }
-
-            localStorage.setItem('elite_v39_data', JSON.stringify(dados));
-            localStorage.setItem('elite_v39_gastos', JSON.stringify(gastos));
-            
-            // Limpar campos
-            ["valor", "km", "gasto-val", "gasto-desc", "qtd-pacotes", "cidade"].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('qtd-pacotes').value = 0;
-            atualizar();
         }
 
         function atualizar() {
             let brt = 0, kmt = 0, gst = 0;
             let html = "";
             dados.forEach(d => { 
-                brt += d.val; kmt += d.km; 
-                let infoExtra = d.qtd ? ` (${d.qtd} pac.)` : "";
+                brt += d.val; kmt += d.km; gst += d.gasto;
+                let infoExtra = d.qtd ? ` (${d.qtd} p.)` : "";
                 html += `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;"><b>${d.cid}</b> - ${d.cli}${infoExtra} <span style="float:right">R$ ${d.val.toFixed(2)}</span></div>`; 
             });
-            gastos.forEach(g => gst += g.val);
             let gas = (kmt/35*6.20); let man = (kmt*0.15); let lucro = brt - gas - man - gst;
             document.getElementById('lista').innerHTML = html;
             document.getElementById('resumo-lucro').innerText = `LUCRO LÍQUIDO: R$ ${lucro.toFixed(2)}`;
@@ -221,55 +206,48 @@
         function gerarFechamento() {
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
-            let brt = 0, kmt = 0, gst = 0, htmlEnt = "", htmlGst = "";
+            let brt = 0, kmt = 0, gst = 0, htmlEnt = "";
             dados.forEach(d => { 
-                brt += d.val; kmt += d.km; 
-                let p = d.qtd ? `[${d.qtd} pac]` : "";
-                htmlEnt += `<div>• ${d.cid} ${p}: R$ ${d.val.toFixed(2)}</div>`; 
+                brt += d.val; kmt += d.km; gst += d.gasto;
+                htmlEnt += `<div>• ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}</div>`; 
             });
-            gastos.forEach(g => { gst += g.val; htmlGst += `<div>• ${g.desc}: R$ ${g.val.toFixed(2)}</div>`; });
             let gas = (kmt/35*6.20); let man = (kmt*0.15);
-            document.getElementById('rec-lista').innerHTML = htmlEnt || "Nenhuma entrega";
-            document.getElementById('rec-gastos').innerHTML = htmlGst || "Nenhum gasto extra";
-            document.getElementById('rec-calculos').innerHTML = `BRUTO: R$ ${brt.toFixed(2)}<br>KM: ${kmt} | GASOLINA: R$ ${gas.toFixed(2)}<br>MANUTENÇÃO: R$ ${man.toFixed(2)}<br>EXTRAS: R$ ${gst.toFixed(2)}`;
+            document.getElementById('rec-lista').innerHTML = htmlEnt || "Nenhuma rota";
+            document.getElementById('rec-calculos').innerHTML = `GANHO BRUTO: R$ ${brt.toFixed(2)}<br>DISTÂNCIA: ${kmt} KM<br>GASOLINA: R$ ${gas.toFixed(2)}<br>MANUTENÇÃO: R$ ${man.toFixed(2)}<br>GASTOS EXTRAS: R$ ${gst.toFixed(2)}`;
             document.getElementById('rec-total').innerText = `R$ ${(brt-gas-man-gst).toFixed(2)}`;
         }
 
         function exportZap() {
             let brt = 0, kmt = 0, gst = 0;
-            let txt = `🏁 *FECHAMENTO ELITE*\n👤 Piloto: ${user.nome}\n\n*ENTREGAS:*`;
+            let txt = `🏁 *FECHAMENTO ELITE*\n👤 Piloto: ${user.nome}\n\n*ROTAS:*`;
             dados.forEach(d => { 
-                let p = d.qtd ? `(${d.qtd} pac)` : "";
-                txt += `\n📍 ${d.cid} ${p}: R$ ${d.val.toFixed(2)}`; 
-                brt += d.val; kmt += d.km; 
+                txt += `\n📍 ${d.cid} (${d.cli}): R$ ${d.val.toFixed(2)}`; 
+                brt += d.val; kmt += d.km; gst += d.gasto;
             });
-            txt += `\n\n*GASTOS EXTRAS:*`;
-            gastos.forEach(g => { txt += `\n❌ ${g.desc}: R$ ${g.val.toFixed(2)}`; gst += g.val; });
             let gas = (kmt/35*6.20); let man = (kmt*0.15);
-            txt += `\n\n*RESUMO FINANCEIRO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${man.toFixed(2)}\n🍔 Extras: R$ ${gst.toFixed(2)}\n📏 KM: ${kmt}km\n────────────────\n✅ *LUCRO: R$ ${(brt-gas-man-gst).toFixed(2)}*`;
+            txt += `\n\n*RESUMO FINANCEIRO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${man.toFixed(2)}\n🍔 Extras: R$ ${gst.toFixed(2)}\n📏 KM Total: ${kmt}km\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(brt-gas-man-gst).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
         function exportPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
-                const pdf = new jspdf.jsPDF('p', 'mm', [80, 180]);
+                const pdf = new jspdf.jsPDF('p', 'mm', [80, 160]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
                 pdf.save(`FECHAMENTO_ELITE.pdf`);
             });
         }
 
         function finalizarTudo() {
-            let hist = JSON.parse(localStorage.getItem('elite_v39_hist')) || [];
+            let hist = JSON.parse(localStorage.getItem('elite_v40_hist')) || [];
             hist.push({data: new Date().toLocaleDateString(), lucro: document.getElementById('rec-total').innerText});
-            localStorage.setItem('elite_v39_hist', JSON.stringify(hist));
-            localStorage.removeItem('elite_v39_data');
-            localStorage.removeItem('elite_v39_gastos');
+            localStorage.setItem('elite_v40_hist', JSON.stringify(hist));
+            localStorage.removeItem('elite_v40_data');
             location.reload();
         }
 
         function verHist() {
-            let h = JSON.parse(localStorage.getItem('elite_v39_hist')) || [];
-            if(h.length == 0) return alert("Histórico vazio.");
+            let h = JSON.parse(localStorage.getItem('elite_v40_hist')) || [];
+            if(h.length == 0) return alert("Sem histórico.");
             alert(h.map(i => `${i.data}: ${i.lucro}`).join('\n'));
         }
     </script>
