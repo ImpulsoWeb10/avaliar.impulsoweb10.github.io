@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v26 - ImpulsoWeb10</title>
+    <title>MotoGestão Pro v27 - ImpulsoWeb10</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,7 +14,7 @@
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 220px; }
         
-        /* TELA DE LOGIN / FUNIL */
+        /* TELA DE LOGIN */
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
         .red-line-text { border-bottom: 3px solid var(--danger); padding-bottom: 5px; font-weight: 900; letter-spacing: 1px; color: #fff; text-transform: uppercase; }
 
@@ -27,12 +27,12 @@
         /* BARRA DE META */
         .meta-container { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #333; }
         .meta-bar-bg { background: #000; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; border: 1px solid #333; }
-        #meta-progress { background: linear-gradient(90deg, var(--success), #8efb02); height: 100%; width: 0%; transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); box-shadow: 0 0 10px var(--success); }
+        #meta-progress { background: linear-gradient(90deg, var(--success), #8efb02); height: 100%; width: 0%; transition: 1s; box-shadow: 0 0 10px var(--success); }
 
-        /* FORM & CARDS */
+        /* FORM */
         .form-add { background: var(--card); padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
         label { font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; margin-top: 8px; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
+        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
         
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         .btn-outline { background: transparent; border: 1px solid #555; color: #aaa; padding: 10px; border-radius: 10px; width: 100%; margin-top: 10px; font-size: 11px; font-weight: bold; cursor: pointer; }
@@ -40,7 +40,7 @@
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
         .entrega-card { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--primary); font-size: 13px; }
 
-        /* RECIBO BANCÁRIO */
+        /* MODAIS */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 2000; padding: 20px; flex-direction: column; align-items: center; overflow-y: auto; }
         #recibo-visual { background: #fff; color: #000; padding: 25px; width: 100%; max-width: 340px; font-family: 'Courier New', Courier, monospace; }
         .dashed-line { border-top: 1px dashed #000; margin: 10px 0; }
@@ -51,15 +51,13 @@
 <body>
 
     <div id="tela-login">
-        <img src="impulsoweb10.jpg" style="width: 100px; border-radius: 20px; margin-bottom: 20px; border: 2px solid var(--primary);">
-        <h2 class="red-line-text" id="frase-impacto">SISTEMA DE GESTÃO ELITE</h2>
-        
+        <img src="impulsoweb10.jpg" style="width: 100px; border-radius: 20px; margin-bottom: 20px;">
+        <h2 class="red-line-text">SISTEMA DE GESTÃO ELITE</h2>
         <div id="area-manual" style="width: 100%; max-width: 280px; margin-top:30px;">
-            <input type="text" id="login-nome" placeholder="Seu Nome Completo">
-            <input type="tel" id="login-celular" placeholder="WhatsApp (DDD)">
+            <input type="text" id="login-nome" placeholder="Seu Nome">
+            <input type="tel" id="login-celular" placeholder="WhatsApp">
             <button class="btn-main" onclick="salvarPrimeiroAcesso()">LIBERAR PAINEL 🚀</button>
         </div>
-        
         <div id="area-hibrida" style="display:none; width: 100%; max-width: 280px; margin-top:30px;">
             <button class="btn-main" onclick="liberarApp()">ENTRAR AGORA ➔</button>
         </div>
@@ -76,36 +74,46 @@
 
         <div class="meta-container">
             <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:bold;">
-                <span>PROGRESSO DA META</span>
+                <span>META DO DIA</span>
                 <span id="txt-meta">R$ 0 / R$ 250</span>
             </div>
             <div class="meta-bar-bg"><div id="meta-progress"></div></div>
-            <input type="number" id="input-meta" value="250" onchange="atualizarTela()" style="height:30px; margin-top:5px; font-size:11px;" placeholder="Definir Meta R$">
+            <input type="number" id="input-meta" value="250" onchange="atualizarTela()" style="height:30px; margin-top:5px; font-size:11px;">
         </div>
 
         <div class="form-add">
-            <label>Rota / Cliente</label>
+            <label>Cidade / Cliente</label>
+            <div style="display:flex; gap:5px;"><input type="text" id="cidade" placeholder="Cidade" style="flex:1"><input type="text" id="cliente" placeholder="Cliente" style="flex:1"></div>
+            <div style="display:flex; gap:10px;"><div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div><div style="flex:1"><label>KM Rodada</label><input type="number" id="km" placeholder="0"></div></div>
+            
+            <label>Gastos Extras (Pedágio, Lanche...)</label>
             <div style="display:flex; gap:5px;">
-                <input type="text" id="cidade" placeholder="Cidade" style="flex:1">
-                <input type="text" id="cliente" placeholder="Cliente" style="flex:1">
+                <input type="text" id="gasto-view" placeholder="R$ 0.00" readonly onclick="abrirGasto()" style="background:#111; cursor:pointer;">
+                <button onclick="abrirGasto()" style="background:var(--danger); color:white; border:none; width:50px; border-radius:10px; font-size:20px;">+</button>
             </div>
-            <div style="display:flex; gap:10px;">
-                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label>KM Rodada</label><input type="number" id="km" placeholder="0"></div>
-            </div>
-            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR GANHO 💰</button>
+            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista-entregas"></div>
-        
         <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80;" onclick="abrirFechamento()">🚩 FINALIZAR EXPEDIENTE</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
+    </div>
+
+    <div id="modalGasto" class="overlay" style="justify-content:center;">
+        <div class="form-add" style="width:100%; max-width:300px;">
+            <h3 style="color:var(--danger); margin:0;">Lançar Despesa</h3>
+            <select id="tipo-gasto"><option>Alimentação</option><option>Pedágio</option><option>Oficina</option><option>Outros</option></select>
+            <input type="number" id="valor-gasto" placeholder="R$ 0.00">
+            <button class="btn-main" onclick="addGastoTemp()">ADICIONAR</button>
+            <div id="preview-gastos" style="margin:10px 0; color:var(--danger); font-size:11px;"></div>
+            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR ✅</button>
+        </div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
             <div style="text-align:center;">
-                <h2 style="margin:0;">EXTRATO DE TURNO</h2>
+                <h2 style="margin:0;">COMPROVANTE</h2>
                 <p style="margin:0; font-size:11px;">IMPULSO WEB 10 - GESTÃO</p>
                 <p id="rec-data" style="font-size:10px;"></p>
             </div>
@@ -113,45 +121,33 @@
             <div id="rec-corpo" style="font-size:11px; line-height:1.4;"></div>
             <div class="dashed-line"></div>
             <div id="rec-detalhes" style="font-size:11px;"></div>
-            <div class="tarja-preta">
-                LUCRO LÍQUIDO<br>
-                <span id="total-final-preto">R$ 0,00</span>
-            </div>
+            <div class="tarja-preta">LUCRO LÍQUIDO<br><span id="total-final-preto">R$ 0,00</span></div>
         </div>
-        
         <div style="width:100%; max-width:340px; margin-top:20px;">
-            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 SALVAR PDF</button>
+            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 SALVAR PDF COMPROVANTE</button>
             <button class="btn-main" style="background:#25D366;" onclick="enviarZap()">🟢 ENVIAR WHATSAPP</button>
             <div style="margin-top:15px; border-top:1px solid #333; padding-top:15px;">
                 <button class="btn-main" style="background:var(--success); border: 2px solid #fff;" onclick="encerrarESalvar()">✅ ENCERRAR EXPEDIENTE E SALVAR</button>
-                <button class="btn-outline" onclick="alert('Histórico local ativado. Dados salvos no navegador.')">📁 HISTÓRICO</button>
+                <button class="btn-outline" onclick="alert('Histórico de Turnos: Dados salvos localmente.')">📁 HISTÓRICO</button>
             </div>
         </div>
     </div>
 
     <script>
         const SEU_ZAP = "5511954950044";
-        let user = JSON.parse(localStorage.getItem('moto_v26_user'));
-        let entregas = JSON.parse(localStorage.getItem('moto_v26_data')) || [];
+        let user = JSON.parse(localStorage.getItem('moto_v27_user'));
+        let entregas = JSON.parse(localStorage.getItem('moto_v27_data')) || [];
+        let gastosTemp = [];
 
-        window.onload = () => {
-            if(user) {
-                document.getElementById('area-manual').style.display = 'none';
-                document.getElementById('area-hibrida').style.display = 'block';
-                document.getElementById('frase-impacto').innerText = `BEM-VINDO, ${user.nome.split(' ')[0]}!`;
-            }
-        };
+        window.onload = () => { if(user) { document.getElementById('area-manual').style.display = 'none'; document.getElementById('area-hibrida').style.display = 'block'; } };
 
         function salvarPrimeiroAcesso() {
-            const nome = document.getElementById('login-nome').value;
-            const celular = document.getElementById('login-celular').value;
-            if(!nome || !celular) return alert("Preencha Nome e Celular!");
-            
-            user = { nome, celular };
-            localStorage.setItem('moto_v26_user', JSON.stringify(user));
-            
-            // Notifica o Dono
-            window.open(`https://wa.me/${SEU_ZAP}?text=🚀 *NOVO PILOTO:* ${nome} (${celular}) logou.`);
+            const n = document.getElementById('login-nome').value;
+            const c = document.getElementById('login-celular').value;
+            if(!n || !c) return alert("Preencha os campos!");
+            user = { nome: n, celular: c };
+            localStorage.setItem('moto_v27_user', JSON.stringify(user));
+            window.open(`https://wa.me/${SEU_ZAP}?text=🚀 *CADASTRO:* ${n} (${c})`);
             liberarApp();
         }
 
@@ -162,84 +158,71 @@
             atualizarTela();
         }
 
+        function abrirGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
+        
+        function addGastoTemp() {
+            const v = parseFloat(document.getElementById('valor-gasto').value);
+            const t = document.getElementById('tipo-gasto').value;
+            if(!v) return;
+            gastosTemp.push({tipo: t, valor: v});
+            document.getElementById('preview-gastos').innerHTML += `<div>❌ ${t}: R$ ${v.toFixed(2)}</div>`;
+            document.getElementById('gasto-view').value = `R$ ${gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2)}`;
+            document.getElementById('valor-gasto').value = '';
+        }
+
         function salvarEntrega() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
-            if(v <= 0) return alert("Insira o valor ganho!");
-
-            entregas.push({
-                cidade: document.getElementById('cidade').value || "S/C",
-                cliente: document.getElementById('cliente').value || "S/Cli",
-                valor: v, km: k
-            });
-
-            localStorage.setItem('moto_v26_data', JSON.stringify(entregas));
-            document.getElementById('valor').value=''; document.getElementById('km').value='';
+            if(v <= 0) return alert("Insira um valor ganho!");
+            entregas.push({ cidade: document.getElementById('cidade').value || "S/C", cliente: document.getElementById('cliente').value || "S/Cli", valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) });
+            localStorage.setItem('moto_v27_data', JSON.stringify(entregas));
+            gastosTemp = [];
+            document.getElementById('valor').value=''; document.getElementById('km').value=''; document.getElementById('gasto-view').value=''; document.getElementById('preview-gastos').innerHTML='';
             atualizarTela();
         }
 
         function atualizarTela() {
             const lista = document.getElementById('lista-entregas');
             const meta = parseFloat(document.getElementById('input-meta').value) || 250;
-            lista.innerHTML = ""; let b=0, k=0;
-
-            entregas.forEach(e => {
-                b += e.valor; k += e.km;
-                lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${e.cliente}</b><br><span style="color:var(--success)">R$ ${e.valor.toFixed(2)}</span> | ${e.km}km</div>`;
-            });
-
-            const gas = (k / 35 * 6.20);
-            const m = (k * 0.15);
-            const lucro = b - gas - m;
-
-            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${lucro.toFixed(2)}`;
-            document.getElementById('txt-meta').innerText = `R$ ${b.toFixed(2)} / R$ ${meta}`;
-            
+            lista.innerHTML = ""; let b=0, k=0, g=0;
+            entregas.forEach(e => { b += e.valor; k += e.km; g += e.totalG; lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${e.cliente}</b><br><span style="color:var(--success)">R$ ${e.valor.toFixed(2)}</span> | ${e.km}km</div>`; });
+            const gas = (k / 35 * 6.20); const m = (k * 0.15);
+            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b-gas-m-g).toFixed(2)}`;
             let pct = (b / meta) * 100;
             document.getElementById('meta-progress').style.width = Math.min(pct, 100) + "%";
-            
+            document.getElementById('txt-meta').innerText = `R$ ${b.toFixed(2)} / R$ ${meta}`;
             if(b >= meta && b > 0) confetti();
         }
 
         function abrirFechamento() {
             document.getElementById('modalRecibo').style.display = 'flex';
-            document.getElementById('rec-data').innerText = `FECHAMENTO: ${new Date().toLocaleString()}`;
-            let h = ""; let b=0, k=0;
+            document.getElementById('rec-data').innerText = `DATA: ${new Date().toLocaleString()}`;
+            let h = ""; let b=0, k=0, g=0;
             entregas.forEach(e => {
-                b+=e.valor; k+=e.km;
+                b+=e.valor; k+=e.km; g+=e.totalG;
                 h += `<div><b>${e.cidade}/${e.cliente}</b> <span style="float:right">R$ ${e.valor.toFixed(2)}</span></div>`;
+                e.gastos.forEach(gx => h += `<div class="txt-red"> - ${gx.tipo}: R$ ${gx.valor.toFixed(2)}</div>`);
             });
-            const gas = (k/35*6.20);
-            const manut = (k*0.15);
+            const gasolina = (k/35*6.20); const manut = (k*0.15);
             document.getElementById('rec-corpo').innerHTML = h;
-            document.getElementById('rec-detalhes').innerHTML = `
-                GANHO BRUTO: R$ ${b.toFixed(2)}<br>
-                <span class="txt-red">CUSTO GASOLINA: R$ ${gas.toFixed(2)}</span><br>
-                <span class="txt-red">RESERVA OFICINA: R$ ${manut.toFixed(2)}</span><br>
-                KM TOTAL: ${k.toFixed(1)} km
-            `;
-            document.getElementById('total-final-preto').innerText = `R$ ${(b-gas-manut).toFixed(2)}`;
+            document.getElementById('rec-detalhes').innerHTML = `GANHO BRUTO: R$ ${b.toFixed(2)}<br><span class="txt-red">GASTOS EXTRAS: R$ ${g.toFixed(2)}</span><br><span class="txt-red">GASOLINA: R$ ${gasolina.toFixed(2)}</span><br><span class="txt-red">OFICINA: R$ ${manut.toFixed(2)}</span><br>KM TOTAL: ${k.toFixed(1)} km`;
+            document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-manut-g).toFixed(2)}`;
         }
 
-        function encerrarESalvar() {
-            if(confirm("Deseja encerrar o turno e limpar o painel?")) {
-                localStorage.removeItem('moto_v26_data');
-                location.reload();
-            }
-        }
+        function encerrarESalvar() { if(confirm("Deseja encerrar o turno e salvar o Comprovante?")) { localStorage.removeItem('moto_v27_data'); location.reload(); } }
 
         function baixarPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
                 const pdf = new jspdf.jsPDF('p', 'mm', [80, 160]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
-                pdf.save(`EXTRATO_MOTO.pdf`);
+                pdf.save(`COMPROVANTE_${user.nome}.pdf`);
             });
         }
 
         function enviarZap() {
-            let b=0, k=0; entregas.forEach(e => { b+=e.valor; k+=e.km; });
+            let b=0, k=0, g=0; entregas.forEach(e => { b+=e.valor; k+=e.km; g+=e.totalG; });
             const gas = (k/35*6.20); const m = (k*0.15);
-            const txt = `🏁 *EXTRATO ENCERRADO*\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${m.toFixed(2)}\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-gas-m).toFixed(2)}*`;
+            const txt = `🏁 *COMPROVANTE ELITE*\n👤 Piloto: ${user.nome}\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Oficina: R$ ${m.toFixed(2)}\n❌ Gastos: R$ ${g.toFixed(2)}\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-gas-m-g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
     </script>
