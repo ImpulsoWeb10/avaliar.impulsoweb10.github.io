@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v50 - ImpulsoWeb10 Final</title>
+    <title>MotoGestão Pro v51 - Elite Platinum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -18,6 +18,9 @@
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; }
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
+        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 15px; border-radius: 0 0 25px 25px; display: flex; align-items: center; gap: 10px; border-bottom: 3px solid var(--secondary); transition: 0.3s; }
+        #status-tag { display: none; background: var(--success); color: #000; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; border: 2px solid #fff; }
+
         .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
         #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; box-shadow: 0 0 10px var(--success); }
 
@@ -39,11 +42,11 @@
     <div id="tela-login">
         <img src="impulsoweb10.jpg" style="width: 80px; border-radius: 10px; margin-bottom: 15px;">
         <div class="red-line-box"><span class="red-line-text">GESTÃO ELITE</span></div>
-        <p style="font-size: 9px; color: #aaa; font-weight: bold; text-transform: uppercase;">Não perca tempo nem dinheiro!</p>
+        <p style="font-size: 9px; color: #aaa; font-weight: bold;">IMPULSO WEB 10</p>
         
         <div id="login-primeiro" style="width: 100%; max-width: 280px;">
             <input type="text" id="login-nome" placeholder="Seu Nome Completo">
-            <input type="tel" id="login-celular" placeholder="WhatsApp (DDD + Número)">
+            <input type="tel" id="login-celular" placeholder="WhatsApp">
             <button class="btn-main" onclick="primeiroAcesso()">SOLICITAR ACESSO ➔</button>
         </div>
 
@@ -53,16 +56,18 @@
     </div>
 
     <div id="app" style="display:none;">
-        <header style="background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 15px; border-radius: 0 0 25px 25px; display: flex; align-items: center; gap: 10px; border-bottom: 3px solid var(--secondary);">
+        <header id="header-principal">
             <img src="impulsoweb10.jpg" style="width: 40px; border-radius: 8px; border: 1px solid #fff;">
-            <div id="user-display" style="font-weight: 900; font-size: 13px; color: #fff; text-transform: uppercase;">PILOTO ONLINE</div>
+            <div id="status-container">
+                <div class="red-line-box" id="box-titulo"><span class="red-line-text" style="font-size: 12px;">IMPULSO WEB 10</span></div>
+                <div id="status-tag"></div>
+            </div>
         </header>
 
         <div style="background: var(--card); padding:15px; border-radius:15px; margin-top:10px; border:1px solid #333;">
-            <label style="font-size: 9px; color: var(--primary); font-weight: bold;">EVOLUÇÃO DA META (R$ 200)</label>
             <div class="meta-container"><div id="meta-bar"></div></div>
             
-            <input type="text" id="cidade" placeholder="Cidade / Destino">
+            <input type="text" id="cidade" placeholder="Cidade / Destino" onfocus="ficarOnline()">
             
             <select id="cliente" onchange="togglePacotes()">
                 <option value="Avulso">Serviço Avulso</option>
@@ -72,64 +77,63 @@
 
             <div id="area-pacotes" style="display:none; margin-top:10px; background:rgba(255,165,0,0.05); padding:10px; border-radius:10px;">
                 <div style="display:flex; gap:5px;">
-                    <div style="flex:1;"><label style="font-size:9px;">QTD PACOTES</label><input type="number" id="qtd-pacotes" value="0" oninput="calcAutom()"></div>
-                    <div style="flex:1;"><label style="font-size:9px;">R$ POR UN.</label><input type="number" id="val-unitario" value="2.50" oninput="calcAutom()"></div>
+                    <input type="number" id="qtd-pacotes" placeholder="Qtd" oninput="calcAutom()">
+                    <input type="number" id="val-unitario" value="2.50" oninput="calcAutom()">
                 </div>
             </div>
 
             <div style="display:flex; gap:5px; margin-top:10px;">
-                <div style="flex:1.5;"><label style="font-size:9px;">VALOR GANHO</label><input type="number" id="valor" placeholder="R$"></div>
-                <div style="flex:1;"><label style="font-size:9px;">KM ROTA</label><input type="number" id="km" placeholder="0"></div>
+                <input type="number" id="valor" placeholder="R$ Ganho">
+                <input type="number" id="km" placeholder="KM Rota">
             </div>
 
-            <button class="btn-main" style="background:#333; font-size: 12px;" onclick="abrirModalGastos()">➕ LANÇAR GASTOS EXTRAS</button>
+            <button class="btn-main" style="background:#333; font-size: 12px;" onclick="abrirModalGastos()">➕ LANÇAR GASTOS</button>
             <button class="btn-main" onclick="registrarOperacao()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista" style="margin-top:10px;"></div>
         
         <button class="btn-main" style="background:var(--danger); margin-top:20px;" onclick="gerarFechamento()">🚩 FECHAR EXPEDIENTE</button>
-        <div class="summary-fixed" id="resumo-lucro">LUCRO ATUAL: R$ 0,00</div>
+        <div class="summary-fixed" id="resumo-lucro">LUCRO: R$ 0,00</div>
     </div>
 
     <div id="modalGastos" class="overlay">
         <div style="background:var(--card); padding:20px; border-radius:20px; width:85%; border:2px solid var(--primary);">
-            <h3 style="margin:0 0 10px 0; color:var(--primary);">NOVO GASTO</h3>
             <select id="tipo-gasto">
                 <option value="Almoço">Almoço</option>
                 <option value="Gasolina Extra">Gasolina Extra</option>
                 <option value="Pedágio">Pedágio</option>
-                <option value="Lanche/Água">Lanche/Água</option>
+                <option value="Lanche">Lanche/Água</option>
             </select>
             <input type="number" id="valor-gasto" placeholder="Valor R$">
             <button class="btn-main" onclick="addGastoTemp()">+ ADICIONAR MAIS</button>
-            <button class="btn-main" style="background:var(--success);" onclick="document.getElementById('modalGastos').style.display='none'">VOLTAR E REGISTRAR</button>
-            <div id="lista-gastos-temp" style="font-size:11px; color:#aaa; margin-top:10px; border-top:1px solid #444; padding-top:5px;"></div>
+            <button class="btn-main" style="background:var(--success);" onclick="document.getElementById('modalGastos').style.display='none'">OK, VOLTAR</button>
+            <div id="lista-gastos-temp" style="font-size:11px; color:#aaa; margin-top:10px;"></div>
         </div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
-            <div style="text-align:center; font-weight:bold; font-size:16px; letter-spacing: 2px;">COMPROVANTE</div>
-            <div style="text-align:center; margin-bottom:5px;"><small id="rec-data"></small></div>
+            <div style="text-align:center; font-weight:bold; font-size:16px;">COMPROVANTE</div>
+            <div style="text-align:center;"><small id="rec-data"></small></div>
             <div class="divisor"></div>
             <div id="rec-lista"></div>
             <div class="divisor"></div>
             <div id="rec-calculos"></div>
-            <div style="background:#000; color:#fff; text-align:center; padding:10px; margin-top:10px; font-weight:bold; font-size:14px;">
+            <div style="background:#000; color:#fff; text-align:center; padding:10px; margin-top:10px; font-weight:bold;">
                 LUCRO LÍQUIDO: <span id="rec-total"></span>
             </div>
-            <div style="text-align:center; margin-top:15px; font-weight:900; font-size:14px;">IMPULSO WEB 10</div>
+            <div style="text-align:center; margin-top:15px; font-weight:bold;">IMPULSO WEB 10</div>
         </div>
-        <button class="btn-main" style="background:#fff; color:#000;" onclick="exportPDF()">📥 BAIXAR PDF</button>
+        <button class="btn-main" style="background:#fff; color:#000;" onclick="exportPDF()">📥 SALVAR PDF</button>
         <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 WHATSAPP</button>
-        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">✅ ENCERRAR TURNO</button>
+        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">✅ ENCERRAR</button>
     </div>
 
     <script>
         let entregas = [];
         let gastosTemp = [];
-        let user = JSON.parse(localStorage.getItem('user_elite_v50'));
+        let user = JSON.parse(localStorage.getItem('user_elite_v51'));
 
         if(user) {
             document.getElementById('login-primeiro').style.display = 'none';
@@ -139,24 +143,24 @@
         function primeiroAcesso() {
             let n = document.getElementById('login-nome').value;
             let c = document.getElementById('login-celular').value;
-            if(!n || !c) return alert("Por favor, preencha Nome e Celular!");
-            
+            if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
-            localStorage.setItem('user_elite_v50', JSON.stringify(user));
-            
-            // Envio detalhado para o seu WhatsApp
-            let msg = `🚀 *NOVO ACESSO ELITE*\n👤 *PILOTO:* ${n}\n📱 *ZAP:* ${c}`;
-            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent(msg)}`);
-            
+            localStorage.setItem('user_elite_v51', JSON.stringify(user));
+            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO\nNOME: "+n+"\nZAP: "+c)}`);
             entrarPainel();
         }
 
         function entrarPainel() {
             document.getElementById('tela-login').style.display = 'none';
             document.getElementById('app').style.display = 'block';
-            document.getElementById('user-display').innerText = `PILOTO: ${user.nome.toUpperCase()}`;
-            // Destrava áudio no primeiro clique
             document.getElementById('som-money').play().then(() => document.getElementById('som-money').pause());
+        }
+
+        function ficarOnline() {
+            document.getElementById('box-titulo').style.display = 'none';
+            let tag = document.getElementById('status-tag');
+            tag.style.display = 'inline-block';
+            tag.innerText = `● ONLINE: ${user.nome.toUpperCase()}`;
         }
 
         function togglePacotes() {
@@ -184,8 +188,7 @@
 
         function registrarOperacao() {
             let v = parseFloat(document.getElementById('valor').value) || 0;
-            if(v <= 0) return alert("Insira o valor!");
-            
+            if(v <= 0) return alert("Valor inválido!");
             entregas.push({
                 cid: document.getElementById('cidade').value || "Rota",
                 cli: document.getElementById('cliente').value,
@@ -193,63 +196,51 @@
                 km: parseFloat(document.getElementById('km').value) || 0,
                 gastos: [...gastosTemp]
             });
-
-            // Tocar o novo som
-            let audio = document.getElementById('som-money');
-            audio.currentTime = 0;
-            audio.play();
-
-            gastosTemp = [];
-            document.getElementById('lista-gastos-temp').innerHTML = '';
-            document.getElementById('valor').value = '';
-            document.getElementById('cidade').value = '';
-            document.getElementById('km').value = '';
-            document.getElementById('qtd-pacotes').value = '0';
+            document.getElementById('som-money').currentTime = 0;
+            document.getElementById('som-money').play();
+            gastosTemp = []; document.getElementById('lista-gastos-temp').innerHTML = '';
+            document.getElementById('valor').value = ''; document.getElementById('cidade').value = ''; document.getElementById('km').value = '';
             atualizarPainel();
         }
 
         function atualizarPainel() {
             let brt = 0, kmt = 0, gst = 0;
-            entregas.forEach(e => {
-                brt += e.val; kmt += e.km;
-                e.gastos.forEach(g => gst += g.valor);
-            });
+            entregas.forEach(e => { brt += e.val; kmt += e.km; e.gastos.forEach(g => gst += g.valor); });
             let lucro = brt - (kmt/35*6.20) - (kmt*0.15) - gst;
-            document.getElementById('resumo-lucro').innerText = `LUCRO ATUAL: R$ ${lucro.toFixed(2)}`;
+            document.getElementById('resumo-lucro').innerText = `LUCRO: R$ ${lucro.toFixed(2)}`;
             document.getElementById('meta-bar').style.width = Math.min((lucro/200)*100, 100) + "%";
-            document.getElementById('lista').innerHTML = entregas.map(e => `<div style="background:#1a2222; padding:8px; margin-bottom:5px; border-radius:8px; font-size:11px; border-left: 3px solid var(--primary);">${e.cid} (${e.cli}) - R$ ${e.val.toFixed(2)}</div>`).join('');
+            document.getElementById('lista').innerHTML = entregas.map(e => `<div style="background:#1a2222; padding:8px; margin-bottom:5px; border-radius:8px; font-size:11px; border-left:3px solid var(--primary);">${e.cid} (${e.cli}) - R$ ${e.val.toFixed(2)}</div>`).join('');
         }
 
         function gerarFechamento() {
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
             let brt = 0, kmt = 0, gst = 0, html = "";
-            
             entregas.forEach(e => {
                 brt += e.val; kmt += e.km;
                 html += `<div><b>${e.cli}:</b> ${e.cid} <span style="float:right">${e.val.toFixed(2)}</span></div>`;
-                e.gastos.forEach(g => { 
-                    gst += g.valor; 
-                    html += `<div class="gasto-vermelho">↳ ${g.tipo} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`;
-                });
+                e.gastos.forEach(g => { gst += g.valor; html += `<div class="gasto-vermelho">↳ ${g.tipo} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`; });
             });
-
-            let gasolina = (kmt/35*6.20);
-            let manut = (kmt*0.15);
-            
             document.getElementById('rec-lista').innerHTML = html;
-            document.getElementById('rec-calculos').innerHTML = `
-                BRUTO TOTAL: <span style="float:right">${brt.toFixed(2)}</span><br>
-                KM RODADOS: <span style="float:right">${kmt} KM</span><br>
-                GASOLINA EST.: <span style="float:right">-${gasolina.toFixed(2)}</span><br>
-                MANUTENÇÃO KM: <span style="float:right">-${manut.toFixed(2)}</span><br>
-                DESPESAS EXTRAS: <span style="float:right">-${gst.toFixed(2)}</span>
-            `;
-            document.getElementById('rec-total').innerText = `R$ ${(brt - gasolina - manut - gst).toFixed(2)}`;
+            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM: <span style="float:right">${kmt}</span><br>DESPESAS: <span style="float:right">-${(gst + (kmt/35*6.20) + (kmt*0.15)).toFixed(2)}</span>`;
+            document.getElementById('rec-total').innerText = `R$ ${(brt - (kmt/35*6.20) - (kmt*0.15) - gst).toFixed(2)}`;
         }
 
         function exportZap() {
-            let msg = `🏁 *FECHAMENTO IMPULSO WEB 10*\n👤 *PILOTO:* ${user.nome}\n💰 *LUCRO LÍQUIDO:* ${document.getElementById('rec-total').innerText}`;
+            let brt = 0, kmt = 0, gst = 0;
+            let msg = `🏁 *FECHAMENTO IMPULSO WEB 10*\n👤 *PILOTO:* ${user.nome}\n📅 ${new Date().toLocaleDateString()}\n\n*DETALHAMENTO:*`;
+            entregas.forEach(e => {
+                msg += `\n📍 ${e.cid} (${e.cli}): R$ ${e.val.toFixed(2)}`;
+                brt += e.val; kmt += e.km;
+                e.gastos.forEach(g => { gst += g.valor; msg += `\n   ❌ ${g.tipo}: -R$ ${g.valor.toFixed(2)}`; });
+            });
+            let despesasTotal = (gst + (kmt/35*6.20) + (kmt*0.15));
+            msg += `\n\n📊 *RESUMO FINAL:*`;
+            msg += `\n💰 Bruto: R$ ${brt.toFixed(2)}`;
+            msg += `\n⛽ Gastos/Manut: R$ ${despesasTotal.toFixed(2)}`;
+            msg += `\n──────────────────`;
+            msg += `\n✅ *LUCRO LÍQUIDO: ${document.getElementById('rec-total').innerText}*`;
+            msg += `\n\n🚀 *IMPULSO WEB 10*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
         }
 
