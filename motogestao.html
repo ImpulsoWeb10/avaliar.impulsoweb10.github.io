@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v28 - ImpulsoWeb10</title>
+    <title>MotoGestão Pro v29 - ImpulsoWeb10</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,7 +14,7 @@
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 220px; }
         
-        /* LOGIN & HEADER */
+        /* HEADER & LOGIN */
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
         .red-line-text { border-bottom: 3px solid var(--danger); padding-bottom: 5px; font-weight: 900; color: #fff; text-transform: uppercase; }
         #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 25px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); }
@@ -22,17 +22,11 @@
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         .status-online { background: #000; color: var(--success); font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 20px; display: inline-block; margin-top: 5px; }
 
-        /* META */
-        .meta-container { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #333; }
-        .meta-bar-bg { background: #000; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; }
-        #meta-progress { background: linear-gradient(90deg, var(--success), #8efb02); height: 100%; width: 0%; transition: 1s; box-shadow: 0 0 10px var(--success); }
-
         /* FORM */
         .form-add { background: var(--card); padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
         label { font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; margin-top: 8px; }
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
         
-        /* LOGICA PACOTES */
         #area-pacotes { background: rgba(245, 130, 32, 0.05); padding: 10px; border-radius: 12px; margin-top: 10px; border: 1px dashed var(--primary); display: none; }
         
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
@@ -70,14 +64,6 @@
             </div>
         </header>
 
-        <div class="meta-container">
-            <div style="display:flex; justify-content:space-between; font-size:11px;">
-                <span>META DIÁRIA</span>
-                <span id="txt-meta">R$ 0 / R$ 250</span>
-            </div>
-            <div class="meta-bar-bg"><div id="meta-progress"></div></div>
-        </div>
-
         <div class="form-add">
             <label>Cidade da Rota</label>
             <input type="text" id="cidade" placeholder="Ex: São Paulo, Barueri...">
@@ -91,23 +77,17 @@
 
             <div id="area-pacotes">
                 <div style="display:flex; gap:10px;">
-                    <div style="flex:1">
-                        <label>Qtd Pacotes</label>
-                        <input type="number" id="qtd-pacotes" value="0" oninput="calcularPacotes()">
-                    </div>
-                    <div style="flex:1">
-                        <label>R$ por Pacote</label>
-                        <input type="number" id="custo-pacote" value="2.50" step="0.10" oninput="calcularPacotes()">
-                    </div>
+                    <div style="flex:1"><label>Pacotes</label><input type="number" id="qtd-pacotes" value="0" oninput="calcularPacotes()"></div>
+                    <div style="flex:1"><label>R$/Pacote</label><input type="number" id="custo-pacote" value="2.50" oninput="calcularPacotes()"></div>
                 </div>
             </div>
 
             <div style="display:flex; gap:10px;">
                 <div style="flex:1"><label>Ganho Total R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label>KM Rodada</label><input type="number" id="km" placeholder="0"></div>
+                <div style="flex:1"><label>KM Total</label><input type="number" id="km" placeholder="0"></div>
             </div>
 
-            <label>Gastos Extras (Opcional)</label>
+            <label>Gastos Extras (Pedágio, Lanche...)</label>
             <div style="display:flex; gap:5px;">
                 <input type="text" id="gasto-view" placeholder="R$ 0.00" readonly onclick="abrirGasto()" style="background:#111; cursor:pointer;">
                 <button onclick="abrirGasto()" style="background:var(--danger); border:none; width:50px; border-radius:10px; font-size:20px; color:white;">+</button>
@@ -123,8 +103,8 @@
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
         <div class="form-add" style="width:100%; max-width:300px;">
-            <h3 style="color:var(--danger); margin:0;">Lançar Despesa</h3>
-            <select id="tipo-gasto"><option>Alimentação</option><option>Pedágio</option><option>Oficina</option><option>Outros</option></select>
+            <h3 style="color:var(--danger); margin:0;">Despesa Extra</h3>
+            <select id="tipo-gasto"><option>Alimentação</option><option>Pedágio</option><option>Outros</option></select>
             <input type="number" id="valor-gasto" placeholder="R$ 0.00">
             <button class="btn-main" onclick="addGastoTemp()">ADICIONAR</button>
             <div id="preview-gastos" style="margin:10px 0; color:var(--danger); font-size:11px;"></div>
@@ -154,32 +134,21 @@
 
     <script>
         const SEU_ZAP = "5511954950044";
-        let user = JSON.parse(localStorage.getItem('moto_v28_user'));
-        let entregas = JSON.parse(localStorage.getItem('moto_v28_data')) || [];
+        let user = JSON.parse(localStorage.getItem('moto_v29_user'));
+        let entregas = JSON.parse(localStorage.getItem('moto_v29_data')) || [];
         let gastosTemp = [];
 
-        window.onload = () => { if(user) { document.getElementById('area-manual').style.display = 'none'; document.getElementById('area-hibrida').style.display = 'block'; } };
-
         function togglePacotes() {
-            const cliente = document.getElementById('cliente').value;
-            const area = document.getElementById('area-pacotes');
-            const valorInput = document.getElementById('valor');
-            if(cliente === 'Shopee' || cliente === 'Mercado Livre') {
-                area.style.display = 'block';
-                valorInput.readOnly = true;
-                valorInput.style.background = "#111";
-            } else {
-                area.style.display = 'none';
-                valorInput.readOnly = false;
-                valorInput.style.background = "#000";
-                valorInput.value = "";
-            }
+            const cli = document.getElementById('cliente').value;
+            document.getElementById('area-pacotes').style.display = (cli !== 'Avulso' ? 'block' : 'none');
+            document.getElementById('valor').readOnly = (cli !== 'Avulso');
+            document.getElementById('valor').style.background = (cli !== 'Avulso' ? '#111' : '#000');
         }
 
         function calcularPacotes() {
-            const qtd = parseFloat(document.getElementById('qtd-pacotes').value) || 0;
-            const custo = parseFloat(document.getElementById('custo-pacote').value) || 0;
-            document.getElementById('valor').value = (qtd * custo).toFixed(2);
+            const q = document.getElementById('qtd-pacotes').value;
+            const c = document.getElementById('custo-pacote').value;
+            document.getElementById('valor').value = (q * c).toFixed(2);
         }
 
         function salvarPrimeiroAcesso() {
@@ -187,7 +156,7 @@
             const c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha tudo!");
             user = { nome: n, celular: c };
-            localStorage.setItem('moto_v27_user', JSON.stringify(user));
+            localStorage.setItem('moto_v29_user', JSON.stringify(user));
             liberarApp();
         }
 
@@ -213,24 +182,11 @@
         function salvarEntrega() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
-            const cli = document.getElementById('cliente').value;
-            const qtd = document.getElementById('qtd-pacotes').value;
-
             if(v <= 0) return alert("Valor inválido!");
-
-            entregas.push({
-                cidade: document.getElementById('cidade').value || "S/C",
-                cliente: cli,
-                valor: v,
-                km: k,
-                pacotes: (cli !== 'Avulso' ? qtd : null),
-                gastos: [...gastosTemp],
-                totalG: gastosTemp.reduce((a,b)=>a+b.valor,0)
-            });
-
-            localStorage.setItem('moto_v28_data', JSON.stringify(entregas));
+            entregas.push({ cidade: document.getElementById('cidade').value, cliente: document.getElementById('cliente').value, valor: v, km: k, pacotes: document.getElementById('qtd-pacotes').value, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) });
+            localStorage.setItem('moto_v29_data', JSON.stringify(entregas));
             gastosTemp = [];
-            document.getElementById('valor').value=''; document.getElementById('km').value=''; document.getElementById('gasto-view').value=''; document.getElementById('qtd-pacotes').value='0';
+            document.getElementById('valor').value=''; document.getElementById('km').value=''; document.getElementById('gasto-view').value='';
             atualizarTela();
         }
 
@@ -239,14 +195,10 @@
             lista.innerHTML = ""; let b=0, k=0, g=0;
             entregas.forEach(e => {
                 b += e.valor; k += e.km; g += e.totalG;
-                let infoCli = e.pacotes ? `${e.cliente} (${e.pacotes} Pacs)` : e.cliente;
-                lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${infoCli}</b><br><span style="color:var(--success)">R$ ${e.valor.toFixed(2)}</span> | ${e.km}km</div>`;
+                lista.innerHTML += `<div class="entrega-card"><b>${e.cidade} - ${e.cliente}</b><br>R$ ${e.valor.toFixed(2)} | ${e.km}km</div>`;
             });
-            const gas = (k / 35 * 6.20); const m = (k * 0.15);
-            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b-gas-m-g).toFixed(2)}`;
-            document.getElementById('meta-progress').style.width = Math.min((b/250)*100, 100) + "%";
-            document.getElementById('txt-meta').innerText = `R$ ${b.toFixed(2)} / R$ 250`;
-            if(b >= 250 && b > 0) confetti();
+            const gas = (k / 35 * 6.20); const manut = (k * 0.15);
+            document.getElementById('footer-lucro').innerText = `LUCRO: R$ ${(b-gas-manut-g).toFixed(2)}`;
         }
 
         function abrirFechamento() {
@@ -255,17 +207,22 @@
             let h = ""; let b=0, k=0, g=0;
             entregas.forEach(e => {
                 b+=e.valor; k+=e.km; g+=e.totalG;
-                let detPac = e.pacotes ? `(${e.pacotes}un)` : "";
-                h += `<div><b>${e.cidade}/${e.cliente} ${detPac}</b> <span style="float:right">R$ ${e.valor.toFixed(2)}</span></div>`;
+                h += `<div><b>${e.cidade}/${e.cliente}</b> <span style="float:right">R$ ${e.valor.toFixed(2)}</span></div>`;
                 e.gastos.forEach(gx => h += `<div class="txt-red"> - ${gx.tipo}: R$ ${gx.valor.toFixed(2)}</div>`);
             });
-            const gasolina = (k/35*6.20); const manut = (k*0.15);
+            const gasolina = (k/35*6.20); const manutReserva = (k*0.15);
             document.getElementById('rec-corpo').innerHTML = h;
-            document.getElementById('rec-detalhes').innerHTML = `GANHO BRUTO: R$ ${b.toFixed(2)}<br><span class="txt-red">GASTOS EXTRAS: R$ ${g.toFixed(2)}</span><br><span class="txt-red">GASOLINA: R$ ${gasolina.toFixed(2)}</span><br><span class="txt-red">OFICINA: R$ ${manut.toFixed(2)}</span><br>KM TOTAL: ${k.toFixed(1)} km`;
-            document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-manut-g).toFixed(2)}`;
+            document.getElementById('rec-detalhes').innerHTML = `
+                GANHO BRUTO: R$ ${b.toFixed(2)}<br>
+                <span class="txt-red">GASTOS EXTRAS: R$ ${g.toFixed(2)}</span><br>
+                <span class="txt-red">CONSUMO GASOLINA: R$ ${gasolina.toFixed(2)}</span><br>
+                <span class="txt-red">RESERVA MANUT. FUTURA: R$ ${manutReserva.toFixed(2)}</span><br>
+                DISTÂNCIA TOTAL: ${k.toFixed(1)} km
+            `;
+            document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-manutReserva-g).toFixed(2)}`;
         }
 
-        function encerrarESalvar() { localStorage.removeItem('moto_v28_data'); location.reload(); }
+        function encerrarESalvar() { localStorage.removeItem('moto_v29_data'); location.reload(); }
 
         function baixarPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
@@ -278,7 +235,7 @@
         function enviarZap() {
             let b=0, k=0, g=0; entregas.forEach(e => { b+=e.valor; k+=e.km; g+=e.totalG; });
             const gas = (k/35*6.20); const m = (k*0.15);
-            const txt = `🏁 *COMPROVANTE ELITE*\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${m.toFixed(2)}\n❌ Gastos: R$ ${g.toFixed(2)}\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-gas-m-g).toFixed(2)}*`;
+            const txt = `🏁 *COMPROVANTE ELITE*\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut. Futura: R$ ${m.toFixed(2)}\n❌ Gastos: R$ ${g.toFixed(2)}\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-gas-m-g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
     </script>
