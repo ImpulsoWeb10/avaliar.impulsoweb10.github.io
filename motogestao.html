@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v41 - Elite Prime</title>
+    <title>MotoGestão Pro v42 - Segurança Total</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ff0000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
+        /* RED LINE */
         .red-line-box { border-bottom: 5px solid #ff0000 !important; margin-bottom: 5px; display: inline-block; }
         .red-line-text { font-weight: 950 !important; color: #ffffff !important; text-transform: uppercase; font-size: 18px; letter-spacing: 1px; }
         .sub-frase { color: #aaa; font-size: 9px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px; }
@@ -18,21 +19,19 @@
         .logo-box { width: 50px; height: 50px; border-radius: 10px; border: 2px solid #fff; overflow: hidden; background: #fff; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .status-online { background: #000; color: var(--success); font-size: 11px; font-weight: 900; padding: 5px 12px; border-radius: 20px; display: none; border: 2px solid var(--success); text-transform: uppercase; }
-
-        .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
-        #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; box-shadow: 0 0 10px var(--success); }
-
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .btn-google { background: #fff; color: #000; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; padding: 12px; border-radius: 10px; font-weight: bold; width: 100%; border: none; cursor: pointer; }
+        
         .form-add { background: var(--card); padding: 15px; border-radius: 20px; border: 1px solid #333; margin-bottom: 10px; }
-        label { font-size: 10px; color: var(--primary); font-weight: bold; text-transform: uppercase; display: block; margin-top: 8px; }
         input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; }
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
+        .meta-container { background: #000; border-radius: 10px; height: 12px; margin: 10px 0; overflow: hidden; border: 1px solid #333; }
+        #meta-bar { background: var(--success); width: 0%; height: 100%; transition: 0.5s; }
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); font-weight: bold; font-size: 18px; }
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; padding: 20px; flex-direction: column; overflow-y: auto; align-items: center; }
         #recibo-visual { background: #fff; color: #000; padding: 20px; width: 100%; max-width: 300px; font-family: 'Courier New', monospace; font-size: 11px; }
-        .tarja { background: #000; color: #fff; padding: 10px; text-align: center; font-weight: bold; margin-top: 10px; font-size: 14px; }
+        .tarja { background: #000; color: #fff; padding: 10px; text-align: center; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -41,10 +40,18 @@
         <img src="impulsoweb10.jpg" style="width: 80px; border-radius: 10px; margin-bottom: 15px;">
         <div class="red-line-box"><span class="red-line-text">SISTEMA DE GESTÃO ELITE</span></div>
         <span class="sub-frase">NÃO PERCA TEMPO, NEM DINHEIRO. GESTÃO É A CHAVE DO LUCRO!</span>
-        <div style="width: 100%; max-width: 280px; margin-top: 30px;">
+        
+        <div id="login-primeiro" style="width: 100%; max-width: 280px; margin-top: 30px;">
             <input type="text" id="login-nome" placeholder="Seu Nome">
             <input type="tel" id="login-celular" placeholder="WhatsApp">
-            <button class="btn-main" onclick="logar()">ENTRAR ➔</button>
+            <button class="btn-main" onclick="primeiroAcesso()">SOLICITAR ACESSO ➔</button>
+        </div>
+
+        <div id="login-recorrente" style="display:none; width: 100%; max-width: 280px; margin-top: 30px;">
+            <button class="btn-main" onclick="entrarDireto()">ENTRAR NO PAINEL ➔</button>
+            <button class="btn-google">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" width="18"> Entrar com Google
+            </button>
         </div>
     </div>
 
@@ -56,51 +63,46 @@
                     <div class="red-line-box"><span class="red-line-text" style="font-size:14px;">SISTEMA DE GESTÃO ELITE</span></div>
                     <span class="sub-frase" style="font-size:7px;">GESTÃO É A CHAVE DO LUCRO!</span>
                 </div>
-                <div id="status-display" class="status-online"></div>
+                <div id="status-display" style="display:none; color:var(--success); font-weight:900; font-size:11px;">● ONLINE</div>
             </div>
         </header>
 
         <div class="form-add">
-            <label>Meta Diária (R$ 200)</label>
+            <label style="font-size:9px; color:var(--primary);">META DO DIA (R$ 200)</label>
             <div class="meta-container"><div id="meta-bar"></div></div>
             
             <input type="text" id="cidade" placeholder="Cidade / Destino" onfocus="focarTrabalho()">
-            
-            <label>Tipo de Serviço</label>
             <select id="cliente" onchange="togglePacotes()">
                 <option value="Avulso">Avulso</option>
                 <option value="Shopee">Shopee</option>
                 <option value="Mercado Livre">Mercado Livre</option>
             </select>
 
-            <div id="area-pacotes" style="display:none; margin-top:10px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
+            <div id="area-pacotes" style="display:none; margin-top:10px;">
                 <div style="display:flex; gap:5px;">
-                    <div style="flex:1;"><label>Pacotes</label><input type="number" id="qtd-pacotes" value="0" oninput="calcAutom()"></div>
-                    <div style="flex:1;"><label>R$/Unid</label><input type="number" id="val-unitario" value="2.50" oninput="calcAutom()"></div>
+                    <input type="number" id="qtd-pacotes" placeholder="Qtd Pacotes" oninput="calcAutom()">
+                    <input type="number" id="val-unitario" value="2.50" oninput="calcAutom()">
                 </div>
             </div>
 
             <div style="display:flex; gap:5px; margin-top:10px;">
-                <div style="flex:1;"><label>Valor Ganho</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1;"><label>KM Turno</label><input type="number" id="km" placeholder="0"></div>
+                <input type="number" id="valor" placeholder="Valor R$">
+                <input type="number" id="km" placeholder="KM Rota">
             </div>
 
-            <div style="margin-top:10px; padding-top:10px; border-top: 1px solid #333;">
-                <label>Gastos Extras</label>
-                <div style="display:flex; gap:5px;">
-                    <select id="tipo-gasto" style="flex:1.5;">
-                        <option value="">Nenhum</option>
-                        <option value="Almoço">Almoço</option>
-                        <option value="Gasolina Extra">Gasolina Extra</option>
-                        <option value="Pedágio">Pedágio</option>
-                        <option value="Lanche/Água">Lanche/Água</option>
-                        <option value="Outros">Outros</option>
-                    </select>
-                    <input type="number" id="valor-gasto" placeholder="R$" style="flex:1;">
-                </div>
+            <label style="margin-top:10px;">DESPESA EXTRA</label>
+            <div style="display:flex; gap:5px;">
+                <select id="tipo-gasto" style="flex:1.5;">
+                    <option value="">Nenhuma</option>
+                    <option value="Almoço">Almoço</option>
+                    <option value="Gasolina Extra">Gasolina Extra</option>
+                    <option value="Pedágio">Pedágio</option>
+                    <option value="Outros">Outros</option>
+                </select>
+                <input type="number" id="valor-gasto" placeholder="R$" style="flex:1;">
             </div>
             
-            <button class="btn-main" onclick="addEntrega()">REGISTRAR 💰</button>
+            <button class="btn-main" onclick="addEntrega()">REGISTRAR OPERAÇÃO 💰</button>
         </div>
 
         <div id="lista"></div>
@@ -115,33 +117,48 @@
                 <small id="rec-data"></small>
             </div>
             <hr>
-            <b>ROTAS:</b>
-            <div id="rec-lista"></div>
+            <b>ROTAS:</b> <div id="rec-lista"></div>
             <hr>
-            <b>DESPESAS EXTRAS:</b>
-            <div id="rec-gastos"></div>
+            <b>DESPESAS:</b> <div id="rec-gastos"></div>
             <hr>
             <div id="rec-calculos"></div>
             <div class="tarja">LUCRO LÍQUIDO: <span id="rec-total"></span></div>
         </div>
         <button class="btn-main" style="background:#000;" onclick="exportPDF()">📥 BAIXAR PDF</button>
         <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR WHATSAPP</button>
-        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ LIMPAR E FINALIZAR</button>
+        <button class="btn-main" style="background:var(--success);" onclick="finalizarTudo()">✅ ZERAR E FINALIZAR</button>
     </div>
 
     <script>
-        let dados = JSON.parse(localStorage.getItem('elite_v41_data')) || [];
-        let gastos = JSON.parse(localStorage.getItem('elite_v41_gastos')) || [];
-        let user = JSON.parse(localStorage.getItem('elite_v41_user'));
+        let dados = JSON.parse(localStorage.getItem('elite_v42_data')) || [];
+        let gastos = JSON.parse(localStorage.getItem('elite_v42_gastos')) || [];
+        let user = JSON.parse(localStorage.getItem('elite_v42_user'));
 
-        if(user) document.getElementById('tela-login').style.display = 'none', document.getElementById('app').style.display = 'block', atualizar();
+        // CHECA SE JÁ ACESSOU UMA VEZ
+        if(user) {
+            document.getElementById('login-primeiro').style.display = 'none';
+            document.getElementById('login-recorrente').style.display = 'block';
+        }
 
-        function logar() {
+        function primeiroAcesso() {
             let n = document.getElementById('login-nome').value;
-            if(!n) return alert("Nome?");
-            user = {nome: n, zap: document.getElementById('login-celular').value};
-            localStorage.setItem('elite_v41_user', JSON.stringify(user));
-            location.reload();
+            let c = document.getElementById('login-celular').value;
+            if(!n || !c) return alert("Preencha nome e celular!");
+            
+            user = {nome: n, zap: c};
+            localStorage.setItem('elite_v42_user', JSON.stringify(user));
+
+            // Manda Zap para você notificando o acesso
+            let msg = `🚀 *NOVO PILOTO ELITE*\n👤 Nome: ${n}\n📱 Celular: ${c}\nAcabou de acessar o sistema!`;
+            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent(msg)}`);
+            
+            entrarDireto();
+        }
+
+        function entrarDireto() {
+            document.getElementById('tela-login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            atualizar();
         }
 
         function focarTrabalho() {
@@ -154,7 +171,6 @@
             let cli = document.getElementById('cliente').value;
             document.getElementById('area-pacotes').style.display = (cli === 'Avulso' ? 'none' : 'block');
             document.getElementById('valor').readOnly = (cli !== 'Avulso');
-            if(cli !== 'Avulso') calcAutom();
         }
 
         function calcAutom() {
@@ -173,30 +189,31 @@
                     cid: document.getElementById('cidade').value || "Rota",
                     cli: document.getElementById('cliente').value,
                     val: v,
-                    km: parseFloat(document.getElementById('km').value) || 0,
-                    qtd: (document.getElementById('cliente').value !== 'Avulso') ? document.getElementById('qtd-pacotes').value : null
+                    km: parseFloat(document.getElementById('km').value) || 0
                 });
             }
             if(gV > 0 && gT !== "") {
                 gastos.push({ tipo: gT, valor: gV });
             }
 
-            localStorage.setItem('elite_v41_data', JSON.stringify(dados));
-            localStorage.setItem('elite_v41_gastos', JSON.stringify(gastos));
+            localStorage.setItem('elite_v42_data', JSON.stringify(dados));
+            localStorage.setItem('elite_v42_gastos', JSON.stringify(gastos));
             location.reload();
         }
 
         function atualizar() {
             let brt = 0, kmt = 0, gstTotal = 0;
-            let html = "";
-            dados.forEach(d => { brt += d.val; kmt += d.km; html += `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;"><b>${d.cid}</b> - ${d.cli} <span style="float:right">R$ ${d.val.toFixed(2)}</span></div>`; });
+            dados.forEach(d => { brt += d.val; kmt += d.km; });
             gastos.forEach(g => { gstTotal += g.valor; });
             
             let gas = (kmt/35*6.20); let man = (kmt*0.15); let lucro = brt - gas - man - gstTotal;
-            document.getElementById('lista').innerHTML = html;
             document.getElementById('resumo-lucro').innerText = `LUCRO LÍQUIDO: R$ ${lucro.toFixed(2)}`;
             let perc = (lucro / 200) * 100;
             document.getElementById('meta-bar').style.width = Math.min(perc, 100) + "%";
+            
+            let html = "";
+            dados.forEach(d => { html += `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:5px; border-left:4px solid var(--primary); font-size:12px;"><b>${d.cid}</b> - ${d.cli} <span style="float:right">R$ ${d.val.toFixed(2)}</span></div>`; });
+            document.getElementById('lista').innerHTML = html;
         }
 
         function gerarFechamento() {
@@ -206,7 +223,7 @@
             dados.forEach(d => { brt += d.val; kmt += d.km; hEnt += `<div>• ${d.cid}: R$ ${d.val.toFixed(2)}</div>`; });
             gastos.forEach(g => { gstTotal += g.valor; hGst += `<div>• ${g.tipo}: R$ ${g.valor.toFixed(2)}</div>`; });
             let gas = (kmt/35*6.20); let man = (kmt*0.15);
-            document.getElementById('rec-lista').innerHTML = hEnt || "Sem rotas";
+            document.getElementById('rec-lista').innerHTML = hEnt;
             document.getElementById('rec-gastos').innerHTML = hGst || "Sem despesas";
             document.getElementById('rec-calculos').innerHTML = `BRUTO: R$ ${brt.toFixed(2)}<br>GASOLINA: R$ ${gas.toFixed(2)}<br>MANUTENÇÃO: R$ ${man.toFixed(2)}<br>DESPESAS: R$ ${gstTotal.toFixed(2)}`;
             document.getElementById('rec-total').innerText = `R$ ${(brt-gas-man-gstTotal).toFixed(2)}`;
@@ -216,10 +233,9 @@
             let brt = 0, kmt = 0, gstTotal = 0;
             let txt = `🏁 *FECHAMENTO ELITE*\n👤 Piloto: ${user.nome}\n\n*ROTAS:*`;
             dados.forEach(d => { txt += `\n📍 ${d.cid}: R$ ${d.val.toFixed(2)}`; brt += d.val; kmt += d.km; });
-            txt += `\n\n*DESPESAS:*`;
-            gastos.forEach(g => { txt += `\n❌ ${g.tipo}: R$ ${g.valor.toFixed(2)}`; gstTotal += g.valor; });
+            gastos.forEach(g => { gstTotal += g.valor; });
             let gas = (kmt/35*6.20); let man = (kmt*0.15);
-            txt += `\n\n*RESUMO FINANCEIRO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${man.toFixed(2)}\n🍔 Despesas: R$ ${gstTotal.toFixed(2)}\n📏 KM: ${kmt}km\n────────────────\n✅ *LUCRO: R$ ${(brt-gas-man-gstTotal).toFixed(2)}*`;
+            txt += `\n\n*RESUMO:*\n💰 Bruto: R$ ${brt.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${man.toFixed(2)}\n🍔 Despesas: R$ ${gstTotal.toFixed(2)}\n📏 KM: ${kmt}km\n────────────────\n✅ *LUCRO: R$ ${(brt-gas-man-gstTotal).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
 
@@ -232,8 +248,8 @@
         }
 
         function finalizarTudo() {
-            localStorage.removeItem('elite_v41_data');
-            localStorage.removeItem('elite_v41_gastos');
+            localStorage.removeItem('elite_v42_data');
+            localStorage.removeItem('elite_v42_gastos');
             location.reload();
         }
     </script>
