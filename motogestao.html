@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v51 - Elite Platinum</title>
+    <title>MotoGestão Pro v53 - Elite Platinum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -31,6 +31,8 @@
         .divisor { border-top: 1px dashed #000; margin: 8px 0; }
         
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 15px; text-align: center; z-index: 90; border-top: 4px solid var(--primary); font-weight: bold; font-size: 18px; }
+        
+        .btn-small { background: #1a2222; color: #666; border: 1px solid #333; padding: 5px 10px; border-radius: 5px; font-size: 9px; cursor: pointer; margin-top: 15px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -41,10 +43,8 @@
 
     <div id="tela-login">
         <img src="impulsoweb10.jpg" style="width: 80px; border-radius: 10px; margin-bottom: 15px;">
-        
         <div class="red-line-box"><span class="red-line-text">SISTEMA DE GESTÃO DE ELITE</span></div>
-        <p style="font-size: 10px; color: #aaa; font-weight: bold; margin-top: 5px; max-width: 250px;">NÃO PERCA TEMPO NEM DINHEIRO, GESTÃO É A CHAVE DO LUCRO</p>
-        
+        <p style="font-size: 10px; color: #aaa; font-weight: bold; margin-top: 5px;">NÃO PERCA TEMPO NEM DINHEIRO, GESTÃO É A CHAVE DO LUCRO</p>
         <p style="font-size: 12px; color: var(--primary); font-weight: 900; margin-bottom: 20px;">IMPULSO WEB 10</p>
         
         <div id="login-primeiro" style="width: 100%; max-width: 280px;">
@@ -90,8 +90,10 @@
                 <input type="number" id="km" placeholder="KM Rota">
             </div>
 
-            <button class="btn-main" style="background:#333; font-size: 12px;" onclick="abrirModalGastos()">➕ LANÇAR GASTOS</button>
+            <button class="btn-main" style="background:#333; font-size: 12px;" onclick="abrirModalGastos()">➕ LANÇAR GASTOS EXTRAS (HOJE)</button>
             <button class="btn-main" onclick="registrarOperacao()">REGISTRAR OPERAÇÃO 💰</button>
+            
+            <center><button class="btn-small" onclick="alert('Histórico em breve...')">📊 Histórico</button></center>
         </div>
 
         <div id="lista" style="margin-top:10px;"></div>
@@ -129,14 +131,14 @@
             <div style="text-align:center; margin-top:15px; font-weight:bold;">IMPULSO WEB 10</div>
         </div>
         <button class="btn-main" style="background:#fff; color:#000;" onclick="exportPDF()">📥 SALVAR PDF</button>
-        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 WHATSAPP</button>
-        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">✅ ENCERRAR</button>
+        <button class="btn-main" style="background:#25D366;" onclick="exportZap()">🟢 ENVIAR WHATSAPP</button>
+        <button class="btn-main" style="background:var(--danger);" onclick="location.reload()">⚠️ ENCERRAR E LIMPAR</button>
     </div>
 
     <script>
         let entregas = [];
         let gastosTemp = [];
-        let user = JSON.parse(localStorage.getItem('user_elite_v51'));
+        let user = JSON.parse(localStorage.getItem('user_elite_v53'));
 
         if(user) {
             document.getElementById('login-primeiro').style.display = 'none';
@@ -148,7 +150,7 @@
             let c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
-            localStorage.setItem('user_elite_v51', JSON.stringify(user));
+            localStorage.setItem('user_elite_v53', JSON.stringify(user));
             window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO\nNOME: "+n+"\nZAP: "+c)}`);
             entrarPainel();
         }
@@ -224,11 +226,15 @@
                 html += `<div><b>${e.cli}:</b> ${e.cid} <span style="float:right">${e.val.toFixed(2)}</span></div>`;
                 e.gastos.forEach(g => { gst += g.valor; html += `<div class="gasto-vermelho">↳ ${g.tipo} <span style="float:right">-${g.valor.toFixed(2)}</span></div>`; });
             });
+            
             let gasolina = (kmt/35*6.20);
-            let manut = (kmt*0.15);
+            let manutTotal = (kmt * 0.15); // Os 15% que você mencionou
+
+            html += `<div style="color:blue; font-weight:bold; margin-top:5px;">🕒 RESERVA MOTO (15%) <span style="float:right">-${manutTotal.toFixed(2)}</span></div>`;
+
             document.getElementById('rec-lista').innerHTML = html;
-            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM: <span style="float:right">${kmt}</span><br>DESPESAS: <span style="float:right">-${(gst + gasolina + manut).toFixed(2)}</span>`;
-            document.getElementById('rec-total').innerText = `R$ ${(brt - gasolina - manut - gst).toFixed(2)}`;
+            document.getElementById('rec-calculos').innerHTML = `BRUTO: <span style="float:right">${brt.toFixed(2)}</span><br>KM TOTAL: <span style="float:right">${kmt} KM</span><br>GASOLINA EST.: <span style="float:right">-${gasolina.toFixed(2)}</span><br>DESPESAS EXTRAS: <span style="float:right">-${gst.toFixed(2)}</span>`;
+            document.getElementById('rec-total').innerText = `R$ ${(brt - gasolina - manutTotal - gst).toFixed(2)}`;
         }
 
         function exportZap() {
@@ -239,10 +245,14 @@
                 brt += e.val; kmt += e.km;
                 e.gastos.forEach(g => { gst += g.valor; msg += `\n   ❌ ${g.tipo}: -R$ ${g.valor.toFixed(2)}`; });
             });
-            let despesasTotal = (gst + (kmt/35*6.20) + (kmt*0.15));
+            
+            let manutTotal = (kmt * 0.15);
+            msg += `\n\n🕒 *RESERVA MOTO (15%):* R$ ${manutTotal.toFixed(2)}`;
+
+            let despesasTotal = (gst + (kmt/35*6.20) + manutTotal);
             msg += `\n\n📊 *RESUMO FINAL:*`;
             msg += `\n💰 Bruto: R$ ${brt.toFixed(2)}`;
-            msg += `\n⛽ Gastos/Manut: R$ ${despesasTotal.toFixed(2)}`;
+            msg += `\n⛽ Gasolina Est: R$ ${(kmt/35*6.20).toFixed(2)}`;
             msg += `\n──────────────────`;
             msg += `\n✅ *LUCRO LÍQUIDO: ${document.getElementById('rec-total').innerText}*`;
             msg += `\n\n🚀 *IMPULSO WEB 10*`;
