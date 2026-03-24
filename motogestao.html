@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v21 - ImpulsoWeb10</title>
+    <title>MotoGestão Pro v22 - ImpulsoWeb10</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -12,49 +12,57 @@
     
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 220px; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 220px; }
         
-        /* TELA DE LOGIN DINÂMICA */
+        /* LOGIN E FUNIL */
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
-        .btn-google { background: white; color: #444; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: center; gap: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; max-width: 280px; justify-content: center; }
-
-        /* INTERFACE */
+        
+        /* HEADER RED LINE */
         #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 30px 20px; border-radius: 0 0 40px 40px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 5px solid var(--secondary); }
-        .logo-box { width: 80px; height: 80px; border-radius: 20px; border: 3px solid #fff; overflow: hidden; background: #fff; flex-shrink: 0; }
+        .logo-box { width: 70px; height: 70px; border-radius: 15px; border: 2px solid #fff; overflow: hidden; background: #fff; flex-shrink: 0; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        .form-add { background: var(--card); padding: 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
-        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 10px; box-sizing: border-box; outline: none; }
+        /* FORMULÁRIO E CARDS */
+        .form-add { background: var(--card); padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        label { font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; margin-top: 8px; }
+        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
         
-        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 900; text-transform: uppercase; margin-top: 15px; cursor: pointer; }
-        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
+        .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
+        
+        /* DASHBOARD */
+        .meta-container { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 10px; margin-bottom: 15px; border: 1px solid #333; }
+        .meta-bar-bg { background: #222; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 5px; }
+        #meta-progress { background: var(--success); height: 100%; width: 0%; transition: 0.5s; box-shadow: 0 0 10px var(--success); }
 
-        .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000; padding: 20px; flex-direction: column; align-items: center; overflow-y: auto; }
-        #recibo-visual { background: white; color: black; padding: 25px; border-radius: 2px; width: 100%; max-width: 360px; font-family: monospace; }
+        .entrega-card { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--primary); font-size: 13px; }
+        .tag-gasto { color: var(--danger); font-size: 11px; display: block; margin-left: 10px; }
+
+        .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 18px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
         
-        .tag-status { font-size: 10px; background: #fff; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: 900; vertical-align: middle; }
+        /* MODAIS */
+        .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 20px; flex-direction: column; align-items: center; overflow-y: auto; }
+        #recibo-visual { background: white; color: black; padding: 20px; border-radius: 2px; width: 100%; max-width: 350px; font-family: monospace; font-size: 12px; }
     </style>
 </head>
 <body>
 
     <div id="tela-login">
-        <img src="impulsoweb10.jpg" style="width: 100px; border-radius: 20px; margin-bottom: 15px; border: 2px solid var(--primary);">
-        <h2 id="titulo-login" style="color:var(--primary); margin:0; text-transform: uppercase;">Acesso Piloto</h2>
-        <p id="msg-login" style="color:#777; font-size:14px; margin-bottom:20px;">Identifique-se para liberar o painel</p>
+        <img src="impulsoweb10.jpg" style="width: 90px; border-radius: 20px; margin-bottom: 10px; border: 2px solid var(--primary);">
+        <h2 id="titulo-login" style="color:var(--primary); margin:0;">PILOTO ELITE</h2>
+        <p id="msg-login" style="color:#777; font-size:13px; margin-bottom:20px;">Libere o sistema de gestão nº1</p>
 
         <div id="area-manual" style="width: 100%; max-width: 280px;">
-            <input type="text" id="login-nome" placeholder="Seu Nome Completo">
-            <input type="tel" id="login-celular" placeholder="WhatsApp (DDD)">
-            <button class="btn-main" onclick="salvarPrimeiroAcesso()">LIBERAR MEU ACESSO 🚀</button>
+            <input type="text" id="login-nome" placeholder="Seu Nome">
+            <input type="tel" id="login-celular" placeholder="Seu WhatsApp">
+            <button class="btn-main" onclick="salvarPrimeiroAcesso()">ACESSAR SISTEMA 🚀</button>
         </div>
 
         <div id="area-hibrida" style="display:none; width: 100%; max-width: 280px;">
-            <button class="btn-main" style="background: var(--success);" onclick="acessoDireto()">ENTRAR AGORA ➔</button>
-            <div style="color:#444; margin:15px 0;">──────── OU ────────</div>
-            <div class="btn-google" onclick="acessoDireto()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18"> Entrar com Google
-            </div>
-            <p style="margin-top:20px; font-size:11px; color:#555;" onclick="resetarAcesso()">Não é você? Clique aqui.</p>
+            <button class="btn-main" style="background: var(--success);" onclick="liberarApp()">ENTRAR AGORA ➔</button>
+            <div style="color:#444; margin:10px 0;">─── OU ───</div>
+            <button class="btn-main" style="background:#fff; color:#000;" onclick="liberarApp()">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="14"> LOGIN GOOGLE
+            </button>
         </div>
     </div>
 
@@ -62,141 +70,206 @@
         <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg"></div>
             <div>
-                <h2 style="margin:0; font-size:16px;">MOTO GESTÃO PRO</h2>
-                <div id="user-display" style="font-size:11px; font-weight:bold; margin-top:3px;"></div>
+                <h2 style="margin:0; font-size:16px; color:#000;">ELITE MOTO PRO</h2>
+                <small id="user-tag" style="background:#000; color:#fff; padding:2px 5px; border-radius:4px;"></small>
             </div>
         </header>
 
-        <div class="form-add">
-            <label style="color:var(--primary); font-weight:900; font-size:10px;">CLIENTE / DESTINO</label>
-            <input type="text" id="cliente" placeholder="Aonde você vai?">
-            <div style="display:flex; gap:10px; margin-top:10px;">
-                <div style="flex:1"><label style="font-size:10px;">GANHO R$</label><input type="number" id="valor" placeholder="0.00"></div>
-                <div style="flex:1"><label style="font-size:10px;">KM RODADA</label><input type="number" id="km" placeholder="0"></div>
+        <div class="meta-container">
+            <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:bold;">
+                <span>META DO DIA</span>
+                <span id="txt-meta">R$ 0 / R$ 200</span>
             </div>
+            <div class="meta-bar-bg"><div id="meta-progress"></div></div>
+            <input type="number" id="meta-valor" value="200" onchange="atualizarTela()" style="height:30px; margin-top:10px; font-size:12px;" placeholder="Ajustar Meta R$">
+        </div>
+
+        <div class="form-add">
+            <label>Destino / Cliente</label>
+            <input type="text" id="cliente" placeholder="Ex: Ifood, Particular, Loggi...">
+            
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1"><label>Ganho R$</label><input type="number" id="valor" placeholder="0.00"></div>
+                <div style="flex:1"><label>KM Rodada</label><input type="number" id="km" placeholder="0"></div>
+            </div>
+
+            <label>Gasto Extra nesta Entrega?</label>
+            <div style="display:flex; gap:5px;">
+                <input type="text" id="gasto-total-view" placeholder="R$ 0.00" readonly onclick="abrirModalGasto()" style="background:#111; cursor:pointer;">
+                <button onclick="abrirModalGasto()" style="background:var(--danger); color:white; border:none; width:50px; border-radius:10px; font-size:20px;">+</button>
+            </div>
+            
             <button class="btn-main" onclick="salvarEntrega()">SALVAR CORRIDA 💰</button>
         </div>
 
         <div id="lista-entregas"></div>
-        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80;" onclick="abrirFechamento()">🚩 FECHAR DIA E RECIBO</button>
-        <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
+        
+        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80;" onclick="abrirFechamento()">🚩 FINALIZAR DIA (RECIBO)</button>
+        <div class="summary-fixed" id="footer-lucro">LUCRO REAL: R$ 0,00</div>
+    </div>
+
+    <div id="modalGasto" class="overlay" style="justify-content:center;">
+        <div class="form-add" style="width:100%; max-width:300px;">
+            <h3 style="color:var(--danger); margin:0;">Lançar Despesa</h3>
+            <select id="tipo-gasto"><option>Combustível</option><option>Pedágio</option><option>Refeição</option><option>Oficina</option><option>Outros</option></select>
+            <input type="number" id="valor-gasto" placeholder="R$ 0.00">
+            <button class="btn-main" onclick="addGastoTemp()">ADICIONAR</button>
+            <div id="preview-gastos" style="margin:10px 0; color:var(--danger); font-size:11px; font-weight:bold;"></div>
+            <button class="btn-main" style="background:var(--success)" onclick="fecharModalGasto()">CONFIRMAR ✅</button>
+        </div>
     </div>
 
     <div id="modalRecibo" class="overlay">
         <div id="recibo-visual">
             <div style="text-align:center;">
-                <img src="impulsoweb10.jpg" width="50" style="border-radius:5px;">
-                <h4 style="margin:5px 0;">EXTRATO DE TRABALHO</h4>
-                <small id="rec-data"></small>
+                <img src="impulsoweb10.jpg" width="40">
+                <h3 style="margin:5px 0;">RELATÓRIO ELITE MOTO</h3>
+                <p id="rec-data" style="margin:0; font-size:10px;"></p>
             </div>
-            <hr><div id="rec-corpo"></div><hr><div id="rec-resumo"></div>
+            <hr>
+            <div id="rec-corpo"></div>
+            <hr>
+            <div id="rec-resumo"></div>
         </div>
-        <div style="width:100%; max-width:360px; margin-top:20px;">
-            <button class="btn-main" style="background:#000;" onclick="gerarPDF()">📥 BAIXAR PDF</button>
-            <button class="btn-main" style="background:#25D366;" onclick="enviarWhatsAppRelatorio()">🟢 ENVIAR WHATSAPP</button>
-            <button class="btn-main" style="background:var(--success);" onclick="location.reload()">💾 ARQUIVAR E ZERAR</button>
+        <div style="width:100%; max-width:350px; margin-top:15px;">
+            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 BAIXAR RECIBO PDF</button>
+            <button class="btn-main" style="background:#25D366;" onclick="enviarZap()">🟢 MANDAR NO WHATSAPP</button>
+            <button class="btn-main" style="background:var(--success);" onclick="arquivarEZerar()">💾 ARQUIVAR E ZERAR</button>
+            <button class="btn-main" style="background:transparent; border:1px solid #fff;" onclick="document.getElementById('modalRecibo').style.display='none'">VOLTAR</button>
         </div>
     </div>
 
     <script>
         const SEU_ZAP = "5511954950044";
-        let userData = JSON.parse(localStorage.getItem('moto_v21_user'));
-        let entregas = JSON.parse(localStorage.getItem('moto_v21_data')) || [];
+        let user = JSON.parse(localStorage.getItem('moto_v22_user'));
+        let entregas = JSON.parse(localStorage.getItem('moto_v22_data')) || [];
+        let gastosTemp = [];
 
-        // LÓGICA DE CARREGAMENTO INTELIGENTE
         window.onload = () => {
-            if(userData) {
-                // Já logou uma vez na vida: mostra tela híbrida rápida
+            if(user) {
                 document.getElementById('area-manual').style.display = 'none';
                 document.getElementById('area-hibrida').style.display = 'block';
-                document.getElementById('titulo-login').innerText = `OLÁ, ${userData.nome.split(' ')[0]}!`;
-                document.getElementById('msg-login').innerText = "Bom ver você de novo.";
+                document.getElementById('titulo-login').innerText = `OLÁ, ${user.nome.split(' ')[0]}!`;
             }
         };
 
         function salvarPrimeiroAcesso() {
             const nome = document.getElementById('login-nome').value;
             const celular = document.getElementById('login-celular').value;
-
-            if(nome.length < 3 || celular.length < 8) return alert("Preencha Nome e Celular!");
-
-            userData = { nome, celular, primeiroAcesso: false };
-            localStorage.setItem('moto_v21_user', JSON.stringify(userData));
-
-            // NOTIFICA O DONO (LEAD)
-            const msg = `🚀 *NOVO PILOTO CADASTRADO!*\n\n👤 Nome: ${nome}\n📱 WhatsApp: ${celular}\n\n_Lead capturado com sucesso._`;
-            window.open(`https://wa.me/${SEU_ZAP}?text=${encodeURIComponent(msg)}`);
-
+            if(!nome || !celular) return alert("Preencha seus dados!");
+            user = { nome, celular };
+            localStorage.setItem('moto_v22_user', JSON.stringify(user));
+            window.open(`https://wa.me/${SEU_ZAP}?text=🚀 *NOVO PILOTO:* ${nome} (${celular}) logou.`);
             liberarApp();
-        }
-
-        function acessoDireto() {
-            liberarApp();
-        }
-
-        function resetarAcesso() {
-            localStorage.removeItem('moto_v21_user');
-            location.reload();
         }
 
         function liberarApp() {
             document.getElementById('tela-login').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            document.getElementById('user-display').innerHTML = `<span class="tag-status">ONLINE</span> ${userData.nome.toUpperCase()}`;
+            document.getElementById('user-tag').innerText = `PILOTO: ${user.nome.toUpperCase()}`;
             atualizarTela();
+        }
+
+        // FUNÇÕES DE GASTOS
+        function abrirModalGasto() { document.getElementById('modalGasto').style.display = 'flex'; }
+        function fecharModalGasto() { document.getElementById('modalGasto').style.display = 'none'; }
+        function addGastoTemp() {
+            const v = parseFloat(document.getElementById('valor-gasto').value);
+            const t = document.getElementById('tipo-gasto').value;
+            if(!v) return;
+            gastosTemp.push({tipo: t, valor: v});
+            document.getElementById('preview-gastos').innerHTML += `<div>❌ ${t}: R$ ${v.toFixed(2)}</div>`;
+            document.getElementById('gasto-total-view').value = `R$ ${gastosTemp.reduce((a,b)=>a+b.valor,0).toFixed(2)}`;
+            document.getElementById('valor-gasto').value = '';
         }
 
         function salvarEntrega() {
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
             const c = document.getElementById('cliente').value || "Entrega";
-            if(v <= 0) return;
+            if(v <= 0) return alert("Insira o valor ganho!");
 
-            entregas.push({ cliente: c, valor: v, km: k, manut: k * 0.15 });
-            localStorage.setItem('moto_v21_data', JSON.stringify(entregas));
-            
+            entregas.push({
+                cliente: c, valor: v, km: k,
+                gastos: [...gastosTemp],
+                totalG: gastosTemp.reduce((a,b)=>a+b.valor,0),
+                manut: k * 0.15
+            });
+
+            localStorage.setItem('moto_v22_data', JSON.stringify(entregas));
             new Audio('https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3').play();
-            document.getElementById('valor').value = ''; document.getElementById('km').value = ''; document.getElementById('cliente').value = '';
+            
+            gastosTemp = [];
+            document.getElementById('cliente').value = ''; document.getElementById('valor').value = '';
+            document.getElementById('km').value = ''; document.getElementById('gasto-total-view').value = '';
+            document.getElementById('preview-gastos').innerHTML = '';
             atualizarTela();
         }
 
         function atualizarTela() {
             const lista = document.getElementById('lista-entregas');
-            lista.innerHTML = ""; let b=0, k=0;
+            const meta = parseFloat(document.getElementById('meta-valor').value) || 200;
+            lista.innerHTML = ""; let b=0, k=0, g=0, m=0;
+
             entregas.forEach(e => {
-                b += e.valor; k += e.km;
-                lista.innerHTML += `<div style="background:var(--card); padding:12px; border-radius:12px; margin-bottom:8px; border-left:4px solid var(--primary);"><b>${e.cliente}</b> <span style="float:right; color:var(--success)">R$ ${e.valor.toFixed(2)}</span></div>`;
+                b += e.valor; k += e.km; g += e.totalG; m += e.manut;
+                let det = e.gastos.map(gt => `<span class="tag-gasto">└ ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</span>`).join('');
+                lista.innerHTML += `<div class="entrega-card">
+                    <b>${e.cliente} (${e.km}km)</b> <span style="float:right; color:var(--success)">R$ ${e.valor.toFixed(2)}</span>
+                    ${det}
+                </div>`;
             });
+
             const gas = (k / 35 * 6.20);
-            const m = (k * 0.15);
-            document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${(b-gas-m).toFixed(2)}`;
+            const lucro = b - gas - g - m;
+            document.getElementById('footer-lucro').innerText = `LUCRO REAL: R$ ${lucro.toFixed(2)}`;
+            document.getElementById('meta-progress').style.width = Math.min((b/meta)*100, 100) + "%";
+            document.getElementById('txt-meta').innerText = `R$ ${b.toFixed(2)} / R$ ${meta}`;
+            if(b >= meta) confetti();
         }
 
         function abrirFechamento() {
             document.getElementById('modalRecibo').style.display = 'flex';
             document.getElementById('rec-data').innerText = new Date().toLocaleString();
-            let h = ""; let b=0, k=0, m=0;
-            entregas.forEach(e => { b+=e.valor; k+=e.km; m+=e.manut; h += `<div style="display:flex; justify-content:space-between; font-size:12px;"><span>${e.cliente}</span> <b>R$ ${e.valor.toFixed(2)}</b></div>`; });
+            let h = ""; let b=0, k=0, g=0, m=0;
+            entregas.forEach(e => {
+                b += e.valor; k += e.km; g += e.totalG; m += e.manut;
+                h += `<div><b>${e.cliente}:</b> R$ ${e.valor.toFixed(2)}</div>`;
+                e.gastos.forEach(gt => h += `<div style="color:red; font-size:10px;"> - ${gt.tipo}: R$ ${gt.valor.toFixed(2)}</div>`);
+            });
             const gas = (k/35*6.20);
             document.getElementById('rec-corpo').innerHTML = h;
-            document.getElementById('rec-resumo').innerHTML = `<hr>BRUTO: R$ ${b.toFixed(2)}<br>GASOLINA: R$ ${gas.toFixed(2)}<br>MANUTENÇÃO: R$ ${m.toFixed(2)}<hr><b style="font-size:16px;">LUCRO LÍQUIDO: R$ ${(b-gas-m).toFixed(2)}</b>`;
+            document.getElementById('rec-resumo').innerHTML = `
+                <div style="margin-top:10px;">GANHO BRUTO: R$ ${b.toFixed(2)}</div>
+                <div style="color:red;">GASTOS EXTRAS: R$ ${g.toFixed(2)}</div>
+                <div style="color:orange;">GASOLINA (EST.): R$ ${gas.toFixed(2)}</div>
+                <div style="color:gray;">RESERVA OFICINA: R$ ${m.toFixed(2)}</div>
+                <hr><div style="font-size:16px; font-weight:bold;">LUCRO LÍQUIDO: R$ ${(b-gas-g-m).toFixed(2)}</div>
+            `;
         }
 
-        function gerarPDF() {
+        function baixarPDF() {
             const { jsPDF } = window.jspdf;
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
                 const pdf = new jsPDF('p', 'mm', [80, 150]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
-                pdf.save(`Extrato_${userData.nome}.pdf`);
+                pdf.save(`Recibo_Elite_${user.nome}.pdf`);
             });
         }
 
-        function enviarWhatsAppRelatorio() {
-            let b=0, k=0, m=0;
-            entregas.forEach(e => { b+=e.valor; k+=e.km; m+=e.manut; });
+        function enviarZap() {
+            let b=0, k=0, g=0, m=0;
+            entregas.forEach(e => { b+=e.valor; k+=e.km; g+=e.totalG; m+=e.manut; });
             const gas = (k/35*6.20);
-            const txt = `🏁 *EXTRATO ELITE - ${userData.nome.toUpperCase()}*\n\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${m.toFixed(2)}\n──────────────\n✅ *LUCRO: R$ ${(b-gas-m).toFixed(2)}*`;
+            const txt = `🏁 *EXTRATO ELITE - PILOTO ${user.nome.toUpperCase()}*\n\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gasolina: R$ ${gas.toFixed(2)}\n🛠️ Manutenção: R$ ${m.toFixed(2)}\n❌ Gastos Extras: R$ ${g.toFixed(2)}\n────────────────\n✅ *LUCRO LÍQUIDO: R$ ${(b-gas-g-m).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
+        }
+
+        function arquivarEZerar() {
+            if(confirm("Deseja zerar os dados e iniciar um novo dia?")) {
+                localStorage.removeItem('moto_v22_data');
+                location.reload();
+            }
         }
     </script>
 </body>
