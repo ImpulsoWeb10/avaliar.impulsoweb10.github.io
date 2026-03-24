@@ -3,45 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoGestão Pro v32 - ImpulsoWeb10</title>
+    <title>MotoGestão Pro v33 - ImpulsoWeb10</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ef4444; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 250px; }
         
-        /* HEADER FIXO COM TRANSIÇÃO */
-        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 25px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); }
-        .logo-box { width: 55px; height: 55px; border-radius: 12px; border: 2px solid #fff; overflow: hidden; background: #fff; }
+        /* HEADER FIXO */
+        #header-principal { background: linear-gradient(135deg, #f58220 0%, #b35a00 100%); padding: 25px 20px; border-radius: 0 0 35px 35px; margin: -15px -15px 20px -15px; display: flex; align-items: center; gap: 15px; border-bottom: 4px solid var(--secondary); height: 80px; }
+        .logo-box { width: 55px; height: 55px; border-radius: 12px; border: 2px solid #fff; overflow: hidden; background: #fff; flex-shrink: 0; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* ESTILO RED LINE */
-        .red-line-container { border-bottom: 3px solid var(--danger); padding-bottom: 3px; display: inline-block; }
-        .red-line-text { font-weight: 900; color: #fff; text-transform: uppercase; font-size: 15px; letter-spacing: 1px; }
+        /* A MARCAÇÃO RED LINE - FORÇADA */
+        .marca-redline { border-bottom: 4px solid var(--danger) !important; display: inline-block; line-height: 1.2; }
+        .red-line-text { font-weight: 900; color: #fff; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; white-space: nowrap; }
         
-        /* STATUS ONLINE (ESCONDIDO INICIALMENTE) */
-        .status-online { background: #000; color: var(--success); font-size: 10px; font-weight: 900; padding: 3px 10px; border-radius: 20px; display: none; margin-top: 5px; box-shadow: 0 0 5px var(--success); text-transform: uppercase; }
+        /* STATUS ONLINE */
+        .status-online { background: #000; color: var(--success); font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 20px; display: none; box-shadow: 0 0 8px var(--success); text-transform: uppercase; border: 1px solid var(--success); }
 
-        /* TELA DE LOGIN */
+        /* TELAS */
         #tela-login { position: fixed; inset: 0; background: var(--bg); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
 
-        /* FORMULÁRIO */
         .form-add { background: var(--card); padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
         label { font-size: 10px; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; margin-top: 8px; }
-        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; outline: none; }
         
         .btn-main { width: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); color: #fff; border: none; padding: 16px; border-radius: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         
-        /* BOTÃO HISTÓRICO DISCRETO */
-        .btn-historico-mini { background: transparent; border: 1px solid #222; color: #444; padding: 6px; border-radius: 6px; font-size: 9px; font-weight: bold; width: 110px; margin: 30px auto 10px auto; display: block; text-transform: uppercase; cursor: pointer; }
+        /* HISTÓRICO NO FINAL */
+        .btn-historico-mini { background: #1a2222; border: 1px solid #333; color: #777; padding: 10px; border-radius: 8px; font-size: 10px; font-weight: bold; width: 160px; margin: 40px auto 20px auto; display: block; text-transform: uppercase; cursor: pointer; }
 
         .summary-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--secondary); color: #fff; padding: 20px; text-align: center; font-weight: 900; z-index: 90; border-top: 3px solid var(--primary); font-size: 18px; }
         .entrega-card { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border-left: 4px solid var(--primary); font-size: 13px; }
 
-        /* OVERLAYS */
+        /* MODAIS */
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000; padding: 20px; flex-direction: column; align-items: center; overflow-y: auto; }
         #recibo-visual { background: #fff; color: #000; padding: 25px; width: 100%; max-width: 310px; font-family: 'Courier New', monospace; }
         .txt-red { color: #d32f2f; font-weight: bold; }
@@ -51,27 +49,27 @@
 <body>
 
     <div id="tela-login">
-        <img src="impulsoweb10.jpg" style="width: 100px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #333;">
-        <div class="red-line-container">
+        <img src="impulsoweb10.jpg" style="width: 100px; border-radius: 15px; margin-bottom: 25px;">
+        <div class="marca-redline">
             <span class="red-line-text">SISTEMA DE GESTÃO ELITE</span>
         </div>
         
         <div id="area-manual" style="width: 100%; max-width: 280px; margin-top:40px;">
-            <input type="text" id="login-nome" placeholder="Seu Nome">
+            <input type="text" id="login-nome" placeholder="Nome do Piloto">
             <input type="tel" id="login-celular" placeholder="WhatsApp">
             <button class="btn-main" onclick="salvarPrimeiroAcesso()">LIBERAR ACESSO 🚀</button>
         </div>
         
         <div id="area-hibrida" style="display:none; width: 100%; max-width: 280px; margin-top:40px;">
-            <button class="btn-main" onclick="liberarApp()">ENTRAR NO SISTEMA ➔</button>
+            <button class="btn-main" onclick="liberarApp()">ENTRAR NO PAINEL ➔</button>
         </div>
     </div>
 
     <div id="app-container" style="display:none;">
         <header id="header-principal">
             <div class="logo-box"><img src="impulsoweb10.jpg"></div>
-            <div id="wrapper-status">
-                <div id="red-line-header" class="red-line-container">
+            <div id="box-status-header">
+                <div id="red-line-header" class="marca-redline">
                     <span class="red-line-text">SISTEMA DE GESTÃO ELITE</span>
                 </div>
                 <div id="status-display" class="status-online"></div>
@@ -80,7 +78,7 @@
 
         <div class="form-add">
             <label>Cidade / Destino</label>
-            <input type="text" id="cidade" placeholder="Onde foi a entrega?" onfocus="mudarParaOnline()">
+            <input type="text" id="cidade" placeholder="Clique para iniciar..." onfocus="mudarParaOnline()">
 
             <label>Cliente</label>
             <select id="cliente" onchange="togglePacotes()">
@@ -89,10 +87,10 @@
                 <option value="Mercado Livre">Mercado Livre</option>
             </select>
 
-            <div id="area-pacotes" style="display:none; background:rgba(0,0,0,0.2); padding:10px; border-radius:10px; margin-top:10px;">
+            <div id="area-pacotes" style="display:none; background:rgba(0,0,0,0.3); padding:10px; border-radius:10px; margin-top:10px;">
                 <div style="display:flex; gap:10px;">
                     <div style="flex:1"><label>Pacotes</label><input type="number" id="qtd-pacotes" value="0" oninput="calcularPacotes()"></div>
-                    <div style="flex:1"><label>Valor Unit.</label><input type="number" id="custo-pacote" value="2.50" oninput="calcularPacotes()"></div>
+                    <div style="flex:1"><label>R$/Unid</label><input type="number" id="custo-pacote" value="2.50" oninput="calcularPacotes()"></div>
                 </div>
             </div>
 
@@ -101,33 +99,33 @@
                 <div style="flex:1"><label>KM Turno</label><input type="number" id="km" placeholder="0"></div>
             </div>
 
-            <label>Despesa Extra</label>
+            <label>Gastos Extras</label>
             <div style="display:flex; gap:5px;">
                 <input type="text" id="gasto-view" placeholder="R$ 0.00" readonly onclick="abrirGasto()" style="background:#111; cursor:pointer;">
-                <button onclick="abrirGasto()" style="background:var(--danger); border:none; width:50px; border-radius:10px; color:white; font-size:20px;">+</button>
+                <button onclick="abrirGasto()" style="background:var(--danger); border:none; width:50px; border-radius:10px; color:white; font-size:22px;">+</button>
             </div>
 
-            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR OPERAÇÃO 💰</button>
+            <button class="btn-main" onclick="salvarEntrega()">REGISTRAR PEDIDO 💰</button>
         </div>
 
         <div id="lista-entregas"></div>
         
-        <button class="btn-historico-mini" onclick="alert('Acessando Histórico Local...')">📁 Histórico</button>
+        <button class="btn-historico-mini" onclick="verHistorico()">📁 Histórico de Turnos</button>
 
-        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80; box-shadow: 0 4px 15px rgba(0,0,0,0.6);" onclick="abrirFechamento()">✅ FECHAR EXPEDIENTE E SALVAR</button>
+        <button style="position:fixed; bottom:85px; left:15px; right:15px; background:var(--danger); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; z-index:80; box-shadow: 0 4px 20px #000;" onclick="abrirFechamento()">🚩 FINALIZAR E SALVAR</button>
         <div class="summary-fixed" id="footer-lucro">LUCRO: R$ 0,00</div>
     </div>
 
     <div id="modalGasto" class="overlay" style="justify-content:center;">
         <div class="form-add" style="width:100%; max-width:300px;">
-            <h3 style="color:var(--danger); margin:0;">Lançar Gasto</h3>
+            <h3 style="color:var(--danger); margin:0;">Adicionar Despesa</h3>
             <select id="tipo-gasto">
                 <option>Gasolina</option><option>Alimentação</option><option>Pedágio</option><option>Outros</option>
             </select>
             <input type="number" id="valor-gasto" placeholder="R$ 0.00">
-            <button class="btn-main" onclick="addGastoTemp()">SOMAR</button>
+            <button class="btn-main" onclick="addGastoTemp()">SOMAR GASTO</button>
             <div id="preview-gastos" style="margin:10px 0; color:var(--danger); font-size:11px;"></div>
-            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">CONFIRMAR ✅</button>
+            <button class="btn-main" style="background:var(--success)" onclick="document.getElementById('modalGasto').style.display='none'">FECHAR ✅</button>
         </div>
     </div>
 
@@ -145,21 +143,21 @@
             <div class="tarja-preta">LUCRO LÍQUIDO<br><span id="total-final-preto">R$ 0,00</span></div>
         </div>
         <div style="width:100%; max-width:320px; margin-top:20px;">
-            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 SALVAR COMPROVANTE (PDF)</button>
+            <button class="btn-main" style="background:#000;" onclick="baixarPDF()">📥 BAIXAR COMPROVANTE</button>
             <button class="btn-main" style="background:#25D366;" onclick="enviarZap()">🟢 WHATSAPP</button>
-            <button class="btn-main" style="background:var(--success);" onclick="encerrarESalvar()">✅ FINALIZAR E LIMPAR</button>
+            <button class="btn-main" style="background:var(--success);" onclick="encerrarESalvarDefinitivo()">✅ FINALIZA E SALVAR NO HISTÓRICO</button>
         </div>
     </div>
 
     <script>
         const sfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3');
-        let user = JSON.parse(localStorage.getItem('moto_v32_user'));
-        let entregas = JSON.parse(localStorage.getItem('moto_v32_data')) || [];
+        let user = JSON.parse(localStorage.getItem('moto_v33_user'));
+        let entregas = JSON.parse(localStorage.getItem('moto_v33_data')) || [];
+        let historico = JSON.parse(localStorage.getItem('moto_v33_historico')) || [];
         let gastosTemp = [];
 
         window.onload = () => { if(user) { document.getElementById('area-manual').style.display = 'none'; document.getElementById('area-hibrida').style.display = 'block'; } };
 
-        // AQUI A MÁGICA DA TRANSIÇÃO
         function mudarParaOnline() {
             document.getElementById('red-line-header').style.display = 'none';
             const status = document.getElementById('status-display');
@@ -183,9 +181,9 @@
         function salvarPrimeiroAcesso() {
             const n = document.getElementById('login-nome').value;
             const c = document.getElementById('login-celular').value;
-            if(!n || !c) return alert("Preencha os campos!");
+            if(!n || !c) return alert("Preencha seu nome e zap!");
             user = { nome: n, celular: c };
-            localStorage.setItem('moto_v32_user', JSON.stringify(user));
+            localStorage.setItem('moto_v33_user', JSON.stringify(user));
             liberarApp();
         }
 
@@ -211,8 +209,15 @@
             const v = parseFloat(document.getElementById('valor').value) || 0;
             const k = parseFloat(document.getElementById('km').value) || 0;
             if(v <= 0) return alert("Insira o valor ganho!");
-            entregas.push({ cidade: document.getElementById('cidade').value || "Rota", cliente: document.getElementById('cliente').value, valor: v, km: k, gastos: [...gastosTemp], totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) });
-            localStorage.setItem('moto_v32_data', JSON.stringify(entregas));
+            entregas.push({ 
+                cidade: document.getElementById('cidade').value || "Rota", 
+                cliente: document.getElementById('cliente').value, 
+                valor: v, 
+                km: k, 
+                gastos: [...gastosTemp], 
+                totalG: gastosTemp.reduce((a,b)=>a+b.valor,0) 
+            });
+            localStorage.setItem('moto_v33_data', JSON.stringify(entregas));
             sfx.play();
             gastosTemp = [];
             document.getElementById('valor').value=''; document.getElementById('km').value=''; document.getElementById('gasto-view').value=''; document.getElementById('preview-gastos').innerHTML='';
@@ -236,26 +241,51 @@
                 h += `<div><b>${e.cidade}/${e.cliente}</b> <span style="float:right">R$ ${e.valor.toFixed(2)}</span></div>`;
                 e.gastos.forEach(gx => h += `<div class="txt-red"> - ${gx.tipo}: R$ ${gx.valor.toFixed(2)}</div>`);
             });
-            const gasolina = (k/35*6.20); const manutReserva = (k*0.15);
+            const gasolina = (k/35*6.20); const mReserva = (k*0.15);
             document.getElementById('rec-corpo').innerHTML = h;
-            document.getElementById('rec-detalhes').innerHTML = `GANHO BRUTO: R$ ${b.toFixed(2)}<br><span class="txt-red">GASTOS EXTRAS: R$ ${g.toFixed(2)}</span><br><span class="txt-red">GASOLINA: R$ ${gasolina.toFixed(2)}</span><br><span class="txt-red">MANUT. RESERVA: R$ ${manutReserva.toFixed(2)}</span><br>KM TOTAL: ${k.toFixed(1)} km`;
-            document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-manutReserva-g).toFixed(2)}`;
+            document.getElementById('rec-detalhes').innerHTML = `GANHO BRUTO: R$ ${b.toFixed(2)}<br><span class="txt-red">DESPESAS EXTRAS: R$ ${g.toFixed(2)}</span><br><span class="txt-red">GASOLINA ESTIMADA: R$ ${gasolina.toFixed(2)}</span><br><span class="txt-red">MANUT. RESERVA: R$ ${mReserva.toFixed(2)}</span><br>KM TOTAL: ${k.toFixed(1)} km`;
+            document.getElementById('total-final-preto').innerText = `R$ ${(b-gasolina-mReserva-g).toFixed(2)}`;
         }
 
-        function encerrarESalvar() { localStorage.removeItem('moto_v32_data'); location.reload(); }
+        function encerrarESalvarDefinitivo() {
+            if(entregas.length === 0) return alert("Sem dados para salvar!");
+            
+            // SALVA NO HISTORICO ANTES DE LIMPAR
+            const resumoTurno = {
+                data: new Date().toLocaleString(),
+                totalEntregas: entregas.length,
+                lucroFinal: document.getElementById('total-final-preto').innerText
+            };
+            historico.push(resumoTurno);
+            localStorage.setItem('moto_v33_historico', JSON.stringify(historico));
+            
+            // LIMPA TURNO ATUAL
+            localStorage.removeItem('moto_v33_data');
+            alert("Turno salvo no histórico com sucesso! 🏁");
+            location.reload();
+        }
+
+        function verHistorico() {
+            if(historico.length === 0) return alert("Ainda não há turnos salvos.");
+            let msg = "📜 SEU HISTÓRICO:\n\n";
+            historico.forEach((h, i) => {
+                msg += `${i+1}. ${h.data}\nLucro: ${h.lucroFinal}\n----\n`;
+            });
+            alert(msg);
+        }
 
         function baixarPDF() {
             html2canvas(document.querySelector("#recibo-visual")).then(canvas => {
                 const pdf = new jspdf.jsPDF('p', 'mm', [80, 160]);
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 80, 0);
-                pdf.save(`COMPROVANTE_ELITE.pdf`);
+                pdf.save(`ELITE_RECIBO.pdf`);
             });
         }
 
         function enviarZap() {
             let b=0, k=0, g=0; entregas.forEach(e => { b+=e.valor; k+=e.km; g+=e.totalG; });
             const gas = (k/35*6.20); const m = (k*0.15);
-            const txt = `🏁 *COMPROVANTE ELITE*\n👤 Piloto: ${user.nome}\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${m.toFixed(2)}\n❌ Gastos: R$ ${g.toFixed(2)}\n────────────────\n✅ *LUCRO: R$ ${(b-gas-m-g).toFixed(2)}*`;
+            const txt = `🏁 *COMPROVANTE ELITE*\n👤 Piloto: ${user.nome}\n💰 Bruto: R$ ${b.toFixed(2)}\n⛽ Gas: R$ ${gas.toFixed(2)}\n🛠️ Manut: R$ ${m.toFixed(2)}\n────────────────\n✅ *LUCRO: R$ ${(b-gas-m-g).toFixed(2)}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
         }
     </script>
