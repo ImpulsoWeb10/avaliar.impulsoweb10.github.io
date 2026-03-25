@@ -3,66 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImpulsoWeb10 | Painel Designer v10.0</title>
+    <title>ImpulsoWeb10 | Painel v11.0 Completo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #fbbf24; --bg: #0f172a; --accent: #38bdf8; --text: #f8fafc; --magic: #a855f7; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; border: 1px solid #334155; }
-        .header { text-align: center; margin-bottom: 25px; }
-        .header h2 { color: var(--primary); margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; border: 1px solid #334155; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 1px solid #334155; padding-bottom: 15px; }
+        .header h2 { color: var(--primary); margin: 0; font-size: 26px; }
         
         .magic-box { background: linear-gradient(135deg, #1e293b, #2e1065); padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed var(--magic); }
-        textarea { width: 100%; background: rgba(0,0,0,0.3); color: white; border: 1px solid var(--magic); padding: 10px; border-radius: 10px; resize: none; box-sizing: border-box; }
+        textarea { width: 100%; background: rgba(0,0,0,0.3); color: white; border: 1px solid var(--magic); padding: 10px; border-radius: 10px; resize: none; box-sizing: border-box; outline: none; }
         
-        .section-title { background: #334155; color: var(--accent); padding: 10px; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; margin: 20px 0 10px; }
+        .section-title { background: #334155; color: var(--accent); padding: 10px; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; margin: 20px 0 10px; border-left: 4px solid var(--accent); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
         .field { display: flex; flex-direction: column; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; }
-        label { font-size: 10px; color: #94a3b8; margin-bottom: 5px; font-weight: 700; }
-        input { padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; outline: none; }
+        label { font-size: 10px; color: #94a3b8; margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
+        input { padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; outline: none; font-size: 13px; }
+        input:focus { border-color: var(--accent); }
 
-        .btn-main { width: 100%; padding: 20px; background: var(--primary); color: #000; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-size: 18px; }
-        .result-area { display: none; margin-top: 35px; text-align: center; }
-        .code-box { background: #000; color: #10b981; padding: 15px; border-radius: 15px; font-size: 11px; text-align: left; overflow-y: auto; max-height: 300px; border: 1px solid #059669; margin-top: 15px; }
+        .btn-main { width: 100%; padding: 18px; background: var(--primary); color: #000; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-size: 18px; transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.02); filter: brightness(1.1); }
+        
+        .result-area { display: none; margin-top: 35px; text-align: center; border-top: 2px solid #334155; padding-top: 25px; }
+        .code-box { background: #000; color: #10b981; padding: 15px; border-radius: 15px; font-size: 11px; text-align: left; overflow-y: auto; max-height: 300px; border: 1px solid #059669; margin-top: 15px; font-family: 'Courier New', monospace; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h2>🚀 Gerador Ultra Design v10.0</h2>
-        <p>Estilo Sonat Music com Ícones Modernos</p>
+        <h2>🚀 Gerador ImpulsoWeb10 v11.0</h2>
+        <p>Edição Completa com Endereço e Telefone Fixo</p>
     </div>
 
     <div class="magic-box">
-        <label>🪄 CAPTURA RÁPIDA (Cole do Google)</label>
-        <textarea id="magicPaste" rows="2" placeholder="Cole o texto aqui..."></textarea>
-        <button onclick="magicExtract()" style="width:100%; margin-top:10px; background:var(--magic); color:white; border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:bold;">EXTRAIR DADOS</button>
+        <label><i class="fas fa-wand-magic-sparkles"></i> Captura Inteligente</label>
+        <textarea id="magicPaste" rows="2" placeholder="Cole os dados do Google aqui..."></textarea>
+        <button onclick="magicExtract()" style="width:100%; margin-top:10px; background:var(--magic); color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; font-weight:bold;">✨ EXTRAIR DADOS AUTOMÁTICO</button>
     </div>
     
+    <div class="section-title">Dados da Empresa</div>
     <div class="grid">
-        <div class="field"><label>Nome do Cliente</label><input id="n" oninput="autoSlug()"></div>
-        <div class="field"><label>URL Logo (PNG)</label><input id="l" placeholder="logo.png"></div>
-        <div class="field"><label>Slug/Pasta</label><input id="slug"></div>
+        <div class="field"><label>Nome da Empresa</label><input id="n" oninput="autoSlug()"></div>
+        <div class="field"><label>URL da Logo</label><input id="l" placeholder="logo.png"></div>
+        <div class="field"><label>Slug (Pasta)</label><input id="slug"></div>
+        <div class="field"><label>Endereço Completo</label><input id="end" placeholder="Rua Exemplo, 123 - Bairro"></div>
     </div>
 
-    <div class="section-title">Links de Destino</div>
+    <div class="section-title">Contatos e Redes Sociais</div>
     <div class="grid">
-        <div class="field"><label>Google Review (Link)</label><input id="g"></div>
-        <div class="field"><label>WhatsApp</label><input id="w"></div>
-        <div class="field"><label>Google Maps</label><input id="maps"></div>
-        <div class="field"><label>Instagram</label><input id="ig"></div>
-        <div class="field"><label>Facebook</label><input id="fb"></div>
+        <div class="field"><label>Link Google Review</label><input id="g"></div>
+        <div class="field"><label>WhatsApp (55...)</label><input id="w"></div>
+        <div class="field"><label>Telefone Fixo (00...)</label><input id="fixo" placeholder="Apenas números"></div>
+        <div class="field"><label>Instagram (Link)</label><input id="ig"></div>
+        <div class="field"><label>Facebook (Link)</label><input id="fb"></div>
+        <div class="field"><label>Google Maps (Link)</label><input id="maps"></div>
     </div>
 
-    <button class="btn-main" onclick="gerarTudo()">CRIAR PÁGINA PROFISSIONAL ⚡</button>
+    <button class="btn-main" onclick="gerarTudo()">GERAR PÁGINA DO CLIENTE ⚡</button>
 
     <div id="result-area" class="result-area">
-        <div id="qrcode" style="background:white; padding:15px; display:inline-block; border-radius:15px;"></div>
+        <div id="qrcode" style="background:white; padding:15px; display:inline-block; border-radius:15px; margin-bottom: 10px;"></div>
+        <p id="linkUrl" style="font-weight: bold; color: var(--accent);"></p>
         <div id="codeIndex" class="code-box"></div>
-        <button onclick="copy()" style="width:100%; padding:15px; margin-top:10px; background:#10b981; color:white; border:none; border-radius:10px; font-weight:800; cursor:pointer;">COPIAR CÓDIGO HTML</button>
+        <button onclick="copy()" style="width:100%; padding:15px; margin-top:15px; background:#10b981; color:white; border:none; border-radius:10px; font-weight:800; cursor:pointer;"><i class="fas fa-copy"></i> COPIAR HTML</button>
     </div>
 </div>
 
@@ -72,8 +79,14 @@ function magicExtract() {
     const lines = t.split('\n');
     document.getElementById('n').value = lines[0].split('·')[0].replace(/[0-9],?[0-9] ⭐+/g, '').trim();
     autoSlug();
-    const p = t.match(/(?:\(?\d{2}\)?\s?)?9?\d{4}[-\s]?\d{4}/g);
+    
+    // Extrai WhatsApp/Celular
+    const p = t.match(/(?:\(?\d{2}\)?\s?)?9\d{4}[-\s]?\d{4}/g);
     if(p) document.getElementById('w').value = '55' + p[0].replace(/\D/g, '');
+
+    // Tenta achar endereço (Ex: Rua, Av, Avenida...)
+    const endMatch = t.match(/(Rua|Av|Avenida|Al|Alameda|Rod)\.?\s[^,]+,\s\d+/i);
+    if(endMatch) document.getElementById('end').value = endMatch[0];
 }
 
 function autoSlug() {
@@ -85,8 +98,10 @@ function gerarTudo() {
     const d = {
         n: document.getElementById('n').value,
         l: document.getElementById('l').value || 'logo.png',
+        end: document.getElementById('end').value,
         g: document.getElementById('g').value,
         w: document.getElementById('w').value,
+        f: document.getElementById('fixo').value,
         m: document.getElementById('maps').value,
         ig: document.getElementById('ig').value,
         fb: document.getElementById('fb').value,
@@ -103,46 +118,52 @@ function gerarTudo() {
 <style>
 body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#0f172a,#1e293b,#2e1065,#0f172a);background-size:400% 400%;animation:grad 12s infinite;display:flex;justify-content:center;align-items:center;min-height:100vh;color:white;text-align:center;}
 @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.card{background:rgba(0,0,0,0.5);padding:40px 25px;border-radius:30px;backdrop-filter:blur(15px);max-width:350px;width:90%;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);}
-.logo{width:110px;border-radius:15px;margin-bottom:15px;}
-.stars{color:#fbbf24;font-size:22px;margin-bottom:20px;}
+.card{background:rgba(0,0,0,0.5);padding:40px 25px;border-radius:30px;backdrop-filter:blur(15px);max-width:350px;width:90%;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);animation:up 0.8s;}
+@keyframes up{from{opacity:0;transform:translateY(20px)}}
+.logo{width:110px;border-radius:15px;margin-bottom:15px;background:white;}
+.stars{color:#fbbf24;font-size:22px;margin-bottom:15px;}
 .btn-google{display:block;margin:10px auto;padding:15px;width:90%;font-weight:700;text-decoration:none;border-radius:50px;background:#fbbf24;color:#000;text-transform:uppercase;font-size:14px;transition:0.3s;}
-.btn-google:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(251,191,36,0.4);}
-.social-row{display:flex;justify-content:center;gap:15px;margin-top:20px;}
-.icon-btn{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;font-size:20px;transition:0.3s;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);}
-.icon-btn.wa{background:#25D366;}.icon-btn.ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);}.icon-btn.fb{background:#1877F2;}.icon-btn.maps{background:#ea4335;}
+.social-row{display:flex;justify-content:center;gap:12px;margin:20px 0;}
+.icon-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;font-size:18px;transition:0.3s;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);}
+.wa{background:#25D366;}.ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);}.fb{background:#1877F2;}.maps{background:#ea4335;}.tel{background:#38bdf8;}
 .icon-btn:hover{transform:translateY(-5px);filter:brightness(1.2);}
-footer{margin-top:30px;font-size:10px;opacity:0.6;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;}
-footer a{color:#38bdf8;text-decoration:none;}
+.endereco{font-size:11px;opacity:0.7;margin:15px 0;padding:0 10px;line-height:1.4;}
+footer{margin-top:20px;font-size:10px;opacity:0.5;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;}
+footer a{color:#38bdf8;text-decoration:none;font-weight:bold;}
 </style>
 </head>
 <body>
 <div class="card">
     <img src="${d.l}" class="logo">
-    <h1>${d.n} 💛</h1>
-    <p style="font-size:14px;opacity:0.8;">Sua avaliação é muito importante para nós!</p>
+    <h1 style="font-size:20px;margin:0;">${d.n}</h1>
     <div class="stars">★★★★★</div>
     <a href="${d.g}" class="btn-google" target="_blank"><i class="fab fa-google"></i> Avaliar no Google</a>
     <div class="social-row">
         ${d.w ? `<a href="https://wa.me/${d.w}" class="icon-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>` : ''}
+        ${d.f ? `<a href="tel:${d.f}" class="icon-btn tel" title="Ligar"><i class="fas fa-phone"></i></a>` : ''}
         ${d.ig ? `<a href="${d.ig}" class="icon-btn ig" target="_blank"><i class="fab fa-instagram"></i></a>` : ''}
         ${d.fb ? `<a href="${d.fb}" class="icon-btn fb" target="_blank"><i class="fab fa-facebook-f"></i></a>` : ''}
         ${d.m ? `<a href="${d.m}" class="icon-btn maps" target="_blank"><i class="fas fa-location-dot"></i></a>` : ''}
     </div>
-    <footer>Desenvolvido por <a href="https://www.impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a><br>WhatsApp: <a href="https://wa.me/5511954950044">11 95495-0044</a></footer>
+    ${d.end ? `<div class="endereco"><i class="fas fa-map-marker-alt"></i> ${d.end}</div>` : ''}
+    <footer>
+        Desenvolvido por <a href="https://www.impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a><br>
+        Suporte: <a href="https://wa.me/5511954950044">11 95495-0044</a>
+    </footer>
 </div>
 </body>
 </html>`;
 
     document.getElementById('codeIndex').innerText = html;
     document.getElementById('result-area').style.display = 'block';
+    document.getElementById('linkUrl').innerText = "Link: " + d.slug;
     const qr = document.getElementById('qrcode'); qr.innerHTML = "";
     new QRCode(qr, { text: window.location.origin + "/" + d.slug, width: 150, height: 150 });
 }
 
 function copy() {
     const t = document.getElementById('codeIndex').innerText;
-    navigator.clipboard.writeText(t).then(() => alert("Copiado!"));
+    navigator.clipboard.writeText(t).then(() => alert("Código Copiado!"));
 }
 </script>
 </body>
