@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQEEFFQCDS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DQEEFFQCDS');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoGestão Pro v60 - Elite Platinum</title>
+    
+    <meta name="description" content="Sistema de Gestão de Elite para Motoboys e Logística - Impulso Web 10">
+    <meta name="author" content="ImpulsoWeb10">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
         :root { --primary: #f58220; --secondary: #004a80; --bg: #0d1212; --card: #1a2222; --text: #ffffff; --success: #22c55e; --danger: #ff0000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 100px; }
@@ -167,7 +180,8 @@
 
     <script>
         let entregas = []; let gastosTemp = [];
-        let user = JSON.parse(localStorage.getItem('user_elite_v59'));
+        // ATUALIZADO PARA V60
+        let user = JSON.parse(localStorage.getItem('user_moto_v60'));
 
         if(user) {
             document.getElementById('login-primeiro').style.display = 'none';
@@ -179,8 +193,8 @@
             let c = document.getElementById('login-celular').value;
             if(!n || !c) return alert("Preencha Nome e Zap!");
             user = {nome: n, zap: c};
-            localStorage.setItem('user_elite_v59', JSON.stringify(user));
-            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO PILOTO LOGADO\nNOME: "+n+"\nZAP: "+c)}`);
+            localStorage.setItem('user_moto_v60', JSON.stringify(user));
+            window.open(`https://wa.me/5511954950044?text=${encodeURIComponent("🚀 NOVO ACESSO MOTO GESTÃO V60\nNOME: "+n+"\nZAP: "+c)}`);
             entrarPainel();
         }
 
@@ -268,34 +282,31 @@
 
         function encerrarDia() {
             let lucroFinal = document.getElementById('rec-total').innerText;
-            let hist = JSON.parse(localStorage.getItem('hist_elite')) || [];
+            let hist = JSON.parse(localStorage.getItem('hist_moto_v60')) || [];
             hist.unshift({data: new Date().toLocaleDateString(), lucro: lucroFinal});
-            localStorage.setItem('hist_elite', JSON.stringify(hist));
+            localStorage.setItem('hist_moto_v60', JSON.stringify(hist));
             location.reload();
         }
 
         function abrirHistorico() {
             document.getElementById('modalHistorico').style.display = 'flex';
-            let hist = JSON.parse(localStorage.getItem('hist_elite')) || [];
-            document.getElementById('lista-historico-itens').innerHTML = hist.length ? hist.map(h => `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:8px; border-left:4px solid var(--success);">📅 ${h.data} <br> <b style="color:#22c55e">LUCRO: ${h.lucro}</b></div>`).join('') : '<p>Vazio.</p>';
+            let hist = JSON.parse(localStorage.getItem('hist_moto_v60')) || [];
+            document.getElementById('lista-historico-itens').innerHTML = hist.length ? hist.map(h => `<div style="background:#1a2222; padding:10px; border-radius:10px; margin-bottom:8px; border-left:4px solid var(--success);">📅 ${h.data} <br> <b style="color:#22c55e">LUCRO: ${h.lucro}</b></div>`).join('') : '<p>Histórico vazio.</p>';
         }
 
-        // FUNÇÃO WHATSAPP DETALHADA COM ÍCONES
         function exportZap() {
             let brt = 0, kmt = 0, gst = 0;
-            let msg = `🏁 *FECHAMENTO IMPULSO WEB 10*\n`;
+            let msg = `🏁 *FECHAMENTO MOTOGESTÃO V60*\n`;
             msg += `👤 *PILOTO:* ${user.nome}\n`;
             msg += `📅 *DATA:* ${new Date().toLocaleDateString()}\n`;
             msg += `─────────────────────\n\n`;
-            msg += `📍 *DETALHAMENTO DE ROTAS:*\n`;
+            msg += `📍 *DETALHAMENTO:*\n`;
 
             entregas.forEach(e => {
                 msg += `🛵 *${e.cid}* (${e.cli})\n`;
                 msg += `💰 Ganho: R$ ${e.val.toFixed(2)}\n`;
                 if(e.km > 0) msg += `🛣️ Rota: ${e.km} KM\n`;
-                
                 brt += e.val; kmt += e.km;
-                
                 e.gastos.forEach(g => {
                     gst += g.valor;
                     msg += `   ⚠️ _${g.tipo}: -R$ ${g.valor.toFixed(2)}_\n`;
