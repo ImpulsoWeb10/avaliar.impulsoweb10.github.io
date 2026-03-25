@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImpulsoWeb10 | Gerador Inteligente v8.0</title>
+    <title>ImpulsoWeb10 | Gerador Inteligente v9.0</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,35 +11,28 @@
         :root { --primary: #fbbf24; --bg: #0f172a; --accent: #38bdf8; --text: #f8fafc; --magic: #a855f7; --danger: #ef4444; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #334155; }
-        .header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #334155; padding-bottom: 15px; position: relative; }
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #334155; padding-bottom: 15px; }
         .header h2 { color: var(--primary); font-size: 28px; margin: 0; }
         
-        /* BOX MÁGICO DE EXTRAÇÃO */
-        .magic-box { background: linear-gradient(135deg, #1e293b 0%, #2e1065 100%); padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed var(--magic); transition: 0.3s; }
-        .magic-box:hover { border-style: solid; box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }
+        .magic-box { background: linear-gradient(135deg, #1e293b 0%, #2e1065 100%); padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed var(--magic); }
         .magic-box label { color: #d8b4fe; font-weight: 800; font-size: 13px; margin-bottom: 8px; display: block; text-transform: uppercase; }
         .magic-box textarea { width: 100%; background: rgba(0,0,0,0.4); color: #f5f3ff; border: 1px solid #7c3aed; padding: 12px; border-radius: 12px; font-size: 12px; resize: none; outline: none; box-sizing: border-box; }
         
-        .section-title { background: #334155; color: var(--accent); padding: 10px 15px; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; margin: 20px 0 10px; border-left: 4px solid var(--accent); display: flex; justify-content: space-between; align-items: center; }
+        .section-title { background: #334155; color: var(--accent); padding: 10px 15px; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; margin: 20px 0 10px; border-left: 4px solid var(--accent); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-        .field { display: flex; flex-direction: column; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; transition: 0.2s; }
-        .field:focus-within { border-color: var(--accent); }
+        .field { display: flex; flex-direction: column; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; }
         label { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
         input { padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; outline: none; font-size: 13px; }
 
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-        button { cursor: pointer; border: none; font-weight: 800; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        button { cursor: pointer; border: none; font-weight: 800; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px; border-radius: 50px; }
         
-        #btnGerar { padding: 20px; background: var(--primary); color: #000; border-radius: 50px; font-size: 18px; }
-        #btnGerar:hover { transform: scale(1.02); filter: brightness(1.1); }
-        
-        #btnLimpar { padding: 15px; background: #334155; color: white; border-radius: 50px; font-size: 14px; }
+        #btnGerar { background: var(--primary); color: #000; font-size: 18px; }
+        #btnLimpar { background: #334155; color: white; font-size: 14px; }
         #btnLimpar:hover { background: var(--danger); }
 
-        .result-area { display: none; margin-top: 35px; border-top: 2px solid #334155; padding-top: 25px; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .code-box { background: #000; color: #10b981; padding: 15px; border-radius: 15px; font-size: 11px; font-family: 'Courier New', monospace; overflow-y: auto; max-height: 300px; border: 1px solid #059669; line-height: 1.5; }
+        .result-area { display: none; margin-top: 35px; border-top: 2px solid #334155; padding-top: 25px; text-align: center; }
+        .code-box { background: #000; color: #10b981; padding: 15px; border-radius: 15px; font-size: 11px; font-family: monospace; overflow-y: auto; max-height: 300px; border: 1px solid #059669; text-align: left; }
         #qrcode-wrap { background: white; padding: 20px; border-radius: 20px; display: inline-block; margin-bottom: 15px; }
     </style>
 </head>
@@ -47,100 +40,72 @@
 
 <div class="container">
     <div class="header">
-        <h2>🚀 ImpulsoWeb10 Ultra v8.0</h2>
-        <p style="font-size: 12px; opacity: 0.7;">Gerador Premium com Extração de Dados via Regex</p>
+        <h2>🚀 ImpulsoWeb10 Ultra v9.0</h2>
+        <p style="font-size: 12px; opacity: 0.7;">Sistema com Dados Fixos ImpulsoWeb10</p>
     </div>
 
     <div class="magic-box">
-        <label><i class="fas fa-magic"></i> 🪄 Captura Inteligente (Cole do Google Maps/Pesquisa)</label>
-        <textarea id="magicPaste" rows="3" placeholder="Exemplo: Nome da Empresa, 4.8 (150) · Pizzaria, Endereço: Rua Tal, 123, Telefone: (11) 99999-9999..."></textarea>
-        <button onclick="magicExtract()" style="margin-top:10px; background: var(--magic); color: white; border:none; padding:10px 20px; border-radius:8px; width: 100%; font-size: 13px;">✨ EXTRAIR DADOS DO TEXTO</button>
+        <label><i class="fas fa-magic"></i> 🪄 Captura Inteligente</label>
+        <textarea id="magicPaste" rows="3" placeholder="Cole aqui o texto do Google para preencher automaticamente..."></textarea>
+        <button onclick="magicExtract()" style="margin-top:10px; background: var(--magic); color: white; border:none; padding:10px; border-radius:8px; width: 100%; cursor:pointer;">✨ EXTRAIR DADOS</button>
     </div>
     
-    <div class="section-title"><span>1. IDENTIDADE</span></div>
+    <div class="section-title"><span>1. DADOS DO CLIENTE</span></div>
     <div class="grid">
-        <div class="field"><label>Nome da Empresa *</label><input id="n" oninput="autoSlug()" placeholder="Nome Fantasia"></div>
-        <div class="field"><label>Link da Logo</label><input id="l" placeholder="logo.png ou link"></div>
-        <div class="field"><label>Pasta (Slug)</label><input id="slug" placeholder="slug-do-cliente"></div>
+        <div class="field"><label>Nome da Empresa *</label><input id="n" oninput="autoSlug()"></div>
+        <div class="field"><label>Link da Logo</label><input id="l" placeholder="logo.png"></div>
+        <div class="field"><label>Pasta (Slug)</label><input id="slug"></div>
     </div>
 
-    <div class="section-title"><span>2. LINKS E REDES SOCIAIS</span></div>
+    <div class="section-title"><span>2. LINKS DO CLIENTE</span></div>
     <div class="grid">
-        <div class="field"><label>Google Review (Link Avaliação) *</label><input id="g" placeholder="https://g.page/r/..."></div>
-        <div class="field"><label>WhatsApp (DDD + Número)</label><input id="w" placeholder="5511999999999"></div>
-        <div class="field"><label>Link Google Maps (GPS)</label><input id="maps" placeholder="https://goo.gl/maps/..."></div>
-        <div class="field"><label>Instagram</label><input id="ig" placeholder="Link do Perfil"></div>
-        <div class="field"><label>Facebook</label><input id="fb" placeholder="Link da Página"></div>
-        <div class="field"><label>Catálogo / Site</label><input id="site" placeholder="Link oficial"></div>
+        <div class="field"><label>Google Review *</label><input id="g"></div>
+        <div class="field"><label>WhatsApp Cliente</label><input id="w" placeholder="55..."></div>
+        <div class="field"><label>Google Maps</label><input id="maps"></div>
+        <div class="field"><label>Instagram</label><input id="ig"></div>
+        <div class="field"><label>Facebook</label><input id="fb"></div>
+        <div class="field"><label>Site/Catálogo</label><input id="site"></div>
     </div>
 
     <div class="btn-group">
-        <button id="btnLimpar" onclick="limparTudo()"><i class="fas fa-trash"></i> LIMPAR</button>
+        <button id="btnLimpar" onclick="limparCampos()"><i class="fas fa-eraser"></i> LIMPAR CLIENTE</button>
         <button id="btnGerar" onclick="gerarTudo()">GERAR CÓDIGO ⚡</button>
     </div>
 
-    <div id="result-area" class="result-area" style="text-align: center;">
+    <div id="result-area" class="result-area">
         <div id="qrcode-wrap"><div id="qrcode"></div></div>
-        <p id="linkCurtoTxt" style="color: var(--accent); font-weight: 800; font-size: 18px; margin-bottom: 20px;"></p>
-        
-        <div style="text-align: left;">
-            <label style="display: block; margin-bottom: 5px;">Código HTML Final (Pronto para o Cliente):</label>
-            <div id="codeIndex" class="code-box"></div>
-            <button onclick="copy('codeIndex')" style="width: 100%; padding: 15px; margin-top: 10px; background: #10b981; color: white; border-radius: 12px; font-size: 15px;">
-                <i class="fas fa-copy"></i> COPIAR CÓDIGO AGORA
-            </button>
-        </div>
+        <p id="linkCurtoTxt" style="color: var(--accent); font-weight: 800; font-size: 18px;"></p>
+        <div id="codeIndex" class="code-box"></div>
+        <button onclick="copy('codeIndex')" style="width: 100%; padding: 15px; margin-top: 10px; background: #10b981; color: white; border:none; border-radius:12px; cursor:pointer;">COPIAR HTML</button>
     </div>
 </div>
 
 <script>
-// CÉREBRO DA EXTRAÇÃO v8.0
+// DADOS FIXOS DA SUA EMPRESA
+const MEU_WHATS = "5511954950044";
+const MEU_SITE = "https://www.impulsoweb10.com.br";
+
 function magicExtract() {
-    const rawText = document.getElementById('magicPaste').value.trim();
-    if (!rawText) return alert("Cole o conteúdo do Google Maps primeiro!");
-
-    // 1. EXTRAÇÃO DE NOME (Filtra estrelas, números de avaliação e separadores do Google)
-    const lines = rawText.split('\n');
-    let nomeSugerido = lines[0].trim();
-    // Limpeza pesada: Remove (4.5), ⭐⭐⭐, "150 avaliações", etc.
-    nomeSugerido = nomeSugerido.replace(/\(\d+\.?\d*\)/g, ''); // Remove (4.8)
-    nomeSugerido = nomeSugerido.replace(/[0-9],?[0-9] ⭐+/g, ''); // Remove 4,8 ⭐⭐⭐
-    nomeSugerido = nomeSugerido.replace(/·/g, '').replace(/(\d+)\s+avaliações/gi, '').trim();
-    
-    document.getElementById('n').value = nomeSugerido;
+    const text = document.getElementById('magicPaste').value.trim();
+    if (!text) return;
+    const lines = text.split('\n');
+    document.getElementById('n').value = lines[0].replace(/\d\.\d\s\(.*\)/, '').replace(/⭐/g, '').trim();
     autoSlug();
-
-    // 2. EXTRAÇÃO DE WHATSAPP (Regex Robusto)
-    const phoneRegex = /(?:\(?\d{2}\)?\s?)?9?\d{4}[-\s]?\d{4}/g;
-    const foundPhones = rawText.match(phoneRegex);
-    if (foundPhones) {
-        let clean = foundPhones[0].replace(/\D/g, '');
-        if (clean.length === 10 || clean.length === 11) {
-            clean = '55' + clean;
-        }
-        document.getElementById('w').value = clean;
-    }
-
-    // 3. EXTRAÇÃO DE SITE (URLs genéricas no texto)
-    const urlRegex = /(www\.[a-z0-9-]+\.[a-z.]+)|(https?:\/\/[^\s]+)/gi;
-    const foundUrls = rawText.match(urlRegex);
-    if (foundUrls) {
-        // Pega a primeira URL, mas ignora se for algo comum do google
-        const filtered = foundUrls.find(u => !u.includes('google.com'));
-        if(filtered) document.getElementById('site').value = filtered.startsWith('http') ? filtered : 'https://' + filtered;
-    }
-
-    alert("Análise concluída! ✨ Nome, Slug e Telefone extraídos.");
+    const phone = text.match(/(?:\(?\d{2}\)?\s?)?9?\d{4}[-\s]?\d{4}/g);
+    if (phone) document.getElementById('w').value = '55' + phone[0].replace(/\D/g, '');
+    alert("Dados extraídos!");
 }
 
 function autoSlug() {
     const n = document.getElementById('n').value;
-    const slug = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-    document.getElementById('slug').value = slug;
+    document.getElementById('slug').value = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 
-function limparTudo() {
-    if(confirm("Deseja limpar todos os campos?")) window.location.reload();
+function limparCampos() {
+    // Limpa apenas os inputs, sem dar refresh na página (para não perder os dados fixos se houver)
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => input.value = '');
+    document.getElementById('result-area').style.display = 'none';
 }
 
 function gerarTudo() {
@@ -156,30 +121,26 @@ function gerarTudo() {
         slug: document.getElementById('slug').value
     };
 
-    if(!d.n || !d.g) return alert("Erro: Nome e Link do Google Review são obrigatórios!");
+    if(!d.n || !d.g) return alert("Nome e Google Review são obrigatórios!");
 
-    const urlFinal = window.location.origin + "/" + d.slug;
-
-    const htmlIndex = `<!DOCTYPE html>
+    const htmlFinal = `<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${d.n} | Avalie-nos</title>
+<title>${d.n} | Oficial</title>
 <style>
 body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#0f172a,#1e293b,#2e1065,#0f172a);background-size:400% 400%;animation:gradientBG 10s ease infinite;display:flex;justify-content:center;align-items:center;min-height:100vh;color:white;text-align:center;}
 @keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 .container{background:rgba(255,255,255,0.05);padding:35px 25px;border-radius:30px;backdrop-filter:blur(15px);max-width:360px;width:92%;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);animation:slideUp 0.8s ease;}
 @keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 .logo{width:100px;height:100px;border-radius:50%;margin-bottom:15px;border:3px solid #fbbf24;object-fit:cover;background:white;}
-h1{font-size:22px;margin:0 0 5px;}
-.stars{color:#fbbf24;font-size:22px;margin-bottom:20px;}
-.btn{display:block;margin:12px auto;padding:15px;width:90%;font-weight:700;text-decoration:none;border-radius:15px;font-size:14px;transition:0.3s;box-sizing:border-box;text-transform:uppercase;letter-spacing:1px;}
-.google{background:#fbbf24;color:#000;box-shadow:0 0 15px rgba(251,191,36,0.3);}
+.btn{display:block;margin:12px auto;padding:15px;width:90%;font-weight:700;text-decoration:none;border-radius:15px;font-size:14px;transition:0.3s;box-sizing:border-box;text-transform:uppercase;}
+.google{background:#fbbf24;color:#000;}
 .site{background:white;color:#000;}
 .whats{background:#25D366;color:white;}
 .social{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
-.btn:hover{transform:translateY(-4px);filter:brightness(1.1);box-shadow:0 10px 20px rgba(0,0,0,0.4);}
+.btn:hover{transform:translateY(-4px);filter:brightness(1.1);}
 footer{margin-top:30px;font-size:10px;opacity:0.6;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;}
 footer a{color:#38bdf8;text-decoration:none;}
 </style>
@@ -188,37 +149,29 @@ footer a{color:#38bdf8;text-decoration:none;}
 <div class="container">
     <img src="${d.l}" class="logo">
     <h1>${d.n}</h1>
-    <div class="stars">★★★★★</div>
-    <p style="font-size:14px;margin-bottom:25px;opacity:0.8;">Sua opinião nos ajuda a crescer! Escolha uma opção:</p>
-    
+    <div style="color:#fbbf24;font-size:22px;margin-bottom:20px;">★★★★★</div>
     <a class="btn google" href="${d.g}" target="_blank">⭐ Avaliar no Google</a>
     ${d.site ? `<a class="btn site" href="${d.site}" target="_blank">🌐 Ver Site Oficial</a>` : ''}
     ${d.maps ? `<a class="btn social" href="${d.maps}" target="_blank">📍 Como Chegar (GPS)</a>` : ''}
     ${d.w ? `<a class="btn whats" href="https://wa.me/${d.w}" target="_blank">💬 WhatsApp</a>` : ''}
     ${d.ig ? `<a class="btn social" href="${d.ig}" target="_blank">📸 Instagram</a>` : ''}
     ${d.fb ? `<a class="btn social" href="${d.fb}" target="_blank">🔵 Facebook</a>` : ''}
-
-    <footer>Desenvolvido com 💛 por <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a></footer>
+    <footer>Desenvolvido por <a href="${MEU_SITE}" target="_blank">ImpulsoWeb10</a> | <a href="https://wa.me/${MEU_WHATS}" target="_blank">Suporte</a></footer>
 </div>
 </body>
 </html>`;
 
-    document.getElementById('codeIndex').innerText = htmlIndex;
+    document.getElementById('codeIndex').innerText = htmlFinal;
     const qrDiv = document.getElementById('qrcode');
     qrDiv.innerHTML = "";
-    new QRCode(qrDiv, { text: urlFinal, width: 160, height: 160 });
-    document.getElementById('linkCurtoTxt').innerText = urlFinal;
+    new QRCode(qrDiv, { text: window.location.origin + "/" + d.slug, width: 160, height: 160 });
+    document.getElementById('linkCurtoTxt').innerText = window.location.origin + "/" + d.slug;
     document.getElementById('result-area').style.display = 'block';
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        const btn = event.target;
-        btn.innerText = "COPIADO COM SUCESSO!";
-        setTimeout(() => btn.innerText = "COPIAR CÓDIGO AGORA", 2000);
-    });
+    navigator.clipboard.writeText(text).then(() => alert("Copiado!"));
 }
 </script>
 </body>
