@@ -75,7 +75,7 @@ const clientes = [
   { 
   nome: "Hotel Flamboyant", 
   pasta: "hotelflanboyant", 
-  logo: "logo.png", 
+  logo: "logo.jpeg", 
   descricao: "Sua melhor estadia com conforto e natureza." 
 }
 ];
