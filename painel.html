@@ -3,88 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel ImpulsoWeb10 | Gerador Premium v4.0</title>
+    <title>Painel ImpulsoWeb10 | Gerador Ultra v6.0</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #fbbf24; --bg: #0f172a; --accent: #38bdf8; --text: #f8fafc; --danger: #ef4444; }
+        :root { --primary: #fbbf24; --bg: #0f172a; --accent: #38bdf8; --text: #f8fafc; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        .container { max-width: 950px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #334155; }
         .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #334155; padding-bottom: 20px; }
-        .header h2 { color: var(--primary); font-size: 28px; font-weight: 800; margin: 0; }
-        .section-title { background: #334155; color: var(--accent); padding: 12px 15px; border-radius: 10px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin: 25px 0 15px; border-left: 4px solid var(--accent); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        .field { display: flex; flex-direction: column; margin-bottom: 10px; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; }
-        label { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; }
-        input, textarea { padding: 12px; border-radius: 8px; border: 2px solid #334155; background: #1e293b; color: white; font-family: inherit; font-size: 14px; width: 100%; box-sizing: border-box; }
-        input:focus { border-color: var(--accent); outline: none; }
-        button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: #000; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; transition: 0.3s; }
-        button#btnGerar:hover { transform: scale(1.02); background: #f59e0b; }
-        .result-area { display: none; margin-top: 40px; border-top: 3px solid #334155; padding-top: 30px; }
-        .code-box { background: #000; color: #10b981; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 300px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #059669; }
-        #qrcode-wrap { text-align: center; padding: 20px; background: white; border-radius: 20px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
+        .header h2 { color: var(--primary); font-size: 28px; margin: 0; }
+        .section-title { background: #334155; color: var(--accent); padding: 10px 15px; border-radius: 10px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin: 20px 0 10px; border-left: 4px solid var(--accent); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .field { display: flex; flex-direction: column; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; }
+        label { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 5px; }
+        input { padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; outline: none; }
+        input:focus { border-color: var(--accent); }
+        button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: #000; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-size: 18px; transition: 0.3s; }
+        .result-area { display: none; margin-top: 30px; }
+        .code-box { background: #000; color: #10b981; padding: 15px; border-radius: 10px; font-size: 11px; font-family: monospace; overflow-y: auto; max-height: 250px; border: 1px solid #059669; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h2>🚀 Gerador Premium ImpulsoWeb10</h2>
-        <p>Modelo Dark Animado com Redes Sociais</p>
+        <h2>🚀 Gerador Ultra ImpulsoWeb10</h2>
+        <p>O modelo mais completo para conversão e SEO</p>
     </div>
     
-    <div class="section-title">1. Dados Principais</div>
+    <div class="section-title">1. Informações do Negócio</div>
     <div class="grid">
-        <div class="field">
-            <label>Nome da Empresa *</label>
-            <input id="n" placeholder="Ex: Tintas Qualy Quimy" oninput="autoSlug()">
-        </div>
-        <div class="field">
-            <label>Link da Logo (URL)</label>
-            <input id="l" placeholder="https://link.com/logo.png">
-        </div>
-        <div class="field">
-            <label>Pasta (Slug)</label>
-            <input id="slug" placeholder="ex: tintas-qualy">
-        </div>
+        <div class="field"><label>Nome da Empresa</label><input id="n" oninput="autoSlug()"></div>
+        <div class="field"><label>URL da Logo</label><input id="l" placeholder="logo.png"></div>
+        <div class="field"><label>Pasta (Slug)</label><input id="slug"></div>
     </div>
 
-    <div class="section-title">2. Texto e Chamada</div>
+    <div class="section-title">2. Links de Destino (O que não tiver, deixe vazio)</div>
     <div class="grid">
-        <div class="field" style="grid-column: span 2;">
-            <label>Frase de Agradecimento/Subtítulo</label>
-            <textarea id="s" rows="2">Se você gostou dos nossos produtos, deixe sua avaliação e acompanhe nossas novidades!</textarea>
-        </div>
+        <div class="field"><label>Google Review (Avaliação)</label><input id="g"></div>
+        <div class="field"><label>Google Maps (Endereço)</label><input id="maps"></div>
+        <div class="field"><label>Catálogo ou Site</label><input id="site"></div>
+        <div class="field"><label>WhatsApp</label><input id="w"></div>
+        <div class="field"><label>Instagram</label><input id="ig"></div>
+        <div class="field"><label>Facebook</label><input id="fb"></div>
     </div>
 
-    <div class="section-title">3. Links de Destino</div>
+    <div class="section-title">3. Tracking & Analytics (Opcional)</div>
     <div class="grid">
-        <div class="field">
-            <label>Link Google Review *</label>
-            <input id="g" placeholder="https://g.page/r/...">
-        </div>
-        <div class="field">
-            <label>WhatsApp (DDD + Número)</label>
-            <input id="w" placeholder="5511999999999">
-        </div>
-        <div class="field">
-            <label>URL Instagram</label>
-            <input id="ig" placeholder="https://instagram.com/perfil">
-        </div>
+        <div class="field"><label>ID Google Analytics (G-XXXX)</label><input id="ga"></div>
+        <div class="field"><label>ID Pixel Facebook</label><input id="pixel"></div>
     </div>
 
-    <button id="btnGerar" onclick="gerarTudo()">GERAR PÁGINA DO CLIENTE ⚡</button>
+    <button id="btnGerar" onclick="gerarTudo()">CRIAR PÁGINA PROFISSIONAL ⚡</button>
 
     <div id="result-area" class="result-area">
-        <div style="text-align:center">
-            <div id="qrcode-wrap"><div id="qrcode"></div></div>
-            <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent);"></p>
+        <div style="text-align:center; background:white; padding:20px; border-radius:20px; margin-bottom:20px; display:inline-block; width:100%;">
+            <div id="qrcode" style="display:flex; justify-content:center;"></div>
+            <p id="linkCurtoTxt" style="color:#1e293b; font-weight:bold; margin-top:10px;"></p>
         </div>
-        
-        <label>Código para o index.html (Copie e cole no arquivo do cliente)</label>
-        <button style="float:right; margin-bottom:5px; cursor:pointer;" onclick="copy('codeIndex')">Copiar Código</button>
-        <div id="codeIndex" class="code-box"></div>
+        <div class="code-box" id="codeIndex"></div>
+        <button onclick="copy('codeIndex')" style="width:100%; padding:10px; margin-top:10px; cursor:pointer;">Copiar Código HTML</button>
     </div>
 </div>
 
@@ -96,75 +74,81 @@ function autoSlug() {
 }
 
 function gerarTudo() {
-    const n = document.getElementById('n').value;
-    const l = document.getElementById('l').value || 'logo.png';
-    const s = document.getElementById('s').value;
-    const g = document.getElementById('g').value;
-    const w = document.getElementById('w').value;
-    const ig = document.getElementById('ig').value;
-    const slug = document.getElementById('slug').value;
+    const d = {
+        n: document.getElementById('n').value,
+        l: document.getElementById('l').value || 'logo.png',
+        g: document.getElementById('g').value,
+        maps: document.getElementById('maps').value,
+        site: document.getElementById('site').value,
+        w: document.getElementById('w').value,
+        ig: document.getElementById('ig').value,
+        fb: document.getElementById('fb').value,
+        ga: document.getElementById('ga').value,
+        px: document.getElementById('pixel').value,
+        slug: document.getElementById('slug').value
+    };
 
-    if(!n || !g) { alert("Nome e Link do Google são obrigatórios!"); return; }
+    if(!d.n || !d.g) return alert("Preencha o Nome e o Google Review!");
 
-    const urlFinal = window.location.origin + "/" + slug;
-
-    // Gerar o HTML baseado no SEU NOVO MODELO
-    const htmlPronto = `<!DOCTYPE html>
+    const htmlFinal = `<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avalie ${n} ⭐</title>
+<title>${d.n} | Links Oficiais</title>
+${d.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${d.ga}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${d.ga}');</script>` : ''}
+${d.px ? `<script>!function(f,b,e,v,n,t,s){n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};f._fbq||(f.fbq=n);n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${d.px}');fbq('track','PageView');</script>` : ''}
 <style>
-body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#1e1e1e,#2c3e50,#34495e,#1e1e1e);background-size:400% 400%;animation:gradientBG 12s ease infinite;display:flex;justify-content:center;align-items:center;height:100vh;color:white;text-align:center;}
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#0f172a,#1e293b,#334155,#0f172a);background-size:400% 400%;animation:gradientBG 10s ease infinite;display:flex;justify-content:center;align-items:center;min-height:100vh;color:white;text-align:center;}
 @keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-.container{background:rgba(0,0,0,0.45);padding:35px 25px;border-radius:25px;backdrop-filter:blur(12px);max-width:380px;width:90%;box-shadow:0 20px 50px rgba(0,0,0,0.6);animation:fadeIn 1.2s ease;}
-@keyframes fadeIn{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
-.logo{width:120px;margin-bottom:20px;border-radius:12px;object-fit:contain;}
-h1{font-size:20px;margin-bottom:10px;}
-p{font-size:14px;margin-bottom:18px;line-height:1.4em;}
-.estrelas{font-size:24px;margin-bottom:18px;opacity:0.9;}
-.botao{display:block;margin:8px auto;padding:12px 18px;width:75%;font-weight:600;text-decoration:none;border-radius:30px;font-size:14px;transition:0.3s;}
-.google{background:#FFD700;color:#000;box-shadow:0 0 10px rgba(255,215,0,0.4);}
-.whatsapp{background:#25D366;color:white;box-shadow:0 0 10px rgba(37,211,102,0.4);}
-.instagram{background:linear-gradient(45deg,#E1306C,#F77737,#FCAF45);color:white;}
-.botao:hover{transform:scale(1.05);filter:brightness(1.1);}
-footer{margin-top:18px;padding-top:10px;font-size:9px;opacity:0.7;border-top:1px solid rgba(255,255,255,0.1);}
-footer a{color:#00d4ff;text-decoration:none;}
+.container{background:rgba(255,255,255,0.05);padding:30px 20px;border-radius:30px;backdrop-filter:blur(15px);max-width:350px;width:90%;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);animation:slideUp 0.8s ease-out;}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.logo{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:3px solid var(--primary);object-fit:cover;background:white;}
+h1{font-size:20px;margin-bottom:5px;}
+.estrelas{color:#fbbf24;font-size:20px;margin-bottom:20px;}
+.botao{display:block;margin:12px auto;padding:14px;width:90%;font-weight:700;text-decoration:none;border-radius:12px;font-size:14px;transition:0.3s;box-sizing:border-box;text-transform:uppercase;letter-spacing:0.5px;}
+.google{background:#fbbf24;color:#000;}
+.site{background:white;color:#000;}
+.whatsapp{background:#25D366;color:white;}
+.social{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+.botao:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,0.3);filter:brightness(1.1);}
+footer{margin-top:25px;font-size:10px;opacity:0.5;}
+footer a{color:#38bdf8;text-decoration:none;}
 </style>
 </head>
 <body>
 <div class="container">
-    <img src="${l}" alt="${n}" class="logo">
-    <h1>Obrigado por escolher ${n} 💛</h1>
-    <p>${s}</p>
-    <div class="estrelas">⭐⭐⭐⭐⭐</div>
-    <a class="botao google" href="${g}" target="_blank">⭐ Avaliar no Google</a>
-    ${w ? `<a class="botao whatsapp" href="https://wa.me/${w}" target="_blank">💬 Falar no WhatsApp</a>` : ''}
-    ${ig ? `<a class="botao instagram" href="${ig}" target="_blank">📸 Seguir no Instagram</a>` : ''}
+    <img src="${d.l}" class="logo">
+    <h1>${d.n}</h1>
+    <div class="estrelas">★★★★★</div>
+    <p style="font-size:13px;margin-bottom:20px;opacity:0.8;">Toque em um dos botões abaixo:</p>
+    
+    <a class="botao google" href="${d.g}" target="_blank">⭐ Avaliar no Google</a>
+    ${d.site ? `<a class="botao site" href="${d.site}" target="_blank">🌐 Ver Catálogo/Site</a>` : ''}
+    ${d.maps ? `<a class="botao social" href="${d.maps}" target="_blank">📍 Como Chegar (GPS)</a>` : ''}
+    ${d.w ? `<a class="botao whatsapp" href="https://wa.me/${d.w}" target="_blank">💬 Chamar no WhatsApp</a>` : ''}
+    ${d.ig ? `<a class="botao social" href="${d.ig}" target="_blank">📸 Instagram</a>` : ''}
+    ${d.fb ? `<a class="botao social" href="${d.fb}" target="_blank">🔵 Facebook</a>` : ''}
+
     <footer>
-        <div>Qualidade • Confiança • Compromisso</div>
-        <div>🔒 Site Seguro | Certificado SSL</div>
-        <div style="margin-top:5px;">⚙️ Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a></div>
+        <div>🔒 Ambiente Seguro & Oficial</div>
+        <div style="margin-top:8px;">Tecnologia <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a></div>
     </footer>
 </div>
 </body>
 </html>`;
 
-    document.getElementById('codeIndex').innerText = htmlPronto;
-    
-    // QR Code
+    document.getElementById('codeIndex').innerText = htmlFinal;
     const qrDiv = document.getElementById('qrcode');
     qrDiv.innerHTML = "";
-    new QRCode(qrDiv, { text: urlFinal, width: 150, height: 150 });
-    document.getElementById('linkCurtoTxt').innerText = urlFinal;
-    
+    new QRCode(qrDiv, { text: window.location.origin + "/" + d.slug, width: 150, height: 150 });
+    document.getElementById('linkCurtoTxt').innerText = window.location.origin + "/" + d.slug;
     document.getElementById('result-area').style.display = 'block';
 }
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Código copiado!"));
+    navigator.clipboard.writeText(text).then(() => alert("Código Copiado!"));
 }
 </script>
 </body>
