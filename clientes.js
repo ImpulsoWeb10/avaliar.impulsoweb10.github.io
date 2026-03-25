@@ -72,4 +72,10 @@ const clientes = [
     descricao: "Beleza e estilo para valorizar sua autoestima.",
     instagram: "@TINTASQUALYQUIMY"
   }
+  { 
+  nome: "Hotel Flamboyant", 
+  pasta: "hotelflanboyant", 
+  logo: "logo.png", 
+  descricao: "Sua melhor estadia com conforto e natureza." 
+},
 ];
