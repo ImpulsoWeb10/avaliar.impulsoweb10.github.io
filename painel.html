@@ -3,151 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel ImpulsoWeb10 | Gerador Tanque de Guerra v3.0</title>
+    <title>Painel ImpulsoWeb10 | Gerador Premium v4.0</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #22c55e; --bg: #f1f5f9; --accent: #4f46e5; --text: #1e293b; --danger: #ef4444; }
+        :root { --primary: #fbbf24; --bg: #0f172a; --accent: #38bdf8; --text: #f8fafc; --danger: #ef4444; }
         body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #334155; padding-bottom: 20px; }
         .header h2 { color: var(--primary); font-size: 28px; font-weight: 800; margin: 0; }
-        
-        .section-title { background: #eef2ff; color: var(--accent); padding: 12px 15px; border-radius: 10px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin: 25px 0 15px; display: flex; align-items: center; justify-content: space-between; border-left: 4px solid var(--accent); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        
-        .field { display: flex; flex-direction: column; margin-bottom: 10px; position: relative; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1px solid #e2e8f0; transition: 0.3s; }
-        .field.hidden { display: none; }
-        
-        .remove-btn { position: absolute; top: 5px; right: 5px; background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 16px; transition: 0.2s; font-weight: bold; }
-        .remove-btn:hover { color: var(--danger); }
-        
-        label { font-size: 10px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
-        input, select, textarea { padding: 12px; border-radius: 8px; border: 2px solid #e2e8f0; background: #fff; font-family: inherit; font-size: 14px; width: 100%; box-sizing: border-box; }
+        .section-title { background: #334155; color: var(--accent); padding: 12px 15px; border-radius: 10px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin: 25px 0 15px; border-left: 4px solid var(--accent); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .field { display: flex; flex-direction: column; margin-bottom: 10px; background: #0f172a; padding: 10px; border-radius: 12px; border: 1px solid #334155; }
+        label { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; }
+        input, textarea { padding: 12px; border-radius: 8px; border: 2px solid #334155; background: #1e293b; color: white; font-family: inherit; font-size: 14px; width: 100%; box-sizing: border-box; }
         input:focus { border-color: var(--accent); outline: none; }
-
-        .btn-reset { font-size: 11px; background: #fff; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 50px; cursor: pointer; margin-bottom: 10px; font-weight: 700; }
-
-        button#btnGerar { width: 100%; padding: 22px; background: var(--primary); color: white; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); transition: 0.3s; }
-        button#btnGerar:hover { transform: scale(1.01); background: #16a34a; }
-        
-        .result-area { display: none; margin-top: 40px; border-top: 3px solid #f1f5f9; padding-top: 30px; }
-        .code-box { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 250px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #334155; }
-        
-        #qrcode-wrap { text-align: center; padding: 30px; background: #f8fafc; border-radius: 25px; margin-bottom: 30px; border: 2px dashed #e2e8f0; }
-        #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 10px; }
+        button#btnGerar { width: 100%; padding: 20px; background: var(--primary); color: #000; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; margin-top: 30px; font-size: 18px; transition: 0.3s; }
+        button#btnGerar:hover { transform: scale(1.02); background: #f59e0b; }
+        .result-area { display: none; margin-top: 40px; border-top: 3px solid #334155; padding-top: 30px; }
+        .code-box { background: #000; color: #10b981; padding: 20px; border-radius: 15px; font-size: 11px; font-family: monospace; word-break: break-all; max-height: 300px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #059669; }
+        #qrcode-wrap { text-align: center; padding: 20px; background: white; border-radius: 20px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h2>🚀 Gerador Tanque de Guerra v3.0</h2>
-        <p>SEO Semântico & Cadastro Completo</p>
-        <button class="btn-reset" onclick="window.location.reload()">RESTAURAR CAMPOS OCULTOS</button>
+        <h2>🚀 Gerador Premium ImpulsoWeb10</h2>
+        <p>Modelo Dark Animado com Redes Sociais</p>
     </div>
     
-    <div class="section-title"><span><i class="fas fa-palette"></i> 1. Identidade e Tracking</span></div>
-    <div class="grid">
-        <div class="field" id="f-tema">
-            <button class="remove-btn" onclick="hideField('f-tema')">×</button>
-            <label>Tema Visual</label>
-            <select id="t">
-                <option value="1">Tema 1: Dark Neon</option>
-                <option value="2" selected>Tema 2: Clean White</option>
-                <option value="3">Tema 3: Luxury Gold</option>
-                <option value="4">Tema 4: Red Modern</option>
-            </select>
-        </div>
-        <div class="field" id="f-ga">
-            <button class="remove-btn" onclick="hideField('f-ga')">×</button>
-            <label>Google Analytics ID</label>
-            <input id="ga" placeholder="G-XXXXXXXXXX">
-        </div>
-        <div class="field" id="f-logo">
-            <button class="remove-btn" onclick="hideField('f-logo')">×</button>
-            <label>Link da Logo</label>
-            <input id="l" value="logo.png">
-        </div>
-    </div>
-
-    <div class="section-title"><span><i class="fas fa-building"></i> 2. Cadastro da Empresa (SEO)</span></div>
+    <div class="section-title">1. Dados Principais</div>
     <div class="grid">
         <div class="field">
             <label>Nome da Empresa *</label>
-            <input id="n" placeholder="Ex: Pizzaria do Zé" oninput="autoSlug()">
+            <input id="n" placeholder="Ex: Tintas Qualy Quimy" oninput="autoSlug()">
         </div>
         <div class="field">
-            <label>Slogan / Subtítulo</label>
-            <input id="s" placeholder="Ex: A melhor da cidade">
+            <label>Link da Logo (URL)</label>
+            <input id="l" placeholder="https://link.com/logo.png">
         </div>
         <div class="field">
-            <label>Pasta GitHub (Slug)</label>
-            <input id="slug" placeholder="ex: pizzaria-ze">
-        </div>
-        <div class="field" id="f-end">
-            <button class="remove-btn" onclick="hideField('f-end')">×</button>
-            <label>Endereço Completo</label>
-            <input id="end" placeholder="Rua exemplo, 123 - Centro">
+            <label>Pasta (Slug)</label>
+            <input id="slug" placeholder="ex: tintas-qualy">
         </div>
     </div>
 
-    <div class="section-title"><span><i class="fas fa-share-nodes"></i> 3. Redes Sociais e Localização</span></div>
+    <div class="section-title">2. Texto e Chamada</div>
+    <div class="grid">
+        <div class="field" style="grid-column: span 2;">
+            <label>Frase de Agradecimento/Subtítulo</label>
+            <textarea id="s" rows="2">Se você gostou dos nossos produtos, deixe sua avaliação e acompanhe nossas novidades!</textarea>
+        </div>
+    </div>
+
+    <div class="section-title">3. Links de Destino</div>
     <div class="grid">
         <div class="field">
             <label>Link Google Review *</label>
-            <input id="g" placeholder="Link de avaliação do Google">
+            <input id="g" placeholder="https://g.page/r/...">
         </div>
         <div class="field">
-            <label>WhatsApp (55 + DDD + Numero)</label>
+            <label>WhatsApp (DDD + Número)</label>
             <input id="w" placeholder="5511999999999">
         </div>
-        <div class="field" id="f-insta">
-            <button class="remove-btn" onclick="hideField('f-insta')">×</button>
-            <label>Instagram URL</label>
-            <input id="ig" placeholder="Link do perfil">
-        </div>
-        <div class="field" id="f-fb">
-            <button class="remove-btn" onclick="hideField('f-fb')">×</button>
-            <label>Facebook URL</label>
-            <input id="fb" placeholder="Link da página">
-        </div>
-        <div class="field" id="f-maps">
-            <button class="remove-btn" onclick="hideField('f-maps')">×</button>
-            <label>Link Maps (Como Chegar)</label>
-            <input id="gmaps" placeholder="Link de localização">
+        <div class="field">
+            <label>URL Instagram</label>
+            <input id="ig" placeholder="https://instagram.com/perfil">
         </div>
     </div>
 
-    <div class="section-title"><span><i class="fas fa-align-left"></i> 4. FAQ Oculto (SEO)</span></div>
-    <div class="grid" style="grid-template-columns: 1fr;">
-        <div class="field" id="f-faq">
-            <button class="remove-btn" onclick="hideField('f-faq')">×</button>
-            <label>Perguntas Frequentes (Separe por vírgula)</label>
-            <textarea id="faq" placeholder="Aceita cartão?, Tem estacionamento?, Qual o horário?"></textarea>
-        </div>
-    </div>
-
-    <button id="btnGerar" onclick="gerarTudo()">GERAR ESTRUTURA ATUALIZADA ⚡</button>
+    <button id="btnGerar" onclick="gerarTudo()">GERAR PÁGINA DO CLIENTE ⚡</button>
 
     <div id="result-area" class="result-area">
-        <div id="qrcode-wrap">
-            <div id="qrcode"></div>
-            <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent); margin-top:15px; font-size: 16px;"></p>
+        <div style="text-align:center">
+            <div id="qrcode-wrap"><div id="qrcode"></div></div>
+            <p id="linkCurtoTxt" style="font-weight: 700; color: var(--accent);"></p>
         </div>
-        <div>
-            <button style="float:right; padding:8px 15px; cursor:pointer; background: var(--accent); color:white; border:none; border-radius:8px;" onclick="copy('codeIndex')">COPIAR CÓDIGO</button>
-            <label>Código para o index.html (Pasta do Cliente)</label>
-            <div id="codeIndex" class="code-box"></div>
-        </div>
+        
+        <label>Código para o index.html (Copie e cole no arquivo do cliente)</label>
+        <button style="float:right; margin-bottom:5px; cursor:pointer;" onclick="copy('codeIndex')">Copiar Código</button>
+        <div id="codeIndex" class="code-box"></div>
     </div>
 </div>
 
 <script>
-function hideField(id) { document.getElementById(id).classList.add('hidden'); }
-
 function autoSlug() {
     const nome = document.getElementById('n').value;
     const slug = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[^\w-]/g, '');
@@ -155,67 +96,75 @@ function autoSlug() {
 }
 
 function gerarTudo() {
-    const d = {
-        n: document.getElementById('n').value,
-        s: document.getElementById('s').value,
-        t: document.getElementById('t').value,
-        ga: document.getElementById('ga').value,
-        slug: document.getElementById('slug').value,
-        w: document.getElementById('w').value,
-        gRaw: document.getElementById('g').value.trim(),
-        l: document.getElementById('l').value,
-        end: document.getElementById('end').value,
-        ig: document.getElementById('ig').value,
-        fb: document.getElementById('fb').value,
-        gmaps: document.getElementById('gmaps').value,
-        faq: document.getElementById('faq').value
-    };
+    const n = document.getElementById('n').value;
+    const l = document.getElementById('l').value || 'logo.png';
+    const s = document.getElementById('s').value;
+    const g = document.getElementById('g').value;
+    const w = document.getElementById('w').value;
+    const ig = document.getElementById('ig').value;
+    const slug = document.getElementById('slug').value;
 
-    if(!d.n || !d.gRaw) { alert("Nome e Link do Google são obrigatórios!"); return; }
+    if(!n || !g) { alert("Nome e Link do Google são obrigatórios!"); return; }
 
-    const baseUrl = window.location.origin;
-    
-    // Codificação Sincronizada com o Smart Decode do v.html
-    const gBase64 = btoa(encodeURIComponent(d.gRaw));
-    
-    let linkMagico = `${baseUrl}/v.html?t=${d.t}&v=${Date.now()}&n=${encodeURIComponent(d.n)}&s=${encodeURIComponent(d.s)}&l=${encodeURIComponent(d.l)}&w=${d.w}&g=${gBase64}`;
-    
-    if(d.ga) linkMagico += `&ga=${d.ga}`;
-    if(d.end) linkMagico += `&end=${encodeURIComponent(d.end)}`;
-    if(d.ig) linkMagico += `&ig=${encodeURIComponent(d.ig)}`;
-    if(d.fb) linkMagico += `&fb=${encodeURIComponent(d.fb)}`;
-    if(d.gmaps) linkMagico += `&gmaps=${encodeURIComponent(d.gmaps)}`;
-    if(d.faq) linkMagico += `&faq=${encodeURIComponent(d.faq)}`;
+    const urlFinal = window.location.origin + "/" + slug;
 
-    const urlFinal = `${baseUrl}/${d.slug}`;
-
-    const qrDiv = document.getElementById('qrcode');
-    qrDiv.innerHTML = "";
-    new QRCode(qrDiv, { text: urlFinal, width: 160, height: 160 });
-    document.getElementById('linkCurtoTxt').innerText = urlFinal;
-
-    const htmlIndex = `<!DOCTYPE html>
+    // Gerar o HTML baseado no SEU NOVO MODELO
+    const htmlPronto = `<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Avaliar ${d.n} | Oficial</title>
-    <script>setTimeout(function(){ window.location.href = "${linkMagico}"; }, 500);<\/script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalie ${n} ⭐</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#1e1e1e,#2c3e50,#34495e,#1e1e1e);background-size:400% 400%;animation:gradientBG 12s ease infinite;display:flex;justify-content:center;align-items:center;height:100vh;color:white;text-align:center;}
+@keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.container{background:rgba(0,0,0,0.45);padding:35px 25px;border-radius:25px;backdrop-filter:blur(12px);max-width:380px;width:90%;box-shadow:0 20px 50px rgba(0,0,0,0.6);animation:fadeIn 1.2s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+.logo{width:120px;margin-bottom:20px;border-radius:12px;object-fit:contain;}
+h1{font-size:20px;margin-bottom:10px;}
+p{font-size:14px;margin-bottom:18px;line-height:1.4em;}
+.estrelas{font-size:24px;margin-bottom:18px;opacity:0.9;}
+.botao{display:block;margin:8px auto;padding:12px 18px;width:75%;font-weight:600;text-decoration:none;border-radius:30px;font-size:14px;transition:0.3s;}
+.google{background:#FFD700;color:#000;box-shadow:0 0 10px rgba(255,215,0,0.4);}
+.whatsapp{background:#25D366;color:white;box-shadow:0 0 10px rgba(37,211,102,0.4);}
+.instagram{background:linear-gradient(45deg,#E1306C,#F77737,#FCAF45);color:white;}
+.botao:hover{transform:scale(1.05);filter:brightness(1.1);}
+footer{margin-top:18px;padding-top:10px;font-size:9px;opacity:0.7;border-top:1px solid rgba(255,255,255,0.1);}
+footer a{color:#00d4ff;text-decoration:none;}
+</style>
 </head>
-<body style="background:#f1f5f9;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;">
-    <div style="background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.1);max-width:300px;">
-        <img src="${d.l}" style="width:80px;height:80px;border-radius:20px;margin-bottom:20px;object-fit:cover;">
-        <h2 style="font-size:18px;color:#1e293b;">Conectando...</h2>
-    </div>
+<body>
+<div class="container">
+    <img src="${l}" alt="${n}" class="logo">
+    <h1>Obrigado por escolher ${n} 💛</h1>
+    <p>${s}</p>
+    <div class="estrelas">⭐⭐⭐⭐⭐</div>
+    <a class="botao google" href="${g}" target="_blank">⭐ Avaliar no Google</a>
+    ${w ? `<a class="botao whatsapp" href="https://wa.me/${w}" target="_blank">💬 Falar no WhatsApp</a>` : ''}
+    ${ig ? `<a class="botao instagram" href="${ig}" target="_blank">📸 Seguir no Instagram</a>` : ''}
+    <footer>
+        <div>Qualidade • Confiança • Compromisso</div>
+        <div>🔒 Site Seguro | Certificado SSL</div>
+        <div style="margin-top:5px;">⚙️ Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a></div>
+    </footer>
+</div>
 </body>
 </html>`;
 
-    document.getElementById('codeIndex').innerText = htmlIndex;
+    document.getElementById('codeIndex').innerText = htmlPronto;
+    
+    // QR Code
+    const qrDiv = document.getElementById('qrcode');
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, { text: urlFinal, width: 150, height: 150 });
+    document.getElementById('linkCurtoTxt').innerText = urlFinal;
+    
     document.getElementById('result-area').style.display = 'block';
 }
 
 function copy(id) {
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Copiado com sucesso!"));
+    navigator.clipboard.writeText(text).then(() => alert("Código copiado!"));
 }
 </script>
 </body>
