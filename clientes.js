@@ -71,7 +71,7 @@ const clientes = [
     logo: "https://images.unsplash.com/photo-1773061941695-43568f71bee9?q=80&w=1470",
     descricao: "Beleza e estilo para valorizar sua autoestima.",
     instagram: "@TINTASQUALYQUIMY"
-  }
+  },
   { 
   nome: "Hotel Flamboyant", 
   pasta: "hotelflanboyant", 
