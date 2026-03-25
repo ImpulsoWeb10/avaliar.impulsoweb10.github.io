@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9RSCEX0LD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      const urlP = new URLSearchParams(window.location.search);
+      const clienteNome = urlP.get('n') || 'Empresa';
+      
+      // Configuração Principal
+      gtag('config', 'G-H9RSCEX0LD', {
+        'page_title': 'Motor de Avaliação: ' + clienteNome,
+        'content_group': 'Motor_Avaliacao'
+      });
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="metaTitle">Avaliação Oficial</title>
     
     <script type="application/ld+json" id="schema-json"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -16,25 +31,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Quicksand', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; background: #f1f5f9; transition: opacity 0.5s; opacity: 0; }
         body.visible { opacity: 1; }
-        
         .container { max-width: 420px; width: 100%; padding: 40px 25px; border-radius: 40px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.15); background: #fff; position: relative; }
-        
         .logo { width: 100px; height: 100px; object-fit: cover; border-radius: 25px; border: 3px solid var(--accent); margin-bottom: 15px; background: #fff; }
         h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: #1e293b; }
         .subtitle { font-size: 13px; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
-        
         .star-btn { font-size: 42px; color: #cbd5e1; cursor: pointer; transition: 0.2s; margin: 0 4px; background: none; border: none; outline: none; }
         .star-btn.active { color: var(--accent); transform: scale(1.1); }
-        
         .btn-action { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 50px; font-weight: 800; text-decoration: none; margin-top: 12px; transition: 0.3s; font-size: 14px; border: none; cursor: pointer; }
         .google { background: var(--accent); color: #000; }
         .whatsapp { background: #25d366; color: #fff; }
         .social-btn { background: #e2e8f0; color: #475569; font-size: 12px; padding: 10px; border-radius: 12px; }
-        
         .hidden { display: none !important; }
-        
         .safe-link { display: block; margin-top: 20px; font-size: 11px; color: #94a3b8; text-decoration: underline; opacity: 0.7; border-top: 1px dashed #eee; padding-top: 15px; }
-        
         .footer-info { margin-top: 25px; font-size: 11px; color: #94a3b8; line-height: 1.4; border-top: 1px solid #f1f5f9; padding-top: 15px; }
         .faq-seo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
     </style>
@@ -61,7 +69,7 @@
 
     <section id="feedback-bom" class="hidden">
         <p style="font-weight: 700; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
-        <a id="linkG" href="#" target="_blank" class="btn-action google"><i class="fab fa-google"></i> AVALIAR NO GOOGLE</a>
+        <a id="linkG" href="#" onclick="trackLead()" target="_blank" class="btn-action google"><i class="fab fa-google"></i> AVALIAR NO GOOGLE</a>
         
         <div id="extra-links" style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
             <a id="linkInsta" href="#" target="_blank" class="btn-action social-btn hidden"><i class="fab fa-instagram"></i> Instagram</a>
@@ -75,7 +83,7 @@
         <textarea id="msg" rows="3" placeholder="Sua mensagem para o gerente..." style="width:100%; padding:12px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:10px; font-family: inherit;"></textarea>
         <button onclick="irWhats()" class="btn-action whatsapp"><i class="fab fa-whatsapp"></i> FALAR COM GERENTE</button>
         
-        <a id="linkG-safe" href="#" target="_blank" class="safe-link">
+        <a id="linkG-safe" href="#" onclick="trackLead()" target="_blank" class="safe-link">
             Prefiro registrar minha opinião diretamente no Google
         </a>
     </section>
@@ -89,94 +97,66 @@
 </main>
 
 <script>
-    const urlP = new URLSearchParams(window.location.search);
-    
+    // Lead Tracking
+    function trackLead() {
+        gtag('event', 'generate_lead', {
+            'event_category': 'Avaliacao',
+            'event_label': urlP.get('n') || 'Empresa'
+        });
+    }
+
     window.onload = function() {
         const n = urlP.get('n') || 'Empresa';
         const s = urlP.get('s') || 'Feedback';
         const t = urlP.get('t') || '2';
         const l = urlP.get('l') || 'logo.png';
-        const ga = urlP.get('ga');
+        const gaParam = urlP.get('ga');
         const end = urlP.get('end');
         const ig = urlP.get('ig');
         const fb = urlP.get('fb');
         const gmaps = urlP.get('gmaps');
         const faq = urlP.get('faq');
 
-        // Temas
-        const temas = {
-            '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' },
-            '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' },
-            '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' },
-            '4': { b: '#fff5f5', c: '#ffffff', t: '#1e293b', a: '#e11d48' }
-        };
+        // Carrega Analytics do Cliente se existir (sem sobrepor o seu)
+        if(gaParam && gaParam !== 'G-H9RSCEX0LD') {
+            const sc = document.createElement('script');
+            sc.src = `https://www.googletagmanager.com/gtag/js?id=${gaParam}`;
+            document.head.appendChild(sc);
+            gtag('config', gaParam);
+        }
+
+        // Temas e Dados (Mantidos conforme original)
+        const temas = { '1': { b: '#0f172a', c: '#1e293b', t: '#ffffff', a: '#facc15' }, '2': { b: '#f1f5f9', c: '#ffffff', t: '#1e293b', a: '#22c55e' }, '3': { b: '#000000', c: '#111111', t: '#ffffff', a: '#d4af37' }, '4': { b: '#fff5f5', c: '#ffffff', t: '#1e293b', a: '#e11d48' } };
         const sel = temas[t] || temas['2'];
         document.body.style.backgroundColor = sel.b;
         document.querySelector('.container').style.backgroundColor = sel.c;
         document.querySelector('.container').style.color = sel.t;
         document.documentElement.style.setProperty('--accent', sel.a);
 
-        // Dados Básicos
         document.getElementById('nome').innerText = n;
         document.getElementById('nomeFooter').innerText = n;
         document.getElementById('sub').innerText = s;
         document.getElementById('imgLogo').src = l;
         document.getElementById('ano').innerText = new Date().getFullYear();
 
-        // Links Sociais
         if(end) document.getElementById('txtEnd').innerText = end;
         if(ig) { document.getElementById('linkInsta').href = ig; document.getElementById('linkInsta').classList.remove('hidden'); }
         if(fb) { document.getElementById('linkFB').href = fb; document.getElementById('linkFB').classList.remove('hidden'); }
         if(gmaps) { document.getElementById('linkMaps').href = gmaps; document.getElementById('linkMaps').classList.remove('hidden'); }
         
-        // --- LOGICA DE DECODIFICAÇÃO SEGURA DO LINK GOOGLE ---
         let linkFinal = "#";
         const paramG = urlP.get('g');
-
         if (paramG) {
-            try {
-                // Tenta decodificar se estiver em Base64
-                linkFinal = decodeURIComponent(atob(paramG));
-            } catch (e) {
-                // Se falhar (não for Base64), usa o texto puro que veio na URL
-                linkFinal = paramG;
-            }
+            try { linkFinal = decodeURIComponent(atob(paramG)); } catch (e) { linkFinal = paramG; }
         }
-        
         document.getElementById('linkG').href = linkFinal;
         document.getElementById('linkG-safe').href = linkFinal;
-        // -----------------------------------------------------
-
-        if(ga && ga !== 'G-XXXXXXXXXX') {
-            const sc = document.createElement('script');
-            sc.src = `https://www.googletagmanager.com/gtag/js?id=${ga}`;
-            document.head.appendChild(sc);
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date()); gtag('config', ga);
-        }
-
-        if(faq) {
-            faq.split(',').forEach(q => {
-                const p = document.createElement('p');
-                p.innerText = q.trim();
-                document.getElementById('faq-area').appendChild(p);
-            });
-        }
-
-        const schema = {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": n,
-            "image": l,
-            "address": { "@type": "PostalAddress", "streetAddress": end || "" }
-        };
-        document.getElementById('schema-json').text = JSON.stringify(schema);
 
         document.body.classList.add('visible');
     };
 
     function votar(n) {
+        gtag('event', 'voto_estrelas', { 'valor': n, 'cliente': urlP.get('n') });
         document.querySelectorAll('.star-btn').forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
         setTimeout(() => {
             document.getElementById('etapa1').classList.add('hidden');
@@ -190,6 +170,7 @@
     }
 
     function irWhats() {
+        gtag('event', 'contato_gerente', { 'cliente': urlP.get('n') });
         const w = urlP.get('w');
         const m = document.getElementById('msg').value;
         window.open(`https://wa.me/${w}?text=Feedback: ${encodeURIComponent(m)}`, '_blank');
