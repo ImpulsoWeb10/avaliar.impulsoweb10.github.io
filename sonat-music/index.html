@@ -1,38 +1,191 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonat Music | Oficial</title>
-<style>
-body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(-45deg,#0f172a,#1e293b,#2e1065,#0f172a);background-size:400% 400%;animation:gradientBG 10s ease infinite;display:flex;justify-content:center;align-items:center;min-height:100vh;color:white;text-align:center;}
-@keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-.container{background:rgba(255,255,255,0.05);padding:35px 25px;border-radius:30px;backdrop-filter:blur(15px);max-width:360px;width:92%;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);animation:slideUp 0.8s ease;}
-@keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
-.logo{width:100px;height:100px;border-radius:50%;margin-bottom:15px;border:3px solid #fbbf24;object-fit:cover;background:white;}
-.btn{display:block;margin:12px auto;padding:15px;width:90%;font-weight:700;text-decoration:none;border-radius:15px;font-size:14px;transition:0.3s;box-sizing:border-box;text-transform:uppercase;}
-.google{background:#fbbf24;color:#000;}
-.site{background:white;color:#000;}
-.whats{background:#25D366;color:white;}
-.social{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
-.btn:hover{transform:translateY(-4px);filter:brightness(1.1);}
-footer{margin-top:30px;font-size:10px;opacity:0.6;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;}
-footer a{color:#38bdf8;text-decoration:none;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avalie Sonat Music ⭐</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* FUNDO COM GRADIENTE ANIMADO */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* CONTAINER GLASSMORPHISM */
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            max-width: 380px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            width: 130px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            opacity: 0.9;
+            padding: 0 10px;
+        }
+
+        .estrelas {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #fbbf24;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+        }
+
+        /* ESTILO DOS BOTÕES */
+        .botao {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 12px auto;
+            padding: 14px 20px;
+            width: 85%;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-sizing: border-box;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .botao:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* CORES DOS BOTÕES */
+        .google {
+            background: #fbbf24; /* Amarelo Google */
+            color: #000;
+        }
+
+        .whatsapp {
+            background: #25D366; /* Verde WhatsApp */
+            color: white;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045); /* Gradiente Insta */
+            color: white;
+        }
+
+        .maps {
+            background: #ea4335; /* Vermelho Maps */
+            color: white;
+        }
+
+        /* FOOTER FIXO IMPULSOWEB10 */
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 10px;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+
 <div class="container">
-<img src="logo.jpeg" class="logo">
-<h1>Sonat Music</h1>
-<div style="color:#fbbf24;font-size:22px;margin-bottom:20px;">★★★★★</div>
-<a class="btn google" href="https://g.page/r/CRkmaq9U_Z8dEAE/review" target="_blank">⭐ Avaliar no Google</a>
+    <img src="logo-sonat.png" alt="Sonat Music" class="logo">
 
-<a class="btn social" href="https://www.google.com/maps/dir//Sonata+Music,+Av.+Turmalina,+1111+-+Est%C3%A2ncia+Fraternidade,+Itaquaquecetuba+-+SP,+08589-000/@-23.4398979,-46.2953356,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94ce7d713c67e031:0x1d9ffd54af6a2619!2m2!1d-46.3003809!2d-23.43553?entry=ttu&g_ep=EgoyMDI2MDMyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍 Como Chegar (GPS)</a>
-<a class="btn whats" href="https://wa.me/5511912035161" target="_blank">💬 WhatsApp</a>
-<a class="btn social" href="@sonat_amusic" target="_blank">📸 Instagram</a>
+    <h1>Sonat Music 💛</h1>
+    
+    <p>Agradecemos a preferência! <br> Sua avaliação nos ajuda a levar música para mais pessoas.</p>
 
-<footer>Desenvolvido por <a href="https://www.impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a> | <a href="https://wa.me/5511954950044" target="_blank">Suporte</a></footer>
+    <div class="estrelas">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+
+    <a href="#" class="botao google" target="_blank">
+        <i class="fab fa-google"></i> Avaliar no Google
+    </a>
+
+    <a href="https://wa.me/SEU_NUMERO" class="botao whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+    </a>
+
+    <a href="#" class="botao instagram" target="_blank">
+        <i class="fab fa-instagram"></i> Seguir no Instagram
+    </a>
+
+    <a href="#" class="botao maps" target="_blank">
+        <i class="fas fa-location-dot"></i> Como Chegar (GPS)
+    </a>
+
+    <footer>
+        <div>Qualidade • Harmonia • Compromisso</div>
+        <div>🔒 Ambiente Seguro | Certificado SSL</div>
+        <div style="margin-top: 8px;">
+            Desenvolvido por <a href="https://www.impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a>
+            <br>
+            Suporte: <a href="https://wa.me/5511954950044" target="_blank">(11) 95495-0044</a>
+        </div>
+    </footer>
 </div>
+
 </body>
 </html>
