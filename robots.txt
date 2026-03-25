@@ -1,7 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /v.html
 
-Sitemap: https://avaliar.impulsoweb10.com.br/sitemap.xml
-
+# Bloqueia pastas de sistema e testes
 Disallow: /temp/
 Disallow: /testes/
+
+# Indica o caminho do mapa do site para os robôs
+Sitemap: https://avaliar.impulsoweb10.com.br/sitemap.xml
