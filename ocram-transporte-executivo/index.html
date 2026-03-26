@@ -9,226 +9,164 @@
         :root { --gold: #fbbf24; }
         
         body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            margin: 0; font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #161b22, #000000);
-            background-size: 400% 400%;
-            animation: grad 12s infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
+            background-size: 400% 400%; animation: grad 12s infinite;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; color: white; text-align: center; overflow: hidden;
         }
 
         @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
         .card {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 35px 20px;
-            border-radius: 40px;
-            backdrop-filter: blur(20px);
-            max-width: 360px;
-            width: 92%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
-            border: 1px solid rgba(251, 191, 36, 0.15);
-            animation: up 1s ease-out;
-            position: relative;
+            background: rgba(0, 0, 0, 0.75); padding: 35px 20px; border-radius: 40px;
+            backdrop-filter: blur(20px); max-width: 360px; width: 92%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9); border: 1px solid rgba(251, 191, 36, 0.2);
+            animation: up 1s ease-out; position: relative; z-index: 1;
         }
 
         @keyframes up { from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)} }
 
-        /* LOGO COM LUZ DE FUNDO */
-        .logo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
+        /* LOGO COM LUZ */
+        .logo-container { position: relative; display: inline-block; margin-bottom: 5px; }
         .logo-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: var(--gold);
-            filter: blur(45px);
-            opacity: 0.35;
-            z-index: -1;
-            border-radius: 50%;
-            animation: glow 4s infinite alternate;
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90px; height: 90px; background: var(--gold); filter: blur(40px);
+            opacity: 0.4; z-index: -1; border-radius: 50%; animation: glow 3s infinite alternate;
         }
-        @keyframes glow { from { opacity: 0.2; transform: translate(-50%, -50%) scale(1); } to { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); } }
-        
-        .logo { width: 120px; position: relative; z-index: 2; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
+        @keyframes glow { from { opacity: 0.25; transform: translate(-50%, -50%) scale(1); } to { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); } }
+        .logo { width: 120px; position: relative; z-index: 2; }
 
-        .seo-phrase {
-            font-size: 11px;
-            color: var(--gold);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            display: block;
-            opacity: 0.9;
+        /* CARROSSEL */
+        .carousel-container {
+            width: 100%; height: 180px; border-radius: 20px; overflow: hidden;
+            margin: 15px 0; position: relative; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .carousel-track { display: flex; width: 600%; height: 100%; animation: slide 24s infinite ease-in-out; }
+        .carousel-track img { width: 16.66%; height: 100%; object-fit: cover; }
+        @keyframes slide {
+            0%, 13% { transform: translateX(0); }
+            16%, 29% { transform: translateX(-16.66%); }
+            32%, 45% { transform: translateX(-33.33%); }
+            48%, 61% { transform: translateX(-50%); }
+            64%, 77% { transform: translateX(-66.66%); }
+            80%, 93% { transform: translateX(-83.33%); }
+            100% { transform: translateX(0); }
         }
 
-        /* CONTAINER DO VÍDEO PREMIUM */
-        .video-container {
-            width: 100%;
-            height: 190px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.05);
-            background: #000; /* Fundo preto para o fade-out */
-        }
-        
-        /* Efeito de vinheta nas bordas do vídeo */
-        .video-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .video-player {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 1;
-            animation: taxiFade 6s infinite; /* Sincronizado com o tempo do vídeo */
-            z-index: 1;
-        }
-
-        /* Animação de fade-out no final do vídeo */
-        @keyframes taxiFade {
-            0%, 70% { opacity: 1; } /* Fica visível a maior parte do tempo */
-            90%, 100% { opacity: 0; } /* Desaparece no final do clipe */
-        }
-
-        .stars { color: var(--gold); font-size: 22px; margin-bottom: 15px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
-
-        /* BOTÃO GOOGLE PULSANTE */
+        /* BOTÃO PULSANTE */
         .btn-google {
-            position: relative;
-            display: block;
-            margin: 10px auto 20px auto;
-            padding: 18px;
-            width: 90%;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 50px;
-            background: var(--gold);
-            color: #000;
-            text-transform: uppercase;
-            font-size: 14px;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
-            animation: pulse 2.5s infinite;
+            position: relative; display: block; margin: 15px auto; padding: 18px;
+            width: 90%; font-weight: 800; text-decoration: none; border-radius: 50px;
+            background: var(--gold); color: #000; text-transform: uppercase; font-size: 13px;
+            animation: pulse 2.5s infinite; border: none; cursor: pointer;
         }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); }
-            70% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
-
-        .btn-google::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
-            transition: all 0.5s;
-            animation: shine 3.5s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            25% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .social-row { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
+        .social-row { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
         .icon-btn {
             width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: white; font-size: 20px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+            text-decoration: none; color: white; font-size: 20px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
         }
-        .wa{background:#25D366; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);} 
-        .ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045); box-shadow: 0 5px 15px rgba(253, 29, 29, 0.2);} 
-        .fb{background:#1877F2; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.2);} 
-        .maps{background:#ea4335; box-shadow: 0 5px 15px rgba(234, 67, 53, 0.2);} 
-        .tel{background:#38bdf8; box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);}
+        .wa{background:#25D366;} .ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);} 
+        .fb{background:#1877F2;} .maps{background:#ea4335;} .tel{background:#38bdf8;}
 
-        .icon-btn:hover { transform: translateY(-8px) scale(1.15); filter: brightness(1.2); border-color: white; }
-
-        .endereco { font-size: 11px; opacity: 0.8; margin: 15px 0; line-height: 1.6; padding: 0 10px; color: #e5e7eb; }
-
-        footer {
-            margin-top: 25px; padding-top: 15px; font-size: 10px;
-            border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.7;
+        /* MODAL ESTILOSO */
+        #modal-info {
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 999; display: flex; justify-content: center; align-items: flex-end;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        footer a { color: var(--gold); text-decoration: none; font-weight: bold; }
+        #modal-info.active { bottom: 0; }
+        .modal-content {
+            background: linear-gradient(180deg, #1a1a1a, #000);
+            width: 100%; max-width: 400px; padding: 40px 20px;
+            border-radius: 30px 30px 0 0; border-top: 2px solid var(--gold);
+            position: relative; text-align: center;
+        }
+        .close-modal {
+            position: absolute; top: 15px; right: 20px; font-size: 24px;
+            color: var(--gold); cursor: pointer;
+        }
+        .modal-icon { font-size: 50px; color: var(--gold); margin-bottom: 15px; }
+        .modal-text { font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .modal-subtext { font-size: 14px; opacity: 0.7; }
+
     </style>
 </head>
 <body>
 
 <div class="card">
     <div class="logo-container">
-        <img src="logo.png" class="logo" alt="Ocram Logo">
+        <img src="logo.png" class="logo">
     </div>
 
-    <h1 style="font-size:19px; margin:0 0 5px 0; letter-spacing: 1.5px; font-weight: 800;">OCRAM TRANSPORTE</h1>
-    <span class="seo-phrase">Sua Viagem em Primeira Classe</span>
+    <h1 style="font-size:19px; margin:0; letter-spacing: 1px;">OCRAM TRANSPORTE</h1>
+    <p style="color:var(--gold); font-size: 11px; margin: 5px 0 15px 0; font-weight: bold;">SERVIÇO EXECUTIVO PREMIUM</p>
     
-    <div class="video-container">
-        <video class="video-player" autoplay loop muted playsinline>
-            <source src="taxi_indo_embora.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos HTML5.
-        </video>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <img src="tranfer1.png"><img src="tranfer2.png"><img src="tranfer3.png">
+            <img src="tranfer4.png"><img src="tranfer5.png"><img src="tranfer6.png">
+        </div>
     </div>
 
-    <div class="stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-    </div>
-
-    <a href="https://www.google.com/search?q=avaliações+sobre+ocram+transporte+executivo" class="btn-google" target="_blank">
+    <a href="https://www.google.com/search?q=avaliacoes+ocram" class="btn-google" 
+       onclick="openLink(event, 'Abrindo avaliações no Google', 'google')">
         <i class="fab fa-google"></i> Avaliar no Google
     </a>
 
     <div class="social-row">
-        <a href="https://wa.me/5511984048552?text=Olá! Gostaria de um orçamento." class="icon-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="tel:11984048552" class="icon-btn tel"><i class="fas fa-phone"></i></a>
-        <a href="https://www.instagram.com/ocramtransporteexecutivo" class="icon-btn ig" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/share/18CTqH38X2/" class="icon-btn fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="http://googleusercontent.com/maps.google.com/3" class="icon-btn maps" target="_blank"><i class="fas fa-location-dot"></i></a>
+        <a href="https://wa.me/5511984048552" class="icon-btn wa" onclick="openLink(event, 'Iniciando conversa no WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:11984048552" class="icon-btn tel" onclick="openLink(event, 'Ligando para Ocram Transporte', 'phone')"><i class="fas fa-phone"></i></a>
+        <a href="https://www.instagram.com/ocramtransporteexecutivo" class="icon-btn ig" onclick="openLink(event, 'Acessando nosso Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
+        <a href="http://maps.google.com" class="icon-btn maps" onclick="openLink(event, 'Abrindo localização da nossa sede', 'location-dot')"><i class="fas fa-location-dot"></i></a>
     </div>
 
-    <div class="endereco">
-        <i class="fas fa-map-marker-alt" style="color:var(--gold)"></i> Av. Águia de Haia, 2100 - Parque Paineiras<br>São Paulo - SP, 03694-000
-    </div>
-
-    <footer>
-        Desenvolvido por <a href="https://www.impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a><br>
-        Suporte: <a href="https://wa.me/5511954950044">11 95495-0044</a>
+    <footer style="font-size: 10px; opacity: 0.5;">
+        Desenvolvido por ImpulsoWeb10
     </footer>
 </div>
+
+<div id="modal-info">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-icon"><i id="m-icon" class="fas fa-info-circle"></i></div>
+        <div class="modal-text" id="m-text">Acessando...</div>
+        <div class="modal-subtext">Você será redirecionado em instantes.</div>
+    </div>
+</div>
+
+<script>
+    function openLink(event, frase, iconName) {
+        event.preventDefault(); // Trava o link por 4 segundos
+        const url = event.currentTarget.href;
+        
+        // Ativa Modal
+        document.getElementById('m-text').innerText = frase;
+        document.getElementById('m-icon').className = 'fas fa-' + iconName;
+        document.getElementById('modal-info').classList.add('active');
+
+        // Voz (Audio)
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = frase;
+        msg.lang = 'pt-BR';
+        msg.rate = 1.1;
+        window.speechSynthesis.speak(msg);
+
+        // Redireciona após 4 segundos
+        setTimeout(() => {
+            window.location.href = url;
+        }, 4000);
+    }
+
+    function closeModal() {
+        document.getElementById('modal-info').classList.remove('active');
+        window.speechSynthesis.cancel(); // Para o áudio se fechar no X
+    }
+</script>
 
 </body>
 </html>
