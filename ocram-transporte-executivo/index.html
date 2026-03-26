@@ -76,8 +76,8 @@
             opacity: 0.9;
         }
 
-        /* CARROSSEL PREMIUM */
-        .carousel-container {
+        /* CONTAINER DO VÍDEO PREMIUM */
+        .video-container {
             width: 100%;
             height: 190px;
             border-radius: 20px;
@@ -86,36 +86,35 @@
             position: relative;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.05);
+            background: #000; /* Fundo preto para o fade-out */
         }
-        /* Efeito de vinheta nas bordas do carrossel */
-        .carousel-container::after {
+        
+        /* Efeito de vinheta nas bordas do vídeo */
+        .video-container::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
             pointer-events: none;
+            z-index: 2;
         }
 
-        .carousel-track {
-            display: flex;
-            width: 600%; 
-            height: 100%;
-            animation: slide 24s infinite ease-in-out;
-        }
-        .carousel-track img {
+        .video-player {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            animation: taxiFade 6s infinite; /* Sincronizado com o tempo do vídeo */
+            z-index: 1;
         }
 
-        @keyframes slide {
-            0%, 13% { transform: translateX(0); }
-            16%, 29% { transform: translateX(-16.66%); }
-            32%, 45% { transform: translateX(-33.33%); }
-            48%, 61% { transform: translateX(-50%); }
-            64%, 77% { transform: translateX(-66.66%); }
-            80%, 93% { transform: translateX(-83.33%); }
-            100% { transform: translateX(0); }
+        /* Animação de fade-out no final do vídeo */
+        @keyframes taxiFade {
+            0%, 70% { opacity: 1; } /* Fica visível a maior parte do tempo */
+            90%, 100% { opacity: 0; } /* Desaparece no final do clipe */
         }
 
         .stars { color: var(--gold); font-size: 22px; margin-bottom: 15px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
@@ -198,15 +197,11 @@
     <h1 style="font-size:19px; margin:0 0 5px 0; letter-spacing: 1.5px; font-weight: 800;">OCRAM TRANSPORTE</h1>
     <span class="seo-phrase">Sua Viagem em Primeira Classe</span>
     
-    <div class="carousel-container">
-        <div class="carousel-track">
-            <img src="tranfer1.png" alt="Transfer Executivo">
-            <img src="tranfer2.png" alt="Chevrolet Spin 7 Lugares">
-            <img src="tranfer3.png" alt="Viagem Particular">
-            <img src="tranfer4.png" alt="Traslado Aeroporto">
-            <img src="tranfer5.png" alt="Atendimento VIP">
-            <img src="tranfer6.png" alt="Ocram Transporte">
-        </div>
+    <div class="video-container">
+        <video class="video-player" autoplay loop muted playsinline>
+            <source src="taxi_indo_embora.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
     </div>
 
     <div class="stars">
@@ -222,7 +217,7 @@
         <a href="tel:11984048552" class="icon-btn tel"><i class="fas fa-phone"></i></a>
         <a href="https://www.instagram.com/ocramtransporteexecutivo" class="icon-btn ig" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.facebook.com/share/18CTqH38X2/" class="icon-btn fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://maps.app.goo.gl/YourLink" class="icon-btn maps" target="_blank"><i class="fas fa-location-dot"></i></a>
+        <a href="http://googleusercontent.com/maps.google.com/3" class="icon-btn maps" target="_blank"><i class="fas fa-location-dot"></i></a>
     </div>
 
     <div class="endereco">
