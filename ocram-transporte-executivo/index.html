@@ -19,23 +19,20 @@
         @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
         .card {
-            background: rgba(0, 0, 0, 0.75); padding: 35px 20px; border-radius: 40px;
+            background: rgba(0, 0, 0, 0.75); padding: 30px 20px; border-radius: 40px;
             backdrop-filter: blur(20px); max-width: 360px; width: 92%;
             box-shadow: 0 25px 50px rgba(0,0,0,0.9); border: 1px solid rgba(251, 191, 36, 0.2);
-            animation: up 1s ease-out; position: relative; z-index: 1;
+            position: relative; z-index: 1;
         }
-
-        @keyframes up { from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)} }
 
         /* LOGO COM LUZ */
         .logo-container { position: relative; display: inline-block; margin-bottom: 5px; }
         .logo-container::after {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90px; height: 90px; background: var(--gold); filter: blur(40px);
-            opacity: 0.4; z-index: -1; border-radius: 50%; animation: glow 3s infinite alternate;
+            width: 80px; height: 80px; background: var(--gold); filter: blur(40px);
+            opacity: 0.3; z-index: -1; border-radius: 50%;
         }
-        @keyframes glow { from { opacity: 0.25; transform: translate(-50%, -50%) scale(1); } to { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); } }
-        .logo { width: 120px; position: relative; z-index: 2; }
+        .logo { width: 110px; position: relative; z-index: 2; }
 
         /* CARROSSEL */
         .carousel-container {
@@ -54,46 +51,50 @@
             100% { transform: translateX(0); }
         }
 
-        /* BOTÃO PULSANTE */
         .btn-google {
-            position: relative; display: block; margin: 15px auto; padding: 18px;
+            position: relative; display: block; margin: 15px auto; padding: 16px;
             width: 90%; font-weight: 800; text-decoration: none; border-radius: 50px;
             background: var(--gold); color: #000; text-transform: uppercase; font-size: 13px;
             animation: pulse 2.5s infinite; border: none; cursor: pointer;
         }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); } 70% { box-shadow: 0 0 0 12px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
 
-        .social-row { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .social-row { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
         .icon-btn {
-            width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: white; font-size: 20px; background: rgba(255,255,255,0.05);
+            width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: white; font-size: 18px; background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
         }
-        .wa{background:#25D366;} .ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);} 
-        .fb{background:#1877F2;} .maps{background:#ea4335;} .tel{background:#38bdf8;}
+        .wa{background:#25D366;} .tel{background:#38bdf8;} .ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);} .maps{background:#ea4335;}
 
-        /* MODAL ESTILOSO */
+        /* MODAL CENTRALIZADO */
         #modal-info {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-            z-index: 999; display: flex; justify-content: center; align-items: flex-end;
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            z-index: 999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: 0.4s;
         }
-        #modal-info.active { bottom: 0; }
+        #modal-info.active { opacity: 1; visibility: visible; }
         .modal-content {
-            background: linear-gradient(180deg, #1a1a1a, #000);
-            width: 100%; max-width: 400px; padding: 40px 20px;
-            border-radius: 30px 30px 0 0; border-top: 2px solid var(--gold);
-            position: relative; text-align: center;
+            background: #1a1a1a; width: 85%; max-width: 320px; padding: 30px;
+            border-radius: 30px; border: 1px solid var(--gold);
+            position: relative; text-align: center; transform: scale(0.8); transition: 0.4s;
         }
-        .close-modal {
-            position: absolute; top: 15px; right: 20px; font-size: 24px;
-            color: var(--gold); cursor: pointer;
-        }
-        .modal-icon { font-size: 50px; color: var(--gold); margin-bottom: 15px; }
-        .modal-text { font-size: 18px; font-weight: bold; margin-bottom: 5px; }
-        .modal-subtext { font-size: 14px; opacity: 0.7; }
+        #modal-info.active .modal-content { transform: scale(1); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #fff; cursor: pointer; }
+        .modal-icon { font-size: 45px; color: var(--gold); margin-bottom: 15px; }
+        .modal-text { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #fff; }
 
+        /* BARRINHA DE TEMPO */
+        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gold); width: 0%; }
+        #modal-info.active .progress-fill { animation: fillProgress 4s linear forwards; }
+        @keyframes fillProgress { from { width: 0%; } to { width: 100%; } }
+
+        /* RODAPÉ PERSONALIZADO */
+        .custom-footer { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .footer-link { color: #fff; text-decoration: none; font-size: 11px; line-height: 1.4; display: block; }
+        .footer-link b { color: var(--gold); }
     </style>
 </head>
 <body>
@@ -102,9 +103,7 @@
     <div class="logo-container">
         <img src="logo.png" class="logo">
     </div>
-
-    <h1 style="font-size:19px; margin:0; letter-spacing: 1px;">OCRAM TRANSPORTE</h1>
-    <p style="color:var(--gold); font-size: 11px; margin: 5px 0 15px 0; font-weight: bold;">SERVIÇO EXECUTIVO PREMIUM</p>
+    <h1 style="font-size:18px; margin:0; letter-spacing: 1px;">OCRAM TRANSPORTE</h1>
     
     <div class="carousel-container">
         <div class="carousel-track">
@@ -114,57 +113,64 @@
     </div>
 
     <a href="https://www.google.com/search?q=avaliacoes+ocram" class="btn-google" 
-       onclick="openLink(event, 'Abrindo avaliações no Google', 'google')">
+       onclick="handleAction(event, 'Abrindo avaliações no Google', 'google')">
         <i class="fab fa-google"></i> Avaliar no Google
     </a>
 
     <div class="social-row">
-        <a href="https://wa.me/5511984048552" class="icon-btn wa" onclick="openLink(event, 'Iniciando conversa no WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
-        <a href="tel:11984048552" class="icon-btn tel" onclick="openLink(event, 'Ligando para Ocram Transporte', 'phone')"><i class="fas fa-phone"></i></a>
-        <a href="https://www.instagram.com/ocramtransporteexecutivo" class="icon-btn ig" onclick="openLink(event, 'Acessando nosso Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
-        <a href="http://maps.google.com" class="icon-btn maps" onclick="openLink(event, 'Abrindo localização da nossa sede', 'location-dot')"><i class="fas fa-location-dot"></i></a>
+        <a href="https://wa.me/5511984048552" class="icon-btn wa" onclick="handleAction(event, 'Iniciando conversa no WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:11984048552" class="icon-btn tel" onclick="handleAction(event, 'Ligando agora para Ocram', 'phone')"><i class="fas fa-phone"></i></a>
+        <a href="https://www.instagram.com/ocramtransporteexecutivo" class="icon-btn ig" onclick="handleAction(event, 'Acessando nosso Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
+        <a href="http://maps.google.com" class="icon-btn maps" onclick="handleAction(event, 'Localizando endereço no GPS', 'location-dot')"><i class="fas fa-location-dot"></i></a>
     </div>
 
-    <footer style="font-size: 10px; opacity: 0.5;">
-        Desenvolvido por ImpulsoWeb10
-    </footer>
+    <div class="custom-footer">
+        <a href="https://wa.me/5511954950044" class="footer-link">
+            Quer seu link personalizado igual a esse? <br>
+            <b>Saiba mais: (11) 95495-0044</b>
+        </a>
+    </div>
 </div>
 
 <div id="modal-info">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-icon"><i id="m-icon" class="fas fa-info-circle"></i></div>
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <div class="modal-icon"><i id="m-icon" class="fas fa-circle-notch"></i></div>
         <div class="modal-text" id="m-text">Acessando...</div>
-        <div class="modal-subtext">Você será redirecionado em instantes.</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
     </div>
 </div>
 
 <script>
-    function openLink(event, frase, iconName) {
-        event.preventDefault(); // Trava o link por 4 segundos
+    let redirectTimer;
+
+    function handleAction(event, frase, iconName) {
+        event.preventDefault();
         const url = event.currentTarget.href;
         
-        // Ativa Modal
+        // Modal e Ícone
         document.getElementById('m-text').innerText = frase;
         document.getElementById('m-icon').className = 'fas fa-' + iconName;
         document.getElementById('modal-info').classList.add('active');
 
-        // Voz (Audio)
+        // VOZ MASCULINA (Ajustada)
         const msg = new SpeechSynthesisUtterance();
         msg.text = frase;
         msg.lang = 'pt-BR';
-        msg.rate = 1.1;
+        msg.pitch = 0.8; // Tom mais grave (masculino)
+        msg.rate = 1.0;
         window.speechSynthesis.speak(msg);
 
-        // Redireciona após 4 segundos
-        setTimeout(() => {
+        // Timer de 4 segundos
+        redirectTimer = setTimeout(() => {
             window.location.href = url;
         }, 4000);
     }
 
     function closeModal() {
+        clearTimeout(redirectTimer);
         document.getElementById('modal-info').classList.remove('active');
-        window.speechSynthesis.cancel(); // Para o áudio se fechar no X
+        window.speechSynthesis.cancel();
     }
 </script>
 
