@@ -235,7 +235,7 @@
       text-align: center;
       text-decoration: none;
       border-radius: 12px;
-      border: 1px solid rgba(255,26,38,0.4);
+      border: 1px solid rgba(255,26,38,0.5);
       box-shadow:
         0 4px 20px rgba(192,0,10,0.4),
         inset 0 1px 0 rgba(255,255,255,0.1);
@@ -244,23 +244,67 @@
       overflow: hidden;
       cursor: pointer;
       margin-bottom: 14px;
+      animation: pulse-btn 2.2s ease-in-out infinite;
     }
 
+    /* brilho deslizante */
     .btn-avaliar::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.2s;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 80%
+      );
+      animation: shine-slide 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* anel pulsante externo */
+    .btn-avaliar::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 15px;
+      border: 2px solid rgba(255,26,38,0.7);
+      animation: ring-pulse 2.2s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .btn-avaliar:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(192,0,10,0.6), inset 0 1px 0 rgba(255,255,255,0.15);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 36px rgba(192,0,10,0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+      animation-play-state: paused;
     }
 
-    .btn-avaliar:hover::before { opacity: 1; }
+    @keyframes pulse-btn {
+      0%, 100% {
+        box-shadow: 0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 6px 32px rgba(255,26,38,0.75), 0 0 0 6px rgba(192,0,10,0.15), inset 0 1px 0 rgba(255,255,255,0.15);
+        transform: scale(1.025);
+      }
+    }
+
+    @keyframes shine-slide {
+      0%   { left: -80%; opacity: 0; }
+      10%  { opacity: 1; }
+      60%  { left: 130%; opacity: 1; }
+      61%, 100% { left: 130%; opacity: 0; }
+    }
+
+    @keyframes ring-pulse {
+      0%, 100% { opacity: 0; transform: scale(1); }
+      40%       { opacity: 1; transform: scale(1.01); }
+      70%       { opacity: 0; transform: scale(1.04); }
+    }
 
     .btn-icon { margin-right: 8px; font-size: 1.1rem; }
 
@@ -275,54 +319,92 @@
     .divider-line { flex: 1; height: 1px; background: var(--silver); }
     .divider-dot { font-size: 0.5rem; color: var(--silver); }
 
-    /* ── CONTACT BUTTONS ── */
-    .btn-contact {
+    /* ── CONTACT GRID ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-icon-box {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 13px 20px;
-      background: transparent;
-      color: var(--silver);
-      font-family: 'Exo 2', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 1px;
+      gap: 7px;
+      padding: 14px 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
       text-decoration: none;
-      border-radius: 10px;
-      border: 1px solid rgba(200,205,212,0.15);
       transition: all 0.25s ease;
-      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .btn-contact:hover {
-      border-color: rgba(200,205,212,0.4);
-      background: rgba(200,205,212,0.05);
-      color: var(--white);
+    .btn-icon-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+      border-radius: 14px;
     }
 
-    .btn-contact.whatsapp:hover {
+    .btn-icon-box:hover { transform: translateY(-3px); }
+    .btn-icon-box:hover::before { opacity: 1; }
+
+    .btn-icon-box.whatsapp:hover {
       border-color: rgba(37,211,102,0.5);
-      color: #25d366;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.2);
+    }
+    .btn-icon-box.whatsapp::before {
+      background: radial-gradient(ellipse at 50% 100%, rgba(37,211,102,0.12), transparent 70%);
     }
 
-    .btn-contact.maps:hover {
+    .btn-icon-box.instagram:hover {
+      border-color: rgba(225,48,108,0.5);
+      box-shadow: 0 6px 20px rgba(225,48,108,0.2);
+    }
+    .btn-icon-box.instagram::before {
+      background: radial-gradient(ellipse at 50% 100%, rgba(225,48,108,0.12), transparent 70%);
+    }
+
+    .btn-icon-box.maps:hover {
       border-color: rgba(66,133,244,0.5);
-      color: #4285f4;
+      box-shadow: 0 6px 20px rgba(66,133,244,0.2);
+    }
+    .btn-icon-box.maps::before {
+      background: radial-gradient(ellipse at 50% 100%, rgba(66,133,244,0.12), transparent 70%);
     }
 
-    .btn-contact.instagram:hover {
-      border-color: rgba(225,48,108,0.5);
-      color: #e1306c;
+    .bib-icon {
+      font-size: 1.6rem;
+      line-height: 1;
     }
 
-    .btn-contact.instagram:hover {
-      border-color: rgba(225,48,108,0.5);
-      color: #e1306c;
+    .bib-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
     }
 
-    .contact-icon { font-size: 1.2rem; }
+    .btn-icon-box.whatsapp .bib-label { color: #25d366; }
+    .btn-icon-box.instagram .bib-label { color: #e1306c; }
+    .btn-icon-box.maps .bib-label { color: #4285f4; }
+
+    .bib-sub {
+      font-size: 0.62rem;
+      color: #555;
+      text-align: center;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+    }
 
     /* ── ADDRESS PILL ── */
     .address-pill {
@@ -333,7 +415,7 @@
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
       padding: 12px 16px;
-      margin-top: 6px;
+      margin-top: 10px;
     }
 
     .address-pill .pin { font-size: 1.1rem; color: var(--red); flex-shrink: 0; margin-top: 1px; }
@@ -486,158 +568,144 @@
       animation: speedLine linear infinite;
     }
 
-    /* ── CAROUSEL ── */
-    .carousel-wrap {
-      width: 100%;
-      margin: 0 0 28px;
-      animation: fadeUp 0.8s 0.25s ease both;
-    }
 
-    .carousel-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #444;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-
-    .carousel-track-outer {
-      overflow: hidden;
-      width: 100%;
+    /* ══ CAROUSEL ══ */
+    .carousel-section {
+      width: 100vw;
       position: relative;
-      padding: 12px 0;
-    }
-
-    /* fade edges */
-    .carousel-track-outer::before,
-    .carousel-track-outer::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 60px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .carousel-track-outer::before {
-      left: 0;
-      background: linear-gradient(90deg, #0a0a0a, transparent);
-    }
-    .carousel-track-outer::after {
-      right: 0;
-      background: linear-gradient(270deg, #0a0a0a, transparent);
-    }
-
-    .carousel-track {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      width: max-content;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-
-    .carousel-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: 110px;
-      transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-      opacity: 0.35;
-      transform: scale(0.65);
-      cursor: pointer;
-      padding: 0 6px;
-    }
-
-    .carousel-item.center {
-      opacity: 1;
-      transform: scale(1.0);
-    }
-
-    .carousel-item.side1 {
-      opacity: 0.65;
-      transform: scale(0.82);
-    }
-
-    .carousel-item.side2 {
-      opacity: 0.38;
-      transform: scale(0.68);
-    }
-
-    .carousel-img-wrap {
-      width: 88px;
-      height: 88px;
-      border-radius: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 28px;
       overflow: hidden;
-      border: 2px solid transparent;
-      transition: border-color 0.4s, box-shadow 0.4s;
-      background: #111;
     }
 
-    .carousel-item.center .carousel-img-wrap {
-      width: 110px;
-      height: 110px;
-      border-radius: 16px;
-      border-color: rgba(192,0,10,0.7);
-      box-shadow: 0 0 20px rgba(192,0,10,0.4), 0 8px 24px rgba(0,0,0,0.5);
+    .cs-slides {
+      position: relative;
+      width: 100%;
+      height: 270px;
     }
 
-    .carousel-item.side1 .carousel-img-wrap {
-      border-color: rgba(192,0,10,0.2);
+    .cs-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.75s ease;
     }
+    .cs-slide.active { opacity: 1; }
 
-    .carousel-img-wrap img {
+    .cs-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .carousel-phrase {
+    .cs-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 35%,
+        rgba(0,0,0,0.65) 100%
+      );
+    }
+
+    .cs-phrase {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 28px;
+      pointer-events: none;
+    }
+
+    .cs-phrase span {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--red);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
       text-align: center;
-      margin-top: 8px;
+      color: #fff;
+      text-shadow:
+        0 0 24px rgba(192,0,10,1),
+        0 2px 10px rgba(0,0,0,0.9),
+        0 0 60px rgba(192,0,10,0.5);
+      line-height: 1.25;
       opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.4s, transform 0.4s;
-      white-space: nowrap;
-      max-width: 130px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      transform: translateY(12px) scale(0.96);
+      transition: opacity 0.5s 0.25s ease, transform 0.5s 0.25s ease;
     }
 
-    .carousel-item.center .carousel-phrase {
+    .cs-slide.active .cs-phrase span {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
-    .carousel-dots {
+    /* red bar top */
+    .cs-slides::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--red), var(--red-glow), var(--red), transparent);
+      z-index: 5;
+    }
+
+    /* dots */
+    .cs-dots {
       display: flex;
       justify-content: center;
-      gap: 6px;
-      margin-top: 14px;
+      gap: 7px;
+      padding: 12px 0 0;
     }
-
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
+    .cs-dot {
+      width: 7px; height: 7px;
       border-radius: 50%;
-      background: #333;
+      background: #2a2a2a;
+      border: 1px solid #333;
       cursor: pointer;
       transition: all 0.3s;
     }
-
-    .carousel-dot.active {
+    .cs-dot.active {
       background: var(--red);
-      width: 18px;
-      border-radius: 3px;
+      width: 22px;
+      border-radius: 4px;
+      border-color: var(--red);
+      box-shadow: 0 0 8px rgba(192,0,10,0.6);
+    }
+
+    /* thumbnails */
+    .cs-thumbs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 0;
+    }
+    .cs-thumb {
+      width: 48px;
+      height: 34px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+    .cs-thumb.active {
+      border-color: var(--red);
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(192,0,10,0.5);
+    }
+    .cs-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
   </style>
@@ -691,40 +759,56 @@
   <div class="brand-name">SPN</div>
   <div class="brand-sub">Estética Automotiva</div>
 
-
-  <!-- CAROUSEL -->
-  <div class="carousel-wrap">
-    <div class="carousel-title">◆ Nossos trabalhos ◆</div>
-    <div class="carousel-track-outer">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-item" data-idx="0" onclick="goTo(0)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/logo.png" alt="SPN Logo" loading="lazy"/></div>
-          <div class="carousel-phrase">Excelência em cada detalhe</div>
+  <!-- ══ CAROUSEL ══ -->
+  <div class="carousel-section">
+    <div class="cs-slides" id="csSlides">
+      
+        <div class="cs-slide active">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/logo.png" alt="SPN trabalho 1" loading="eager"/>
+          <div class="cs-phrase"><span>Excelência em cada detalhe</span></div>
         </div>
-        <div class="carousel-item" data-idx="1" onclick="goTo(1)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer1.jpeg" alt="Transfer 1" loading="lazy"/></div>
-          <div class="carousel-phrase">Brilho que impressiona</div>
+        <div class="cs-slide">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer1.jpeg" alt="SPN trabalho 2" loading="lazy"/>
+          <div class="cs-phrase"><span>Brilho que impressiona</span></div>
         </div>
-        <div class="carousel-item" data-idx="2" onclick="goTo(2)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer2.jpeg" alt="Transfer 2" loading="lazy"/></div>
-          <div class="carousel-phrase">Cuidado que transforma</div>
+        <div class="cs-slide">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer2.jpeg" alt="SPN trabalho 3" loading="lazy"/>
+          <div class="cs-phrase"><span>Cuidado que transforma</span></div>
         </div>
-        <div class="carousel-item" data-idx="3" onclick="goTo(3)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer3.jpeg" alt="Transfer 3" loading="lazy"/></div>
-          <div class="carousel-phrase">Proteção de alto nível</div>
+        <div class="cs-slide">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer3.jpeg" alt="SPN trabalho 4" loading="lazy"/>
+          <div class="cs-phrase"><span>Proteção de alto nível</span></div>
         </div>
-        <div class="carousel-item" data-idx="4" onclick="goTo(4)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer4.jpeg" alt="Transfer 4" loading="lazy"/></div>
-          <div class="carousel-phrase">Resultados que falam por si</div>
+        <div class="cs-slide">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer4.jpeg" alt="SPN trabalho 5" loading="lazy"/>
+          <div class="cs-phrase"><span>Resultados que falam por si</span></div>
         </div>
-      </div>
     </div>
-    <div class="carousel-dots" id="carouselDots">
-      <div class="carousel-dot active" onclick="goTo(0)"></div>
-      <div class="carousel-dot" onclick="goTo(1)"></div>
-      <div class="carousel-dot" onclick="goTo(2)"></div>
-      <div class="carousel-dot" onclick="goTo(3)"></div>
-      <div class="carousel-dot" onclick="goTo(4)"></div>
+    <div class="cs-thumbs" id="csThumbs">
+      
+        <div class="cs-thumb active" onclick="csGoTo(0)">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/logo.png" alt="thumb 1" loading="lazy"/>
+        </div>
+        <div class="cs-thumb" onclick="csGoTo(1)">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer1.jpeg" alt="thumb 2" loading="lazy"/>
+        </div>
+        <div class="cs-thumb" onclick="csGoTo(2)">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer2.jpeg" alt="thumb 3" loading="lazy"/>
+        </div>
+        <div class="cs-thumb" onclick="csGoTo(3)">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer3.jpeg" alt="thumb 4" loading="lazy"/>
+        </div>
+        <div class="cs-thumb" onclick="csGoTo(4)">
+          <img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer4.jpeg" alt="thumb 5" loading="lazy"/>
+        </div>
+    </div>
+    <div class="cs-dots" id="csDots">
+      <div class="cs-dot active" onclick="csGoTo(0)"></div>
+        <div class="cs-dot" onclick="csGoTo(1)"></div>
+        <div class="cs-dot" onclick="csGoTo(2)"></div>
+        <div class="cs-dot" onclick="csGoTo(3)"></div>
+        <div class="cs-dot" onclick="csGoTo(4)"></div>
+        
     </div>
   </div>
 
@@ -754,26 +838,31 @@
       <div class="divider-line"></div>
     </div>
 
-    <a class="btn-contact whatsapp"
-       href="https://wa.me/5511954950044?text=Olá! Vim pelo link de avaliação da SPN Estética Automotiva."
-       target="_blank">
-      <span class="contact-icon">💬</span>
-      WhatsApp · (11) 95495-0044
-    </a>
+    <div class="contact-grid">
+      <a class="btn-icon-box whatsapp"
+         href="https://wa.me/5511954950044?text=Olá! Vim pelo link de avaliação da SPN Estética Automotiva."
+         target="_blank">
+        <div class="bib-icon">💬</div>
+        <div class="bib-label">WhatsApp</div>
+        <div class="bib-sub">(11) 95495-0044</div>
+      </a>
 
-    <a class="btn-contact maps"
-       href="https://www.google.com/maps/dir/-23.427591,-46.3145074/Estr.+Promiss%C3%A3o,+386+-+Jardim+Carolina,+Itaquaquecetuba+-+SP,+08588-310/@-23.4301926,-46.3289461,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94ce7da82e8b877f:0x75b04a25687f29e9!2m2!1d-46.3236643!2d-23.4327949?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
-       target="_blank">
-      <span class="contact-icon">📍</span>
-      Como chegar · Ver no Maps
-    </a>
+      <a class="btn-icon-box instagram"
+         href="https://www.instagram.com/spn_esteticauto"
+         target="_blank">
+        <div class="bib-icon">📸</div>
+        <div class="bib-label">Instagram</div>
+        <div class="bib-sub">@spn_esteticauto</div>
+      </a>
 
-    <a class="btn-contact instagram"
-       href="https://www.instagram.com/spn_esteticauto"
-       target="_blank">
-      <span class="contact-icon">📸</span>
-      Instagram · @spn_esteticauto
-    </a>
+      <a class="btn-icon-box maps"
+         href="https://www.google.com/maps/dir/-23.427591,-46.3145074/Estr.+Promiss%C3%A3o,+386+-+Jardim+Carolina,+Itaquaquecetuba+-+SP,+08588-310/@-23.4301926,-46.3289461,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94ce7da82e8b877f:0x75b04a25687f29e9!2m2!1d-46.3236643!2d-23.4327949?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank">
+        <div class="bib-icon">📍</div>
+        <div class="bib-label">Como Chegar</div>
+        <div class="bib-sub">Ver no Maps</div>
+      </a>
+    </div>
 
     <div class="address-pill">
       <span class="pin">📍</span>
@@ -906,59 +995,37 @@
     });
   });
 
-  // ── CAROUSEL LOGIC ──
-  (function() {
-    const TOTAL = 5;
-    let current = 2; // start at center
-    let autoTimer;
 
-    function updateCarousel() {
-      const items = document.querySelectorAll('.carousel-item');
-      const dots  = document.querySelectorAll('.carousel-dot');
-      const track = document.getElementById('carouselTrack');
-
-      items.forEach((el, i) => {
-        el.classList.remove('center','side1','side2');
-        const dist = Math.abs(i - current);
-        if (dist === 0) el.classList.add('center');
-        else if (dist === 1) el.classList.add('side1');
-        else if (dist === 2) el.classList.add('side2');
-      });
-
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
-
-      // shift track so center item is in middle of container
-      const outerW = document.querySelector('.carousel-track-outer').offsetWidth;
-      const itemW  = 122; // item width + gap
-      const offset = outerW / 2 - current * itemW - itemW / 2;
-      track.style.transform = `translateX(${offset}px)`;
+  // ══ CAROUSEL JS ══
+  (function(){
+    var total = 5, cur = 0, timer;
+    function csGoTo(n){
+      var slides = document.querySelectorAll('.cs-slide');
+      var dots   = document.querySelectorAll('.cs-dot');
+      var thumbs = document.querySelectorAll('.cs-thumb');
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      thumbs[cur].classList.remove('active');
+      cur = (n + total) % total;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+      thumbs[cur].classList.add('active');
+      resetTimer();
     }
-
-    window.goTo = function(idx) {
-      current = idx;
-      updateCarousel();
-      resetAuto();
-    };
-
-    function next() { current = (current + 1) % TOTAL; updateCarousel(); }
-
-    function resetAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(next, 3000);
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(function(){ csGoTo(cur+1); }, 3500);
     }
-
-    // touch/swipe
-    let touchStartX = 0;
-    const outer = document.querySelector('.carousel-track-outer');
-    outer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-    outer.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 40) { current = dx < 0 ? Math.min(current+1, TOTAL-1) : Math.max(current-1, 0); updateCarousel(); resetAuto(); }
-    }, {passive:true});
-
-    // init
-    updateCarousel();
-    resetAuto();
+    window.csGoTo = csGoTo;
+    // swipe
+    var sx = 0;
+    var el = document.getElementById('csSlides');
+    el.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; },{passive:true});
+    el.addEventListener('touchend',   function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      if(Math.abs(dx)>40) csGoTo(dx < 0 ? cur+1 : cur-1);
+    },{passive:true});
+    resetTimer();
   })();
 
 </script>
