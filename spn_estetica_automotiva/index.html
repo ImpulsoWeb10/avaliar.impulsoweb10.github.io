@@ -18,6 +18,9 @@
       --gold: #d4a017;
       --star-on: #ffd700;
       --star-off: #333;
+      --whatsapp: #25D366;
+      --instagram: #E1306C;
+      --maps: #4285F4;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +37,6 @@
       position: relative;
     }
 
-    /* Background animated grid */
     body::before {
       content: '';
       position: fixed;
@@ -57,7 +59,7 @@
       z-index: 1;
       width: 100%;
       max-width: 480px;
-      padding: 20px 0 40px; /* Removido padding lateral para o carrossel encostar */
+      padding: 20px 0 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -72,7 +74,7 @@
       align-items: center;
     }
 
-    /* ── LOGO SECTION ── */
+    /* ── LOGO ── */
     .logo-wrap {
       position: relative;
       margin-bottom: 8px;
@@ -92,7 +94,6 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* ── BRAND NAME ── */
     .brand-name {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2.6rem;
@@ -116,23 +117,24 @@
       color: var(--red);
       text-align: center;
       margin-top: 4px;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
 
-    /* ══ CAROUSEL PREMIUM OCRAM STYLE ══ */
+    /* ══ CAROUSEL MAIOR ══ */
     .carousel-section {
       width: 100%;
       position: relative;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       overflow: hidden;
-      border-top: 2px solid var(--red);
-      border-bottom: 2px solid var(--red);
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      box-shadow: 0 0 30px rgba(192,0,10,0.25);
     }
 
     .cs-slides {
       position: relative;
       width: 100%;
-      height: 320px; /* Altura aumentada para destaque */
+      height: 420px; /* AUMENTADO de 320 para 420 */
     }
 
     .cs-slide {
@@ -149,37 +151,132 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 8s linear; /* Efeito de Zoom Ocram */
+      transition: transform 8s linear;
     }
 
     .cs-slide.active img {
       transform: scale(1.15);
     }
 
+    /* ── FRASE DESTACADA ── */
     .cs-phrase {
       position: absolute;
-      bottom: 20px;
+      bottom: 0;
       left: 0;
       width: 100%;
       z-index: 4;
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 20px;
       pointer-events: none;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+      padding: 40px 20px 18px;
     }
 
     .cs-phrase span {
+      display: block;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.6rem; /* AUMENTADO de 1.2rem para 1.6rem */
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: #fff;
-      background: rgba(0, 0, 0, 0.7); /* Fundo escuro Ocram */
-      padding: 8px 15px;
-      border-left: 4px solid var(--red);
-      backdrop-filter: blur(4px);
+      border-left: 5px solid var(--red);
+      padding-left: 14px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+      line-height: 1.2;
     }
+
+    .cs-phrase span::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--red);
+      margin-top: 6px;
+    }
+
+    /* ── DOTS ── */
+    .cs-dots {
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+      z-index: 5;
+      display: flex;
+      gap: 6px;
+    }
+
+    .cs-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: 0.3s;
+    }
+
+    .cs-dot.active {
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+      width: 20px;
+      border-radius: 4px;
+    }
+
+    /* ── BOTÕES SOCIAIS (substituem os antigos) ── */
+    .social-btns {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 0 16px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 8px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+      transition: opacity 0.25s;
+    }
+
+    .social-btn:hover::before { opacity: 0.22; }
+    .social-btn:hover { transform: translateY(-3px); }
+
+    .social-btn.whatsapp { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.35); }
+    .social-btn.whatsapp:hover { box-shadow: 0 6px 20px rgba(37,211,102,0.25); border-color: var(--whatsapp); }
+
+    .social-btn.instagram { background: rgba(225,48,108,0.12); border-color: rgba(225,48,108,0.35); }
+    .social-btn.instagram:hover { box-shadow: 0 6px 20px rgba(225,48,108,0.25); border-color: var(--instagram); }
+
+    .social-btn.maps { background: rgba(66,133,244,0.12); border-color: rgba(66,133,244,0.35); }
+    .social-btn.maps:hover { box-shadow: 0 6px 20px rgba(66,133,244,0.25); border-color: var(--maps); }
+
+    .social-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .social-btn.whatsapp svg { fill: var(--whatsapp); }
+    .social-btn.instagram svg { fill: var(--instagram); }
+    .social-btn.maps svg { fill: var(--maps); }
 
     /* ── CARD ── */
     .card {
@@ -192,27 +289,52 @@
       overflow: hidden;
     }
 
-    /* ── STARS & BUTTONS (Mantidos do original) ── */
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+      color: var(--silver-bright);
+      margin-bottom: 6px;
+    }
+
+    .card-sub {
+      font-size: 0.85rem;
+      color: #888;
+      text-align: center;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
     .stars-section { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 28px; }
     .stars { display: flex; gap: 8px; }
     .star { font-size: 2.6rem; color: var(--star-off); cursor: pointer; transition: 0.2s; }
     .star.active, .star.hover { color: var(--star-on); transform: scale(1.15); }
-    
+
+    .star-msg {
+      font-size: 0.85rem;
+      color: #888;
+      letter-spacing: 1px;
+      min-height: 20px;
+      transition: 0.3s;
+    }
+
     .btn-avaliar {
       display: block; width: 100%; padding: 16px 20px;
       background: linear-gradient(135deg, var(--red) 0%, #8b0000 100%);
       color: white; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700;
       text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 12px;
-      animation: pulse-btn 2.2s infinite; cursor: pointer;
+      animation: pulse-btn 2.2s infinite; cursor: pointer; border: none; letter-spacing: 2px;
     }
 
-    /* ── FOOTER IMPULSOWEB10 STYLE ── */
+    /* ── FOOTER ── */
     .footer-impulsoweb {
       width: 100%;
       background: #050505;
       padding: 40px 20px;
       margin-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255,255,255,0.05);
       text-align: center;
     }
 
@@ -242,10 +364,66 @@
       text-shadow: 0 0 10px var(--red);
     }
 
-    /* Animações base */
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: linear-gradient(160deg, #1c1c1c 0%, #111 100%);
+      border: 1px solid rgba(192,0,10,0.4);
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 340px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--silver-bright);
+      margin-bottom: 12px;
+    }
+
+    .modal-text {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .modal-btn {
+      display: block;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--red) 0%, #8b0000 100%);
+      color: white;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 12px;
+      letter-spacing: 2px;
+    }
+
     @keyframes pulse-btn {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(192,0,10,0.5); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -255,10 +433,11 @@
   <div class="logo-wrap">
     <img src="https://avaliar.impulsoweb10.com.br/ocram-transporte-executivo/img/logo.png" alt="Logo">
   </div>
-  
+
   <h1 class="brand-name">SPN</h1>
   <p class="brand-sub">Estética Automotiva</p>
 
+  <!-- CARROSSEL MAIOR -->
   <div class="carousel-section">
     <div class="cs-slides" id="csSlides">
       <div class="cs-slide active">
@@ -274,8 +453,42 @@
         <div class="cs-phrase"><span>DETALHAMENTO INTERNO</span></div>
       </div>
     </div>
+    <!-- DOTS indicadores -->
+    <div class="cs-dots" id="csDots">
+      <div class="cs-dot active"></div>
+      <div class="cs-dot"></div>
+      <div class="cs-dot"></div>
+    </div>
   </div>
 
+  <!-- BOTÕES SOCIAIS: WhatsApp, Instagram, Google Maps -->
+  <div class="social-btns">
+    <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" class="social-btn whatsapp">
+      <!-- WhatsApp SVG -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      WhatsApp
+    </a>
+
+    <a href="https://instagram.com/SEUPERFIL" target="_blank" class="social-btn instagram">
+      <!-- Instagram SVG -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      Instagram
+    </a>
+
+    <a href="https://maps.google.com/?q=SEUENDERECOAQUI" target="_blank" class="social-btn maps">
+      <!-- Google Maps SVG -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C7.802 0 4 3.403 4 7.602 4 11.8 7.469 16.812 12 24c4.531-7.188 8-12.2 8-16.398C20 3.403 16.199 0 12 0zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+      </svg>
+      Como Chegar
+    </a>
+  </div>
+
+  <!-- CARD AVALIAÇÃO -->
   <div class="content-padding">
     <div class="card">
       <h2 class="card-title">SUA OPINIÃO VALE MUITO</h2>
@@ -293,58 +506,71 @@
       </div>
 
       <button class="btn-avaliar" id="btnMain">
-        <span class="btn-icon">⭐</span> AVALIAR AGORA
+        <span>⭐ AVALIAR AGORA</span>
       </button>
     </div>
   </div>
 
   <footer class="footer-impulsoweb">
     <div class="footer-content">
-      <p>&copy; 2024 SPN Estética Automotiva - Todos os direitos reservados.</p>
+      <p>&copy; 2025 SPN Estética Automotiva - Todos os direitos reservados.</p>
       <div class="powered-by">
-        Desenvolvido por 
+        Desenvolvido por
         <a href="https://impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a>
       </div>
     </div>
   </footer>
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalGood">
   <div class="modal">
-    <div class="modal-title">OBRIGADO!</div>
-    <p class="modal-text">Você será redirecionado para o Google.</p>
+    <div class="modal-title">OBRIGADO! 🙌</div>
+    <p class="modal-text">Você será redirecionado para o Google para deixar sua avaliação.</p>
     <a class="modal-btn" href="SUA_URL_GOOGLE_AQUI" target="_blank">AVALIAR NO GOOGLE</a>
   </div>
 </div>
 
 <script>
-  // Lógica do Carrossel
+  // Carrossel com dots
   let currentSlide = 0;
   const slides = document.querySelectorAll('.cs-slide');
-  
-  function nextSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }
-  setInterval(nextSlide, 5000);
+  const dots = document.querySelectorAll('.cs-dot');
 
-  // Lógica de Estrelas
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  setInterval(() => goToSlide(currentSlide + 1), 5000);
+
+  // Estrelas
   const stars = document.querySelectorAll('.star');
   let rating = 0;
 
   stars.forEach(s => {
+    s.addEventListener('mouseenter', () => {
+      const v = parseInt(s.getAttribute('data-v'));
+      stars.forEach((st, i) => st.classList.toggle('hover', i < v));
+    });
+    s.addEventListener('mouseleave', () => {
+      stars.forEach(st => st.classList.remove('hover'));
+    });
     s.addEventListener('click', () => {
-      rating = s.getAttribute('data-v');
-      stars.forEach(st => st.classList.remove('active'));
-      for(let i=0; i<rating; i++) stars[i].classList.add('active');
-      document.getElementById('starMsg').innerText = rating + " estrelas selecionadas";
+      rating = parseInt(s.getAttribute('data-v'));
+      stars.forEach((st, i) => st.classList.toggle('active', i < rating));
+      const msgs = ['','Ruim 😞','Regular 😐','Bom 👍','Muito Bom 😊','Excelente! 🤩'];
+      document.getElementById('starMsg').innerText = msgs[rating];
     });
   });
 
   document.getElementById('btnMain').addEventListener('click', () => {
-    if(rating >= 4) document.getElementById('modalGood').classList.add('show');
-    else alert("Por favor, selecione uma avaliação.");
+    if (rating >= 4) document.getElementById('modalGood').classList.add('show');
+    else if (rating === 0) alert('Por favor, selecione uma avaliação.');
+    else alert('Obrigado pelo feedback! Estamos sempre melhorando.');
   });
 </script>
 
