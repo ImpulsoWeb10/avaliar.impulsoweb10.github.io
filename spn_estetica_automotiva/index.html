@@ -412,11 +412,84 @@
     /* ── FOOTER ── */
     .footer {
       margin-top: 32px;
-      text-align: center;
-      color: #333;
-      font-size: 0.72rem;
-      letter-spacing: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       animation: fadeUp 0.8s 0.6s ease both;
+      padding-bottom: 12px;
+    }
+
+    .footer-ssl {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(37,211,102,0.06);
+      border: 1px solid rgba(37,211,102,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: #25d366;
+    }
+
+    .footer-copy {
+      color: #2e2e2e;
+      font-size: 0.68rem;
+      letter-spacing: 0.8px;
+      text-align: center;
+    }
+
+    .footer-dev-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+    }
+
+    .footer-dev-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: linear-gradient(135deg, var(--red) 0%, #8b0000 100%);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 1px solid rgba(255,26,38,0.4);
+      overflow: hidden;
+      animation: devPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 0 0 rgba(192,0,10,0.7);
+    }
+
+    @keyframes devPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(192,0,10,0.7), 0 4px 20px rgba(192,0,10,0.4); }
+      50%  { box-shadow: 0 0 0 10px rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4); }
+      100% { box-shadow: 0 0 0 0 rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4); }
+    }
+
+    .footer-dev-shine {
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      animation: devShine 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes devShine {
+      0%   { left: -75%; opacity: 0; }
+      15%  { opacity: 1; }
+      50%  { left: 130%; opacity: 1; }
+      51%  { opacity: 0; }
+      100% { left: 130%; opacity: 0; }
     }
 
     /* ── MODAL ── */
@@ -602,18 +675,53 @@
       transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
     }
 
+    /* ── CAROUSEL PHRASE OVERLAY ── */
+    .carousel-phrase-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .carousel-phrase-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--silver-bright);
+      text-shadow:
+        0 0 20px rgba(192,0,10,0.8),
+        0 0 40px rgba(192,0,10,0.4),
+        0 2px 8px rgba(0,0,0,0.9);
+      padding: 0 24px;
+      line-height: 1.3;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .carousel-phrase-text.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     .carousel-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 150px;
+      width: 190px;
       transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-      opacity: 0.35;
-      transform: scale(0.65);
+      opacity: 0.3;
+      transform: scale(0.6);
       cursor: pointer;
-      padding: 0 8px;
+      padding: 0 10px;
     }
 
     .carousel-item.center {
@@ -622,31 +730,35 @@
     }
 
     .carousel-item.side1 {
-      opacity: 0.75;
-      transform: scale(0.84);
+      opacity: 0.7;
+      transform: scale(0.82);
     }
 
     .carousel-item.side2 {
-      opacity: 0.4;
-      transform: scale(0.70);
+      opacity: 0.35;
+      transform: scale(0.65);
     }
 
     .carousel-img-wrap {
-      width: 120px;
-      height: 120px;
-      border-radius: 16px;
+      width: 155px;
+      height: 155px;
+      border-radius: 18px;
       overflow: hidden;
       border: 2px solid transparent;
-      transition: border-color 0.4s, box-shadow 0.4s, width 0.5s, height 0.5s;
+      transition: border-color 0.5s, box-shadow 0.5s, opacity 0.45s ease;
       background: #111;
     }
 
+    .carousel-img-wrap.fading {
+      opacity: 0;
+    }
+
     .carousel-item.center .carousel-img-wrap {
-      width: 148px;
-      height: 148px;
-      border-radius: 18px;
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
       border-color: rgba(192,0,10,0.7);
-      box-shadow: 0 0 24px rgba(192,0,10,0.45), 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 0 28px rgba(192,0,10,0.5), 0 12px 32px rgba(0,0,0,0.7);
     }
 
     .carousel-item.side1 .carousel-img-wrap {
@@ -660,36 +772,8 @@
       display: block;
     }
 
-    .carousel-phrase {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #555;
-      text-align: center;
-      margin-top: 9px;
-      opacity: 0.6;
-      transition: opacity 0.4s, color 0.4s, font-size 0.4s;
-      white-space: nowrap;
-      max-width: 148px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .carousel-item.center .carousel-phrase {
-      opacity: 1;
-      color: var(--red);
-      font-size: 0.8rem;
-    }
-
-    .carousel-item.side1 .carousel-phrase {
-      opacity: 0.5;
-      color: #555;
-    }
-
-    .carousel-item.side2 .carousel-phrase {
-      opacity: 0.25;
-    }
+    /* hide old phrase below photo */
+    .carousel-phrase { display: none; }
 
     .carousel-dots {
       display: flex;
@@ -766,7 +850,7 @@
 
 
   <!-- CAROUSEL -->
-  <div class="carousel-wrap">
+  <div class="carousel-wrap" style="position:relative;">
     <div class="carousel-title">◆ Nossos trabalhos ◆</div>
     <div class="carousel-track-outer">
       <div class="carousel-track" id="carouselTrack">
@@ -798,6 +882,10 @@
       <div class="carousel-dot" onclick="goTo(2)"></div>
       <div class="carousel-dot" onclick="goTo(3)"></div>
       <div class="carousel-dot" onclick="goTo(4)"></div>
+    </div>
+    <!-- Phrase overlay shown between photos -->
+    <div class="carousel-phrase-overlay" id="carouselPhraseOverlay">
+      <div class="carousel-phrase-text" id="carouselPhraseText"></div>
     </div>
   </div>
 
@@ -888,7 +976,28 @@
   </div>
 
   <div class="footer">
-    © 2026 SPN Estética Automotiva · Todos os direitos reservados
+    <div class="footer-ssl">
+      <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+        <rect x="1" y="7" width="11" height="8" rx="2" stroke="#25d366" stroke-width="1.4" fill="none"/>
+        <path d="M3.5 7V4.5a3 3 0 0 1 6 0V7" stroke="#25d366" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <circle cx="6.5" cy="11" r="1.2" fill="#25d366"/>
+      </svg>
+      <span>Conexão Segura · SSL Certificado</span>
+    </div>
+
+    <div class="footer-copy">© 2026 SPN Estética Automotiva · Todos os direitos reservados</div>
+
+    <div class="footer-dev-label">Desenvolvido por</div>
+    <a class="footer-dev-btn"
+       href="https://wa.me/5511954950044?text=Olá! Vi o trabalho de vocês na SPN e quero saber mais sobre desenvolvimento web."
+       target="_blank">
+      <span class="footer-dev-shine"></span>
+      <svg width="16" height="16" viewBox="0 0 32 32" fill="none" style="flex-shrink:0">
+        <circle cx="16" cy="16" r="16" fill="#25D366"/>
+        <path d="M22.9 9.1A9.7 9.7 0 0 0 16 6.3a9.74 9.74 0 0 0-8.43 14.6L6 26l5.22-1.37a9.73 9.73 0 0 0 4.77 1.22h.01A9.74 9.74 0 0 0 22.9 9.1zm-6.9 14.97a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.1.81.83-3.02-.2-.31a8.1 8.1 0 1 1 6.89 3.83zm4.44-6.06c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12s-.62.78-.76.94c-.14.16-.28.18-.52.06a6.57 6.57 0 0 1-1.93-1.19 7.23 7.23 0 0 1-1.34-1.66c-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" fill="white"/>
+      </svg>
+      <span>ImpulsoWeb10</span>
+    </a>
   </div>
 </div>
 
@@ -1012,8 +1121,16 @@
   // ── CAROUSEL LOGIC ──
   (function() {
     const TOTAL = 5;
-    let current = 2; // start at center
+    const phrases = [
+      'Excelência em cada detalhe',
+      'Brilho que impressiona',
+      'Cuidado que transforma',
+      'Proteção de alto nível',
+      'Resultados que falam por si'
+    ];
+    let current = 2;
     let autoTimer;
+    let phaseTimer;
 
     function updateCarousel() {
       const items = document.querySelectorAll('.carousel-item');
@@ -1030,24 +1147,56 @@
 
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
 
-      // shift track so center item is in middle of container
       const outerW = document.querySelector('.carousel-track-outer').offsetWidth;
-      const itemW  = 166; // item width (150px) + padding (16px)
+      const itemW  = 210; // item width (190px) + padding (20px)
       const offset = outerW / 2 - current * itemW - itemW / 2;
       track.style.transform = `translateX(${offset}px)`;
     }
 
+    function showPhraseThenNext() {
+      const phraseEl = document.getElementById('carouselPhraseText');
+      const wrapEls  = document.querySelectorAll('.carousel-item.center .carousel-img-wrap');
+
+      // fade out center image
+      wrapEls.forEach(el => el.classList.add('fading'));
+
+      // show phrase
+      phraseEl.textContent = phrases[current];
+      setTimeout(() => phraseEl.classList.add('visible'), 50);
+
+      // after phrase shown, hide it and advance
+      phaseTimer = setTimeout(() => {
+        phraseEl.classList.remove('visible');
+
+        setTimeout(() => {
+          // fade image back in on next item
+          current = (current + 1) % TOTAL;
+          updateCarousel();
+
+          setTimeout(() => {
+            document.querySelectorAll('.carousel-item.center .carousel-img-wrap')
+              .forEach(el => el.classList.remove('fading'));
+          }, 80);
+
+          // schedule next cycle
+          resetAuto();
+        }, 450);
+      }, 1600);
+    }
+
     window.goTo = function(idx) {
+      clearTimeout(phaseTimer);
+      document.getElementById('carouselPhraseText').classList.remove('visible');
+      document.querySelectorAll('.carousel-img-wrap').forEach(el => el.classList.remove('fading'));
       current = idx;
       updateCarousel();
       resetAuto();
     };
 
-    function next() { current = (current + 1) % TOTAL; updateCarousel(); }
-
     function resetAuto() {
       clearInterval(autoTimer);
-      autoTimer = setInterval(next, 3000);
+      clearTimeout(phaseTimer);
+      autoTimer = setTimeout(showPhraseThenNext, 2800);
     }
 
     // touch/swipe
@@ -1056,10 +1205,16 @@
     outer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
     outer.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 40) { current = dx < 0 ? Math.min(current+1, TOTAL-1) : Math.max(current-1, 0); updateCarousel(); resetAuto(); }
+      if (Math.abs(dx) > 40) {
+        clearTimeout(phaseTimer);
+        document.getElementById('carouselPhraseText').classList.remove('visible');
+        document.querySelectorAll('.carousel-img-wrap').forEach(el => el.classList.remove('fading'));
+        current = dx < 0 ? Math.min(current+1, TOTAL-1) : Math.max(current-1, 0);
+        updateCarousel();
+        resetAuto();
+      }
     }, {passive:true});
 
-    // init
     updateCarousel();
     resetAuto();
   })();
