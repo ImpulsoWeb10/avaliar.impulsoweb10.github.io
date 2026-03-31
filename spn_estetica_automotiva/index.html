@@ -636,145 +636,103 @@
       font-weight: 600;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: #444;
+      color: #666;
       text-align: center;
       margin-bottom: 14px;
     }
 
-    .carousel-track-outer {
-      overflow: hidden;
-      width: 100%;
+    /* Fixed-height stage — single slot, no scrolling track */
+    .carousel-stage {
       position: relative;
-      padding: 12px 0;
-    }
-
-    /* fade edges */
-    .carousel-track-outer::before,
-    .carousel-track-outer::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 60px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .carousel-track-outer::before {
-      left: 0;
-      background: linear-gradient(90deg, #0a0a0a, transparent);
-    }
-    .carousel-track-outer::after {
-      right: 0;
-      background: linear-gradient(270deg, #0a0a0a, transparent);
-    }
-
-    .carousel-track {
+      width: 100%;
+      height: 280px;
       display: flex;
       align-items: center;
-      gap: 0;
-      width: max-content;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      justify-content: center;
     }
 
-    /* ── CAROUSEL PHRASE OVERLAY ── */
-    .carousel-phrase-overlay {
+    /* Each slide: absolute, full stage */
+    .carousel-slide {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 0;
+      transition: opacity 0.55s ease;
       pointer-events: none;
-      z-index: 5;
     }
 
-    .carousel-phrase-text {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-align: center;
-      color: var(--silver-bright);
-      text-shadow:
-        0 0 20px rgba(192,0,10,0.8),
-        0 0 40px rgba(192,0,10,0.4),
-        0 2px 8px rgba(0,0,0,0.9);
-      padding: 0 24px;
-      line-height: 1.3;
-      opacity: 0;
-      transform: scale(0.85);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-
-    .carousel-phrase-text.visible {
+    .carousel-slide.active {
       opacity: 1;
-      transform: scale(1);
+      pointer-events: auto;
     }
 
-    .carousel-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: 190px;
-      transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-      opacity: 0.3;
-      transform: scale(0.6);
-      cursor: pointer;
-      padding: 0 10px;
-    }
-
-    .carousel-item.center {
-      opacity: 1;
-      transform: scale(1.0);
-    }
-
-    .carousel-item.side1 {
-      opacity: 0.7;
-      transform: scale(0.82);
-    }
-
-    .carousel-item.side2 {
-      opacity: 0.35;
-      transform: scale(0.65);
-    }
-
-    .carousel-img-wrap {
-      width: 155px;
-      height: 155px;
-      border-radius: 18px;
+    /* Photo inside slide */
+    .carousel-slide .slide-img-wrap {
+      width: 240px;
+      height: 240px;
+      border-radius: 22px;
       overflow: hidden;
-      border: 2px solid transparent;
-      transition: border-color 0.5s, box-shadow 0.5s, opacity 0.45s ease;
-      background: #111;
+      border: 2.5px solid rgba(192,0,10,0.75);
+      box-shadow:
+        0 0 0 1px rgba(192,0,10,0.2),
+        0 0 32px rgba(192,0,10,0.55),
+        0 16px 40px rgba(0,0,0,0.65);
     }
 
-    .carousel-img-wrap.fading {
-      opacity: 0;
-    }
-
-    .carousel-item.center .carousel-img-wrap {
-      width: 180px;
-      height: 180px;
-      border-radius: 20px;
-      border-color: rgba(192,0,10,0.7);
-      box-shadow: 0 0 28px rgba(192,0,10,0.5), 0 12px 32px rgba(0,0,0,0.7);
-    }
-
-    .carousel-item.side1 .carousel-img-wrap {
-      border-color: rgba(192,0,10,0.2);
-    }
-
-    .carousel-img-wrap img {
+    .carousel-slide .slide-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    /* hide old phrase below photo */
-    .carousel-phrase { display: none; }
+    /* Phrase slide */
+    .carousel-phrase-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+    }
 
+    .carousel-phrase-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-phrase-slide .phrase-inner {
+      text-align: center;
+      padding: 0 28px;
+    }
+
+    .carousel-phrase-slide .phrase-line {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--silver-bright);
+      line-height: 1.2;
+      text-shadow:
+        0 0 30px rgba(192,0,10,0.9),
+        0 0 60px rgba(192,0,10,0.4),
+        0 2px 6px rgba(0,0,0,0.8);
+      display: block;
+    }
+
+    .carousel-phrase-slide .phrase-bar {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Dots */
     .carousel-dots {
       display: flex;
       justify-content: center;
@@ -786,16 +744,25 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #333;
+      background: #3a3f4a;
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .carousel-dot.active {
       background: var(--red);
-      width: 18px;
+      width: 20px;
       border-radius: 3px;
     }
+
+    /* hide old track elements */
+    .carousel-track-outer,
+    .carousel-track,
+    .carousel-item,
+    .carousel-img-wrap,
+    .carousel-phrase { display: none; }
+
+    .carousel-phrase-overlay { display: none; }
 
   </style>
 </head>
@@ -852,40 +819,42 @@
   <!-- CAROUSEL -->
   <div class="carousel-wrap" style="position:relative;">
     <div class="carousel-title">◆ Nossos trabalhos ◆</div>
-    <div class="carousel-track-outer">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-item" data-idx="0" onclick="goTo(0)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/logo.png" alt="SPN Logo" loading="lazy"/></div>
-          <div class="carousel-phrase">Excelência em cada detalhe</div>
-        </div>
-        <div class="carousel-item" data-idx="1" onclick="goTo(1)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer1.jpeg" alt="Transfer 1" loading="lazy"/></div>
-          <div class="carousel-phrase">Brilho que impressiona</div>
-        </div>
-        <div class="carousel-item" data-idx="2" onclick="goTo(2)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer2.jpeg" alt="Transfer 2" loading="lazy"/></div>
-          <div class="carousel-phrase">Cuidado que transforma</div>
-        </div>
-        <div class="carousel-item" data-idx="3" onclick="goTo(3)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer3.jpeg" alt="Transfer 3" loading="lazy"/></div>
-          <div class="carousel-phrase">Proteção de alto nível</div>
-        </div>
-        <div class="carousel-item" data-idx="4" onclick="goTo(4)">
-          <div class="carousel-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer4.jpeg" alt="Transfer 4" loading="lazy"/></div>
-          <div class="carousel-phrase">Resultados que falam por si</div>
+
+    <div class="carousel-stage" id="carouselStage">
+
+      <!-- Photo slides -->
+      <div class="carousel-slide active" data-idx="0">
+        <div class="slide-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/logo.png" alt="SPN Logo" loading="lazy"/></div>
+      </div>
+      <div class="carousel-slide" data-idx="1">
+        <div class="slide-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer1.jpeg" alt="Transfer 1" loading="lazy"/></div>
+      </div>
+      <div class="carousel-slide" data-idx="2">
+        <div class="slide-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer2.jpeg" alt="Transfer 2" loading="lazy"/></div>
+      </div>
+      <div class="carousel-slide" data-idx="3">
+        <div class="slide-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer3.jpeg" alt="Transfer 3" loading="lazy"/></div>
+      </div>
+      <div class="carousel-slide" data-idx="4">
+        <div class="slide-img-wrap"><img src="https://raw.githubusercontent.com/ImpulsoWeb10/avaliar.impulsoweb10.github.io/main/spn_estetica_automotiva/transfer4.jpeg" alt="Transfer 4" loading="lazy"/></div>
+      </div>
+
+      <!-- Phrase slide (shared, text swapped by JS) -->
+      <div class="carousel-phrase-slide" id="phraseSlide">
+        <div class="phrase-inner">
+          <span class="phrase-line" id="phraseText"></span>
+          <div class="phrase-bar"></div>
         </div>
       </div>
+
     </div>
+
     <div class="carousel-dots" id="carouselDots">
       <div class="carousel-dot active" onclick="goTo(0)"></div>
       <div class="carousel-dot" onclick="goTo(1)"></div>
       <div class="carousel-dot" onclick="goTo(2)"></div>
       <div class="carousel-dot" onclick="goTo(3)"></div>
       <div class="carousel-dot" onclick="goTo(4)"></div>
-    </div>
-    <!-- Phrase overlay shown between photos -->
-    <div class="carousel-phrase-overlay" id="carouselPhraseOverlay">
-      <div class="carousel-phrase-text" id="carouselPhraseText"></div>
     </div>
   </div>
 
@@ -1128,95 +1097,75 @@
       'Proteção de alto nível',
       'Resultados que falam por si'
     ];
-    let current = 2;
+    let current = 0;
     let autoTimer;
-    let phaseTimer;
+    let running = false;
 
-    function updateCarousel() {
-      const items = document.querySelectorAll('.carousel-item');
-      const dots  = document.querySelectorAll('.carousel-dot');
-      const track = document.getElementById('carouselTrack');
+    const slides     = document.querySelectorAll('.carousel-slide');
+    const phraseSlide = document.getElementById('phraseSlide');
+    const phraseText  = document.getElementById('phraseText');
+    const dots        = document.querySelectorAll('.carousel-dot');
 
-      items.forEach((el, i) => {
-        el.classList.remove('center','side1','side2');
-        const dist = Math.abs(i - current);
-        if (dist === 0) el.classList.add('center');
-        else if (dist === 1) el.classList.add('side1');
-        else if (dist === 2) el.classList.add('side2');
-      });
-
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
-
-      const outerW = document.querySelector('.carousel-track-outer').offsetWidth;
-      const itemW  = 210; // item width (190px) + padding (20px)
-      const offset = outerW / 2 - current * itemW - itemW / 2;
-      track.style.transform = `translateX(${offset}px)`;
+    function showSlide(idx) {
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      phraseSlide.classList.remove('active');
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      current = idx;
     }
 
-    function showPhraseThenNext() {
-      const phraseEl = document.getElementById('carouselPhraseText');
-      const wrapEls  = document.querySelectorAll('.carousel-item.center .carousel-img-wrap');
+    function cycle() {
+      if (running) return;
+      running = true;
 
-      // fade out center image
-      wrapEls.forEach(el => el.classList.add('fading'));
+      // 1. Fade out current photo
+      slides[current].classList.remove('active');
 
-      // show phrase
-      phraseEl.textContent = phrases[current];
-      setTimeout(() => phraseEl.classList.add('visible'), 50);
+      // 2. After fade-out, show phrase
+      setTimeout(() => {
+        phraseText.textContent = phrases[current];
+        phraseSlide.classList.add('active');
 
-      // after phrase shown, hide it and advance
-      phaseTimer = setTimeout(() => {
-        phraseEl.classList.remove('visible');
-
+        // 3. After phrase visible, hide it
         setTimeout(() => {
-          // fade image back in on next item
-          current = (current + 1) % TOTAL;
-          updateCarousel();
+          phraseSlide.classList.remove('active');
 
+          // 4. Advance to next photo
           setTimeout(() => {
-            document.querySelectorAll('.carousel-item.center .carousel-img-wrap')
-              .forEach(el => el.classList.remove('fading'));
-          }, 80);
+            current = (current + 1) % TOTAL;
+            showSlide(current);
+            running = false;
+            scheduleNext();
+          }, 560);
 
-          // schedule next cycle
-          resetAuto();
-        }, 450);
-      }, 1600);
+        }, 1800);
+      }, 560);
+    }
+
+    function scheduleNext() {
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(cycle, 2800);
     }
 
     window.goTo = function(idx) {
-      clearTimeout(phaseTimer);
-      document.getElementById('carouselPhraseText').classList.remove('visible');
-      document.querySelectorAll('.carousel-img-wrap').forEach(el => el.classList.remove('fading'));
-      current = idx;
-      updateCarousel();
-      resetAuto();
+      if (running) return;
+      clearTimeout(autoTimer);
+      phraseSlide.classList.remove('active');
+      showSlide(idx);
+      running = false;
+      scheduleNext();
     };
 
-    function resetAuto() {
-      clearInterval(autoTimer);
-      clearTimeout(phaseTimer);
-      autoTimer = setTimeout(showPhraseThenNext, 2800);
-    }
-
-    // touch/swipe
-    let touchStartX = 0;
-    const outer = document.querySelector('.carousel-track-outer');
-    outer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-    outer.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 40) {
-        clearTimeout(phaseTimer);
-        document.getElementById('carouselPhraseText').classList.remove('visible');
-        document.querySelectorAll('.carousel-img-wrap').forEach(el => el.classList.remove('fading'));
-        current = dx < 0 ? Math.min(current+1, TOTAL-1) : Math.max(current-1, 0);
-        updateCarousel();
-        resetAuto();
-      }
+    // swipe
+    let tx = 0;
+    const stage = document.getElementById('carouselStage');
+    stage.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+    stage.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) goTo(dx < 0 ? (current+1)%TOTAL : (current-1+TOTAL)%TOTAL);
     }, {passive:true});
 
-    updateCarousel();
-    resetAuto();
+    showSlide(0);
+    scheduleNext();
   })();
 
 </script>
