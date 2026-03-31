@@ -7,9 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black: #0a0a0a;
-      --dark: #111111;
-      --card: #161616;
+      --black: #111318;
+      --dark: #1a1d24;
+      --card: #20242e;
       --red: #c0000a;
       --red-glow: #ff1a26;
       --silver: #c8cdd4;
@@ -17,7 +17,7 @@
       --white: #ffffff;
       --gold: #d4a017;
       --star-on: #ffd700;
-      --star-off: #333;
+      --star-off: #4a4f5a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,8 +40,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(192,0,10,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(192,0,10,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(192,0,10,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192,0,10,0.1) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: gridMove 20s linear infinite;
       z-index: 0;
@@ -51,8 +51,8 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(192,0,10,0.18) 0%, transparent 65%),
-                  radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.8) 0%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(192,0,10,0.22) 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 50%, rgba(30,35,50,0.4) 0%, transparent 80%);
       z-index: 0;
     }
 
@@ -125,14 +125,14 @@
     /* ── CARD ── */
     .card {
       width: 100%;
-      background: linear-gradient(160deg, #1c1c1c 0%, #111 100%);
-      border: 1px solid rgba(192,0,10,0.3);
+      background: linear-gradient(160deg, #262b38 0%, #1c2030 100%);
+      border: 1px solid rgba(192,0,10,0.35);
       border-radius: 20px;
       padding: 32px 28px 28px;
       box-shadow:
-        0 0 0 1px rgba(200,205,212,0.06),
-        0 20px 60px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.05);
+        0 0 0 1px rgba(200,205,212,0.1),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.08);
       animation: fadeUp 0.8s 0.3s ease both;
       position: relative;
       overflow: hidden;
@@ -239,28 +239,45 @@
       box-shadow:
         0 4px 20px rgba(192,0,10,0.4),
         inset 0 1px 0 rgba(255,255,255,0.1);
-      transition: all 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       position: relative;
       overflow: hidden;
       cursor: pointer;
       margin-bottom: 14px;
+      animation: googlePulse 2s ease-in-out infinite;
     }
 
+    @keyframes googlePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(192,0,10,0.75), 0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
+      50%  { box-shadow: 0 0 0 12px rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
+      100% { box-shadow: 0 0 0 0 rgba(192,0,10,0),   0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
+    }
+
+    /* brilho deslizante */
     .btn-avaliar::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.2s;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.32) 50%, transparent 100%);
+      animation: googleShine 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes googleShine {
+      0%   { left: -75%; opacity: 0; }
+      15%  { opacity: 1; }
+      50%  { left: 130%; opacity: 1; }
+      51%  { opacity: 0; }
+      100% { left: 130%; opacity: 0; }
     }
 
     .btn-avaliar:hover {
       transform: translateY(-2px);
+      animation-play-state: paused;
       box-shadow: 0 8px 30px rgba(192,0,10,0.6), inset 0 1px 0 rgba(255,255,255,0.15);
     }
-
-    .btn-avaliar:hover::before { opacity: 1; }
 
     .btn-icon { margin-right: 8px; font-size: 1.1rem; }
 
@@ -453,8 +470,8 @@
       align-items: center;
       gap: 8px;
       padding: 11px 22px;
-      background: linear-gradient(135deg, var(--red) 0%, #8b0000 100%);
-      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      color: var(--silver);
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
       font-weight: 700;
@@ -462,35 +479,18 @@
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 10px;
-      border: 1px solid rgba(255,26,38,0.4);
+      border: 1px solid rgba(200,205,212,0.15);
       overflow: hidden;
-      animation: devPulse 2s ease-in-out infinite;
-      box-shadow: 0 0 0 0 rgba(192,0,10,0.7);
+      transition: all 0.25s ease;
     }
 
-    @keyframes devPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(192,0,10,0.7), 0 4px 20px rgba(192,0,10,0.4); }
-      50%  { box-shadow: 0 0 0 10px rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4); }
-      100% { box-shadow: 0 0 0 0 rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4); }
+    .footer-dev-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(200,205,212,0.3);
+      color: var(--white);
     }
 
-    .footer-dev-shine {
-      position: absolute;
-      top: 0; left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
-      animation: devShine 2.8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes devShine {
-      0%   { left: -75%; opacity: 0; }
-      15%  { opacity: 1; }
-      50%  { left: 130%; opacity: 1; }
-      51%  { opacity: 0; }
-      100% { left: 130%; opacity: 0; }
-    }
+    .footer-dev-shine { display: none; }
 
     /* ── MODAL ── */
     .modal-overlay {
