@@ -275,7 +275,97 @@
     .divider-line { flex: 1; height: 1px; background: var(--silver); }
     .divider-dot { font-size: 0.5rem; color: var(--silver); }
 
-    /* ── CONTACT BUTTONS ── */
+    /* ── SOCIAL BUTTONS GRID ── */
+    .social-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #444;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    .btn-social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 14px 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      border: 1px solid rgba(200,205,212,0.1);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-social::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 14px;
+    }
+
+    .btn-social:hover {
+      transform: translateY(-3px);
+      border-color: transparent;
+    }
+
+    .btn-social:hover::before { opacity: 1; }
+
+    /* WhatsApp */
+    .btn-social.whatsapp:hover { box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+    .btn-social.whatsapp::before { background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(18,140,60,0.1)); }
+    .btn-social.whatsapp:hover .social-icon { filter: drop-shadow(0 0 8px rgba(37,211,102,0.8)); }
+    .btn-social.whatsapp:hover .social-name { color: #25d366; }
+
+    /* Instagram */
+    .btn-social.instagram:hover { box-shadow: 0 8px 24px rgba(225,48,108,0.35); }
+    .btn-social.instagram::before { background: linear-gradient(135deg, rgba(225,48,108,0.15), rgba(131,58,180,0.1)); }
+    .btn-social.instagram:hover .social-icon { filter: drop-shadow(0 0 8px rgba(225,48,108,0.8)); }
+    .btn-social.instagram:hover .social-name { color: #e1306c; }
+
+    /* Google Maps */
+    .btn-social.maps:hover { box-shadow: 0 8px 24px rgba(66,133,244,0.35); }
+    .btn-social.maps::before { background: linear-gradient(135deg, rgba(66,133,244,0.15), rgba(234,67,53,0.1)); }
+    .btn-social.maps:hover .social-icon { filter: drop-shadow(0 0 8px rgba(66,133,244,0.8)); }
+    .btn-social.maps:hover .social-name { color: #4285f4; }
+
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      transition: filter 0.25s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+      transition: color 0.25s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CONTACT BUTTONS (kept for any fallback) ── */
     .btn-contact {
       display: flex;
       align-items: center;
@@ -294,32 +384,6 @@
       border: 1px solid rgba(200,205,212,0.15);
       transition: all 0.25s ease;
       margin-bottom: 10px;
-    }
-
-    .btn-contact:hover {
-      border-color: rgba(200,205,212,0.4);
-      background: rgba(200,205,212,0.05);
-      color: var(--white);
-    }
-
-    .btn-contact.whatsapp:hover {
-      border-color: rgba(37,211,102,0.5);
-      color: #25d366;
-    }
-
-    .btn-contact.maps:hover {
-      border-color: rgba(66,133,244,0.5);
-      color: #4285f4;
-    }
-
-    .btn-contact.instagram:hover {
-      border-color: rgba(225,48,108,0.5);
-      color: #e1306c;
-    }
-
-    .btn-contact.instagram:hover {
-      border-color: rgba(225,48,108,0.5);
-      color: #e1306c;
     }
 
     .contact-icon { font-size: 1.2rem; }
@@ -544,12 +608,12 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 110px;
+      width: 150px;
       transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
       opacity: 0.35;
       transform: scale(0.65);
       cursor: pointer;
-      padding: 0 6px;
+      padding: 0 8px;
     }
 
     .carousel-item.center {
@@ -558,31 +622,31 @@
     }
 
     .carousel-item.side1 {
-      opacity: 0.65;
-      transform: scale(0.82);
+      opacity: 0.75;
+      transform: scale(0.84);
     }
 
     .carousel-item.side2 {
-      opacity: 0.38;
-      transform: scale(0.68);
+      opacity: 0.4;
+      transform: scale(0.70);
     }
 
     .carousel-img-wrap {
-      width: 88px;
-      height: 88px;
-      border-radius: 14px;
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
       overflow: hidden;
       border: 2px solid transparent;
-      transition: border-color 0.4s, box-shadow 0.4s;
+      transition: border-color 0.4s, box-shadow 0.4s, width 0.5s, height 0.5s;
       background: #111;
     }
 
     .carousel-item.center .carousel-img-wrap {
-      width: 110px;
-      height: 110px;
-      border-radius: 16px;
+      width: 148px;
+      height: 148px;
+      border-radius: 18px;
       border-color: rgba(192,0,10,0.7);
-      box-shadow: 0 0 20px rgba(192,0,10,0.4), 0 8px 24px rgba(0,0,0,0.5);
+      box-shadow: 0 0 24px rgba(192,0,10,0.45), 0 10px 30px rgba(0,0,0,0.6);
     }
 
     .carousel-item.side1 .carousel-img-wrap {
@@ -598,24 +662,33 @@
 
     .carousel-phrase {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 1px;
-      color: var(--red);
+      color: #555;
       text-align: center;
-      margin-top: 8px;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.4s, transform 0.4s;
+      margin-top: 9px;
+      opacity: 0.6;
+      transition: opacity 0.4s, color 0.4s, font-size 0.4s;
       white-space: nowrap;
-      max-width: 130px;
+      max-width: 148px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .carousel-item.center .carousel-phrase {
       opacity: 1;
-      transform: translateY(0);
+      color: var(--red);
+      font-size: 0.8rem;
+    }
+
+    .carousel-item.side1 .carousel-phrase {
+      opacity: 0.5;
+      color: #555;
+    }
+
+    .carousel-item.side2 .carousel-phrase {
+      opacity: 0.25;
     }
 
     .carousel-dots {
@@ -754,26 +827,56 @@
       <div class="divider-line"></div>
     </div>
 
-    <a class="btn-contact whatsapp"
-       href="https://wa.me/5511954950044?text=Olá! Vim pelo link de avaliação da SPN Estética Automotiva."
-       target="_blank">
-      <span class="contact-icon">💬</span>
-      WhatsApp · (11) 95495-0044
-    </a>
+    <div class="social-label">Nos siga nas redes</div>
+    <div class="social-grid">
 
-    <a class="btn-contact maps"
-       href="https://www.google.com/maps/dir/-23.427591,-46.3145074/Estr.+Promiss%C3%A3o,+386+-+Jardim+Carolina,+Itaquaquecetuba+-+SP,+08588-310/@-23.4301926,-46.3289461,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94ce7da82e8b877f:0x75b04a25687f29e9!2m2!1d-46.3236643!2d-23.4327949?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
-       target="_blank">
-      <span class="contact-icon">📍</span>
-      Como chegar · Ver no Maps
-    </a>
+      <!-- WhatsApp -->
+      <a class="btn-social whatsapp"
+         href="https://wa.me/5511954950044?text=Olá! Vim pelo link de avaliação da SPN Estética Automotiva."
+         target="_blank">
+        <svg class="social-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#25D366"/>
+          <path d="M22.9 9.1A9.7 9.7 0 0 0 16 6.3a9.74 9.74 0 0 0-8.43 14.6L6 26l5.22-1.37a9.73 9.73 0 0 0 4.77 1.22h.01A9.74 9.74 0 0 0 22.9 9.1zm-6.9 14.97a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.1.81.83-3.02-.2-.31a8.1 8.1 0 1 1 6.89 3.83zm4.44-6.06c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12s-.62.78-.76.94c-.14.16-.28.18-.52.06a6.57 6.57 0 0 1-1.93-1.19 7.23 7.23 0 0 1-1.34-1.66c-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" fill="white"/>
+        </svg>
+        <span class="social-name">WhatsApp</span>
+      </a>
 
-    <a class="btn-contact instagram"
-       href="https://www.instagram.com/spn_esteticauto"
-       target="_blank">
-      <span class="contact-icon">📸</span>
-      Instagram · @spn_esteticauto
-    </a>
+      <!-- Instagram -->
+      <a class="btn-social instagram"
+         href="https://www.instagram.com/spn_esteticauto"
+         target="_blank">
+        <svg class="social-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ig1" cx="30%" cy="107%" r="150%">
+              <stop offset="0%" stop-color="#fdf497"/>
+              <stop offset="5%" stop-color="#fdf497"/>
+              <stop offset="45%" stop-color="#fd5949"/>
+              <stop offset="60%" stop-color="#d6249f"/>
+              <stop offset="90%" stop-color="#285AEB"/>
+            </radialGradient>
+          </defs>
+          <rect width="32" height="32" rx="8" fill="url(#ig1)"/>
+          <rect x="8" y="8" width="16" height="16" rx="4.5" stroke="white" stroke-width="1.8" fill="none"/>
+          <circle cx="16" cy="16" r="4" stroke="white" stroke-width="1.8" fill="none"/>
+          <circle cx="21.2" cy="10.8" r="1.1" fill="white"/>
+        </svg>
+        <span class="social-name">Instagram</span>
+      </a>
+
+      <!-- Google Maps -->
+      <a class="btn-social maps"
+         href="https://www.google.com/maps/dir/-23.427591,-46.3145074/Estr.+Promiss%C3%A3o,+386+-+Jardim+Carolina,+Itaquaquecetuba+-+SP,+08588-310/@-23.4301926,-46.3289461,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94ce7da82e8b877f:0x75b04a25687f29e9!2m2!1d-46.3236643!2d-23.4327949?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank">
+        <svg class="social-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="white"/>
+          <path d="M16 7C12.69 7 10 9.69 10 13c0 4.5 6 12 6 12s6-7.5 6-12c0-3.31-2.69-6-6-6zm0 8.5A2.5 2.5 0 1 1 16 10.5a2.5 2.5 0 0 1 0 5z" fill="#EA4335"/>
+          <path d="M16 7v6.5" stroke="#34A853" stroke-width="0"/>
+          <path d="M16 10.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill="#C5221F"/>
+        </svg>
+        <span class="social-name">Maps</span>
+      </a>
+
+    </div>
 
     <div class="address-pill">
       <span class="pin">📍</span>
@@ -929,7 +1032,7 @@
 
       // shift track so center item is in middle of container
       const outerW = document.querySelector('.carousel-track-outer').offsetWidth;
-      const itemW  = 122; // item width + gap
+      const itemW  = 166; // item width (150px) + padding (16px)
       const offset = outerW / 2 - current * itemW - itemW / 2;
       track.style.transform = `translateX(${offset}px)`;
     }
