@@ -821,13 +821,13 @@
       50%       { transform: translateY(-9px); }
     }
 
-  
-    /* ── TINY COUNTDOWN BAR ── */
+
+    /* ── COUNTDOWN BAR ── */
     #cdBar {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 9999;
-      background: rgba(17,19,24,0.92);
+      background: rgba(17,19,24,0.93);
       border-bottom: 1px solid rgba(192,0,10,0.4);
       display: flex;
       align-items: center;
@@ -838,18 +838,53 @@
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 2px;
-      color: #888;
+      color: #777;
       text-transform: uppercase;
     }
-    #cdBar span.cd-time {
-      color: var(--silver-bright);
-      font-size: 0.9rem;
+    #cdBar .cd-time {
+      color: #e8edf4;
+      font-size: 0.92rem;
       letter-spacing: 3px;
     }
-    #cdBar span.cd-dot {
-      color: var(--red);
-      font-size: 0.7rem;
+    #cdBar .cd-dot { color: #c0000a; }
+
+    /* ── EXPIRED OVERLAY ── */
+    #expiredOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0d0f14;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      animation: fadeInExp 1s ease both;
     }
+    #expiredOverlay.show { display: flex; }
+    @keyframes fadeInExp {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .exp-icon { font-size: 3.5rem; filter: grayscale(1); opacity: 0.4; }
+    .exp-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #333;
+      text-align: center;
+    }
+    .exp-sub {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: #2a2a2a;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .exp-line { width: 60px; height: 1px; background: #222; }
   </style>
 </head>
 <body>
@@ -889,10 +924,20 @@
 </div>
 
 <!-- MAIN -->
+<!-- COUNTDOWN BAR -->
 <div id="cdBar">
   <span class="cd-dot">⏳</span>
   <span>Link disponível por</span>
   <span class="cd-time" id="cdTime">24:00:00</span>
+</div>
+
+<!-- EXPIRED OVERLAY -->
+<div id="expiredOverlay">
+  <div class="exp-icon">🔒</div>
+  <div class="exp-line"></div>
+  <div class="exp-title">Link Expirado</div>
+  <div class="exp-sub">Este link não está mais disponível</div>
+  <div class="exp-line"></div>
 </div>
 
 <div class="container">
@@ -1065,22 +1110,112 @@
 <script>
   const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJf4eLLqjXzpQRqSl_aCVKsHU';
 
-  // ── COUNTDOWN 24h ──
+  // ── COUNTDOWN 24h + EXPIRED PAGE ──
   (function(){
     const KEY = 'spn_end';
     let end = localStorage.getItem(KEY);
     if (!end) { end = Date.now() + 24*3600*1000; localStorage.setItem(KEY, end); }
     else end = +end;
+
     function pad(n){ return String(n).padStart(2,'0'); }
+
+    function showExpired(){
+      document.getElementById('cdBar').style.display = 'none';
+      document.getElementById('expiredOverlay').classList.add('show');
+      document.getElementById('cdTime').textContent = '00:00:00';
+    }
+
     function tick(){
       const r = end - Date.now();
-      if(r <= 0){ document.getElementById('cdTime').textContent = 'EXPIRADO'; return; }
+      if(r <= 0){ showExpired(); return; }
       const s = Math.floor(r/1000);
       document.getElementById('cdTime').textContent =
         pad(Math.floor(s/3600)) + ':' + pad(Math.floor(s%3600/60)) + ':' + pad(s%60);
       setTimeout(tick, 1000);
     }
     tick();
+  })();
+
+  // ── ENGINE RUMBLE (Web Audio) ──
+  (function(){
+    let audioCtx = null;
+    let unlocked = false;
+
+    function unlock(){
+      if(unlocked) return;
+      unlocked = true;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    // Rugido sintético de motor — osciladores + distorção + envelope
+    function playEngineRumble(){
+      if(!audioCtx) return;
+      const ctx = audioCtx;
+      const now = ctx.currentTime;
+
+      // Oscilador base (grave do motor)
+      const osc1 = ctx.createOscillator();
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(55, now);
+      osc1.frequency.linearRampToValueAtTime(110, now + 0.15);
+      osc1.frequency.linearRampToValueAtTime(80, now + 0.5);
+      osc1.frequency.linearRampToValueAtTime(60, now + 1.1);
+
+      // Oscilador harmônico (textura)
+      const osc2 = ctx.createOscillator();
+      osc2.type = 'sawtooth';
+      osc2.frequency.setValueAtTime(110, now);
+      osc2.frequency.linearRampToValueAtTime(220, now + 0.15);
+      osc2.frequency.linearRampToValueAtTime(160, now + 0.5);
+      osc2.frequency.linearRampToValueAtTime(120, now + 1.1);
+
+      // Distorção
+      const dist = ctx.createWaveShaper();
+      const curve = new Float32Array(256);
+      for(let i=0;i<256;i++){
+        const x = (i*2/255)-1;
+        curve[i] = (Math.PI+300)*x / (Math.PI+300*Math.abs(x));
+      }
+      dist.curve = curve;
+
+      // Filtro passa-baixa (abafar agudos)
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(400, now);
+      filter.frequency.linearRampToValueAtTime(800, now + 0.15);
+      filter.frequency.linearRampToValueAtTime(300, now + 1.0);
+
+      // Envelope de volume
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.55, now + 0.08);
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.3);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.9);
+      gain.gain.linearRampToValueAtTime(0, now + 1.3);
+
+      // Conectar cadeia
+      osc1.connect(dist);
+      osc2.connect(dist);
+      dist.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(now); osc1.stop(now + 1.4);
+      osc2.start(now); osc2.stop(now + 1.4);
+    }
+
+    // Desbloquear áudio no primeiro toque/clique
+    document.addEventListener('touchstart', unlock, {once: true});
+    document.addEventListener('click', unlock, {once: true});
+
+    // Disparar rugido quando a animação logoShake termina (~1.6s após carregar)
+    // logoShake: delay 1.05s + duration 0.55s = ~1.6s
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        playEngineRumble();
+      }, 1650);
+    });
+
   })();
 
 
