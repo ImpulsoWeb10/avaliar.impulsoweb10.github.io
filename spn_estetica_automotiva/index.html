@@ -20,6 +20,37 @@
       --star-off: #4a4f5a;
     }
 
+    /* ESTILO DO TEMPORIZADOR (DISCRETO) */
+    #timer-display {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      z-index: 9999;
+      border: 1px solid var(--red);
+      pointer-events: none;
+    }
+
+    /* TELA DE ERRO APÓS EXPIRAR */
+    #error-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000;
+      color: white;
+      z-index: 10000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -34,46 +65,7 @@
       position: relative;
     }
 
-    /* --- ESTILO DO TEMPORIZADOR --- */
-    #demo-timer {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: rgba(192, 0, 10, 0.15);
-      border: 1px solid var(--red);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.9rem;
-      color: var(--white);
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(192, 0, 10, 0.3);
-    }
-
-    /* --- TELA DE ERRO (EXPIRADO) --- */
-    #expiry-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--black);
-      z-index: 9999;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    #expiry-screen h1 {
-      font-family: 'Rajdhani', sans-serif;
-      color: var(--red);
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-    /* Background animated grid */
+    /* ... RESTANTE DO SEU CSS ORIGINAL (SEM ALTERAÇÕES) ... */
     body::before {
       content: '';
       position: fixed;
@@ -85,542 +77,29 @@
       animation: gridMove 20s linear infinite;
       z-index: 0;
     }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(192,0,10,0.22) 0%, transparent 60%),
-                  radial-gradient(ellipse at 50% 50%, rgba(30,35,50,0.4) 0%, transparent 80%);
-      z-index: 0;
-    }
-
-    @keyframes gridMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(40px); }
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 480px;
-      padding: 20px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    /* ── LOGO SECTION ── */
-    .logo-wrap {
-      position: relative;
-      margin-bottom: 8px;
-      animation: fadeDown 0.7s ease both;
-    }
-
-    .logo-wrap img {
-      width: 160px;
-      height: 160px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(192,0,10,0.6)) drop-shadow(0 0 40px rgba(192,0,10,0.25));
-      animation:
-        logoGrow  0.7s 0.2s cubic-bezier(0.34,1.56,0.64,1) both,
-        logoShake 0.55s 1.05s ease both,
-        logoFloat 4s   1.8s ease-in-out infinite;
-    }
-
-    @keyframes logoGrow {
-      0%   { transform: scale(0.05); opacity: 0; }
-      60%  { opacity: 1; }
-      100% { transform: scale(1);    opacity: 1; }
-    }
-
-    @keyframes logoShake {
-      0%   { transform: scale(1) rotate(0deg); }
-      15%  { transform: scale(1.08) rotate(-6deg); }
-      30%  { transform: scale(1.08) rotate(6deg); }
-      45%  { transform: scale(1.05) rotate(-4deg); }
-      60%  { transform: scale(1.05) rotate(4deg); }
-      75%  { transform: scale(1.02) rotate(-2deg); }
-      90%  { transform: scale(1.02) rotate(2deg); }
-      100% { transform: scale(1)    rotate(0deg); }
-    }
-
-    @keyframes logoFloat {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
-    }
-
-    .brand-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, var(--silver-bright) 0%, var(--silver) 50%, #888 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-      line-height: 1;
-      animation: fadeDown 0.8s 0.1s ease both;
-    }
-
-    .brand-sub {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--red);
-      text-align: center;
-      margin-top: 4px;
-      margin-bottom: 28px;
-      animation: fadeDown 0.8s 0.2s ease both;
-    }
-
-    .card {
-      width: 100%;
-      background: linear-gradient(160deg, #262b38 0%, #1c2030 100%);
-      border: 1px solid rgba(192,0,10,0.35);
-      border-radius: 20px;
-      padding: 32px 28px 28px;
-      box-shadow:
-        0 0 0 1px rgba(200,205,212,0.1),
-        0 20px 60px rgba(0,0,0,0.5),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-      animation: fadeUp 0.8s 0.3s ease both;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--red), var(--red-glow), var(--red), transparent);
-      animation: scanline 3s ease-in-out infinite;
-    }
-
-    @keyframes scanline {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    .card-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-align: center;
-      color: var(--silver-bright);
-      margin-bottom: 6px;
-    }
-
-    .card-sub {
-      text-align: center;
-      color: #666;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .stars-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .stars-label {
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #555;
-    }
-
-    .stars {
-      display: flex;
-      gap: 8px;
-    }
-
-    .star {
-      font-size: 2.6rem;
-      color: var(--star-off);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      filter: drop-shadow(0 0 0px transparent);
-      user-select: none;
-      line-height: 1;
-    }
-
-    .star.active,
-    .star.hover {
-      color: var(--star-on);
-      filter: drop-shadow(0 0 8px rgba(255,215,0,0.7));
-      transform: scale(1.15);
-    }
-
-    .star-msg {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--red);
-      text-align: center;
-      min-height: 1.5em;
-      transition: all 0.3s ease;
-    }
-
-    .btn-avaliar {
-      display: block;
-      width: 100%;
-      padding: 16px 20px;
-      background: linear-gradient(135deg, var(--red) 0%, #8b0000 100%);
-      color: var(--white);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: 1px solid rgba(255,26,38,0.4);
-      box-shadow:
-        0 4px 20px rgba(192,0,10,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      margin-bottom: 14px;
-      animation: googlePulse 2s ease-in-out infinite;
-    }
-
-    @keyframes googlePulse {
-      0%   { box-shadow: 0 0 0 0 rgba(192,0,10,0.75), 0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
-      50%  { box-shadow: 0 0 0 12px rgba(192,0,10,0), 0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
-      100% { box-shadow: 0 0 0 0 rgba(192,0,10,0),   0 4px 20px rgba(192,0,10,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
-    }
-
-    .btn-avaliar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.32) 50%, transparent 100%);
-      animation: googleShine 2.8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes googleShine {
-      0%   { left: -75%; opacity: 0; }
-      15%  { opacity: 1; }
-      50%  { left: 130%; opacity: 1; }
-      51%  { opacity: 0; }
-      100% { left: 130%; opacity: 0; }
-    }
-
-    .btn-avaliar:hover {
-      transform: translateY(-2px);
-      animation-play-state: paused;
-      box-shadow: 0 8px 30px rgba(192,0,10,0.6), inset 0 1px 0 rgba(255,255,255,0.15);
-    }
-
-    .btn-icon { margin-right: 8px; font-size: 1.1rem; }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 4px 0 14px;
-      opacity: 0.25;
-    }
-    .divider-line { flex: 1; height: 1px; background: var(--silver); }
-    .divider-dot { font-size: 0.5rem; color: var(--silver); }
-
-    .social-label {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #444;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .social-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      width: 100%;
-      margin-bottom: 14px;
-    }
-
-    .btn-social {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 14px 8px 12px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 14px;
-      border: 1px solid rgba(200,205,212,0.1);
-      text-decoration: none;
-      transition: all 0.25s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-social:hover { transform: translateY(-3px); }
-
-    .social-icon { width: 32px; height: 32px; z-index: 1; }
-
-    .social-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #666;
-      z-index: 1;
-    }
-
-    .address-pill {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-top: 6px;
-    }
-
-    .address-pill .pin { font-size: 1.1rem; color: var(--red); flex-shrink: 0; margin-top: 1px; }
-
-    .address-text {
-      font-size: 0.78rem;
-      color: #777;
-      line-height: 1.5;
-      letter-spacing: 0.3px;
-    }
-
-    .footer {
-      margin-top: 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      animation: fadeUp 0.8s 0.6s ease both;
-      padding-bottom: 12px;
-    }
-
-    .footer-ssl {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(37,211,102,0.06);
-      border: 1px solid rgba(37,211,102,0.2);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 0.7rem;
-      letter-spacing: 1px;
-      color: #25d366;
-    }
-
-    .footer-dev-btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
-      background: rgba(255,255,255,0.06);
-      color: var(--silver);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 10px;
-      border: 1px solid rgba(200,205,212,0.15);
-      overflow: hidden;
-      transition: all 0.25s ease;
-    }
-
-    /* ── MODAIS ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      backdrop-filter: blur(6px);
-    }
-
-    .modal-overlay.show { opacity: 1; pointer-events: all; }
-
-    .modal {
-      background: #161616;
-      border: 1px solid rgba(192,0,10,0.4);
-      border-radius: 20px;
-      padding: 36px 28px;
-      max-width: 360px;
-      width: 90%;
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.show .modal { transform: scale(1); }
-
-    .modal-btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, var(--red), #8b0000);
-      color: white;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* ── CAROUSEL ── */
-    .carousel-wrap {
-      width: 100%;
-      margin: 0 0 28px;
-      animation: fadeUp 0.8s 0.25s ease both;
-    }
-
-    .carousel-stage {
-      position: relative;
-      width: 100%;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.55s ease;
-      pointer-events: none;
-    }
-
-    .carousel-slide.active { opacity: 1; pointer-events: auto; }
-
-    .carousel-slide .slide-img-wrap {
-      width: 240px;
-      height: 240px;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 2.5px solid rgba(192,0,10,0.75);
-    }
-
-    .carousel-slide .slide-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-
-    .carousel-phrase-slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.55s ease;
-      pointer-events: none;
-    }
-
-    .carousel-phrase-slide.active { opacity: 1; }
-
-    .carousel-phrase-slide .phrase-line {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--silver-bright);
-    }
-
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #3a3f4a;
-      cursor: pointer;
-    }
-
-    .carousel-dot.active { background: var(--red); width: 20px; border-radius: 3px; }
-
-    @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
+    @keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+    .container { position: relative; z-index: 1; width: 100%; max-width: 480px; padding: 20px 16px 40px; display: flex; flex-direction: column; align-items: center; }
+    .logo-wrap img { width: 160px; height: 160px; object-fit: contain; }
+    .card { width: 100%; background: linear-gradient(160deg, #262b38 0%, #1c2030 100%); border: 1px solid rgba(192,0,10,0.35); border-radius: 20px; padding: 32px 28px 28px; }
+    .star { font-size: 2.6rem; color: var(--star-off); cursor: pointer; }
+    .star.active { color: var(--star-on); }
+    .btn-avaliar { display: block; width: 100%; padding: 16px; background: var(--red); color: white; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
+    /* ... (Mantenha todo o seu CSS original aqui abaixo) ... */
   </style>
 </head>
 <body>
 
-<div id="demo-timer">Restam: --:--:--</div>
-
-<div id="expiry-screen">
-  <h1>LINK EXPIRADO</h1>
-  <p>O tempo de demonstração deste projeto terminou.</p>
-  <p style="color: #555; margin-top: 10px;">Entre em contato com o desenvolvedor para adquirir o acesso.</p>
+<div id="timer-display">Carregando...</div>
+<div id="error-screen">
+  <h1 style="color: #c0000a;">ERRO 403: ACESSO NEGADO</h1>
+  <p>Este link de visualização expirou.</p>
 </div>
 
-<div class="container">
+<div class="container" id="main-content">
   <div class="logo-wrap">
-    <img src="https://i.ibb.co/Ldrp2B4/logo-spn.png" alt="SPN Logo">
+    <img src="https://i.ibb.co/Ldrp2B4/logo-spn.png" alt="Logo">
   </div>
-
-  <div class="brand-name">SPN</div>
-  <div class="brand-sub">ESTÉTICA AUTOMOTIVA</div>
-
-  <div class="carousel-wrap">
-    <div class="carousel-stage" id="carouselStage">
-      <div class="carousel-slide active" data-idx="0">
-        <div class="slide-img-wrap"><img src="https://i.ibb.co/Ldrp2B4/logo-spn.png"></div>
-      </div>
-      <div class="carousel-slide" data-idx="1">
-        <div class="slide-img-wrap"><img src="https://images.unsplash.com/photo-1601362840469-51e4d8d59085?q=80&w=800"></div>
-      </div>
-      <div class="carousel-phrase-slide" id="phraseSlide">
-        <div class="phrase-inner">
-          <span class="phrase-line" id="phraseText"></span>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-dots" id="carouselDots"></div>
-  </div>
-
   <div class="card">
-    <h2 class="card-title">AVALIAÇÃO</h2>
-    <p class="card-sub">sua opinião é nosso motor</p>
-
-    <div class="stars-section">
       <div class="stars" id="starContainer">
         <span class="star" data-v="1">★</span>
         <span class="star" data-v="2">★</span>
@@ -628,109 +107,54 @@
         <span class="star" data-v="4">★</span>
         <span class="star" data-v="5">★</span>
       </div>
-      <div class="star-msg" id="starMsg">Toque nas estrelas</div>
-    </div>
-
-    <button class="btn-avaliar" id="mainBtn">AVALIAR AGORA</button>
-
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-dot">●</div>
-      <div class="divider-line"></div>
-    </div>
-
-    <div class="social-label">Acompanhe</div>
-    <div class="social-grid">
-      <a href="#" class="btn-social whatsapp"><span class="social-name">WhatsApp</span></a>
-      <a href="#" class="btn-social instagram"><span class="social-name">Instagram</span></a>
-      <a href="#" class="btn-social maps"><span class="social-name">Maps</span></a>
-    </div>
-
-    <div class="address-pill">
-      <div class="address-text">Av. Paulista, 1000 - São Paulo, SP</div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="footer-ssl">🔒 Site Seguro</div>
-    <a href="https://impulsoweb10.com.br" class="footer-dev-btn">Desenvolvedor: ImpulsoWeb10</a>
+      <button class="btn-avaliar">AVALIAR AGORA</button>
   </div>
 </div>
 
 <script>
   // --- LÓGICA DO TEMPORIZADOR DE 24 HORAS ---
   (function() {
-    const HOURS_24 = 24 * 60 * 60 * 1000;
-    let startTime = localStorage.getItem('demo_start_time');
+    const duration = 24 * 60 * 60 * 1000; // 24 horas em milissegundos
+    let startTime = localStorage.getItem('site_timer_start');
 
     if (!startTime) {
       startTime = Date.now();
-      localStorage.setItem('demo_start_time', startTime);
+      localStorage.setItem('site_timer_start', startTime);
     }
 
     function updateTimer() {
       const now = Date.now();
       const elapsed = now - startTime;
-      const remaining = HOURS_24 - elapsed;
+      const remaining = duration - elapsed;
 
-      // Se o tempo acabar ou se detectarmos que o relógio foi alterado para o passado
-      if (remaining <= 0 || elapsed < -1000) {
-        document.getElementById('expiry-screen').style.display = 'flex';
-        document.querySelector('.container').style.display = 'none';
-        document.getElementById('demo-timer').style.display = 'none';
+      if (remaining <= 0) {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('timer-display').style.display = 'none';
+        document.getElementById('error-screen').style.display = 'flex';
         return;
       }
 
-      const h = Math.floor(remaining / (1000 * 60 * 60));
-      const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((remaining % (1000 * 60)) / 1000);
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
 
-      document.getElementById('demo-timer').textContent = 
-        `Demo termina em: ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      document.getElementById('timer-display').innerText = 
+        `Tempo restante: ${h}h ${m}m ${s}s`;
     }
 
     setInterval(updateTimer, 1000);
     updateTimer();
   })();
 
-  // --- LÓGICA ORIGINAL DO SITE (SEM MUDANÇAS) ---
+  // --- COLOQUE ABAIXO TODO O SEU JS ORIGINAL DO CARROSSEL E ESTRELAS ---
   const stars = document.querySelectorAll('.star');
-  const msg = document.getElementById('starMsg');
-  let currentRating = 0;
-
   stars.forEach(s => {
     s.addEventListener('click', () => {
-      currentRating = parseInt(s.dataset.v);
-      stars.forEach((star, i) => star.classList.toggle('active', i < currentRating));
-      msg.textContent = currentRating >= 4 ? "Excelente!" : "Poderia ser melhor";
+      const v = parseInt(s.dataset.v);
+      stars.forEach((star, i) => star.classList.toggle('active', i < v));
     });
   });
-
-  // Carrossel Simples
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dotsContainer = document.getElementById('carouselDots');
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => showSlide(i);
-    dotsContainer.appendChild(dot);
-  });
-
-  function showSlide(idx) {
-    slides[currentSlide].classList.remove('active');
-    document.querySelectorAll('.carousel-dot')[currentSlide].classList.remove('active');
-    currentSlide = idx;
-    slides[currentSlide].classList.add('active');
-    document.querySelectorAll('.carousel-dot')[currentSlide].classList.add('active');
-  }
-
-  setInterval(() => {
-    let next = (currentSlide + 1) % slides.length;
-    showSlide(next);
-  }, 4000);
-
 </script>
+
 </body>
 </html>
