@@ -30,7 +30,6 @@
             text-align: center; position: relative;
         }
 
-        /* PROVA SOCIAL */
         .social-proof {
             position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
             background: #facc15; color: #000; padding: 8px 20px;
@@ -39,9 +38,12 @@
             z-index: 10; letter-spacing: 1px;
         }
 
+        /* LOGO ESTILIZADA */
         .logo { 
-            width: 100%; max-width: 200px; height: auto;
-            margin-bottom: 20px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            width: 100%; max-width: 280px; height: auto;
+            border-radius: 15px; margin-bottom: 20px;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         h1 { font-size: 24px; color: #fff; margin-bottom: 5px; font-weight: 700; }
@@ -49,7 +51,6 @@
         
         #emoji-reacao { font-size: 50px; margin-bottom: 10px; display: block; height: 60px; }
 
-        /* RATING */
         .rating-box { margin-bottom: 35px; display: flex; justify-content: center; gap: 12px; }
         .star-btn {
             font-size: 38px; color: #334155; cursor: pointer;
@@ -57,7 +58,6 @@
         }
         .star-btn.active { color: #facc15; transform: scale(1.15); text-shadow: 0 0 20px rgba(250, 204, 21, 0.5); }
 
-        /* BOTÕES PRINCIPAIS */
         .botao {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             width: 100%; padding: 18px; border-radius: 15px;
@@ -66,14 +66,14 @@
         }
 
         .google { background: #facc15; color: #000; }
-        .google:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(250, 204, 21, 0.3); }
+        .google:hover { transform: translateY(-3px); }
 
         .btn-modal { background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
 
-        /* MODAL ESTRUTURA */
+        /* MODAL */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
             display: none; align-items: center; justify-content: center; z-index: 100;
             padding: 20px;
         }
@@ -94,7 +94,6 @@
             padding: 15px; border-radius: 12px; color: white;
             font-family: inherit; font-size: 15px; outline: none;
         }
-        .input-style:focus { border-color: #facc15; }
 
         .btn-confirmar { background: #22c55e; color: white; margin-top: 10px; }
 
@@ -106,12 +105,12 @@
 <body>
 
 <div class="container">
-    <div class="social-proof"><i class="fas fa-crown"></i> ATENDIMENTO EXCLUSIVO</div>
+    <div class="social-proof"><i class="fas fa-certificate"></i> TOP 1 DA REGIÃO</div>
 
-    <i class="fas fa-cut" style="font-size: 40px; color: #facc15; margin-bottom: 15px;"></i>
+    <img src="luciano-cabeleireiro.png" class="logo" alt="Luciano Cabeleireiro">
 
     <h1>Luciano Cabeleireiro</h1>
-    <h2>Excelência em cada detalhe</h2>
+    <h2>Corte, Estilo e Autoestima</h2>
     
     <div id="emoji-reacao">✨</div>
 
@@ -129,46 +128,46 @@
         </a>
 
         <button onclick="abrirModal()" class="botao btn-modal">
-            <i class="far fa-calendar-check"></i> AGENDAR PRÓXIMO CORTE
+            <i class="far fa-calendar-alt"></i> AGENDAR PRÓXIMO VISUAL
         </button>
     </div>
 
     <div class="footer">
-        <div>🔒 AMBIENTE VIP | © 2026</div>
+        <div>🔒 AMBIENTE SEGURO | © 2026</div>
         <div style="margin-top: 8px;">Desenvolvido por <a href="https://impulsoweb10.com.br/" style="color:#facc15; text-decoration:none; font-weight:700;">ImpulsoWeb10</a></div>
     </div>
 </div>
 
 <div class="modal-overlay" id="modalAgendamento">
     <div class="modal-content">
-        <h3>Reservar Horário</h3>
+        <h3>Agendar Horário</h3>
         
         <div class="form-group">
             <label>Seu Nome</label>
-            <input type="text" id="nomeCliente" class="input-style" placeholder="Ex: João Silva">
+            <input type="text" id="nomeCliente" class="input-style" placeholder="Como podemos te chamar?">
         </div>
 
         <div class="form-group">
-            <label>Data Desejada</label>
+            <label>Data</label>
             <input type="date" id="dataAgendamento" class="input-style">
         </div>
 
         <div class="form-group">
-            <label>Melhor Horário</label>
+            <label>Horário</label>
             <input type="time" id="horaAgendamento" class="input-style">
         </div>
 
         <button onclick="enviarAgendamento()" class="botao btn-confirmar">
-            <i class="fab fa-whatsapp"></i> CONFIRMAR NO WHATSAPP
+            <i class="fab fa-whatsapp"></i> ENVIAR SOLICITAÇÃO
         </button>
         
-        <button onclick="fecharModal()" style="background:transparent; color:#888; border:none; width:100%; font-size:12px; cursor:pointer;">Cancelar</button>
+        <button onclick="fecharModal()" style="background:transparent; color:#888; border:none; width:100%; font-size:12px; cursor:pointer; margin-top:10px;">Voltar</button>
     </div>
 </div>
 
 <script>
     const emojis = ["✨", "☹️", "😐", "🙂", "🤩", "😍"];
-    const telefoneBarbearia = "55119970967674";
+    const telefoneBarbearia = "551170967674"; // NÚMERO ATUALIZADO
 
     function avaliar(n) {
         const stars = document.querySelectorAll('.star-btn');
@@ -183,13 +182,12 @@
 
         if (n >= 4) {
             confetti({ 
-                particleCount: 100, spread: 70, origin: { y: 0.8 },
+                particleCount: 120, spread: 60, origin: { y: 0.8 },
                 colors: ['#facc15', '#ffffff'] 
             });
         }
     }
 
-    // Lógica do Modal
     function abrirModal() {
         document.getElementById('modalAgendamento').style.display = 'flex';
     }
@@ -204,26 +202,24 @@
         const hora = document.getElementById('horaAgendamento').value;
 
         if(!nome || !data || !hora) {
-            alert("Por favor, preencha todos os campos para o agendamento.");
+            alert("Por favor, preencha nome, data e hora.");
             return;
         }
 
-        // Formatar data para PT-BR
         const dataFormatada = data.split('-').reverse().join('/');
 
         const mensagem = encodeURIComponent(
-            `Olá Luciano! Gostaria de agendar um corte:\n\n` +
-            `👤 *Nome:* ${nome}\n` +
+            `*Novo Agendamento (Site)*\n\n` +
+            `👤 *Cliente:* ${nome}\n` +
             `📅 *Data:* ${dataFormatada}\n` +
             `⏰ *Hora:* ${hora}\n\n` +
-            `Aguardo confirmação! ✂️`
+            `_Gostaria de confirmar este horário!_`
         );
 
         window.open(`https://wa.me/${telefoneBarbearia}?text=${mensagem}`, '_blank');
         fecharModal();
     }
 
-    // Fechar modal ao clicar fora dele
     window.onclick = function(event) {
         const modal = document.getElementById('modalAgendamento');
         if (event.target == modal) fecharModal();
