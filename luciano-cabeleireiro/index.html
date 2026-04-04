@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luciano Cabeleireiro | VIP Feedback</title>
+    <title>Luciano Cabeleireiro | VIP Experience</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
@@ -15,7 +14,7 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #121212, #1a1a1a); /* Fundo escuro premium */
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
             color: white;
             display: flex; align-items: center; justify-content: center;
             min-height: 100vh; padding: 15px;
@@ -23,98 +22,96 @@
 
         .container {
             max-width: 420px; width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            padding: 40px 20px 30px; border-radius: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 40px 25px; border-radius: 40px;
+            border: 1px solid rgba(250, 204, 21, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             text-align: center; position: relative;
         }
 
         /* PROVA SOCIAL */
         .social-proof {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: #facc15; color: #000; padding: 6px 18px;
-            border-radius: 20px; font-size: 11px; font-weight: 800;
-            white-space: nowrap; box-shadow: 0 5px 15px rgba(250, 204, 21, 0.3);
-            z-index: 10;
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: #facc15; color: #000; padding: 8px 20px;
+            border-radius: 25px; font-size: 10px; font-weight: 900;
+            white-space: nowrap; box-shadow: 0 10px 20px rgba(250, 204, 21, 0.2);
+            z-index: 10; letter-spacing: 1px;
         }
 
-        /* AJUSTE LOGO RETANGULAR */
         .logo { 
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-            border: 1px solid rgba(250, 204, 21, 0.4);
-            background: #000;
-            margin: 0 auto 20px;
-            display: block;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 100%; max-width: 200px; height: auto;
+            margin-bottom: 20px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         }
 
-        h1 { font-size: 22px; color: #fff; margin-bottom: 5px; }
-        h2 { font-size: 13px; color: #facc15; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { font-size: 24px; color: #fff; margin-bottom: 5px; font-weight: 700; }
+        h2 { font-size: 12px; color: #facc15; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
         
-        #emoji-reacao { font-size: 45px; margin-bottom: 10px; display: block; min-height: 55px; }
+        #emoji-reacao { font-size: 50px; margin-bottom: 10px; display: block; height: 60px; }
 
-        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 10px; }
+        /* RATING */
+        .rating-box { margin-bottom: 35px; display: flex; justify-content: center; gap: 12px; }
         .star-btn {
-            font-size: 42px; color: #334155; cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 38px; color: #334155; cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .star-btn.active { color: #facc15; transform: scale(1.2); text-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+        .star-btn.active { color: #facc15; transform: scale(1.15); text-shadow: 0 0 20px rgba(250, 204, 21, 0.5); }
 
-        .img-feedback {
-            width: 100%; height: 170px; object-fit: cover;
-            border-radius: 20px; margin-bottom: 15px;
-            border: 2px solid rgba(250, 204, 21, 0.2);
-        }
-
-        /* ÁREA DO CUPOM */
-        #cupom-area {
-            background: rgba(250, 204, 21, 0.07); border: 2px dashed #facc15;
-            padding: 18px; border-radius: 20px; margin: 20px 0;
-            display: none; animation: slideUp 0.5s ease;
-        }
-        .codigo-cupom { font-size: 22px; font-weight: 800; color: #facc15; letter-spacing: 3px; }
-
+        /* BOTÕES PRINCIPAIS */
         .botao {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 18px; border-radius: 50px;
-            font-weight: 800; font-size: 15px; text-decoration: none; transition: 0.3s;
-            border: none; cursor: pointer; margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%; padding: 18px; border-radius: 15px;
+            font-weight: 800; font-size: 14px; text-decoration: none; transition: 0.3s;
+            border: none; cursor: pointer; margin-bottom: 15px;
         }
 
-        .google { background: #facc15; color: #000; animation: pulsar 2s infinite; }
-        .whatsapp { background: #22c55e; color: white; }
-        .agenda { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; margin-top: 10px; }
-        .agenda:hover { background: rgba(255,255,255,0.1); }
+        .google { background: #facc15; color: #000; }
+        .google:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(250, 204, 21, 0.3); }
 
-        @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-modal { background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
 
-        .hidden { display: none; }
-        textarea { 
-            width: 100%; background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; 
-            color: white; padding: 15px; margin-bottom: 15px; 
-            resize: none; outline: none; font-family: inherit;
+        /* MODAL ESTRUTURA */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 100;
+            padding: 20px;
         }
+
+        .modal-content {
+            background: #1a1a1a; width: 100%; max-width: 360px;
+            padding: 30px; border-radius: 30px; border: 1px solid #333;
+            text-align: left; animation: slideUp 0.4s ease;
+        }
+
+        .modal-content h3 { font-size: 20px; margin-bottom: 20px; color: #facc15; text-align: center; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; color: #888; margin-bottom: 8px; margin-left: 5px; }
         
-        .footer { margin-top: 30px; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: rgba(255,255,255,0.6); }
+        .input-style {
+            width: 100%; background: #222; border: 1px solid #444;
+            padding: 15px; border-radius: 12px; color: white;
+            font-family: inherit; font-size: 15px; outline: none;
+        }
+        .input-style:focus { border-color: #facc15; }
+
+        .btn-confirmar { background: #22c55e; color: white; margin-top: 10px; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .footer { margin-top: 30px; font-size: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: rgba(255,255,255,0.4); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="social-proof"><i class="fas fa-certificate"></i> TOP 1 DA REGIÃO ESTE MÊS</div>
+    <div class="social-proof"><i class="fas fa-crown"></i> ATENDIMENTO EXCLUSIVO</div>
 
-    <img src="luciano-cabeleireiro.png" class="logo" alt="Luciano Cabeleireiro">
+    <i class="fas fa-cut" style="font-size: 40px; color: #facc15; margin-bottom: 15px;"></i>
 
-    <h1 id="main-title">Luciano Cabeleireiro</h1>
-    <h2>Corte, Estilo e Autoestima</h2>
+    <h1>Luciano Cabeleireiro</h1>
+    <h2>Excelência em cada detalhe</h2>
     
     <div id="emoji-reacao">✨</div>
 
@@ -126,51 +123,56 @@
         <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
     </div>
 
-    <div id="feedback-bom" class="hidden">
-        <p style="margin-bottom: 15px; font-size: 14px; color: #e2e8f0;">
-            Você acaba de ganhar um <strong>Mimo VIP!</strong><br>
-            Avalie no Google para liberar seu cupom especial.
-        </p>
-        
-        <a href="https://g.page/SUA_PAGINA_GOOGLE/review" onclick="liberarCupom()" target="_blank" class="botao google">
+    <div id="acoes-cliente">
+        <a href="https://g.page/SUA_PAGINA_GOOGLE/review" target="_blank" class="botao google">
             <i class="fab fa-google"></i> AVALIAR NO GOOGLE
         </a>
 
-        <div id="cupom-area">
-            <p style="font-size: 11px; color: #fff; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Seu Cupom de Fidelidade:</p>
-            <div class="codigo-cupom">LUCIANO10</div>
-            <p style="font-size: 11px; margin-top: 8px; color: #facc15;">Apresente no próximo agendamento!</p>
-        </div>
-
-        <a href="https://wa.me/55119970967674" class="botao agenda">
-            <i class="far fa-calendar-alt"></i> AGENDAR PRÓXIMO VISUAL
-        </a>
-    </div>
-
-    <div id="feedback-ruim" class="hidden">
-        <p style="font-size: 16px; margin-bottom: 15px;">Sua opinião é fundamental para nós... 😔</p>
-        <textarea id="texto-melhoria" rows="3" placeholder="O que podemos fazer para melhorar sua experiência?"></textarea>
-        <button onclick="enviarWhatsApp()" class="botao whatsapp">
-            <i class="fab fa-whatsapp"></i> FALAR COM LUCIANO
+        <button onclick="abrirModal()" class="botao btn-modal">
+            <i class="far fa-calendar-check"></i> AGENDAR PRÓXIMO CORTE
         </button>
     </div>
 
     <div class="footer">
-        <div>🔒 AMBIENTE SEGURO | © 2026</div>
+        <div>🔒 AMBIENTE VIP | © 2026</div>
         <div style="margin-top: 8px;">Desenvolvido por <a href="https://impulsoweb10.com.br/" style="color:#facc15; text-decoration:none; font-weight:700;">ImpulsoWeb10</a></div>
     </div>
 </div>
 
+<div class="modal-overlay" id="modalAgendamento">
+    <div class="modal-content">
+        <h3>Reservar Horário</h3>
+        
+        <div class="form-group">
+            <label>Seu Nome</label>
+            <input type="text" id="nomeCliente" class="input-style" placeholder="Ex: João Silva">
+        </div>
+
+        <div class="form-group">
+            <label>Data Desejada</label>
+            <input type="date" id="dataAgendamento" class="input-style">
+        </div>
+
+        <div class="form-group">
+            <label>Melhor Horário</label>
+            <input type="time" id="horaAgendamento" class="input-style">
+        </div>
+
+        <button onclick="enviarAgendamento()" class="botao btn-confirmar">
+            <i class="fab fa-whatsapp"></i> CONFIRMAR NO WHATSAPP
+        </button>
+        
+        <button onclick="fecharModal()" style="background:transparent; color:#888; border:none; width:100%; font-size:12px; cursor:pointer;">Cancelar</button>
+    </div>
+</div>
+
 <script>
-    let notaSelecionada = 0;
-    const emojis = ["", "☹️", "😐", "🙂", "🤩", "😍"];
+    const emojis = ["✨", "☹️", "😐", "🙂", "🤩", "😍"];
+    const telefoneBarbearia = "55119970967674";
 
     function avaliar(n) {
-        notaSelecionada = n;
         const stars = document.querySelectorAll('.star-btn');
         const emojiArea = document.getElementById('emoji-reacao');
-        const bom = document.getElementById('feedback-bom');
-        const ruim = document.getElementById('feedback-ruim');
 
         stars.forEach((s, i) => {
             if (i < n) s.classList.add('active');
@@ -180,34 +182,51 @@
         emojiArea.innerText = emojis[n];
 
         if (n >= 4) {
-            bom.classList.remove('hidden');
-            ruim.classList.add('hidden');
             confetti({ 
-                particleCount: 150, 
-                spread: 70, 
-                origin: { y: 0.8 }, 
-                colors: ['#facc15', '#ffffff', '#aa8822'] 
+                particleCount: 100, spread: 70, origin: { y: 0.8 },
+                colors: ['#facc15', '#ffffff'] 
             });
-        } else {
-            ruim.classList.remove('hidden');
-            bom.classList.add('hidden');
         }
     }
 
-    function liberarCupom() {
-        // O cupom aparece após o cliente clicar para ir ao Google
-        setTimeout(() => {
-            document.getElementById('cupom-area').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }, 1500);
+    // Lógica do Modal
+    function abrirModal() {
+        document.getElementById('modalAgendamento').style.display = 'flex';
     }
 
-    function enviarWhatsApp() {
-        const texto = document.getElementById('texto-melhoria').value;
-        const telefone = "55119970967674"; 
-        if(!texto) { alert("Por favor, conte-nos como podemos melhorar."); return; }
-        const mensagem = encodeURIComponent(`Feedback Luciano Cabeleireiro (${notaSelecionada} estrelas): ${texto}`);
-        window.open(`https://wa.me/${telefone}?text=${mensagem}`, '_blank');
+    function fecharModal() {
+        document.getElementById('modalAgendamento').style.display = 'none';
+    }
+
+    function enviarAgendamento() {
+        const nome = document.getElementById('nomeCliente').value;
+        const data = document.getElementById('dataAgendamento').value;
+        const hora = document.getElementById('horaAgendamento').value;
+
+        if(!nome || !data || !hora) {
+            alert("Por favor, preencha todos os campos para o agendamento.");
+            return;
+        }
+
+        // Formatar data para PT-BR
+        const dataFormatada = data.split('-').reverse().join('/');
+
+        const mensagem = encodeURIComponent(
+            `Olá Luciano! Gostaria de agendar um corte:\n\n` +
+            `👤 *Nome:* ${nome}\n` +
+            `📅 *Data:* ${dataFormatada}\n` +
+            `⏰ *Hora:* ${hora}\n\n` +
+            `Aguardo confirmação! ✂️`
+        );
+
+        window.open(`https://wa.me/${telefoneBarbearia}?text=${mensagem}`, '_blank');
+        fecharModal();
+    }
+
+    // Fechar modal ao clicar fora dele
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalAgendamento');
+        if (event.target == modal) fecharModal();
     }
 </script>
 
