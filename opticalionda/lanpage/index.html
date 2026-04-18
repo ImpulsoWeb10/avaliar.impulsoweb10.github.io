@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Óptica Lionda | Melhor Ótica em Itaquaquecetuba - Óculos e Exame de Vista</title>
+    <meta name="description" content="Procurando ótica em Itaquaquecetuba? Na Óptica Lionda você encontra óculos de grau, solares e lentes de contato. Especialistas em visão no Parque Piratininga.">
+    <meta name="keywords" content="ótica em Itaquaquecetuba, óculos de grau Itaquaquecetuba, melhor ótica em Itaquaquecetuba, lentes de contato Itaquaquecetuba, óculos perto de mim, exame de vista Itaquaquecetuba">
+    <link rel="canonical" href="https://oticalionda.com.br" />
+
+    <meta property="og:title" content="Óptica Lionda - Veja Melhor, Viva Melhor">
+    <meta property="og:description" content="Sua saúde visual em primeiro lugar em Itaquaquecetuba. Armações modernas e tecnologia em lentes.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=500">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OpticalBusiness",
+      "name": "Óptica Lionda - Itaquaquecetuba",
+      "image": "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?q=80&w=500",
+      "@id": "https://oticalionda.com.br",
+      "url": "https://oticalionda.com.br",
+      "telephone": "+55-11-97131-9233",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "R. Joaquim Caetano - Parque Piratininga",
+        "addressLocality": "Itaquaquecetuba",
+        "addressRegion": "SP",
+        "postalCode": "08583-670",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -23.4862,
+        "longitude": -46.3315
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "124"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "15:00"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Serviços Visuais Lionda",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Óculos de Grau Modernos" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Exame de Vista Computadorizado" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Conserto e Ajuste de Óculos" } }
+        ]
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root { --primary: #facc15; --success: #25D366; --glass: rgba(255, 255, 255, 0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; line-height: 1.6; }
+        
+        .container { max-width: 450px; margin: 0 auto; padding: 20px; }
+
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 40px 0 20px; }
+        .logo-wrap { background: white; width: 150px; margin: 0 auto 20px; padding: 10px; border-radius: 20px; border: 3px solid var(--primary); }
+        .logo-wrap img { width: 100%; }
+        
+        h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; color: white; }
+        h2 { font-size: 18px; color: var(--primary); margin-bottom: 25px; font-weight: normal; }
+
+        /* CARDS MODERNOS */
+        .glass-card { 
+            background: var(--glass); backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 30px; 
+            padding: 25px; margin-bottom: 20px; text-align: center;
+            transition: 0.3s;
+        }
+
+        .img-nicho { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* SISTEMA DE AVALIAÇÃO */
+        .star-box { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
+        .fa-star { font-size: 40px; color: #475569; cursor: pointer; transition: 0.3s; }
+        .fa-star.active { color: var(--primary); transform: scale(1.1); }
+
+        .feedback-content { display: none; transform: scale(0.8); opacity: 0; }
+        .animar { display: block; animation: popUp 0.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popUp { to { transform: scale(1); opacity: 1; } }
+
+        /* BOTÕES */
+        .btn-cta { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 18px; border-radius: 50px; font-weight: 800;
+            text-decoration: none; background: var(--primary); color: #000;
+            margin: 15px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-whats { background: var(--success); color: white; }
+
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .btn-round { 
+            width: 50px; height: 50px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; color: white; font-size: 22px; text-decoration: none;
+        }
+        .legend { font-size: 10px; margin-top: 5px; color: #cbd5e1; font-weight: 700; }
+
+        /* SEO LOCAL TEXT */
+        .seo-content { font-size: 14px; text-align: justify; opacity: 0.8; padding: 0 10px; }
+        .seo-content strong { color: var(--primary); }
+
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px; font-size: 12px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header class="hero">
+        <div class="logo-wrap">
+            <img src="logo.png" alt="Óptica Lionda Itaquaquecetuba">
+        </div>
+        <h1>Óptica Lionda</h1>
+        <h2>Veja melhor. Viva melhor.</h2>
+    </header>
+
+    <div class="glass-card">
+        <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?q=80&w=500" class="img-nicho" alt="Óculos de Grau Itaquaquecetuba">
+        <h3>Armações Modernas</h3>
+        <p style="font-size: 14px; margin-top: 5px;">Estilo e conforto com as melhores lentes do mercado.</p>
+    </div>
+
+    <div class="glass-card" id="card-principal">
+        <p id="txt-pergunta" style="font-weight: 700; color: var(--primary);">Como foi sua experiência conosco?</p>
+        
+        <div class="star-box">
+            <i class="fas fa-star" onclick="avaliar(1)"></i>
+            <i class="fas fa-star" onclick="avaliar(2)"></i>
+            <i class="fas fa-star" onclick="avaliar(3)"></i>
+            <i class="fas fa-star" onclick="avaliar(4)"></i>
+            <i class="fas fa-star" onclick="avaliar(5)"></i>
+        </div>
+
+        <div id="bom" class="feedback-content">
+            <a href="https://g.page/r/CYK6OdJELWHSEAE/review" target="_blank" class="btn-cta">
+                <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+            </a>
+            <div class="social-row">
+                <div style="text-align:center"><a href="https://wa.me/5511971319233" class="btn-round" style="background:#25D366"><i class="fab fa-whatsapp"></i></a><p class="legend">Whats</p></div>
+                <div style="text-align:center"><a href="tel:11971319233" class="btn-round" style="background:#00AEEF"><i class="fas fa-phone-alt"></i></a><p class="legend">Ligar</p></div>
+                <div style="text-align:center"><a href="https://www.instagram.com/oticalionda/" class="btn-round" style="background:#E1306C"><i class="fab fa-instagram"></i></a><p class="legend">Insta</p></div>
+                <div style="text-align:center"><a href="https://maps.app.goo.gl/YourMapLink" class="btn-round" style="background:#EA4335"><i class="fas fa-map-marker-alt"></i></a><p class="legend">Mapa</p></div>
+            </div>
+        </div>
+
+        <div id="ruim" class="feedback-content">
+            <p style="margin-bottom: 10px;">Poxa! Como podemos melhorar?</p>
+            <textarea id="feedback-text" style="width:100%; border-radius:15px; background:rgba(0,0,0,0.2); color:white; padding:10px; border:1px solid #444;" rows="3"></textarea>
+            <a href="javascript:void(0)" onclick="enviarRuim()" class="btn-cta btn-whats">FALAR COM GERENTE</a>
+        </div>
+    </div>
+
+    <div class="seo-content">
+        <h3>A melhor ótica no Parque Piratininga</h3>
+        <p>Procurando <strong>óculos de grau em Itaquaquecetuba</strong>? A Óptica Lionda é referência em <strong>exame de vista</strong> e <strong>armações modernas</strong>. Localizada estrategicamente na R. Joaquim Caetano, facilitamos o seu acesso a <strong>lentes de contato</strong> e consertos rápidos. Nossa missão é garantir que você encontre <strong>óculos perto de mim</strong> com o melhor custo-benefício e atendimento humanizado da região.</p>
+    </div>
+
+    <footer>
+        <p><strong>Óptica Lionda - Unidade Piratininga</strong></p>
+        <p>R. Joaquim Caetano - Parque Piratininga</p>
+        <p>Itaquaquecetuba - SP, 08583-670</p>
+        <p>📞 (11) 97131-9233</p>
+        <div style="margin-top: 20px;">
+            Desenvolvido por <a href="#" style="color:var(--success); text-decoration:none;">ImpulsoWeb10</a>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    function avaliar(n) {
+        const stars = document.querySelectorAll('.fa-star');
+        stars.forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
+        
+        document.getElementById('txt-pergunta').style.display = 'none';
+        const bom = document.getElementById('bom');
+        const ruim = document.getElementById('ruim');
+
+        if(n >= 4) {
+            bom.classList.add('animar');
+            ruim.classList.remove('animar');
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        } else {
+            ruim.classList.add('animar');
+            bom.classList.remove('animar');
+        }
+    }
+
+    function enviarRuim() {
+        const msg = document.getElementById('feedback-text').value;
+        window.open(`https://wa.me/5511971319233?text=Feedback: ${msg}`);
+    }
+</script>
+
+</body>
+</html>
