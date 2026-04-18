@@ -38,53 +38,71 @@
         .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
         .star-btn.active { color: #facc15; transform: scale(1.1); }
 
+        /* ANIMAÇÃO DE CRESCER E PULSAR PARA A SEGUNDA TELA */
+        .feedback-content {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .animar-feedback {
+            animation: crescerEPulsar 1.5s forwards ease-in-out;
+        }
+
+        @keyframes crescerEPulsar {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.98); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .img-retangular {
             width: 100%; height: 140px; object-fit: cover; border-radius: 15px;
             margin: 0 auto 20px; border: 2px solid #facc15; display: block;
-            transform: scale(0);
-            animation: crescer 0.5s forwards ease-out;
         }
 
-        @keyframes crescer { to { transform: scale(1); } }
-
-        /* ESTILO DO BOTÃO GOOGLE (GRANDE) */
         .btn-google {
             display: flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 16px; border-radius: 50px; font-weight: 800;
             text-decoration: none; transition: 0.3s; border: none; cursor: pointer; 
-            background: #facc15; color: #000; margin-bottom: 15px; font-size: 14px;
-            animation: pulsar 2s infinite;
+            background: #facc15; color: #000; margin-bottom: 20px; font-size: 14px;
         }
 
-        @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-
-        /* CONTAINER DOS BOTÕES REDONDOS PEQUENOS (UMA LINHA) */
         .social-row { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; /* Espaçamento entre os botões */
+            gap: 15px; 
             margin-bottom: 20px; 
         }
 
-        /* ESTILO DOS BOTÕES PEQUENOS E PERFEITAMENTE REDONDOS */
+        /* CONTAINER DOS BOTÕES COM LEGENDA */
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
         .btn-round {
             display: flex; align-items: center; justify-content: center;
-            width: 45px; height: 45px; /* Tamanho fixo e igual */
-            border-radius: 50%; /* Faz ficar redondo */
+            width: 45px; height: 45px;
+            border-radius: 50%;
             text-decoration: none; color: white;
-            font-size: 20px; /* Tamanho do ícone */
+            font-size: 20px;
             transition: transform 0.2s;
         }
 
-        .btn-round:hover { transform: scale(1.1); }
+        .btn-legend {
+            font-size: 10px;
+            font-weight: 700;
+            color: #cbd5e1;
+            text-transform: none;
+        }
 
-        /* CORES DOS BOTÕES (BASEADO NA IMAGEM) */
-        .whatsapp { background-color: #25D366; } /* Verde */
-        .phone { background-color: #00AEEF; } /* Azul */
-        .instagram { background-color: #E1306C; } /* Rosa/Vermelho */
-        .maps { background-color: #EA4335; } /* Vermelho Maps */
+        .whatsapp { background-color: #25D366; }
+        .phone { background-color: #00AEEF; }
+        .instagram { background-color: #E1306C; }
+        .maps { background-color: #EA4335; }
 
-        /* ESTILO DO FORMULÁRIO DE FEEDBACK RUIM */
         textarea {
             width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
             border-radius: 15px; color: white; padding: 12px; margin-bottom: 12px; resize: none;
@@ -98,10 +116,7 @@
 
         .hidden { display: none; }
 
-        /* RODAPÉ E INFORMAÇÕES */
         .footer { margin-top: 25px; font-size: 12px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-        .frase-personalizada { display: block; margin-top: 12px; font-size: 13px; font-weight: 700; color: #fff; }
-        .saiba-mais { color: #facc15; text-decoration: none; text-transform: uppercase; margin-left: 5px; }
         .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; }
     </style>
 </head>
@@ -125,30 +140,42 @@
         <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
     </div>
 
-    <div id="feedback-bom" class="hidden">
+    <div id="feedback-bom" class="hidden feedback-content">
         <img src="optica-lionda.png" class="img-retangular" alt="Sucesso">
         
-        <a href="https://share.google/1wl0WlbIpAFRFYOVz" target="_blank" class="btn-google">
+        <a href="https://g.page/r/CYK6OdJELWHSEAE/review" target="_blank" class="btn-google">
             <i class="fab fa-google"></i> AVALIAR NO GOOGLE
         </a>
 
         <div class="social-row">
-            <a href="https://wa.me/5511999822103" target="_blank" class="btn-round whatsapp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="tel:11999822103" class="btn-round phone">
-                <i class="fas fa-phone-alt"></i>
-            </a>
-            <a href="https://www.instagram.com/oticalionda/" target="_blank" class="btn-round instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://share.google/1wl0WlbIpAFRFYOVz" target="_blank" class="btn-round maps">
-                <i class="fas fa-map-marker-alt"></i>
-            </a>
+            <div class="btn-wrapper">
+                <a href="https://wa.me/5511999822103" target="_blank" class="btn-round whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <span class="btn-legend">Whats</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="tel:11999822103" class="btn-round phone">
+                    <i class="fas fa-phone-alt"></i>
+                </a>
+                <span class="btn-legend">Ligar</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="https://www.instagram.com/oticalionda/" target="_blank" class="btn-round instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <span class="btn-legend">Insta</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="https://share.google/1wl0WlbIpAFRFYOVz" target="_blank" class="btn-round maps">
+                    <i class="fas fa-map-marker-alt"></i>
+                </a>
+                <span class="btn-legend">Como chegar</span>
+            </div>
         </div>
     </div>
 
-    <div id="feedback-ruim" class="hidden">
+    <div id="feedback-ruim" class="hidden feedback-content">
         <p style="margin-bottom: 12px; color: #facc15;" id="msg-desculpa"></p>
         <textarea id="texto-melhoria" rows="3" placeholder="Conte para nós como podemos melhorar..."></textarea>
         <button onclick="enviarWhatsApp()" class="btn-whatsapp-large">
@@ -159,10 +186,6 @@
     <div class="footer">
         <b>📍 Estr. Pedro da Cunha Albuquerque Lopes, 2235</b><br>
         (11) 99982-2103<br>
-        <span class="frase-personalizada">
-            Deseja um link personalizado para sua empresa? 
-            <a href="https://wa.me/5511954950044" target="_blank" class="saiba-mais">Saiba mais</a>
-        </span>
         <div style="margin-top: 15px;">
             © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-impulsoweb">ImpulsoWeb10</a>
         </div>
@@ -179,14 +202,19 @@
         document.getElementById('logo-wrap').classList.add('logo-compacta');
         document.getElementById('instrucao').classList.add('hidden');
 
+        const bom = document.getElementById('feedback-bom');
+        const ruim = document.getElementById('feedback-ruim');
+
         if (n >= 4) {
-            document.getElementById('feedback-bom').classList.remove('hidden');
-            document.getElementById('feedback-ruim').classList.add('hidden');
+            bom.classList.remove('hidden');
+            ruim.classList.add('hidden');
+            bom.classList.add('animar-feedback');
             confetti({ particleCount: 100, spread: 60, origin: { y: 0.8 } });
         } else {
             document.getElementById('msg-desculpa').innerText = frasesDesculpas[n];
-            document.getElementById('feedback-ruim').classList.remove('hidden');
-            document.getElementById('feedback-bom').classList.add('hidden');
+            ruim.classList.remove('hidden');
+            bom.classList.add('hidden');
+            ruim.classList.add('animar-feedback');
         }
     }
 
