@@ -22,12 +22,13 @@
       "@type": "OpticalBusiness",
       "name": "Óptica Lionda",
       "image": "https://oticalionda.com.br/logo.png",
-      "@id": "",
+      "@id": "https://oticalionda.com.br",
       "url": "https://oticalionda.com.br",
       "telephone": "+55-11-99982-2103",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Estr. Pedro da Cunha Albuquerque Lopes, 2235",
+        "streetAddress": "Estrada Pedro da Cunha Albuquerque Lopes, 2235",
         "addressLocality": "Itaquaquecetuba",
         "addressRegion": "SP",
         "postalCode": "08583-430",
@@ -35,15 +36,28 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": -23.4851,
-        "longitude": -46.3331
+        "latitude": -23.4839845,
+        "longitude": -46.3387532
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      }
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "87"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "14:00"
+        }
+      ]
     }
     </script>
 
@@ -65,7 +79,6 @@
         .btn-primary { background: var(--primary); color: var(--dark); }
         .btn-whatsapp { background: var(--success); color: white; }
 
-        /* Header & Hero */
         header { background: rgba(15, 23, 42, 0.95); padding: 15px 0; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { height: 50px; background: white; padding: 5px; border-radius: 8px; }
@@ -77,7 +90,6 @@
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
         .hero p { font-size: 1.25rem; margin-bottom: 30px; max-width: 600px; opacity: 0.9; }
 
-        /* Features */
         .section-padding { padding: 80px 0; }
         .section-title { text-align: center; margin-bottom: 50px; }
         .section-title h2 { font-size: 2.5rem; margin-bottom: 10px; }
@@ -88,17 +100,14 @@
         .card:hover { transform: translateY(-10px); }
         .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
 
-        /* SEO Local Content */
         .local-seo { background: var(--accent); color: white; }
         .seo-text { font-size: 1.1rem; opacity: 0.9; column-count: 2; column-gap: 40px; }
 
-        /* Localização e Footer */
         .map-box { border-radius: 25px; overflow: hidden; height: 450px; margin-top: 30px; border: 5px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         
         footer { background: var(--dark); color: white; padding: 60px 0 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
         
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .seo-text { column-count: 1; }
@@ -179,18 +188,8 @@
                 <p>📞 (11) 99982-2103</p>
             </div>
             <div class="map-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.845663704875!2d-46.3331!3d-23.4851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7c7c7c7c7c7c%3A0x7c7c7c7c7c7c7c7c!2sEstr.%20Pedro%20da%20Cunha%20Albuquerque%20Lopes%2C%202235%20-%20Perobal%2C%20Itaquaquecetuba%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1620000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.8601614212555!2d-46.34132812376664!3d-23.48356997885191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7b96054f15f3%3A0xd2d12d442039bab2!2sEstr.%20Pedro%20da%20Cunha%20Albuquerque%20Lopes%2C%202235%20-%20Jardim%20Perobal%2C%20Itaquaquecetuba%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1715000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-        </div>
-    </section>
-
-    <section class="section-padding" style="background: var(--primary); text-align: center;">
-        <div class="container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Pronto para enxergar o mundo melhor?</h2>
-            <p style="margin-bottom: 30px; font-weight: 600;">Agende seu atendimento personalizado agora mesmo pelo WhatsApp.</p>
-            <a href="https://wa.me/5511999822103" class="btn btn-whatsapp" style="padding: 20px 50px; font-size: 1.2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-                <i class="fab fa-whatsapp"></i> CHAMAR NO WHATSAPP
-            </a>
         </div>
     </section>
 
@@ -213,14 +212,13 @@
                     <p>Segunda a Sexta: 09h às 18h<br>Sábado: 09h às 14h</p>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                <p>&copy; 2026 Óptica Lionda - Unidade II. Desenvolvido por <a href="https://wa.me/5511954950044" style="color: var(--success); font-weight: bold; text-decoration: none;">ImpulsoWeb10</a></p>
+            <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px;">
+                <p>© 2026 Óptica Lionda - Unidade II. Desenvolvido por <a href="https://wa.me/5511954950044" style="color: var(--success); font-weight: bold; text-decoration: none;">ImpulsoWeb10</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth Scroll e Lazy Loading nativo
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
