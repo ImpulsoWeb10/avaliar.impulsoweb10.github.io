@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,18 +17,30 @@
             max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(12px); padding: 30px 20px; border-radius: 35px;
             border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            text-align: center; position: relative;
+            text-align: center; position: relative; overflow: hidden;
         }
 
-        /* LOGO COM ESPAÇO BRANCO REDUZIDO */
-        .logo { 
-            width: 180px; height: auto; object-fit: contain; 
-            padding: 4px; /* Espaço branco diminuído */
-            border-radius: 20px; border: 3px solid #facc15; 
-            background: white; margin: 0 auto 15px;
-            transition: transform 0.4s ease; display: block;
+        /* AJUSTE LOGO: Removido corte e garantido visibilidade */
+        .logo-container {
+            background: white;
+            width: 180px;
+            margin: 0 auto 15px;
+            padding: 10px;
+            border-radius: 20px;
+            border: 3px solid #facc15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s ease;
         }
-        .logo-compacta { transform: scale(0.8); margin-bottom: -15px; }
+        
+        .logo { 
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .logo-compacta { transform: scale(0.8); margin-bottom: -10px; }
 
         h1 { font-size: 26px; margin-bottom: 2px; }
         h2 { font-size: 16px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
@@ -40,7 +51,6 @@
         .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
         .star-btn.active { color: #facc15; transform: scale(1.1); }
 
-        /* ANIMAÇÃO DA IMAGEM: CRESCENDO E PULSANDO */
         .img-retangular {
             width: 90%; height: 140px; object-fit: cover; border-radius: 15px;
             margin: 0 auto 20px; border: 2px solid #facc15; display: block;
@@ -63,12 +73,11 @@
 
         .botao {
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 16px; border-radius: 50px; font-weight: 800;
+            width: 100%; padding: 14px; border-radius: 50px; font-weight: 800;
             text-decoration: none; transition: 0.3s; border: none; cursor: pointer; 
-            margin-bottom: 10px; position: relative; overflow: hidden;
+            margin-bottom: 10px; position: relative; overflow: hidden; font-size: 14px;
         }
 
-        /* BOTAO AMARELO PULSANDO COM BRILHO INTERNO */
         .google { 
             background: #facc15; color: #000; 
             animation: pulsarBotao 2s infinite;
@@ -93,23 +102,25 @@
         }
 
         .whatsapp { background: #22c55e; color: white; }
+        .instagram { background: #E1306C; color: white; }
+        .maps { background: #4285F4; color: white; }
 
         .hidden { display: none; }
 
-        /* RODAPÉ E CORES */
+        .social-grid { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; }
+
         .footer { margin-top: 25px; font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-        
         .frase-personalizada { display: block; margin-top: 12px; font-size: 13px; font-weight: 700; color: #fff; }
-        
         .saiba-mais { color: #facc15; text-decoration: none; text-transform: uppercase; margin-left: 5px; }
-        
-        .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; } /* Verde agora */
+        .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="logo.png" class="logo" id="main-logo" alt="Logo">
+    <div class="logo-container" id="logo-wrap">
+        <img src="logo.png" class="logo" id="main-logo" alt="Logo">
+    </div>
 
     <h1 id="titulo">Óptica Lionda</h1>
     <h2 id="subtitulo">Unidade II</h2>
@@ -127,9 +138,21 @@
     <div id="feedback-bom" class="hidden">
         <img src="optica-lionda.png" class="img-retangular" alt="Sucesso">
         <p style="font-size: 17px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
-        <a href="https://www.google.com/maps/place/%C3%93tica+Lionda/@-23.4210109,-46.3495786,17z/data=!4m8!3m7!1s0x94ce7d399227cfdd:0xd2612d44d239ba82!8m2!3d-23.4210109!4d-46.3495786!9m1!1b1!16s%2Fg%2F11k6sxfh2t?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="botao google">
-            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-        </a>
+        
+        <div class="social-grid">
+            <a href="https://www.google.com/maps/search/?api=1&query=Estr.+Pedro+da+Cunha+Albuquerque+Lopes,+2235+-+Perobal" target="_blank" class="botao google">
+                <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+            </a>
+            <a href="https://www.instagram.com/oticalionda/" target="_blank" class="botao instagram">
+                <i class="fab fa-instagram"></i> NOSSO INSTAGRAM
+            </a>
+            <a href="https://wa.me/5511999822103" target="_blank" class="botao whatsapp">
+                <i class="fab fa-whatsapp"></i> NOSSO WHATSAPP
+            </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=-23.4682022,-46.3636605" target="_blank" class="botao maps">
+                <i class="fas fa-map-marker-alt"></i> COMO CHEGAR (MAPS)
+            </a>
+        </div>
     </div>
 
     <div id="feedback-ruim" class="hidden">
@@ -142,7 +165,7 @@
 
     <div class="footer">
         <div id="info-loja">
-            <b>📍 Estrada Pedro da Cunha Albuquerque Lopes, 2235</b><br>
+            <b>📍 Estr. Pedro da Cunha Albuquerque Lopes, 2235</b><br>
             Perobal, Itaquaquecetuba - SP<br>
             <i class="fas fa-phone-alt" style="margin-top:5px;"></i> (11) 99982-2103
         </div>
@@ -185,7 +208,7 @@
             i < n ? s.classList.add('active') : s.classList.remove('active');
         });
 
-        document.getElementById('main-logo').classList.add('logo-compacta');
+        document.getElementById('logo-wrap').classList.add('logo-compacta');
         document.getElementById('instrucao').classList.add('hidden');
 
         if (n >= 4) {
