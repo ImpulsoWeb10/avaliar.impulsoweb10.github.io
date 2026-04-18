@@ -4,17 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Óptica Lionda | Melhor Ótica em Itaquaquecetuba - Óculos e Exames</title>
-    <meta name="description" content="Procurando ótica em Itaquaquecetuba? A Óptica Lionda oferece óculos de grau, solares e lentes com tecnologia avançada. Agende seu exame de vista no Perobal.">
-    <meta name="keywords" content="ótica em Itaquaquecetuba, óculos de grau Itaquaquecetuba, exame de vista Itaquaquecetuba, lentes de contato, armações modernas">
-    
-    <meta property="og:title" content="Óptica Lionda - Especialistas em Visão">
-    <meta property="og:description" content="Estilo e saúde visual em Itaquaquecetuba. Confira nossas armações modernas.">
-    <meta property="og:type" content="website">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>Óptica Lionda | Melhor Ótica em Itaquaquecetuba - Unidade II</title>
+    <meta name="description" content="Procurando ótica em Itaquaquecetuba? A Óptica Lionda oferece óculos de grau, solares e exame de vista no Perobal. Qualidade e armações modernas perto de você.">
+    <meta name="keywords" content="ótica em Itaquaquecetuba, óculos de grau Itaquaquecetuba, exame de vista Itaquaquecetuba, lentes de contato">
 
     <script type="application/ld+json">
     {
@@ -61,144 +53,189 @@
     }
     </script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        :root { --primary: #facc15; --dark: #0f172a; --light: #f8fafc; --success: #22c55e; }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Quicksand', sans-serif; background-color: var(--light); color: var(--dark); }
+        /* MANTENDO O SEU VISUAL ORIGINAL */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 15px; }
+
+        .container {
+            max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px); padding: 30px 20px; border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            text-align: center; position: relative;
+        }
+
+        .logo-container {
+            background: white; width: 160px; margin: 0 auto 15px; padding: 8px;
+            border-radius: 20px; border: 3px solid #facc15; display: flex;
+            align-items: center; justify-content: center; transition: 0.4s;
+        }
         
-        /* HEADER & HERO */
-        header { background: rgba(15, 23, 42, 0.95); padding: 15px 0; position: fixed; width: 100%; z-index: 1000; backdrop-filter: blur(10px); }
-        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-        .nav-logo { height: 45px; background: white; padding: 5px; border-radius: 8px; }
+        .logo { max-width: 100%; height: auto; display: block; }
+        .logo-compacta { transform: scale(0.8); margin-bottom: -15px; }
 
-        .hero { 
-            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&q=80&w=1920') center/cover;
-            height: 100vh; display: flex; align-items: center; color: white; padding: 0 20px;
+        h1 { font-size: 26px; margin-bottom: 2px; }
+        h2 { font-size: 16px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
+        
+        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; margin-bottom: 15px; min-height: 24px; }
+
+        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
+        .star-btn { font-size: 44px; color: #475569; cursor: pointer; transition: 0.3s; }
+        .star-btn.active { color: #facc15; transform: scale(1.1); }
+
+        /* ANIMAÇÃO DE CRESCER E PULSAR */
+        .feedback-content { display: none; transform: scale(0.5); opacity: 0; }
+        .animar-feedback { display: block; animation: crescerEPulsar 0.8s forwards ease-in-out; }
+
+        @keyframes crescerEPulsar {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
-        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero-text p { font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; }
 
-        /* SEÇÃO DE AVALIAÇÃO (MODAL STYLE) */
-        .rating-section { background: var(--dark); padding: 80px 20px; text-align: center; color: white; }
-        .eval-container { 
-            max-width: 420px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); 
-            padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+        .img-retangular {
+            width: 100%; height: 140px; object-fit: cover; border-radius: 15px;
+            margin: 0 auto 20px; border: 2px solid #facc15; display: block;
         }
-        .star-btn { font-size: 40px; color: #475569; cursor: pointer; transition: 0.3s; margin: 0 5px; }
-        .star-btn.active { color: var(--primary); transform: scale(1.1); }
 
-        /* ANIMAÇÃO FEEDBACK */
-        .feedback-content { display: none; transform: scale(0.8); opacity: 0; transition: 0.5s; }
-        .feedback-content.show { display: block; animation: popUp 0.6s forwards ease-out; }
-        @keyframes popUp { to { transform: scale(1); opacity: 1; } }
-
-        .btn-google-large { 
+        /* BOTÃO GOOGLE */
+        .btn-google {
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 16px; border-radius: 50px; background: var(--primary);
-            color: black; text-decoration: none; font-weight: 800; margin: 20px 0;
+            width: 100%; padding: 16px; border-radius: 50px; font-weight: 800;
+            text-decoration: none; transition: 0.3s; border: none; background: #facc15; color: #000; margin-bottom: 20px;
         }
 
-        /* BOTÕES REDONDOS */
-        .social-row { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        /* BOTÕES REDONDOS PEQUENOS */
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
         .btn-wrapper { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .btn-round { 
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; color: white; text-decoration: none; font-size: 22px; 
+        .btn-round {
+            display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%;
+            text-decoration: none; color: white; font-size: 22px; transition: 0.2s;
         }
         .btn-legend { font-size: 10px; font-weight: 700; color: #cbd5e1; }
-        .bg-whats { background: #25D366; } .bg-phone { background: #00AEEF; } 
-        .bg-insta { background: #E1306C; } .bg-maps { background: #EA4335; }
 
-        /* FOOTER & SEO CONTENT */
-        .seo-section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; column-count: 2; column-gap: 40px; }
-        footer { background: #070b14; color: white; padding: 40px 20px; text-align: center; border-top: 2px solid var(--primary); }
+        .whatsapp { background-color: #25D366; }
+        .phone { background-color: #00AEEF; }
+        .instagram { background-color: #E1306C; }
+        .maps { background-color: #EA4335; }
+
+        textarea {
+            width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 15px; color: white; padding: 12px; margin-bottom: 12px; resize: none;
+        }
+
+        .footer { margin-top: 25px; font-size: 12px; color: #cbd5e1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .marca-impulsoweb { color: #22c55e; text-decoration: none; font-weight: 700; }
         
-        @media (max-width: 768px) { .seo-section { column-count: 1; } }
+        /* SEO SEMÂNTICO LOCAL (Conteúdo real para o Google ler) */
+        .seo-hidden { position: absolute; left: -9999px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-content">
-            <img src="logo.png" alt="Óptica Lionda" class="nav-logo">
-            <a href="https://wa.me/5511999822103" class="btn-round bg-whats"><i class="fab fa-whatsapp"></i></a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Sua visão merece<br>o melhor cuidado.</h1>
-            <p>Especialistas em lentes de alta tecnologia e armações exclusivas em Itaquaquecetuba.</p>
-            <a href="#avaliar" class="btn-google-large" style="max-width: 250px;">VER PROMOÇÕES</a>
-        </div>
-    </section>
-
-    <section id="avaliar" class="rating-section">
-        <div class="eval-container">
-            <h2 id="instrucao">Como foi sua experiência?</h2>
-            <div class="rating-box" style="margin: 20px 0;">
-                <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
-                <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
-                <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
-                <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
-                <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
-            </div>
-
-            <div id="feedback-bom" class="feedback-content">
-                <img src="optica-lionda.png" alt="Sucesso" style="width: 100%; border-radius: 15px; margin-bottom: 15px;">
-                <a href="https://g.page/r/CYK6OdJELWHSEAE/review" target="_blank" class="btn-google-large">
-                    <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-                </a>
-                <div class="social-row">
-                    <div class="btn-wrapper"><a href="https://wa.me/5511999822103" class="btn-round bg-whats"><i class="fab fa-whatsapp"></i></a><span class="btn-legend">Whats</span></div>
-                    <div class="btn-wrapper"><a href="tel:11999822103" class="btn-round bg-phone"><i class="fas fa-phone-alt"></i></a><span class="btn-legend">Ligar</span></div>
-                    <div class="btn-wrapper"><a href="https://www.instagram.com/oticalionda/" class="btn-round bg-insta"><i class="fab fa-instagram"></i></a><span class="btn-legend">Insta</span></div>
-                    <div class="btn-wrapper"><a href="https://share.google/1wl0WlbIpAFRFYOVz" class="btn-round bg-maps"><i class="fas fa-map-marker-alt"></i></a><span class="btn-legend">Como chegar</span></div>
-                </div>
-            </div>
-
-            <div id="feedback-ruim" class="feedback-content">
-                <p style="color: var(--primary); margin-bottom: 15px;">Queremos melhorar!</p>
-                <textarea id="msg-melhoria" style="width:100%; padding:10px; border-radius:10px; background:rgba(0,0,0,0.3); color:white; border:1px solid #444;" rows="3" placeholder="O que aconteceu?"></textarea>
-                <button onclick="enviarWhats()" class="btn-google-large" style="background: var(--success); color: white;">FALAR COM GERENTE</button>
-            </div>
-        </div>
-    </section>
-
-    <div class="seo-section">
-        <h2>A Melhor Óptica em Itaquaquecetuba</h2>
-        <p>A <strong>Óptica Lionda</strong> destaca-se como referência para quem procura <strong>óculos de grau em Itaquaquecetuba</strong>. Com um laboratório moderno e especialistas qualificados, garantimos a precisão do seu <strong>exame de vista no Perobal</strong>. Se procura armações modernas ou lentes de contacto de alta performance, a nossa unidade II está pronta para o receber com atendimento personalizado e os melhores preços da região.</p>
+<div class="container">
+    <div class="logo-container" id="logo-wrap">
+        <img src="logo.png" class="logo" id="main-logo" alt="Logo Óptica Lionda">
     </div>
 
-    <footer>
-        <p>📍 Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Itaquaquecetuba</p>
-        <p>📞 (11) 99982-2103</p>
-        <div style="margin-top: 20px; font-size: 12px; opacity: 0.7;">
-            © 2026 Óptica Lionda | Desenvolvido por <span style="color:var(--success)">ImpulsoWeb10</span>
+    <h1>Óptica Lionda</h1>
+    <h2>Unidade II</h2>
+    
+    <p id="instrucao">Como foi sua experiência hoje?</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="feedback-content">
+        <img src="optica-lionda.png" class="img-retangular" alt="Óculos de Grau em Itaquaquecetuba">
+        
+        <a href="https://g.page/r/CYK6OdJELWHSEAE/review" target="_blank" class="btn-google">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+
+        <div class="social-row">
+            <div class="btn-wrapper">
+                <a href="https://wa.me/5511999822103" target="_blank" class="btn-round whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <span class="btn-legend">Whats</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="tel:11999822103" class="btn-round phone"><i class="fas fa-phone-alt"></i></a>
+                <span class="btn-legend">Ligar</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="https://www.instagram.com/oticalionda/" target="_blank" class="btn-round instagram"><i class="fab fa-instagram"></i></a>
+                <span class="btn-legend">Insta</span>
+            </div>
+            <div class="btn-wrapper">
+                <a href="https://share.google/1wl0WlbIpAFRFYOVz" target="_blank" class="btn-round maps"><i class="fas fa-map-marker-alt"></i></a>
+                <span class="btn-legend">Como chegar</span>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        function avaliar(n) {
-            const stars = document.querySelectorAll('.star-btn');
-            stars.forEach((s, i) => s.classList.toggle('active', i < n));
-            
-            document.getElementById('instrucao').style.display = 'none';
-            const bom = document.getElementById('feedback-bom');
-            const ruim = document.getElementById('feedback-ruim');
+    <div id="feedback-ruim" class="feedback-content">
+        <p style="margin-bottom: 12px; color: #facc15;" id="msg-desculpa"></p>
+        <textarea id="texto-melhoria" rows="3" placeholder="O que podemos melhorar?"></textarea>
+        <button onclick="enviarWhatsApp()" class="btn-google" style="background: #25D366; color: white;">
+            <i class="fab fa-whatsapp"></i> FALAR COM O GERENTE
+        </button>
+    </div>
 
-            if (n >= 4) {
-                bom.classList.add('show'); ruim.classList.remove('show');
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            } else {
-                ruim.classList.add('show'); bom.classList.remove('show');
-            }
+    <div class="seo-hidden">
+        <h3>Melhor ótica em Itaquaquecetuba</h3>
+        <p>A Óptica Lionda oferece óculos de grau, óculos de sol e exame de vista em Itaquaquecetuba, bairro Perobal.</p>
+    </div>
+
+    <div class="footer">
+        <b>📍 Estr. Pedro da Cunha Albuquerque Lopes, 2235</b><br>
+        Perobal - Itaquaquecetuba/SP<br>
+        <i class="fas fa-phone-alt"></i> (11) 99982-2103
+        <div style="margin-top: 15px;">
+            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-impulsoweb">ImpulsoWeb10</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let notaSelecionada = 0;
+    const frasesDesculpas = { 1: "Sentimos muito. Vamos melhorar! 😔", 2: "Sentimos muito. Queremos ouvir você. 😟", 3: "Como podemos ser nota 10? 😐" };
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        document.querySelectorAll('.star-btn').forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active'));
+        document.getElementById('logo-wrap').classList.add('logo-compacta');
+        document.getElementById('instrucao').style.display = 'none';
+
+        const bom = document.getElementById('feedback-bom');
+        const ruim = document.getElementById('feedback-ruim');
+
+        if (n >= 4) {
+            bom.classList.add('animar-feedback');
+            ruim.classList.remove('animar-feedback');
+            confetti({ particleCount: 100, spread: 60, origin: { y: 0.8 } });
+        } else {
+            document.getElementById('msg-desculpa').innerText = frasesDesculpas[n];
+            ruim.classList.add('animar-feedback');
+            bom.classList.remove('animar-feedback');
         }
+    }
 
-        function enviarWhats() {
-            const txt = document.getElementById('msg-melhoria').value;
-            window.open(`https://wa.me/5511999822103?text=Feedback: ${txt}`, '_blank');
-        }
-    </script>
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        if (!texto) { alert("Por favor, conte-nos como podemos melhorar."); return; }
+        window.open(`https://wa.me/5511999822103?text=Feedback Unidade II (${notaSelecionada} estrelas): ${texto}`, '_blank');
+    }
+</script>
+
 </body>
 </html>
