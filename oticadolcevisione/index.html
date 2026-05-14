@@ -1,1 +1,548 @@
-oi
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ótica Dolce Visione em Suzano — Exame de vista gratuito, óculos de grau, lentes multifocais, antirreflexo e transitions. Agende sua consulta.">
+<meta property="og:title" content="Ótica Dolce Visione | Suzano SP">
+<meta property="og:description" content="Visão com clareza e estilo. Agende seu exame de vista gratuito.">
+<title>Ótica Dolce Visione | Suzano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#0b1a2e;
+  color:#e8e2d8;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem 1.5rem;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Background glow subtle */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,169,110,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(17,40,80,0.6) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2rem;max-width:420px;width:100%}
+
+/* Logo area */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.logo-img{
+  width:110px;height:110px;
+  border-radius:50%;
+  border:2px solid rgba(201,169,110,0.35);
+  object-fit:cover;
+  background:rgba(201,169,110,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;color:#c9a96e;font-weight:600;
+  letter-spacing:.04em;
+  overflow:hidden;
+}
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.1rem;font-weight:600;
+  color:#f0ece5;letter-spacing:.06em;line-height:1.1;
+}
+.brand em{color:#c9a96e;font-style:italic}
+.tagline{font-size:.9rem;color:#7a96b8;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
+
+/* Rating stars */
+.stars-row{display:flex;align-items:center;gap:.35rem;justify-content:center}
+.star{font-size:1.3rem;color:#c9a96e}
+.rating-text{font-size:.8rem;color:#7a96b8;margin-top:.2rem}
+
+/* Main CTA button */
+.btn-main{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:linear-gradient(135deg,#25d366,#1aab55);
+  color:#fff;font-weight:500;
+  padding:.95rem 2.2rem;
+  border-radius:50px;
+  font-size:1rem;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;
+  transition:transform .2s, box-shadow .2s;
+  box-shadow:0 6px 24px rgba(37,211,102,.28);
+  border:none;cursor:pointer;
+  width:100%;max-width:320px;justify-content:center;
+}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,211,102,.38)}
+.btn-main svg{width:20px;height:20px;flex-shrink:0}
+
+/* 4 icon buttons row */
+.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center}
+.social-btn{
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  text-decoration:none;
+  transition:transform .2s;
+}
+.social-btn:hover{transform:translateY(-3px)}
+.social-icon{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.12);
+  transition:border-color .2s,box-shadow .2s;
+}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.3);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.social-icon svg{width:22px;height:22px}
+.social-label{font-size:.68rem;color:#5a7490;letter-spacing:.04em}
+
+/* Google button pulsing + shimmer */
+.btn-google{
+  display:inline-flex;align-items:center;gap:.65rem;
+  background:#FBBC05;
+  color:#1a1200;font-weight:700;
+  padding:.95rem 2rem;
+  border-radius:50px;
+  font-size:.95rem;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;
+  border:none;cursor:pointer;
+  width:100%;max-width:320px;justify-content:center;
+  position:relative;overflow:hidden;
+  animation:pulse-google 2.2s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(251,188,5,.5);
+}
+.btn-google::after{
+  content:'';
+  position:absolute;
+  top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-20deg);
+  animation:shimmer 2.2s ease-in-out infinite;
+}
+@keyframes pulse-google{
+  0%{box-shadow:0 0 0 0 rgba(251,188,5,.55),0 6px 20px rgba(251,188,5,.3)}
+  60%{box-shadow:0 0 0 14px rgba(251,188,5,0),0 6px 20px rgba(251,188,5,.15)}
+  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 6px 20px rgba(251,188,5,.3)}
+}
+@keyframes shimmer{
+  0%{left:-120%}
+  55%,100%{left:160%}
+}
+.btn-google svg{width:20px;height:20px;flex-shrink:0}
+.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
+
+/* FAQ link — subtle */
+.faq-link{
+  background:none;border:none;
+  color:#c9a96e;
+  font-size:.88rem;font-family:'DM Sans',sans-serif;
+  cursor:pointer;letter-spacing:.04em;
+  display:flex;align-items:center;gap:.4rem;
+  text-decoration:none;
+  transition:opacity .2s;
+  padding:.3rem .5rem;
+  border-radius:4px;
+}
+.faq-link:hover{opacity:.75}
+.faq-link svg{width:14px;height:14px}
+
+/* Address */
+.address{font-size:.8rem;color:#4d6580;line-height:1.6;margin-top:.5rem}
+
+/* Footer */
+.footer{font-size:.72rem;color:#334455;margin-top:auto;padding-top:2rem}
+.footer a{color:#4d6580;text-decoration:none}
+
+/* ===== MODAL OVERLAY ===== */
+.overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(5,12,22,.82);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.overlay.open{opacity:1;pointer-events:all}
+
+/* Sheet slides up from bottom */
+.sheet{
+  background:linear-gradient(175deg,#102040 0%,#0b1a2e 100%);
+  border:1px solid rgba(201,169,110,.18);
+  border-bottom:none;
+  border-radius:20px 20px 0 0;
+  width:100%;max-width:480px;
+  padding:0 0 env(safe-area-inset-bottom,0);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.32,1,.36,1);
+  max-height:88vh;
+  overflow-y:auto;
+  position:relative;
+}
+.overlay.open .sheet{transform:translateY(0)}
+
+.sheet-handle{width:36px;height:4px;background:rgba(201,169,110,.3);border-radius:2px;margin:12px auto 0}
+
+.sheet-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 1.4rem .8rem;
+  border-bottom:1px solid rgba(201,169,110,.1);
+}
+.sheet-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:#f0ece5;
+}
+.btn-close{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  color:#7a96b8;cursor:pointer;
+  width:30px;height:30px;border-radius:50%;
+  font-size:1rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.btn-close:hover{background:rgba(255,255,255,.12);color:#f0ece5}
+
+/* FAQ list */
+.faq-list{padding:.6rem 1.2rem 1.4rem;display:flex;flex-direction:column;gap:.5rem}
+
+.faq-item-btn{
+  width:100%;background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,169,110,.12);
+  border-radius:12px;
+  padding:.95rem 1rem .95rem 1rem;
+  color:#ccc9c0;font-size:.88rem;
+  font-family:'DM Sans',sans-serif;
+  text-align:left;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  transition:all .22s;
+  line-height:1.4;
+}
+.faq-item-btn:hover{
+  background:rgba(201,169,110,.09);
+  border-color:rgba(201,169,110,.35);
+  color:#f0ece5;
+  transform:translateX(3px);
+}
+.faq-item-btn svg{flex-shrink:0;opacity:.5;width:14px;height:14px}
+.faq-item-btn:hover svg{opacity:1}
+
+/* Answer sheet (second level) */
+.answer-head{
+  display:flex;align-items:center;gap:.8rem;
+  padding:1.2rem 1.4rem .8rem;
+  border-bottom:1px solid rgba(201,169,110,.1);
+}
+.btn-back{
+  background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.2);
+  color:#c9a96e;cursor:pointer;
+  width:32px;height:32px;border-radius:50%;
+  font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.btn-back:hover{background:rgba(201,169,110,.2)}
+.answer-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:#f0ece5;
+  line-height:1.3;flex:1;
+}
+
+.answer-body{padding:1.3rem 1.4rem 1.8rem}
+.answer-icon{font-size:2.2rem;margin-bottom:.9rem;display:block}
+.answer-text{
+  font-size:.9rem;color:#8aa0bb;line-height:1.7;
+  margin-bottom:1.4rem;
+}
+.answer-cta{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;
+  background:linear-gradient(135deg,#25d366,#1aab55);
+  color:#fff;font-weight:500;font-size:.9rem;
+  padding:.85rem;border-radius:50px;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  box-shadow:0 4px 16px rgba(37,211,102,.25);
+  transition:transform .2s,box-shadow .2s;
+}
+.answer-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.answer-cta svg{width:16px;height:16px}
+
+/* transition panels */
+.panel{transition:opacity .22s ease,transform .22s ease}
+.panel.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;width:100%;transform:translateX(30px)}
+.panel.visible{opacity:1;pointer-events:all;transform:translateX(0)}
+
+.sheet-inner{position:relative;min-height:200px}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- LOGO / MARCA -->
+  <div class="logo-wrap">
+    <div class="logo-img" aria-label="Logo Ótica Dolce Visione">DV</div>
+    <div>
+      <div class="brand">Dolce <em>Visione</em></div>
+      <div class="tagline">Ótica &amp; Saúde Ocular · Suzano</div>
+    </div>
+  </div>
+
+  <!-- ESTRELAS -->
+  <div>
+    <div class="stars-row" aria-label="Avaliação 5 estrelas">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
+  </div>
+
+  <!-- BOTÃO GOOGLE PULSANDO -->
+  <a
+    href="https://g.page/r/CWR5YPtUJJriEAE/review"
+    class="btn-google"
+    target="_blank"
+    rel="noopener"
+    aria-label="Avaliar no Google"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+    Avaliar no Google ⭐⭐⭐⭐⭐
+  </a>
+
+  <!-- 4 BOTÕES SOCIAIS -->
+  <div class="social-row" aria-label="Redes sociais e contato">
+
+    <a href="https://wa.me/5511999990000?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <div class="social-icon" style="background:#1a2e1a;">
+        <svg viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      </div>
+      <span class="social-label">WhatsApp</span>
+    </a>
+
+    <a href="https://instagram.com/dolcevisione" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+      <div class="social-icon" style="background:#2a1a2e;">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="1.8"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="#dc2743"/>
+        </svg>
+      </div>
+      <span class="social-label">Instagram</span>
+    </a>
+
+    <a href="https://maps.google.com/?q=Ótica+Dolce+Visione+Suzano+SP" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+      <div class="social-icon" style="background:#1a2030;">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+          <circle cx="12" cy="9" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <span class="social-label">Maps</span>
+    </a>
+
+    <a href="tel:+5511999990000" class="social-btn" aria-label="Ligar para a ótica">
+      <div class="social-icon" style="background:#1a2a1a;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+      </div>
+      <span class="social-label">Ligar</span>
+    </a>
+
+  </div>
+
+  <!-- FAQ LINK DISCRETO -->
+  <button class="faq-link" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Tire suas dúvidas
+  </button>
+
+  <!-- ENDEREÇO -->
+  <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <span itemprop="streetAddress">Rua Dr. Prudente de Moraes, 540</span><br>
+    Centro · <span itemprop="addressLocality">Suzano</span>, <span itemprop="addressRegion">SP</span><br>
+    Seg–Sex 9h–19h · Sáb 9h–17h
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Desenvolvido por <a href="#">ImpulsoWeb10</a> · © 2026 Ótica Dolce Visione
+</div>
+
+
+<!-- ===== MODAL FAQ ===== -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Perguntas frequentes">
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle" aria-hidden="true"></div>
+
+    <div class="sheet-inner" id="sheetInner">
+
+      <!-- PANEL 1: lista de perguntas -->
+      <div class="panel visible" id="panelList">
+        <div class="sheet-head">
+          <span class="sheet-title">Tire suas dúvidas</span>
+          <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
+        </div>
+        <div class="faq-list" role="list">
+          <!-- itens gerados pelo JS -->
+        </div>
+      </div>
+
+      <!-- PANEL 2: resposta -->
+      <div class="panel hidden" id="panelAnswer">
+        <div class="answer-head">
+          <button class="btn-back" onclick="backToList()" aria-label="Voltar">←</button>
+          <div class="answer-title" id="answerTitle"></div>
+          <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
+        </div>
+        <div class="answer-body">
+          <span class="answer-icon" id="answerIcon"></span>
+          <p class="answer-text" id="answerText"></p>
+          <a
+            id="answerCta"
+            href="https://wa.me/5511999990000"
+            class="answer-cta"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            <span id="answerCtaText">Agendar pelo WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+const faqs = [
+  {
+    q: 'O exame de vista é gratuito?',
+    icon: '🔬',
+    a: 'Sim! O exame de vista completo é 100% gratuito para clientes que adquirem óculos ou lentes na Dolce Visione. Utilizamos equipamentos digitais modernos para garantir total precisão na medição do seu grau.',
+    cta: 'Agendar exame gratuito',
+    msg: 'Olá! Quero agendar meu exame de vista gratuito na Dolce Visione.'
+  },
+  {
+    q: 'Vocês trabalham com lentes multifocais?',
+    icon: '👓',
+    a: 'Sim! Trabalhamos com lentes monofocais, multifocais digitais, antirreflexo, transitions fotossensíveis e filtro de luz azul. Nosso especialista indica a lente ideal para o seu estilo de vida.',
+    cta: 'Falar sobre lentes',
+    msg: 'Olá! Quero saber mais sobre as lentes disponíveis na Dolce Visione.'
+  },
+  {
+    q: 'Quanto tempo leva para ficar pronto?',
+    icon: '⚡',
+    a: 'Com nosso laboratório próprio em Suzano, a maioria dos pedidos fica pronto em 24 a 48 horas. Casos com lentes especiais ou graus elevados podem levar até 5 dias úteis.',
+    cta: 'Fazer meu pedido',
+    msg: 'Olá! Quero fazer um pedido de óculos na Dolce Visione.'
+  },
+  {
+    q: 'Vocês aceitam convênios e planos de saúde?',
+    icon: '💳',
+    a: 'Aceitamos os principais convênios e planos de saúde. Parcelamos também em até 12x sem juros no cartão. Entre em contato para confirmar seu convênio.',
+    cta: 'Verificar meu convênio',
+    msg: 'Olá! Quero verificar se meu convênio é aceito na Dolce Visione.'
+  },
+  {
+    q: 'Atende miopia, astigmatismo e hipermetropia?',
+    icon: '👁️',
+    a: 'Sim! Atendemos todas as condições visuais: miopia, hipermetropia, astigmatismo, presbiopia (vista cansada) e outras. Nossa equipe especializada vai encontrar a solução ideal para você.',
+    cta: 'Falar com especialista',
+    msg: 'Olá! Preciso de ajuda com minha condição visual. Quero agendar uma avaliação.'
+  },
+  {
+    q: 'Qual o endereço e horário de funcionamento?',
+    icon: '📍',
+    a: 'Estamos na Rua Dr. Prudente de Moraes, 540 — Centro, Suzano/SP.\n\nFuncionamos de segunda a sexta das 9h às 19h e sábado das 9h às 17h. Fácil acesso e estacionamento nas proximidades.',
+    cta: 'Como chegar',
+    msg: 'Olá! Gostaria de saber mais sobre como chegar na Dolce Visione.'
+  }
+];
+
+const overlay = document.getElementById('overlay');
+const panelList = document.getElementById('panelList');
+const panelAnswer = document.getElementById('panelAnswer');
+
+// build list
+const list = document.querySelector('.faq-list');
+faqs.forEach((faq, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'faq-item-btn';
+  btn.setAttribute('role', 'listitem');
+  btn.setAttribute('aria-label', faq.q);
+  btn.innerHTML = `
+    <span>${faq.q}</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+  `;
+  btn.onclick = () => showAnswer(i);
+  list.appendChild(btn);
+});
+
+function openFaq() {
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  showList(false); // reset to list without animation
+}
+
+function closeFaq() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => showList(false), 400);
+}
+
+function showList(animate) {
+  panelList.classList.remove('hidden');
+  panelList.classList.add('visible');
+  panelAnswer.classList.add('hidden');
+  panelAnswer.classList.remove('visible');
+  panelAnswer.style.position = 'absolute';
+}
+
+function showAnswer(i) {
+  const faq = faqs[i];
+  document.getElementById('answerTitle').textContent = faq.q;
+  document.getElementById('answerIcon').textContent = faq.icon;
+  document.getElementById('answerText').innerHTML = faq.a.replace(/\n/g,'<br>');
+  document.getElementById('answerCtaText').textContent = faq.cta;
+  const ctaEl = document.getElementById('answerCta');
+  ctaEl.href = `https://wa.me/5511999990000?text=${encodeURIComponent(faq.msg)}`;
+
+  panelList.classList.remove('visible');
+  panelList.classList.add('hidden');
+  panelList.style.transform = 'translateX(-30px)';
+
+  panelAnswer.style.position = 'relative';
+  panelAnswer.classList.remove('hidden');
+  panelAnswer.classList.add('visible');
+}
+
+function backToList() {
+  panelList.classList.remove('hidden');
+  panelList.classList.add('visible');
+  panelList.style.transform = '';
+
+  panelAnswer.classList.add('hidden');
+  panelAnswer.classList.remove('visible');
+  panelAnswer.style.position = 'absolute';
+}
+
+// close on overlay click
+overlay.addEventListener('click', e => { if (e.target === overlay) closeFaq(); });
+
+// close on ESC
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFaq(); });
+</script>
+
+</body>
+</html>
