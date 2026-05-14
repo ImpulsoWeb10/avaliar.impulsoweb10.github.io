@@ -43,17 +43,58 @@ body::before{
 
 /* Logo area */
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem}
+
+.logo-frame{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  display:inline-block;
+  animation:logo-pulse 2.6s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(201,169,110,.5);
+}
+/* brilho deslizando */
+.logo-frame::after{
+  content:'';
+  position:absolute;
+  top:0;left:-110%;
+  width:55%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  animation:logo-shimmer 2.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@keyframes logo-pulse{
+  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 8px 28px rgba(201,169,110,.25)}
+  55% {box-shadow:0 0 0 16px rgba(201,169,110,0), 0 8px 28px rgba(201,169,110,.1)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 8px 28px rgba(201,169,110,.25)}
+}
+@keyframes logo-shimmer{
+  0%     {left:-110%}
+  45%,100%{left:160%}
+}
+
 .logo-img{
-  width:110px;height:110px;
-  border-radius:50%;
-  border:2px solid rgba(201,169,110,0.35);
-  object-fit:cover;
-  background:rgba(201,169,110,0.08);
+  display:block;
+  width:220px;
+  height:auto;
+  max-height:110px;
+  border-radius:16px;
+  border:2px solid rgba(201,169,110,.4);
+  object-fit:contain;
+  background:rgba(201,169,110,0.06);
+  position:relative;z-index:1;
+}
+.logo-img-fallback{
+  width:220px;height:90px;
+  border-radius:16px;
+  border:2px solid rgba(201,169,110,.4);
+  background:rgba(201,169,110,0.06);
   display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;
-  font-size:2.2rem;color:#c9a96e;font-weight:600;
-  letter-spacing:.04em;
-  overflow:hidden;
+  font-size:2rem;color:#c9a96e;font-weight:600;
+  letter-spacing:.08em;
+  position:relative;z-index:1;
 }
 .brand{
   font-family:'Cormorant Garamond',serif;
@@ -289,7 +330,11 @@ body::before{
 
   <!-- LOGO / MARCA -->
   <div class="logo-wrap">
-    <img class="logo-img" src="logo.png" alt="Logo Ótica Dolce Visione" onerror="this.outerHTML='<div class=\'logo-img\' aria-label=\'Logo Ótica Dolce Visione\'>DV</div>'">
+    <div class="logo-frame">
+      <img class="logo-img" src="logo.png" alt="Logo Ótica Dolce Visione"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-img-fallback" style="display:none;">Dolce Visione</div>
+    </div>
     <div>
       <div class="brand">Dolce <em>Visione</em></div>
       <div class="tagline">Ótica &amp; Saúde Ocular · Suzano</div>
