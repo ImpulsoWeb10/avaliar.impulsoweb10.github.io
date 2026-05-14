@@ -200,8 +200,15 @@ body::before{
 .address{font-size:.8rem;color:#4d6580;line-height:1.6;margin-top:.5rem}
 
 /* Footer */
-.footer{font-size:.72rem;color:#334455;margin-top:auto;padding-top:2rem}
-.footer a{color:#4d6580;text-decoration:none}
+.footer{font-size:.7rem;color:#2e4255;margin-top:auto;padding-top:2.5rem;display:flex;flex-direction:column;align-items:center;gap:.55rem;width:100%}
+.footer-promo{font-size:.75rem;color:#4a6070;line-height:1.5;text-align:center}
+.footer-promo a{color:#c9a96e;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(201,169,110,.3);padding-bottom:1px;transition:color .2s}
+.footer-promo a:hover{color:#e8cfa0}
+.footer-ssl{display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:#2a3a48}
+.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.55}
+.footer-dev{font-size:.68rem;color:#2a3a48}
+.footer-dev a{color:#3a5568;text-decoration:none;transition:color .2s}
+.footer-dev a:hover{color:#5a7890}
 
 /* ===== MODAL OVERLAY ===== */
 .overlay{
@@ -419,7 +426,14 @@ body::before{
 
 <!-- FOOTER -->
 <div class="footer">
-  Desenvolvido por <a href="#">ImpulsoWeb10</a> · © 2026 Ótica Dolce Visione
+  <p class="footer-promo">Deseja ter um link de avaliação assim para sua empresa?<br>
+    <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Dolce%20Visione%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
+  </p>
+  <div class="footer-ssl">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Protegido por SSL
+  </div>
+  <p class="footer-dev">Desenvolvido por <a href="https://impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
 </div>
 
 
