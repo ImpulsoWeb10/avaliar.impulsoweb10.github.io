@@ -83,5 +83,5 @@ const clientes = [
   pasta: "sonat-music", 
   logo: "logo.jpeg", 
   descricao: "Sua melhor opção em Itaquá." 
-},
+}
 ];
