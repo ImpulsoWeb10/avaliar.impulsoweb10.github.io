@@ -60,10 +60,10 @@ const clientes = [
     descricao: "Domínio técnico em cortes e tratamentos capilares. Visual renovado." 
   },
   { 
-    nome: "Estética Lidia", 
-    pasta: "estetica-lidia", 
-    logo: "https://lh3.googleusercontent.com/a-/ALV-UjUN9pMljOGoQmIPEVG_QQJgHqUuJbY-8ZLVKCEHirk80KVdxzb_=s360-w360-h360", 
-    descricao: "Cuidado estético e bem-estar com atendimento personalizado."
+    nome: "Ótica e saude Ocular", 
+    pasta: "oticadolcevisione", 
+    logo: "logo.png", 
+    descricao: "Cuide bem de sua visão, ela merece!"
   },
   {
     nome: "Ocram Transporte",
