@@ -66,10 +66,10 @@ const clientes = [
     descricao: "Cuidado estético e bem-estar com atendimento personalizado."
   },
   {
-    nome: "Lidia Lindona",
-    pasta: "lidia",
-    logo: "https://images.unsplash.com/photo-1773061941695-43568f71bee9?q=80&w=1470",
-    descricao: "Beleza e estilo para valorizar sua autoestima.",
+    nome: "Ocram Transporte",
+    pasta: "ocram-transporte-executivo",
+    logo: "logo.png",
+    descricao: "Transporte de Qualidade.",
     instagram: "@TINTASQUALYQUIMY"
   },
   { 
