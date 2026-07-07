@@ -78,4 +78,10 @@ const clientes = [
   logo: "logo.jpeg", 
   descricao: "Sua melhor estadia com conforto e natureza." 
 }
+   { 
+  nome: "A vinte anos ensinando boa música!", 
+  pasta: "sonat-music", 
+  logo: "logo.jpeg", 
+  descricao: "Sua melhor opção em Itaquá." 
+}
 ];
