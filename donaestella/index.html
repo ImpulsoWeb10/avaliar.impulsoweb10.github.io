@@ -106,14 +106,59 @@
         }
         .info-hotel a { color: #ffce54; text-decoration: none; }
 
-        #instrucao { font-size: 16px; color: #ead9c9; margin-bottom: 20px; font-weight: 600; }
+        #instrucao { font-size: 16px; color: #ead9c9; margin-bottom: 18px; font-weight: 600; }
 
-        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 10px; }
+        .rating-box { margin-bottom: 18px; display: flex; justify-content: center; gap: 8px; }
+
         .star-btn {
-            font-size: 42px; color: #4a3a2c; cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 30px;
+            color: #4a3a2c;
+            cursor: pointer;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            animation: pulseStar 1.6s ease-in-out infinite;
+            display: inline-block;
         }
-        .star-btn.active { color: #ffce54; transform: scale(1.2); text-shadow: 0 0 20px rgba(255, 206, 84, 0.65); }
+        .star-btn:nth-child(1) { animation-delay: 0s; }
+        .star-btn:nth-child(2) { animation-delay: 0.12s; }
+        .star-btn:nth-child(3) { animation-delay: 0.24s; }
+        .star-btn:nth-child(4) { animation-delay: 0.36s; }
+        .star-btn:nth-child(5) { animation-delay: 0.48s; }
+
+        @keyframes pulseStar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.18); }
+        }
+
+        .star-btn.active {
+            color: #ffce54;
+            text-shadow: 0 0 16px rgba(255, 206, 84, 0.7);
+        }
+
+        /* Caixa de mensagem especial */
+        .mensagem-caixa {
+            background: rgba(0,0,0,0.28);
+            border: 1px solid rgba(255, 206, 84, 0.22);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mensagem-caixa p {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffce54;
+        }
+        .mensagem-caixa p.pop {
+            animation: popMensagem 0.4s ease;
+        }
+        @keyframes popMensagem {
+            0% { opacity: 0; transform: translateY(6px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
         textarea {
             width: 100%; background: rgba(0,0,0,0.3);
@@ -131,7 +176,7 @@
             margin-bottom: 10px;
         }
 
-        /* BOTÃO GOOGLE — PULSO + BRILHO DESLIZANTE */
+        /* BOTÃO GOOGLE — visível desde o início, pulso + brilho deslizante */
         .google {
             background: linear-gradient(90deg, #ffce54, #ff8a3d);
             color: #1c120c;
@@ -202,17 +247,15 @@
         <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
     </div>
 
-    <div id="feedback-bom" class="hidden">
-        <p style="font-size: 18px; margin-bottom: 15px;">Que delícia saber disso! 🍕😍</p>
-        <p style="margin-bottom: 20px; font-size: 14px; color: #d8c3ac;">Sua avaliação ajuda outros clientes a nos encontrarem no Google.</p>
-
-        <a href="https://www.google.com/maps/search/?api=1&query=DonaStella+Pizzaria+Av.+Italo+Adami+1197+Vila+Sao+Jose+Itaquaquecetuba+SP" class="botao google" target="_blank" rel="noopener">
-            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-        </a>
+    <div class="mensagem-caixa">
+        <p id="mensagem-texto">Toque nas estrelas para nos contar sua experiência 🍕</p>
     </div>
 
+    <a href="https://www.google.com/maps/search/?api=1&query=DonaStella+Pizzaria+Av.+Italo+Adami+1197+Vila+Sao+Jose+Itaquaquecetuba+SP" class="botao google" target="_blank" rel="noopener">
+        <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+    </a>
+
     <div id="feedback-ruim" class="hidden">
-        <p style="font-size: 18px; margin-bottom: 15px;">Sentimos muito... 😔</p>
         <textarea id="texto-melhoria" placeholder="O que podemos fazer para melhorar sua próxima experiência?"></textarea>
         <button onclick="enviarWhatsApp()" class="botao whatsapp">
             <i class="fab fa-whatsapp"></i> FALAR COM A GERÊNCIA
@@ -233,12 +276,20 @@
 <script>
     let notaSelecionada = 0;
 
+    const mensagens = {
+        1: "Sentimos muito...",
+        2: "Como podemos te atender melhor?",
+        3: "Muito Grato",
+        4: "Que bom que está aqui",
+        5: "Que dia Especial"
+    };
+
     function avaliar(n) {
         notaSelecionada = n;
         const stars = document.querySelectorAll('.star-btn');
-        const bom = document.getElementById('feedback-bom');
         const ruim = document.getElementById('feedback-ruim');
         const instrucao = document.getElementById('instrucao');
+        const mensagemTexto = document.getElementById('mensagem-texto');
 
         stars.forEach((s, i) => {
             if (i < n) s.classList.add('active');
@@ -247,18 +298,24 @@
 
         instrucao.classList.add('hidden');
 
-        if (n >= 4) {
-            bom.classList.remove('hidden');
+        mensagemTexto.textContent = mensagens[n];
+        mensagemTexto.classList.remove('pop');
+        void mensagemTexto.offsetWidth;
+        mensagemTexto.classList.add('pop');
+
+        if (n <= 2) {
+            ruim.classList.remove('hidden');
+        } else {
             ruim.classList.add('hidden');
+        }
+
+        if (n >= 4) {
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
                 colors: ['#ffce54', '#ff8a3d', '#ffffff']
             });
-        } else {
-            ruim.classList.remove('hidden');
-            bom.classList.add('hidden');
         }
     }
 
