@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonaStella Pizzaria Itaquá | Avalie sua Experiência</title>
+
+    <meta name="description" content="Sua opinião é fundamental para a DonaStella Pizzaria em Itaquaquecetuba. Avalie nosso sabor e atendimento.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background:
+                radial-gradient(circle at 20% 0%, rgba(232, 181, 69, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 100%, rgba(179, 38, 30, 0.18), transparent 50%),
+                linear-gradient(160deg, #1c120c, #100b08 65%);
+            color: #ead9c9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(255, 240, 220, 0.04);
+            backdrop-filter: blur(15px);
+            padding: 0 25px 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(232, 181, 69, 0.18);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .logo-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 96px; height: 96px;
+            margin: 0 auto 18px;
+            margin-top: -2px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #e8b545, #b3261e 75%);
+            box-shadow: 0 0 0 6px rgba(232, 181, 69, 0.1), 0 10px 30px -8px rgba(179, 38, 30, 0.6);
+            overflow: hidden;
+            top: 28px;
+        }
+
+        .logo-box::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine-logo 3.5s infinite;
+        }
+
+        @keyframes shine-logo { 100% { left: 140%; } }
+
+        .logo-box i { font-size: 40px; color: #fff8ec; }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-top: 34px;
+            margin-bottom: 4px;
+            color: #fdf3e2;
+            letter-spacing: 0.01em;
+        }
+        h2 {
+            font-size: 13px;
+            color: #e8b545;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .info-hotel {
+            font-size: 11.5px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #d8c3ac;
+            background: rgba(0,0,0,0.25);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(232, 181, 69, 0.1);
+        }
+        .info-hotel a { color: #e8b545; text-decoration: none; }
+
+        #instrucao { font-size: 16px; color: #ead9c9; margin-bottom: 20px; font-weight: 600; }
+
+        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 10px; }
+        .star-btn {
+            font-size: 42px; color: #4a3a2c; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .star-btn.active { color: #e8b545; transform: scale(1.2); text-shadow: 0 0 20px rgba(232, 181, 69, 0.55); }
+
+        textarea {
+            width: 100%; background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(232, 181, 69, 0.2); border-radius: 15px;
+            color: #fdf3e2; padding: 15px; margin-bottom: 15px;
+            resize: none; outline: none; font-family: inherit; font-size: 14px;
+        }
+        textarea::placeholder { color: #a8927a; }
+
+        .botao {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 18px; border-radius: 50px;
+            font-weight: 800; font-size: 16px; text-decoration: none;
+            transition: 0.3s; border: none; cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* BOTÃO GOOGLE — PULSO + BRILHO DESLIZANTE */
+        .google {
+            background: linear-gradient(90deg, #f0c869, #e8b545);
+            color: #1c120c;
+            position: relative;
+            overflow: hidden;
+            animation: pulse-google 2s infinite;
+        }
+
+        @keyframes pulse-google {
+            0%   { box-shadow: 0 0 0 0 rgba(232, 181, 69, 0.7), 0 4px 15px rgba(232,181,69,0.3); }
+            50%  { box-shadow: 0 0 0 12px rgba(232, 181, 69, 0), 0 4px 25px rgba(232,181,69,0.6); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 181, 69, 0), 0 4px 15px rgba(232,181,69,0.3); }
+        }
+
+        .google::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+            animation: shine-btn 2.5s infinite;
+        }
+
+        @keyframes shine-btn {
+            0%   { left: -100%; }
+            40%  { left: 130%; }
+            100% { left: 130%; }
+        }
+
+        .google:hover { transform: translateY(-3px); }
+
+        .whatsapp { background: #22c55e; color: white; }
+
+        .hidden { display: none; }
+
+        .footer {
+            margin-top: 30px; font-size: 12px; color: #94a3b8;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+        }
+        .footer a { color: #facc15; text-decoration: none; font-weight: 700; }
+        .frase-top { font-style: italic; margin-bottom: 10px; display: block; color: #facc15; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo-box">
+        <i class="fa-solid fa-pizza-slice"></i>
+    </div>
+
+    <h1>DonaStella Pizzaria</h1>
+    <h2>Itaquaquecetuba - SP</h2>
+
+    <div class="info-hotel">
+        <a href="https://www.google.com/maps/search/?api=1&query=DonaStella+Pizzaria+Av.+Italo+Adami+1197+Vila+Sao+Jose+Itaquaquecetuba+SP" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Av. Italo Adami, 1197 - Vila São José, Itaquaquecetuba - SP, 08574-020</a><br>
+        <i class="fas fa-phone"></i> (11) 4642-8157
+        &nbsp;|&nbsp;
+        <i class="fas fa-globe"></i> <a href="https://www.donastella.com.br/" target="_blank" rel="noopener">donastella.com.br</a>
+    </div>
+
+    <p id="instrucao">Como foi sua experiência com a nossa pizza?</p>
+
+    <div class="rating-box">
+        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
+        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
+    </div>
+
+    <div id="feedback-bom" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Que delícia saber disso! 🍕😍</p>
+        <p style="margin-bottom: 20px; font-size: 14px; color: #d8c3ac;">Sua avaliação ajuda outros clientes a nos encontrarem no Google.</p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=DonaStella+Pizzaria+Av.+Italo+Adami+1197+Vila+Sao+Jose+Itaquaquecetuba+SP" class="botao google" target="_blank" rel="noopener">
+            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+        </a>
+    </div>
+
+    <div id="feedback-ruim" class="hidden">
+        <p style="font-size: 18px; margin-bottom: 15px;">Sentimos muito... 😔</p>
+        <textarea id="texto-melhoria" placeholder="O que podemos fazer para melhorar sua próxima experiência?"></textarea>
+        <button onclick="enviarWhatsApp()" class="botao whatsapp">
+            <i class="fab fa-whatsapp"></i> FALAR COM A GERÊNCIA
+        </button>
+        <p style="font-size: 11px; margin-top: 10px; color: #94a3b8;">Sua mensagem será enviada direto para o nosso WhatsApp.</p>
+    </div>
+
+    <div class="footer">
+        <span class="frase-top">"Sabor e tradição em Itaquaquecetuba."</span>
+        <div>🔒 AMBIENTE SEGURO | © 2026</div>
+        <div style="margin-top: 8px;">
+            Desenvolvido por
+            <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let notaSelecionada = 0;
+
+    function avaliar(n) {
+        notaSelecionada = n;
+        const stars = document.querySelectorAll('.star-btn');
+        const bom = document.getElementById('feedback-bom');
+        const ruim = document.getElementById('feedback-ruim');
+        const instrucao = document.getElementById('instrucao');
+
+        stars.forEach((s, i) => {
+            if (i < n) s.classList.add('active');
+            else s.classList.remove('active');
+        });
+
+        instrucao.classList.add('hidden');
+
+        if (n >= 4) {
+            bom.classList.remove('hidden');
+            ruim.classList.add('hidden');
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#e8b545', '#ffffff', '#b3261e']
+            });
+        } else {
+            ruim.classList.remove('hidden');
+            bom.classList.add('hidden');
+        }
+    }
+
+    function enviarWhatsApp() {
+        const texto = document.getElementById('texto-melhoria').value;
+        const telefone = "5511996558702";
+
+        if (!texto) {
+            alert("Por favor, conte-nos brevemente o que houve.");
+            return;
+        }
+
+        const mensagem = encodeURIComponent(`*Feedback DonaStella Pizzaria*%0A*Nota:* ${notaSelecionada} estrelas ⭐%0A*Comentário:* ${texto}`);
+        window.open(`https://wa.me/${telefone}?text=${mensagem}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
