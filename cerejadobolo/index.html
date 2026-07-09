@@ -29,14 +29,19 @@
             position: relative; z-index: 1; margin: 20px 0;
         }
 
-        /* LOGO ADAPTADA: MENOR COM PULSO E BRILHO */
+        /* CONTAINER DA LOGO: PERFEITAMENTE REDONDO SEM CORTAR OS LADOS */
         .logo-container {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 10px;
             overflow: hidden;
-            border-radius: 50%; /* Garante formato harmônico para efeito circular/oval */
-            padding: 8px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Torna a moldura perfeitamente redonda */
+            background: rgba(255, 255, 255, 0.03); /* Fundo sutil para destacar a logo */
+            border: 1px solid rgba(233, 30, 99, 0.3);
             animation: pulseLogo 3s infinite ease-in-out;
         }
 
@@ -48,11 +53,12 @@
         
         .logo-container::after {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100px; height: 60px; background: var(--cherry); filter: blur(40px);
-            opacity: 0.4; z-index: -1; animation: glow 3s infinite alternate;
+            width: 100px; height: 100px; background: var(--cherry); filter: blur(40px);
+            opacity: 0.35; z-index: -1; animation: glow 3s infinite alternate;
         }
         @keyframes glow { from { opacity: 0.2; scale: 1; } to { opacity: 0.5; scale: 1.2; } }
 
+        /* Brilho passando por dentro do círculo */
         .logo-container::before {
             content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
@@ -64,7 +70,15 @@
             100% { left: 150%; }
         }
 
-        .logo { width: 120px; height: auto; position: relative; z-index: 2; display: block; margin: 0 auto; }
+        /* Ajuste estrito para a imagem conter-se no círculo sem nunca cortar lateralmente */
+        .logo { 
+            max-width: 90%; 
+            max-height: 90%; 
+            object-fit: contain; /* Força a exibição da imagem inteira */
+            position: relative; 
+            z-index: 2; 
+            display: block; 
+        }
 
         /* PALCO DO CARROSSEL */
         .dynamic-stage {
@@ -211,10 +225,8 @@
         img.className = 'stage-item';
         stage.appendChild(img);
         
-        // Efeito: Começa em 0.1 de escala e vai para 1 (Cresce dinamicamente)
+        // Efeito: Começa pequenininha e expande suavemente
         setTimeout(() => img.classList.add('animate-in'), 50);
-        
-        // Mantém a imagem em exibição por 4 segundos antes de transicionar
         setTimeout(nextStep, 4000); 
     }
 
@@ -223,10 +235,9 @@
         runStageCycle();
     }
 
-    // Iniciar Carrosel
     runStageCycle();
 
-    // INTERAÇÕES DO LINK (MODAL E SONS)
+    // INTERAÇÕES
     let redirectTimer;
     const sound = document.getElementById('click-sound');
 
