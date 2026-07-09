@@ -29,31 +29,32 @@
             position: relative; z-index: 1; margin: 20px 0;
         }
 
-        /* CONTAINER DA LOGO: PERFEITAMENTE REDONDO SEM CORTAR OS LADOS */
+        /* LOGO AUMENTADA E FORÇADA A FICAR PERFEITAMENTE REDONDA */
         .logo-container {
             position: relative;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             overflow: hidden;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%; /* Torna a moldura perfeitamente redonda */
-            background: rgba(255, 255, 255, 0.03); /* Fundo sutil para destacar a logo */
+            width: 135px; /* Aumentado de 120px para 135px */
+            height: 135px; /* Aumentado de 120px para 135px */
+            border-radius: 50% !important; /* Força círculo perfeito */
+            background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(233, 30, 99, 0.3);
             animation: pulseLogo 3s infinite ease-in-out;
+            box-sizing: border-box;
         }
 
         @keyframes pulseLogo {
             0% { transform: scale(1); }
-            50% { transform: scale(1.06); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         
         .logo-container::after {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100px; height: 100px; background: var(--cherry); filter: blur(40px);
+            width: 110px; height: 110px; background: var(--cherry); filter: blur(40px);
             opacity: 0.35; z-index: -1; animation: glow 3s infinite alternate;
         }
         @keyframes glow { from { opacity: 0.2; scale: 1; } to { opacity: 0.5; scale: 1.2; } }
@@ -70,11 +71,12 @@
             100% { left: 150%; }
         }
 
-        /* Ajuste estrito para a imagem conter-se no círculo sem nunca cortar lateralmente */
+        /* Garante que a imagem se adapte ao tamanho interno sem ser cortada */
         .logo { 
-            max-width: 90%; 
-            max-height: 90%; 
-            object-fit: contain; /* Força a exibição da imagem inteira */
+            max-width: 92%; 
+            max-height: 92%; 
+            object-fit: contain; 
+            border-radius: 50%; /* Ajuda a clipar caso a imagem original possua cantos brancos */
             position: relative; 
             z-index: 2; 
             display: block; 
