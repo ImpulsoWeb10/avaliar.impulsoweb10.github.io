@@ -37,9 +37,9 @@
             align-items: center;
             margin-bottom: 12px;
             overflow: hidden;
-            width: 135px; /* Aumentado de 120px para 135px */
-            height: 135px; /* Aumentado de 120px para 135px */
-            border-radius: 50% !important; /* Força círculo perfeito */
+            width: 135px;
+            height: 135px;
+            border-radius: 50% !important;
             background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(233, 30, 99, 0.3);
             animation: pulseLogo 3s infinite ease-in-out;
@@ -71,12 +71,12 @@
             100% { left: 150%; }
         }
 
-        /* Garante que a imagem se adapte ao tamanho interno sem ser cortada */
+        /* Garante que a imagem se adapte perfeitamente sem cortes */
         .logo { 
-            max-width: 92%; 
-            max-height: 92%; 
+            max-width: 100%; 
+            max-height: 100%; 
             object-fit: contain; 
-            border-radius: 50%; /* Ajuda a clipar caso a imagem original possua cantos brancos */
+            border-radius: 50%;
             position: relative; 
             z-index: 2; 
             display: block; 
@@ -172,7 +172,7 @@
     
     <div class="dynamic-stage" id="dynamicStage"></div>
 
-    <a href="https://www.google.com" 
+    <a href="https://www.google.com/search?client=firefox-b-d&hs=m8Dq&sca_esv=c3faaa4084c3cbf9&sxsrf=APpeQnuGK2tTyKHtM5_T6pvUPDl-K_8T2g:1783610147303&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_zeN_YDx3Nzze9ekiBBa3NpVNDfhfE-nfBppRplcXSbu74dn7eYAcJ-46U3jttNz9tB0MnCTUGF6K3f1_P7kJYtOcknERBUJtPMMMvsdg_YJ-YyZxQ%3D%3D&q=Cereja+do+Bolo+Coment%C3%A1rios&sa=X&ved=2ahUKEwiVqv3J8cWVAxWDjpUCHe3oJd8Q0bkNegQINxAH&biw=1525&bih=687&dpr=0.9" 
        class="btn-google" onclick="handleAction(event, 'Abrindo Avaliações Google', 'google')">
         <i class="fab fa-google"></i> Avaliar no Google
     </a>
@@ -180,8 +180,8 @@
     <div class="social-row">
         <a href="https://wa.me/5500000000000" class="icon-btn wa" onclick="handleAction(event, 'Abrindo WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
         <a href="tel:00000000000" class="icon-btn tel" onclick="handleAction(event, 'Ligando para Confeitaria', 'phone')"><i class="fas fa-phone"></i></a>
-        <a href="https://www.instagram.com/cerejadobolo.2019/" class="icon-btn ig" onclick="handleAction(event, 'Acessando Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
-        <a href="http://maps.google.com" class="icon-btn maps" onclick="handleAction(event, 'Traçando Rota para Confeitaria', 'location-dot')"><i class="fas fa-location-dot"></i></a>
+        <a href="https://www.instagram.com/cereja.do.bolo2019/" class="icon-btn ig" onclick="handleAction(event, 'Acessando Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.google.com/maps?client=firefox-b-d&um=1&ie=UTF-8&fb=1&gl=br&sa=X&geocode=KcE4UwWQe86UMZrDVyKNL7NU&daddr=R.+Varginha,+218+-+Vila+Zeferina,+Itaquaquecetuba+-+SP,+08576-080" class="icon-btn maps" onclick="handleAction(event, 'Traçando Rota para Confeitaria', 'location-dot')"><i class="fas fa-location-dot"></i></a>
     </div>
 
     <div class="custom-footer">
@@ -207,11 +207,11 @@
 <audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
 <script>
-    // CONFIGURAÇÃO DO CARROSSEL DE EXATAMENTE 3 IMAGENS
+    // CONFIGURAÇÃO DO CARROSSEL DE EXATAMENTE 3 IMAGENS (BOLO1, BOLO2, BOLO3)
     const stageData = [
-        { src: 'bolo1.jpeg', alt: 'Bolo Decorado 1' },
-        { src: 'bolo2.jpeg', alt: 'Doces Finos Gourmet' },
-        { src: 'bolo3.jpeg', alt: 'Bolo de Festa Cereja' }
+        { src: 'bolo1.png', alt: 'Bolo Decorado 1' },
+        { src: 'bolo2.png', alt: 'Doces Finos Gourmet' },
+        { src: 'bolo3.png', alt: 'Bolo de Festa Cereja' }
     ];
 
     const stage = document.getElementById('dynamicStage');
@@ -227,7 +227,7 @@
         img.className = 'stage-item';
         stage.appendChild(img);
         
-        // Efeito: Começa pequenininha e expande suavemente
+        // Efeito: Começa pequenininha (scale 0.1) e expande suavemente (scale 1)
         setTimeout(() => img.classList.add('animate-in'), 50);
         setTimeout(nextStep, 4000); 
     }
@@ -239,7 +239,7 @@
 
     runStageCycle();
 
-    // INTERAÇÕES
+    // INTERAÇÕES (MODAL COM CONTADOR DE REDIRECIONAMENTO)
     let redirectTimer;
     const sound = document.getElementById('click-sound');
 
