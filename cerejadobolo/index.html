@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cereja do Bolo | Confeitaria Artesanal & Bolos Decorados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --cherry: #e91e63; /* Rosa Cereja */
+            --cream: #fff5f7;  /* Fundo suave */
+        }
+        
+        body {
+            margin: 0; font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #120107, #2c0514, #1a020c, #000000);
+            background-size: 400% 400%; animation: grad 12s infinite;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; color: white; text-align: center;
+            overscroll-behavior-y: contain; 
+        }
+
+        @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+        .card {
+            background: rgba(20, 5, 10, 0.75); padding: 40px 20px; border-radius: 40px;
+            backdrop-filter: blur(20px); max-width: 360px; width: 92%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9); border: 1px solid rgba(233, 30, 99, 0.2);
+            position: relative; z-index: 1; margin: 20px 0;
+        }
+
+        /* LOGO COM EFEITO DE LUZ CEREJA */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .logo-container::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 150px; height: 80px; background: var(--cherry); filter: blur(50px);
+            opacity: 0.4; z-index: -1; animation: glow 3s infinite alternate;
+        }
+        @keyframes glow { from { opacity: 0.2; scale: 1; } to { opacity: 0.5; scale: 1.2; } }
+
+        .logo-container::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            z-index: 3; transform: skewX(-20deg); animation: shimmerLogo 5s infinite;
+        }
+        @keyframes shimmerLogo {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        .logo { width: 180px; height: auto; position: relative; z-index: 2; display: block; }
+
+        /* PALCO DE ANIMAÇÃO DINÂMICA */
+        .dynamic-stage {
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #120208;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dynamic-stage::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8); pointer-events: none; z-index: 5;
+        }
+
+        .stage-item {
+            max-width: 100%; max-height: 100%; object-fit: cover; position: absolute;
+            opacity: 0; transform: scale(0.1); transition: transform 1.5s ease-out, opacity 1s ease-in; z-index: 2;
+        }
+
+        .stage-item.animate-in { opacity: 1; transform: scale(1); }
+
+        .stage-phrase {
+            position: absolute; width: 80%; color: #fff; font-size: 16px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; opacity: 0; transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease; z-index: 3; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .stage-phrase.active { opacity: 1; transform: translateY(0); }
+        .stage-phrase b { color: var(--cherry); }
+
+        /* BOTÃO DE DESTAQUE */
+        .btn-google {
+            position: relative; display: block; margin: 15px auto; padding: 18px;
+            width: 90%; font-weight: 800; text-decoration: none; border-radius: 50px;
+            background: var(--cherry); color: #fff; text-transform: uppercase; font-size: 13px;
+            animation: pulse 2.5s infinite; border: none; cursor: pointer; letter-spacing: 0.5px;
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.6); } 70% { box-shadow: 0 0 0 12px rgba(233, 30, 99, 0); } 100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); } }
+
+        .social-row { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .icon-btn {
+            width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: white; font-size: 20px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+        }
+        .wa{background:#25D366;} .tel{background:#ff4081;} .ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);} .maps{background:#ea4335;}
+
+        /* MODAL */
+        #modal-info {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+            z-index: 999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #modal-info.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: #1a050e; width: 80%; max-width: 300px; padding: 35px 25px;
+            border-radius: 40px; border: 1px solid var(--cherry);
+            text-align: center; transform: scale(0.7); transition: 0.4s; position: relative;
+        }
+        #modal-info.active .modal-content { transform: scale(1); }
+        .modal-icon { font-size: 50px; color: var(--cherry); margin-bottom: 20px; }
+        .modal-text { font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 20px; }
+
+        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--cherry); width: 0%; }
+        #modal-info.active .progress-fill { animation: fillProgress 4s linear forwards; }
+        @keyframes fillProgress { from { width: 0%; } to { width: 100%; } }
+
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #777; cursor: pointer; }
+
+        /* RODAPÉ */
+        .custom-footer { margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .footer-link { color: #fff; text-decoration: none; font-size: 11px; line-height: 1.5; display: block; margin-bottom: 10px; }
+        .footer-link b { color: var(--cherry); font-size: 13px; }
+        
+        .ssl-info { font-size: 10px; opacity: 0.6; color: #fff; letter-spacing: 0.5px; }
+        .ssl-info i { color: #2ecc71; margin-right: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="logo-container">
+        <!-- Substitua pelo arquivo da logo da confeitaria -->
+        <img src="logo.png" class="logo" alt="Cereja do Bolo Logo">
+    </div>
+    
+    <h1 style="font-size:22px; margin:5px 0 0 0; font-weight: 800; letter-spacing: 1px;">CEREJA DO BOLO</h1>
+    <p style="color:var(--cherry); font-size: 11px; margin: 5px 0 15px 0; font-weight: 700; letter-spacing: 2px;">CONFEITARIA ARTESANAL</p>
+    
+    <div class="dynamic-stage" id="dynamicStage"></div>
+
+    <!-- LINK DO GOOGLE MEU NEGÓCIO (Trocar o href pelo link de avaliações real do cliente) -->
+    <a href="https://www.google.com" 
+       class="btn-google" onclick="handleAction(event, 'Abrindo Avaliações Google', 'google')">
+        <i class="fab fa-google"></i> Avaliar no Google
+    </a>
+
+    <div class="social-row">
+        <!-- Configurar o número do WhatsApp da Confeitaria abaixo -->
+        <a href="https://wa.me/5500000000000" class="icon-btn wa" onclick="handleAction(event, 'Abrindo WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
+        <!-- Configurar o telefone abaixo -->
+        <a href="tel:00000000000" class="icon-btn tel" onclick="handleAction(event, 'Ligando para Confeitaria', 'phone')"><i class="fas fa-phone"></i></a>
+        <!-- Instagram já atualizado para o cliente correto -->
+        <a href="https://www.instagram.com/cerejadobolo.2019/" class="icon-btn ig" onclick="handleAction(event, 'Acessando Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
+        <!-- Configurar link do Google Maps para o endereço físico se houver -->
+        <a href="http://maps.google.com" class="icon-btn maps" onclick="handleAction(event, 'Traçando Rota para Confeitaria', 'location-dot')"><i class="fas fa-location-dot"></i></a>
+    </div>
+
+    <div class="custom-footer">
+        <a href="https://wa.me/5511954950044" class="footer-link">
+            Quer seu link personalizado igual a esse? <br>
+            <b>Saiba mais: (11) 95495-0044</b>
+        </a>
+        <div class="ssl-info">
+            <i class="fas fa-lock"></i> Conexão Segura SSL | @2026 Todos os direitos reservados
+        </div>
+    </div>
+</div>
+
+<div id="modal-info">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <div class="modal-icon"><i id="m-icon" class="fas fa-circle-notch"></i></div>
+        <div class="modal-text" id="m-text">Acessando...</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+</div>
+
+<audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+
+<script>
+    // CONFIGURAÇÃO DO PALCO DINÂMICA PARA CONFEITARIA
+    // Renomeie suas imagens de bolos/doces para bolo1.png, bolo2.png, etc., ou mude os nomes abaixo.
+    const stageData = [
+        { type: 'image', src: 'bolo1.png', alt: 'Bolo Decorado 1' },
+        { type: 'phrase', text: 'Feito com <b>Amor</b>' },
+        { type: 'image', src: 'bolo2.png', alt: 'Doces Gourmet' },
+        { type: 'phrase', text: 'Ingredientes <b>Premium</b>' },
+        { type: 'image', src: 'bolo3.png', alt: 'Bolo Decorado 2' },
+        { type: 'phrase', text: 'O toque que sua festa <b>merece</b>' },
+        { type: 'image', src: 'bolo4.png', alt: 'Detalhes' },
+        { type: 'phrase', text: 'Seu momento mais <b>doce</b>' },
+        { type: 'image', src: 'bolo5.png', alt: 'Bolo Festivo' },
+        { type: 'phrase', text: 'Encomendas <b>Personalizadas</b>' }
+    ];
+
+    const stage = document.getElementById('dynamicStage');
+    let currentIndex = 0;
+
+    function runStageCycle() {
+        stage.innerHTML = '';
+        const data = stageData[currentIndex];
+
+        if (data.type === 'image') {
+            const img = document.createElement('img');
+            img.src = data.src;
+            img.alt = data.alt;
+            img.className = 'stage-item';
+            stage.appendChild(img);
+            
+            setTimeout(() => img.classList.add('animate-in'), 100);
+            setTimeout(nextStep, 4000); 
+        } else {
+            const p = document.createElement('p');
+            p.innerHTML = data.text;
+            p.className = 'stage-phrase';
+            stage.appendChild(p);
+            
+            setTimeout(() => p.classList.add('active'), 100);
+            setTimeout(nextStep, 3000);
+        }
+    }
+
+    function nextStep() {
+        currentIndex = (currentIndex + 1) % stageData.length;
+        runStageCycle();
+    }
+
+    runStageCycle();
+
+    // FUNÇÕES DO MODAL E REDIRECIONAMENTO
+    let redirectTimer;
+    const sound = document.getElementById('click-sound');
+
+    function handleAction(event, frase, iconName) {
+        event.preventDefault();
+        const url = event.currentTarget.href;
+        sound.currentTime = 0;
+        sound.play();
+
+        document.getElementById('m-text').innerText = frase;
+        document.getElementById('m-icon').className = 'fas fa-' + iconName;
+        document.getElementById('modal-info').classList.add('active');
+
+        redirectTimer = setTimeout(() => {
+            window.location.href = url;
+        }, 4000);
+    }
+
+    function closeModal() {
+        clearTimeout(redirectTimer);
+        document.getElementById('modal-info').classList.remove('active');
+    }
+</script>
+
+</body>
+</html>
