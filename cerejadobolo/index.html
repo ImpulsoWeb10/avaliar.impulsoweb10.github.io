@@ -29,36 +29,44 @@
             position: relative; z-index: 1; margin: 20px 0;
         }
 
-        /* LOGO COM EFEITO DE LUZ CEREJA */
+        /* LOGO ADAPTADA: MENOR COM PULSO E BRILHO */
         .logo-container {
             position: relative;
             display: inline-block;
             margin-bottom: 10px;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 50%; /* Garante formato harmônico para efeito circular/oval */
+            padding: 8px;
+            animation: pulseLogo 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
         }
         
         .logo-container::after {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 150px; height: 80px; background: var(--cherry); filter: blur(50px);
+            width: 100px; height: 60px; background: var(--cherry); filter: blur(40px);
             opacity: 0.4; z-index: -1; animation: glow 3s infinite alternate;
         }
         @keyframes glow { from { opacity: 0.2; scale: 1; } to { opacity: 0.5; scale: 1.2; } }
 
         .logo-container::before {
             content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            z-index: 3; transform: skewX(-20deg); animation: shimmerLogo 5s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            z-index: 3; transform: skewX(-20deg); animation: shimmerLogo 4s infinite ease-in-out;
         }
         @keyframes shimmerLogo {
             0% { left: -150%; }
-            20% { left: 150%; }
+            30% { left: 150%; }
             100% { left: 150%; }
         }
 
-        .logo { width: 180px; height: auto; position: relative; z-index: 2; display: block; }
+        .logo { width: 120px; height: auto; position: relative; z-index: 2; display: block; margin: 0 auto; }
 
-        /* PALCO DE ANIMAÇÃO DINÂMICA */
+        /* PALCO DO CARROSSEL */
         .dynamic-stage {
             width: 100%;
             height: 200px;
@@ -78,21 +86,13 @@
             box-shadow: inset 0 0 30px rgba(0,0,0,0.8); pointer-events: none; z-index: 5;
         }
 
+        /* IMAGEM COMEÇA PEQUENA E CRESCE */
         .stage-item {
-            max-width: 100%; max-height: 100%; object-fit: cover; position: absolute;
-            opacity: 0; transform: scale(0.1); transition: transform 1.5s ease-out, opacity 1s ease-in; z-index: 2;
+            width: 100%; height: 100%; object-fit: cover; position: absolute;
+            opacity: 0; transform: scale(0.1); transition: transform 1.8s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s ease-in; z-index: 2;
         }
 
         .stage-item.animate-in { opacity: 1; transform: scale(1); }
-
-        .stage-phrase {
-            position: absolute; width: 80%; color: #fff; font-size: 16px; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase; opacity: 0; transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease; z-index: 3; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        }
-
-        .stage-phrase.active { opacity: 1; transform: translateY(0); }
-        .stage-phrase b { color: var(--cherry); }
 
         /* BOTÃO DE DESTAQUE */
         .btn-google {
@@ -148,7 +148,6 @@
 
 <div class="card">
     <div class="logo-container">
-        <!-- Substitua pelo arquivo da logo da confeitaria -->
         <img src="logo.png" class="logo" alt="Cereja do Bolo Logo">
     </div>
     
@@ -157,20 +156,15 @@
     
     <div class="dynamic-stage" id="dynamicStage"></div>
 
-    <!-- LINK DO GOOGLE MEU NEGÓCIO (Trocar o href pelo link de avaliações real do cliente) -->
     <a href="https://www.google.com" 
        class="btn-google" onclick="handleAction(event, 'Abrindo Avaliações Google', 'google')">
         <i class="fab fa-google"></i> Avaliar no Google
     </a>
 
     <div class="social-row">
-        <!-- Configurar o número do WhatsApp da Confeitaria abaixo -->
         <a href="https://wa.me/5500000000000" class="icon-btn wa" onclick="handleAction(event, 'Abrindo WhatsApp', 'whatsapp')"><i class="fab fa-whatsapp"></i></a>
-        <!-- Configurar o telefone abaixo -->
         <a href="tel:00000000000" class="icon-btn tel" onclick="handleAction(event, 'Ligando para Confeitaria', 'phone')"><i class="fas fa-phone"></i></a>
-        <!-- Instagram já atualizado para o cliente correto -->
         <a href="https://www.instagram.com/cerejadobolo.2019/" class="icon-btn ig" onclick="handleAction(event, 'Acessando Instagram', 'instagram')"><i class="fab fa-instagram"></i></a>
-        <!-- Configurar link do Google Maps para o endereço físico se houver -->
         <a href="http://maps.google.com" class="icon-btn maps" onclick="handleAction(event, 'Traçando Rota para Confeitaria', 'location-dot')"><i class="fas fa-location-dot"></i></a>
     </div>
 
@@ -197,19 +191,11 @@
 <audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
 <script>
-    // CONFIGURAÇÃO DO PALCO DINÂMICA PARA CONFEITARIA
-    // Renomeie suas imagens de bolos/doces para bolo1.png, bolo2.png, etc., ou mude os nomes abaixo.
+    // CONFIGURAÇÃO DO CARROSSEL DE EXATAMENTE 3 IMAGENS
     const stageData = [
-        { type: 'image', src: 'bolo1.png', alt: 'Bolo Decorado 1' },
-        { type: 'phrase', text: 'Feito com <b>Amor</b>' },
-        { type: 'image', src: 'bolo2.png', alt: 'Doces Gourmet' },
-        { type: 'phrase', text: 'Ingredientes <b>Premium</b>' },
-        { type: 'image', src: 'bolo3.png', alt: 'Bolo Decorado 2' },
-        { type: 'phrase', text: 'O toque que sua festa <b>merece</b>' },
-        { type: 'image', src: 'bolo4.png', alt: 'Detalhes' },
-        { type: 'phrase', text: 'Seu momento mais <b>doce</b>' },
-        { type: 'image', src: 'bolo5.png', alt: 'Bolo Festivo' },
-        { type: 'phrase', text: 'Encomendas <b>Personalizadas</b>' }
+        { src: 'bolo1.png', alt: 'Bolo Decorado 1' },
+        { src: 'bolo2.png', alt: 'Doces Finos Gourmet' },
+        { src: 'bolo3.png', alt: 'Bolo de Festa Cereja' }
     ];
 
     const stage = document.getElementById('dynamicStage');
@@ -219,24 +205,17 @@
         stage.innerHTML = '';
         const data = stageData[currentIndex];
 
-        if (data.type === 'image') {
-            const img = document.createElement('img');
-            img.src = data.src;
-            img.alt = data.alt;
-            img.className = 'stage-item';
-            stage.appendChild(img);
-            
-            setTimeout(() => img.classList.add('animate-in'), 100);
-            setTimeout(nextStep, 4000); 
-        } else {
-            const p = document.createElement('p');
-            p.innerHTML = data.text;
-            p.className = 'stage-phrase';
-            stage.appendChild(p);
-            
-            setTimeout(() => p.classList.add('active'), 100);
-            setTimeout(nextStep, 3000);
-        }
+        const img = document.createElement('img');
+        img.src = data.src;
+        img.alt = data.alt;
+        img.className = 'stage-item';
+        stage.appendChild(img);
+        
+        // Efeito: Começa em 0.1 de escala e vai para 1 (Cresce dinamicamente)
+        setTimeout(() => img.classList.add('animate-in'), 50);
+        
+        // Mantém a imagem em exibição por 4 segundos antes de transicionar
+        setTimeout(nextStep, 4000); 
     }
 
     function nextStep() {
@@ -244,9 +223,10 @@
         runStageCycle();
     }
 
+    // Iniciar Carrosel
     runStageCycle();
 
-    // FUNÇÕES DO MODAL E REDIRECIONAMENTO
+    // INTERAÇÕES DO LINK (MODAL E SONS)
     let redirectTimer;
     const sound = document.getElementById('click-sound');
 
