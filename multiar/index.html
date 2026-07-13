@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação - Sua Empresa</title>
+    <title>Avaliação - MultiAr Ar Condicionado</title>
+    <!-- Font Awesome para os ícones das redes sociais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,7 +15,7 @@
         }
 
         body {
-            background-color: #f4f6f9;
+            background-color: #f0f4f8; /* Azul bem claro para lembrar frescor */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -35,54 +36,58 @@
 
         /* Topo: Logo da Empresa e Setas */
         .header-empresa {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             position: relative;
         }
 
         .setas {
-            font-size: 24px;
-            color: #4285F4;
-            margin-bottom: 5px;
+            font-size: 26px;
+            color: #007acc; /* Azul ar condicionado */
+            margin-bottom: 8px;
             animation: bounce 1.5s infinite;
         }
 
         .logo-empresa {
-            max-width: 150px;
+            max-width: 160px;
             height: auto;
-            border-radius: 10px;
+            border-radius: 12px;
+            /* Se não tiver logo em imagem ainda, um efeito shadow bacana */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
         }
 
         .nome-empresa {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0b3c5d; /* Azul escuro corporativo */
+            margin-top: 12px;
+            letter-spacing: 0.5px;
         }
 
         /* Elemento Pulsante: Dê sua avaliação */
         .txt-avaliacao {
             font-size: 20px;
             font-weight: bold;
-            color: #e53935;
-            margin: 20px 0;
+            color: #d32f2f; /* Vermelho para chamar atenção */
+            margin: 25px 0 15px 0;
             text-transform: uppercase;
+            letter-spacing: 1px;
             animation: pulsar-texto 1.5s infinite alternate;
         }
 
         /* Botão do Google */
         .btn-google {
             background-color: white;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
             border-radius: 30px;
-            padding: 12px 25px;
+            padding: 14px 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
-            color: #5f6368;
+            color: #4a4a4a;
             font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
             transition: transform 0.2s;
             width: 85%;
             margin-bottom: 15px;
@@ -95,81 +100,82 @@
 
         /* Botão Amarelo Pulsante */
         .btn-amarelo {
-            background-color: #fbc02d;
+            background-color: #ffcc00; /* Amarelo vivo de destaque */
             color: #000;
             border: none;
             border-radius: 30px;
-            padding: 15px 25px;
+            padding: 16px 25px;
             font-size: 16px;
             font-weight: bold;
             text-decoration: none;
             width: 85%;
-            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
             animation: pulsar-botao 2s infinite;
             display: inline-block;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        /* Redes Sociais (Estilo similar ao padrão de links integrados) */
+        /* Redes Sociais no rodapé */
         .redes-sociais {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: auto; /* Empurra para baixo se houver espaço */
-            padding-bottom: 30px;
+            margin-top: auto; 
+            padding-bottom: 35px;
         }
 
         .social-icon {
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background-color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #555;
-            font-size: 20px;
+            color: #0b3c5d;
+            font-size: 22px;
             text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
             transition: all 0.3s;
         }
 
         .social-icon:hover {
-            transform: translateY(-3px);
-            color: #4285F4;
+            transform: translateY(-4px);
+            background-color: #007acc;
+            color: #fff;
         }
 
         /* Rodapé ImpulsoWeb 10 */
         .rodape {
             width: 100%;
             font-size: 12px;
-            color: #777;
-            padding: 15px 0;
-            border-top: 1px solid #e0e0e0;
+            color: #666;
+            padding: 18px 0;
+            border-top: 1px solid #dce4ec;
             background-color: #fff;
         }
 
         .rodape a {
-            color: #4285F4;
+            color: #007acc;
             text-decoration: none;
             font-weight: bold;
         }
 
-        /* --- ANIMAÇÕES --- */
+        /* --- ANIMAÇÕES OTIMIZADAS --- */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-6px); }
         }
 
         @keyframes pulsar-texto {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.08); opacity: 1; }
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.06); opacity: 1; }
         }
 
         @keyframes pulsar-botao {
-            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 4px 25px rgba(251, 192, 45, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4); }
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); }
+            50% { transform: scale(1.04); box-shadow: 0 4px 25px rgba(255, 204, 0, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); }
         }
     </style>
 </head>
@@ -177,30 +183,38 @@
 
     <div class="container">
         
+        <!-- Topo com indicação visual para a marca -->
         <div class="header-empresa">
             <div class="setas">▼ ▼</div>
-            <img src="https://via.placeholder.com/150" alt="Logo da Empresa" class="logo-empresa">
-            <div class="nome-empresa">Nome da Empresa</div>
+            <!-- Substitua pelo link da imagem oficial da MultiAr se houver -->
+            <img src="https://via.placeholder.com/160x160/0b3c5d/ffffff?text=MultiAr" alt="Logo MultiAr" class="logo-empresa">
+            <div class="nome-empresa">MultiAr</div>
         </div>
 
+        <!-- Texto Pulsante -->
         <div class="txt-avaliacao">Dê sua avaliação</div>
 
+        <!-- Link Principal do Google -->
+        <!-- Insira o link de avaliação da MultiAr no lugar do '#' -->
         <a href="#" class="btn-google" target="_blank">
             <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google">
             Avaliar no Google
         </a>
 
-        <a href="#" class="btn-amarelo">Clique aqui para Avaliar</a>
+        <!-- Botão Amarelo de Destaque Embaixo -->
+        <a href="#" class="btn-amarelo">CLIQUE AQUI PARA AVALIAR</a>
 
+        <!-- Redes Sociais Estilizadas -->
         <div class="redes-sociais">
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fas fa-globe"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
         </div>
 
     </div>
 
+    <!-- Rodapé padrão ImpulsoWeb 10 -->
     <footer class="rodape">
         Desenvolvido por <a href="https://impulsoweb10.com.br" target="_blank">ImpulsoWeb 10</a>
     </footer>
