@@ -1,230 +1,346 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação - MultiAr</title>
-    <!-- Font Awesome para os ícones das redes sociais -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Reset e Estilo Geral (Inspirado no Sonat Music) */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalie a MultiAr | Climatização Premium ⭐⭐⭐⭐⭐</title>
+<meta name="author" content="ImpulsoWeb10">
+<meta name="description" content="Sua avaliação é o nosso ar fresco! Deixe seu feedback para a MultiAr Ar Condicionado e ajude-nos a climatizar mais lares e empresas.">
+<meta name="keywords" content="MultiAr, Ar Condicionado, Instalação Ar Condicionado, Avaliação Google, Climatização">
+<meta property="og:title" content="Avalie a MultiAr ⭐⭐⭐⭐⭐">
+<meta property="og:description" content="Sua nota 5 estrelas é o nosso maior prêmio. Clique e avalie!">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --ice: #EAF5F8;
+    --frost: #FFFFFF;
+    --ocean: #0B3D5C;
+    --ocean-deep: #072A40;
+    --cyan: #00B4D8;
+    --cyan-soft: #7FDBEF;
+    --steel: #5B7285;
+    --coral: #FF6B4A;
+    --coral-dark: #E5502D;
+  }
 
-        body {
-            background-color: #0d0d0d; /* Fundo escuro premium */
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px 15px;
-        }
+  *{box-sizing:border-box; margin:0; padding:0;}
 
-        .container {
-            max-width: 450px;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 30px;
-        }
+  body{
+    font-family:'Inter', sans-serif;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(0,180,216,0.18), transparent 55%),
+      linear-gradient(180deg, var(--ice) 0%, #DDEEF3 100%);
+    color:var(--ocean);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 18px;
+    overflow-x:hidden;
+    position:relative;
+  }
 
-        /* Topo: Setas e Logo MultiAr */
-        .header-empresa {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  /* Cooling ripple rings behind the hero */
+  .ripples{
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:120vmax; height:120vmax;
+    pointer-events:none;
+    z-index:0;
+  }
+  .ripples span{
+    position:absolute;
+    top:50%; left:50%;
+    width:280px; height:280px;
+    border:1.5px solid rgba(0,180,216,0.22);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    animation:ripple 6s ease-out infinite;
+  }
+  .ripples span:nth-child(2){animation-delay:1.5s;}
+  .ripples span:nth-child(3){animation-delay:3s;}
+  .ripples span:nth-child(4){animation-delay:4.5s;}
+  @keyframes ripple{
+    0%{width:120px; height:120px; opacity:0.9;}
+    100%{width:1400px; height:1400px; opacity:0;}
+  }
 
-        .setas {
-            font-size: 28px;
-            color: #00a8ff; /* Azul neon sutil para combinar com Ar Condicionado */
-            margin-bottom: 10px;
-            animation: bounce 1.3s infinite;
-        }
+  .card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:460px;
+    background:var(--frost);
+    border-radius:28px;
+    padding:44px 32px 32px;
+    text-align:center;
+    box-shadow:0 30px 60px -20px rgba(11,61,92,0.35), 0 0 0 1px rgba(255,255,255,0.6) inset;
+  }
 
-        .logo-empresa {
-            max-width: 140px;
-            height: auto;
-            object-fit: contain;
-            /* Sombra neon suave atrás da logo */
-            filter: drop-shadow(0px 4px 10px rgba(0, 168, 255, 0.3)); 
-        }
+  .logo-wrap{
+    width:96px; height:96px;
+    margin:0 auto 18px;
+    border-radius:22px;
+    background:linear-gradient(145deg, var(--ocean) 0%, var(--ocean-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 24px -8px rgba(11,61,92,0.5);
+  }
+  .logo-wrap svg{width:52px; height:52px;}
 
-        .nome-empresa {
-            font-size: 26px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-top: 15px;
-            letter-spacing: 1px;
-        }
+  .brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:2rem;
+    letter-spacing:-0.02em;
+    color:var(--ocean-deep);
+  }
+  .brand span{color:var(--cyan);}
 
-        /* Texto Pulsante: Dê sua avaliação */
-        .txt-avaliacao {
-            font-size: 22px;
-            font-weight: 800;
-            color: #ff3838; /* Vermelho vibrante que se destaca no escuro */
-            margin: 25px 0;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            animation: pulsar-texto 1.2s infinite alternate;
-        }
+  .tagline{
+    font-size:0.95rem;
+    color:var(--steel);
+    margin-top:6px;
+    font-weight:500;
+  }
 
-        /* Botão do Google */
-        .btn-google {
-            background-color: #ffffff;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #333333;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
-            width: 90%;
-            margin-bottom: 15px;
-            transition: transform 0.2s;
-        }
+  .divider{
+    width:40px; height:3px;
+    background:var(--cyan);
+    border-radius:3px;
+    margin:20px auto;
+  }
 
-        .btn-google img {
-            width: 24px;
-            height: 24px;
-        }
+  .prompt{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.15rem;
+    font-weight:600;
+    color:var(--ocean);
+    margin-bottom:14px;
+  }
 
-        /* Botão Amarelo Pulsante (Embaixo do Google) */
-        .btn-amarelo {
-            background-color: #ffd32a; /* Amarelo vivo estilo a referência */
-            color: #000000;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 30px;
-            font-size: 16px;
-            font-weight: 800;
-            text-decoration: none;
-            width: 90%;
-            text-transform: uppercase;
-            box-shadow: 0 4px 20px rgba(255, 211, 42, 0.4);
-            animation: pulsar-botao 2s infinite;
-            display: inline-block;
-            margin-bottom: 40px;
-        }
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin:14px 0 26px;
+  }
+  .stars svg{
+    width:34px; height:34px;
+    fill:#DCE7EC;
+    cursor:pointer;
+    transition:transform 0.2s ease;
+  }
+  .stars svg.lit{
+    fill:var(--coral);
+    animation:pop 0.4s ease;
+  }
+  .stars svg:hover{transform:scale(1.15);}
+  @keyframes pop{
+    0%{transform:scale(0.6);}
+    60%{transform:scale(1.3);}
+    100%{transform:scale(1);}
+  }
 
-        /* Botões de Redes Sociais iguaizinhos aos da página indicada */
-        .redes-sociais {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: auto; /* Empurra para a parte inferior */
-            padding-bottom: 40px;
-        }
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    padding:16px 20px;
+    background:linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+    color:#fff;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    border-radius:14px;
+    box-shadow:0 14px 24px -10px rgba(229,80,45,0.55);
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+    border:none;
+    cursor:pointer;
+  }
+  .cta:hover{transform:translateY(-2px); box-shadow:0 18px 30px -10px rgba(229,80,45,0.6);}
+  .cta:active{transform:translateY(0);}
 
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #1a1a1a; /* Fundo escuro pros botões das redes */
-            border: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 22px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+  .address{
+    margin-top:22px;
+    font-size:0.88rem;
+    color:var(--steel);
+    line-height:1.5;
+  }
 
-        .social-icon:hover {
-            transform: translateY(-5px);
-            background-color: #ffffff;
-            color: #0d0d0d;
-        }
+  .whatsapp-cta{
+    margin-top:28px;
+    padding:16px;
+    background:var(--ice);
+    border-radius:16px;
+    font-size:0.85rem;
+    color:var(--ocean);
+    line-height:1.5;
+  }
+  .whatsapp-cta a{
+    color:var(--cyan);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1.5px solid var(--cyan);
+  }
 
-        /* Rodapé padrão igual ImpulsoWeb 10 */
-        .rodape {
-            width: 100%;
-            font-size: 11px;
-            color: #666666;
-            padding: 20px 0 10px 0;
-            border-top: 1px solid #1a1a1a;
-            background-color: #0d0d0d;
-            letter-spacing: 0.5px;
-        }
+  .footer{
+    margin-top:26px;
+    font-size:0.75rem;
+    color:#9AAAB6;
+  }
+  .footer strong{color:var(--steel);}
 
-        .rodape a {
-            color: #ffd32a; /* Link amarelo combinando com o padrão de rodapé */
-            text-decoration: none;
-            font-weight: bold;
-        }
+  /* Modal */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(7,42,64,0.75);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:10;
+  }
+  .modal-overlay.active{display:flex;}
+  .modal-box{
+    background:#fff;
+    border-radius:20px;
+    padding:36px 30px;
+    text-align:center;
+    max-width:300px;
+  }
+  .spinner{
+    width:48px; height:48px;
+    border:4px solid var(--ice);
+    border-top-color:var(--cyan);
+    border-radius:50%;
+    margin:0 auto 16px;
+    animation:spin 0.9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .modal-box p{font-weight:600; color:var(--ocean);}
+  .modal-box span{font-size:0.8rem; color:var(--steel); display:block; margin-top:4px;}
 
-        /* --- ANIMAÇÕES --- */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        @keyframes pulsar-texto {
-            0% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 5px rgba(255,56,56,0.3); }
-            100% { transform: scale(1.06); opacity: 1; text-shadow: 0 0 15px rgba(255,56,56,0.7); }
-        }
-
-        @keyframes pulsar-botao {
-            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 211, 42, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 4px 25px rgba(255, 211, 42, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 211, 42, 0.4); }
-        }
-    </style>
+  @media (prefers-reduced-motion: reduce){
+    .ripples span, .stars svg.lit, .spinner{animation:none;}
+  }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Topo da página com setas apontando para a logo -->
-        <div class="header-empresa">
-            <div class="setas">▼ ▼</div>
-            <!-- Substitua pela imagem real da logo da MultiAr -->
-            <img src="https://via.placeholder.com/150x150/1a1a1a/ffffff?text=MultiAr" alt="Logo MultiAr" class="logo-empresa">
-            <div class="nome-empresa">MultiAr</div>
-        </div>
+<div class="ripples"><span></span><span></span><span></span><span></span></div>
 
-        <!-- Texto Pulsante -->
-        <div class="txt-avaliacao">Dê sua avaliação</div>
+<main class="card">
+  <div class="logo-wrap">
+    <!-- Simple AC fan / snowflake icon -->
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2V22M12 2L9.5 5M12 2L14.5 5M12 22L9.5 19M12 22L14.5 19" stroke="#7FDBEF" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M2 12H22M2 12L5 9.5M2 12L5 14.5M22 12L19 9.5M22 12L19 14.5" stroke="#7FDBEF" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M4.9 4.9L19.1 19.1M4.9 19.1L19.1 4.9" stroke="#00B4D8" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="12" cy="12" r="3" fill="#00B4D8"/>
+    </svg>
+  </div>
 
-        <!-- Botão do Google Centralizado -->
-        <!-- Insira o link da sua avaliação no lugar do '#' -->
-        <a href="#" class="btn-google" target="_blank">
-            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google">
-            Avaliar no Google
-        </a>
+  <h1 class="brand">Multi<span>Ar</span></h1>
+  <p class="tagline">Climatização com precisão e frescor</p>
 
-        <!-- Botão Amarelo Pulsante Logo Embaixo -->
-        <a href="#" class="btn-amarelo">Clique aqui para Avaliar</a>
+  <div class="divider"></div>
 
-        <!-- Botões de redes sociais iguais aos da parte de baixo da referência -->
-        <div class="redes-sociais">
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fas fa-globe"></i></a>
-        </div>
+  <p class="prompt">Sua nota 5 estrelas é o nosso ar fresco!</p>
 
-    </div>
+  <div class="stars" id="starsRow">
+    <svg data-v="1" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-v="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-v="3" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-v="4" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-v="5" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+  </div>
 
-    <!-- Rodapé clássico sobre a impulsoweb 10 -->
-    <footer class="rodape">
-        Desenvolvido por <a href="https://impulsoweb10.com.br" target="_blank">ImpulsoWeb 10</a>
-    </footer>
+  <!-- ⚠️ TROCAR: cole aqui o link real de avaliação do Google da MultiAr -->
+  <button class="cta" id="ctaBtn">
+    AVALIAR NO GOOGLE
+  </button>
+
+  <!-- ⚠️ TROCAR: endereço real da MultiAr -->
+  <p class="address">
+    [Endereço da MultiAr aqui]<br>
+    Itaquaquecetuba - SP
+  </p>
+
+  <div class="whatsapp-cta">
+    <strong>Deseja ter "seu" link personalizado igual a esse</strong>, para ser mais relevante nas pesquisas do Google?
+    <br>
+    <!-- ⚠️ TROCAR: número de WhatsApp se for diferente do usado abaixo -->
+    <a href="https://wa.me/5511954950044?text=Olá! Vi o link da MultiAr e quero um link personalizado premium assim." target="_blank" rel="noopener">SAIBA MAIS AQUI</a>
+  </div>
+
+  <p class="footer">Desenvolvido por <strong>ImpulsoWeb10</strong><br>© 2026 Todos os direitos reservados.</p>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="spinner"></div>
+    <p>Carregando...</p>
+    <span>Aguarde o redirecionamento seguro</span>
+  </div>
+</div>
+
+<script>
+  // ⚠️ TROCAR: cole aqui o link real de avaliação do Google
+  const GOOGLE_REVIEW_LINK = "https://g.page/r/SEU-LINK-AQUI/review";
+
+  const stars = document.querySelectorAll('#starsRow svg');
+  const ctaBtn = document.getElementById('ctaBtn');
+  const modalOverlay = document.getElementById('modalOverlay');
+  let selected = 0;
+
+  function lightStars(count){
+    stars.forEach(s => {
+      const v = parseInt(s.dataset.v);
+      s.classList.toggle('lit', v <= count);
+    });
+  }
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selected = parseInt(star.dataset.v);
+      lightStars(selected);
+      fireConfetti();
+    });
+    star.addEventListener('mouseenter', () => lightStars(parseInt(star.dataset.v)));
+    star.addEventListener('mouseleave', () => lightStars(selected));
+  });
+
+  function fireConfetti(){
+    confetti({
+      particleCount: 60,
+      spread: 65,
+      startVelocity: 32,
+      origin: { y: 0.55 },
+      colors: ['#00B4D8', '#7FDBEF', '#FFFFFF', '#0B3D5C']
+    });
+  }
+
+  ctaBtn.addEventListener('click', () => {
+    if(selected === 0){
+      selected = 5;
+      lightStars(5);
+    }
+    fireConfetti();
+    modalOverlay.classList.add('active');
+    setTimeout(() => {
+      window.location.href = GOOGLE_REVIEW_LINK;
+    }, 1400);
+  });
+</script>
 
 </body>
 </html>
