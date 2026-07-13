@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação - Sua Empresa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        /* Topo: Logo da Empresa e Setas */
+        .header-empresa {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .setas {
+            font-size: 24px;
+            color: #4285F4;
+            margin-bottom: 5px;
+            animation: bounce 1.5s infinite;
+        }
+
+        .logo-empresa {
+            max-width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .nome-empresa {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* Elemento Pulsante: Dê sua avaliação */
+        .txt-avaliacao {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+            margin: 20px 0;
+            text-transform: uppercase;
+            animation: pulsar-texto 1.5s infinite alternate;
+        }
+
+        /* Botão do Google */
+        .btn-google {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #5f6368;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            width: 85%;
+            margin-bottom: 15px;
+        }
+
+        .btn-google img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Botão Amarelo Pulsante */
+        .btn-amarelo {
+            background-color: #fbc02d;
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            width: 85%;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4);
+            animation: pulsar-botao 2s infinite;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        /* Redes Sociais (Estilo similar ao padrão de links integrados) */
+        .redes-sociais {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: auto; /* Empurra para baixo se houver espaço */
+            padding-bottom: 30px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #4285F4;
+        }
+
+        /* Rodapé ImpulsoWeb 10 */
+        .rodape {
+            width: 100%;
+            font-size: 12px;
+            color: #777;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+            background-color: #fff;
+        }
+
+        .rodape a {
+            color: #4285F4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulsar-texto {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.08); opacity: 1; }
+        }
+
+        @keyframes pulsar-botao {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 4px 25px rgba(251, 192, 45, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header-empresa">
+            <div class="setas">▼ ▼</div>
+            <img src="https://via.placeholder.com/150" alt="Logo da Empresa" class="logo-empresa">
+            <div class="nome-empresa">Nome da Empresa</div>
+        </div>
+
+        <div class="txt-avaliacao">Dê sua avaliação</div>
+
+        <a href="#" class="btn-google" target="_blank">
+            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google">
+            Avaliar no Google
+        </a>
+
+        <a href="#" class="btn-amarelo">Clique aqui para Avaliar</a>
+
+        <div class="redes-sociais">
+            <a href="#" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" target="_blank"><i class="fas fa-globe"></i></a>
+        </div>
+
+    </div>
+
+    <footer class="rodape">
+        Desenvolvido por <a href="https://impulsoweb10.com.br" target="_blank">ImpulsoWeb 10</a>
+    </footer>
+
+</body>
+</html>
