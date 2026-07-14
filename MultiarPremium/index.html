@@ -21,6 +21,7 @@
     --ocean: #0B3D5C;
     --ocean-deep: #072A40;
     --cyan: #00B4D8;
+    --cyan-neon: #00f0ff; /* Cor neon para efeitos */
     --cyan-soft: #7FDBEF;
     --steel: #5B7285;
     --coral: #FF6B4A;
@@ -31,9 +32,11 @@
 
   body{
     font-family:'Inter', sans-serif;
+    /* Fundo com aura Neon */
     background:
-      radial-gradient(circle at 50% -10%, rgba(0,180,216,0.18), transparent 55%),
-      linear-gradient(180deg, var(--ice) 0%, #DDEEF3 100%);
+      radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.25), transparent 60%),
+      radial-gradient(circle at 50% -10%, rgba(0, 180, 216, 0.3), transparent 50%),
+      linear-gradient(180deg, #072A40 0%, #031420 100%);
     color:var(--ocean);
     min-height:100vh;
     display:flex;
@@ -57,10 +60,11 @@
     position:absolute;
     top:50%; left:50%;
     width:280px; height:280px;
-    border:1.5px solid rgba(0,180,216,0.22);
+    border:1.5px solid rgba(0, 240, 255, 0.15);
     border-radius:50%;
     transform:translate(-50%,-50%);
     animation:ripple 6s ease-out infinite;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.05);
   }
   .ripples span:nth-child(2){animation-delay:1.5s;}
   .ripples span:nth-child(3){animation-delay:3s;}
@@ -79,7 +83,10 @@
     border-radius:28px;
     padding:44px 32px 24px;
     text-align:center;
-    box-shadow:0 30px 60px -20px rgba(11,61,92,0.35), 0 0 0 1px rgba(255,255,255,0.6) inset;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.5), 
+      0 0 40px rgba(0, 240, 255, 0.25), /* Brilho neon externo no card */
+      0 0 0 1px rgba(255,255,255,0.6) inset;
   }
 
   /* Logo com efeito de brilho */
@@ -205,7 +212,7 @@
     );
     transform: rotate(30deg);
     animation: shineEffect 4s infinite ease-in-out;
-    animation-delay: 1.5s; /* Alterna o brilho entre o botão e o logo */
+    animation-delay: 1.5s;
   }
 
   /* Animação do Brilho */
@@ -218,47 +225,15 @@
   .cta:hover{transform:translateY(-2px); box-shadow:0 18px 30px -10px rgba(229,80,45,0.6);}
   .cta:active{transform:translateY(0);}
 
-  .address{
-    margin-top:22px;
-    font-size:0.88rem;
-    color:var(--steel);
-    line-height:1.5;
-  }
-
-  .whatsapp-cta{
-    margin-top:24px;
-    padding:16px;
-    background:var(--ice);
-    border-radius:16px;
-    font-size:0.85rem;
-    color:var(--ocean);
-    line-height:1.5;
-  }
-  .whatsapp-cta a{
-    color:var(--cyan);
-    font-weight:700;
-    text-decoration:none;
-    border-bottom:1.5px solid var(--cyan);
-  }
-
-  /* Seção elegante de Redes Sociais */
+  /* Seção elegante de Redes Sociais - Agora logo abaixo do botão */
   .social-wrapper {
-    margin-top: 28px;
-    padding-top: 18px;
-    border-top: 1px dashed rgba(11, 61, 92, 0.15);
-  }
-  .social-title {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--steel);
-    font-weight: 600;
-    margin-bottom: 12px;
+    margin: 22px auto 10px;
+    padding-top: 4px;
   }
   .social-icons {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
   }
   .social-link {
     display: flex;
@@ -276,7 +251,6 @@
     height: 18px;
     fill: currentColor;
   }
-  /* Cores de hover personalizadas e discretas */
   .social-link:hover {
     transform: translateY(-3px);
     color: #fff;
@@ -288,19 +262,44 @@
   .social-link.gm:hover { background-color: #EA4335; }
   .social-link.tt:hover { background-color: #000000; }
 
-  .footer{
-    margin-top:24px;
-    font-size:0.72rem;
-    color:#9AAAB6;
-    border-top: 1px solid rgba(11, 61, 92, 0.05);
-    padding-top: 16px;
+  .address{
+    margin-top:16px;
+    font-size:0.88rem;
+    color:var(--steel);
+    line-height:1.5;
   }
-  .footer strong{color:var(--steel);}
+
+  .whatsapp-cta{
+    margin-top:22px;
+    padding:16px;
+    background:var(--ice);
+    border-radius:16px;
+    font-size:0.85rem;
+    color:var(--ocean);
+    line-height:1.5;
+  }
+  .whatsapp-cta a{
+    color:var(--cyan);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1.5px solid var(--cyan);
+  }
+
+  /* Rodapé menor, discreto e elegante */
+  .footer{
+    margin-top:22px;
+    font-size:0.68rem; /* Letras menores */
+    color:#A5B4C0;
+    border-top: 1px solid rgba(11, 61, 92, 0.06);
+    padding-top: 14px;
+    letter-spacing: 0.02em;
+  }
+  .footer strong{color:var(--steel); font-weight: 600;}
 
   /* Modal */
   .modal-overlay{
     position:fixed; inset:0;
-    background:rgba(7,42,64,0.75);
+    background:rgba(7,42,64,0.8);
     backdrop-filter:blur(4px);
     display:none;
     align-items:center;
@@ -365,19 +364,7 @@
     AVALIAR NO GOOGLE
   </button>
 
-  <p class="address">
-    [Endereço da MultiAr aqui]<br>
-    Itaquaquecetuba - SP
-  </p>
-
-  <div class="whatsapp-cta">
-    <strong>Deseja ter "seu" link personalizado igual a esse</strong>, para ser mais relevante nas pesquisas do Google?
-    <br>
-    <a href="https://wa.me/5511954950044?text=Olá! Vi o link da MultiAr e quero um link personalizado premium assim." target="_blank" rel="noopener">SAIBA MAIS AQUI</a>
-  </div>
-
   <div class="social-wrapper">
-    <p class="social-title">Acompanhe-nos</p>
     <div class="social-icons">
       <a href="https://wa.me/5511954950044" target="_blank" rel="noopener" class="social-link ws" title="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.967C16.58 2.002 14.109.975 11.487.975c-5.441 0-9.866 4.372-9.87 9.802 0 1.763.486 3.428 1.405 4.896l-.997 3.636 3.734-.975-.112.066z"/></svg>
@@ -395,6 +382,17 @@
         <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.74-3.94-1.74-.22-.21-.42-.45-.61-.7-.01 2.89-.01 5.78-.02 8.67-.06 2.57-.96 5.14-2.91 6.84-2.06 1.84-4.96 2.44-7.58 1.94-2.89-.52-5.41-2.61-6.19-5.46-.94-3.32.42-7.14 3.25-8.94 1.71-1.12 3.8-1.57 5.81-1.35v4.11c-.96-.19-2 .03-2.77.67-.93.75-1.33 1.97-1.17 3.15.15 1.34 1.15 2.49 2.45 2.8 1.48.37 3.16-.27 3.82-1.63.35-.69.41-1.48.4-2.25-.01-4.8-.01-9.61-.01-14.41z"/></svg>
       </a>
     </div>
+  </div>
+
+  <p class="address">
+    [Endereço da MultiAr aqui]<br>
+    Itaquaquecetuba - SP
+  </p>
+
+  <div class="whatsapp-cta">
+    <strong>Deseja ter "seu" link personalizado igual a esse</strong>, para ser mais relevante nas pesquisas do Google?
+    <br>
+    <a href="https://wa.me/5511954950044?text=Olá! Vi o link da MultiAr e quero um link personalizado premium assim." target="_blank" rel="noopener">SAIBA MAIS AQUI</a>
   </div>
 
   <p class="footer">Desenvolvido por <strong>ImpulsoWeb10</strong><br>© 2026 Todos os direitos reservados.</p>
