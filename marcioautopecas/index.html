@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Márcio Auto Peças | Itaquaquecetuba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#121417;
+    --asphalt-2:#1b1e23;
+    --surface:#22262c;
+    --line:#33383f;
+    --hazard:#FFB627;
+    --hazard-dim:#8a6a1d;
+    --steel:#7C8B9E;
+    --off:#F2F1EC;
+    --muted:#9AA2AC;
+    --red:#C0392B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--asphalt);
+    color:var(--off);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .display{font-family:'Oswald', sans-serif; text-transform:uppercase;}
+
+  /* hazard divider */
+  .hazard-strip{
+    height:10px;
+    width:100%;
+    background:repeating-linear-gradient(135deg, var(--hazard) 0 18px, #17191c 18px 36px);
+    opacity:.9;
+  }
+
+  /* background texture */
+  .blueprint{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(124,139,158,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,139,158,0.06) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,20,23,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1180px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:34px; height:34px; border-radius:4px;
+    background:var(--hazard); color:var(--asphalt);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Oswald'; font-weight:700; font-size:18px;
+  }
+  .brand-name{font-family:'Oswald'; font-weight:600; letter-spacing:.5px; font-size:16px;}
+  .brand-name span{color:var(--hazard);}
+  .nav-cta{
+    display:flex; gap:10px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:3px;
+    font-weight:600; font-size:13.5px; letter-spacing:.3px;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-hazard{background:var(--hazard); color:var(--asphalt);}
+  .btn-hazard:hover{box-shadow:0 6px 18px rgba(255,182,39,.25);}
+  .btn-ghost{border-color:var(--line); color:var(--off);}
+  .btn-ghost:hover{border-color:var(--steel);}
+  .btn-sm{padding:8px 14px; font-size:12.5px;}
+
+  /* HERO */
+  .hero{
+    position:relative; z-index:1;
+    max-width:1180px; margin:0 auto; padding:80px 24px 60px;
+    display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--hazard); font-family:'JetBrains Mono'; font-size:12.5px;
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--hazard); display:inline-block;}
+  h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:0.98;
+    font-weight:700;
+    letter-spacing:.5px;
+  }
+  h1 .accent{color:var(--hazard);}
+  .hero-sub{
+    margin-top:22px; color:var(--muted); font-size:16.5px; line-height:1.65; max-width:480px;
+  }
+  .hero-actions{margin-top:34px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  .hero-meta{
+    margin-top:36px; display:flex; gap:28px; flex-wrap:wrap;
+  }
+  .meta-item{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--steel);}
+  .meta-item b{display:block; color:var(--off); font-size:15px; font-family:'Oswald'; letter-spacing:.3px;}
+
+  /* GAUGE - signature element */
+  .gauge-wrap{
+    position:relative; display:flex; flex-direction:column; align-items:center;
+    justify-content:center;
+  }
+  .gauge-card{
+    background:var(--asphalt-2); border:1px solid var(--line); border-radius:10px;
+    padding:34px 30px 26px; width:100%; max-width:340px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 20px 40px rgba(0,0,0,.35);
+  }
+  .gauge-label{
+    text-align:center; font-family:'JetBrains Mono'; font-size:11px; color:var(--muted);
+    letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;
+  }
+  .needle{
+    transform-origin:100px 100px;
+    transform:rotate(68deg);
+    transition:transform 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .gauge-digital{
+    text-align:center; margin-top:6px;
+  }
+  .gauge-digital .num{
+    font-family:'Oswald'; font-weight:700; font-size:42px; color:var(--hazard); letter-spacing:1px;
+    line-height:1;
+  }
+  .gauge-digital .of{font-size:16px; color:var(--muted); font-family:'Inter';}
+  .gauge-stars{margin-top:6px; color:var(--hazard); font-size:15px; letter-spacing:3px;}
+  .gauge-count{margin-top:4px; font-family:'JetBrains Mono'; font-size:11.5px; color:var(--steel);}
+
+  section{position:relative; z-index:1;}
+  .wrap{max-width:1180px; margin:0 auto; padding:70px 24px;}
+  .section-head{margin-bottom:44px; max-width:640px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px); font-weight:600; letter-spacing:.3px;}
+  .section-head p{color:var(--muted); margin-top:12px; font-size:15px; line-height:1.6;}
+
+  /* DIFERENCIAIS */
+  .grid-4{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  .card{
+    background:var(--asphalt-2); padding:28px 22px; min-height:180px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .card .tag{
+    font-family:'JetBrains Mono'; font-size:11px; color:var(--hazard); letter-spacing:1.5px;
+  }
+  .card h3{font-family:'Oswald'; font-size:18px; font-weight:600; letter-spacing:.3px;}
+  .card p{color:var(--muted); font-size:13.8px; line-height:1.55;}
+  .card-icon{
+    width:38px; height:38px; border:1px solid var(--line); border-radius:6px;
+    display:flex; align-items:center; justify-content:center; color:var(--hazard);
+  }
+
+  /* REVIEW CTA */
+  .review-band{
+    background:var(--asphalt-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .review-inner{
+    max-width:1180px; margin:0 auto; padding:70px 24px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center;
+  }
+  .review-stars-big{font-size:30px; color:var(--hazard); letter-spacing:6px; margin-bottom:18px;}
+  .review-inner h2{font-size:clamp(24px,3vw,34px); font-weight:600; line-height:1.2;}
+  .review-inner p{color:var(--muted); margin-top:16px; font-size:15.5px; line-height:1.65; max-width:480px;}
+  .review-cta-card{
+    background:var(--asphalt); border:1px solid var(--hazard-dim); border-radius:10px;
+    padding:36px 30px; text-align:center;
+  }
+  .review-cta-card .g{
+    font-family:'Oswald'; font-size:15px; letter-spacing:1px; color:var(--muted); margin-bottom:6px;
+  }
+  .review-cta-card .rating-row{
+    display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:22px;
+  }
+  .review-cta-card .rating-row .num{font-family:'Oswald'; font-size:34px; font-weight:700; color:var(--hazard);}
+  .review-cta-card .rating-row .stars{color:var(--hazard); font-size:18px; letter-spacing:2px;}
+  .btn-block{width:100%; justify-content:center; padding:15px; font-size:15px;}
+
+  /* LOCATION */
+  .loc-inner{
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:0;
+    border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  .loc-info{
+    background:var(--asphalt-2); padding:40px 34px; display:flex; flex-direction:column; gap:24px;
+  }
+  .loc-row{display:flex; gap:14px;}
+  .loc-row .ic{
+    width:36px; height:36px; flex:none; border-radius:6px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; color:var(--hazard);
+  }
+  .loc-row b{display:block; font-family:'Oswald'; font-size:14.5px; letter-spacing:.5px; margin-bottom:4px;}
+  .loc-row span{color:var(--muted); font-size:14px; line-height:1.55;}
+  .loc-map{min-height:340px; filter:grayscale(.25) contrast(1.05);}
+  .loc-map iframe{width:100%; height:100%; border:0; display:block; min-height:340px;}
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 24px;
+  }
+  .footer-inner{
+    max-width:1180px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  .footer-inner .mono{color:var(--steel); font-size:12px;}
+  .footer-brand{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:13px;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr; padding-top:50px;}
+    .grid-4{grid-template-columns:repeat(2,1fr);}
+    .review-inner{grid-template-columns:1fr;}
+    .loc-inner{grid-template-columns:1fr;}
+    .loc-map{min-height:260px;}
+    .loc-map iframe{min-height:260px;}
+    .nav-cta .btn span.full{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="blueprint"></div>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div class="brand-name">MÁRCIO <span>AUTO PEÇAS</span></div>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://wa.me/551146486034" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-hazard btn-sm" href="https://search.google.com/local/writereview?placeid=ChIJfchNjlV8zpQRJgvmhecdCpE" target="_blank" rel="noopener">★ Avaliar</a>
+    </div>
+  </div>
+  <div class="hazard-strip"></div>
+</header>
+
+<section class="hero">
+  <div class="reveal in">
+    <div class="eyebrow">Itaquaquecetuba · Jardim Caiubi</div>
+    <h1>Peça certa.<br>Na hora <span class="accent">certa.</span></h1>
+    <p class="hero-sub">Autopeças para todas as marcas, com estoque de verdade e atendimento de quem entende de carro. Há quase 30 anos abastecendo garagens e oficinas de Itaquaquecetuba.</p>
+    <div class="hero-actions">
+      <a class="btn btn-hazard" href="https://wa.me/551146486034" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-ghost" href="#localizacao">Como chegar</a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">Seg–Sáb<b>8h – 18h</b></div>
+      <div class="meta-item">Domingo<b>8h – 13h</b></div>
+      <div class="meta-item">Telefone<b>(11) 4648-6034</b></div>
+    </div>
+  </div>
+
+  <div class="gauge-wrap reveal in">
+    <div class="gauge-card">
+      <div class="gauge-label">Avaliação no Google</div>
+      <svg viewBox="0 0 200 120" width="100%" height="auto">
+        <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="#33383f" stroke-width="14" stroke-linecap="round"/>
+        <path d="M20,100 A80,80 0 0,1 71,26" fill="none" stroke="#C0392B" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+        <path d="M71,26 A80,80 0 0,1 129,26" fill="none" stroke="#FFB627" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+        <path d="M129,26 A80,80 0 0,1 180,100" fill="none" stroke="#4C8C4A" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+        <g class="needle">
+          <line x1="100" y1="100" x2="100" y2="34" stroke="#F2F1EC" stroke-width="3"/>
+          <circle cx="100" cy="100" r="7" fill="#F2F1EC"/>
+        </g>
+      </svg>
+      <div class="gauge-digital">
+        <span class="num">4.4</span><span class="of">/5.0</span>
+      </div>
+      <div class="gauge-stars">★★★★★</div>
+      <div class="gauge-count">657 AVALIAÇÕES NO GOOGLE</div>
+    </div>
+  </div>
+</section>
+
+<div class="hazard-strip"></div>
+
+<section id="diferenciais">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Por que comprar aqui</div>
+      <h2>Estoque cheio, preço justo, sem enrolação</h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        </div>
+        <div class="tag">VARIEDADE</div>
+        <h3>Peças para todas as marcas</h3>
+        <p>Do popular ao importado, com fornecedores próprios para achar rápido a peça certa.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="tag">PAGAMENTO</div>
+        <h3>Parcela em até 10x sem juros</h3>
+        <p>Cartão, Pix ou carnê — você escolhe a forma que fecha melhor no seu bolso.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </div>
+        <div class="tag">ATENDIMENTO</div>
+        <h3>Quem te atende, entende de carro</h3>
+        <p>Equipe treinada para indicar a peça certa e tirar dúvida na hora, sem enrolação.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+        </div>
+        <div class="tag">TRADIÇÃO</div>
+        <h3>Quase 30 anos em Itaquaquecetuba</h3>
+        <p>Endereço fixo, clientes fiéis e a confiança de quem já compra há anos com a gente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="review-band">
+  <div class="review-inner">
+    <div class="reveal">
+      <div class="review-stars-big">★★★★★</div>
+      <h2>Já é nosso cliente? Deixe sua avaliação no Google.</h2>
+      <p>Leva menos de um minuto e ajuda outros moradores de Itaquaquecetuba a encontrar a Márcio Auto Peças. Sua opinião é a nossa melhor propaganda.</p>
+    </div>
+    <div class="review-cta-card reveal">
+      <div class="g">Google Avaliações</div>
+      <div class="rating-row">
+        <span class="num">4.4</span>
+        <span class="stars">★★★★★</span>
+      </div>
+      <a class="btn btn-hazard btn-block" href="https://search.google.com/local/writereview?placeid=ChIJfchNjlV8zpQRJgvmhecdCpE" target="_blank" rel="noopener">
+        Avaliar no Google agora
+      </a>
+    </div>
+  </div>
+</div>
+
+<section id="localizacao">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Onde estamos</div>
+      <h2>Endereço e horário de funcionamento</h2>
+    </div>
+    <div class="loc-inner reveal">
+      <div class="loc-info">
+        <div class="loc-row">
+          <div class="ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+          </div>
+          <div>
+            <b>Endereço</b>
+            <span>Estr. dos Índios, 120 — Jardim Caiubi<br>Itaquaquecetuba - SP, CEP 08587-000</span>
+          </div>
+        </div>
+        <div class="loc-row">
+          <div class="ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <b>Horário</b>
+            <span>Segunda a Sábado: 8h às 18h<br>Domingo: 8h às 13h</span>
+          </div>
+        </div>
+        <div class="loc-row">
+          <div class="ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <b>Telefone / WhatsApp</b>
+            <span>(11) 4648-6034</span>
+          </div>
+        </div>
+        <a class="btn btn-hazard" style="align-self:flex-start" href="https://www.google.com/maps/dir/?api=1&destination=Estr.+dos+%C3%8Dndios,+120,+Jardim+Caiubi,+Itaquaquecetuba+-+SP,+08587-000" target="_blank" rel="noopener">Traçar rota</a>
+      </div>
+      <div class="loc-map">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=Estr.+dos+%C3%8Dndios,+120,+Jardim+Caiubi,+Itaquaquecetuba+-+SP,+08587-000&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-mark" style="width:26px;height:26px;font-size:13px;">M</div>
+      Márcio Auto Peças · Itaquaquecetuba - SP
+    </div>
+    <div class="mono">ESTR. DOS ÍNDIOS, 120 · (11) 4648-6034</div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:.15});
+  els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
