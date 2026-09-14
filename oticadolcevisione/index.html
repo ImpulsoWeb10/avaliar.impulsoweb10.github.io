@@ -7,6 +7,19 @@
 <meta property="og:title" content="Ótica Dolce Visione | Suzano SP">
 <meta property="og:description" content="Visão com clareza e estilo. Agende seu exame de vista gratuito.">
 <title>Ótica Dolce Visione | Suzano</title>
+
+<!-- PWA / Ícone do app -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f9b911">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dolce Visione">
+<meta name="mobile-web-app-capable" content="yes">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -607,6 +620,13 @@ overlay.addEventListener('click', e => { if (e.target === overlay) closeFaq(); }
 
 // close on ESC
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFaq(); });
+
+// Registro do Service Worker (permite instalar como app / funcionar offline)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 
 </body>
