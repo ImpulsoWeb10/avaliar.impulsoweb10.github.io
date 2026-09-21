@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ9EEX0R5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SJ9EEX0R5J');
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Coxinhas da Diva em Itaquaquecetuba — Salgados sequinhos, quentinhos e deliciosos. Peça já pelo delivery ou retire no local!">
+<meta name="description" content="Coxinhas da Diva em Itaquaquecetuba — Salgados crocantes, quentinhos e deliciosos. Peça já pelo delivery ou retire no local!">
+<meta property="og:title" content="Coxinhas da Diva | Itaquaquecetuba SP">
+<meta property="og:description" content="Salgados e Doces de qualidade. Peça o seu combo ou agende sua entrega!">
 <title>Coxinhas da Diva | Itaquaquecetuba</title>
 
-<!-- Fontes e Estilos -->
+<!-- PWA / Ícone do app -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f9b911">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Coxinhas da Diva">
+<meta name="mobile-web-app-capable" content="yes">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; width: 100%; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #1a0808;
-  color: #fff8f0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem 1rem;
-  overflow-x: hidden;
-  position: relative;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#1a0808;
+  color:#fff8f0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem 1rem;
+  overflow-x:hidden;
+  position:relative;
 }
 
-/* Fundo com efeito radial apetitoso */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(229, 57, 53, 0.2) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255, 152, 0, 0.15) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+/* Fundo com efeito iluminação */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(229,57,53,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,179,0,0.15) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
 }
 
-/* Frame estilo smartphone */
+/* Frame simulação de tela de smartphone */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 410px;
-  background: linear-gradient(175deg, #2c0e0e 0%, #170505 100%);
+  background: linear-gradient(175deg, #2a0b12 0%, #150407 100%);
   border: 1.5px solid rgba(255, 179, 0, 0.3);
   border-radius: 28px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 0 8px rgba(35, 10, 10, 0.8);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 0 8px rgba(35, 10, 15, 0.85);
   padding: 2.2rem 1.5rem 1.8rem;
   display: flex;
   flex-direction: column;
@@ -57,147 +76,274 @@ body::before {
   gap: 1.5rem;
 }
 
-.page { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.3rem; }
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.4rem;width:100%}
 
-/* Logo com efeito glow e brilho */
-.logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+/* Logo Retangular com Pulso e Shimmer */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.8rem}
 
-.logo-frame {
-  position: relative;
-  border-radius: 50%;
-  padding: 4px;
-  background: linear-gradient(45deg, #ffb300, #e53935);
-  box-shadow: 0 0 20px rgba(255, 179, 0, 0.4);
-  animation: pulse-glow 2.5s ease-in-out infinite;
+.logo-frame{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  display:inline-block;
+  animation:logo-pulse 2.6s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(255,179,0,0.5);
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 15px rgba(255, 179, 0, 0.4); }
-  50% { box-shadow: 0 0 25px rgba(255, 179, 0, 0.8); }
+.logo-frame::after{
+  content:'';
+  position:absolute;
+  top:0;left:-110%;
+  width:55%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.6) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  animation:logo-shimmer 2.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
 }
 
-.logo-img {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+@keyframes logo-pulse{
+  0%  {box-shadow:0 0 0 0 rgba(255,179,0,0.6), 0 6px 22px rgba(229,57,53,0.3)}
+  55% {box-shadow:0 0 0 14px rgba(255,179,0,0), 0 6px 22px rgba(229,57,53,0.1)}
+  100%{box-shadow:0 0 0 0 rgba(255,179,0,0),   0 6px 22px rgba(229,57,53,0.3)}
 }
 
-.brand {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
+@keyframes logo-shimmer{
+  0%     {left:-110%}
+  45%,100%{left:160%}
 }
 
-.brand em { color: #ffb300; font-style: normal; }
-.tagline { font-size: 0.82rem; color: #ffcc80; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-
-/* Estrelas de Avaliação */
-.stars-row { display: flex; align-items: center; gap: 0.3rem; justify-content: center; }
-.star { font-size: 1.2rem; color: #ffb300; }
-.rating-text { font-size: 0.78rem; color: #e0d0c0; margin-top: 0.2rem; }
-
-/* Botão Google Pulsante */
-.btn-google {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: #fbbc05; color: #1a0808; font-weight: 700;
-  padding: 0.8rem 1.4rem; border-radius: 50px;
-  font-size: 0.88rem; text-decoration: none;
-  border: none; cursor: pointer; width: 100%; max-width: 270px;
-  justify-content: center; position: relative; overflow: hidden;
-  box-shadow: 0 4px 15px rgba(251, 188, 5, 0.3);
-  transition: transform 0.2s;
+.logo-img{
+  display:block;
+  width:230px;
+  height:auto;
+  max-height:120px;
+  border-radius:16px;
+  border:2px solid rgba(255,179,0,0.45);
+  object-fit:contain;
+  background:#4a0e17;
+  position:relative;
+  z-index:1;
 }
 
-.btn-google::after {
-  content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 2.5s ease-in-out infinite;
+.brand{
+  font-family:'Poppins',sans-serif;
+  font-size:1.8rem;font-weight:700;
+  color:#ffffff;letter-spacing:.02em;line-height:1.1;
 }
+.brand em{color:#ffb300;font-style:normal}
+.tagline{font-size:.82rem;color:#ffcc80;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
 
-@keyframes shimmer { 0% { left: -120%; } 50%, 100% { left: 160%; } }
-.btn-google:hover { transform: translateY(-2px); }
+/* Avaliação / Estrelas */
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.star{font-size:1.15rem;color:#ffb300}
+.rating-text{font-size:.78rem;color:#e8d0c8;margin-top:.15rem}
 
-/* Linha de Redes Sociais / Ações */
-.social-row { display: flex; gap: 0.8rem; justify-content: center; align-items: center; width: 100%; }
-.social-btn { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; text-decoration: none; transition: transform 0.2s; }
-.social-btn:hover { transform: translateY(-3px); }
-.social-icon {
-  width: 48px; height: 48px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+/* Botão Google Avaliar */
+.btn-google{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:#FBBC05;
+  color:#1a0808;font-weight:700;
+  padding:.78rem 1.4rem;
+  border-radius:50px;
+  font-size:.85rem;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;
+  border:none;cursor:pointer;
+  width:100%;max-width:270px;justify-content:center;
+  position:relative;overflow:hidden;
+  animation:pulse-google 2.2s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(251,188,5,.5);
 }
-.social-icon svg { width: 22px; height: 22px; fill: #fff; }
-.social-label { font-size: 0.68rem; color: #d0c0b0; }
-
-/* Link Modal de Dúvidas */
-.faq-link {
-  background: none; border: none; color: #ffb300;
-  font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
-  cursor: pointer; display: flex; align-items: center; gap: 0.35rem;
-  text-decoration: underline; transition: opacity 0.2s;
+.btn-google::after{
+  content:'';
+  position:absolute;
+  top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg);
+  animation:shimmer 2.2s ease-in-out infinite;
 }
-.faq-link:hover { opacity: 0.8; }
+@keyframes pulse-google{
+  0%{box-shadow:0 0 0 0 rgba(251,188,5,.45),0 4px 15px rgba(251,188,5,.25)}
+  60%{box-shadow:0 0 0 10px rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.1)}
+  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.25)}
+}
+@keyframes shimmer{
+  0%{left:-120%}
+  55%,100%{left:160%}
+}
+.btn-google svg{width:16px;height:16px;flex-shrink:0}
+.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
+
+/* Grade de Botões de Ação Elegantes */
+.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center;width:100%}
+.social-btn{
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  text-decoration:none;
+  transition:transform .22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.social-btn:hover{transform:translateY(-4px)}
+.social-icon{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.18);
+  box-shadow:0 6px 16px rgba(0,0,0,0.3);
+  transition:border-color .2s,box-shadow .2s;
+}
+.social-btn:hover .social-icon{
+  border-color:rgba(255,215,0,.6);
+  box-shadow:0 8px 20px rgba(229,57,53,.35);
+}
+.social-icon svg{width:22px;height:22px}
+.social-label{font-size:.68rem;color:#dfc0b5;font-weight:500;letter-spacing:.02em}
+
+/* FAQ link */
+.faq-link{
+  background:none;border:none;
+  color:#ffb300;
+  font-size:.84rem;font-family:'DM Sans',sans-serif;
+  cursor:pointer;letter-spacing:.03em;
+  display:flex;align-items:center;gap:.35rem;
+  text-decoration:none;
+  transition:opacity .2s;
+  padding:.2rem .4rem;
+  border-radius:4px;
+}
+.faq-link:hover{opacity:.8}
+.faq-link svg{width:14px;height:14px}
 
 /* Endereço */
-.address { font-size: 0.78rem; color: #b0a090; line-height: 1.4; }
+.address{font-size:.76rem;color:#b89990;line-height:1.5}
 
-/* Modal Base */
-.overlay {
-  position: fixed; inset: 0; z-index: 100;
-  background: rgba(10, 3, 3, 0.85);
-  backdrop-filter: blur(6px);
-  display: flex; align-items: flex-end; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+/* Footer dentro da moldura */
+.footer{font-size:.66rem;color:#7a5850;margin-top:0.4rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;width:100%;border-top:1px solid rgba(255,179,0,0.15);padding-top:1.2rem}
+.footer-promo{font-size:.72rem;color:#a88078;line-height:1.4;text-align:center}
+.footer-promo a{color:#ffb300;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,179,0,.3);padding-bottom:1px;transition:color .2s}
+.footer-promo a:hover{color:#ffd54f}
+.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.64rem;color:#6d4840}
+.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.65}
+.footer-dev{font-size:.64rem;color:#6d4840}
+.footer-dev a{color:#8c5e54;text-decoration:none;transition:color .2s}
+.footer-dev a:hover{color:#b8857a}
+
+/* ===== MODAL OVERLAY ===== */
+.overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(15,3,5,.85);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
 }
-.overlay.open { opacity: 1; pointer-events: all; }
+.overlay.open{opacity:1;pointer-events:all}
 
-.sheet {
-  background: linear-gradient(175deg, #2c0e0e 0%, #170505 100%);
-  border: 1px solid rgba(255, 179, 0, 0.3);
-  border-radius: 24px 24px 0 0;
-  width: 100%; max-width: 410px;
-  padding: 1.2rem;
-  transform: translateY(100%);
-  transition: transform 0.35s cubic-bezier(0.32, 1, 0.36, 1);
-  position: relative;
+.sheet{
+  background:linear-gradient(175deg,#2a0b12 0%,#150407 100%);
+  border:1px solid rgba(255,179,0,.3);
+  border-bottom:none;
+  border-radius:24px 24px 0 0;
+  width:100%;max-width:410px;
+  padding:0 0 env(safe-area-inset-bottom,0);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.32,1,.36,1);
+  max-height:85vh;
+  overflow-y:auto;
+  position:relative;
 }
-.overlay.open .sheet { transform: translateY(0); }
+.overlay.open .sheet{transform:translateY(0)}
 
-.sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.sheet-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; color: #ffb300; font-weight: 600; }
-.btn-close {
-  background: rgba(255, 255, 255, 0.1); border: none; color: #fff;
-  width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+.sheet-handle{width:36px;height:4px;background:rgba(255,179,0,.3);border-radius:2px;margin:10px auto 0}
+
+.sheet-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.2rem .7rem;
+  border-bottom:1px solid rgba(255,179,0,.15);
+}
+.sheet-title{
+  font-family:'Poppins',sans-serif;
+  font-size:1.1rem;font-weight:600;color:#ffb300;
+}
+.btn-close{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:#dfc0b5;cursor:pointer;
+  width:28px;height:28px;border-radius:50%;
+  font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.btn-close:hover{background:rgba(255,255,255,.16);color:#fff}
+
+/* Lista de Perguntas */
+.faq-list{padding:.5rem 1rem 1.2rem;display:flex;flex-direction:column;gap:.45rem}
+
+.faq-item-btn{
+  width:100%;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,179,0,.15);
+  border-radius:10px;
+  padding:.85rem .9rem;
+  color:#f0d8d0;font-size:.84rem;
+  font-family:'DM Sans',sans-serif;
+  text-align:left;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  transition:all .22s;
+  line-height:1.35;
+}
+.faq-item-btn:hover{
+  background:rgba(255,179,0,.12);
+  border-color:rgba(255,179,0,.4);
+  color:#ffffff;
+  transform:translateX(3px);
+}
+.faq-item-btn svg{flex-shrink:0;opacity:.5;width:13px;height:13px}
+.faq-item-btn:hover svg{opacity:1}
+
+/* Segunda camada (Resposta) */
+.answer-head{
+  display:flex;align-items:center;gap:.7rem;
+  padding:1rem 1.2rem .7rem;
+  border-bottom:1px solid rgba(255,179,0,.15);
+}
+.btn-back{
+  background:rgba(255,179,0,.12);border:1px solid rgba(255,179,0,.25);
+  color:#ffb300;cursor:pointer;
+  width:30px;height:30px;border-radius:50%;
+  font-size:.85rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.btn-back:hover{background:rgba(255,179,0,.25)}
+.answer-title{
+  font-family:'Poppins',sans-serif;
+  font-size:0.95rem;font-weight:600;color:#ffffff;
+  line-height:1.3;flex:1;
 }
 
-/* Modais de Conteúdo */
-.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.faq-item-btn {
-  width: 100%; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,179,0,0.15); border-radius: 10px;
-  padding: 0.85rem; color: #fff; text-align: left; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.85rem;
+.answer-body{padding:1.1rem 1.2rem 1.5rem;text-align:center;}
+.answer-icon{font-size:2.5rem;margin-bottom:.5rem;display:block}
+.answer-text{
+  font-size:.86rem;color:#dfc0b5;line-height:1.6;
+  margin-bottom:1.2rem;
 }
-.faq-item-btn:hover { background: rgba(255,179,0,0.1); }
-
-/* Agradecimento Modal */
-.thanks-body { text-align: center; padding: 1rem 0; }
-.thanks-icon { font-size: 3rem; margin-bottom: 0.5rem; display: block; }
-.thanks-text { font-size: 0.9rem; color: #e0d0c0; margin-bottom: 1.2rem; line-height: 1.5; }
-.btn-confirm {
-  display: inline-block; width: 100%; background: #25d366; color: #fff;
-  padding: 0.8rem; border-radius: 50px; font-weight: bold; text-decoration: none;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+.answer-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;
+  background:linear-gradient(135deg,#25d366,#1aab55);
+  color:#fff;font-weight:700;font-size:.88rem;
+  padding:.85rem;border-radius:50px;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  box-shadow:0 4px 16px rgba(37,211,102,.3);
+  transition:transform .2s,box-shadow .2s;
 }
+.answer-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.answer-cta svg{width:16px;height:16px}
 
-.panel { transition: opacity 0.2s; }
-.panel.hidden { display: none; }
+/* Painéis de transição */
+.panel{transition:opacity .22s ease,transform .22s ease}
+.panel.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;width:100%;transform:translateX(25px)}
+.panel.visible{opacity:1;pointer-events:all;transform:translateX(0)}
+
+.sheet-inner{position:relative;min-height:180px}
 </style>
 </head>
 <body>
@@ -205,137 +351,286 @@ body::before {
 <div class="device-frame">
   <div class="page">
 
-    <!-- Logotipo -->
     <div class="logo-wrap">
       <div class="logo-frame">
-        <!-- Substitua pelo link direto da sua logo se preferir -->
-        <img class="logo-img" src="https://via.placeholder.com/150/e53935/ffffff?text=Coxinhas+da+Diva" alt="Coxinhas da Diva">
+        <img class="logo-img" src="coxinhadadiva.png" alt="Logo Coxinhas da Diva"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-img-fallback" style="display:none; width:230px; height:90px; border-radius:16px; border:2px solid rgba(255,179,0,.45); background:#4a0e17; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.4rem; color:#ffb300; font-weight:700;">Coxinhas da Diva</div>
       </div>
       <div>
         <div class="brand">Coxinhas da <em>Diva</em></div>
-        <div class="tagline">Salgados Especiais & Delivery</div>
+        <div class="tagline">Salgados & Doces · Itaquaquecetuba</div>
       </div>
     </div>
 
-    <!-- Avaliações -->
     <div>
-      <div class="stars-row">
+      <div class="stars-row" aria-label="Avaliação 5 estrelas">
         <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
       </div>
-      <div class="rating-text">4,6 de satisfação! A preferida de Itaquaquecetuba</div>
+      <div class="rating-text">Sua nota 5 estrelas é a nossa maior alegria!</div>
     </div>
 
-    <!-- Botão Modal Avaliar -->
-    <button class="btn-google" onclick="openThanksModal()">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+    <button class="btn-google" onclick="openThanksModal()" aria-label="Avaliar no Google">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
       Avaliar no Google ⭐⭐⭐⭐⭐
     </button>
 
-    <!-- Botões Flutuantes / Sociais -->
-    <div class="social-row">
-      <a href="https://wa.me/5511970463036?text=Olá!%20Quero%20fazer%20um%20pedido%20de%20salgados!" class="social-btn" target="_blank">
-        <div class="social-icon" style="background: #25d366;">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+    <div class="social-row" aria-label="Redes sociais e contato">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/5511970463036?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20fazer%20um%20pedido%20de%20salgados!" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <div class="social-icon" style="background: linear-gradient(135deg, #25d366, #128c7e);">
+          <svg viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </div>
         <span class="social-label">WhatsApp</span>
       </a>
 
-      <a href="https://www.instagram.com/coxinhasdadiva/" class="social-btn" target="_blank">
-        <div class="social-icon" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/coxinhasdadiva/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+        <div class="social-icon" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="#ffffff" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#ffffff" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="#ffffff"/>
+          </svg>
         </div>
         <span class="social-label">Instagram</span>
       </a>
 
-      <a href="https://pedido.anota.ai/loja/coxinhas-da-diva" class="social-btn" target="_blank">
-        <div class="social-icon" style="background: #e53935;">
-          <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.43 3.89 3.39 4.36V22h2.22v-8.64C10.57 12.89 12 11.12 12 9V2h-1v7zm9-7h-2c-1.1 0-2 .9-2 2v8h2V4h1v18h2V4c0-1.1-.9-2-2-2z"/></svg>
+      <!-- Maps -->
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Padre+Joao+Manoel+30+Jardim+Carolina+Itaquaquecetuba+SP" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+        <div class="social-icon" style="background: linear-gradient(135deg, #ea4335, #c5221f);">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ffffff"/>
+            <circle cx="12" cy="9" r="2.5" fill="#ea4335"/>
+          </svg>
+        </div>
+        <span class="social-label">Maps</span>
+      </a>
+
+      <!-- Cardápio / Anota AI -->
+      <a href="https://pedido.anota.ai/loja/coxinhas-da-diva" class="social-btn" target="_blank" rel="noopener" aria-label="Cardápio Digital">
+        <div class="social-icon" style="background: linear-gradient(135deg, #ff9800, #e65100);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            <path d="M12 2v2"/>
+          </svg>
         </div>
         <span class="social-label">Cardápio</span>
       </a>
+
     </div>
 
-    <!-- Link Perguntas Frequentes -->
-    <button class="faq-link" onclick="openFaqModal()">❓ Dúvidas sobre entregas e pedidos?</button>
+    <button class="faq-link" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Tire suas dúvidas
+    </button>
 
-    <!-- Endereço -->
-    <div class="address">
-      📍 Rua Padre João Manoel, 30 - Jd. Carolina<br>
-      Itaquaquecetuba - SP | Atendimento Delivery e Retirada
-    </div>
-
-  </div>
-</div>
-
-<!-- MODAL OVERLAY -->
-<div class="overlay" id="modalOverlay">
-  <div class="sheet">
-    
-    <!-- Painel FAQ / Dúvidas -->
-    <div class="panel hidden" id="panelFaq">
-      <div class="sheet-head">
-        <span class="sheet-title">Dúvidas Frequentes</span>
-        <button class="btn-close" onclick="closeModal()">✕</button>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item-btn">
-          <span>Quais são os tamanhos das porções?</span> 🥟
-        </div>
-        <div class="faq-item-btn">
-          <span>Fazemos entregas em qual região?</span> 🛵
-        </div>
-        <div class="faq-item-btn">
-          <span>Aceitamos encomenda para festas?</span> 🎉
-        </div>
-      </div>
-    </div>
-
-    <!-- Painel Agradecimento (Gatilho do Botão Google) -->
-    <div class="panel hidden" id="panelThanks">
-      <div class="sheet-head">
-        <span class="sheet-title">Sua opinião vale ouro!</span>
-        <button class="btn-close" onclick="closeModal()">✕</button>
-      </div>
-      <div class="thanks-body">
-        <span class="thanks-icon">❤️ Coxinhas da Diva</span>
-        <p class="thanks-text">
-          Agradecemos imensamente por escolher nossos salgados! <br><br>
-          Sua avaliação no Google nos ajuda a continuar entregando salgados quentinhos, crocantes e cheios de sabor.
-        </p>
-        <a href="https://g.page/r/CWR5YPtUJJriEAE/review" target="_blank" class="btn-confirm" onclick="closeModal()">
-          Ir para a Avaliação ⭐
-        </a>
-      </div>
+    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+      <span itemprop="streetAddress">Rua Padre João Manoel, 30</span> · Jd. Carolina<br>
+      <span itemprop="addressLocality">Itaquaquecetuba</span>, <span itemprop="addressRegion">SP</span> · Delivery e Retirada
     </div>
 
   </div>
+
+  <div class="footer">
+    <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
+      <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20das%20Coxinhas%20da%20Diva%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
+    </p>
+    <div class="footer-ssl">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Protegido por SSL
+    </div>
+    <p class="footer-dev">Desenvolvido por <a href="https://avaliar.impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
+  </div>
 </div>
+
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Perguntas frequentes e Informações">
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle" aria-hidden="true"></div>
+
+    <div class="sheet-inner" id="sheetInner">
+
+      <!-- Lista de FAQs -->
+      <div class="panel visible" id="panelList">
+        <div class="sheet-head">
+          <span class="sheet-title">Tire suas dúvidas</span>
+          <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
+        </div>
+        <div class="faq-list" role="list"></div>
+      </div>
+
+      <!-- Resposta do FAQ -->
+      <div class="panel hidden" id="panelAnswer">
+        <div class="answer-head">
+          <button class="btn-back" onclick="backToList()" aria-label="Voltar">←</button>
+          <div class="answer-title" id="answerTitle"></div>
+          <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
+        </div>
+        <div class="answer-body">
+          <span class="answer-icon" id="answerIcon"></span>
+          <p class="answer-text" id="answerText"></p>
+          <a
+            id="answerCta"
+            href="https://wa.me/5511970463036"
+            class="answer-cta"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            <span id="answerCtaText">Pedir pelo WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Modal de Agradecimento antes da Avaliação -->
+      <div class="panel hidden" id="panelThanks">
+        <div class="sheet-head">
+          <span class="sheet-title">Sua opinião vale muito!</span>
+          <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
+        </div>
+        <div class="answer-body">
+          <span class="answer-icon">💛 Coxinhas da Diva</span>
+          <p class="answer-text">
+            Ficamos muito felizes pelo seu carinho! Sua avaliação no Google nos ajuda a levar salgados quentinhos e crocantes para cada vez mais pessoas.
+          </p>
+          <a
+            href="https://www.google.com/search?q=coxinha+da+diva&sca_esv=9828cd16d3c42ece&sxsrf=APpeQntJIRmoCuNtfnk4PS_64Mt9P_6g4Q%3A1789965037042&source=hp&ei=7bKwaq8xgMnWxA-F_dKxDQ&iflsig=ABILxe8AAAAAarDA_VjyhMGdAdRRQD2QadQNjyQe0nD2&ved=0ahUKEwjv28Ox6_6WAxWApJUCHYW-NNYQ4dUDCCQ&uact=5&oq=coxinha+da+diva&gs_lp=Egdnd3Mtd2l6Ig9jb3hpbmhhIGRhIGRpdmEyDRAjGKIHGJ4GGPAFGCcyBhAAGBYYHjIGEAAYFhgeMgIQJjIFEAAY7wVI9zFQxhVYzTBwBHgAkAEAmAGxAaABuQ-qAQQyLjE1uAEDyAEA-AEBmAIVoAKGEagCCsICBxAjGOoCGCfCAhAQIxiiBxieBhjwBRjqAhgnwgIQECMY8AUYngYYogcY6gIYJ8ICBBAjGCfCAgoQABiABBiKBRhDwgIKEC4YgAQYigUYQ8ICBRAAGIAEwgINEAAYgAQYigUYQxi0B8ICDRAjGPAFGJ4GGKIHGCfCAgoQLhgUGIcCGIAEwgIFEC4YgATCAggQABiABBi0B8ICCBAuGMsBGIAEwgIKEAAYgAQYFBiHAsICCxAuGIAEGMcBGK8BwgIKEC4YgAQYFBiHAsICCBAAGIAEGMsBwgILEAAYgAQYywEYtAfCAggQABgWGB4YCsICEBAjGPAFGJ4GGKIHGLACGCfCAgYQABgeGA2YAyLxBVNYqfV0H_VtkgcENC4xN6AHnK0BsgcEMC4xN7gHzRDCBwgyLTE3LjMuMcgHkgGACAE&sclient=gws-wiz#lrd=0x94ce7d5009425bfd:0x334a315650fdfb0f,3,,,,"
+            class="answer-cta"
+            target="_blank"
+            rel="noopener"
+            onclick="closeFaq()"
+          >
+            ⭐ Deixar Avaliação Agora
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <script>
-const overlay = document.getElementById('modalOverlay');
-const panelFaq = document.getElementById('panelFaq');
+const faqs = [
+  {
+    q: 'Como posso fazer meu pedido?',
+    icon: '🥟',
+    a: 'Você pode fazer seu pedido diretamente pelo nosso WhatsApp ou pelo Cardápio Digital Anota AI para receber no conforto de sua casa!',
+    cta: 'Pedir pelo WhatsApp',
+    msg: 'Olá! Gostaria de fazer um pedido de salgados com vocês.'
+  },
+  {
+    q: 'Quais tipos de salgados vocês vendem?',
+    icon: '🍗',
+    a: 'Temos coxinhas crocantes, mini salgados sortidos, kibes recheados, bolinhas de queijo e opções de doces incríveis!',
+    cta: 'Ver Cardápio Completo',
+    msg: 'Olá! Gostaria de saber os sabores de salgados e doces disponíveis hoje.'
+  },
+  {
+    q: 'Vocês fazem entregas na minha região?',
+    icon: '🛵',
+    a: 'Entregamos em Itaquaquecetuba, Arujá e regiões próximas. Entre em contato informando seu endereço para consultar a taxa de entrega.',
+    cta: 'Consultar taxa de entrega',
+    msg: 'Olá! Gostaria de verificar a taxa de entrega para o meu endereço.'
+  },
+  {
+    q: 'Aceitam encomendas para festas e eventos?',
+    icon: '🎉',
+    a: 'Sim! Temos centos de mini salgados fritos na hora para deixar sua festa ainda mais saborosa. Faça seu orçamento antecedido.',
+    cta: 'Solicitar Orçamento de Festa',
+    msg: 'Olá! Gostaria de fazer um orçamento de salgados para evento/festa.'
+  },
+  {
+    q: 'Quais são as formas de pagamento?',
+    icon: '💳',
+    a: 'Aceitamos PIX, cartões de débito e crédito, e dinheiro. Pague com total praticidade no momento do pedido ou na entrega.',
+    cta: 'Fazer Pedido',
+    msg: 'Olá! Quero tirar dúvidas sobre o pagamento e fazer um pedido.'
+  }
+];
+
+const overlay = document.getElementById('overlay');
+const panelList = document.getElementById('panelList');
+const panelAnswer = document.getElementById('panelAnswer');
 const panelThanks = document.getElementById('panelThanks');
 
-function openFaqModal() {
+// Constrói a lista do FAQ
+const list = document.querySelector('.faq-list');
+faqs.forEach((faq, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'faq-item-btn';
+  btn.setAttribute('role', 'listitem');
+  btn.setAttribute('aria-label', faq.q);
+  btn.innerHTML = `
+    <span>${faq.q}</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+  `;
+  btn.onclick = () => showAnswer(i);
+  list.appendChild(btn);
+});
+
+function openFaq() {
   overlay.classList.add('open');
-  panelFaq.classList.remove('hidden');
-  panelThanks.classList.add('hidden');
+  document.body.style.overflow = 'hidden';
+  showList();
 }
 
 function openThanksModal() {
   overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  panelList.classList.add('hidden');
+  panelAnswer.classList.add('hidden');
   panelThanks.classList.remove('hidden');
-  panelFaq.classList.add('hidden');
+  panelThanks.classList.add('visible');
 }
 
-function closeModal() {
+function closeFaq() {
   overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => showList(), 400);
 }
 
-// Fechar modal ao clicar fora
-overlay.addEventListener('click', (e) => {
-  if (e.target === overlay) closeModal();
-});
+function showList() {
+  panelList.classList.remove('hidden');
+  panelList.classList.add('visible');
+  panelAnswer.classList.add('hidden');
+  panelThanks.classList.add('hidden');
+}
+
+function showAnswer(i) {
+  const faq = faqs[i];
+  document.getElementById('answerTitle').textContent = faq.q;
+  document.getElementById('answerIcon').textContent = faq.icon;
+  document.getElementById('answerText').innerHTML = faq.a.replace(/\n/g,'<br>');
+  document.getElementById('answerCtaText').textContent = faq.cta;
+  const ctaEl = document.getElementById('answerCta');
+  ctaEl.href = `https://wa.me/5511970463036?text=${encodeURIComponent(faq.msg)}`;
+
+  panelList.classList.add('hidden');
+  panelThanks.classList.add('hidden');
+  panelAnswer.classList.remove('hidden');
+  panelAnswer.classList.add('visible');
+}
+
+function backToList() {
+  showList();
+}
+
+// Fechar ao clicar fora
+overlay.addEventListener('click', e => { if (e.target === overlay) closeFaq(); });
+
+// Fechar ao pressionar ESC
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFaq(); });
+
+// Registro do Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 
 </body>
