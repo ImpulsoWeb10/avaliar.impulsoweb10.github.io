@@ -35,7 +35,7 @@
 html,body{height:100%;width:100%}
 body{
   font-family:'DM Sans',sans-serif;
-  background:#1a0808;
+  background:#120507;
   color:#fff8f0;
   min-height:100vh;
   display:flex;
@@ -52,22 +52,26 @@ body::before{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(229,57,53,0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,179,0,0.15) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(229,57,53,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 60%);
   pointer-events:none;
   z-index:0;
 }
 
-/* Frame simulação de tela de smartphone */
+/* Frame simulação de tela de smartphone com Luz Neon Branca */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 410px;
   background: linear-gradient(175deg, #2a0b12 0%, #150407 100%);
-  border: 1.5px solid rgba(255, 179, 0, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 28px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 0 8px rgba(35, 10, 15, 0.85);
+  /* Brilho Neon Branco nas bordas */
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.15),
+    inset 0 0 15px rgba(255, 255, 255, 0.1);
   padding: 2.2rem 1.5rem 1.8rem;
   display: flex;
   flex-direction: column;
@@ -76,18 +80,17 @@ body::before{
   gap: 1.5rem;
 }
 
-.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.4rem;width:100%}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.3rem;width:100%}
 
-/* Logo Retangular com Pulso e Shimmer */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.8rem}
+/* Logo Retangular Reduzida (~30% menor) com Pulso Neon Branco */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.6rem}
 
 .logo-frame{
   position:relative;
-  border-radius:18px;
+  border-radius:14px;
   overflow:hidden;
   display:inline-block;
   animation:logo-pulse 2.6s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(255,179,0,0.5);
 }
 
 .logo-frame::after{
@@ -95,7 +98,7 @@ body::before{
   position:absolute;
   top:0;left:-110%;
   width:55%;height:100%;
-  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.6) 50%,transparent 80%);
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.7) 50%,transparent 80%);
   transform:skewX(-18deg);
   animation:logo-shimmer 2.6s ease-in-out infinite;
   pointer-events:none;
@@ -103,9 +106,9 @@ body::before{
 }
 
 @keyframes logo-pulse{
-  0%  {box-shadow:0 0 0 0 rgba(255,179,0,0.6), 0 6px 22px rgba(229,57,53,0.3)}
-  55% {box-shadow:0 0 0 14px rgba(255,179,0,0), 0 6px 22px rgba(229,57,53,0.1)}
-  100%{box-shadow:0 0 0 0 rgba(255,179,0,0),   0 6px 22px rgba(229,57,53,0.3)}
+  0%  {box-shadow:0 0 8px rgba(255,255,255,0.4), 0 4px 15px rgba(0,0,0,0.5)}
+  50% {box-shadow:0 0 20px rgba(255,255,255,0.8), 0 4px 20px rgba(229,57,53,0.3)}
+  100%{box-shadow:0 0 8px rgba(255,255,255,0.4), 0 4px 15px rgba(0,0,0,0.5)}
 }
 
 @keyframes logo-shimmer{
@@ -113,13 +116,14 @@ body::before{
   45%,100%{left:160%}
 }
 
+/* Tamanho reduzido de 230px para 160px (-30%) */
 .logo-img{
   display:block;
-  width:230px;
+  width:160px;
   height:auto;
-  max-height:120px;
-  border-radius:16px;
-  border:2px solid rgba(255,179,0,0.45);
+  max-height:90px;
+  border-radius:12px;
+  border:1.5px solid rgba(255,255,255,0.8);
   object-fit:contain;
   background:#4a0e17;
   position:relative;
@@ -128,18 +132,19 @@ body::before{
 
 .brand{
   font-family:'Poppins',sans-serif;
-  font-size:1.8rem;font-weight:700;
+  font-size:1.6rem;font-weight:700;
   color:#ffffff;letter-spacing:.02em;line-height:1.1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 .brand em{color:#ffb300;font-style:normal}
-.tagline{font-size:.82rem;color:#ffcc80;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.tagline{font-size:.78rem;color:#ffcc80;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
 
 /* Avaliação / Estrelas */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
 .star{font-size:1.15rem;color:#ffb300}
 .rating-text{font-size:.78rem;color:#e8d0c8;margin-top:.15rem}
 
-/* Botão Google Avaliar */
+/* Botão Google Avaliar com Neon sutil */
 .btn-google{
   display:inline-flex;align-items:center;gap:.5rem;
   background:#FBBC05;
@@ -153,20 +158,19 @@ body::before{
   width:100%;max-width:270px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(251,188,5,.5);
 }
 .btn-google::after{
   content:'';
   position:absolute;
   top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
   transform:skewX(-20deg);
   animation:shimmer 2.2s ease-in-out infinite;
 }
 @keyframes pulse-google{
-  0%{box-shadow:0 0 0 0 rgba(251,188,5,.45),0 4px 15px rgba(251,188,5,.25)}
-  60%{box-shadow:0 0 0 10px rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.1)}
-  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.25)}
+  0%{box-shadow:0 0 0 0 rgba(251,188,5,.5), 0 0 10px rgba(255,255,255,0.2)}
+  60%{box-shadow:0 0 0 12px rgba(251,188,5,0), 0 0 15px rgba(255,255,255,0.4)}
+  100%{box-shadow:0 0 0 0 rgba(251,188,5,0), 0 0 10px rgba(255,255,255,0.2)}
 }
 @keyframes shimmer{
   0%{left:-120%}
@@ -186,13 +190,13 @@ body::before{
 .social-icon{
   width:48px;height:48px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  border:1.5px solid rgba(255,255,255,.18);
-  box-shadow:0 6px 16px rgba(0,0,0,0.3);
-  transition:border-color .2s,box-shadow .2s;
+  border:1.5px solid rgba(255,255,255,.4);
+  box-shadow:0 0 10px rgba(255,255,255,0.15), 0 6px 16px rgba(0,0,0,0.4);
+  transition:all .2s ease;
 }
 .social-btn:hover .social-icon{
-  border-color:rgba(255,215,0,.6);
-  box-shadow:0 8px 20px rgba(229,57,53,.35);
+  border-color:#ffffff;
+  box-shadow:0 0 15px rgba(255,255,255,0.6), 0 8px 20px rgba(229,57,53,.35);
 }
 .social-icon svg{width:22px;height:22px}
 .social-label{font-size:.68rem;color:#dfc0b5;font-weight:500;letter-spacing:.02em}
@@ -200,23 +204,28 @@ body::before{
 /* FAQ link */
 .faq-link{
   background:none;border:none;
-  color:#ffb300;
+  color:#ffffff;
   font-size:.84rem;font-family:'DM Sans',sans-serif;
   cursor:pointer;letter-spacing:.03em;
   display:flex;align-items:center;gap:.35rem;
   text-decoration:none;
-  transition:opacity .2s;
-  padding:.2rem .4rem;
-  border-radius:4px;
+  transition:all .2s;
+  padding:.3rem .6rem;
+  border-radius:20px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
-.faq-link:hover{opacity:.8}
+.faq-link:hover{
+  border-color:rgba(255,255,255,0.6);
+  box-shadow:0 0 10px rgba(255,255,255,0.2);
+  color:#ffb300;
+}
 .faq-link svg{width:14px;height:14px}
 
 /* Endereço */
 .address{font-size:.76rem;color:#b89990;line-height:1.5}
 
 /* Footer dentro da moldura */
-.footer{font-size:.66rem;color:#7a5850;margin-top:0.4rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;width:100%;border-top:1px solid rgba(255,179,0,0.15);padding-top:1.2rem}
+.footer{font-size:.66rem;color:#7a5850;margin-top:0.2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;width:100%;border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem}
 .footer-promo{font-size:.72rem;color:#a88078;line-height:1.4;text-align:center}
 .footer-promo a{color:#ffb300;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,179,0,.3);padding-bottom:1px;transition:color .2s}
 .footer-promo a:hover{color:#ffd54f}
@@ -226,10 +235,10 @@ body::before{
 .footer-dev a{color:#8c5e54;text-decoration:none;transition:color .2s}
 .footer-dev a:hover{color:#b8857a}
 
-/* ===== MODAL OVERLAY ===== */
+/* ===== MODAL OVERLAY CORRIGIDO E ELEGANTE ===== */
 .overlay{
   position:fixed;inset:0;z-index:100;
-  background:rgba(15,3,5,.85);
+  background:rgba(10,2,4,.88);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   display:flex;align-items:flex-end;justify-content:center;
@@ -240,49 +249,72 @@ body::before{
 .overlay.open{opacity:1;pointer-events:all}
 
 .sheet{
-  background:linear-gradient(175deg,#2a0b12 0%,#150407 100%);
-  border:1px solid rgba(255,179,0,.3);
+  background:linear-gradient(175deg,#23080e 0%,#120306 100%);
+  border:1.5px solid rgba(255,255,255,0.7);
   border-bottom:none;
   border-radius:24px 24px 0 0;
   width:100%;max-width:410px;
-  padding:0 0 env(safe-area-inset-bottom,0);
+  padding:0;
   transform:translateY(100%);
   transition:transform .4s cubic-bezier(.32,1,.36,1);
   max-height:85vh;
-  overflow-y:auto;
   position:relative;
+  /* Luz Neon Branca no Modal */
+  box-shadow: 0 -5px 25px rgba(255,255,255,0.25);
+  display: flex;
+  flex-direction: column;
 }
 .overlay.open .sheet{transform:translateY(0)}
 
-.sheet-handle{width:36px;height:4px;background:rgba(255,179,0,.3);border-radius:2px;margin:10px auto 0}
+.sheet-handle{width:40px;height:4px;background:rgba(255,255,255,0.4);border-radius:2px;margin:12px auto 4px;flex-shrink: 0;}
 
+.sheet-inner{
+  position:relative;
+  width:100%;
+  overflow-y:auto;
+  padding-bottom: 1.5rem;
+}
+
+/* Painéis de transição organizados (Zero Sobreposição) */
+.panel{
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+.panel.visible{
+  display: flex;
+}
+
+/* Cabeçalho do Modal */
 .sheet-head{
   display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.2rem .7rem;
-  border-bottom:1px solid rgba(255,179,0,.15);
+  padding:0.8rem 1.4rem;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.2);
 }
 .sheet-title{
   font-family:'Poppins',sans-serif;
-  font-size:1.1rem;font-weight:600;color:#ffb300;
+  font-size:1.05rem;font-weight:600;color:#ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
 }
 .btn-close{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-  color:#dfc0b5;cursor:pointer;
-  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);
+  color:#ffffff;cursor:pointer;
+  width:30px;height:30px;border-radius:50%;
   font-size:.9rem;display:flex;align-items:center;justify-content:center;
   transition:all .2s;flex-shrink:0;
 }
-.btn-close:hover{background:rgba(255,255,255,.16);color:#fff}
+.btn-close:hover{background:rgba(255,255,255,.25);box-shadow:0 0 8px rgba(255,255,255,0.5)}
 
 /* Lista de Perguntas */
-.faq-list{padding:.5rem 1rem 1.2rem;display:flex;flex-direction:column;gap:.45rem}
+.faq-list{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.6rem}
 
 .faq-item-btn{
-  width:100%;background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,179,0,.15);
-  border-radius:10px;
-  padding:.85rem .9rem;
-  color:#f0d8d0;font-size:.84rem;
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  padding:.9rem 1rem;
+  color:#f0d8d0;font-size:.85rem;
   font-family:'DM Sans',sans-serif;
   text-align:left;cursor:pointer;
   display:flex;align-items:center;justify-content:space-between;gap:.8rem;
@@ -290,60 +322,57 @@ body::before{
   line-height:1.35;
 }
 .faq-item-btn:hover{
-  background:rgba(255,179,0,.12);
-  border-color:rgba(255,179,0,.4);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.5);
   color:#ffffff;
+  box-shadow:0 0 10px rgba(255,255,255,0.15);
   transform:translateX(3px);
 }
-.faq-item-btn svg{flex-shrink:0;opacity:.5;width:13px;height:13px}
+.faq-item-btn svg{flex-shrink:0;opacity:.6;width:14px;height:14px}
 .faq-item-btn:hover svg{opacity:1}
 
-/* Segunda camada (Resposta) */
+/* Segunda camada (Resposta do Modal) */
 .answer-head{
   display:flex;align-items:center;gap:.7rem;
-  padding:1rem 1.2rem .7rem;
-  border-bottom:1px solid rgba(255,179,0,.15);
+  padding:0.8rem 1.2rem;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.2);
 }
 .btn-back{
-  background:rgba(255,179,0,.12);border:1px solid rgba(255,179,0,.25);
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);
   color:#ffb300;cursor:pointer;
-  width:30px;height:30px;border-radius:50%;
-  font-size:.85rem;display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;
+  font-size:.9rem;display:flex;align-items:center;justify-content:center;
   transition:all .2s;flex-shrink:0;
 }
-.btn-back:hover{background:rgba(255,179,0,.25)}
+.btn-back:hover{background:rgba(255,255,255,.25);box-shadow:0 0 8px rgba(255,255,255,0.4)}
 .answer-title{
   font-family:'Poppins',sans-serif;
   font-size:0.95rem;font-weight:600;color:#ffffff;
   line-height:1.3;flex:1;
 }
 
-.answer-body{padding:1.1rem 1.2rem 1.5rem;text-align:center;}
-.answer-icon{font-size:2.5rem;margin-bottom:.5rem;display:block}
+.answer-body{padding:1.4rem 1.4rem 0.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.answer-icon{font-size:2.4rem;margin-bottom:.6rem;display:block}
 .answer-text{
-  font-size:.86rem;color:#dfc0b5;line-height:1.6;
-  margin-bottom:1.2rem;
+  font-size:.88rem;color:#e8d0c8;line-height:1.6;
+  margin-bottom:1.4rem;
+  word-break: break-word;
 }
 .answer-cta{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   width:100%;
   background:linear-gradient(135deg,#25d366,#1aab55);
   color:#fff;font-weight:700;font-size:.88rem;
-  padding:.85rem;border-radius:50px;
+  padding:.9rem;border-radius:50px;
   text-decoration:none;border:none;cursor:pointer;
   font-family:'DM Sans',sans-serif;
   box-shadow:0 4px 16px rgba(37,211,102,.3);
   transition:transform .2s,box-shadow .2s;
 }
-.answer-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
-.answer-cta svg{width:16px;height:16px}
+.answer-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.5)}
+.answer-cta svg{width:18px;height:18px}
 
-/* Painéis de transição */
-.panel{transition:opacity .22s ease,transform .22s ease}
-.panel.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;width:100%;transform:translateX(25px)}
-.panel.visible{opacity:1;pointer-events:all;transform:translateX(0)}
-
-.sheet-inner{position:relative;min-height:180px}
 </style>
 </head>
 <body>
@@ -355,7 +384,7 @@ body::before{
       <div class="logo-frame">
         <img class="logo-img" src="coxinhadadiva.png" alt="Logo Coxinhas da Diva"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-img-fallback" style="display:none; width:230px; height:90px; border-radius:16px; border:2px solid rgba(255,179,0,.45); background:#4a0e17; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.4rem; color:#ffb300; font-weight:700;">Coxinhas da Diva</div>
+        <div class="logo-img-fallback" style="display:none; width:160px; height:70px; border-radius:12px; border:1.5px solid rgba(255,255,255,.8); background:#4a0e17; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffb300; font-weight:700;">Coxinhas da Diva</div>
       </div>
       <div>
         <div class="brand">Coxinhas da <em>Diva</em></div>
@@ -447,13 +476,14 @@ body::before{
 </div>
 
 
+<!-- Estrutura do Modal Organizada -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Perguntas frequentes e Informações">
   <div class="sheet" id="sheet">
     <div class="sheet-handle" aria-hidden="true"></div>
 
     <div class="sheet-inner" id="sheetInner">
 
-      <!-- Lista de FAQs -->
+      <!-- Painel 1: Lista de FAQs -->
       <div class="panel visible" id="panelList">
         <div class="sheet-head">
           <span class="sheet-title">Tire suas dúvidas</span>
@@ -462,8 +492,8 @@ body::before{
         <div class="faq-list" role="list"></div>
       </div>
 
-      <!-- Resposta do FAQ -->
-      <div class="panel hidden" id="panelAnswer">
+      <!-- Painel 2: Resposta do FAQ -->
+      <div class="panel" id="panelAnswer">
         <div class="answer-head">
           <button class="btn-back" onclick="backToList()" aria-label="Voltar">←</button>
           <div class="answer-title" id="answerTitle"></div>
@@ -485,14 +515,14 @@ body::before{
         </div>
       </div>
 
-      <!-- Modal de Agradecimento antes da Avaliação -->
-      <div class="panel hidden" id="panelThanks">
+      <!-- Painel 3: Agradecimento Avaliação -->
+      <div class="panel" id="panelThanks">
         <div class="sheet-head">
           <span class="sheet-title">Sua opinião vale muito!</span>
           <button class="btn-close" onclick="closeFaq()" aria-label="Fechar">✕</button>
         </div>
         <div class="answer-body">
-          <span class="answer-icon">💛 Coxinhas da Diva</span>
+          <span class="answer-icon">💛</span>
           <p class="answer-text">
             Ficamos muito felizes pelo seu carinho! Sua avaliação no Google nos ajuda a levar salgados quentinhos e crocantes para cada vez mais pessoas.
           </p>
@@ -581,23 +611,21 @@ function openFaq() {
 function openThanksModal() {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  panelList.classList.add('hidden');
-  panelAnswer.classList.add('hidden');
-  panelThanks.classList.remove('hidden');
+  panelList.classList.remove('visible');
+  panelAnswer.classList.remove('visible');
   panelThanks.classList.add('visible');
 }
 
 function closeFaq() {
   overlay.classList.remove('open');
   document.body.style.overflow = '';
-  setTimeout(() => showList(), 400);
+  setTimeout(() => showList(), 300);
 }
 
 function showList() {
-  panelList.classList.remove('hidden');
+  panelAnswer.classList.remove('visible');
+  panelThanks.classList.remove('visible');
   panelList.classList.add('visible');
-  panelAnswer.classList.add('hidden');
-  panelThanks.classList.add('hidden');
 }
 
 function showAnswer(i) {
@@ -609,9 +637,8 @@ function showAnswer(i) {
   const ctaEl = document.getElementById('answerCta');
   ctaEl.href = `https://wa.me/5511970463036?text=${encodeURIComponent(faq.msg)}`;
 
-  panelList.classList.add('hidden');
-  panelThanks.classList.add('hidden');
-  panelAnswer.classList.remove('hidden');
+  panelList.classList.remove('visible');
+  panelThanks.classList.remove('visible');
   panelAnswer.classList.add('visible');
 }
 
