@@ -24,6 +24,7 @@ body{
   padding:0.8rem 0.5rem;
   overflow-x:hidden;
   position:relative;
+  perspective: 1000px;
 }
 
 /* Background glow subtle */
@@ -38,7 +39,7 @@ body::before{
   z-index:0;
 }
 
-/* Moldura externa com NEON BRANCO e tamanho otimizado para caber na tela */
+/* Moldura externa com NEON BRANCO e Giroscópio 3D */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -58,6 +59,9 @@ body::before{
   align-items: center;
   text-align: center;
   gap: 1.1rem;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 .page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.1rem;width:100%}
@@ -253,7 +257,7 @@ body::before{
 </head>
 <body>
 
-<div class="device-frame">
+<div class="device-frame" id="deviceFrame">
   <div class="page">
 
     <div class="logo-wrap">
@@ -352,6 +356,44 @@ body::before{
     <p class="footer-dev">Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
   </div>
 </div>
+
+<script>
+  const frame = document.getElementById('deviceFrame');
+
+  /* Giroscópio (Celulares) */
+  function handleOrientation(e) {
+    if (e.gamma === null || e.beta === null) return;
+    const x = Math.min(Math.max(e.gamma, -25), 25);
+    const y = Math.min(Math.max(e.beta - 45, -25), 25);
+    frame.style.transform = `rotateY(${x * 0.5}deg) rotateX(${-y * 0.5}deg)`;
+  }
+
+  if (window.DeviceOrientationEvent) {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      window.addEventListener('click', () => {
+        DeviceOrientationEvent.requestPermission().then(state => {
+          if (state === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation);
+          }
+        }).catch(() => {});
+      }, { once: true });
+    } else {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+  }
+
+  /* Fallback interativo para Mouse (Desktop) */
+  document.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+    const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+    frame.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  });
+</script>
 
 </body>
 </html>
