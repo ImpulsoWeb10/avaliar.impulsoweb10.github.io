@@ -21,7 +21,7 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:1.5rem 1rem;
+  padding:0.8rem 0.5rem;
   overflow-x:hidden;
   position:relative;
 }
@@ -38,36 +38,36 @@ body::before{
   z-index:0;
 }
 
-/* Moldura externa com NEON BRANCO e tamanho ampliado */
+/* Moldura externa com NEON BRANCO e tamanho otimizado para caber na tela */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   border: 2px solid #ffffff;
-  border-radius: 28px;
+  border-radius: 24px;
   box-shadow: 
     0 0 10px #ffffff,
     0 0 20px rgba(255, 255, 255, 0.8),
-    0 0 35px rgba(255, 255, 255, 0.4),
-    0 20px 45px rgba(0, 0, 0, 0.6);
-  padding: 2.2rem 1.8rem 1.8rem;
+    0 0 30px rgba(255, 255, 255, 0.35),
+    0 15px 35px rgba(0, 0, 0, 0.6);
+  padding: 1.4rem 1.4rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.6rem;
+  gap: 1.1rem;
 }
 
-.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem;width:100%}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.1rem;width:100%}
 
 /* Logo area */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.8rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
 
 .logo-frame{
   position:relative;
-  border-radius:16px;
+  border-radius:14px;
   overflow:hidden;
   display:inline-block;
   animation:logo-pulse 2.6s ease-in-out infinite;
@@ -97,69 +97,69 @@ body::before{
 
 .logo-img{
   display:block;
-  width:210px;
+  width:180px;
   height:auto;
-  max-height:105px;
-  border-radius:14px;
+  max-height:85px;
+  border-radius:12px;
   border:2px solid rgba(201,169,110,.4);
   object-fit:contain;
   background:rgba(201,169,110,0.06);
   position:relative;z-index:1;
 }
 .logo-img-fallback{
-  width:210px;height:90px;
-  border-radius:14px;
+  width:180px;height:75px;
+  border-radius:12px;
   border:2px solid rgba(201,169,110,.4);
   background:rgba(201,169,110,0.06);
   display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;color:#c9a96e;font-weight:600;
+  font-size:1.6rem;color:#c9a96e;font-weight:600;
   letter-spacing:.08em;
   position:relative;z-index:1;
 }
 .brand{
   font-family:'Cormorant Garamond',serif;
-  font-size:2.1rem;font-weight:600;
+  font-size:1.8rem;font-weight:600;
   color:#f0ece5;letter-spacing:.06em;line-height:1.1;
 }
 .brand em{color:#c9a96e;font-style:italic}
-.tagline{font-size:.88rem;color:#7a96b8;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
+.tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
 
 /* Rating stars */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.25rem;color:#c9a96e}
-.rating-text{font-size:.82rem;color:#7a96b8;margin-top:.15rem}
+.star{font-size:1.15rem;color:#ffd700}
+.rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
 
 /* 4 icon buttons row */
-.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center}
+.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
 .social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  display:flex;flex-direction:column;align-items:center;gap:.25rem;
   text-decoration:none;
   transition:transform .2s;
 }
 .social-btn:hover{transform:translateY(-3px)}
 .social-icon{
-  width:48px;height:48px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  border:1.5px solid rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.2);
   transition:border-color .2s,box-shadow .2s;
 }
-.social-btn:hover .social-icon{border-color:rgba(255,255,255,.3);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:22px;height:22px}
-.social-label{font-size:.7rem;color:#5a7490;letter-spacing:.04em}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.4);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
 
 /* Google button */
 .btn-google{
   display:inline-flex;align-items:center;gap:.5rem;
   background:#FBBC05;
   color:#1a1200;font-weight:700;
-  padding:.8rem 1.5rem;
+  padding:.7rem 1.3rem;
   border-radius:50px;
-  font-size:.9rem;text-decoration:none;
+  font-size:.85rem;text-decoration:none;
   font-family:'DM Sans',sans-serif;
   letter-spacing:.02em;
   border:none;cursor:pointer;
-  width:100%;max-width:280px;justify-content:center;
+  width:100%;max-width:260px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
   box-shadow:0 0 0 0 rgba(251,188,5,.5);
@@ -181,47 +181,74 @@ body::before{
   0%{left:-120%}
   55%,100%{left:160%}
 }
-.btn-google svg{width:18px;height:18px;flex-shrink:0}
+.btn-google svg{width:16px;height:16px;flex-shrink:0}
 .btn-google:hover{background:#fcc419;transform:translateY(-1px)}
 
 /* Address */
-.address{font-size:.8rem;color:#4d6580;line-height:1.5}
+.address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
 
-/* Footer dentro da moldura */
-.footer{font-size:.68rem;color:#2e4255;margin-top:0.4rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;width:100%;border-top:1px solid rgba(201,169,110,0.1);padding-top:1.2rem}
-.footer-promo{font-size:.75rem;color:#4a6070;line-height:1.4;text-align:center}
-.footer-promo a{color:#c9a96e;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(201,169,110,.3);padding-bottom:1px;transition:color .2s}
-.footer-promo a:hover{color:#e8cfa0}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.66rem;color:#2a3a48}
-.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.55}
-.footer-dev{font-size:.66rem;color:#2a3a48}
-.footer-dev a{color:#3a5568;text-decoration:none;transition:color .2s}
-.footer-dev a:hover{color:#5a7890}
-
-/* Banner em faixa pequena passando no rodape */
+/* Banner Infinito passando no rodape */
 .ticker-banner {
   width: 100%;
   overflow: hidden;
-  background: rgba(201, 169, 110, 0.12);
-  border: 1px solid rgba(201, 169, 110, 0.25);
+  background: rgba(201, 169, 110, 0.15);
+  border: 1px solid rgba(201, 169, 110, 0.35);
   border-radius: 8px;
-  padding: 0.4rem 0;
-  margin-top: 0.5rem;
-  white-space: nowrap;
+  padding: 0.35rem 0;
+  display: flex;
 }
-.ticker-text {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker 14s linear infinite;
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: infinite-scroll 18s linear infinite;
+}
+.ticker-item {
   font-size: 0.78rem;
-  color: #c9a96e;
+  color: #fce8bd;
   font-weight: 500;
   letter-spacing: 0.03em;
+  padding-right: 2rem;
+  white-space: nowrap;
 }
-@keyframes ticker {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-100%, 0, 0); }
+@keyframes infinite-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
+
+/* Footer com cores claras e destacadas */
+.footer{
+  font-size:.72rem;
+  color:#d0dce8;
+  margin-top:0.2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.4rem;
+  width:100%;
+  border-top:1px solid rgba(255,255,255,0.15);
+  padding-top:0.9rem;
+}
+.footer-promo{
+  font-size:.78rem;
+  color:#ffffff;
+  line-height:1.4;
+  text-align:center;
+  font-weight:400;
+}
+.footer-promo a{
+  color:#ffe082;
+  text-decoration:none;
+  font-weight:700;
+  border-bottom:1px solid #ffe082;
+  padding-bottom:1px;
+  transition:color .2s;
+}
+.footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
+.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#8ba4c4}
+.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-dev{font-size:.72rem;color:#b0c4de}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
+.footer-dev a:hover{color:#90caf9;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -304,9 +331,12 @@ body::before{
       CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
     </div>
 
-    <!-- Banner faixa em movimento -->
+    <!-- Banner Infinito -->
     <div class="ticker-banner">
-      <div class="ticker-text">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</div>
+      <div class="ticker-track">
+        <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
+        <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
+      </div>
     </div>
 
   </div>
