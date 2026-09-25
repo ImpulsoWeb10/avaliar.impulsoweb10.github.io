@@ -45,48 +45,48 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:1.5rem 1rem;
+  padding:1rem 0.8rem;
   overflow-x:hidden;
   position:relative;
 }
 
-/* Fundo com iluminação Neon Dourado/Vermelho para tema Spartan */
+/* Fundo com iluminação Neon Dourado/Vermelho Forte atrás da moldura */
 body::before{
   content:'';
   position:fixed;
   inset:0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(180, 0, 0, 0.12) 0%, transparent 60%);
+    radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.25) 0%, rgba(212, 175, 55, 0.1) 40%, transparent 70%),
+    radial-gradient(circle at 50% 30%, rgba(255, 0, 0, 0.2) 0%, transparent 60%);
   pointer-events:none;
   z-index:0;
 }
 
-/* Frame estilo Smartphone */
+/* Frame estilo Smartphone com Neon atrás */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 410px;
-  background: linear-gradient(175deg, #141414 0%, #080808 100%);
-  border: 1.5px solid rgba(255, 215, 0, 0.5);
+  background: linear-gradient(175deg, #121212 0%, #060606 100%);
+  border: 1.5px solid rgba(255, 215, 0, 0.6);
   border-radius: 28px;
   box-shadow: 
-    0 0 15px rgba(212, 175, 55, 0.25),
-    0 0 30px rgba(0, 0, 0, 0.8),
-    inset 0 0 15px rgba(255, 215, 0, 0.08);
-  padding: 2.2rem 1.5rem 1.8rem;
+    0 0 25px rgba(255, 215, 0, 0.35),
+    0 0 50px rgba(255, 0, 0, 0.25),
+    inset 0 0 15px rgba(255, 215, 0, 0.1);
+  padding: 1.5rem 1.2rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.3rem;width:100%}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%}
 
 /* Logo Retangular com Shimmer Dourado */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.6rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
 
 .logo-frame{
   position:relative;
@@ -121,9 +121,9 @@ body::before{
 
 .logo-img{
   display:block;
-  width:160px;
+  width:150px;
   height:auto;
-  max-height:90px;
+  max-height:80px;
   border-radius:12px;
   border:1.5px solid rgba(212, 175, 55, 0.8);
   object-fit:contain;
@@ -134,53 +134,86 @@ body::before{
 
 .brand{
   font-family:'Poppins',sans-serif;
-  font-size:1.5rem;font-weight:800;
+  font-size:1.4rem;font-weight:800;
   color:#ffffff;letter-spacing:.02em;line-height:1.1;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 .brand em{color:#ffd700;font-style:normal}
-.tagline{font-size:.78rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tagline{font-size:.75rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+/* FAIXA BANNER DE FRASES MOTIVACIONAIS */
+.quote-banner {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.2) 50%, rgba(255,215,0,0.05) 100%);
+  border-top: 1px solid rgba(255, 215, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+  padding: 0.4rem 0.6rem;
+  margin-top: 0.2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 34px;
+}
+
+.quote-text {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 8px rgba(255,215,0,0.6);
+  transition: opacity 0.5s ease-in-out;
+  white-space: nowrap;
+}
 
 /* Avaliação / Estrelas */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.15rem;color:#ffd700}
-.rating-text{font-size:.78rem;color:#cccccc;margin-top:.15rem}
+.star{font-size:1.1rem;color:#ffd700}
+.rating-text{font-size:.75rem;color:#cccccc;margin-top:.1rem}
 
-/* Botão Google Avaliar */
-.btn-google{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:#FBBC05;
-  color:#111111;font-weight:700;
-  padding:.78rem 1.4rem;
-  border-radius:50px;
-  font-size:.85rem;text-decoration:none;
-  font-family:'DM Sans',sans-serif;
-  letter-spacing:.02em;
-  border:none;cursor:pointer;
-  width:100%;max-width:270px;justify-content:center;
-  position:relative;overflow:hidden;
-  animation:pulse-google 2.2s ease-in-out infinite;
+/* BOTÃO GOOGLE PERSONALIZADO (IMAGEM COM PULSO E BRILHO) */
+.btn-google-container {
+  width: 100%;
+  max-width: 290px;
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  animation: pulse-google 2.2s ease-in-out infinite;
 }
-.btn-google::after{
-  content:'';
-  position:absolute;
-  top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
-  transform:skewX(-20deg);
-  animation:shimmer 2.2s ease-in-out infinite;
+
+.btn-google-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 50px;
 }
-@keyframes pulse-google{
-  0%{box-shadow:0 0 0 0 rgba(251,188,5,.5), 0 0 10px rgba(255,255,255,0.2)}
-  60%{box-shadow:0 0 0 12px rgba(251,188,5,0), 0 0 15px rgba(255,255,255,0.4)}
-  100%{box-shadow:0 0 0 0 rgba(251,188,5,0), 0 0 10px rgba(255,255,255,0.2)}
+
+/* Efeito Shimmer (Brilho a passar) por cima da imagem */
+.btn-google-container::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 2.2s ease-in-out infinite;
+  pointer-events: none;
 }
-@keyframes shimmer{
-  0%{left:-120%}
-  55%,100%{left:160%}
+
+@keyframes pulse-google {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0.6); }
+  50% { transform: scale(1.03); box-shadow: 0 0 18px 4px rgba(251,188,5,0.4); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0); }
 }
-.btn-google svg{width:16px;height:16px;flex-shrink:0}
-.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
+
+@keyframes shimmer {
+  0% { left: -120%; }
+  55%, 100% { left: 160%; }
+}
 
 /* Grade de Botões de Ação */
 .social-row{display:flex;gap:.75rem;justify-content:center;align-items:center;width:100%}
@@ -191,7 +224,7 @@ body::before{
 }
 .social-btn:hover{transform:translateY(-4px)}
 .social-icon{
-  width:48px;height:48px;border-radius:50%;
+  width:46px;height:46px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,215,0,.4);
   box-shadow:0 0 10px rgba(212,175,55,0.2), 0 6px 16px rgba(0,0,0,0.6);
@@ -208,12 +241,12 @@ body::before{
 .faq-link{
   background:none;border:none;
   color:#ffffff;
-  font-size:.84rem;font-family:'DM Sans',sans-serif;
+  font-size:.82rem;font-family:'DM Sans',sans-serif;
   cursor:pointer;letter-spacing:.03em;
   display:flex;align-items:center;gap:.35rem;
   text-decoration:none;
   transition:all .2s;
-  padding:.4rem .8rem;
+  padding:.35rem .75rem;
   border-radius:20px;
   border: 1px solid rgba(212,175,55,0.4);
 }
@@ -225,16 +258,37 @@ body::before{
 .faq-link svg{width:14px;height:14px}
 
 /* Endereço */
-.address{font-size:.76rem;color:#aaaaaa;line-height:1.5}
+.address{font-size:.74rem;color:#aaaaaa;line-height:1.4}
 
-/* Footer dentro da moldura */
-.footer{font-size:.66rem;color:#777777;margin-top:0.2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;width:100%;border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem}
-.footer-promo{font-size:.72rem;color:#999999;line-height:1.4;text-align:center}
+/* RODAPÉ COMPACTO (ECONOMIA DE ESPAÇO) */
+.footer{
+  font-size:.65rem;
+  color:#777777;
+  margin-top:0.1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.35rem;
+  width:100%;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:0.75rem;
+}
+.footer-promo{font-size:.68rem;color:#999999;line-height:1.3;text-align:center}
 .footer-promo a{color:#ffd700;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:1px;transition:color .2s}
 .footer-promo a:hover{color:#ffffff}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.64rem;color:#666666}
-.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.65}
-.footer-dev{font-size:.64rem;color:#666666}
+
+/* Linha combinada com SSL e Desenvolvedor para poupar altura */
+.footer-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  font-size: 0.62rem;
+  color: #666666;
+}
+.footer-ssl{display:flex;align-items:center;gap:.25rem;}
+.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.75;stroke:#25d366}
 .footer-dev a{color:#888888;text-decoration:none;transition:color .2s}
 .footer-dev a:hover{color:#cccccc}
 
@@ -385,12 +439,17 @@ body::before{
       <div class="logo-frame">
         <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-img-fallback" style="display:none; width:160px; height:70px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
+        <div class="logo-img-fallback" style="display:none; width:150px; height:70px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
       </div>
       <div>
         <div class="brand">Spartan <em>Fight Fit</em></div>
         <div class="tagline">Jardim Caiubi · Itaquaquecetuba</div>
       </div>
+    </div>
+
+    <!-- FAIXA DE BANNER MOTIVACIONAL ROTATIVA ABAIXO DE ITAQUAQUECETUBA -->
+    <div class="quote-banner">
+      <div class="quote-text" id="quoteText">"O seu único limite é você mesmo."</div>
     </div>
 
     <div>
@@ -400,10 +459,10 @@ body::before{
       <div class="rating-text">Sua evolução é a nossa prioridade!</div>
     </div>
 
-    <button class="btn-google" onclick="openThanksModal()" aria-label="Avaliar no Google">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      Avaliar no Google ⭐⭐⭐⭐⭐
-    </button>
+    <!-- BOTÃO GOOGLE PERSONALIZADO COM PULSO E SHIMMER -->
+    <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
+      <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
+    </a>
 
     <div class="social-row" aria-label="Redes sociais e contato">
 
@@ -438,7 +497,7 @@ body::before{
         <span class="social-label">Maps</span>
       </a>
 
-      <!-- Planos / Modalidades -->
+      <!-- Planos -->
       <a href="https://api.whatsapp.com/send/?phone=5511941029898&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos%20e%20modalidades.&type=phone_number&app_absent=0" class="social-btn" target="_blank" rel="noopener" aria-label="Ver Planos">
         <div class="social-icon" style="background: linear-gradient(135deg, #d4af37, #996515);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -462,15 +521,20 @@ body::before{
 
   </div>
 
+  <!-- RODAPÉ OTIMIZADO PARA COMPACTAÇÃO DE ESPAÇO -->
   <div class="footer">
     <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
       <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
     </p>
-    <div class="footer-ssl">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Protegido por SSL
+
+    <div class="footer-bottom-row">
+      <div class="footer-ssl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Protegido por SSL</span>
+      </div>
+      <span>•</span>
+      <p class="footer-dev">Desenvolvido por <a href="https://avaliar.impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
     </div>
-    <p class="footer-dev">Desenvolvido por <a href="https://avaliar.impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
   </div>
 </div>
 
@@ -543,6 +607,26 @@ body::before{
 
 
 <script>
+// FRASES DO BANNER ROTATIVO
+const quotes = [
+  '"O seu único limite é você mesmo."',
+  '"Um passo de cada vez, todos os dias."',
+  '"Mantenha o ritmo. O resultado vem."',
+  '"A constância vence o talento."'
+];
+
+let quoteIndex = 0;
+const quoteEl = document.getElementById('quoteText');
+
+setInterval(() => {
+  quoteEl.style.opacity = 0;
+  setTimeout(() => {
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    quoteEl.textContent = quotes[quoteIndex];
+    quoteEl.style.opacity = 1;
+  }, 500);
+}, 3500);
+
 const faqs = [
   {
     q: 'Como faço para me matricular?',
