@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos Futustistas do Navegador</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  body {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    text-align: center;
+    transition: background-color 0.5s ease;
+  }
+
+  h1 { font-size: 1.4rem; color: #58a6ff; }
+
+  .btn {
+    background: #238636;
+    color: #ffffff;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+    transition: transform 0.2s, background-color 0.2s;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn:active { transform: scale(0.96); }
+
+  .btn-vibrate { background: #8957e5; box-shadow: 0 4px 12px rgba(137, 87, 229, 0.4); }
+
+  .status-box {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 320px;
+    font-size: 0.85rem;
+    color: #8b949e;
+  }
+
+  .status-box strong { color: #f0883e; }
+</style>
+</head>
+<body>
+
+  <h1>Interações Avançadas sem Arquivos Externos</h1>
+
+  <!-- 1. Síntese de Voz -->
+  <button class="btn" onclick="falarTexto()">
+    🗣️ Ouvir Voz Nativa do Navegador
+  </button>
+
+  <!-- 2. Vibração Tátil -->
+  <button class="btn btn-vibrate" onclick="vibrarCelular()">
+    📳 Testar Vibração Tátil (Celular)
+  </button>
+
+  <!-- 3. Comando por Voz -->
+  <button class="btn" style="background:#da3633;" onclick="iniciarReconhecimentoVoz()">
+    🎙️ Ativar Comando de Voz
+  </button>
+
+  <div class="status-box" id="status">
+    Status da Voz: <strong>Aguardando clique...</strong><br>
+    <small>(Fale: "azul", "verde", "vermelho" ou "amarelo")</small>
+  </div>
+
+<script>
+  /* ========================================================
+     1. SÍNTESE DE VOZ (Text-To-Speech)
+     ======================================================== */
+  function falarTexto() {
+    if ('speechSynthesis' in window) {
+      const mensagem = new SpeechSynthesisUtterance("Olá! Eu sou uma voz gerada inteiramente pelo seu navegador, sem nenhum arquivo de áudio carregado.");
+      mensagem.lang = 'pt-BR';
+      mensagem.rate = 1.1; // Velocidade
+      mensagem.pitch = 1;   // Tom de voz
+      window.speechSynthesis.speak(mensagem);
+    } else {
+      alert("Seu navegador não suporta síntese de voz.");
+    }
+  }
+
+  /* ========================================================
+     2. VIBRAÇÃO TÁTIL (Haptic Feedback)
+     ======================================================== */
+  function vibrarCelular() {
+    if ("vibrate" in navigator) {
+      // Padrão de vibração: vibra 100ms, pausa 50ms, vibra 200ms
+      navigator.vibrate([100, 50, 200]);
+      alert("Vibração disparada! (Funciona em dispositivos móveis compatíveis)");
+    } else {
+      alert("A API de vibração não é suportada neste dispositivo/navegador.");
+    }
+  }
+
+  /* ========================================================
+     3. RECONHECIMENTO DE VOZ (Speech Recognition)
+     ======================================================== */
+  function iniciarReconhecimentoVoz() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const statusDiv = document.getElementById('status');
+
+    if (!SpeechRecognition) {
+      statusDiv.innerHTML = "Status: <strong>Navegador não suporta Reconhecimento de Voz.</strong>";
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.interimResults = false;
+
+    statusDiv.innerHTML = "Status: <strong>Escutando... Fale uma cor!</strong>";
+
+    recognition.start();
+
+    recognition.onresult = (event) => {
+      const comando = event.results[0][0].transcript.toLowerCase().trim();
+      statusDiv.innerHTML = `Você falou: <strong>"${comando}"</strong>`;
+
+      // Altera a cor de fundo baseado na palavra dita
+      if (comando.includes('azul')) document.body.style.backgroundColor = '#0d2d5e';
+      else if (comando.includes('verde')) document.body.style.backgroundColor = '#0d4a22';
+      else if (comando.includes('vermelho')) document.body.style.backgroundColor = '#5a1210';
+      else if (comando.includes('amarelo')) document.body.style.backgroundColor = '#5a4800';
+    };
+
+    recognition.onerror = () => {
+      statusDiv.innerHTML = "Status: <strong>Erro ao ouvir. Tente novamente.</strong>";
+    };
+
+    recognition.onend = () => {
+      setTimeout(() => {
+        if (!statusDiv.innerHTML.includes("Você falou")) {
+          statusDiv.innerHTML = "Status: <strong>Aguardando clique...</strong>";
+        }
+      }, 3000);
+    };
+  }
+</script>
+
+</body>
+</html>
