@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria de Efeitos Avançados CSS & JS</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #050a14;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    color: #38bdf8;
+    text-align: center;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* Cartão Base */
+  .card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-title {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: bold;
+    text-align: center;
+    z-index: 5;
+  }
+
+  .demo-area {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* ========================================================
+     1. MÁQUINA DE ESCREVER (Typing Effect)
+     ======================================================== */
+  .typing-box {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #4ade80;
+    border-right: 2px solid #4ade80;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: digitar 4s steps(22) infinite;
+  }
+
+  @keyframes digitar {
+    0%, 10% { width: 0; }
+    60%, 80% { width: 18ch; } /* Tamanho do texto */
+    90%, 100% { width: 0; }
+  }
+
+  /* ========================================================
+     2. VIDRO FOSCO (Glassmorphism)
+     ======================================================== */
+  .glass-bg {
+    position: absolute;
+    width: 80px; height: 80px;
+    background: #f43f5e;
+    border-radius: 50%;
+    animation: moverBola 4s infinite alternate ease-in-out;
+  }
+
+  .glass-card {
+    width: 140px; height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 2;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  @keyframes moverBola {
+    0% { transform: translate(-40px, -20px); }
+    100% { transform: translate(40px, 20px); }
+  }
+
+  /* ========================================================
+     3. BORDA GRADIENTE ROTATIVA
+     ======================================================== */
+  .gradient-border-wrap {
+    position: relative;
+    width: 120px; height: 75px;
+    background: linear-gradient(90deg, #ff007f, #00f2fe, #4ade80, #ff007f);
+    background-size: 300% 300%;
+    border-radius: 12px;
+    padding: 3px;
+    animation: bordaGira 4s linear infinite;
+  }
+
+  .gradient-border-inner {
+    width: 100%; height: 100%;
+    background: #0f172a;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  @keyframes bordaGira {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ========================================================
+     4. EFEITO MAGNÉTICO / SEGUIDOR
+     ======================================================== */
+  .box-magnetic {
+    width: 100px; height: 60px;
+    background: #8b5cf6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.15s ease-out;
+  }
+
+  /* ========================================================
+     5. REVELAÇÃO SUAVE (Pop-In Elastic)
+     ======================================================== */
+  .box-elastic {
+    width: 90px; height: 90px;
+    background: #f59e0b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #000;
+    animation: entradaElastica 4s infinite;
+  }
+
+  @keyframes entradaElastica {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    30% { transform: scale(1.15) rotate(10deg); opacity: 1; }
+    40% { transform: scale(0.95) rotate(-5deg); }
+    50%, 80% { transform: scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+
+  /* ========================================================
+     6. ONDA LÍQUIDA (Liquid Wave)
+     ======================================================== */
+  .box-liquid {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: #0284c7;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .wave {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: rgba(255, 255, 255, 0.3);
+    top: -120px; left: -50px;
+    border-radius: 40%;
+    animation: ondaGira 6s infinite linear;
+  }
+
+  @keyframes ondaGira {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ========================================================
+     7. EFEITO HOLOGRÁFICO
+     ======================================================== */
+  .box-holo {
+    width: 120px; height: 75px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1e1b4b;
+    font-weight: bold;
+    font-size: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(142, 197, 252, 0.4);
+  }
+
+  .box-holo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.7) 45%, rgba(255,0,128,0.3) 55%, transparent 80%);
+    animation: holoshine 3s infinite ease-in-out;
+  }
+
+  @keyframes holoshine {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+  }
+
+  /* ========================================================
+     8. EXPLOSÃO POP-OUT (Salto 3D no Hover)
+     ======================================================== */
+  .card-popout {
+    width: 100px; height: 80px;
+    background: #ec4899;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .card-popout:hover {
+    transform: translateY(-15px) scale(1.15) rotate(3deg);
+    box-shadow: 0 20px 30px rgba(236, 72, 153, 0.4);
+  }
+</style>
+</head>
+<body>
+
+  <h1>Galeria de Efeitos Especiais em HTML/CSS</h1>
+
+  <div class="container">
+
+    <!-- 1. Máquina de Escrever -->
+    <div class="card">
+      <div class="card-title">1. Máquina de Escrever</div>
+      <div class="demo-area">
+        <div class="typing-box">Qualy Quimy Tintas</div>
+      </div>
+    </div>
+
+    <!-- 2. Vidro Fosco -->
+    <div class="card">
+      <div class="card-title">2. Vidro Fosco (Glassmorphism)</div>
+      <div class="demo-area">
+        <div class="glass-bg"></div>
+        <div class="glass-card">Efeito Vidro</div>
+      </div>
+    </div>
+
+    <!-- 3. Borda Gradiente -->
+    <div class="card">
+      <div class="card-title">3. Borda Neon Rotativa</div>
+      <div class="demo-area">
+        <div class="gradient-border-wrap">
+          <div class="gradient-border-inner">Borda Viva</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Magnético -->
+    <div class="card" id="card-mag">
+      <div class="card-title">4. Botão Magnético (Mova o mouse)</div>
+      <div class="demo-area">
+        <div class="box-magnetic" id="btn-mag">Ameça me pegar</div>
+      </div>
+    </div>
+
+    <!-- 5. Entrada Elástica -->
+    <div class="card">
+      <div class="card-title">5. Entrada Elástica (Pop-In)</div>
+      <div class="demo-area">
+        <div class="box-elastic">SURPRESA!</div>
+      </div>
+    </div>
+
+    <!-- 6. Onda Líquida -->
+    <div class="card">
+      <div class="card-title">6. Onda Líquida</div>
+      <div class="demo-area">
+        <div class="box-liquid">
+          <div class="wave"></div>
+          <span style="z-index:2;">Líquido</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Holográfico -->
+    <div class="card">
+      <div class="card-title">7. Cartão Holográfico</div>
+      <div class="demo-area">
+        <div class="box-holo">HOLOGRÁFICO</div>
+      </div>
+    </div>
+
+    <!-- 8. Pop-Out -->
+    <div class="card">
+      <div class="card-title">8. Salto Pop-Out (Passe o mouse)</div>
+      <div class="demo-area">
+        <div class="card-popout">Passe o Mouse</div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  // Script para o efeito Magnético nº 4
+  const cardMag = document.getElementById('card-mag');
+  const btnMag = document.getElementById('btn-mag');
+
+  cardMag.addEventListener('mousemove', (e) => {
+    const rect = cardMag.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    // Mover levemente em direção ao ponteiro
+    btnMag.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+
+  cardMag.addEventListener('mouseleave', () => {
+    btnMag.style.transform = 'translate(0px, 0px)';
+  });
+</script>
+
+</body>
+</html>
