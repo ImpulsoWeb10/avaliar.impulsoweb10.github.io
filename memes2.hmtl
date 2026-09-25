@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animações CSS Avançadas e Versáteis</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #080f1e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: #e0e1dd;
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 950px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  /* Cartão para cada exemplo */
+  .card {
+    background: #111c30;
+    border: 1px solid #1f3152;
+    border-radius: 12px;
+    width: 270px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-title {
+    font-size: 0.85rem;
+    color: #8fa3bf;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .demo-area {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    perspective: 1000px; /* Habilita profundidade 3D */
+  }
+
+  /* ========================================================
+     1. INCLINAÇÃO 3D INTERATIVA (Tilt no Hover)
+     ======================================================== */
+  .box-tilt {
+    width: 110px;
+    height: 70px;
+    background: linear-gradient(135deg, #ff007f, #7928ca);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  }
+
+  .box-tilt:hover {
+    transform: rotateX(20deg) rotateY(-20deg) scale(1.08);
+    box-shadow: -10px 15px 25px rgba(255, 0, 127, 0.4);
+  }
+
+  /* ========================================================
+     2. REVELAÇÃO POR MÁSCARA CIRCULAR (Clip-path Reveal)
+     ======================================================== */
+  .box-reveal {
+    width: 110px;
+    height: 75px;
+    background: #00f2fe;
+    color: #000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    animation: mascaraCircular 5s infinite ease-in-out;
+  }
+
+  @keyframes mascaraCircular {
+    0%   { clip-path: circle(0% at 50% 50%); opacity: 0; }
+    25%  { clip-path: circle(75% at 50% 50%); opacity: 1; } /* Abre do centro em círculo */
+    75%  { clip-path: circle(75% at 50% 50%); opacity: 1; }
+    90%  { clip-path: circle(0% at 50% 50%); opacity: 0; }  /* Fecha em círculo */
+    100% { clip-path: circle(0% at 50% 50%); opacity: 0; }
+  }
+
+  /* ========================================================
+     3. GIRO 3D / CARTÃO FLIP (Flip Card)
+     ======================================================== */
+  .flip-container {
+    width: 110px;
+    height: 75px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: giroAuto 5s infinite ease-in-out;
+  }
+
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .flip-front { background: #4facfe; color: #fff; }
+  .flip-back  { background: #00f2fe; color: #000; transform: rotateY(180deg); }
+
+  @keyframes giroAuto {
+    0%, 100% { transform: rotateY(0deg); }
+    30%, 70% { transform: rotateY(180deg); } /* Vira para o verso */
+  }
+
+  /* ========================================================
+     4. FEIXE DE LUZ NEON (Glow Shimmer)
+     ======================================================== */
+  .box-shimmer {
+    width: 120px;
+    height: 45px;
+    background: #152238;
+    border: 2px solid #00ffcc;
+    border-radius: 25px;
+    color: #00ffcc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,255,204,0.2);
+  }
+
+  .box-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.8), transparent);
+    transform: skewX(-25deg);
+    animation: luzPassando 2.5s infinite;
+  }
+
+  @keyframes luzPassando {
+    0%   { left: -100%; }
+    50%, 100% { left: 200%; }
+  }
+
+  /* ========================================================
+     5. CHUVA DE ELEMENTOS / GOTAS / PARTÍCULAS
+     ======================================================== */
+  .particle-area {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .drop {
+    position: absolute;
+    top: -20px;
+    background: rgba(0, 204, 255, 0.8);
+    border-radius: 50%;
+    animation: chuvaCaindo 3s infinite linear;
+  }
+
+  /* Variações das gotas caindo em tempos e posições diferentes */
+  .d1 { left: 20%; width: 8px; height: 8px; animation-duration: 2.2s; animation-delay: 0s; }
+  .d2 { left: 45%; width: 12px; height: 12px; animation-duration: 2.8s; animation-delay: 0.5s; }
+  .d3 { left: 70%; width: 6px; height: 6px; animation-duration: 1.8s; animation-delay: 1s; }
+  .d4 { left: 85%; width: 10px; height: 10px; animation-duration: 2.5s; animation-delay: 0.3s; }
+
+  @keyframes chuvaCaindo {
+    0%   { transform: translateY(0); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translateY(160px); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Novas Opções Avançadas e Versáteis (CSS 3D & Efeitos)</h1>
+
+  <div class="container">
+
+    <!-- Opção 1 -->
+    <div class="card">
+      <div class="card-title">1. Tilt 3D (Passe o mouse)</div>
+      <div class="demo-area">
+        <div class="box-tilt">Passe o mouse</div>
+      </div>
+    </div>
+
+    <!-- Opção 2 -->
+    <div class="card">
+      <div class="card-title">2. Revelação em Círculo</div>
+      <div class="demo-area">
+        <div class="box-reveal">Surgindo!</div>
+      </div>
+    </div>
+
+    <!-- Opção 3 -->
+    <div class="card">
+      <div class="card-title">3. Cartão Flip 3D (Verso)</div>
+      <div class="demo-area">
+        <div class="flip-container">
+          <div class="flip-face flip-front">Frente</div>
+          <div class="flip-face flip-back">Verso 🎉</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opção 4 -->
+    <div class="card">
+      <div class="card-title">4. Brilho Neon (Glow)</div>
+      <div class="demo-area">
+        <div class="box-shimmer">OFERTA</div>
+      </div>
+    </div>
+
+    <!-- Opção 5 -->
+    <div class="card">
+      <div class="card-title">5. Chuva de Partículas / Gotas</div>
+      <div class="demo-area">
+        <div class="particle-area">
+          <div class="drop d1"></div>
+          <div class="drop d2"></div>
+          <div class="drop d3"></div>
+          <div class="drop d4"></div>
+        </div>
+        <span style="font-size:0.8rem; color:#00ccff; z-index:2; font-weight:bold;">Chuva no Fundo</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
