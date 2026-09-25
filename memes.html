@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demonstração de Animações CSS</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #0d1b2a;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: #e0e1dd;
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  /* Cartão para cada exemplo */
+  .card {
+    background: #1b263b;
+    border: 1px solid #415a77;
+    border-radius: 12px;
+    width: 260px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    color: #778da9;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Área onde o elemento se move */
+  .demo-area {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Elemento padrão das animações */
+  .box {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  /* ========================================================
+     1. APARECER E SUMIR (Fade In / Fade Out)
+     ======================================================== */
+  .box-fade {
+    background: #e63946;
+    animation: efeitoFade 5s infinite ease-in-out;
+  }
+
+  @keyframes efeitoFade {
+    0%   { opacity: 0; transform: scale(0.5); }
+    20%  { opacity: 1; transform: scale(1); }   /* Aparece totalmente */
+    70%  { opacity: 1; transform: scale(1); }   /* Mantém visível por alguns segundos */
+    90%  { opacity: 0; transform: scale(0.5); } /* Some suavemente */
+    100% { opacity: 0; }
+  }
+
+  /* ========================================================
+     2. CAIR DO TOPO (Drop In)
+     ======================================================== */
+  .box-drop {
+    background: #2a9d8f;
+    animation: efeitoCair 5s infinite cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  @keyframes efeitoCair {
+    0%   { transform: translateY(-120px); opacity: 0; }
+    25%  { transform: translateY(0); opacity: 1; }      /* Cai no centro */
+    75%  { transform: translateY(0); opacity: 1; }      /* Fica parado */
+    90%  { transform: translateY(120px); opacity: 0; }  /* Sai por baixo */
+    100% { transform: translateY(-120px); opacity: 0; }
+  }
+
+  /* ========================================================
+     3. GIRAR E AUMENTAR (3D / Rotate)
+     ======================================================== */
+  .box-rotate {
+    background: #e9c46a;
+    color: #000;
+    animation: efeitoGirar 5s infinite ease-in-out;
+  }
+
+  @keyframes efeitoGirar {
+    0%   { transform: rotate(0deg) scale(0); opacity: 0; }
+    25%  { transform: rotate(360deg) scale(1); opacity: 1; } /* Gira até abrir */
+    75%  { transform: rotate(360deg) scale(1); opacity: 1; }
+    95%  { transform: rotate(0deg) scale(0); opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* ========================================================
+     4. PULSAR / BATER CORAÇÃO (Pulse)
+     ======================================================== */
+  .box-pulse {
+    background: #f4a261;
+    animation: efeitoPulsar 5s infinite linear;
+  }
+
+  @keyframes efeitoPulsar {
+    0%   { opacity: 0; transform: scale(0.8); }
+    15%  { opacity: 1; transform: scale(1); }
+    30%  { transform: scale(1.25); }  /* Batida 1 */
+    40%  { transform: scale(1); }
+    50%  { transform: scale(1.25); }  /* Batida 2 */
+    60%  { transform: scale(1); }
+    85%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.8); }
+  }
+
+  /* ========================================================
+     5. DESLIZAR LATERAL (Slide In)
+     ======================================================== */
+  .box-slide {
+    background: #a855f7;
+    animation: efeitoDeslizar 5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+
+  @keyframes efeitoDeslizar {
+    0%   { transform: translateX(-150px); opacity: 0; }
+    25%  { transform: translateX(0); opacity: 1; }        /* Entra pela esquerda */
+    75%  { transform: translateX(0); opacity: 1; }
+    90%  { transform: translateX(150px); opacity: 0; }    /* Sai pela direita */
+    100% { transform: translateX(-150px); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Demonstração Visual de Animações CSS (5s por ciclo)</h1>
+
+  <div class="container">
+
+    <!-- Opção 1 -->
+    <div class="card">
+      <div class="card-title">1. Aparecer e Sumir (Fade)</div>
+      <div class="demo-area">
+        <div class="box box-fade">Fade</div>
+      </div>
+    </div>
+
+    <!-- Opção 2 -->
+    <div class="card">
+      <div class="card-title">2. Cair do Topo</div>
+      <div class="demo-area">
+        <div class="box box-drop">Cair</div>
+      </div>
+    </div>
+
+    <!-- Opção 3 -->
+    <div class="card">
+      <div class="card-title">3. Girar e Escalar</div>
+      <div class="demo-area">
+        <div class="box box-rotate">Girar</div>
+      </div>
+    </div>
+
+    <!-- Opção 4 -->
+    <div class="card">
+      <div class="card-title">4. Pulsar / Batida</div>
+      <div class="demo-area">
+        <div class="box box-pulse">Pulsar</div>
+      </div>
+    </div>
+
+    <!-- Opção 5 -->
+    <div class="card">
+      <div class="card-title">5. Deslizar Lateral</div>
+      <div class="demo-area">
+        <div class="box box-slide">Slide</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
