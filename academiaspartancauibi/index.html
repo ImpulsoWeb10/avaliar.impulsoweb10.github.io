@@ -45,7 +45,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:1rem 0.8rem;
+  padding:0.4rem 0.8rem; /* Reduzido o espaço fora para sobra pouco em cima e embaixo */
   overflow-x:hidden;
   position:relative;
 }
@@ -62,7 +62,7 @@ body::before{
   z-index:0;
 }
 
-/* Frame estilo Smartphone com Neon atrás */
+/* Frame estilo Smartphone expandido verticalmente */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -75,18 +75,26 @@ body::before{
     0 0 25px rgba(255, 215, 0, 0.35),
     0 0 50px rgba(255, 0, 0, 0.25),
     inset 0 0 15px rgba(255, 215, 0, 0.1);
-  padding: 1.4rem 1.2rem 1.2rem;
+  padding: 1.8rem 1.2rem 1.4rem; /* Aumentado padding interno */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.85rem;
+  gap: 1.2rem; /* Mais espaçamento interno entre os elementos */
 }
 
-.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:0.85rem;width:100%}
+.page{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.15rem; /* Espaçamento interno da página ampliado */
+  width:100%
+}
 
 /* Logo Retangular com Shimmer Dourado */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
 
 .logo-frame{
   position:relative;
@@ -121,9 +129,9 @@ body::before{
 
 .logo-img{
   display:block;
-  width:140px;
+  width:145px;
   height:auto;
-  max-height:75px;
+  max-height:78px;
   border-radius:12px;
   border:1.5px solid rgba(212, 175, 55, 0.8);
   object-fit:contain;
@@ -134,23 +142,23 @@ body::before{
 
 .brand{
   font-family:'Poppins',sans-serif;
-  font-size:1.35rem;font-weight:800;
+  font-size:1.4rem;font-weight:800;
   color:#ffffff;letter-spacing:.02em;line-height:1.1;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 .brand em{color:#ffd700;font-style:normal}
-.tagline{font-size:.73rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tagline{font-size:.74rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 
 /* Avaliação / Estrelas */
-.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.05rem;color:#ffd700}
-.rating-text{font-size:.72rem;color:#cccccc;margin-top:.05rem}
+.stars-row{display:flex;align-items:center;gap:.35rem;justify-content:center}
+.star{font-size:1.1rem;color:#ffd700}
+.rating-text{font-size:.74rem;color:#cccccc;margin-top:.15rem}
 
 /* BOTÃO GOOGLE SEM BORDA BRANCA */
 .btn-google-container {
-  width: 70%;
-  max-width: 260px;
+  width: 100%;
+  max-width: 285px;
   position: relative;
   border-radius: 999px; 
   overflow: hidden;
@@ -193,15 +201,15 @@ body::before{
 }
 
 /* Grade de Botões de Ação */
-.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center;width:100%}
+.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center;width:100%}
 .social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
   text-decoration:none;
   transition:transform .22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .social-btn:hover{transform:translateY(-4px)}
 .social-icon{
-  width:46px;height:46px;border-radius:50%;
+  width:48px;height:48px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,215,0,.4);
   box-shadow:0 0 10px rgba(212,175,55,0.2), 0 6px 16px rgba(0,0,0,0.6);
@@ -212,18 +220,18 @@ body::before{
   box-shadow:0 0 15px rgba(255,215,0,0.6), 0 8px 20px rgba(180,0,0,.4);
 }
 .social-icon svg{width:22px;height:22px}
-.social-label{font-size:.68rem;color:#cccccc;font-weight:500;letter-spacing:.02em}
+.social-label{font-size:.7rem;color:#cccccc;font-weight:500;letter-spacing:.02em}
 
 /* FAQ link */
 .faq-link{
   background:none;border:none;
   color:#ffffff;
-  font-size:.8rem;font-family:'DM Sans',sans-serif;
+  font-size:.82rem;font-family:'DM Sans',sans-serif;
   cursor:pointer;letter-spacing:.03em;
-  display:flex;align-items:center;gap:.35rem;
+  display:flex;align-items:center;gap:.4rem;
   text-decoration:none;
   transition:all .2s;
-  padding:.3rem .75rem;
+  padding:.35rem .85rem;
   border-radius:20px;
   border: 1px solid rgba(212,175,55,0.4);
 }
@@ -235,7 +243,7 @@ body::before{
 .faq-link svg{width:14px;height:14px}
 
 /* Endereço */
-.address{font-size:.73rem;color:#aaaaaa;line-height:1.4}
+.address{font-size:.75rem;color:#aaaaaa;line-height:1.45}
 
 /* FAIXA BANNER ABAIXO DO ENDEREÇO */
 .quote-banner {
@@ -243,7 +251,7 @@ body::before{
   background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.18) 50%, rgba(255,215,0,0.05) 100%);
   border-top: 1px solid rgba(255, 215, 0, 0.4);
   border-bottom: 1px solid rgba(255, 215, 0, 0.4);
-  padding: 0.4rem 0;
+  padding: 0.45rem 0;
   margin-top: 0.2rem;
   overflow: hidden;
   position: relative;
@@ -258,7 +266,7 @@ body::before{
 }
 
 .quote-item {
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
@@ -276,16 +284,16 @@ body::before{
 .footer{
   font-size:.65rem;
   color:#777777;
-  margin-top:0.1rem;
+  margin-top:0.2rem;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.35rem;
+  gap:.4rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:0.65rem;
+  padding-top:0.8rem;
 }
-.footer-promo{font-size:.67rem;color:#999999;line-height:1.3;text-align:center}
+.footer-promo{font-size:.68rem;color:#999999;line-height:1.35;text-align:center}
 .footer-promo a{color:#ffd700;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:1px;transition:color .2s}
 .footer-promo a:hover{color:#ffffff}
 
@@ -295,7 +303,7 @@ body::before{
   justify-content: center;
   gap: 0.8rem;
   width: 100%;
-  font-size: 0.62rem;
+  font-size: 0.63rem;
   color: #666666;
 }
 .footer-ssl{display:flex;align-items:center;gap:.25rem;}
@@ -353,7 +361,7 @@ body::before{
 
 /* Cabeçalho do Modal */
 .sheet-head{
-  display:flex;align-items:center;justify-space-between:space-between;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0.8rem 1.4rem;
   border-bottom:1px solid rgba(255,255,255,0.1);
   background: rgba(0,0,0,0.4);
@@ -451,7 +459,7 @@ body::before{
       <div class="logo-frame">
         <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-img-fallback" style="display:none; width:140px; height:70px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
+        <div class="logo-img-fallback" style="display:none; width:145px; height:75px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
       </div>
       <div>
         <div class="brand">Spartan <em>Fight Fit</em></div>
@@ -459,7 +467,7 @@ body::before{
       </div>
     </div>
 
-    <!-- Estrelas (SUBIDAS) -->
+    <!-- Estrelas -->
     <div>
       <div class="stars-row" aria-label="Avaliação 5 estrelas">
         <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -467,7 +475,7 @@ body::before{
       <div class="rating-text">Sua evolução é a nossa prioridade!</div>
     </div>
 
-    <!-- Botão Google (SUBIDO) -->
+    <!-- Botão Google -->
     <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
       <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
     </a>
@@ -530,14 +538,14 @@ body::before{
       <span itemprop="addressLocality">Itaquaquecetuba</span>, <span itemprop="addressRegion">SP</span> · Musculação & Lutas
     </div>
 
-    <!-- FAIXA BANNER REPOSICIONADA (ABAIXO DO ENDEREÇO) -->
+    <!-- FAIXA BANNER ABAIXO DO ENDEREÇO -->
     <div class="quote-banner">
       <div class="quote-track">
         <span class="quote-item">"O seu único limite é você mesmo."</span>
         <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
         <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
         <span class="quote-item">"A constância vence o talento."</span>
-        <!-- Cópias repetidas para manter a animação sem cortes -->
+        <!-- Repetição para animação infinita sem falhas -->
         <span class="quote-item">"O seu único limite é você mesmo."</span>
         <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
         <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
