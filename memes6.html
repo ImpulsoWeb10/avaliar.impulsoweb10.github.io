@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visão, Voz & Giroscópio 3D</title>
+<!-- Biblioteca leve para rastreamento facial em tempo real (FaceAPI) -->
+<script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  body {
+    background-color: #070a13;
+    color: #e2e8f0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1.5rem;
+    overflow-x: hidden;
+    perspective: 1000px; /* Habilita o efeito 3D do Giroscópio */
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    color: #38bdf8;
+    text-align: center;
+  }
+
+  /* 5. Cartão 3D Reativo ao Giroscópio do Celular */
+  .card-3d {
+    width: 100%;
+    max-width: 340px;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+  }
+
+  /* 1. Área de Câmera e Rastreamento Facial */
+  .camera-container {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #38bdf8;
+    background: #000;
+  }
+
+  video, canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .face-status {
+    font-size: 0.8rem;
+    color: #f59e0b;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* 2. Botão de Controle por Voz */
+  .btn-voice {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+
+  .info-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    width: 100%;
+    text-align: center;
+  }
+  .info-box strong { color: #38bdf8; }
+</style>
+</head>
+<body>
+
+  <h1>1. Rastreamento Facial + 2. Voz + 5. Giroscópio</h1>
+
+  <!-- Cartão que inclina em 3D com o celular -->
+  <div class="card-3d" id="card3d">
+
+    <!-- 1. Câmera com Reconhecimento de Rosto -->
+    <div class="camera-container">
+      <video id="webcam" autoplay muted playsinline></video>
+      <canvas id="canvas-face"></canvas>
+    </div>
+    <div class="face-status" id="faceStatus">Iniciando IA Facial...</div>
+
+    <!-- 2. Controle de Voz -->
+    <button class="btn-voice" id="btnVoice" onclick="alternarVoz()">
+      🎙️ Ligar Comando de Voz
+    </button>
+
+    <div class="info-box" id="voiceStatus">
+      Diga: <strong>"Mudar cor"</strong>, <strong>"Girar"</strong> ou <strong>"Resetar"</strong>
+    </div>
+
+    <div class="info-box">
+      📱 <strong>Giroscópio:</strong> Incline o telemóvel para os lados para ver o cartão mover-se em 3D.
+    </div>
+
+  </div>
+
+<script>
+  /* ========================================================
+     5. SENSOR DE MOVIMENTO / GIROSCÓPIO (Inclinação 3D)
+     ======================================================== */
+  const card = document.getElementById('card3d');
+
+  function lidarComOrientacao(e) {
+    // beta = inclinação para frente/trás (-180 a 180)
+    // gamma = inclinação para os lados (-90 a 90)
+    const x = e.gamma ? Math.min(Math.max(e.gamma, -30), 30) : 0;
+    const y = e.beta ? Math.min(Math.max(e.beta - 45, -30), 30) : 0; // 45° é a inclinação natural ao segurar o celular
+
+    card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+  }
+
+  // Permissão para Giroscópio no iOS/Android
+  if (window.DeviceOrientationEvent) {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      document.body.addEventListener('click', () => {
+        DeviceOrientationEvent.requestPermission().then(state => {
+          if (state === 'granted') window.addEventListener('deviceorientation', lidarComOrientacao);
+        });
+      }, { once: true });
+    } else {
+      window.addEventListener('deviceorientation', lidarComOrientacao);
+    }
+  }
+
+  /* ========================================================
+     1. RASTREAMENTO FACIAL EM TEMPO REAL (Visão Computacional)
+     ======================================================== */
+  const video = document.getElementById('webcam');
+  const canvasFace = document.getElementById('canvas-face');
+  const faceStatus = document.getElementById('faceStatus');
+
+  async function iniciarCameraERastreamento() {
+    try {
+      // 1. Liga a Webcam
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+      video.srcObject = stream;
+
+      faceStatus.innerText = "Carregando modelos de IA...";
+
+      // 2. Carrega os modelos de detecção facial super leves
+      await faceapi.nets.tinyFaceDetector.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+      
+      faceStatus.innerText = "Procurando rosto...";
+
+      // 3. Loop de Rastreamento em tempo real
+      video.addEventListener('play', () => {
+        const displaySize = { width: video.clientWidth, height: video.clientHeight };
+        faceapi.matchDimensions(canvasFace, displaySize);
+
+        setInterval(async () => {
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+          const resizedDetections = faceapi.resizeResults(detections, displaySize);
+          
+          const ctx = canvasFace.getContext('2d');
+          ctx.clearRect(0, 0, canvasFace.width, canvasFace.height);
+
+          if (detections.length > 0) {
+            faceStatus.innerText = "🟢 Rosto Detectado!";
+            faceStatus.style.color = "#4ade80";
+            // Desenha a caixa em volta do rosto
+            faceapi.draw.drawDetections(canvasFace, resizedDetections);
+          } else {
+            faceStatus.innerText = "🟡 Nenhum rosto na câmera";
+            faceStatus.style.color = "#f59e0b";
+          }
+        }, 200);
+      });
+
+    } catch (err) {
+      faceStatus.innerText = "Câmera não permitida ou indisponível.";
+      faceStatus.style.color = "#ef4444";
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', iniciarCameraERastreamento);
+
+  /* ========================================================
+     2. CONTROLE POR VOZ DINÂMICO (Speech Recognition)
+     ======================================================== */
+  let ouvindo = false;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition;
+
+  if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.continuous = true;
+
+    recognition.onresult = (e) => {
+      const comando = e.results[e.results.length - 1][0].transcript.toLowerCase().trim();
+      const statusDiv = document.getElementById('voiceStatus');
+      statusDiv.innerHTML = `Ouvido: <strong>"${comando}"</strong>`;
+
+      if (comando.includes('mudar cor') || comando.includes('cor')) {
+        card.style.background = `linear-gradient(145deg, hsl(${Math.random()*360}, 60%, 20%), #0f172a)`;
+      } else if (comando.includes('girar')) {
+        card.style.transition = "transform 1s ease";
+        card.style.transform = "rotateY(360deg)";
+        setTimeout(() => card.style.transition = "transform 0.1s ease-out", 1000);
+      } else if (comando.includes('resetar')) {
+        card.style.background = "linear-gradient(145deg, #1e293b, #0f172a)";
+      }
+    };
+  }
+
+  function alternarVoz() {
+    const btn = document.getElementById('btnVoice');
+    const statusDiv = document.getElementById('voiceStatus');
+
+    if (!recognition) {
+      alert("Navegador não suporta comando de voz.");
+      return;
+    }
+
+    if (!ouvindo) {
+      recognition.start();
+      ouvindo = true;
+      btn.innerText = "🛑 Parar Ouvinte de Voz";
+      btn.style.background = "#22c55e";
+      statusDiv.innerHTML = "Escutando... Diga <strong>'Mudar cor'</strong> ou <strong>'Girar'</strong>";
+    } else {
+      recognition.stop();
+      ouvindo = false;
+      btn.innerText = "🎙️ Ligar Comando de Voz";
+      btn.style.background = "#ef4444";
+      statusDiv.innerHTML = "Voz Desativada.";
+    }
+  }
+</script>
+
+</body>
+</html>
