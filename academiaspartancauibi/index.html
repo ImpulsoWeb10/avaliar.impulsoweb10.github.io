@@ -142,30 +142,39 @@ body::before{
 .brand em{color:#ffd700;font-style:normal}
 .tagline{font-size:.75rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 
-/* FAIXA BANNER DE FRASES MOTIVACIONAIS */
+/* FAIXA BANNER COM MOVIMENTO LENTO (MARQUEE) */
 .quote-banner {
   width: 100%;
-  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.2) 50%, rgba(255,215,0,0.05) 100%);
+  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.18) 50%, rgba(255,215,0,0.05) 100%);
   border-top: 1px solid rgba(255, 215, 0, 0.4);
   border-bottom: 1px solid rgba(255, 215, 0, 0.4);
-  padding: 0.4rem 0.6rem;
-  margin-top: 0.2rem;
+  padding: 0.45rem 0;
+  margin-top: 0.1rem;
   overflow: hidden;
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 34px;
+  white-space: nowrap;
 }
 
-.quote-text {
+.quote-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 22s linear infinite;
+}
+
+.quote-item {
   font-size: 0.76rem;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-shadow: 0 0 8px rgba(255,215,0,0.6);
-  transition: opacity 0.5s ease-in-out;
-  white-space: nowrap;
+  padding: 0 1.8rem;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Avaliação / Estrelas */
@@ -173,15 +182,17 @@ body::before{
 .star{font-size:1.1rem;color:#ffd700}
 .rating-text{font-size:.75rem;color:#cccccc;margin-top:.1rem}
 
-/* BOTÃO GOOGLE PERSONALIZADO (IMAGEM COM PULSO E BRILHO) */
+/* BOTÃO GOOGLE SEM BORDA BRANCA (CORTE APENAS NO AMARELO) */
 .btn-google-container {
   width: 100%;
   max-width: 290px;
   position: relative;
-  border-radius: 50px;
+  /* Arredondamento perfeito para ocultar cantos brancos da imagem */
+  border-radius: 999px; 
   overflow: hidden;
   cursor: pointer;
   display: block;
+  background: transparent;
   animation: pulse-google 2.2s ease-in-out infinite;
 }
 
@@ -189,7 +200,11 @@ body::before{
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 50px;
+  /* Aplica recorte interno e mistura leve para sumir com fundos claros residuais */
+  border-radius: 999px;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  background: #ffcc00;
 }
 
 /* Efeito Shimmer (Brilho a passar) por cima da imagem */
@@ -206,7 +221,7 @@ body::before{
 
 @keyframes pulse-google {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0.6); }
-  50% { transform: scale(1.03); box-shadow: 0 0 18px 4px rgba(251,188,5,0.4); }
+  50% { transform: scale(1.03); box-shadow: 0 0 18px 4px rgba(251,188,5,0.5); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0); }
 }
 
@@ -260,7 +275,7 @@ body::before{
 /* Endereço */
 .address{font-size:.74rem;color:#aaaaaa;line-height:1.4}
 
-/* RODAPÉ COMPACTO (ECONOMIA DE ESPAÇO) */
+/* RODAPÉ COMPACTO */
 .footer{
   font-size:.65rem;
   color:#777777;
@@ -277,7 +292,6 @@ body::before{
 .footer-promo a{color:#ffd700;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:1px;transition:color .2s}
 .footer-promo a:hover{color:#ffffff}
 
-/* Linha combinada com SSL e Desenvolvedor para poupar altura */
 .footer-bottom-row {
   display: flex;
   align-items: center;
@@ -447,9 +461,19 @@ body::before{
       </div>
     </div>
 
-    <!-- FAIXA DE BANNER MOTIVACIONAL ROTATIVA ABAIXO DE ITAQUAQUECETUBA -->
+    <!-- FAIXA BANNER COM TODAS AS FRASES EM MOVIMENTO LENTO CONTÍNUO -->
     <div class="quote-banner">
-      <div class="quote-text" id="quoteText">"O seu único limite é você mesmo."</div>
+      <div class="quote-track">
+        <span class="quote-item">"O seu único limite é você mesmo."</span>
+        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
+        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
+        <span class="quote-item">"A constância vence o talento."</span>
+        <!-- Cópias repetidas para manter a animação fluida e sem cortes -->
+        <span class="quote-item">"O seu único limite é você mesmo."</span>
+        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
+        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
+        <span class="quote-item">"A constância vence o talento."</span>
+      </div>
     </div>
 
     <div>
@@ -459,7 +483,7 @@ body::before{
       <div class="rating-text">Sua evolução é a nossa prioridade!</div>
     </div>
 
-    <!-- BOTÃO GOOGLE PERSONALIZADO COM PULSO E SHIMMER -->
+    <!-- BOTÃO GOOGLE SEM MOLDURA BRANCA -->
     <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
       <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
     </a>
@@ -521,7 +545,6 @@ body::before{
 
   </div>
 
-  <!-- RODAPÉ OTIMIZADO PARA COMPACTAÇÃO DE ESPAÇO -->
   <div class="footer">
     <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
       <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
@@ -607,26 +630,6 @@ body::before{
 
 
 <script>
-// FRASES DO BANNER ROTATIVO
-const quotes = [
-  '"O seu único limite é você mesmo."',
-  '"Um passo de cada vez, todos os dias."',
-  '"Mantenha o ritmo. O resultado vem."',
-  '"A constância vence o talento."'
-];
-
-let quoteIndex = 0;
-const quoteEl = document.getElementById('quoteText');
-
-setInterval(() => {
-  quoteEl.style.opacity = 0;
-  setTimeout(() => {
-    quoteIndex = (quoteIndex + 1) % quotes.length;
-    quoteEl.textContent = quotes[quoteIndex];
-    quoteEl.style.opacity = 1;
-  }, 500);
-}, 3500);
-
 const faqs = [
   {
     q: 'Como faço para me matricular?',
