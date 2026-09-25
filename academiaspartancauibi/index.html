@@ -75,18 +75,18 @@ body::before{
     0 0 25px rgba(255, 215, 0, 0.35),
     0 0 50px rgba(255, 0, 0, 0.25),
     inset 0 0 15px rgba(255, 215, 0, 0.1);
-  padding: 1.5rem 1.2rem 1.2rem;
+  padding: 1.4rem 1.2rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
-.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:0.85rem;width:100%}
 
 /* Logo Retangular com Shimmer Dourado */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
 
 .logo-frame{
   position:relative;
@@ -121,9 +121,9 @@ body::before{
 
 .logo-img{
   display:block;
-  width:150px;
+  width:140px;
   height:auto;
-  max-height:80px;
+  max-height:75px;
   border-radius:12px;
   border:1.5px solid rgba(212, 175, 55, 0.8);
   object-fit:contain;
@@ -134,60 +134,24 @@ body::before{
 
 .brand{
   font-family:'Poppins',sans-serif;
-  font-size:1.4rem;font-weight:800;
+  font-size:1.35rem;font-weight:800;
   color:#ffffff;letter-spacing:.02em;line-height:1.1;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 .brand em{color:#ffd700;font-style:normal}
-.tagline{font-size:.75rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-
-/* FAIXA BANNER COM MOVIMENTO LENTO (MARQUEE) */
-.quote-banner {
-  width: 100%;
-  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.18) 50%, rgba(255,215,0,0.05) 100%);
-  border-top: 1px solid rgba(255, 215, 0, 0.4);
-  border-bottom: 1px solid rgba(255, 215, 0, 0.4);
-  padding: 0.45rem 0;
-  margin-top: 0.1rem;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  white-space: nowrap;
-}
-
-.quote-track {
-  display: flex;
-  width: max-content;
-  animation: scroll-left 22s linear infinite;
-}
-
-.quote-item {
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 8px rgba(255,215,0,0.6);
-  padding: 0 1.8rem;
-}
-
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+.tagline{font-size:.73rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 
 /* Avaliação / Estrelas */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.1rem;color:#ffd700}
-.rating-text{font-size:.75rem;color:#cccccc;margin-top:.1rem}
+.star{font-size:1.05rem;color:#ffd700}
+.rating-text{font-size:.72rem;color:#cccccc;margin-top:.05rem}
 
-/* BOTÃO GOOGLE SEM BORDA BRANCA (CORTE APENAS NO AMARELO) */
+/* BOTÃO GOOGLE SEM BORDA BRANCA */
 .btn-google-container {
   width: 100%;
-  max-width: 290px;
+  max-width: 280px;
   position: relative;
-  /* Arredondamento perfeito para ocultar cantos brancos da imagem */
   border-radius: 999px; 
   overflow: hidden;
   cursor: pointer;
@@ -200,14 +164,12 @@ body::before{
   width: 100%;
   height: auto;
   display: block;
-  /* Aplica recorte interno e mistura leve para sumir com fundos claros residuais */
   border-radius: 999px;
   object-fit: cover;
   mix-blend-mode: multiply;
   background: #ffcc00;
 }
 
-/* Efeito Shimmer (Brilho a passar) por cima da imagem */
 .btn-google-container::after {
   content: '';
   position: absolute;
@@ -256,12 +218,12 @@ body::before{
 .faq-link{
   background:none;border:none;
   color:#ffffff;
-  font-size:.82rem;font-family:'DM Sans',sans-serif;
+  font-size:.8rem;font-family:'DM Sans',sans-serif;
   cursor:pointer;letter-spacing:.03em;
   display:flex;align-items:center;gap:.35rem;
   text-decoration:none;
   transition:all .2s;
-  padding:.35rem .75rem;
+  padding:.3rem .75rem;
   border-radius:20px;
   border: 1px solid rgba(212,175,55,0.4);
 }
@@ -273,7 +235,42 @@ body::before{
 .faq-link svg{width:14px;height:14px}
 
 /* Endereço */
-.address{font-size:.74rem;color:#aaaaaa;line-height:1.4}
+.address{font-size:.73rem;color:#aaaaaa;line-height:1.4}
+
+/* FAIXA BANNER ABAIXO DO ENDEREÇO */
+.quote-banner {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.18) 50%, rgba(255,215,0,0.05) 100%);
+  border-top: 1px solid rgba(255, 215, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+  padding: 0.4rem 0;
+  margin-top: 0.2rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+}
+
+.quote-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 22s linear infinite;
+}
+
+.quote-item {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 8px rgba(255,215,0,0.6);
+  padding: 0 1.8rem;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 /* RODAPÉ COMPACTO */
 .footer{
@@ -286,9 +283,9 @@ body::before{
   gap:.35rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:0.75rem;
+  padding-top:0.65rem;
 }
-.footer-promo{font-size:.68rem;color:#999999;line-height:1.3;text-align:center}
+.footer-promo{font-size:.67rem;color:#999999;line-height:1.3;text-align:center}
 .footer-promo a{color:#ffd700;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:1px;transition:color .2s}
 .footer-promo a:hover{color:#ffffff}
 
@@ -356,7 +353,7 @@ body::before{
 
 /* Cabeçalho do Modal */
 .sheet-head{
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;align-items:center;justify-space-between:space-between;
   padding:0.8rem 1.4rem;
   border-bottom:1px solid rgba(255,255,255,0.1);
   background: rgba(0,0,0,0.4);
@@ -449,11 +446,12 @@ body::before{
 <div class="device-frame">
   <div class="page">
 
+    <!-- Logo / Marca -->
     <div class="logo-wrap">
       <div class="logo-frame">
         <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-img-fallback" style="display:none; width:150px; height:70px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
+        <div class="logo-img-fallback" style="display:none; width:140px; height:70px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
       </div>
       <div>
         <div class="brand">Spartan <em>Fight Fit</em></div>
@@ -461,21 +459,7 @@ body::before{
       </div>
     </div>
 
-    <!-- FAIXA BANNER COM TODAS AS FRASES EM MOVIMENTO LENTO CONTÍNUO -->
-    <div class="quote-banner">
-      <div class="quote-track">
-        <span class="quote-item">"O seu único limite é você mesmo."</span>
-        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
-        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
-        <span class="quote-item">"A constância vence o talento."</span>
-        <!-- Cópias repetidas para manter a animação fluida e sem cortes -->
-        <span class="quote-item">"O seu único limite é você mesmo."</span>
-        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
-        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
-        <span class="quote-item">"A constância vence o talento."</span>
-      </div>
-    </div>
-
+    <!-- Estrelas (SUBIDAS) -->
     <div>
       <div class="stars-row" aria-label="Avaliação 5 estrelas">
         <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -483,11 +467,12 @@ body::before{
       <div class="rating-text">Sua evolução é a nossa prioridade!</div>
     </div>
 
-    <!-- BOTÃO GOOGLE SEM MOLDURA BRANCA -->
+    <!-- Botão Google (SUBIDO) -->
     <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
       <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
     </a>
 
+    <!-- Ícones de Acesso Rápido / Redes Sociais -->
     <div class="social-row" aria-label="Redes sociais e contato">
 
       <!-- WhatsApp -->
@@ -533,18 +518,36 @@ body::before{
 
     </div>
 
+    <!-- FAQ Link -->
     <button class="faq-link" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Tire suas dúvidas
     </button>
 
+    <!-- Endereço -->
     <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
       <span itemprop="streetAddress">Estrada dos Índios, 861</span> · Jd. Caiubi<br>
       <span itemprop="addressLocality">Itaquaquecetuba</span>, <span itemprop="addressRegion">SP</span> · Musculação & Lutas
     </div>
 
+    <!-- FAIXA BANNER REPOSICIONADA (ABAIXO DO ENDEREÇO) -->
+    <div class="quote-banner">
+      <div class="quote-track">
+        <span class="quote-item">"O seu único limite é você mesmo."</span>
+        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
+        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
+        <span class="quote-item">"A constância vence o talento."</span>
+        <!-- Cópias repetidas para manter a animação sem cortes -->
+        <span class="quote-item">"O seu único limite é você mesmo."</span>
+        <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
+        <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
+        <span class="quote-item">"A constância vence o talento."</span>
+      </div>
+    </div>
+
   </div>
 
+  <!-- Rodapé -->
   <div class="footer">
     <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
       <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
