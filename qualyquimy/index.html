@@ -24,7 +24,8 @@ body{
   padding:1.5rem 0.5rem;
   overflow-x:hidden;
   position:relative;
-  perspective: 1000px;
+  /* Garante o ponto de vista 3D refinado */
+  perspective: 1200px;
 }
 
 /* Background glow subtle */
@@ -39,7 +40,7 @@ body::before{
   z-index:0;
 }
 
-/* Container principal para alinhar a moldura e os controles externos */
+/* Container principal */
 .app-wrapper {
   display: flex;
   flex-direction: column;
@@ -51,7 +52,7 @@ body::before{
   z-index: 1;
 }
 
-/* Moldura externa com NEON BRANCO e Giroscópio 3D */
+/* Moldura externa (Camada Base 0) */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -75,7 +76,7 @@ body::before{
   will-change: transform;
 }
 
-/* Efeito 3D para flutuação do conteúdo */
+/* Estrutura de conteúdo 3D */
 .page {
   position:relative;
   z-index:1;
@@ -85,7 +86,29 @@ body::before{
   gap:1.1rem;
   width:100%;
   transform-style: preserve-3d;
-  transform: translateZ(25px);
+}
+
+/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (PROFUNDIDADE 3D): */
+.layer-back {
+  transform: translateZ(15px);
+  transform-style: preserve-3d;
+}
+
+.layer-mid {
+  transform: translateZ(35px);
+  transform-style: preserve-3d;
+}
+
+.layer-front {
+  transform: translateZ(55px);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
+
+.layer-pop {
+  transform: translateZ(75px);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
 }
 
 /* Logo area */
@@ -166,10 +189,10 @@ body::before{
 .social-icon{
   width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  border:1.5px solid rgba(255,255,255,.2);
+  border:1.5px solid rgba(255,255,255,.3);
   transition:border-color .2s,box-shadow .2s;
 }
-.social-btn:hover .social-icon{border-color:rgba(255,255,255,.4);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .social-icon svg{width:20px;height:20px}
 .social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
 
@@ -187,7 +210,6 @@ body::before{
   width:100%;max-width:260px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(251,188,5,.5);
 }
 .btn-google::after{
   content:'';
@@ -304,7 +326,7 @@ body::before{
   border-color: #3b82f6;
 }
 
-/* CONTROLES EXTERNOS (Fora da borda/card) */
+/* CONTROLES EXTERNOS */
 .external-controls {
   display: flex;
   gap: 0.6rem;
@@ -349,7 +371,8 @@ body::before{
   <div class="device-frame" id="deviceFrame">
     <div class="page">
 
-      <div class="logo-wrap">
+      <!-- CAMADA 1: Logo (Profundidade Média) -->
+      <div class="logo-wrap layer-mid">
         <div class="logo-frame">
           <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -361,25 +384,30 @@ body::before{
         </div>
       </div>
 
-      <div>
+      <!-- CAMADA 2: Estrelas (Profundidade Baixa) -->
+      <div class="layer-back">
         <div class="stars-row" aria-label="Avaliação 5 estrelas">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
         <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
       </div>
 
-      <a
-        href="https://g.page/r/CRECbD178tUDEAE/review"
-        class="btn-google"
-        target="_blank"
-        rel="noopener"
-        aria-label="Avaliar no Google"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        Avaliar no Google ⭐⭐⭐⭐⭐
-      </a>
+      <!-- CAMADA 3: Botão Google (Super Destaque / Alta Profundidade) -->
+      <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
+        <a
+          href="https://g.page/r/CRECbD178tUDEAE/review"
+          class="btn-google"
+          target="_blank"
+          rel="noopener"
+          aria-label="Avaliar no Google"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Avaliar no Google ⭐⭐⭐⭐⭐
+        </a>
+      </div>
 
-      <div class="social-row" aria-label="Redes sociais e contato">
+      <!-- CAMADA 4: Ícones de Redes Sociais (Camada Frontal de Destaque) -->
+      <div class="social-row layer-front" aria-label="Redes sociais e contato">
 
         <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
           <div class="social-icon" style="background:#1a2e1a;">
@@ -419,13 +447,14 @@ body::before{
 
       </div>
 
-      <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+      <!-- CAMADA 5: Endereço (Profundidade Baixa) -->
+      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
       </div>
 
-      <!-- Banner Infinito -->
-      <div class="ticker-banner">
+      <!-- CAMADA 6: Banner (Profundidade Média) -->
+      <div class="ticker-banner layer-mid">
         <div class="ticker-track">
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
@@ -434,7 +463,7 @@ body::before{
 
     </div>
 
-    <div class="footer">
+    <div class="footer layer-back">
       <p class="footer-promo">Deseja um link como este para sua empresa?<br>
         <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
       </p>
@@ -449,7 +478,7 @@ body::before{
     </div>
   </div>
 
-  <!-- BOTÕES DO LADO DE FORA DA BORDA (Nível 1 e Nível 2) -->
+  <!-- BOTÕES DE SENSIBILIDADE DO GIROSCÓPIO -->
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
     <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
@@ -466,10 +495,10 @@ body::before{
   let giroscopioAtivo = false;
   let nivelAtual = 1;
 
-  // Configurações de intensidade para cada nível
+  // Configurações com alta amplitude para evidenciar as camadas 3D
   const configuracoes = {
-    1: { intensidadeCelular: 0.6, intensidadeMouse: 14, anguloMax: 30 },
-    2: { intensidadeCelular: 1.5, intensidadeMouse: 32, anguloMax: 55 }
+    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
+    2: { intensidadeCelular: 1.8, intensidadeMouse: 38, anguloMax: 60 }
   };
 
   function definirNivel(lvl) {
@@ -529,7 +558,7 @@ body::before{
     }
   }
 
-  /* Movimento de Mouse no Desktop */
+  /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
     if (!giroscopioAtivo) return;
     const config = configuracoes[nivelAtual];
