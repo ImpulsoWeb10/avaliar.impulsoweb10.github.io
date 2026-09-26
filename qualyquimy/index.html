@@ -24,7 +24,6 @@ body{
   padding:1.5rem 0.5rem;
   overflow-x:hidden;
   position:relative;
-  /* Garante o ponto de vista 3D refinado */
   perspective: 1200px;
 }
 
@@ -76,7 +75,45 @@ body::before{
   will-change: transform;
 }
 
-/* Estrutura de conteúdo 3D */
+/* MENSAGEM SECRETA NAS COSTAS DO CARD */
+.secret-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 2rem;
+  /* Vira o elemento para o lado inverso */
+  transform: rotateY(180deg) translateZ(1px);
+  /* Esconde a frente quando estiver virado */
+  backface-visibility: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
+}
+
+.secret-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.secret-sub {
+  font-size: 0.85rem;
+  color: #a3c0e4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Estrutura de conteúdo 3D da Frente */
 .page {
   position:relative;
   z-index:1;
@@ -86,9 +123,10 @@ body::before{
   gap:1.1rem;
   width:100%;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (PROFUNDIDADE 3D): */
+/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
 .layer-back {
   transform: translateZ(15px);
   transform-style: preserve-3d;
@@ -369,9 +407,16 @@ body::before{
 <div class="app-wrapper">
   
   <div class="device-frame" id="deviceFrame">
+    
+    <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
+    <div class="secret-back">
+      <div class="secret-title">Jesus te ama! ❤️</div>
+      <div class="secret-sub">Que você tenha um ótimo dia!</div>
+    </div>
+
+    <!-- FRENTE DO CARD -->
     <div class="page">
 
-      <!-- CAMADA 1: Logo (Profundidade Média) -->
       <div class="logo-wrap layer-mid">
         <div class="logo-frame">
           <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
@@ -384,7 +429,6 @@ body::before{
         </div>
       </div>
 
-      <!-- CAMADA 2: Estrelas (Profundidade Baixa) -->
       <div class="layer-back">
         <div class="stars-row" aria-label="Avaliação 5 estrelas">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -392,7 +436,6 @@ body::before{
         <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
       </div>
 
-      <!-- CAMADA 3: Botão Google (Super Destaque / Alta Profundidade) -->
       <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
         <a
           href="https://g.page/r/CRECbD178tUDEAE/review"
@@ -406,7 +449,6 @@ body::before{
         </a>
       </div>
 
-      <!-- CAMADA 4: Ícones de Redes Sociais (Camada Frontal de Destaque) -->
       <div class="social-row layer-front" aria-label="Redes sociais e contato">
 
         <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -447,13 +489,11 @@ body::before{
 
       </div>
 
-      <!-- CAMADA 5: Endereço (Profundidade Baixa) -->
       <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
       </div>
 
-      <!-- CAMADA 6: Banner (Profundidade Média) -->
       <div class="ticker-banner layer-mid">
         <div class="ticker-track">
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
@@ -478,7 +518,6 @@ body::before{
     </div>
   </div>
 
-  <!-- BOTÕES DE SENSIBILIDADE DO GIROSCÓPIO -->
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
     <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
@@ -495,10 +534,10 @@ body::before{
   let giroscopioAtivo = false;
   let nivelAtual = 1;
 
-  // Configurações com alta amplitude para evidenciar as camadas 3D
+  // Aumentamos os limites no Nível 2 para permitir dar a volta/virar até as costas
   const configuracoes = {
     1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 1.8, intensidadeMouse: 38, anguloMax: 60 }
+    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
   };
 
   function definirNivel(lvl) {
