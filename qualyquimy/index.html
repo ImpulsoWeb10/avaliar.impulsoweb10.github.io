@@ -71,8 +71,36 @@ body::before{
   text-align: center;
   gap: 1.1rem;
   transform-style: preserve-3d;
-  transition: transform 0.08s linear;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
+}
+
+/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
+body.mode-xray .device-frame {
+  transform: rotateY(-35deg) rotateX(15deg) !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
+}
+body.mode-xray .layer-back {
+  transform: translateZ(-30px) !important;
+  opacity: 0.75;
+  transition: transform 0.6s ease;
+}
+body.mode-xray .layer-mid {
+  transform: translateZ(50px) !important;
+  transition: transform 0.6s ease;
+}
+body.mode-xray .layer-front {
+  transform: translateZ(110px) !important;
+  transition: transform 0.6s ease;
+}
+body.mode-xray .layer-pop {
+  transform: translateZ(170px) !important;
+  transition: transform 0.6s ease;
+}
+body.mode-xray .secret-back {
+  transform: rotateY(180deg) translateZ(-60px) !important;
+  opacity: 0.5;
+  transition: transform 0.6s ease;
 }
 
 /* MENSAGEM SECRETA NAS COSTAS DO CARD */
@@ -89,12 +117,11 @@ body::before{
   justify-content: center;
   gap: 0.8rem;
   padding: 2rem;
-  /* Vira o elemento para o lado inverso */
   transform: rotateY(180deg) translateZ(1px);
-  /* Esconde a frente quando estiver virado */
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
+  transition: transform 0.4s ease;
 }
 
 .secret-title {
@@ -130,23 +157,27 @@ body::before{
 .layer-back {
   transform: translateZ(15px);
   transform-style: preserve-3d;
+  transition: transform 0.4s ease;
 }
 
 .layer-mid {
   transform: translateZ(35px);
   transform-style: preserve-3d;
+  transition: transform 0.4s ease;
 }
 
 .layer-front {
   transform: translateZ(55px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+  transition: transform 0.4s ease;
 }
 
 .layer-pop {
   transform: translateZ(75px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
+  transition: transform 0.4s ease;
 }
 
 /* Logo area */
@@ -367,11 +398,12 @@ body::before{
 /* CONTROLES EXTERNOS */
 .external-controls {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding-top: 0.2rem;
+  flex-wrap: wrap;
 }
 
 .level-btn {
@@ -379,7 +411,7 @@ body::before{
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 0.4rem 0.9rem;
+  padding: 0.4rem 0.8rem;
   font-size: 0.72rem;
   font-weight: 500;
   cursor: pointer;
@@ -399,6 +431,23 @@ body::before{
   color: #ffffff;
   border-color: #60a5fa;
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+
+/* Estilo do Botão Raio-X */
+.xray-btn {
+  background: rgba(88, 28, 135, 0.85);
+  color: #d8b4fe;
+  border: 1px solid rgba(192, 132, 252, 0.4);
+}
+.xray-btn:hover {
+  border-color: #c084fc;
+  color: #ffffff;
+}
+.xray-btn.active {
+  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+  color: #ffffff;
+  border-color: #e9d5ff;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
 }
 </style>
 </head>
@@ -521,6 +570,7 @@ body::before{
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
     <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
+    <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
 </div>
@@ -530,17 +580,19 @@ body::before{
   const btnGyro = document.getElementById('toggleGyro');
   const btnLvl1 = document.getElementById('btnLvl1');
   const btnLvl2 = document.getElementById('btnLvl2');
+  const btnXray = document.getElementById('btnXray');
 
   let giroscopioAtivo = false;
+  let modoRaioX = false;
   let nivelAtual = 1;
 
-  // Aumentamos os limites no Nível 2 para permitir dar a volta/virar até as costas
   const configuracoes = {
     1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
     2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
   };
 
   function definirNivel(lvl) {
+    if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
     if (lvl === 1) {
       btnLvl1.classList.add('active');
@@ -551,8 +603,28 @@ body::before{
     }
   }
 
+  function alternarRaioX() {
+    modoRaioX = !modoRaioX;
+    if (modoRaioX) {
+      document.body.classList.add('mode-xray');
+      btnXray.classList.add('active');
+      btnLvl1.classList.remove('active');
+      btnLvl2.classList.remove('active');
+    } else {
+      desativarRaioX();
+    }
+  }
+
+  function desativarRaioX() {
+    modoRaioX = false;
+    document.body.classList.remove('mode-xray');
+    btnXray.classList.remove('active');
+    definirNivel(nivelAtual);
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+
   function handleOrientation(e) {
-    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
+    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
 
     const config = configuracoes[nivelAtual];
     let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
@@ -573,7 +645,9 @@ body::before{
     giroscopioAtivo = false;
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    if (!modoRaioX) {
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    }
   }
 
   function alternarGiroscopio() {
@@ -599,7 +673,7 @@ body::before{
 
   /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
-    if (!giroscopioAtivo) return;
+    if (modoRaioX || !giroscopioAtivo) return;
     const config = configuracoes[nivelAtual];
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
@@ -609,7 +683,7 @@ body::before{
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo) {
+    if (giroscopioAtivo && !modoRaioX) {
       frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
