@@ -87,8 +87,8 @@ body::before{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 1.2rem;
+  gap: 0.4rem;
+  padding: 1rem;
   transform: rotateY(180deg);
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -98,7 +98,7 @@ body::before{
 
 .mago-back-img {
   width: 100%;
-  max-height: 310px;
+  height: 72%; /* Ajustado para ocupar melhor a altura do cartão sem estourar */
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
   border-radius: 12px;
@@ -106,15 +106,16 @@ body::before{
 
 .secret-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #ffd700;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   letter-spacing: 0.05em;
+  line-height: 1.1;
 }
 
 .secret-sub {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #a3c0e4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -460,7 +461,7 @@ body.mode-xray .layer-pop {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (O Mago 3D aparece aqui atrás ao virar) -->
+    <!-- VERSO DO CARTÃO (O Mago 3D preenchendo o espaço interno) -->
     <div class="card-back">
       <img src="mago3d.png" alt="Mago 3D Verso" class="mago-back-img">
       <div class="secret-title">Tintas Qualy Quimy</div>
@@ -590,7 +591,6 @@ body.mode-xray .layer-pop {
   let modoRaioX = false;
   let nivelAtual = 1;
 
-  // Variáveis para guardar rotação acumulada e livre para todos os lados no Nível 2
   let rotacaoYAcumulada = 0;
   let rotacaoXAcumulada = 0;
 
@@ -607,7 +607,6 @@ body.mode-xray .layer-pop {
     } else {
       btnLvl2.classList.add('active');
       btnLvl1.classList.remove('active');
-      // Força a viragem inicial de 180 graus para mostrar o mago nas costas
       rotacaoYAcumulada = 180;
       rotacaoXAcumulada = 0;
       frame.style.transform = `rotateY(${rotacaoYAcumulada}deg) rotateX(${rotacaoXAcumulada}deg)`;
@@ -637,7 +636,6 @@ body.mode-xray .layer-pop {
     if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
 
     if (nivelAtual === 2) {
-      // Giro livre completo para todo o lado baseado na inclinação do celular
       let x = e.gamma * 1.5;
       let y = (e.beta - 45) * 1.5;
       frame.style.transform = `rotateY(${180 + x}deg) rotateX(${-y}deg)`;
@@ -686,7 +684,6 @@ body.mode-xray .layer-pop {
     }
   }
 
-  /* Movimento interativo com o Mouse no Desktop */
   document.addEventListener('mousemove', (e) => {
     if (modoRaioX || !giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
@@ -694,7 +691,6 @@ body.mode-xray .layer-pop {
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
     if (nivelAtual === 2) {
-      // No nível 2 com mouse, permite girar o cartão livremente para ver as costas e a frente
       frame.style.transform = `rotateY(${180 + (x * 120)}deg) rotateX(${-y * 90}deg)`;
     } else {
       frame.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg)`;
