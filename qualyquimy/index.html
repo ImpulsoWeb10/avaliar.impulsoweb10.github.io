@@ -75,40 +75,76 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO (Onde fica o Mago 3D preenchendo o espaço interno) */
+/* VERSO DO CARTÃO COM CAMADAS 3D SEPARADAS (fundo, mago e moldura) */
 .card-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
   border-radius: 22px;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  z-index: 2;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+/* Camada 1: Fundo do Verso */
+.back-layer-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateZ(-20px);
+  border-radius: 22px;
+}
+
+/* Camada 2: Mago no Meio do Verso */
+.back-layer-mago {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+  transform: translateZ(30px);
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+}
+
+/* Camada 3: Moldura por Cima no Verso */
+.back-layer-moldura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transform: translateZ(70px);
+  pointer-events: none;
+  border-radius: 22px;
+}
+
+/* Textos flutuantes sobre o mago no verso */
+.back-content {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 1rem 1rem 1rem;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 25px rgba(201, 169, 110, 0.25);
-  z-index: 2;
-}
-
-.mago-back-img {
-  width: 100%;
-  height: 82%; /* Ocupa grande parte da altura do verso */
-  object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
-  border-radius: 12px;
+  gap: 0.2rem;
+  transform: translateZ(50px);
+  z-index: 5;
+  text-align: center;
 }
 
 .secret-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
   letter-spacing: 0.05em;
   line-height: 1;
 }
@@ -118,6 +154,7 @@ body::before{
   color: #a3c0e4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 /* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
@@ -125,20 +162,20 @@ body.mode-xray .device-frame {
   transform: rotateY(-35deg) rotateX(15deg) !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
-body.mode-xray .layer-back {
-  transform: translateZ(-30px) !important;
+body.mode-xray .layer-back, body.mode-xray .back-layer-bg {
+  transform: translateZ(-50px) !important;
   opacity: 0.75;
   transition: transform 0.6s ease;
 }
-body.mode-xray .layer-mid {
-  transform: translateZ(50px) !important;
+body.mode-xray .layer-mid, body.mode-xray .back-layer-mago {
+  transform: translateZ(40px) !important;
   transition: transform 0.6s ease;
 }
-body.mode-xray .layer-front {
+body.mode-xray .layer-front, body.mode-xray .back-content {
   transform: translateZ(110px) !important;
   transition: transform 0.6s ease;
 }
-body.mode-xray .layer-pop {
+body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
   transform: translateZ(170px) !important;
   transition: transform 0.6s ease;
 }
@@ -156,7 +193,7 @@ body.mode-xray .layer-pop {
   backface-visibility: hidden;
 }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
+/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (Frente) */
 .layer-back {
   transform: translateZ(15px);
   transform-style: preserve-3d;
@@ -460,13 +497,15 @@ body.mode-xray .layer-pop {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (O Mago 3D preenchendo o espaço interno) -->
+    <!-- VERSO DO CARTÃO COM AS 3 IMAGENS SEPARADAS EM 3D -->
     <div class="card-back">
-      <img src="mago3d.png" alt="Mago 3D Verso" class="mago-back-img">
-      <div>
+      <img src="fundo.png" alt="Fundo Verso" class="back-layer-bg">
+      <img src="mago.png" alt="Mago Verso" class="back-layer-mago">
+      <div class="back-content">
         <div class="secret-title">Tintas Qualy Quimy</div>
         <div class="secret-sub">Magia em Cores e Acabamentos</div>
       </div>
+      <img src="moldura.png" alt="Moldura Verso" class="back-layer-moldura">
     </div>
 
     <!-- FRENTE DO CARD -->
