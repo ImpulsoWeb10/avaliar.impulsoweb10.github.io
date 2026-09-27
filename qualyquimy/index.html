@@ -25,79 +25,84 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:1rem;
-  perspective: 1200px;
+  padding:0;
+  margin:0;
+  perspective: 1400px;
 }
 
-/* Background glow subtle */
+/* Background glow */
 body::before{
   content:'';
   position:fixed;
   inset:0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,169,110,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(17,40,80,0.6) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(201,169,110,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(17,40,80,0.7) 0%, transparent 60%);
   pointer-events:none;
   z-index:0;
 }
 
-/* Container principal ajustado para ocupar toda a largura da tela */
+/* Faz o wrapper ocupar a tela inteira preenchendo os espaços */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
-  width: 100%;
-  max-width: 600px;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
   position: relative;
   z-index: 1;
+  padding: 1.5rem 1rem;
 }
 
-/* Moldura principal com efeito 3D / Paralaxe ativo */
+/* Moldura principal ocupando o espaço fluido da tela com efeito 3D */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 520px;
+  height: 100%;
+  max-height: 820px;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
-  border: 2px solid #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   box-shadow: 
-    0 0 10px #ffffff,
-    0 0 20px rgba(255, 255, 255, 0.8),
-    0 0 30px rgba(255, 255, 255, 0.35),
-    0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.8rem 1.4rem;
+    0 0 15px rgba(255, 255, 255, 0.4),
+    0 20px 40px rgba(0, 0, 0, 0.8);
+  padding: 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
-  gap: 1.2rem;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease-out; /* Suavidade para o paralaxe */
+  transition: transform 0.08s ease-out;
   will-change: transform;
 }
 
 /* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
 body.mode-xray .device-frame {
-  transform: rotateY(-35deg) rotateX(15deg) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
+  transform: rotateY(-30deg) rotateX(15deg) !important;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
 body.mode-xray .layer-back {
-  transform: translateZ(-30px) !important;
-  opacity: 0.75;
+  transform: translateZ(-40px) !important;
+  opacity: 0.8;
 }
 body.mode-xray .layer-mid {
-  transform: translateZ(50px) !important;
+  transform: translateZ(40px) !important;
 }
 body.mode-xray .layer-front {
-  transform: translateZ(110px) !important;
+  transform: translateZ(100px) !important;
 }
 body.mode-xray .layer-pop {
-  transform: translateZ(170px) !important;
+  transform: translateZ(160px) !important;
 }
 body.mode-xray .secret-back {
-  transform: rotateY(180deg) translateZ(-60px) !important;
-  opacity: 0.85;
+  transform: rotateY(180deg) translateZ(-70px) !important;
+  opacity: 0.9;
 }
 
 /* VERSO DO CARD COM AS 3 IMAGENS */
@@ -112,79 +117,79 @@ body.mode-xray .secret-back {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.2rem;
   padding: 1.5rem;
-  transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg) translateZ(2px);
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
+  box-shadow: inset 0 0 25px rgba(201, 169, 110, 0.25);
 }
 
 .secret-title-custom {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #ffd700;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   letter-spacing: 0.05em;
-  margin-bottom: 0.2rem;
 }
 
 .images-grid {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.8rem;
   width: 100%;
   justify-content: center;
 }
 
 .card-back-img {
   width: 31%;
-  height: 130px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 10px;
-  border: 1.5px solid rgba(201, 169, 110, 0.5);
+  border-radius: 12px;
+  border: 1.5px solid rgba(201, 169, 110, 0.6);
   background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
 }
 
 /* Estrutura de conteúdo 3D da Frente */
 .page {
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:1.1rem;
-  width:100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (PARALAXE) */
+/* CAMADAS COM PROFUNDIDADE REAL PARA O PARALAXE */
 .layer-back {
-  transform: translateZ(20px);
+  transform: translateZ(25px);
   transform-style: preserve-3d;
 }
 
 .layer-mid {
-  transform: translateZ(45px);
+  transform: translateZ(55px);
   transform-style: preserve-3d;
 }
 
 .layer-front {
-  transform: translateZ(70px);
+  transform: translateZ(85px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
 }
 
 .layer-pop {
-  transform: translateZ(95px);
+  transform: translateZ(115px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
 }
 
 /* Logo area */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
 
 .logo-frame{
   position:relative;
@@ -217,9 +222,9 @@ body.mode-xray .secret-back {
 
 .logo-img{
   display:block;
-  width:180px;
+  width:160px;
   height:auto;
-  max-height:85px;
+  max-height:75px;
   border-radius:12px;
   border:2px solid rgba(201,169,110,.4);
   object-fit:contain;
@@ -227,59 +232,59 @@ body.mode-xray .secret-back {
   position:relative;z-index:1;
 }
 .logo-img-fallback{
-  width:180px;height:75px;
+  width:160px;height:70px;
   border-radius:12px;
   border:2px solid rgba(201,169,110,.4);
   background:rgba(201,169,110,0.06);
   display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;
-  font-size:1.6rem;color:#c9a96e;font-weight:600;
+  font-size:1.5rem;color:#c9a96e;font-weight:600;
   letter-spacing:.08em;
   position:relative;z-index:1;
 }
 .brand{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.9rem;font-weight:600;
+  font-size:1.7rem;font-weight:600;
   color:#f0ece5;letter-spacing:.06em;line-height:1.1;
 }
 .brand em{color:#c9a96e;font-style:italic}
-.tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
+.tagline{font-size:.75rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
 
 /* Rating stars */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.15rem;color:#ffd700}
-.rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
+.star{font-size:1.1rem;color:#ffd700}
+.rating-text{font-size:.75rem;color:#a3c0e4;margin-top:.1rem}
 
 /* 4 icon buttons row */
-.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center;width:100%}
+.social-row{display:flex;gap:.8rem;justify-content:center;align-items:center;width:100%}
 .social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.25rem;
+  display:flex;flex-direction:column;align-items:center;gap:.2rem;
   text-decoration:none;
   transition:transform .2s;
 }
 .social-btn:hover{transform:translateY(-3px)}
 .social-icon{
-  width:50px;height:50px;border-radius:50%;
+  width:46px;height:46px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,255,255,.3);
   transition:border-color .2s,box-shadow .2s;
 }
 .social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:22px;height:22px}
-.social-label{font-size:.7rem;color:#9bb5d4;letter-spacing:.04em}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
 
 /* Google button */
 .btn-google{
   display:inline-flex;align-items:center;gap:.5rem;
   background:#FBBC05;
   color:#1a1200;font-weight:700;
-  padding:.8rem 1.4rem;
+  padding:.7rem 1.3rem;
   border-radius:50px;
-  font-size:.9rem;text-decoration:none;
+  font-size:.85rem;text-decoration:none;
   font-family:'DM Sans',sans-serif;
   letter-spacing:.02em;
   border:none;cursor:pointer;
-  width:100%;max-width:280px;justify-content:center;
+  width:100%;max-width:260px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
 }
@@ -300,11 +305,11 @@ body.mode-xray .secret-back {
   0%{left:-120%}
   55%,100%{left:160%}
 }
-.btn-google svg{width:18px;height:18px;flex-shrink:0}
+.btn-google svg{width:16px;height:16px;flex-shrink:0}
 .btn-google:hover{background:#fcc419;transform:translateY(-1px)}
 
 /* Address */
-.address{font-size:.78rem;color:#8ba4c4;line-height:1.4}
+.address{font-size:.75rem;color:#8ba4c4;line-height:1.4}
 
 /* Banner Infinito */
 .ticker-banner {
@@ -313,7 +318,7 @@ body.mode-xray .secret-back {
   background: rgba(201, 169, 110, 0.15);
   border: 1px solid rgba(201, 169, 110, 0.35);
   border-radius: 8px;
-  padding: 0.4rem 0;
+  padding: 0.35rem 0;
   display: flex;
 }
 .ticker-track {
@@ -322,7 +327,7 @@ body.mode-xray .secret-back {
   animation: infinite-scroll 18s linear infinite;
 }
 .ticker-item {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #fce8bd;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -336,21 +341,20 @@ body.mode-xray .secret-back {
 
 /* Footer interno */
 .footer{
-  font-size:.74rem;
+  font-size:.72rem;
   color:#d0dce8;
-  margin-top:0.2rem;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.4rem;
+  gap:.3rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:1rem;
+  padding-top:0.7rem;
 }
 .footer-promo{
-  font-size:.8rem;
+  font-size:.76rem;
   color:#ffffff;
-  line-height:1.4;
+  line-height:1.3;
   text-align:center;
   font-weight:400;
 }
@@ -363,10 +367,10 @@ body.mode-xray .secret-back {
   transition:color .2s;
 }
 .footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.7rem;color:#8ba4c4}
-.footer-ssl svg{width:12px;height:12px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-ssl{display:flex;align-items:center;gap:.3rem;font-size:.68rem;color:#8ba4c4}
+.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
 .footer-dev{
-  font-size:.74rem;
+  font-size:.72rem;
   color:#b0c4de;
   display:flex;
   align-items:center;
@@ -383,8 +387,8 @@ body.mode-xray .secret-back {
   color: #90caf9;
   border: 1px solid rgba(100, 181, 246, 0.4);
   border-radius: 12px;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.65rem;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.2s;
@@ -405,7 +409,6 @@ body.mode-xray .secret-back {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 0.4rem;
   flex-wrap: wrap;
 }
 
@@ -414,8 +417,8 @@ body.mode-xray .secret-back {
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 0.45rem 0.9rem;
-  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.72rem;
   font-weight: 500;
   cursor: pointer;
   font-family: inherit;
@@ -569,7 +572,7 @@ body.mode-xray .secret-back {
       </div>
       <p class="footer-dev">
         Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
+        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: ON</button>
       </p>
     </div>
   </div>
@@ -589,13 +592,13 @@ body.mode-xray .secret-back {
   const btnLvl2 = document.getElementById('btnLvl2');
   const btnXray = document.getElementById('btnXray');
 
-  let giroscopioAtivo = true; // Mantém ativo por padrão para garantir o efeito
+  let giroscopioAtivo = true;
   let modoRaioX = false;
   let nivelAtual = 1;
 
   const configuracoes = {
-    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+    1: { intensidadeCelular: 0.9, intensidadeMouse: 22, anguloMax: 40 },
+    2: { intensidadeCelular: 2.5, intensidadeMouse: 120, anguloMax: 120 }
   };
 
   function definirNivel(lvl) {
@@ -678,7 +681,7 @@ body.mode-xray .secret-back {
     }
   }
 
-  /* Movimento no Desktop por Mousemove */
+  /* Movimento de Paralaxe fluido via Mouse */
   document.addEventListener('mousemove', (e) => {
     if (modoRaioX) return;
     const config = configuracoes[nivelAtual];
@@ -695,7 +698,6 @@ body.mode-xray .secret-back {
     }
   });
 
-  // Inicializa o botão de giroscópio como ligado no carregamento visual
   btnGyro.innerText = 'Giroscópio: ON';
   btnGyro.classList.add('active');
 </script>
