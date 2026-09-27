@@ -101,7 +101,7 @@ body::before{
   border-radius: 22px;
 }
 
-/* Camada 2: Mago no Meio do Verso (Com blend-mode para sumir o fundo branco) */
+/* Camada 2: Mago no Meio do Verso (Com blend-mode darken para preservar cores) */
 .back-layer-mago {
   position: absolute;
   inset: 0;
@@ -109,7 +109,8 @@ body::before{
   height: 100%;
   object-fit: fill;
   transform: translateZ(10px);
-  mix-blend-mode: multiply;
+  mix-blend-mode: darken;
+  filter: contrast(1.2) brightness(1.1);
 }
 
 /* Camada 3: Moldura por Cima no Verso com Mistura */
