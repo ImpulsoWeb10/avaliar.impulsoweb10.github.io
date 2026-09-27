@@ -27,20 +27,6 @@ body{
   perspective: 1200px;
 }
 
-/* Imagem de fundo fixa em tela cheia atrás de tudo */
-.bg-mago3d {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
-  will-change: transform;
-}
-
 /* Container principal */
 .app-wrapper {
   display: flex;
@@ -75,6 +61,28 @@ body{
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
+  overflow: hidden;
+}
+
+/* Imagem mago3d.png ajustada para ficar exatamente do tamanho do cartão, atrás do conteúdo */
+.bg-mago3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  opacity: 0.85; /* Ajuste opcional para mesclar com o fundo do cartão se necessário */
+}
+
+/* Garante que o conteúdo fique acima da imagem de fundo */
+.device-frame > *:not(.bg-mago3d) {
+  position: relative;
+  z-index: 1;
 }
 
 /* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
@@ -124,6 +132,7 @@ body.mode-xray .secret-back {
   border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
   transition: transform 0.4s ease;
+  z-index: 2;
 }
 
 .secret-title {
@@ -455,13 +464,13 @@ body.mode-xray .secret-back {
 </head>
 <body>
 
-<!-- Imagem de fundo mago3d.png posicionada atrás de tudo -->
-<img src="mago3d.png" alt="Fundo Mago 3D" class="bg-mago3d" id="magoBg">
-
 <div class="app-wrapper">
   
   <div class="device-frame" id="deviceFrame">
     
+    <!-- Imagem de fundo mago3d.png posicionada dentro do cartão, cobrindo exatamente o seu tamanho -->
+    <img src="mago3d.png" alt="Fundo Mago 3D" class="bg-mago3d" id="magoBg">
+
     <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
     <div class="secret-back">
       <div class="secret-title">Jesus te ama! ❤️</div>
@@ -636,7 +645,7 @@ body.mode-xray .secret-back {
     let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
     let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
 
-    // Aplicando o movimento de rotação/inclinação exclusivamente na imagem de fundo mago3d.png
+    // Movimento aplicado exclusivamente na imagem de fundo dentro do card
     magoBg.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
   }
 
