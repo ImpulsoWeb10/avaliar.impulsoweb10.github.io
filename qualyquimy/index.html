@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
+html,body{height:100%;width:100%; overflow:hidden;}
 body{
   font-family:'DM Sans',sans-serif;
   background:#07101e;
@@ -22,12 +22,30 @@ body{
   align-items:center;
   justify-content:center;
   padding:1.5rem 0.5rem;
-  overflow-x:hidden;
   position:relative;
-  perspective: 1200px;
 }
 
-/* Background glow subtle */
+/* CONTAINER DO PARALLAX 3D NO FUNDO (Z-INDEX 0) */
+.parallax-bg {
+  position: fixed;
+  inset: -20px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* Background glow subtle sobreposto ao parallax */
 body::before{
   content:'';
   position:fixed;
@@ -36,10 +54,10 @@ body::before{
     radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,169,110,0.07) 0%, transparent 70%),
     radial-gradient(ellipse 40% 40% at 80% 80%, rgba(17,40,80,0.6) 0%, transparent 60%);
   pointer-events:none;
-  z-index:0;
+  z-index:1;
 }
 
-/* Container principal */
+/* Container principal (Frente Fixa) */
 .app-wrapper {
   display: flex;
   flex-direction: column;
@@ -48,15 +66,16 @@ body::before{
   width: 100%;
   max-width: 480px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* Moldura externa (Camada Base 0) */
+/* Moldura externa estática */
 .device-frame {
   position: relative;
-  z-index: 1;
   width: 100%;
-  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
+  background: linear-gradient(175deg, rgba(16, 32, 64, 0.85) 0%, rgba(11, 26, 46, 0.85) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 2px solid #ffffff;
   border-radius: 24px;
   box-shadow: 
@@ -70,114 +89,16 @@ body::before{
   align-items: center;
   text-align: center;
   gap: 1.1rem;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
 }
 
-/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
-body.mode-xray .device-frame {
-  transform: rotateY(-35deg) rotateX(15deg) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
-}
-body.mode-xray .layer-back {
-  transform: translateZ(-30px) !important;
-  opacity: 0.75;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-mid {
-  transform: translateZ(50px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-front {
-  transform: translateZ(110px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-pop {
-  transform: translateZ(170px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .secret-back {
-  transform: rotateY(180deg) translateZ(-60px) !important;
-  opacity: 0.5;
-  transition: transform 0.6s ease;
-}
-
-/* MENSAGEM SECRETA NAS COSTAS DO CARD */
-.secret-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  padding: 2rem;
-  transform: rotateY(180deg) translateZ(1px);
-  backface-visibility: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
-  transition: transform 0.4s ease;
-}
-
-.secret-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
-  letter-spacing: 0.05em;
-}
-
-.secret-sub {
-  font-size: 0.85rem;
-  color: #a3c0e4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Estrutura de conteúdo 3D da Frente */
+/* Estrutura de conteúdo interna da Frente */
 .page {
   position:relative;
-  z-index:1;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:1.1rem;
   width:100%;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
-.layer-back {
-  transform: translateZ(15px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-mid {
-  transform: translateZ(35px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-front {
-  transform: translateZ(55px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
-}
-
-.layer-pop {
-  transform: translateZ(75px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
 }
 
 /* Logo area */
@@ -205,10 +126,10 @@ body.mode-xray .secret-back {
 @keyframes logo-pulse{
   0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
   55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),    0 6px 20px rgba(201,169,110,.25)}
 }
 @keyframes logo-shimmer{
-  0%     {left:-110%}
+  0%      {left:-110%}
   45%,100%{left:160%}
 }
 
@@ -432,41 +353,25 @@ body.mode-xray .secret-back {
   border-color: #60a5fa;
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
 }
-
-/* Estilo do Botão Raio-X */
-.xray-btn {
-  background: rgba(88, 28, 135, 0.85);
-  color: #d8b4fe;
-  border: 1px solid rgba(192, 132, 252, 0.4);
-}
-.xray-btn:hover {
-  border-color: #c084fc;
-  color: #ffffff;
-}
-.xray-btn.active {
-  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
-  color: #ffffff;
-  border-color: #e9d5ff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-}
 </style>
 </head>
 <body>
 
+<!-- CONTAINER DE FUNDO COM PARALLAX EM CAMADAS (Z-INDEX 0) -->
+<div class="parallax-bg" id="parallaxContainer">
+  <div class="parallax-layer" data-speed="0.05" style="background-image: url('fundo.png');"></div>
+  <div class="parallax-layer" data-speed="0.12" style="background-image: url('mago.png');"></div>
+  <div class="parallax-layer" data-speed="0.22" style="background-image: url('moldura.png');"></div>
+</div>
+
 <div class="app-wrapper">
   
   <div class="device-frame" id="deviceFrame">
-    
-    <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
-    <div class="secret-back">
-      <div class="secret-title">Jesus te ama! ❤️</div>
-      <div class="secret-sub">Que você tenha um ótimo dia!</div>
-    </div>
 
-    <!-- FRENTE DO CARD -->
+    <!-- FRENTE DO CARD (100% ESTÁTICA) -->
     <div class="page">
 
-      <div class="logo-wrap layer-mid">
+      <div class="logo-wrap">
         <div class="logo-frame">
           <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -478,14 +383,14 @@ body.mode-xray .secret-back {
         </div>
       </div>
 
-      <div class="layer-back">
+      <div>
         <div class="stars-row" aria-label="Avaliação 5 estrelas">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
         <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
       </div>
 
-      <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
+      <div style="width: 100%; display: flex; justify-content: center;">
         <a
           href="https://g.page/r/CRECbD178tUDEAE/review"
           class="btn-google"
@@ -498,7 +403,7 @@ body.mode-xray .secret-back {
         </a>
       </div>
 
-      <div class="social-row layer-front" aria-label="Redes sociais e contato">
+      <div class="social-row" aria-label="Redes sociais e contato">
 
         <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
           <div class="social-icon" style="background:#1a2e1a;">
@@ -538,12 +443,12 @@ body.mode-xray .secret-back {
 
       </div>
 
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
+      <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
       </div>
 
-      <div class="ticker-banner layer-mid">
+      <div class="ticker-banner">
         <div class="ticker-track">
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
@@ -552,7 +457,7 @@ body.mode-xray .secret-back {
 
     </div>
 
-    <div class="footer layer-back">
+    <div class="footer">
       <p class="footer-promo">Deseja um link como este para sua empresa?<br>
         <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
       </p>
@@ -570,29 +475,25 @@ body.mode-xray .secret-back {
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
     <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
-    <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
 </div>
 
 <script>
-  const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
   const btnLvl1 = document.getElementById('btnLvl1');
   const btnLvl2 = document.getElementById('btnLvl2');
-  const btnXray = document.getElementById('btnXray');
+  const layers = document.querySelectorAll('.parallax-layer');
 
   let giroscopioAtivo = false;
-  let modoRaioX = false;
   let nivelAtual = 1;
 
   const configuracoes = {
-    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+    1: { multCelular: 40, multMouse: 30 },
+    2: { multCelular: 100, multMouse: 80 }
   };
 
   function definirNivel(lvl) {
-    if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
     if (lvl === 1) {
       btnLvl1.classList.add('active');
@@ -603,34 +504,24 @@ body.mode-xray .secret-back {
     }
   }
 
-  function alternarRaioX() {
-    modoRaioX = !modoRaioX;
-    if (modoRaioX) {
-      document.body.classList.add('mode-xray');
-      btnXray.classList.add('active');
-      btnLvl1.classList.remove('active');
-      btnLvl2.classList.remove('active');
-    } else {
-      desativarRaioX();
-    }
-  }
-
-  function desativarRaioX() {
-    modoRaioX = false;
-    document.body.classList.remove('mode-xray');
-    btnXray.classList.remove('active');
-    definirNivel(nivelAtual);
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  function atualizarParallax(xVal, yVal) {
+    const config = configuracoes[nivelAtual];
+    layers.forEach(layer => {
+      const speed = parseFloat(layer.getAttribute('data-speed'));
+      const x = xVal * speed * config.multCelular;
+      const y = yVal * speed * config.multCelular;
+      layer.style.transform = `translate3d(${x}px, ${y}px, 0px)`;
+    });
   }
 
   function handleOrientation(e) {
-    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
 
-    const config = configuracoes[nivelAtual];
-    let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
-    let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
+    // Normaliza gamma (-90 a 90) e beta (-180 a 180) para um range aproximado de -1 a 1
+    let x = Math.min(Math.max(e.gamma / 45, -1), 1);
+    let y = Math.min(Math.max((e.beta - 45) / 45, -1), 1);
 
-    frame.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
+    atualizarParallax(x, y);
   }
 
   function ativandoOorientacao() {
@@ -645,9 +536,7 @@ body.mode-xray .secret-back {
     giroscopioAtivo = false;
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
-    if (!modoRaioX) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
+    atualizarParallax(0, 0);
   }
 
   function alternarGiroscopio() {
@@ -671,20 +560,25 @@ body.mode-xray .secret-back {
     }
   }
 
-  /* Movimento no Desktop */
+  /* Movimento no Desktop via Mouse */
   document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !giroscopioAtivo) return;
+    if (!giroscopioAtivo) return;
     const config = configuracoes[nivelAtual];
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
-    frame.style.transform = `rotateY(${x * config.intensidadeMouse}deg) rotateX(${-y * config.intensidadeMouse}deg)`;
+    layers.forEach(layer => {
+      const speed = parseFloat(layer.getAttribute('data-speed'));
+      const posX = x * speed * config.multMouse;
+      const posY = y * speed * config.multMouse;
+      layer.style.transform = `translate3d(${posX}px, ${posY}px, 0px)`;
+    });
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo && !modoRaioX) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    if (giroscopioAtivo) {
+      atualizarParallax(0, 0);
     }
   });
 </script>
