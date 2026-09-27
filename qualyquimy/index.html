@@ -111,7 +111,7 @@ body::before{
   transform: translateZ(20px);
 }
 
-/* Camada 3: Moldura por Cima no Verso */
+/* Camada 3: Moldura por Cima no Verso com Mistura para remover o fundo branco */
 .back-layer-moldura {
   position: absolute;
   inset: 0;
@@ -121,6 +121,7 @@ body::before{
   transform: translateZ(80px);
   pointer-events: none;
   border-radius: 22px;
+  mix-blend-mode: multiply;
 }
 
 /* Textos flutuantes sobre o verso */
@@ -244,7 +245,7 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
 @keyframes logo-pulse{
   0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
   55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),    0 6px 20px rgba(201,169,110,.25)}
 }
 @keyframes logo-shimmer{
   0%     {left:-110%}
@@ -496,7 +497,7 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (fundo.png, mago.png e moldura.png em camadas 3D separadas) -->
+    <!-- VERSO DO CARTÃO (fundo, mago, textos e moldura integrados em camadas 3D) -->
     <div class="card-back">
       <img src="fundo.png" alt="Fundo Verso" class="back-layer-bg" onerror="this.style.display='none'">
       <img src="mago.png" alt="Mago Verso" class="back-layer-mago" onerror="this.style.display='none'">
