@@ -51,7 +51,7 @@ body::before{
   z-index: 1;
 }
 
-/* Moldura externa (Cartão 3D) */
+/* Moldura externa (Camada Base 0) */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -75,51 +75,6 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO (Onde fica o Mago 3D nas costas) */
-.card-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 1.2rem;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 25px rgba(201, 169, 110, 0.25);
-  z-index: 2;
-}
-
-.mago-back-img {
-  width: 100%;
-  max-height: 310px;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
-  border-radius: 12px;
-}
-
-.secret-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  letter-spacing: 0.05em;
-}
-
-.secret-sub {
-  font-size: 0.75rem;
-  color: #a3c0e4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
 body.mode-xray .device-frame {
   transform: rotateY(-35deg) rotateX(15deg) !important;
@@ -141,6 +96,48 @@ body.mode-xray .layer-front {
 body.mode-xray .layer-pop {
   transform: translateZ(170px) !important;
   transition: transform 0.6s ease;
+}
+body.mode-xray .secret-back {
+  transform: rotateY(180deg) translateZ(-60px) !important;
+  opacity: 0.5;
+  transition: transform 0.6s ease;
+}
+
+/* MENSAGEM SECRETA NAS COSTAS DO CARD */
+.secret-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 2rem;
+  transform: rotateY(180deg) translateZ(1px);
+  backface-visibility: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.secret-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.secret-sub {
+  font-size: 0.85rem;
+  color: #a3c0e4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Estrutura de conteúdo 3D da Frente */
@@ -460,11 +457,10 @@ body.mode-xray .layer-pop {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (O Mago 3D aparece aqui atrás ao virar) -->
-    <div class="card-back">
-      <img src="mago3d.png" alt="Mago 3D Verso" class="mago-back-img">
-      <div class="secret-title">Tintas Qualy Quimy</div>
-      <div class="secret-sub">Magia em Cores e Acabamentos</div>
+    <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
+    <div class="secret-back">
+      <div class="secret-title">Jesus te ama! ❤️</div>
+      <div class="secret-sub">Que você tenha um ótimo dia!</div>
     </div>
 
     <!-- FRENTE DO CARD -->
@@ -573,7 +569,7 @@ body.mode-xray .layer-pop {
 
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Virar Cartão 3D)</button>
+    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
     <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
@@ -590,27 +586,20 @@ body.mode-xray .layer-pop {
   let modoRaioX = false;
   let nivelAtual = 1;
 
-  // Variáveis para guardar rotação acumulada e livre para todos os lados no Nível 2
-  let rotacaoYAcumulada = 0;
-  let rotacaoXAcumulada = 0;
+  const configuracoes = {
+    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
+    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+  };
 
   function definirNivel(lvl) {
     if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
-    
     if (lvl === 1) {
       btnLvl1.classList.add('active');
       btnLvl2.classList.remove('active');
-      rotacaoYAcumulada = 0;
-      rotacaoXAcumulada = 0;
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     } else {
       btnLvl2.classList.add('active');
       btnLvl1.classList.remove('active');
-      // Força a viragem inicial de 180 graus para mostrar o mago nas costas
-      rotacaoYAcumulada = 180;
-      rotacaoXAcumulada = 0;
-      frame.style.transform = `rotateY(${rotacaoYAcumulada}deg) rotateX(${rotacaoXAcumulada}deg)`;
     }
   }
 
@@ -631,21 +620,17 @@ body.mode-xray .layer-pop {
     document.body.classList.remove('mode-xray');
     btnXray.classList.remove('active');
     definirNivel(nivelAtual);
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function handleOrientation(e) {
     if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
 
-    if (nivelAtual === 2) {
-      // Giro livre completo para todo o lado baseado na inclinação do celular
-      let x = e.gamma * 1.5;
-      let y = (e.beta - 45) * 1.5;
-      frame.style.transform = `rotateY(${180 + x}deg) rotateX(${-y}deg)`;
-    } else {
-      let x = Math.min(Math.max(e.gamma, -35), 35);
-      let y = Math.min(Math.max(e.beta - 45, -35), 35);
-      frame.style.transform = `rotateY(${x * 0.8}deg) rotateX(${-y * 0.8}deg)`;
-    }
+    const config = configuracoes[nivelAtual];
+    let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
+    let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
+
+    frame.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
   }
 
   function ativandoOorientacao() {
@@ -661,7 +646,7 @@ body.mode-xray .layer-pop {
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
     if (!modoRaioX) {
-      definirNivel(nivelAtual);
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   }
 
@@ -686,24 +671,20 @@ body.mode-xray .layer-pop {
     }
   }
 
-  /* Movimento interativo com o Mouse no Desktop */
+  /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
     if (modoRaioX || !giroscopioAtivo) return;
+    const config = configuracoes[nivelAtual];
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
-    if (nivelAtual === 2) {
-      // No nível 2 com mouse, permite girar o cartão livremente para ver as costas e a frente
-      frame.style.transform = `rotateY(${180 + (x * 120)}deg) rotateX(${-y * 90}deg)`;
-    } else {
-      frame.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg)`;
-    }
+    frame.style.transform = `rotateY(${x * config.intensidadeMouse}deg) rotateX(${-y * config.intensidadeMouse}deg)`;
   });
 
   document.addEventListener('mouseleave', () => {
     if (giroscopioAtivo && !modoRaioX) {
-      definirNivel(nivelAtual);
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
 </script>
