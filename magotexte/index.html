@@ -1,693 +1,401 @@
 <!DOCTYPE html>
+<!--
+  MAGO 3D — Carta com profundidade controlada por giroscópio
+  ------------------------------------------------------------
+  COMO PUBLICAR NO GITHUB PAGES:
+  1. Crie um repositório novo no GitHub (pode ser público).
+  2. Suba este arquivo como "index.html" na raiz do repositório.
+  3. Suba as 3 imagens na mesma pasta, com estes nomes exatos:
+     fundo.png (paisagem), mago.png (transparente), moldura.png (transparente).
+  4. Vá em Settings > Pages, escolha a branch "main" e pasta "/ (root)", salve.
+  5. Aguarde alguns minutos e abra o link gerado (ex: usuario.github.io/repo) no celular.
+  6. Toque no botão "GIROSCÓPIO OFF" na parte de baixo da tela e permita o acesso
+     ao movimento quando o iPhone pedir.
+-->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Tintas Qualy Quimy em Itaquaquecetuba — Qualidade, confiança e compromisso. Tintas, texturas e acabamentos para a sua obra.">
-<meta property="og:title" content="Tintas Qualy Quimy | Itaquaquecetuba SP">
-<meta property="og:description" content="Qualidade, confiança e compromisso. Avalie nosso atendimento e fale conosco no WhatsApp.">
-<title>Tintas Qualy Quimy | Itaquaquecetuba</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Mago 3D</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:#07101e;
-  color:#e8e2d8;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:1.5rem 0.5rem;
-  overflow-x:hidden;
-  position:relative;
-  perspective: 1200px;
-}
+  :root{
+    /* Estes valores são só referência visual — quem realmente controla o
+       efeito agora é o objeto DEPTH e PERSPECTIVE_PX lá no <script>
+       (buscar por "AJUSTE AQUI" no JS). Mantidos aqui só de anotação. */
+    --perspective: 800px;
+    --z-bg: -150px;
+    --z-image: 0px;
+    --z-frame: 160px;
+    --z-highlight: 220px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{
+    margin:0; height:100%; overflow:hidden;
+    background:radial-gradient(ellipse at 50% 20%, #0e1a3a 0%, #060a17 55%, #020308 100%);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color:#cfe0ff;
+    touch-action:none;
+  }
 
-/* Background glow subtle */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,169,110,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(17,40,80,0.6) 0%, transparent 60%);
-  pointer-events:none;
-  z-index:0;
-}
+  .scene{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    perspective: var(--perspective);
+  }
 
-/* Container principal */
-.app-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  width: 100%;
-  max-width: 480px;
-  position: relative;
-  z-index: 1;
-}
+  /* Moldura: 90-95% da largura, proporção vertical, centralizada.
+     O tamanho real (largura/altura em px) é calculado via JS em sizeCard(),
+     porque "aspect-ratio" nem sempre é respeitado dentro de um flex com
+     filhos position:absolute em alguns navegadores de celular. */
+  .card{
+    position:relative;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
 
-/* Moldura externa (Camada Base 0) */
-.device-frame {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
-  border: 2px solid #ffffff;
-  border-radius: 24px;
-  box-shadow: 
-    0 0 10px #ffffff,
-    0 0 20px rgba(255, 255, 255, 0.8),
-    0 0 30px rgba(255, 255, 255, 0.35),
-    0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.4rem 1.4rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.1rem;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
-}
+  .card-layer{
+    position:absolute; inset:0;
+    border-radius:22px;
+    backface-visibility:hidden;
+    /* IMPORTANTE: não colocar transform-style/filter/overflow junto de translateZ
+       aqui — no Safari/iOS essa combinação "achata" o 3D das camadas. */
+  }
 
-/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
-body.mode-xray .device-frame {
-  transform: rotateY(-35deg) rotateX(15deg) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
-}
-body.mode-xray .layer-back {
-  transform: translateZ(-30px) !important;
-  opacity: 0.75;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-mid {
-  transform: translateZ(50px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-front {
-  transform: translateZ(110px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-pop {
-  transform: translateZ(170px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .secret-back {
-  transform: rotateY(180deg) translateZ(-60px) !important;
-  opacity: 0.5;
-  transition: transform 0.6s ease;
-}
+  /* Cada camada agora é uma imagem PNG real, na sua própria profundidade.
+     AJUSTE AQUI: troque os arquivos trocando o src das tags <img> no HTML. */
+  .card-layer img{
+    width:100%; height:100%; display:block; object-fit:cover;
+    pointer-events:none;
+  }
 
-/* MENSAGEM SECRETA NAS COSTAS DO CARD */
-.secret-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(175deg, #0b1a2e 0%, #050b14 100%);
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  padding: 2rem;
-  transform: rotateY(180deg) translateZ(1px);
-  backface-visibility: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
-  transition: transform 0.4s ease;
-}
+  /* AJUSTE AQUI: o deslocamento/escala de cada camada (paralaxe) não usa mais
+     translateZ nativo do navegador (achatava as camadas em vários celulares).
+     Agora é calculado em JS (função updateParallax) e aplicado como um
+     translate()+scale() comum, que funciona igual em qualquer navegador. */
+  .background-layer{
+    border-radius:18px;
+    overflow:hidden;
+  }
 
-.secret-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
-  letter-spacing: 0.05em;
-}
+  .image-layer{ }
+  .image-layer img{ object-fit:contain; }
+  .image-layer .fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:14px; color:#8ea3d8;
+    background:linear-gradient(160deg,#101a3d,#060a17);
+  }
 
-.secret-sub {
-  font-size: 0.85rem;
-  color: #a3c0e4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+  .frame-layer{ }
+  .frame-layer img{ object-fit:contain; }
 
-/* Estrutura de conteúdo 3D da Frente */
-.page {
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:1.1rem;
-  width:100%;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
+  /* Brilho mágico que se move sutilmente com o tilt (var setada em JS) */
+  .highlight-layer{
+    border-radius:18px;
+    background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,20%),
+      rgba(150,190,255,.28), rgba(150,190,255,0) 55%);
+    mix-blend-mode:screen;
+  }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
-.layer-back {
-  transform: translateZ(15px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
+  /* Sombra externa dando sensação de objeto flutuando */
+  .card::after{
+    content:"";
+    position:absolute; left:8%; right:8%; bottom:-6%; height:24px;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+    transform:translateZ(-90px) scale(var(--shadow-scale,1));
+    filter:blur(4px);
+  }
 
-.layer-mid {
-  transform: translateZ(35px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
+  /* ================= Interface inferior ================= */
+  .ui{
+    position:fixed; left:0; right:0; bottom:0;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    padding:14px 12px calc(14px + env(safe-area-inset-bottom,0px));
+    transition:opacity .5s ease, transform .5s ease;
+    z-index:5;
+  }
+  .ui.hidden{ opacity:0; transform:translateY(12px); pointer-events:none; }
 
-.layer-front {
-  transform: translateZ(55px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
-}
-
-.layer-pop {
-  transform: translateZ(75px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
-}
-
-/* Logo area */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
-
-.logo-frame{
-  position:relative;
-  border-radius:14px;
-  overflow:hidden;
-  display:inline-block;
-  animation:logo-pulse 2.6s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(201,169,110,.5);
-}
-.logo-frame::after{
-  content:'';
-  position:absolute;
-  top:0;left:-110%;
-  width:55%;height:100%;
-  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
-  transform:skewX(-18deg);
-  animation:logo-shimmer 2.6s ease-in-out infinite;
-  pointer-events:none;
-  z-index:2;
-}
-@keyframes logo-pulse{
-  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
-  55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
-}
-@keyframes logo-shimmer{
-  0%     {left:-110%}
-  45%,100%{left:160%}
-}
-
-.logo-img{
-  display:block;
-  width:180px;
-  height:auto;
-  max-height:85px;
-  border-radius:12px;
-  border:2px solid rgba(201,169,110,.4);
-  object-fit:contain;
-  background:rgba(201,169,110,0.06);
-  position:relative;z-index:1;
-}
-.logo-img-fallback{
-  width:180px;height:75px;
-  border-radius:12px;
-  border:2px solid rgba(201,169,110,.4);
-  background:rgba(201,169,110,0.06);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.6rem;color:#c9a96e;font-weight:600;
-  letter-spacing:.08em;
-  position:relative;z-index:1;
-}
-.brand{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:600;
-  color:#f0ece5;letter-spacing:.06em;line-height:1.1;
-}
-.brand em{color:#c9a96e;font-style:italic}
-.tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
-
-/* Rating stars */
-.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.15rem;color:#ffd700}
-.rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
-
-/* 4 icon buttons row */
-.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
-.social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.25rem;
-  text-decoration:none;
-  transition:transform .2s;
-}
-.social-btn:hover{transform:translateY(-3px)}
-.social-icon{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px solid rgba(255,255,255,.3);
-  transition:border-color .2s,box-shadow .2s;
-}
-.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:20px;height:20px}
-.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
-
-/* Google button */
-.btn-google{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:#FBBC05;
-  color:#1a1200;font-weight:700;
-  padding:.7rem 1.3rem;
-  border-radius:50px;
-  font-size:.85rem;text-decoration:none;
-  font-family:'DM Sans',sans-serif;
-  letter-spacing:.02em;
-  border:none;cursor:pointer;
-  width:100%;max-width:260px;justify-content:center;
-  position:relative;overflow:hidden;
-  animation:pulse-google 2.2s ease-in-out infinite;
-}
-.btn-google::after{
-  content:'';
-  position:absolute;
-  top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
-  transform:skewX(-20deg);
-  animation:shimmer 2.2s ease-in-out infinite;
-}
-@keyframes pulse-google{
-  0%{box-shadow:0 0 0 0 rgba(251,188,5,.45),0 4px 15px rgba(251,188,5,.25)}
-  60%{box-shadow:0 0 0 10px rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.1)}
-  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.25)}
-}
-@keyframes shimmer{
-  0%{left:-120%}
-  55%,100%{left:160%}
-}
-.btn-google svg{width:16px;height:16px;flex-shrink:0}
-.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
-
-/* Address */
-.address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
-
-/* Banner Infinito */
-.ticker-banner {
-  width: 100%;
-  overflow: hidden;
-  background: rgba(201, 169, 110, 0.15);
-  border: 1px solid rgba(201, 169, 110, 0.35);
-  border-radius: 8px;
-  padding: 0.35rem 0;
-  display: flex;
-}
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: infinite-scroll 18s linear infinite;
-}
-.ticker-item {
-  font-size: 0.78rem;
-  color: #fce8bd;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  padding-right: 2rem;
-  white-space: nowrap;
-}
-@keyframes infinite-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Footer interno */
-.footer{
-  font-size:.72rem;
-  color:#d0dce8;
-  margin-top:0.2rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.4rem;
-  width:100%;
-  border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:0.9rem;
-}
-.footer-promo{
-  font-size:.78rem;
-  color:#ffffff;
-  line-height:1.4;
-  text-align:center;
-  font-weight:400;
-}
-.footer-promo a{
-  color:#ffe082;
-  text-decoration:none;
-  font-weight:700;
-  border-bottom:1px solid #ffe082;
-  padding-bottom:1px;
-  transition:color .2s;
-}
-.footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#8ba4c4}
-.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
-.footer-dev{
-  font-size:.72rem;
-  color:#b0c4de;
-  display:flex;
-  align-items:center;
-  gap:.4rem;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
-.footer-dev a:hover{color:#90caf9;text-decoration:underline}
-
-/* Botão no Rodapé Interno */
-.btn-gyro {
-  background: rgba(255, 255, 255, 0.08);
-  color: #90caf9;
-  border: 1px solid rgba(100, 181, 246, 0.4);
-  border-radius: 12px;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.65rem;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-}
-.btn-gyro:hover {
-  background: rgba(100, 181, 246, 0.2);
-}
-.btn-gyro.active {
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #3b82f6;
-}
-
-/* CONTROLES EXTERNOS */
-.external-controls {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding-top: 0.2rem;
-  flex-wrap: wrap;
-}
-
-.level-btn {
-  background: rgba(15, 23, 42, 0.85);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.72rem;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.level-btn:hover {
-  border-color: #64b5f6;
-  color: #ffffff;
-}
-
-.level-btn.active {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  border-color: #60a5fa;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-}
-
-/* Estilo do Botão Raio-X */
-.xray-btn {
-  background: rgba(88, 28, 135, 0.85);
-  color: #d8b4fe;
-  border: 1px solid rgba(192, 132, 252, 0.4);
-}
-.xray-btn:hover {
-  border-color: #c084fc;
-  color: #ffffff;
-}
-.xray-btn.active {
-  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
-  color: #ffffff;
-  border-color: #e9d5ff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-}
+  .row{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  button{
+    font-family:inherit; font-size:13px; letter-spacing:.02em;
+    color:#dbe6ff; background:rgba(20,28,58,.75);
+    border:1px solid rgba(140,170,255,.35);
+    padding:9px 14px; border-radius:999px;
+    backdrop-filter:blur(6px);
+  }
+  button.active{
+    background:rgba(90,120,230,.55);
+    border-color:rgba(180,200,255,.7);
+    box-shadow:0 0 16px rgba(110,150,255,.5);
+  }
+  .hint{ font-size:11px; color:#7e8cba; text-align:center; max-width:280px; }
 </style>
 </head>
 <body>
 
-<div class="app-wrapper">
-  
-  <div class="device-frame" id="deviceFrame">
-    
-    <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
-    <div class="secret-back">
-      <div class="secret-title">Jesus te ama! ❤️</div>
-      <div class="secret-sub">Que você tenha um ótimo dia!</div>
+<div class="scene" id="scene">
+  <div class="card" id="card">
+    <!-- AJUSTE AQUI: troque qualquer um dos 3 arquivos trocando o src abaixo -->
+    <div class="card-layer background-layer">
+      <img src="fundo.png" alt="Fundo">
     </div>
-
-    <!-- FRENTE DO CARD -->
-    <div class="page">
-
-      <div class="logo-wrap layer-mid">
-        <div class="logo-frame">
-          <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-img-fallback" style="display:none;">Qualy Quimy</div>
-        </div>
-        <div>
-          <div class="brand">Tintas <em>Qualy Quimy</em></div>
-          <div class="tagline">Qualidade · Confiança · Compromisso</div>
-        </div>
+    <div class="card-layer image-layer">
+      <img id="mainImage" src="mago.png" alt="Mago"
+           onerror="document.getElementById('imgFallback').style.display='flex'; this.style.display='none';">
+      <div class="fallback" id="imgFallback" style="display:none">
+        Coloque o arquivo <b>mago.png</b> na mesma pasta deste index.html
       </div>
-
-      <div class="layer-back">
-        <div class="stars-row" aria-label="Avaliação 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
-      </div>
-
-      <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
-        <a
-          href="https://g.page/r/CRECbD178tUDEAE/review"
-          class="btn-google"
-          target="_blank"
-          rel="noopener"
-          aria-label="Avaliar no Google"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Avaliar no Google ⭐⭐⭐⭐⭐
-        </a>
-      </div>
-
-      <div class="social-row layer-front" aria-label="Redes sociais e contato">
-
-        <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <div class="social-icon" style="background:#1a2e1a;">
-            <svg viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-          </div>
-          <span class="social-label">WhatsApp</span>
-        </a>
-
-        <a href="https://www.instagram.com/tintasqualyquimy" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
-          <div class="social-icon" style="background:#2a1a2e;">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
-              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/>
-              <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="1.8"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="#dc2743"/>
-            </svg>
-          </div>
-          <span class="social-label">Instagram</span>
-        </a>
-
-        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Leiria+45+Chacara+Cuiaba+CEP+08587100" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
-          <div class="social-icon" style="background:#1a2030;">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
-              <circle cx="12" cy="9" r="2.5" fill="#fff"/>
-            </svg>
-          </div>
-          <span class="social-label">Maps</span>
-        </a>
-
-        <a href="tel:+551146432301" class="social-btn" aria-label="Ligar para a loja">
-          <div class="social-icon" style="background:#1a2a1a;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
-          </div>
-          <span class="social-label">Ligar</span>
-        </a>
-
-      </div>
-
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
-        <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
-        CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
-      </div>
-
-      <div class="ticker-banner layer-mid">
-        <div class="ticker-track">
-          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
-          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
-        </div>
-      </div>
-
     </div>
-
-    <div class="footer layer-back">
-      <p class="footer-promo">Deseja um link como este para sua empresa?<br>
-        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
-      </p>
-      <div class="footer-ssl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Protegido por SSL
-      </div>
-      <p class="footer-dev">
-        Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
-      </p>
+    <div class="card-layer frame-layer">
+      <img src="moldura.png" alt="Moldura">
     </div>
+    <div class="card-layer highlight-layer"></div>
   </div>
+</div>
 
-  <div class="external-controls">
-    <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
-    <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
+<div class="ui" id="ui">
+  <div class="row">
+    <button id="gyroBtn">GIROSCÓPIO OFF</button>
+    <button id="recenterBtn">RECENTRALIZAR</button>
+    <button id="calibrateBtn">CALIBRAR</button>
   </div>
-
+  <div class="row">
+    <button id="lvl1Btn" class="active">NÍVEL 1</button>
+    <button id="lvl2Btn">NÍVEL 2</button>
+  </div>
+  <div class="hint" id="hint">Arraste com o dedo para girar. Ative o giroscópio para controlar com o movimento do celular.</div>
 </div>
 
 <script>
-  const frame = document.getElementById('deviceFrame');
-  const btnGyro = document.getElementById('toggleGyro');
-  const btnLvl1 = document.getElementById('btnLvl1');
-  const btnLvl2 = document.getElementById('btnLvl2');
-  const btnXray = document.getElementById('btnXray');
+(function(){
+  "use strict";
 
-  let giroscopioAtivo = false;
-  let modoRaioX = false;
-  let nivelAtual = 1;
+  // ================= CONFIGURAÇÃO (ajuste livre) =================
+  // AJUSTE AQUI: limite máximo de rotação (graus). 175 = ~350° de amplitude total.
+  const MAX_ROT_Y = 175;
+  const MAX_ROT_X = 60;
 
-  const configuracoes = {
-    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+  // AJUSTE AQUI: intensidade do NÍVEL 1 e NÍVEL 2
+  const LEVELS = {
+    1: { gyroSensitivity: 0.9,  dragSensitivity: 0.35 },
+    2: { gyroSensitivity: 1.8,  dragSensitivity: 0.35 } // ~2x mais forte
   };
 
-  function definirNivel(lvl) {
-    if (modoRaioX) desativarRaioX();
-    nivelAtual = lvl;
-    if (lvl === 1) {
-      btnLvl1.classList.add('active');
-      btnLvl2.classList.remove('active');
-    } else {
-      btnLvl2.classList.add('active');
-      btnLvl1.classList.remove('active');
-    }
+  const scene  = document.getElementById('scene');
+  const card   = document.getElementById('card');
+  const bgLayer   = document.querySelector('.background-layer');
+  const imgLayer  = document.querySelector('.image-layer');
+  const frameLayer= document.querySelector('.frame-layer');
+  const glowLayer = document.querySelector('.highlight-layer');
+
+  // AJUSTE AQUI: "profundidade" virtual de cada camada (em px) e a perspectiva
+  // usada só para calcular o deslocamento/escala manualmente em JS.
+  const PERSPECTIVE_PX = 800;
+  const DEPTH = { bg:-150, image:0, frame:160, glow:220 };
+
+  function layerTransform(depthZ, curYdeg, curXdeg){
+    const scale = PERSPECTIVE_PX / (PERSPECTIVE_PX - depthZ);
+    const dx = depthZ * Math.sin(curYdeg * Math.PI/180);
+    const dy = -depthZ * Math.sin(curXdeg * Math.PI/180) * 0.6;
+    return `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) scale(${scale.toFixed(3)})`;
   }
 
-  function alternarRaioX() {
-    modoRaioX = !modoRaioX;
-    if (modoRaioX) {
-      document.body.classList.add('mode-xray');
-      btnXray.classList.add('active');
-      btnLvl1.classList.remove('active');
-      btnLvl2.classList.remove('active');
-    } else {
-      desativarRaioX();
-    }
+  function updateParallax(curY, curX){
+    bgLayer.style.transform    = layerTransform(DEPTH.bg,    curY, curX);
+    imgLayer.style.transform   = layerTransform(DEPTH.image, curY, curX);
+    frameLayer.style.transform = layerTransform(DEPTH.frame, curY, curX);
+    glowLayer.style.transform  = layerTransform(DEPTH.glow,  curY, curX);
   }
 
-  function desativarRaioX() {
-    modoRaioX = false;
-    document.body.classList.remove('mode-xray');
-    btnXray.classList.remove('active');
-    definirNivel(nivelAtual);
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  // AJUSTE AQUI: proporção da moldura (largura / altura) e tamanho máximo
+  function sizeCard(){
+    const ratio = 3 / 4; // largura / altura — igual à proporção de fundo/mago/moldura
+    const maxW = Math.min(window.innerWidth * 0.92, 520);
+    const maxH = window.innerHeight * 0.88;
+    let w = maxW;
+    let h = w / ratio;
+    if (h > maxH){ h = maxH; w = h * ratio; }
+    card.style.width  = w + 'px';
+    card.style.height = h + 'px';
+  }
+  sizeCard();
+  window.addEventListener('resize', sizeCard);
+  window.addEventListener('orientationchange', sizeCard);
+
+  const ui     = document.getElementById('ui');
+  const gyroBtn= document.getElementById('gyroBtn');
+  const lvl1Btn= document.getElementById('lvl1Btn');
+  const lvl2Btn= document.getElementById('lvl2Btn');
+  const recenterBtn = document.getElementById('recenterBtn');
+  const calibrateBtn= document.getElementById('calibrateBtn');
+
+  const state = {
+    level: 1,
+    gyroOn: false,
+    // rotação alvo (para onde a carta está sendo empurrada)
+    targetY: 0, targetX: 0,
+    // rotação atual (suavizada via lerp)
+    curY: 0, curX: 0,
+    // acumulador do giroscópio (para permitir "girar" além do range físico)
+    gyroBaseGamma: null, gyroBaseBeta: null,
+    lastGamma: 0, lastBeta: 0,
+    dragging:false, dragStartX:0, dragStartY:0, dragStartRotY:0, dragStartRotX:0
+  };
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  // Normaliza diferença de ângulo evitando saltos ao cruzar 180/-180
+  function angleDelta(curr, prev){
+    let d = curr - prev;
+    if (d > 180) d -= 360;
+    if (d < -180) d += 360;
+    return d;
   }
 
-  function handleOrientation(e) {
-    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
-
-    const config = configuracoes[nivelAtual];
-    let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
-    let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
-
-    frame.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
+  function applyTransform(){
+    card.style.transform =
+      `rotateX(${state.curX}deg) rotateY(${state.curY}deg)`;
+    const glowX = 50 + (state.curY / MAX_ROT_Y) * 35;
+    const glowY = 25 + (state.curX / MAX_ROT_X) * 25;
+    card.style.setProperty('--glow-x', glowX + '%');
+    card.style.setProperty('--glow-y', glowY + '%');
+    card.style.setProperty('--shadow-scale', clamp(1 - Math.abs(state.curY)/400, 0.7, 1));
+    updateParallax(state.curY, state.curX);
   }
 
-  function ativandoOorientacao() {
-    window.addEventListener('deviceorientation', handleOrientation);
-    giroscopioAtivo = true;
-    btnGyro.innerText = 'Giroscópio: ON';
-    btnGyro.classList.add('active');
+  // Loop de suavização (transform/opacity apenas => leve, via requestAnimationFrame)
+  function tick(){
+    state.curY += (state.targetY - state.curY) * 0.14;
+    state.curX += (state.targetX - state.curX) * 0.14;
+    applyTransform();
+    requestAnimationFrame(tick);
   }
+  requestAnimationFrame(tick);
 
-  function desativarGiroscopio() {
-    window.removeEventListener('deviceorientation', handleOrientation);
-    giroscopioAtivo = false;
-    btnGyro.innerText = 'Giroscópio: OFF';
-    btnGyro.classList.remove('active');
-    if (!modoRaioX) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
-  }
+  // ================= GIROSCÓPIO =================
+  // AJUSTE AQUI: toda a lógica de leitura do DeviceOrientation
+  function handleOrientation(e){
+    if (!state.gyroOn || state.dragging) return;
+    if (e.gamma === null || e.beta === null) return;
 
-  function alternarGiroscopio() {
-    if (giroscopioAtivo) {
-      desativarGiroscopio();
+    if (state.gyroBaseGamma === null){
+      state.gyroBaseGamma = e.gamma;
+      state.gyroBaseBeta = e.beta;
+      state.lastGamma = e.gamma;
+      state.lastBeta = e.beta;
       return;
     }
 
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission().then(state => {
-        if (state === 'granted') {
-          ativandoOorientacao();
-        } else {
-          alert('Permissão de orientação negada.');
-        }
-      }).catch(() => {
-        ativandoOorientacao();
-      });
-    } else {
-      ativandoOorientacao();
-    }
+    const sens = LEVELS[state.level].gyroSensitivity;
+    // delta relativo à última leitura (evita saltos, permite "girar" além do range físico)
+    const dGamma = angleDelta(e.gamma, state.lastGamma);
+    const dBeta  = angleDelta(e.beta,  state.lastBeta);
+    state.lastGamma = e.gamma;
+    state.lastBeta  = e.beta;
+
+    state.targetY = clamp(state.targetY + dGamma * sens * 0.5, -MAX_ROT_Y, MAX_ROT_Y);
+    state.targetX = clamp(state.targetX - dBeta  * sens * 0.3, -MAX_ROT_X, MAX_ROT_X);
   }
 
-  /* Movimento no Desktop */
-  document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !giroscopioAtivo) return;
-    const config = configuracoes[nivelAtual];
-    const { innerWidth, innerHeight } = window;
-    const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-    const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+  function enableGyro(){
+    window.addEventListener('deviceorientation', handleOrientation);
+    state.gyroOn = true;
+    gyroBtn.textContent = 'GIROSCÓPIO ON';
+    gyroBtn.classList.add('active');
+  }
 
-    frame.style.transform = `rotateY(${x * config.intensidadeMouse}deg) rotateX(${-y * config.intensidadeMouse}deg)`;
-  });
+  function disableGyro(){
+    window.removeEventListener('deviceorientation', handleOrientation);
+    state.gyroOn = false;
+    state.gyroBaseGamma = null;
+    gyroBtn.textContent = 'GIROSCÓPIO OFF';
+    gyroBtn.classList.remove('active');
+  }
 
-  document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo && !modoRaioX) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  gyroBtn.addEventListener('click', function(){
+    if (state.gyroOn){ disableGyro(); return; }
+
+    // Permissão do iOS 13+ — só pode ser pedida após toque do usuário
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(resp){
+        if (resp === 'granted'){ enableGyro(); }
+        else { alert('Permissão negada. Você ainda pode girar a carta arrastando com o dedo.'); }
+      }).catch(function(){
+        alert('Não foi possível solicitar o giroscópio neste navegador.');
+      });
+    } else if ('DeviceOrientationEvent' in window){
+      enableGyro(); // Android e navegadores que não exigem permissão explícita
+    } else {
+      alert('Este dispositivo não tem suporte a giroscópio. Use o arraste com o dedo/mouse.');
     }
   });
-</script>
 
+  calibrateBtn.addEventListener('click', function(){
+    state.gyroBaseGamma = null; // próxima leitura de orientação vira o novo "zero"
+  });
+
+  recenterBtn.addEventListener('click', function(){
+    state.targetY = 0; state.targetX = 0;
+  });
+
+  // ================= NÍVEIS =================
+  function setLevel(n){
+    state.level = n;
+    lvl1Btn.classList.toggle('active', n===1);
+    lvl2Btn.classList.toggle('active', n===2);
+  }
+  lvl1Btn.addEventListener('click', function(){ setLevel(1); });
+  lvl2Btn.addEventListener('click', function(){ setLevel(2); });
+
+  // ================= CONTROLE MANUAL (mouse + touch, via Pointer Events) =================
+  card.addEventListener('pointerdown', function(e){
+    state.dragging = true;
+    state.dragStartX = e.clientX;
+    state.dragStartY = e.clientY;
+    state.dragStartRotY = state.targetY;
+    state.dragStartRotX = state.targetX;
+    card.setPointerCapture(e.pointerId);
+  });
+
+  card.addEventListener('pointermove', function(e){
+    if (!state.dragging) return;
+    const sens = LEVELS[state.level].dragSensitivity;
+    const dx = e.clientX - state.dragStartX;
+    const dy = e.clientY - state.dragStartY;
+    state.targetY = clamp(state.dragStartRotY + dx * sens, -MAX_ROT_Y, MAX_ROT_Y);
+    state.targetX = clamp(state.dragStartRotX - dy * sens, -MAX_ROT_X, MAX_ROT_X);
+  });
+
+  function endDrag(){
+    if (!state.dragging) return;
+    state.dragging = false;
+    // Se o giroscópio estiver desligado, a carta volta suavemente ao centro
+    if (!state.gyroOn){ state.targetY = 0; state.targetX = 0; }
+  }
+  card.addEventListener('pointerup', endDrag);
+  card.addEventListener('pointercancel', endDrag);
+
+  // ================= UI DISCRETA (some após alguns segundos) =================
+  let hideTimer;
+  function showUI(){
+    ui.classList.remove('hidden');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function(){ ui.classList.add('hidden'); }, 4500);
+  }
+  document.addEventListener('pointerdown', showUI);
+  showUI();
+
+  // Pequena animação ambiente quando giroscópio está OFF e ninguém interage
+  let ambient = 0;
+  setInterval(function(){
+    if (state.gyroOn || state.dragging) return;
+    ambient += 0.05;
+    state.targetY = Math.sin(ambient) * 4;
+    state.targetX = Math.cos(ambient*0.7) * 2;
+  }, 60);
+
+})();
+</script>
 </body>
 </html>
