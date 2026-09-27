@@ -75,7 +75,7 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO (Onde fica o Mago 3D nas costas) */
+/* VERSO DO CARTÃO (Onde fica o Mago 3D preenchendo o espaço interno) */
 .card-back {
   position: absolute;
   inset: 0;
@@ -86,9 +86,8 @@ body::before{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: 1.2rem 1rem 1rem 1rem;
   transform: rotateY(180deg);
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -98,7 +97,7 @@ body::before{
 
 .mago-back-img {
   width: 100%;
-  height: 72%; /* Ajustado para ocupar melhor a altura do cartão sem estourar */
+  height: 82%; /* Ocupa grande parte da altura do verso */
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
   border-radius: 12px;
@@ -106,16 +105,16 @@ body::before{
 
 .secret-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #ffd700;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   letter-spacing: 0.05em;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 .secret-sub {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: #a3c0e4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -464,8 +463,10 @@ body.mode-xray .layer-pop {
     <!-- VERSO DO CARTÃO (O Mago 3D preenchendo o espaço interno) -->
     <div class="card-back">
       <img src="mago3d.png" alt="Mago 3D Verso" class="mago-back-img">
-      <div class="secret-title">Tintas Qualy Quimy</div>
-      <div class="secret-sub">Magia em Cores e Acabamentos</div>
+      <div>
+        <div class="secret-title">Tintas Qualy Quimy</div>
+        <div class="secret-sub">Magia em Cores e Acabamentos</div>
+      </div>
     </div>
 
     <!-- FRENTE DO CARD -->
