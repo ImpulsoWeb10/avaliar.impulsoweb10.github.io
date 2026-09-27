@@ -75,13 +75,13 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO COM CAMADAS 3D SEPARADAS (fundo, mago e moldura) */
+/* VERSO DO CARTÃO COM CAMADAS 3D SEPARADAS */
 .card-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #0b1a2e;
+  background: #050b14;
   border-radius: 22px;
   transform: rotateY(180deg);
   backface-visibility: hidden;
@@ -96,8 +96,8 @@ body::before{
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transform: translateZ(-30px);
+  object-fit: fill;
+  transform: translateZ(-40px);
   border-radius: 22px;
 }
 
@@ -107,10 +107,8 @@ body::before{
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 1rem;
-  transform: translateZ(30px);
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+  object-fit: fill;
+  transform: translateZ(20px);
 }
 
 /* Camada 3: Moldura por Cima no Verso */
@@ -125,17 +123,17 @@ body::before{
   border-radius: 22px;
 }
 
-/* Textos flutuantes sobre o mago no verso */
+/* Textos flutuantes sobre o verso */
 .back-content {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.8rem;
   left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;
-  transform: translateZ(55px);
+  transform: translateZ(50px);
   z-index: 5;
   text-align: center;
 }
@@ -145,7 +143,7 @@ body::before{
   font-size: 1.3rem;
   font-weight: 600;
   color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
   letter-spacing: 0.05em;
   line-height: 1;
 }
@@ -164,12 +162,12 @@ body.mode-xray .device-frame {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
 body.mode-xray .layer-back, body.mode-xray .back-layer-bg {
-  transform: translateZ(-60px) !important;
-  opacity: 0.8;
+  transform: translateZ(-70px) !important;
+  opacity: 0.9;
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-mid, body.mode-xray .back-layer-mago {
-  transform: translateZ(40px) !important;
+  transform: translateZ(30px) !important;
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-front, body.mode-xray .back-content {
@@ -177,7 +175,7 @@ body.mode-xray .layer-front, body.mode-xray .back-content {
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
-  transform: translateZ(180px) !important;
+  transform: translateZ(190px) !important;
   transition: transform 0.6s ease;
 }
 
