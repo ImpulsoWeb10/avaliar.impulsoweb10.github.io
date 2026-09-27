@@ -5,7 +5,8 @@
   COMO PUBLICAR NO GITHUB PAGES:
   1. Crie um repositório novo no GitHub (pode ser público).
   2. Suba este arquivo como "index.html" na raiz do repositório.
-  3. Suba sua imagem do mago com o nome exato "mago3d.png" na mesma pasta.
+  3. Suba as 3 imagens na mesma pasta, com estes nomes exatos:
+     fundo.png (paisagem), mago.png (transparente), moldura.png (transparente).
   4. Vá em Settings > Pages, escolha a branch "main" e pasta "/ (root)", salve.
   5. Aguarde alguns minutos e abra o link gerado (ex: usuario.github.io/repo) no celular.
   6. Toque no botão "GIROSCÓPIO OFF" na parte de baixo da tela e permita o acesso
@@ -59,61 +60,44 @@
        aqui — no Safari/iOS essa combinação "achata" o 3D das camadas. */
   }
 
-  .background-layer{
-    transform:translateZ(var(--z-bg));
-    background:linear-gradient(160deg,#0b1230,#050814);
-    border-radius:26px;
+  /* Cada camada agora é uma imagem PNG real, na sua própria profundidade.
+     AJUSTE AQUI: troque os arquivos trocando o src das tags <img> no HTML. */
+  .card-layer img{
+    width:100%; height:100%; display:block; object-fit:cover;
+    pointer-events:none;
   }
 
-  /* AJUSTE AQUI: recuo da imagem para dentro da moldura (efeito de quadro físico) */
+  /* Fundo: um pouco maior (scale) para não deixar "buraco" nas bordas quando
+     a carta gira e a camada de trás se desloca lateralmente (paralaxe). */
+  .background-layer{
+    transform:translateZ(var(--z-bg)) scale(1.18);
+    border-radius:18px;
+    overflow:hidden;
+  }
+
+  /* Mago: imagem com fundo transparente, sem recorte (contain) */
   .image-layer{
     transform:translateZ(var(--z-image));
-    overflow:hidden;
-    border-radius:14px;
-    inset:5.5%;
-    box-shadow:
-      inset 0 10px 24px rgba(0,0,0,.65),   /* sombra da moldura projetada sobre a arte */
-      inset 0 0 0 1px rgba(0,0,0,.4);
   }
-  .image-layer img{
-    width:100%; height:100%; object-fit:cover; display:block;
-    /* Não distorce a arte original */
-  }
+  .image-layer img{ object-fit:contain; }
   .image-layer .fallback{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     text-align:center; padding:24px; font-size:14px; color:#8ea3d8;
     background:linear-gradient(160deg,#101a3d,#060a17);
   }
 
-  /* Moldura: agora com material visível (metal azulado), a imagem fica recuada dentro dela */
+  /* Moldura: PNG com centro vazado, por cima de tudo */
   .frame-layer{
     transform:translateZ(var(--z-frame));
-    pointer-events:none;
-    border-radius:22px;
-    background:linear-gradient(155deg,#3a4d8f 0%,#141b3a 38%,#0a0f24 60%,#4c5fb0 100%);
-    box-shadow:
-      inset 0 0 0 2px rgba(180,200,255,.45),
-      inset 0 2px 6px rgba(255,255,255,.25),
-      inset 0 -6px 14px rgba(0,0,0,.6),
-      0 30px 60px rgba(0,0,0,.55);
   }
-  /* Reflexo diagonal na moldura que varre a superfície ao girar (var setada em JS) */
-  .frame-layer::before{
-    content:"";
-    position:absolute; inset:0; border-radius:22px;
-    background:linear-gradient(115deg,
-      transparent calc(var(--sheen,30%) - 18%),
-      rgba(255,255,255,.35) var(--sheen,30%),
-      transparent calc(var(--sheen,30%) + 18%));
-  }
+  .frame-layer img{ object-fit:contain; }
 
-  /* Brilho mágico que se move sutilmente com o tilt (via CSS var setada em JS) */
+  /* Brilho mágico que se move sutilmente com o tilt (var setada em JS) */
   .highlight-layer{
     transform:translateZ(var(--z-highlight));
-    pointer-events:none;
-    border-radius:22px;
+    border-radius:18px;
     background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,20%),
-      rgba(150,190,255,.30), rgba(150,190,255,0) 55%);
+      rgba(150,190,255,.28), rgba(150,190,255,0) 55%);
     mix-blend-mode:screen;
   }
 
@@ -156,16 +140,20 @@
 
 <div class="scene" id="scene">
   <div class="card" id="card">
-    <div class="card-layer background-layer"></div>
+    <!-- AJUSTE AQUI: troque qualquer um dos 3 arquivos trocando o src abaixo -->
+    <div class="card-layer background-layer">
+      <img src="fundo.png" alt="Fundo">
+    </div>
     <div class="card-layer image-layer">
-      <!-- ============ AJUSTE AQUI: troque o arquivo da imagem ============ -->
-      <img id="mainImage" src="mago3d.png" alt="Mago"
+      <img id="mainImage" src="mago.png" alt="Mago"
            onerror="document.getElementById('imgFallback').style.display='flex'; this.style.display='none';">
       <div class="fallback" id="imgFallback" style="display:none">
-        Coloque o arquivo <b>mago3d.png</b> na mesma pasta deste index.html
+        Coloque o arquivo <b>mago.png</b> na mesma pasta deste index.html
       </div>
     </div>
-    <div class="card-layer frame-layer"></div>
+    <div class="card-layer frame-layer">
+      <img src="moldura.png" alt="Moldura">
+    </div>
     <div class="card-layer highlight-layer"></div>
   </div>
 </div>
@@ -203,7 +191,7 @@
 
   // AJUSTE AQUI: proporção da moldura (largura / altura) e tamanho máximo
   function sizeCard(){
-    const ratio = 3 / 4.4; // largura / altura
+    const ratio = 3 / 4; // largura / altura — igual à proporção de fundo/mago/moldura
     const maxW = Math.min(window.innerWidth * 0.92, 520);
     const maxH = window.innerHeight * 0.88;
     let w = maxW;
