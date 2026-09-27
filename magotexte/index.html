@@ -19,12 +19,10 @@
 <title>Mago 3D</title>
 <style>
   :root{
-    /* ============ AJUSTE AQUI: perspectiva geral do efeito 3D =============
-       Quanto MENOR esse número, mais exagerado fica o efeito de profundidade. */
+    /* Estes valores são só referência visual — quem realmente controla o
+       efeito agora é o objeto DEPTH e PERSPECTIVE_PX lá no <script>
+       (buscar por "AJUSTE AQUI" no JS). Mantidos aqui só de anotação. */
     --perspective: 800px;
-    /* ============ AJUSTE AQUI: profundidade de cada camada (translateZ) ===
-       Diferenças grandes entre as camadas = moldura "saltando" pra frente e
-       fundo recuando de verdade. Se ficar exagerado, reduza estes valores. */
     --z-bg: -150px;
     --z-image: 0px;
     --z-frame: 160px;
@@ -70,18 +68,16 @@
     pointer-events:none;
   }
 
-  /* Fundo: um pouco maior (scale) para não deixar "buraco" nas bordas quando
-     a carta gira e a camada de trás se desloca lateralmente (paralaxe). */
+  /* AJUSTE AQUI: o deslocamento/escala de cada camada (paralaxe) não usa mais
+     translateZ nativo do navegador (achatava as camadas em vários celulares).
+     Agora é calculado em JS (função updateParallax) e aplicado como um
+     translate()+scale() comum, que funciona igual em qualquer navegador. */
   .background-layer{
-    transform:translateZ(var(--z-bg)) scale(1.5);
     border-radius:18px;
     overflow:hidden;
   }
 
-  /* Mago: imagem com fundo transparente, sem recorte (contain) */
-  .image-layer{
-    transform:translateZ(var(--z-image));
-  }
+  .image-layer{ }
   .image-layer img{ object-fit:contain; }
   .image-layer .fallback{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -89,15 +85,11 @@
     background:linear-gradient(160deg,#101a3d,#060a17);
   }
 
-  /* Moldura: PNG com centro vazado, por cima de tudo */
-  .frame-layer{
-    transform:translateZ(var(--z-frame));
-  }
+  .frame-layer{ }
   .frame-layer img{ object-fit:contain; }
 
   /* Brilho mágico que se move sutilmente com o tilt (var setada em JS) */
   .highlight-layer{
-    transform:translateZ(var(--z-highlight));
     border-radius:18px;
     background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,20%),
       rgba(150,190,255,.28), rgba(150,190,255,0) 55%);
@@ -191,6 +183,29 @@
 
   const scene  = document.getElementById('scene');
   const card   = document.getElementById('card');
+  const bgLayer   = document.querySelector('.background-layer');
+  const imgLayer  = document.querySelector('.image-layer');
+  const frameLayer= document.querySelector('.frame-layer');
+  const glowLayer = document.querySelector('.highlight-layer');
+
+  // AJUSTE AQUI: "profundidade" virtual de cada camada (em px) e a perspectiva
+  // usada só para calcular o deslocamento/escala manualmente em JS.
+  const PERSPECTIVE_PX = 800;
+  const DEPTH = { bg:-150, image:0, frame:160, glow:220 };
+
+  function layerTransform(depthZ, curYdeg, curXdeg){
+    const scale = PERSPECTIVE_PX / (PERSPECTIVE_PX - depthZ);
+    const dx = depthZ * Math.sin(curYdeg * Math.PI/180);
+    const dy = -depthZ * Math.sin(curXdeg * Math.PI/180) * 0.6;
+    return `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+  }
+
+  function updateParallax(curY, curX){
+    bgLayer.style.transform    = layerTransform(DEPTH.bg,    curY, curX);
+    imgLayer.style.transform   = layerTransform(DEPTH.image, curY, curX);
+    frameLayer.style.transform = layerTransform(DEPTH.frame, curY, curX);
+    glowLayer.style.transform  = layerTransform(DEPTH.glow,  curY, curX);
+  }
 
   // AJUSTE AQUI: proporção da moldura (largura / altura) e tamanho máximo
   function sizeCard(){
@@ -245,9 +260,7 @@
     card.style.setProperty('--glow-x', glowX + '%');
     card.style.setProperty('--glow-y', glowY + '%');
     card.style.setProperty('--shadow-scale', clamp(1 - Math.abs(state.curY)/400, 0.7, 1));
-    // Reflexo da moldura: varre de um lado a outro conforme o ângulo de giro
-    const sheen = 50 + (state.curY / MAX_ROT_Y) * 70;
-    card.style.setProperty('--sheen', sheen + '%');
+    updateParallax(state.curY, state.curX);
   }
 
   // Loop de suavização (transform/opacity apenas => leve, via requestAnimationFrame)
