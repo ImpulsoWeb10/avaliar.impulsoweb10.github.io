@@ -81,6 +81,7 @@ body::before{
   inset: 0;
   width: 100%;
   height: 100%;
+  background: #0b1a2e;
   border-radius: 22px;
   transform: rotateY(180deg);
   backface-visibility: hidden;
@@ -96,7 +97,7 @@ body::before{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translateZ(-20px);
+  transform: translateZ(-30px);
   border-radius: 22px;
 }
 
@@ -119,7 +120,7 @@ body::before{
   width: 100%;
   height: 100%;
   object-fit: fill;
-  transform: translateZ(70px);
+  transform: translateZ(80px);
   pointer-events: none;
   border-radius: 22px;
 }
@@ -134,7 +135,7 @@ body::before{
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;
-  transform: translateZ(50px);
+  transform: translateZ(55px);
   z-index: 5;
   text-align: center;
 }
@@ -163,8 +164,8 @@ body.mode-xray .device-frame {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
 body.mode-xray .layer-back, body.mode-xray .back-layer-bg {
-  transform: translateZ(-50px) !important;
-  opacity: 0.75;
+  transform: translateZ(-60px) !important;
+  opacity: 0.8;
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-mid, body.mode-xray .back-layer-mago {
@@ -172,11 +173,11 @@ body.mode-xray .layer-mid, body.mode-xray .back-layer-mago {
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-front, body.mode-xray .back-content {
-  transform: translateZ(110px) !important;
+  transform: translateZ(120px) !important;
   transition: transform 0.6s ease;
 }
 body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
-  transform: translateZ(170px) !important;
+  transform: translateZ(180px) !important;
   transition: transform 0.6s ease;
 }
 
@@ -497,15 +498,15 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO COM AS 3 IMAGENS SEPARADAS EM 3D -->
+    <!-- VERSO DO CARTÃO (fundo.png, mago.png e moldura.png em camadas 3D separadas) -->
     <div class="card-back">
-      <img src="fundo.png" alt="Fundo Verso" class="back-layer-bg">
-      <img src="mago.png" alt="Mago Verso" class="back-layer-mago">
+      <img src="fundo.png" alt="Fundo Verso" class="back-layer-bg" onerror="this.style.display='none'">
+      <img src="mago.png" alt="Mago Verso" class="back-layer-mago" onerror="this.style.display='none'">
       <div class="back-content">
         <div class="secret-title">Tintas Qualy Quimy</div>
         <div class="secret-sub">Magia em Cores e Acabamentos</div>
       </div>
-      <img src="moldura.png" alt="Moldura Verso" class="back-layer-moldura">
+      <img src="moldura.png" alt="Moldura Verso" class="back-layer-moldura" onerror="this.style.display='none'">
     </div>
 
     <!-- FRENTE DO CARD -->
