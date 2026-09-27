@@ -41,30 +41,27 @@
     perspective: var(--perspective);
   }
 
-  /* Moldura: 90-95% da largura, proporção vertical, centralizada */
+  /* Moldura: 90-95% da largura, proporção vertical, centralizada.
+     O tamanho real (largura/altura em px) é calculado via JS em sizeCard(),
+     porque "aspect-ratio" nem sempre é respeitado dentro de um flex com
+     filhos position:absolute em alguns navegadores de celular. */
   .card{
     position:relative;
-    width:92vw; max-width:520px;
-    aspect-ratio: 3 / 4.4;
-    max-height:88vh;
     transform-style:preserve-3d;
     will-change:transform;
-  }
-  @media (orientation:landscape){
-    .card{ width:auto; height:88vh; max-width:none; }
   }
 
   .card-layer{
     position:absolute; inset:0;
     border-radius:22px;
-    transform-style:preserve-3d;
     backface-visibility:hidden;
+    /* IMPORTANTE: não colocar transform-style/filter/overflow junto de translateZ
+       aqui — no Safari/iOS essa combinação "achata" o 3D das camadas. */
   }
 
   .background-layer{
     transform:translateZ(var(--z-bg));
     background:linear-gradient(160deg,#0b1230,#050814);
-    filter:blur(2px);
     border-radius:26px;
   }
 
@@ -185,7 +182,24 @@
     2: { gyroSensitivity: 1.8,  dragSensitivity: 0.35 } // ~2x mais forte
   };
 
+  const scene  = document.getElementById('scene');
   const card   = document.getElementById('card');
+
+  // AJUSTE AQUI: proporção da moldura (largura / altura) e tamanho máximo
+  function sizeCard(){
+    const ratio = 3 / 4.4; // largura / altura
+    const maxW = Math.min(window.innerWidth * 0.92, 520);
+    const maxH = window.innerHeight * 0.88;
+    let w = maxW;
+    let h = w / ratio;
+    if (h > maxH){ h = maxH; w = h * ratio; }
+    card.style.width  = w + 'px';
+    card.style.height = h + 'px';
+  }
+  sizeCard();
+  window.addEventListener('resize', sizeCard);
+  window.addEventListener('orientationchange', sizeCard);
+
   const ui     = document.getElementById('ui');
   const gyroBtn= document.getElementById('gyroBtn');
   const lvl1Btn= document.getElementById('lvl1Btn');
