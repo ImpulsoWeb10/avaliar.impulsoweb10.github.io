@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--
+  MAGO 3D — Carta com profundidade controlada por giroscópio
+  ------------------------------------------------------------
+  COMO PUBLICAR NO GITHUB PAGES:
+  1. Crie um repositório novo no GitHub (pode ser público).
+  2. Suba este arquivo como "index.html" na raiz do repositório.
+  3. Suba sua imagem do mago com o nome exato "mago3d.png" na mesma pasta.
+  4. Vá em Settings > Pages, escolha a branch "main" e pasta "/ (root)", salve.
+  5. Aguarde alguns minutos e abra o link gerado (ex: usuario.github.io/repo) no celular.
+  6. Toque no botão "GIROSCÓPIO OFF" na parte de baixo da tela e permita o acesso
+     ao movimento quando o iPhone pedir.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Mago 3D</title>
+<style>
+  :root{
+    /* ============ AJUSTE AQUI: perspectiva geral do efeito 3D ============ */
+    --perspective: 1000px;
+    /* ============ AJUSTE AQUI: profundidade de cada camada (translateZ) === */
+    --z-bg: -60px;
+    --z-image: 10px;
+    --z-frame: 75px;
+    --z-highlight: 110px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{
+    margin:0; height:100%; overflow:hidden;
+    background:radial-gradient(ellipse at 50% 20%, #0e1a3a 0%, #060a17 55%, #020308 100%);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color:#cfe0ff;
+    touch-action:none;
+  }
+
+  .scene{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    perspective: var(--perspective);
+  }
+
+  /* Moldura: 90-95% da largura, proporção vertical, centralizada */
+  .card{
+    position:relative;
+    width:92vw; max-width:520px;
+    aspect-ratio: 3 / 4.4;
+    max-height:88vh;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  @media (orientation:landscape){
+    .card{ width:auto; height:88vh; max-width:none; }
+  }
+
+  .card-layer{
+    position:absolute; inset:0;
+    border-radius:22px;
+    transform-style:preserve-3d;
+    backface-visibility:hidden;
+  }
+
+  .background-layer{
+    transform:translateZ(var(--z-bg));
+    background:linear-gradient(160deg,#0b1230,#050814);
+    filter:blur(2px);
+    border-radius:26px;
+  }
+
+  .image-layer{
+    transform:translateZ(var(--z-image));
+    overflow:hidden;
+    border-radius:22px;
+  }
+  .image-layer img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    /* Não distorce a arte original */
+  }
+  .image-layer .fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:14px; color:#8ea3d8;
+    background:linear-gradient(160deg,#101a3d,#060a17);
+  }
+
+  /* Moldura: camada decorativa por cima da imagem, não bloqueia toque */
+  .frame-layer{
+    transform:translateZ(var(--z-frame));
+    pointer-events:none;
+    border-radius:22px;
+    box-shadow:
+      inset 0 0 0 3px rgba(140,170,255,.35),
+      inset 0 0 40px rgba(30,50,120,.55),
+      0 30px 60px rgba(0,0,0,.55);
+  }
+
+  /* Brilho mágico que se move sutilmente com o tilt (via CSS var setada em JS) */
+  .highlight-layer{
+    transform:translateZ(var(--z-highlight));
+    pointer-events:none;
+    border-radius:22px;
+    background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,20%),
+      rgba(150,190,255,.30), rgba(150,190,255,0) 55%);
+    mix-blend-mode:screen;
+  }
+
+  /* Sombra externa dando sensação de objeto flutuando */
+  .card::after{
+    content:"";
+    position:absolute; left:8%; right:8%; bottom:-6%; height:24px;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+    transform:translateZ(-90px) scale(var(--shadow-scale,1));
+    filter:blur(4px);
+  }
+
+  /* ================= Interface inferior ================= */
+  .ui{
+    position:fixed; left:0; right:0; bottom:0;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    padding:14px 12px calc(14px + env(safe-area-inset-bottom,0px));
+    transition:opacity .5s ease, transform .5s ease;
+    z-index:5;
+  }
+  .ui.hidden{ opacity:0; transform:translateY(12px); pointer-events:none; }
+
+  .row{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  button{
+    font-family:inherit; font-size:13px; letter-spacing:.02em;
+    color:#dbe6ff; background:rgba(20,28,58,.75);
+    border:1px solid rgba(140,170,255,.35);
+    padding:9px 14px; border-radius:999px;
+    backdrop-filter:blur(6px);
+  }
+  button.active{
+    background:rgba(90,120,230,.55);
+    border-color:rgba(180,200,255,.7);
+    box-shadow:0 0 16px rgba(110,150,255,.5);
+  }
+  .hint{ font-size:11px; color:#7e8cba; text-align:center; max-width:280px; }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="card" id="card">
+    <div class="card-layer background-layer"></div>
+    <div class="card-layer image-layer">
+      <!-- ============ AJUSTE AQUI: troque o arquivo da imagem ============ -->
+      <img id="mainImage" src="mago3d.png" alt="Mago"
+           onerror="document.getElementById('imgFallback').style.display='flex'; this.style.display='none';">
+      <div class="fallback" id="imgFallback" style="display:none">
+        Coloque o arquivo <b>mago3d.png</b> na mesma pasta deste index.html
+      </div>
+    </div>
+    <div class="card-layer frame-layer"></div>
+    <div class="card-layer highlight-layer"></div>
+  </div>
+</div>
+
+<div class="ui" id="ui">
+  <div class="row">
+    <button id="gyroBtn">GIROSCÓPIO OFF</button>
+    <button id="recenterBtn">RECENTRALIZAR</button>
+    <button id="calibrateBtn">CALIBRAR</button>
+  </div>
+  <div class="row">
+    <button id="lvl1Btn" class="active">NÍVEL 1</button>
+    <button id="lvl2Btn">NÍVEL 2</button>
+  </div>
+  <div class="hint" id="hint">Arraste com o dedo para girar. Ative o giroscópio para controlar com o movimento do celular.</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ================= CONFIGURAÇÃO (ajuste livre) =================
+  // AJUSTE AQUI: limite máximo de rotação (graus). 175 = ~350° de amplitude total.
+  const MAX_ROT_Y = 175;
+  const MAX_ROT_X = 60;
+
+  // AJUSTE AQUI: intensidade do NÍVEL 1 e NÍVEL 2
+  const LEVELS = {
+    1: { gyroSensitivity: 0.9,  dragSensitivity: 0.35 },
+    2: { gyroSensitivity: 1.8,  dragSensitivity: 0.35 } // ~2x mais forte
+  };
+
+  const card   = document.getElementById('card');
+  const ui     = document.getElementById('ui');
+  const gyroBtn= document.getElementById('gyroBtn');
+  const lvl1Btn= document.getElementById('lvl1Btn');
+  const lvl2Btn= document.getElementById('lvl2Btn');
+  const recenterBtn = document.getElementById('recenterBtn');
+  const calibrateBtn= document.getElementById('calibrateBtn');
+
+  const state = {
+    level: 1,
+    gyroOn: false,
+    // rotação alvo (para onde a carta está sendo empurrada)
+    targetY: 0, targetX: 0,
+    // rotação atual (suavizada via lerp)
+    curY: 0, curX: 0,
+    // acumulador do giroscópio (para permitir "girar" além do range físico)
+    gyroBaseGamma: null, gyroBaseBeta: null,
+    lastGamma: 0, lastBeta: 0,
+    dragging:false, dragStartX:0, dragStartY:0, dragStartRotY:0, dragStartRotX:0
+  };
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  // Normaliza diferença de ângulo evitando saltos ao cruzar 180/-180
+  function angleDelta(curr, prev){
+    let d = curr - prev;
+    if (d > 180) d -= 360;
+    if (d < -180) d += 360;
+    return d;
+  }
+
+  function applyTransform(){
+    card.style.transform =
+      `rotateX(${state.curX}deg) rotateY(${state.curY}deg)`;
+    const glowX = 50 + (state.curY / MAX_ROT_Y) * 35;
+    const glowY = 25 + (state.curX / MAX_ROT_X) * 25;
+    card.style.setProperty('--glow-x', glowX + '%');
+    card.style.setProperty('--glow-y', glowY + '%');
+    card.style.setProperty('--shadow-scale', clamp(1 - Math.abs(state.curY)/400, 0.7, 1));
+  }
+
+  // Loop de suavização (transform/opacity apenas => leve, via requestAnimationFrame)
+  function tick(){
+    state.curY += (state.targetY - state.curY) * 0.14;
+    state.curX += (state.targetX - state.curX) * 0.14;
+    applyTransform();
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // ================= GIROSCÓPIO =================
+  // AJUSTE AQUI: toda a lógica de leitura do DeviceOrientation
+  function handleOrientation(e){
+    if (!state.gyroOn || state.dragging) return;
+    if (e.gamma === null || e.beta === null) return;
+
+    if (state.gyroBaseGamma === null){
+      state.gyroBaseGamma = e.gamma;
+      state.gyroBaseBeta = e.beta;
+      state.lastGamma = e.gamma;
+      state.lastBeta = e.beta;
+      return;
+    }
+
+    const sens = LEVELS[state.level].gyroSensitivity;
+    // delta relativo à última leitura (evita saltos, permite "girar" além do range físico)
+    const dGamma = angleDelta(e.gamma, state.lastGamma);
+    const dBeta  = angleDelta(e.beta,  state.lastBeta);
+    state.lastGamma = e.gamma;
+    state.lastBeta  = e.beta;
+
+    state.targetY = clamp(state.targetY + dGamma * sens * 0.5, -MAX_ROT_Y, MAX_ROT_Y);
+    state.targetX = clamp(state.targetX - dBeta  * sens * 0.3, -MAX_ROT_X, MAX_ROT_X);
+  }
+
+  function enableGyro(){
+    window.addEventListener('deviceorientation', handleOrientation);
+    state.gyroOn = true;
+    gyroBtn.textContent = 'GIROSCÓPIO ON';
+    gyroBtn.classList.add('active');
+  }
+
+  function disableGyro(){
+    window.removeEventListener('deviceorientation', handleOrientation);
+    state.gyroOn = false;
+    state.gyroBaseGamma = null;
+    gyroBtn.textContent = 'GIROSCÓPIO OFF';
+    gyroBtn.classList.remove('active');
+  }
+
+  gyroBtn.addEventListener('click', function(){
+    if (state.gyroOn){ disableGyro(); return; }
+
+    // Permissão do iOS 13+ — só pode ser pedida após toque do usuário
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(resp){
+        if (resp === 'granted'){ enableGyro(); }
+        else { alert('Permissão negada. Você ainda pode girar a carta arrastando com o dedo.'); }
+      }).catch(function(){
+        alert('Não foi possível solicitar o giroscópio neste navegador.');
+      });
+    } else if ('DeviceOrientationEvent' in window){
+      enableGyro(); // Android e navegadores que não exigem permissão explícita
+    } else {
+      alert('Este dispositivo não tem suporte a giroscópio. Use o arraste com o dedo/mouse.');
+    }
+  });
+
+  calibrateBtn.addEventListener('click', function(){
+    state.gyroBaseGamma = null; // próxima leitura de orientação vira o novo "zero"
+  });
+
+  recenterBtn.addEventListener('click', function(){
+    state.targetY = 0; state.targetX = 0;
+  });
+
+  // ================= NÍVEIS =================
+  function setLevel(n){
+    state.level = n;
+    lvl1Btn.classList.toggle('active', n===1);
+    lvl2Btn.classList.toggle('active', n===2);
+  }
+  lvl1Btn.addEventListener('click', function(){ setLevel(1); });
+  lvl2Btn.addEventListener('click', function(){ setLevel(2); });
+
+  // ================= CONTROLE MANUAL (mouse + touch, via Pointer Events) =================
+  card.addEventListener('pointerdown', function(e){
+    state.dragging = true;
+    state.dragStartX = e.clientX;
+    state.dragStartY = e.clientY;
+    state.dragStartRotY = state.targetY;
+    state.dragStartRotX = state.targetX;
+    card.setPointerCapture(e.pointerId);
+  });
+
+  card.addEventListener('pointermove', function(e){
+    if (!state.dragging) return;
+    const sens = LEVELS[state.level].dragSensitivity;
+    const dx = e.clientX - state.dragStartX;
+    const dy = e.clientY - state.dragStartY;
+    state.targetY = clamp(state.dragStartRotY + dx * sens, -MAX_ROT_Y, MAX_ROT_Y);
+    state.targetX = clamp(state.dragStartRotX - dy * sens, -MAX_ROT_X, MAX_ROT_X);
+  });
+
+  function endDrag(){
+    if (!state.dragging) return;
+    state.dragging = false;
+    // Se o giroscópio estiver desligado, a carta volta suavemente ao centro
+    if (!state.gyroOn){ state.targetY = 0; state.targetX = 0; }
+  }
+  card.addEventListener('pointerup', endDrag);
+  card.addEventListener('pointercancel', endDrag);
+
+  // ================= UI DISCRETA (some após alguns segundos) =================
+  let hideTimer;
+  function showUI(){
+    ui.classList.remove('hidden');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function(){ ui.classList.add('hidden'); }, 4500);
+  }
+  document.addEventListener('pointerdown', showUI);
+  showUI();
+
+  // Pequena animação ambiente quando giroscópio está OFF e ninguém interage
+  let ambient = 0;
+  setInterval(function(){
+    if (state.gyroOn || state.dragging) return;
+    ambient += 0.05;
+    state.targetY = Math.sin(ambient) * 4;
+    state.targetX = Math.cos(ambient*0.7) * 2;
+  }, 60);
+
+})();
+</script>
+</body>
+</html>
