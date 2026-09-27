@@ -75,88 +75,46 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO COM CAMADAS 3D SEPARADAS */
-.card-back {
+/* VERSO DO CARTÃO COM AS TRÊS IMAGENS SEPARADAS EM CAMADAS */
+.secret-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #050b14;
+  background: #050b14; /* Fundo base escuro */
   border-radius: 22px;
   transform: rotateY(180deg);
   backface-visibility: hidden;
   z-index: 2;
-  transform-style: preserve-3d;
-  overflow: visible;
+  transform-style: preserve-3d; /* Essencial para o efeito 3D nas imagens internas */
+  overflow: hidden; /* Mantém as imagens dentro das bordas arredondadas */
 }
 
-/* Camada 1: Fundo do Verso */
-.back-layer-bg {
+/* Estilo comum para as três imagens do verso */
+.back-layer {
   position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
-  transform: translateZ(-60px);
-  border-radius: 22px;
-}
-
-/* Camada 2: Mago no Meio do Verso (Com blend-mode darken para preservar cores) */
-.back-layer-mago {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  transform: translateZ(10px);
-  mix-blend-mode: darken;
-  filter: contrast(1.2) brightness(1.1);
-}
-
-/* Camada 3: Moldura por Cima no Verso com Mistura */
-.back-layer-moldura {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  transform: translateZ(90px);
-  pointer-events: none;
-  border-radius: 22px;
-  mix-blend-mode: multiply;
-}
-
-/* Textos flutuantes sobre o verso */
-.back-content {
-  position: absolute;
-  bottom: 1.8rem;
+  object-fit: cover; /* Ajusta a imagem para preencher sem distorcer */
+  top: 0;
   left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  transform: translateZ(50px);
-  z-index: 5;
-  text-align: center;
+  border-radius: 22px;
 }
 
-.secret-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  letter-spacing: 0.05em;
-  line-height: 1;
+/* Camada 1: O Fundo (Mais ao fundo) */
+.back-layer-fundo {
+  transform: translateZ(-20px); /* Move para trás */
 }
 
-.secret-sub {
-  font-size: 0.65rem;
-  color: #a3c0e4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+/* Camada 2: O Mago (No meio) */
+.back-layer-mago {
+  transform: translateZ(30px); /* Move para frente */
+}
+
+/* Camada 3: A Moldura de Galhos (Mais à frente) */
+.back-layer-moldura {
+  transform: translateZ(80px); /* Move muito para frente */
+  pointer-events: none; /* Garante que os cliques passem pela moldura */
 }
 
 /* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
@@ -164,23 +122,17 @@ body.mode-xray .device-frame {
   transform: rotateY(-35deg) rotateX(15deg) !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
-body.mode-xray .layer-back, body.mode-xray .back-layer-bg {
-  transform: translateZ(-90px) !important;
-  opacity: 0.9;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-mid, body.mode-xray .back-layer-mago {
-  transform: translateZ(10px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-front, body.mode-xray .back-content {
-  transform: translateZ(110px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
-  transform: translateZ(180px) !important;
-  transition: transform 0.6s ease;
-}
+/* Explode as camadas da FRENTE */
+body.mode-xray .layer-back { transform: translateZ(-30px) !important; opacity: 0.75; transition: transform 0.6s ease; }
+body.mode-xray .layer-mid { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
+body.mode-xray .layer-front { transform: translateZ(110px) !important; transition: transform 0.6s ease; }
+body.mode-xray .layer-pop { transform: translateZ(170px) !important; transition: transform 0.6s ease; }
+
+/* Explode as camadas do VERSO */
+body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !important; transition: transform 0.6s ease; }
+body.mode-xray .back-layer-fundo { transform: translateZ(-50px) !important; transition: transform 0.6s ease; }
+body.mode-xray .back-layer-mago { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
+body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; transition: transform 0.6s ease; }
 
 /* Estrutura de conteúdo 3D da Frente */
 .page {
@@ -247,7 +199,7 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
 @keyframes logo-pulse{
   0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
   55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),    0 6px 20px rgba(201,169,110,.25)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
 }
 @keyframes logo-shimmer{
   0%     {left:-110%}
@@ -499,15 +451,16 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (fundo, mago, textos e moldura integrados em camadas 3D) -->
-    <div class="card-back">
-      <img src="fundo.png" alt="Fundo Verso" class="back-layer-bg" onerror="this.style.display='none'">
-      <img src="mago.png" alt="Mago Verso" class="back-layer-mago" onerror="this.style.display='none'">
-      <div class="back-content">
-        <div class="secret-title">Tintas Qualy Quimy</div>
-        <div class="secret-sub">Magia em Cores e Acabamentos</div>
-      </div>
-      <img src="moldura.png" alt="Moldura Verso" class="back-layer-moldura" onerror="this.style.display='none'">
+    <!-- VERSO DO CARTÃO (TRÊS IMAGENS SEPARADAS EM CAMADAS) -->
+    <div class="secret-back">
+      <!-- Camada 1: O Fundo -->
+      <img src="fundo.png" alt="Cenário de Fundo" class="back-layer back-layer-fundo">
+      
+      <!-- Camada 2: O Mago -->
+      <img src="mago.png" alt="Ilustração do Mago" class="back-layer back-layer-mago">
+      
+      <!-- Camada 3: A Moldura de Galhos -->
+      <img src="moldura.png" alt="Moldura de Galhos e Cristais" class="back-layer back-layer-moldura">
     </div>
 
     <!-- FRENTE DO CARD -->
@@ -616,7 +569,7 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
 
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Virar Cartão 3D)</button>
+    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
     <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
@@ -633,25 +586,20 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
   let modoRaioX = false;
   let nivelAtual = 1;
 
-  let rotacaoYAcumulada = 0;
-  let rotacaoXAcumulada = 0;
+  const configuracoes = {
+    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
+    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+  };
 
   function definirNivel(lvl) {
     if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
-    
     if (lvl === 1) {
       btnLvl1.classList.add('active');
       btnLvl2.classList.remove('active');
-      rotacaoYAcumulada = 0;
-      rotacaoXAcumulada = 0;
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     } else {
       btnLvl2.classList.add('active');
       btnLvl1.classList.remove('active');
-      rotacaoYAcumulada = 180;
-      rotacaoXAcumulada = 0;
-      frame.style.transform = `rotateY(${rotacaoYAcumulada}deg) rotateX(${rotacaoXAcumulada}deg)`;
     }
   }
 
@@ -672,20 +620,17 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
     document.body.classList.remove('mode-xray');
     btnXray.classList.remove('active');
     definirNivel(nivelAtual);
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function handleOrientation(e) {
     if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
 
-    if (nivelAtual === 2) {
-      let x = e.gamma * 1.5;
-      let y = (e.beta - 45) * 1.5;
-      frame.style.transform = `rotateY(${180 + x}deg) rotateX(${-y}deg)`;
-    } else {
-      let x = Math.min(Math.max(e.gamma, -35), 35);
-      let y = Math.min(Math.max(e.beta - 45, -35), 35);
-      frame.style.transform = `rotateY(${x * 0.8}deg) rotateX(${-y * 0.8}deg)`;
-    }
+    const config = configuracoes[nivelAtual];
+    let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
+    let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
+
+    frame.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
   }
 
   function ativandoOorientacao() {
@@ -701,7 +646,7 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
     if (!modoRaioX) {
-      definirNivel(nivelAtual);
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   }
 
@@ -726,22 +671,20 @@ body.mode-xray .layer-pop, body.mode-xray .back-layer-moldura {
     }
   }
 
+  /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
     if (modoRaioX || !giroscopioAtivo) return;
+    const config = configuracoes[nivelAtual];
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
-    if (nivelAtual === 2) {
-      frame.style.transform = `rotateY(${180 + (x * 120)}deg) rotateX(${-y * 90}deg)`;
-    } else {
-      frame.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg)`;
-    }
+    frame.style.transform = `rotateY(${x * config.intensidadeMouse}deg) rotateX(${-y * config.intensidadeMouse}deg)`;
   });
 
   document.addEventListener('mouseleave', () => {
     if (giroscopioAtivo && !modoRaioX) {
-      definirNivel(nivelAtual);
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
 </script>
