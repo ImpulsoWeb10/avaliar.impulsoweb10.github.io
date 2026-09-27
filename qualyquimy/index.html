@@ -27,29 +27,6 @@ body{
   perspective: 1200px;
 }
 
-/* IMAGEM DE FUNDO ATRÁS DE TUDO (Movimentada pelo giroscópio) */
-.bg-mago3d-container {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bg-mago3d {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.1s ease-out;
-  will-change: transform;
-  opacity: 0.6; /* Ajuste a opacidade se quiser mais claro ou escuro ao fundo */
-}
-
 /* Container principal */
 .app-wrapper {
   display: flex;
@@ -62,10 +39,9 @@ body{
   z-index: 1;
 }
 
-/* Moldura externa / Cartão (Mantido intacto na frente) */
+/* Moldura externa / Cartão 3D */
 .device-frame {
   position: relative;
-  z-index: 1;
   width: 100%;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   border: 2px solid #ffffff;
@@ -82,40 +58,22 @@ body{
   text-align: center;
   gap: 1.1rem;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
 
-/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
+/* ESTADOS DE ROTAÇÃO E NÍVEIS DO CARTÃO */
+body.nivel-2 .device-frame {
+  transform: rotateY(180deg);
+}
+
 body.mode-xray .device-frame {
   transform: rotateY(-35deg) rotateX(15deg) !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
-body.mode-xray .layer-back {
-  transform: translateZ(-30px) !important;
-  opacity: 0.75;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-mid {
-  transform: translateZ(50px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-front {
-  transform: translateZ(110px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .layer-pop {
-  transform: translateZ(170px) !important;
-  transition: transform 0.6s ease;
-}
-body.mode-xray .secret-back {
-  transform: rotateY(180deg) translateZ(-60px) !important;
-  opacity: 0.5;
-  transition: transform 0.6s ease;
-}
 
-/* MENSAGEM SECRETA NAS COSTAS DO CARD */
-.secret-back {
+/* VERSO DO CARTÃO (Onde fica o Mago 3D nas costas) */
+.card-back {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -127,69 +85,48 @@ body.mode-xray .secret-back {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  padding: 2rem;
-  transform: rotateY(180deg) translateZ(1px);
+  padding: 1.5rem;
+  transform: rotateY(180deg);
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
-  transition: transform 0.4s ease;
+  box-shadow: inset 0 0 25px rgba(201, 169, 110, 0.25);
   z-index: 2;
+}
+
+.mago-back-img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+  border-radius: 12px;
 }
 
 .secret-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #ffd700;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   letter-spacing: 0.05em;
 }
 
 .secret-sub {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #a3c0e4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* Estrutura de conteúdo 3D da Frente */
+/* FRENTE DO CARTÃO (Idêntica à sua imagem, 100% intacta) */
 .page {
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:1.1rem;
-  width:100%;
-  transform-style: preserve-3d;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
   backface-visibility: hidden;
-}
-
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
-.layer-back {
-  transform: translateZ(15px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-mid {
-  transform: translateZ(35px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-front {
-  transform: translateZ(55px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
-}
-
-.layer-pop {
-  transform: translateZ(75px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
 }
 
 /* Logo area */
@@ -445,7 +382,6 @@ body.mode-xray .secret-back {
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
 }
 
-/* Estilo do Botão Raio-X */
 .xray-btn {
   background: rgba(88, 28, 135, 0.85);
   color: #d8b4fe;
@@ -465,25 +401,21 @@ body.mode-xray .secret-back {
 </head>
 <body>
 
-<!-- IMAGEM DE FUNDO FIXA ATRÁS DE TUDO -->
-<div class="bg-mago3d-container">
-  <img src="mago3d.png" alt="Fundo Mago 3D" class="bg-mago3d" id="magoBg">
-</div>
-
 <div class="app-wrapper">
   
   <div class="device-frame" id="deviceFrame">
 
-    <!-- COSTAS DO CARD (MENSAGEM SECRETA) -->
-    <div class="secret-back">
-      <div class="secret-title">Jesus te ama! ❤️</div>
-      <div class="secret-sub">Que você tenha um ótimo dia!</div>
+    <!-- VERSO DO CARTÃO (O Mago 3D aparece aqui atrás ao virar o cartão) -->
+    <div class="card-back">
+      <img src="mago3d.png" alt="Mago 3D Verso" class="mago-back-img">
+      <div class="secret-title">Tintas Qualy Quimy</div>
+      <div class="secret-sub">Qualidade e Tradição</div>
     </div>
 
-    <!-- FRENTE DO CARD (100% INTACTA) -->
+    <!-- FRENTE DO CARTÃO (100% igualzinha à sua foto, intacta) -->
     <div class="page">
 
-      <div class="logo-wrap layer-mid">
+      <div class="logo-wrap">
         <div class="logo-frame">
           <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -495,14 +427,14 @@ body.mode-xray .secret-back {
         </div>
       </div>
 
-      <div class="layer-back">
+      <div>
         <div class="stars-row" aria-label="Avaliação 5 estrelas">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
         <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
       </div>
 
-      <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
+      <div style="width: 100%; display: flex; justify-content: center;">
         <a
           href="https://g.page/r/CRECbD178tUDEAE/review"
           class="btn-google"
@@ -515,7 +447,7 @@ body.mode-xray .secret-back {
         </a>
       </div>
 
-      <div class="social-row layer-front" aria-label="Redes sociais e contato">
+      <div class="social-row" aria-label="Redes sociais e contato">
 
         <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
           <div class="social-icon" style="background:#1a2e1a;">
@@ -555,12 +487,12 @@ body.mode-xray .secret-back {
 
       </div>
 
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
+      <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
       </div>
 
-      <div class="ticker-banner layer-mid">
+      <div class="ticker-banner">
         <div class="ticker-track">
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
           <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
@@ -569,7 +501,7 @@ body.mode-xray .secret-back {
 
     </div>
 
-    <div class="footer layer-back">
+    <div class="footer">
       <p class="footer-promo">Deseja um link como este para sua empresa?<br>
         <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
       </p>
@@ -586,7 +518,7 @@ body.mode-xray .secret-back {
 
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
+    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Virar Cartão)</button>
     <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
@@ -594,7 +526,6 @@ body.mode-xray .secret-back {
 
 <script>
   const frame = document.getElementById('deviceFrame');
-  const magoBg = document.getElementById('magoBg');
   const btnGyro = document.getElementById('toggleGyro');
   const btnLvl1 = document.getElementById('btnLvl1');
   const btnLvl2 = document.getElementById('btnLvl2');
@@ -604,20 +535,20 @@ body.mode-xray .secret-back {
   let modoRaioX = false;
   let nivelAtual = 1;
 
-  const configuracoes = {
-    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
-  };
-
   function definirNivel(lvl) {
     if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
+    
+    document.body.classList.remove('nivel-2');
+
     if (lvl === 1) {
       btnLvl1.classList.add('active');
       btnLvl2.classList.remove('active');
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     } else {
       btnLvl2.classList.add('active');
       btnLvl1.classList.remove('active');
+      document.body.classList.add('nivel-2');
     }
   }
 
@@ -625,6 +556,7 @@ body.mode-xray .secret-back {
     modoRaioX = !modoRaioX;
     if (modoRaioX) {
       document.body.classList.add('mode-xray');
+      document.body.classList.remove('nivel-2');
       btnXray.classList.add('active');
       btnLvl1.classList.remove('active');
       btnLvl2.classList.remove('active');
@@ -638,18 +570,15 @@ body.mode-xray .secret-back {
     document.body.classList.remove('mode-xray');
     btnXray.classList.remove('active');
     definirNivel(nivelAtual);
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function handleOrientation(e) {
-    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
+    if (!giroscopioAtivo || modoRaioX || nivelAtual === 2 || e.gamma === null || e.beta === null) return;
 
-    const config = configuracoes[nivelAtual];
-    let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
-    let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
+    let x = Math.min(Math.max(e.gamma, -35), 35);
+    let y = Math.min(Math.max(e.beta - 45, -35), 35);
 
-    // Movimento do fundo que reage ao giroscópio mantendo a frente intacta
-    magoBg.style.transform = `rotateY(${x * config.intensidadeCelular}deg) rotateX(${-y * config.intensidadeCelular}deg)`;
+    frame.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   }
 
   function ativandoOorientacao() {
@@ -664,7 +593,7 @@ body.mode-xray .secret-back {
     giroscopioAtivo = false;
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
-    magoBg.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    if (nivelAtual === 1) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function alternarGiroscopio() {
@@ -688,20 +617,19 @@ body.mode-xray .secret-back {
     }
   }
 
-  /* Movimento no Desktop na imagem de fundo */
+  /* Movimento subtil no Desktop para o Nível 1 */
   document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !giroscopioAtivo) return;
-    const config = configuracoes[nivelAtual];
+    if (modoRaioX || !giroscopioAtivo || nivelAtual === 2) return;
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
-    magoBg.style.transform = `rotateY(${x * config.intensidadeMouse}deg) rotateX(${-y * config.intensidadeMouse}deg)`;
+    frame.style.transform = `rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`;
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo && !modoRaioX) {
-      magoBg.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    if (giroscopioAtivo && !modoRaioX && nivelAtual === 1) {
+      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
 </script>
