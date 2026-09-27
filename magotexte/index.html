@@ -19,13 +19,16 @@
 <title>Mago 3D</title>
 <style>
   :root{
-    /* ============ AJUSTE AQUI: perspectiva geral do efeito 3D ============ */
-    --perspective: 1000px;
-    /* ============ AJUSTE AQUI: profundidade de cada camada (translateZ) === */
-    --z-bg: -60px;
-    --z-image: 10px;
-    --z-frame: 75px;
-    --z-highlight: 110px;
+    /* ============ AJUSTE AQUI: perspectiva geral do efeito 3D =============
+       Quanto MENOR esse número, mais exagerado fica o efeito de profundidade. */
+    --perspective: 800px;
+    /* ============ AJUSTE AQUI: profundidade de cada camada (translateZ) ===
+       Diferenças grandes entre as camadas = moldura "saltando" pra frente e
+       fundo recuando de verdade. Se ficar exagerado, reduza estes valores. */
+    --z-bg: -150px;
+    --z-image: 0px;
+    --z-frame: 160px;
+    --z-highlight: 220px;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{
@@ -70,7 +73,7 @@
   /* Fundo: um pouco maior (scale) para não deixar "buraco" nas bordas quando
      a carta gira e a camada de trás se desloca lateralmente (paralaxe). */
   .background-layer{
-    transform:translateZ(var(--z-bg)) scale(1.18);
+    transform:translateZ(var(--z-bg)) scale(1.5);
     border-radius:18px;
     overflow:hidden;
   }
