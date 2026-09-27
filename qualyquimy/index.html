@@ -11,7 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
+html,body{
+  height:100%;
+  width:100%;
+  overflow-x:hidden;
+}
 body{
   font-family:'DM Sans',sans-serif;
   background:#07101e;
@@ -21,9 +25,7 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:1.5rem 0.5rem;
-  overflow-x:hidden;
-  position:relative;
+  padding:1rem;
   perspective: 1200px;
 }
 
@@ -39,19 +41,19 @@ body::before{
   z-index:0;
 }
 
-/* Container principal */
+/* Container principal ajustado para ocupar toda a largura da tela */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 600px;
   position: relative;
   z-index: 1;
 }
 
-/* Moldura externa (Camada Base 0) */
+/* Moldura principal com efeito 3D / Paralaxe ativo */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -64,14 +66,14 @@ body::before{
     0 0 20px rgba(255, 255, 255, 0.8),
     0 0 30px rgba(255, 255, 255, 0.35),
     0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.4rem 1.4rem 1.2rem;
+  padding: 1.8rem 1.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.1rem;
+  gap: 1.2rem;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.1s ease-out; /* Suavidade para o paralaxe */
   will-change: transform;
 }
 
@@ -83,24 +85,19 @@ body.mode-xray .device-frame {
 body.mode-xray .layer-back {
   transform: translateZ(-30px) !important;
   opacity: 0.75;
-  transition: transform 0.6s ease;
 }
 body.mode-xray .layer-mid {
   transform: translateZ(50px) !important;
-  transition: transform 0.6s ease;
 }
 body.mode-xray .layer-front {
   transform: translateZ(110px) !important;
-  transition: transform 0.6s ease;
 }
 body.mode-xray .layer-pop {
   transform: translateZ(170px) !important;
-  transition: transform 0.6s ease;
 }
 body.mode-xray .secret-back {
   transform: rotateY(180deg) translateZ(-60px) !important;
   opacity: 0.85;
-  transition: transform 0.6s ease;
 }
 
 /* VERSO DO CARD COM AS 3 IMAGENS */
@@ -121,12 +118,11 @@ body.mode-xray .secret-back {
   backface-visibility: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: inset 0 0 20px rgba(201, 169, 110, 0.2);
-  transition: transform 0.4s ease;
 }
 
 .secret-title-custom {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #ffd700;
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
@@ -142,8 +138,8 @@ body.mode-xray .secret-back {
 }
 
 .card-back-img {
-  width: 30%;
-  height: 110px;
+  width: 31%;
+  height: 130px;
   object-fit: cover;
   border-radius: 10px;
   border: 1.5px solid rgba(201, 169, 110, 0.5);
@@ -164,31 +160,27 @@ body.mode-xray .secret-back {
   backface-visibility: hidden;
 }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS */
+/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (PARALAXE) */
 .layer-back {
-  transform: translateZ(15px);
+  transform: translateZ(20px);
   transform-style: preserve-3d;
-  transition: transform 0.4s ease;
 }
 
 .layer-mid {
-  transform: translateZ(35px);
+  transform: translateZ(45px);
   transform-style: preserve-3d;
-  transition: transform 0.4s ease;
 }
 
 .layer-front {
-  transform: translateZ(55px);
+  transform: translateZ(70px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
 }
 
 .layer-pop {
-  transform: translateZ(75px);
+  transform: translateZ(95px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
 }
 
 /* Logo area */
@@ -247,7 +239,7 @@ body.mode-xray .secret-back {
 }
 .brand{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:600;
+  font-size:1.9rem;font-weight:600;
   color:#f0ece5;letter-spacing:.06em;line-height:1.1;
 }
 .brand em{color:#c9a96e;font-style:italic}
@@ -259,7 +251,7 @@ body.mode-xray .secret-back {
 .rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
 
 /* 4 icon buttons row */
-.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
+.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center;width:100%}
 .social-btn{
   display:flex;flex-direction:column;align-items:center;gap:.25rem;
   text-decoration:none;
@@ -267,27 +259,27 @@ body.mode-xray .secret-back {
 }
 .social-btn:hover{transform:translateY(-3px)}
 .social-icon{
-  width:44px;height:44px;border-radius:50%;
+  width:50px;height:50px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,255,255,.3);
   transition:border-color .2s,box-shadow .2s;
 }
 .social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:20px;height:20px}
-.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
+.social-icon svg{width:22px;height:22px}
+.social-label{font-size:.7rem;color:#9bb5d4;letter-spacing:.04em}
 
 /* Google button */
 .btn-google{
   display:inline-flex;align-items:center;gap:.5rem;
   background:#FBBC05;
   color:#1a1200;font-weight:700;
-  padding:.7rem 1.3rem;
+  padding:.8rem 1.4rem;
   border-radius:50px;
-  font-size:.85rem;text-decoration:none;
+  font-size:.9rem;text-decoration:none;
   font-family:'DM Sans',sans-serif;
   letter-spacing:.02em;
   border:none;cursor:pointer;
-  width:100%;max-width:260px;justify-content:center;
+  width:100%;max-width:280px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
 }
@@ -308,11 +300,11 @@ body.mode-xray .secret-back {
   0%{left:-120%}
   55%,100%{left:160%}
 }
-.btn-google svg{width:16px;height:16px;flex-shrink:0}
+.btn-google svg{width:18px;height:18px;flex-shrink:0}
 .btn-google:hover{background:#fcc419;transform:translateY(-1px)}
 
 /* Address */
-.address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
+.address{font-size:.78rem;color:#8ba4c4;line-height:1.4}
 
 /* Banner Infinito */
 .ticker-banner {
@@ -321,7 +313,7 @@ body.mode-xray .secret-back {
   background: rgba(201, 169, 110, 0.15);
   border: 1px solid rgba(201, 169, 110, 0.35);
   border-radius: 8px;
-  padding: 0.35rem 0;
+  padding: 0.4rem 0;
   display: flex;
 }
 .ticker-track {
@@ -330,7 +322,7 @@ body.mode-xray .secret-back {
   animation: infinite-scroll 18s linear infinite;
 }
 .ticker-item {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: #fce8bd;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -344,7 +336,7 @@ body.mode-xray .secret-back {
 
 /* Footer interno */
 .footer{
-  font-size:.72rem;
+  font-size:.74rem;
   color:#d0dce8;
   margin-top:0.2rem;
   display:flex;
@@ -353,10 +345,10 @@ body.mode-xray .secret-back {
   gap:.4rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:0.9rem;
+  padding-top:1rem;
 }
 .footer-promo{
-  font-size:.78rem;
+  font-size:.8rem;
   color:#ffffff;
   line-height:1.4;
   text-align:center;
@@ -371,10 +363,10 @@ body.mode-xray .secret-back {
   transition:color .2s;
 }
 .footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#8ba4c4}
-.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.7rem;color:#8ba4c4}
+.footer-ssl svg{width:12px;height:12px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
 .footer-dev{
-  font-size:.72rem;
+  font-size:.74rem;
   color:#b0c4de;
   display:flex;
   align-items:center;
@@ -391,8 +383,8 @@ body.mode-xray .secret-back {
   color: #90caf9;
   border: 1px solid rgba(100, 181, 246, 0.4);
   border-radius: 12px;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.68rem;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.2s;
@@ -413,7 +405,7 @@ body.mode-xray .secret-back {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 0.2rem;
+  padding-top: 0.4rem;
   flex-wrap: wrap;
 }
 
@@ -422,8 +414,8 @@ body.mode-xray .secret-back {
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.72rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
   font-family: inherit;
@@ -468,13 +460,13 @@ body.mode-xray .secret-back {
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARD (COM AS 3 IMAGENS) -->
+    <!-- VERSO DO CARD COM AS 3 IMAGENS -->
     <div class="secret-back">
       <div class="secret-title-custom">Nossos Produtos</div>
       <div class="images-grid">
-        <img src="imagem1.png" alt="Produto 1" class="card-back-img">
-        <img src="imagem2.png" alt="Produto 2" class="card-back-img">
-        <img src="imagem3.png" alt="Produto 3" class="card-back-img">
+        <img src="imagem1.jpg" alt="Produto 1" class="card-back-img">
+        <img src="imagem2.jpg" alt="Produto 2" class="card-back-img">
+        <img src="imagem3.jpg" alt="Produto 3" class="card-back-img">
       </div>
     </div>
 
@@ -597,7 +589,7 @@ body.mode-xray .secret-back {
   const btnLvl2 = document.getElementById('btnLvl2');
   const btnXray = document.getElementById('btnXray');
 
-  let giroscopioAtivo = false;
+  let giroscopioAtivo = true; // Mantém ativo por padrão para garantir o efeito
   let modoRaioX = false;
   let nivelAtual = 1;
 
@@ -686,9 +678,9 @@ body.mode-xray .secret-back {
     }
   }
 
-  /* Movimento no Desktop */
+  /* Movimento no Desktop por Mousemove */
   document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !giroscopioAtivo) return;
+    if (modoRaioX) return;
     const config = configuracoes[nivelAtual];
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
@@ -698,10 +690,14 @@ body.mode-xray .secret-back {
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo && !modoRaioX) {
+    if (!modoRaioX) {
       frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
+
+  // Inicializa o botão de giroscópio como ligado no carregamento visual
+  btnGyro.innerText = 'Giroscópio: ON';
+  btnGyro.classList.add('active');
 </script>
 
 </body>
