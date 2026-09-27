@@ -3,28 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tintas Qualy Quimy em Itaquaquecetuba — Qualidade, confiança e compromisso. Tintas, texturas e acabamentos para a sua obra.">
+<meta property="og:title" content="Tintas Qualy Quimy | Itaquaquecetuba SP">
+<meta property="og:description" content="Qualidade, confiança e compromisso. Avalie nosso atendimento e fale conosco no WhatsApp.">
 <title>Tintas Qualy Quimy | Itaquaquecetuba</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #050b14;
-  color: #e8e2d8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#07101e;
+  color:#e8e2d8;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem 0.5rem;
+  overflow:hidden;
+  position:relative;
 }
 
-/* 1. CONTAINER DO PARALLAX FIXO NO FUNDO DA TELA INTEIRA */
+/* NOVO FUNDO 3D PARALLAX */
 .parallax-bg {
   position: fixed;
   top: 0;
@@ -36,148 +38,290 @@ body {
   pointer-events: none;
 }
 
-/* 2. EMPILHAR AS 3 IMAGENS EXATAMENTE UMA EM CIMA DA OUTRA */
 .parallax-layer {
   position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
   object-fit: cover;
-  will-change: transform;
   transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
-/* 4. APP WRAPPER (CARTÃO PRINCIPAL DA FRENTE) */
+/* Container principal */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 1.2rem;
   width: 100%;
-  max-width: 440px;
-  height: 80vh;
-  max-height: 720px;
-  background: linear-gradient(160deg, rgba(15, 23, 42, 0.88) 0%, rgba(2, 6, 23, 0.92) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(37, 99, 235, 0.15);
-  padding: 1.2rem 1rem;
-  text-align: center;
-  z-index: 10;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Elementos internos do cartão */
-.page {
+/* Moldura externa */
+.device-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: linear-gradient(175deg, rgba(16, 32, 64, 0.9) 0%, rgba(11, 26, 46, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.4),
+    0 15px 35px rgba(0, 0, 0, 0.8);
+  padding: 1.4rem 1.4rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
+  text-align: center;
+  gap: 1.1rem;
 }
 
-.logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-.logo-img {
-  width: 140px;
-  height: auto;
-  max-height: 60px;
-  border-radius: 10px;
-  border: 1px solid rgba(201,169,110,0.4);
-  object-fit: contain;
-  background: rgba(201,169,110,0.05);
-}
-.brand {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #f0ece5;
-}
-.brand em { color: #c9a96e; font-style: italic; }
-.tagline { font-size: 0.65rem; color: #9bb5d4; text-transform: uppercase; letter-spacing: 0.05em; }
+/* ESTILOS DO MODO RAIO-X */
+body.mode-xray .parallax-layer:nth-child(1) { transform: translate(-40px, 20px) !important; }
+body.mode-xray .parallax-layer:nth-child(2) { transform: translate(20px, -30px) !important; }
+body.mode-xray .parallax-layer:nth-child(3) { transform: translate(60px, 40px) !important; }
 
-.stars-row { display: flex; gap: 0.2rem; justify-content: center; color: #ffd700; font-size: 0.95rem; }
-.rating-text { font-size: 0.68rem; color: #a3c0e4; margin-top: 0.1rem; }
-
-.btn-google {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #FBBC05;
-  color: #1a1200;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  text-decoration: none;
-  border: none;
-  box-shadow: 0 4px 15px rgba(251,188,5,0.3);
+/* Estrutura de conteúdo 3D da Frente */
+.page {
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.1rem;
+  width:100%;
 }
-.btn-google svg { width: 14px; height: 14px; }
 
-.social-row { display: flex; gap: 0.5rem; justify-content: center; width: 100%; }
-.social-btn {
-  display: flex; flex-direction: column; align-items: center; gap: 0.2rem; text-decoration: none;
+/* Logo area */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+
+.logo-frame{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  display:inline-block;
+  animation:logo-pulse 2.6s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(201,169,110,.5);
 }
-.social-icon {
-  width: 38px; height: 38px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.03);
+.logo-frame::after{
+  content:'';
+  position:absolute;
+  top:0;left:-110%;
+  width:55%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  animation:logo-shimmer 2.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
 }
-.social-icon svg { width: 16px; height: 16px; }
-.social-label { font-size: 0.58rem; color: #9bb5d4; }
+@keyframes logo-pulse{
+  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
+  55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
+}
+@keyframes logo-shimmer{
+  0%     {left:-110%}
+  45%,100%{left:160%}
+}
 
-.address { font-size: 0.65rem; color: #8ba4c4; line-height: 1.3; }
+.logo-img{
+  display:block;
+  width:180px;
+  height:auto;
+  max-height:85px;
+  border-radius:12px;
+  border:2px solid rgba(201,169,110,.4);
+  object-fit:contain;
+  background:rgba(201,169,110,0.06);
+  position:relative;z-index:1;
+}
+.logo-img-fallback{
+  width:180px;height:75px;
+  border-radius:12px;
+  border:2px solid rgba(201,169,110,.4);
+  background:rgba(201,169,110,0.06);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;color:#c9a96e;font-weight:600;
+  letter-spacing:.08em;
+  position:relative;z-index:1;
+}
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;
+  color:#f0ece5;letter-spacing:.06em;line-height:1.1;
+}
+.brand em{color:#c9a96e;font-style:italic}
+.tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
 
+/* Rating stars */
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.star{font-size:1.15rem;color:#ffd700}
+.rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
+
+/* 4 icon buttons row */
+.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
+.social-btn{
+  display:flex;flex-direction:column;align-items:center;gap:.25rem;
+  text-decoration:none;
+  transition:transform .2s;
+}
+.social-btn:hover{transform:translateY(-3px)}
+.social-icon{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.3);
+  transition:border-color .2s,box-shadow .2s;
+}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
+
+/* Google button */
+.btn-google{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:#FBBC05;
+  color:#1a1200;font-weight:700;
+  padding:.7rem 1.3rem;
+  border-radius:50px;
+  font-size:.85rem;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;
+  border:none;cursor:pointer;
+  width:100%;max-width:260px;justify-content:center;
+  position:relative;overflow:hidden;
+  animation:pulse-google 2.2s ease-in-out infinite;
+}
+.btn-google::after{
+  content:'';
+  position:absolute;
+  top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-20deg);
+  animation:shimmer 2.2s ease-in-out infinite;
+}
+@keyframes pulse-google{
+  0%{box-shadow:0 0 0 0 rgba(251,188,5,.45),0 4px 15px rgba(251,188,5,.25)}
+  60%{box-shadow:0 0 0 10px rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.1)}
+  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.25)}
+}
+@keyframes shimmer{
+  0%{left:-120%}
+  55%,100%{left:160%}
+}
+.btn-google svg{width:16px;height:16px;flex-shrink:0}
+.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
+
+/* Address */
+.address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
+
+/* Banner Infinito */
 .ticker-banner {
   width: 100%;
   overflow: hidden;
-  background: rgba(201, 169, 110, 0.1);
-  border: 1px solid rgba(201, 169, 110, 0.25);
-  border-radius: 6px;
-  padding: 0.25rem 0;
+  background: rgba(201, 169, 110, 0.15);
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  border-radius: 8px;
+  padding: 0.35rem 0;
+  display: flex;
 }
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: scroll 15s linear infinite;
+  animation: infinite-scroll 18s linear infinite;
 }
 .ticker-item {
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   color: #fce8bd;
-  padding-right: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding-right: 2rem;
   white-space: nowrap;
 }
-@keyframes scroll {
+@keyframes infinite-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-.footer {
-  font-size: 0.62rem;
-  color: #b0c4de;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 0.4rem;
-  width: 100%;
+/* Footer interno */
+.footer{
+  font-size:.72rem;
+  color:#d0dce8;
+  margin-top:0.2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.4rem;
+  width:100%;
+  border-top:1px solid rgba(255,255,255,0.15);
+  padding-top:0.9rem;
 }
-.footer a { color: #64b5f6; text-decoration: none; }
+.footer-promo{
+  font-size:.78rem;
+  color:#ffffff;
+  line-height:1.4;
+  text-align:center;
+  font-weight:400;
+}
+.footer-promo a{
+  color:#ffe082;
+  text-decoration:none;
+  font-weight:700;
+  border-bottom:1px solid #ffe082;
+  padding-bottom:1px;
+  transition:color .2s;
+}
+.footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
+.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#8ba4c4}
+.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-dev{
+  font-size:.72rem;
+  color:#b0c4de;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
+.footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
-/* CONTROLES EXTERNOS DA BARRA INFERIOR (MANTIDOS INTACTOS) */
+/* Botão no Rodapé Interno */
+.btn-gyro {
+  background: rgba(255, 255, 255, 0.08);
+  color: #90caf9;
+  border: 1px solid rgba(100, 181, 246, 0.4);
+  border-radius: 12px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.65rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-gyro:hover {
+  background: rgba(100, 181, 246, 0.2);
+}
+.btn-gyro.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+/* CONTROLES EXTERNOS */
 .external-controls {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 0.8rem;
-  z-index: 10;
+  padding-top: 0.2rem;
+  flex-wrap: wrap;
 }
 
 .level-btn {
@@ -185,11 +329,12 @@ body {
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.68rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.72rem;
   font-weight: 500;
   cursor: pointer;
   font-family: inherit;
+  backdrop-filter: blur(4px);
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -225,19 +370,26 @@ body {
 </head>
 <body>
 
-  <!-- 1 & 2. CONTAINER E AS 3 IMAGENS EMPILHADAS NO FUNDO -->
-  <div class="parallax-bg" id="parallaxBg">
-    <img src="fundo.png" alt="Fundo" class="parallax-layer" data-speed="10">
-    <img src="mago.png" alt="Mago" class="parallax-layer" data-speed="25">
-    <img src="moldura.png" alt="Moldura" class="parallax-layer" data-speed="40">
-  </div>
+<!-- NOVO FUNDO 3D PARALLAX COM AS 3 IMAGENS -->
+<div class="parallax-bg" id="parallaxBg">
+  <img src="fundo.png" class="parallax-layer" data-speed="0.3" alt="Fundo">
+  <img src="mago.png" class="parallax-layer" data-speed="1.2" alt="Mago">
+  <img src="moldura.png" class="parallax-layer" data-speed="2.5" alt="Moldura">
+</div>
 
-  <!-- CARTÃO PRINCIPAL DA FRENTE (ESTÁTICO) -->
-  <div class="app-wrapper">
+<div class="app-wrapper">
+  
+  <div class="device-frame" id="deviceFrame">
+    
+    <!-- FRENTE DO CARD -->
     <div class="page">
-      
+
       <div class="logo-wrap">
-        <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo">
+        <div class="logo-frame">
+          <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none;">Qualy Quimy</div>
+        </div>
         <div>
           <div class="brand">Tintas <em>Qualy Quimy</em></div>
           <div class="tagline">Qualidade · Confiança · Compromisso</div>
@@ -245,38 +397,68 @@ body {
       </div>
 
       <div>
-        <div class="stars-row"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="stars-row" aria-label="Avaliação 5 estrelas">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
         <div class="rating-text">Sua nota 5 estrelas é a nossa maior recompensa!</div>
       </div>
 
-      <div>
-        <a href="https://g.page/r/CRECbD178tUDEAE/review" class="btn-google" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      <div style="width: 100%; display: flex; justify-content: center;">
+        <a
+          href="https://g.page/r/CRECbD178tUDEAE/review"
+          class="btn-google"
+          target="_blank"
+          rel="noopener"
+          aria-label="Avaliar no Google"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Avaliar no Google ⭐⭐⭐⭐⭐
         </a>
       </div>
 
-      <div class="social-row">
-        <a href="https://wa.me/5511954950044" class="social-btn" target="_blank" rel="noopener">
-          <div class="social-icon" style="background:#1a2e1a;"><svg viewBox="0 0 24 24" fill="#25d366"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></div>
+      <div class="social-row" aria-label="Redes sociais e contato">
+
+        <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <div class="social-icon" style="background:#1a2e1a;">
+            <svg viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </div>
           <span class="social-label">WhatsApp</span>
         </a>
-        <a href="https://www.instagram.com/tintasqualyquimy" class="social-btn" target="_blank" rel="noopener">
-          <div class="social-icon" style="background:#2a1a2e;"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#e6683c" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#e6683c" stroke-width="2"/></svg></div>
+
+        <a href="https://www.instagram.com/tintasqualyquimy" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+          <div class="social-icon" style="background:#2a1a2e;">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#dc2743"/>
+            </svg>
+          </div>
           <span class="social-label">Instagram</span>
         </a>
-        <a href="https://www.google.com/maps" class="social-btn" target="_blank" rel="noopener">
-          <div class="social-icon" style="background:#1a2030;"><svg viewBox="0 0 24 24" fill="#EA4335"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Leiria+45+Chacara+Cuiaba+CEP+08587100" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+          <div class="social-icon" style="background:#1a2030;">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+              <circle cx="12" cy="9" r="2.5" fill="#fff"/>
+            </svg>
+          </div>
           <span class="social-label">Maps</span>
         </a>
-        <a href="tel:+551146432301" class="social-btn">
-          <div class="social-icon" style="background:#1a2a1a;"><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3"/></svg></div>
+
+        <a href="tel:+551146432301" class="social-btn" aria-label="Ligar para a loja">
+          <div class="social-icon" style="background:#1a2a1a;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+          </div>
           <span class="social-label">Ligar</span>
         </a>
+
       </div>
 
-      <div class="address">
-        Rua Leiria, 45 · Chácara Cuiabá<br>CEP 08587-100 · Tel: (11) 4643-2301
+      <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
+        CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
       </div>
 
       <div class="ticker-banner">
@@ -289,78 +471,149 @@ body {
     </div>
 
     <div class="footer">
-      <p>Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank">ImpulsoWeb10</a></p>
+      <p class="footer-promo">Deseja um link como este para sua empresa?<br>
+        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
+      </p>
+      <div class="footer-ssl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Protegido por SSL
+      </div>
+      <p class="footer-dev">
+        Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
+        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscópio()">Giroscópio: OFF</button>
+      </p>
     </div>
   </div>
 
-  <!-- BARRA INFERIOR DE BOTÕES (MANTIDA ORIGINAL) -->
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
     <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
     <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
+</div>
+
 <script>
   const layers = document.querySelectorAll('.parallax-layer');
+  const btnGyro = document.getElementById('toggleGyro');
   const btnLvl1 = document.getElementById('btnLvl1');
   const btnLvl2 = document.getElementById('btnLvl2');
   const btnXray = document.getElementById('btnXray');
 
-  let nivelAtual = 1;
+  let giroscopioAtivo = false;
   let modoRaioX = false;
-  const multiplicadoresNivel = { 1: 1, 2: 2.2 };
+  let nivelAtual = 1;
+
+  const configuracoes = {
+    1: { intensidadeCelular: 0.5, intensidadeMouse: 12 },
+    2: { intensidadeCelular: 1.5, intensidadeMouse: 35 }
+  };
 
   function definirNivel(lvl) {
     if (modoRaioX) desativarRaioX();
     nivelAtual = lvl;
-    btnLvl1.classList.toggle('active', lvl === 1);
-    btnLvl2.classList.toggle('active', lvl === 2);
+    if (lvl === 1) {
+      btnLvl1.classList.add('active');
+      btnLvl2.classList.remove('active');
+    } else {
+      btnLvl2.classList.add('active');
+      btnLvl1.classList.remove('active');
+    }
   }
 
   function alternarRaioX() {
     modoRaioX = !modoRaioX;
-    btnXray.classList.toggle('active', modoRaioX);
     if (modoRaioX) {
-      // Posição estática de demonstração do Raio-X nas camadas de fundo
-      layers.forEach((layer, index) => {
-        const offset = (index - 1) * 60;
-        layer.style.transform = `translate(${offset}px, ${-offset}px)`;
-      });
+      document.body.classList.add('mode-xray');
+      btnXray.classList.add('active');
+      btnLvl1.classList.remove('active');
+      btnLvl2.classList.remove('active');
     } else {
-      definirNivel(nivelAtual);
-      aplicarParallax(0, 0);
+      desativarRaioX();
     }
   }
 
   function desativarRaioX() {
     modoRaioX = false;
+    document.body.classList.remove('mode-xray');
     btnXray.classList.remove('active');
+    definirNivel(nivelAtual);
+    aplicarParallax(0, 0);
   }
 
   function aplicarParallax(x, y) {
     if (modoRaioX) return;
-    const mult = multiplicadoresNivel[nivelAtual];
+    const config = configuracoes[nivelAtual];
+    
     layers.forEach(layer => {
-      const speed = parseFloat(layer.getAttribute('data-speed')) || 10;
-      const moveX = (x * speed * mult) / 10;
-      const moveY = (y * speed * mult) / 10;
+      const speed = parseFloat(layer.getAttribute('data-speed')) || 1;
+      const moveX = x * speed * config.intensidadeCelular;
+      const moveY = y * speed * config.intensidadeCelular;
       layer.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
   }
 
-  /* 3. ISOLAR O MOVIMENTO E GIROSCÓPIO APENAS NAS IMAGENS DE FUNDO */
-  window.addEventListener('mousemove', (e) => {
-    if (modoRaioX) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 15;
-    const y = (e.clientY / window.innerHeight - 0.5) * 15;
+  function handleOrientation(e) {
+    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
+    let x = Math.min(Math.max(e.gamma, -30), 30);
+    let y = Math.min(Math.max(e.beta - 45, -30), 30);
     aplicarParallax(x, y);
+  }
+
+  function ativandoOorientacao() {
+    window.addEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = true;
+    btnGyro.innerText = 'Giroscópio: ON';
+    btnGyro.classList.add('active');
+  }
+
+  function desativarGiroscopio() {
+    window.removeEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = false;
+    btnGyro.innerText = 'Giroscópio: OFF';
+    btnGyro.classList.remove('active');
+    aplicarParallax(0, 0);
+  }
+
+  function alternarGiroscópio() {
+    if (giroscopioAtivo) {
+      desativarGiroscopio();
+      return;
+    }
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(state => {
+        if (state === 'granted') {
+          ativandoOorientacao();
+        } else {
+          alert('Permissão de orientação negada.');
+        }
+      }).catch(() => {
+        ativandoOorientacao();
+      });
+    } else {
+      ativandoOorientacao();
+    }
+  }
+
+  /* Movimento no Desktop */
+  document.addEventListener('mousemove', (e) => {
+    if (modoRaioX || !giroscopioAtivo) return;
+    const config = configuracoes[nivelAtual];
+    const { innerWidth, innerHeight } = window;
+    const x = (e.clientX - innerWidth / 2) / (innerWidth / 2) * config.intensidadeMouse;
+    const y = (e.clientY - innerHeight / 2) / (innerHeight / 2) * config.intensidadeMouse;
+
+    layers.forEach(layer => {
+      const speed = parseFloat(layer.getAttribute('data-speed')) || 1;
+      layer.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
   });
 
-  window.addEventListener('deviceorientation', (e) => {
-    if (modoRaioX || e.gamma === null || e.beta === null) return;
-    const x = Math.min(Math.max(e.gamma, -30), 30) / 2;
-    const y = Math.min(Math.max(e.beta - 45, -30), 30) / 2;
-    aplicarParallax(x, y);
+  document.addEventListener('mouseleave', () => {
+    if (giroscopioAtivo && !modoRaioX) {
+      aplicarParallax(0, 0);
+    }
   });
 </script>
 
