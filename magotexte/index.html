@@ -65,10 +65,15 @@
     border-radius:26px;
   }
 
+  /* AJUSTE AQUI: recuo da imagem para dentro da moldura (efeito de quadro físico) */
   .image-layer{
     transform:translateZ(var(--z-image));
     overflow:hidden;
-    border-radius:22px;
+    border-radius:14px;
+    inset:5.5%;
+    box-shadow:
+      inset 0 10px 24px rgba(0,0,0,.65),   /* sombra da moldura projetada sobre a arte */
+      inset 0 0 0 1px rgba(0,0,0,.4);
   }
   .image-layer img{
     width:100%; height:100%; object-fit:cover; display:block;
@@ -80,15 +85,26 @@
     background:linear-gradient(160deg,#101a3d,#060a17);
   }
 
-  /* Moldura: camada decorativa por cima da imagem, não bloqueia toque */
+  /* Moldura: agora com material visível (metal azulado), a imagem fica recuada dentro dela */
   .frame-layer{
     transform:translateZ(var(--z-frame));
     pointer-events:none;
     border-radius:22px;
+    background:linear-gradient(155deg,#3a4d8f 0%,#141b3a 38%,#0a0f24 60%,#4c5fb0 100%);
     box-shadow:
-      inset 0 0 0 3px rgba(140,170,255,.35),
-      inset 0 0 40px rgba(30,50,120,.55),
+      inset 0 0 0 2px rgba(180,200,255,.45),
+      inset 0 2px 6px rgba(255,255,255,.25),
+      inset 0 -6px 14px rgba(0,0,0,.6),
       0 30px 60px rgba(0,0,0,.55);
+  }
+  /* Reflexo diagonal na moldura que varre a superfície ao girar (var setada em JS) */
+  .frame-layer::before{
+    content:"";
+    position:absolute; inset:0; border-radius:22px;
+    background:linear-gradient(115deg,
+      transparent calc(var(--sheen,30%) - 18%),
+      rgba(255,255,255,.35) var(--sheen,30%),
+      transparent calc(var(--sheen,30%) + 18%));
   }
 
   /* Brilho mágico que se move sutilmente com o tilt (via CSS var setada em JS) */
@@ -238,6 +254,9 @@
     card.style.setProperty('--glow-x', glowX + '%');
     card.style.setProperty('--glow-y', glowY + '%');
     card.style.setProperty('--shadow-scale', clamp(1 - Math.abs(state.curY)/400, 0.7, 1));
+    // Reflexo da moldura: varre de um lado a outro conforme o ângulo de giro
+    const sheen = 50 + (state.curY / MAX_ROT_Y) * 70;
+    card.style.setProperty('--sheen', sheen + '%');
   }
 
   // Loop de suavização (transform/opacity apenas => leve, via requestAnimationFrame)
