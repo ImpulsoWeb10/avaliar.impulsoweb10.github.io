@@ -369,26 +369,29 @@ body::before{
   padding-top:0.9rem;
 }
 
-/* Estilo do Efeito Máquina de Escrever */
+/* Estilo do Efeito Máquina de Escrever Corrigido (Usando ch exato) */
+.footer-seo-wrapper {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+
 .footer-seo-text {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: #9bb5d4;
   text-align: center;
-  line-height: 1.35;
-  max-width: 90%;
-  margin-bottom: 0.2rem;
-  display: inline-block;
+  font-family: monospace; /* Necessário para o efeito ch contar certinho */
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid #60a5fa;
-  width: 0;
-  animation: typing 5s steps(50, end) infinite alternate, blink-caret 0.75s step-end infinite;
+  width: 33ch; /* Exatamente 33 caracteres contando letras e espaços de "Referencia em tintas, texturas etc..." */
+  animation: typing 4s steps(33) infinite alternate, blink-caret 0.75s step-end infinite;
+  display: block;
+  margin: 0 auto;
 }
 
 @keyframes typing {
-  0% { width: 0; }
-  70% { width: 100%; }
-  100% { width: 100%; }
+  from { width: 0; }
+  to { width: 33ch; }
 }
 
 @keyframes blink-caret {
@@ -574,7 +577,9 @@ body::before{
 
     <!-- Rodapé Otimizado com Máquina de Escrever -->
     <footer class="footer layer-back" itemscope itemtype="https://schema.org/WPFooter">
-      <span class="footer-seo-text">Referencia em tintas, texturas etc...</span>
+      <div class="footer-seo-wrapper">
+        <span class="footer-seo-text">Referencia em tintas, texturas etc...</span>
+      </div>
       <p class="footer-promo">Deseja um link como este para sua empresa?<br>
         <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
       </p>
@@ -584,7 +589,7 @@ body::before{
       </div>
       <p class="footer-dev">
         Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
+        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscópio()">Giroscópio: OFF</button>
       </p>
     </footer>
   </div>
@@ -597,7 +602,6 @@ body::before{
 
   let giroscopioAtivo = false;
   
-  // Configuração fixa para o Nível 1,5 quando ligado
   const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
 
   function handleOrientation(e) {
@@ -645,7 +649,6 @@ body::before{
     }
   }
 
-  /* Movimento no Desktop (Ativo somente se giroscópio/efeito estiver ON) */
   document.addEventListener('mousemove', (e) => {
     if (!giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
