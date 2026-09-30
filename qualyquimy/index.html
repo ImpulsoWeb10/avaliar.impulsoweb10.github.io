@@ -74,7 +74,7 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:1.5rem 0.5rem;
+  padding:0.5rem;
   overflow-x:hidden;
   position:relative;
   perspective: 1200px;
@@ -92,80 +92,41 @@ body::before{
   z-index:0;
 }
 
-/* Container principal */
+/* Container principal ajustado para ocupar melhor a tela do celular */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.8rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   position: relative;
   z-index: 1;
 }
 
-/* Moldura externa (Cartão 3D) */
+/* Moldura externa (Cartão 3D) otimizada para encaixe */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   border: 2px solid #ffffff;
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow: 
     0 0 10px #ffffff,
-    0 0 20px rgba(255, 255, 255, 0.8),
-    0 0 30px rgba(255, 255, 255, 0.35),
+    0 0 20px rgba(255, 255, 255, 0.7),
+    0 0 30px rgba(255, 255, 255, 0.3),
     0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.4rem 1.4rem 1.2rem;
+  padding: 1.1rem 1.1rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.1rem;
+  gap: 0.9rem;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
-
-/* VERSO DO CARTÃO (Mantido para o modo Raio-X) */
-.secret-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: #050b14;
-  border-radius: 22px;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  z-index: 2;
-  transform-style: preserve-3d;
-  overflow: hidden;
-}
-
-.back-layer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  top: 0;
-  left: 0;
-  border-radius: 22px;
-}
-.back-layer-fundo { transform: translateZ(-20px); }
-.back-layer-mago { transform: translateZ(30px); }
-.back-layer-moldura { transform: translateZ(80px); pointer-events: none; }
-
-/* ESTILOS DO MODO RAIO-X */
-body.mode-xray .device-frame {
-  transform: rotateY(-35deg) rotateX(15deg) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
-}
-body.mode-xray .layer-back { transform: translateZ(-30px) !important; opacity: 0.75; transition: transform 0.6s ease; }
-body.mode-xray .layer-mid { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .layer-front { transform: translateZ(110px) !important; transition: transform 0.6s ease; }
-body.mode-xray .layer-pop { transform: translateZ(170px) !important; transition: transform 0.6s ease; }
-body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !important; transition: transform 0.6s ease; }
 
 /* Estrutura de conteúdo 3D da Frente */
 .page {
@@ -174,22 +135,22 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:1.1rem;
+  gap:0.9rem;
   width:100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
 
-.layer-back { transform: translateZ(15px); transform-style: preserve-3d; transition: transform 0.4s ease; }
-.layer-mid { transform: translateZ(35px); transform-style: preserve-3d; transition: transform 0.4s ease; }
-.layer-front { transform: translateZ(55px); transform-style: preserve-3d; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: transform 0.4s ease; }
-.layer-pop { transform: translateZ(75px); transform-style: preserve-3d; filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6)); transition: transform 0.4s ease; }
+.layer-back { transform: translateZ(12px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-mid { transform: translateZ(28px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-front { transform: translateZ(44px); transform-style: preserve-3d; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5)); transition: transform 0.4s ease; }
+.layer-pop { transform: translateZ(60px); transform-style: preserve-3d; filter: drop-shadow(0 10px 16px rgba(0,0,0,0.6)); transition: transform 0.4s ease; }
 
 /* Logo area */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
 .logo-frame{
   position:relative;
-  border-radius:14px;
+  border-radius:12px;
   overflow:hidden;
   display:inline-block;
   animation:logo-pulse 2.6s ease-in-out infinite;
@@ -208,7 +169,7 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
 }
 @keyframes logo-pulse{
   0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
-  55% {box-shadow:0 0 0 12px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
+  55% {box-shadow:0 0 0 10px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
   100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
 }
 @keyframes logo-shimmer{
@@ -218,69 +179,69 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
 
 .logo-img{
   display:block;
-  width:180px;
+  width:160px;
   height:auto;
-  max-height:85px;
-  border-radius:12px;
+  max-height:75px;
+  border-radius:10px;
   border:2px solid rgba(201,169,110,.4);
   object-fit:contain;
   background:rgba(201,169,110,0.06);
   position:relative;z-index:1;
 }
 .logo-img-fallback{
-  width:180px;height:75px;
-  border-radius:12px;
+  width:160px;height:70px;
+  border-radius:10px;
   border:2px solid rgba(201,169,110,.4);
   background:rgba(201,169,110,0.06);
   display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;
-  font-size:1.6rem;color:#c9a96e;font-weight:600;
+  font-size:1.5rem;color:#c9a96e;font-weight:600;
   letter-spacing:.08em;
   position:relative;z-index:1;
 }
 .brand{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:600;
+  font-size:1.6rem;font-weight:600;
   color:#f0ece5;letter-spacing:.06em;line-height:1.1;
 }
 .brand em{color:#c9a96e;font-style:italic}
-.tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
+.tagline{font-size:.74rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
 
 /* Rating stars */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.15rem;color:#ffd700}
-.rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
+.star{font-size:1.05rem;color:#ffd700}
+.rating-text{font-size:.74rem;color:#a3c0e4;margin-top:.1rem}
 
 /* 4 icon buttons row */
-.social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
+.social-row{display:flex;gap:.65rem;justify-content:center;align-items:center}
 .social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.25rem;
+  display:flex;flex-direction:column;align-items:center;gap:.2rem;
   text-decoration:none;
   transition:transform .2s;
 }
 .social-btn:hover{transform:translateY(-3px)}
 .social-icon{
-  width:44px;height:44px;border-radius:50%;
+  width:40px;height:40px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,255,255,.3);
   transition:border-color .2s,box-shadow .2s;
 }
 .social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:20px;height:20px}
-.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
+.social-icon svg{width:18px;height:18px}
+.social-label{font-size:.64rem;color:#9bb5d4;letter-spacing:.04em}
 
 /* Google button */
 .btn-google{
-  display:inline-flex;align-items:center;gap:.5rem;
+  display:inline-flex;align-items:center;gap:.4rem;
   background:#FBBC05;
   color:#1a1200;font-weight:700;
-  padding:.7rem 1.3rem;
+  padding:.6rem 1.1rem;
   border-radius:50px;
-  font-size:.85rem;text-decoration:none;
+  font-size:.82rem;text-decoration:none;
   font-family:'DM Sans',sans-serif;
   letter-spacing:.02em;
   border:none;cursor:pointer;
-  width:100%;max-width:260px;justify-content:center;
+  width:100%;max-width:240px;justify-content:center;
   position:relative;overflow:hidden;
   animation:pulse-google 2.2s ease-in-out infinite;
 }
@@ -301,29 +262,29 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   0%{left:-120%}
   55%,100%{left:160%}
 }
-.btn-google svg{width:16px;height:16px;flex-shrink:0}
+.btn-google svg{width:15px;height:15px;flex-shrink:0}
 .btn-google:hover{background:#fcc419;transform:translateY(-1px)}
 
 /* Address */
-.address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
+.address{font-size:.72rem;color:#8ba4c4;line-height:1.35}
 
-/* Banner Infinito */
+/* Banner Infinito com velocidade aumentada */
 .ticker-banner {
   width: 100%;
   overflow: hidden;
   background: rgba(201, 169, 110, 0.15);
   border: 1px solid rgba(201, 169, 110, 0.35);
-  border-radius: 8px;
-  padding: 0.35rem 0;
+  border-radius: 6px;
+  padding: 0.3rem 0;
   display: flex;
 }
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: infinite-scroll 18s linear infinite;
+  animation: infinite-scroll 10s linear infinite; /* Velocidade otimizada (mais rápida) */
 }
 .ticker-item {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: #fce8bd;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -337,21 +298,21 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
 
 /* Footer interno */
 .footer{
-  font-size:.72rem;
+  font-size:.68rem;
   color:#d0dce8;
-  margin-top:0.2rem;
+  margin-top:0.1rem;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.4rem;
+  gap:.35rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:0.9rem;
+  padding-top:0.7rem;
 }
 .footer-promo{
-  font-size:.78rem;
+  font-size:.74rem;
   color:#ffffff;
-  line-height:1.4;
+  line-height:1.35;
   text-align:center;
   font-weight:400;
 }
@@ -364,14 +325,14 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   transition:color .2s;
 }
 .footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
-.footer-ssl{display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#8ba4c4}
-.footer-ssl svg{width:11px;height:11px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-ssl{display:flex;align-items:center;gap:.3rem;font-size:.64rem;color:#8ba4c4}
+.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
 .footer-dev{
-  font-size:.72rem;
+  font-size:.68rem;
   color:#b0c4de;
   display:flex;
   align-items:center;
-  gap:.4rem;
+  gap:.35rem;
   flex-wrap:wrap;
   justify-content:center;
 }
@@ -383,61 +344,15 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   background: rgba(255, 255, 255, 0.08);
   color: #90caf9;
   border: 1px solid rgba(100, 181, 246, 0.4);
-  border-radius: 12px;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.65rem;
+  border-radius: 10px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.62rem;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.2s;
 }
 .btn-gyro:hover { background: rgba(100, 181, 246, 0.2); }
 .btn-gyro.active { background: #2563eb; color: #ffffff; border-color: #3b82f6; }
-
-/* CONTROLES EXTERNOS */
-.external-controls {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding-top: 0.2rem;
-  flex-wrap: wrap;
-}
-
-.level-btn {
-  background: rgba(15, 23, 42, 0.85);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.72rem;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-.level-btn:hover { border-color: #64b5f6; color: #ffffff; }
-.level-btn.active {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  border-color: #60a5fa;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-}
-
-.xray-btn {
-  background: rgba(88, 28, 135, 0.85);
-  color: #d8b4fe;
-  border: 1px solid rgba(192, 132, 252, 0.4);
-}
-.xray-btn:hover { border-color: #c084fc; color: #ffffff; }
-.xray-btn.active {
-  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
-  color: #ffffff;
-  border-color: #e9d5ff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-}
 </style>
 </head>
 <body>
@@ -446,13 +361,6 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO -->
-    <div class="secret-back">
-      <img src="fundo.png" alt="Cenário de Fundo" class="back-layer back-layer-fundo">
-      <img src="mago.png" alt="Ilustração do Mago" class="back-layer back-layer-mago">
-      <img src="moldura.png" alt="Moldura de Galhos e Cristais" class="back-layer back-layer-moldura">
-    </div>
-
     <!-- FRENTE DO CARD -->
     <div class="page">
 
@@ -557,67 +465,19 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
     </div>
   </div>
 
-  <div class="external-controls">
-    <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 1.5 (Dinâmico Seguro)</button>
-    <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
-  </div>
-
 </div>
 
 <script>
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
-  const btnLvl1 = document.getElementById('btnLvl1');
-  const btnLvl2 = document.getElementById('btnLvl2');
-  const btnXray = document.getElementById('btnXray');
 
   let giroscopioAtivo = false;
-  let modoRaioX = false;
-  let nivelAtual = 1;
-
-  // Configuração modificada para o Nível 2 ser o "Nível 1.5 Seguro" (maior que o nível 1, mas limitado para nunca virar a página)
-  const configuracoes = {
-    1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 1.6, intensidadeMouse: 45, anguloMax: 45 } 
-  };
-
-  function definirNivel(lvl) {
-    if (modoRaioX) desativarRaioX();
-    nivelAtual = lvl;
-    if (lvl === 1) {
-      btnLvl1.classList.add('active');
-      btnLvl2.classList.remove('active');
-    } else {
-      btnLvl2.classList.add('active');
-      btnLvl1.classList.remove('active');
-    }
-  }
-
-  function alternarRaioX() {
-    modoRaioX = !modoRaioX;
-    if (modoRaioX) {
-      document.body.classList.add('mode-xray');
-      btnXray.classList.add('active');
-      btnLvl1.classList.remove('active');
-      btnLvl2.classList.remove('active');
-    } else {
-      desativarRaioX();
-    }
-  }
-
-  function desativarRaioX() {
-    modoRaioX = false;
-    document.body.classList.remove('mode-xray');
-    btnXray.classList.remove('active');
-    definirNivel(nivelAtual);
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  }
+  // Intensidade equilibrada e segura (maior que o nível 1 anterior, mas sem virar a página)
+  const config = { intensidadeCelular: 1.6, intensidadeMouse: 45, anguloMax: 42 };
 
   function handleOrientation(e) {
-    if (!giroscopioAtivo || modoRaioX || e.gamma === null || e.beta === null) return;
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
 
-    const config = configuracoes[nivelAtual];
     let x = Math.min(Math.max(e.gamma, -config.anguloMax), config.anguloMax);
     let y = Math.min(Math.max(e.beta - 45, -config.anguloMax), config.anguloMax);
 
@@ -636,9 +496,7 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
     giroscopioAtivo = false;
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
-    if (!modoRaioX) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function alternarGiroscopio() {
@@ -664,8 +522,7 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
 
   /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !giroscopioAtivo) return;
-    const config = configuracoes[nivelAtual];
+    if (!giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
@@ -674,7 +531,7 @@ body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !imp
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo && !modoRaioX) {
+    if (giroscopioAtivo) {
       frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
