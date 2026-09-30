@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ursão Transportes — Fretes, carretos, coletas e entregas rápidas. Atendimento 24 horas para Capital, Litoral e Interior.">
-<meta name="keywords" content="Fretes, Carretos, Coletas, Entregas Rápidas, Ursão Transportes, Atendimento 24 horas">
+<meta name="description" content="Ursão Transportes — Fretes, carretos, mudanças e entregas rápidas em Itaquaquecetuba - SP e região. Atendimento 24 horas.">
+<meta name="keywords" content="Fretes, Carretos, Mudanças, Itaquaquecetuba, Ursão Transportes">
 <meta name="author" content="ImpulsoWeb10">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/ursaotransportes/">
 <meta property="og:title" content="Ursão Transportes | Fretes e Carretos">
-<meta property="og:description" content="Fretes, carretos, coletas e entregas rápidas. Atendimento 24 horas. Solicite seu orçamento via WhatsApp!">
+<meta property="og:description" content="Fretes, carretos, mudanças e coletas rápidas. Itaquaquecetuba - SP. Solicite seu orçamento via WhatsApp!">
 <meta property="og:locale" content="pt_BR">
 
 <title>Ursão Transportes | Fretes e Carretos</title>
 
 <!-- Favicon SVG Embutido -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9a96e'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff9900'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -31,17 +31,17 @@
 }
 
 :root {
-  --bg-dark: #050b14;
-  --bg-card: #0b1525;
-  --bg-card-hover: #101d32;
-  --gold: #d4af37;
-  --gold-light: #f3e5ab;
-  --gold-dark: #aa8c2c;
+  --bg-dark: #0a0e14;
+  --bg-card: #121824;
+  --bg-card-hover: #1a2233;
+  --orange: #ff9900;
+  --orange-light: #ffb733;
+  --orange-dark: #cc7a00;
   --text-main: #f0f4f8;
   --text-muted: #94a3b8;
   --whatsapp: #25d366;
   --whatsapp-dark: #1ebe5d;
-  --border-color: rgba(212, 175, 55, 0.25);
+  --border-color: rgba(255, 153, 0, 0.3);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -67,14 +67,14 @@ body::before {
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(13, 30, 55, 0.6) 0%, transparent 60%),
-    linear-gradient(to bottom, #03070d, #08111f);
+    radial-gradient(circle at 20% 10%, rgba(255, 153, 0, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(20, 15, 5, 0.6) 0%, transparent 60%),
+    linear-gradient(to bottom, #06080d, #0d121c);
   pointer-events: none;
   z-index: -1;
 }
 
-/* CONTAINER PRINCIPAL (ESTILO MOBILE FIRST / LINK PERSONALIZADO) */
+/* CONTAINER PRINCIPAL */
 .page-wrapper {
   width: 100%;
   max-width: 480px;
@@ -88,155 +88,105 @@ body::before {
 }
 
 /* ========================================================== */
-/* ANIMAÇÃO DO CAMINHÃO (QUEDA + IMPACTO + CORRIDA INFINITA) */
-/* ========================================================== */
-.truck-stage {
-  width: 100%;
-  height: 90px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: -0.5rem;
-  border-bottom: 2px dashed rgba(212, 175, 55, 0.2);
-}
-
-.truck-container {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  /* Animação horizontal infinita */
-  animation: driveAcross 6s linear infinite;
-}
-
-@keyframes dropAndDrive {
-  0% {
-    transform: translateY(-80px) scale(0.8);
-    opacity: 0;
-  }
-  15% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  20% {
-    transform: translateY(-10px) scale(1.05, 0.95); /* Quicada / Impacto */
-  }
-  25% {
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes driveAcross {
-  0% {
-    transform: translateX(-120px);
-  }
-  100% {
-    transform: translateX(500px);
-  }
-}
-
-.truck-wrapper-anim {
-  animation: dropAndDrive 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-/* Estilo do Caminhão SVG detalhado com Cores Premium */
-.truck-svg {
-  width: 85px;
-  height: auto;
-  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
-}
-
-.wheel {
-  animation: rotateWheel 0.6s linear infinite;
-  transform-origin: center;
-}
-
-@keyframes rotateWheel {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ========================================================== */
-/* SEÇÃO 1 — HERO */
+/* SEÇÃO 1 — HERO COM LOGO E BOTÃO RETANGULAR PULSANTE COM BRILHO */
 /* ========================================================== */
 .hero-section {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   animation: fadeInDown 0.8s ease-out;
 }
 
-.brand-badge {
+.logo-container {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6));
+  border-radius: 12px;
+}
+
+/* BOTÃO RETANGULAR COM PULSO E BRILHO */
+.pulsing-box-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #161f30 0%, #0d131f 100%);
+  border: 2px solid var(--orange);
+  border-radius: 14px;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(255, 153, 0, 0.4), inset 0 0 15px rgba(255, 153, 0, 0.1);
+  animation: pulseGlow 2.5s infinite ease-in-out;
+  transition: var(--transition);
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.3), inset 0 0 10px rgba(255, 153, 0, 0.1);
+    border-color: rgba(255, 153, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 153, 0, 0.8), inset 0 0 20px rgba(255, 153, 0, 0.25);
+    border-color: #ffb733;
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.3), inset 0 0 10px rgba(255, 153, 0, 0.1);
+    border-color: rgba(255, 153, 0, 0.6);
+  }
+}
+
+.pulsing-box-btn:hover {
+  background: linear-gradient(135deg, #1c273c 0%, #121a29 100%);
+  transform: scale(1.03);
+}
+
+.pulsing-box-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--orange-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulsing-box-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.location-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(255, 153, 0, 0.1);
   border: 1px solid var(--border-color);
-  padding: 0.3rem 0.9rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 50px;
-  font-size: 0.75rem;
-  color: var(--gold-light);
+  font-size: 0.78rem;
+  color: var(--orange-light);
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.brand-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 2.3rem;
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--text-main);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
-.brand-title span {
-  color: var(--gold);
-  display: block;
-  font-size: 1.6rem;
-}
-
-.hero-tagline {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.hero-badges-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.2rem;
-}
-
-.mini-badge {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  color: var(--gold-light);
-  font-weight: 500;
-}
-
-.hero-slogan {
-  font-size: 0.95rem;
-  color: var(--text-main);
-  font-weight: 600;
-  margin-top: 0.4rem;
-  padding: 0 1rem;
-  line-height: 1.4;
-  border-left: 3px solid var(--gold);
-  border-right: 3px solid var(--gold);
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.08), transparent);
 }
 
 /* ========================================================== */
@@ -271,23 +221,6 @@ body::before {
   text-align: center;
 }
 
-.btn-whatsapp-main::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: skewX(-20deg);
-  animation: shimmerBtn 3s infinite ease-in-out;
-}
-
-@keyframes shimmerBtn {
-  0% { left: -100%; }
-  20%, 100% { left: 150%; }
-}
-
 .btn-whatsapp-main:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
@@ -308,7 +241,7 @@ body::before {
 }
 
 .contact-info-box strong {
-  color: var(--gold-light);
+  color: var(--orange-light);
 }
 
 /* ========================================================== */
@@ -317,7 +250,7 @@ body::before {
 .section-title {
   font-family: 'Oswald', sans-serif;
   font-size: 1.3rem;
-  color: var(--gold);
+  color: var(--orange);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.2rem;
@@ -348,15 +281,13 @@ body::before {
   flex-direction: column;
   gap: 0.4rem;
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
 }
 
 .service-card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--gold);
+  border-color: var(--orange);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 6px 20px rgba(255, 153, 0, 0.15);
 }
 
 .service-icon {
@@ -382,14 +313,13 @@ body::before {
 /* SEÇÃO 4 — ÁREA DE ATENDIMENTO */
 /* ========================================================== */
 .coverage-card {
-  background: linear-gradient(145deg, #0b1525 0%, #07101e 100%);
+  background: linear-gradient(145deg, #121824 0%, #0a0e14 100%);
   border: 1px solid var(--border-color);
   border-radius: 14px;
   padding: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  position: relative;
 }
 
 .coverage-list {
@@ -413,7 +343,7 @@ body::before {
 .coverage-item svg {
   width: 20px;
   height: 20px;
-  stroke: var(--gold);
+  stroke: var(--orange);
 }
 
 .coverage-item span {
@@ -424,102 +354,112 @@ body::before {
 }
 
 /* ========================================================== */
-/* SEÇÃO 5 — POR QUE ESCOLHER A URSÃO? */
+/* SEÇÃO 5 — FAQ (PERGUNTAS FREQUENTES SOBRE O NICHO) */
 /* ========================================================== */
-.features-card {
+.faq-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faq-item {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 14px;
-  padding: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: var(--transition);
 }
 
-.features-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.feature-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
+.faq-question {
+  padding: 0.9rem 1rem;
   font-size: 0.82rem;
+  font-weight: 700;
   color: var(--text-main);
-  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 153, 0, 0.03);
 }
 
-.feature-check {
-  width: 18px;
-  height: 18px;
-  background: rgba(212, 175, 55, 0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  font-size: 0.7rem;
+.faq-question::after {
+  content: '+';
+  font-size: 1rem;
+  color: var(--orange);
   font-weight: bold;
-  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question::after {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease;
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 150px;
+  padding: 0 1rem 0.9rem 1rem;
 }
 
 /* ========================================================== */
-/* SEÇÃO 6 — CHAMADA FINAL */
+/* SEÇÃO 6 — BANNER ESTEIRA (MARQUEE INFINITO NO RODAPÉ) */
 /* ========================================================== */
-.final-cta {
-  background: linear-gradient(135deg, #12223a 0%, #08111f 100%);
-  border: 1px solid var(--gold);
-  border-radius: 16px;
-  padding: 1.5rem 1.2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+.marquee-wrapper {
+  width: 100%;
+  background: linear-gradient(90deg, #121824, #1a2233, #121824);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.6rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.marquee-track {
+  display: inline-block;
+  animation: scrollMarquee 20s linear infinite;
+}
+
+.marquee-content {
+  display: inline-flex;
+  gap: 2rem;
   align-items: center;
-  gap: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.final-cta h3 {
+.marquee-item {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.4rem;
-  color: var(--gold-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--orange-light);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.final-cta p {
-  font-size: 0.8rem;
+.marquee-item span {
   color: var(--text-muted);
 }
 
-.btn-whatsapp-secondary {
-  width: 100%;
-  background: var(--whatsapp);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.9rem;
-  border-radius: 10px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.btn-whatsapp-secondary:hover {
-  background: var(--whatsapp-dark);
-  transform: translateY(-2px);
-}
-
-.btn-whatsapp-secondary svg {
-  width: 20px;
-  height: 20px;
-  fill: #fff;
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ========================================================== */
@@ -556,38 +496,26 @@ body::before {
 }
 
 .footer-dev a {
-  color: var(--gold);
+  color: var(--orange);
   text-decoration: none;
   font-weight: 700;
   transition: color 0.2s;
 }
 
 .footer-dev a:hover {
-  color: var(--gold-light);
+  color: var(--orange-light);
   text-decoration: underline;
 }
 
 /* ANIMAÇÕES GLOBAIS DE ENTRADA */
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* RESPONSIVIDADE TABLET / DESKTOP */
@@ -596,20 +524,6 @@ body::before {
     max-width: 520px;
     padding: 2rem 1.5rem;
   }
-  .brand-title {
-    font-size: 2.6rem;
-  }
-}
-
-/* PREFERS REDUCED MOTION (Respeito a acessibilidade) */
-@media (prefers-reduced-motion: reduce) {
-  .truck-container, .truck-wrapper-anim, .btn-whatsapp-main::after, .wheel {
-    animation: none !important;
-  }
-  .truck-container {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 </style>
 </head>
@@ -617,65 +531,23 @@ body::before {
 
 <div class="page-wrapper">
 
-  <!-- ANIMAÇÃO DO CAMINHÃO -->
-  <div class="truck-stage" aria-hidden="true">
-    <div class="truck-container">
-      <div class="truck-wrapper-anim">
-        <!-- SVG Personalizado Caminhão Pesado Profissional -->
-        <svg class="truck-svg" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
-          <!-- Carroceria / Baú (Branco com detalhe dourado) -->
-          <rect x="5" y="25" width="115" height="55" rx="4" fill="#f8fafc" stroke="#d4af37" stroke-width="2"/>
-          <text x="62" y="58" font-family="'Oswald', sans-serif" font-weight="700" font-size="16" fill="#0b1525" text-anchor="middle">URSÃO</text>
-          
-          <!-- Cabine (Azul Escuro / Preto com vidro) -->
-          <path d="M120 40 L150 40 Q160 40 165 48 L178 70 Q180 75 180 80 L120 80 Z" fill="#0b1525" stroke="#d4af37" stroke-width="2"/>
-          <path d="M132 45 L152 45 Q158 45 162 50 L170 70 L132 70 Z" fill="#1e293b" stroke="#d4af37" stroke-width="1"/>
-          
-          <!-- Detalhe Pata / Urso Dourado na cabine -->
-          <circle cx="145" cy="58" r="4" fill="#d4af37"/>
-          <circle cx="141" cy="53" r="1.5" fill="#d4af37"/>
-          <circle cx="149" cy="53" r="1.5" fill="#d4af37"/>
-
-          <!-- Chassi / Parachoque -->
-          <rect x="0" y="78" width="185" height="6" rx="2" fill="#334155"/>
-          <rect x="175" y="65" width="8" height="15" rx="2" fill="#d4af37"/>
-          
-          <!-- Rodas com calota dourada (Efeito rotativo via CSS) -->
-          <g class="wheel" transform="translate(35, 84)">
-            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
-            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
-          </g>
-          <g class="wheel" transform="translate(145, 84)">
-            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
-            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
-          </g>
-          <g class="wheel" transform="translate(168, 84)">
-            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
-            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <!-- HERO -->
+  <!-- HERO & LOGO + BOTÃO RETANGULAR PULSANTE -->
   <header class="hero-section">
-    <div class="brand-badge">
-      <span>🐻</span> Transporte & Logística
-    </div>
-    <h1 class="brand-title">
-      Ursão
-      <span>Transportes</span>
-    </h1>
-    <p class="hero-tagline">Fretes e Carretos</p>
-    
-    <div class="hero-badges-row">
-      <span class="mini-badge">Coletas e Entregas Rápidas</span>
-      <span class="mini-badge">Atendimento 24 horas</span>
+    <div class="logo-container">
+      <!-- Exibindo a logo fornecida (ursaotransporte.png) -->
+      <img src="ursaotransporte.png" alt="Ursão Transportes Logo" class="logo-img">
     </div>
 
-    <div class="hero-slogan">
-      "Seu transporte com agilidade, segurança e compromisso."
+    <!-- Botão Retangular Pulsante com Brilho -->
+    <a href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="pulsing-box-btn">
+      <div class="pulsing-box-title">
+        <span>⚡</span> ATENDIMENTO 24 HORAS
+      </div>
+      <div class="pulsing-box-subtitle">Clique aqui e faça seu orçamento imediato</div>
+    </a>
+
+    <div class="location-badge">
+      <span>📍</span> Itaquaquecetuba - SP e Região
     </div>
   </header>
 
@@ -706,22 +578,22 @@ body::before {
       <div class="service-card">
         <div class="service-icon">🚚</div>
         <h3>Fretes</h3>
-        <p>Transporte seguro e dedicado para diferentes necessidades.</p>
+        <p>Transporte seguro e dedicado para diversas necessidades.</p>
       </div>
       <div class="service-card">
         <div class="service-icon">📦</div>
         <h3>Carretos</h3>
-        <p>Soluções práticas para pequenas e grandes cargas.</p>
+        <p>Soluções práticas para pequenas e médias cargas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Mudanças</h3>
+        <p>Cuidado e agilidade no transporte residencial e comercial.</p>
       </div>
       <div class="service-card">
         <div class="service-icon">⚡</div>
         <h3>Coletas Rápidas</h3>
         <p>Agilidade máxima para retirar e entregar sua mercadoria.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🕐</div>
-        <h3>Atendimento 24h</h3>
-        <p>Disponibilidade integral para atender sua urgência.</p>
       </div>
     </div>
   </section>
@@ -747,64 +619,73 @@ body::before {
     </div>
   </section>
 
-  <!-- POR QUE ESCOLHER A URSÃO? -->
-  <section class="features-section">
-    <h2 class="section-title">Por que escolher a Ursão?</h2>
-    <div class="features-card">
-      <div class="features-list">
-        <div class="feature-row">
-          <div class="feature-check">✓</div>
-          <span>Atendimento rápido e direto</span>
-        </div>
-        <div class="feature-row">
-          <div class="feature-check">✓</div>
-          <span>Agilidade nas coletas e entregas</span>
-        </div>
-        <div class="feature-row">
-          <div class="feature-check">✓</div>
-          <span>Atendimento 24 horas</span>
-        </div>
-        <div class="feature-row">
-          <div class="feature-check">✓</div>
-          <span>Transporte com total responsabilidade</span>
-        </div>
-        <div class="feature-row">
-          <div class="feature-check">✓</div>
-          <span>Atendimento personalizado</span>
-        </div>
+  <!-- FAQ SOBRE O NICHO -->
+  <section class="faq-section">
+    <h2 class="section-title">Dúvidas Frequentes</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">Como solicitar um orçamento de frete ou carreto?</div>
+        <div class="faq-answer">Basta clicar em qualquer um dos botões do WhatsApp nesta página. Você falará diretamente com o Adriano para informar os endereços de coleta e entrega e o tipo de carga.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Vocês realizam atendimentos de urgência 24 horas?</div>
+        <div class="faq-answer">Sim! Contamos com atendimento 24 horas para garantir que sua necessidade de transporte urgente seja resolvida com total agilidade e segurança.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Quais regiões são atendidas pela Ursão Transportes?</div>
+        <div class="faq-answer">Estamos baseados em Itaquaquecetuba - SP e realizamos fretes, carretos e mudanças para toda a Capital, Litoral e Interior do estado.</div>
       </div>
     </div>
   </section>
 
-  <!-- CHAMADA FINAL -->
-  <section class="final-cta">
-    <h3>Precisa de um frete?</h3>
-    <p>Fale agora com a Ursão Transportes e garanta o melhor atendimento.</p>
-    <a 
-      href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento." 
-      class="btn-whatsapp-secondary"
-      target="_blank"
-      rel="noopener"
-      aria-label="Chamar no WhatsApp"
-    >
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
-      </svg>
-      CHAMAR NO WHATSAPP
-    </a>
-  </section>
+  <!-- BANNER ESTEIRA (MARQUEE INFINITO) -->
+  <div class="marquee-wrapper">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <div class="marquee-item">⚡ FRETES E CARRETOS <span>•</span></div>
+        <div class="marquee-item">📦 MUDANÇAS EM GERAL <span>•</span></div>
+        <div class="marquee-item">🕒 ATENDIMENTO 24H <span>•</span></div>
+        <div class="marquee-item">📍 ITAQUAQUECETUBA - SP <span>•</span></div>
+        <div class="marquee-item">🚀 COLETAS RÁPIDAS <span>•</span></div>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <div class="marquee-item">⚡ FRETES E CARRETOS <span>•</span></div>
+        <div class="marquee-item">📦 MUDANÇAS EM GERAL <span>•</span></div>
+        <div class="marquee-item">🕒 ATENDIMENTO 24H <span>•</span></div>
+        <div class="marquee-item">📍 ITAQUAQUECETUBA - SP <span>•</span></div>
+        <div class="marquee-item">🚀 COLETAS RÁpidas <span>•</span></div>
+      </div>
+    </div>
+  </div>
 
   <!-- RODAPÉ -->
   <footer class="footer">
     <div class="footer-brand">Ursão Transportes</div>
-    <div class="footer-services-text">Fretes &bull; Carretos &bull; Coletas &bull; Entregas</div>
+    <div class="footer-services-text">Fretes &bull; Carretos &bull; Mudanças &bull; Coletas</div>
     <div class="footer-dev">
       Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" rel="noopener">ImpulsoWeb10</a>
     </div>
   </footer>
 
 </div>
+
+<script>
+  // Script simples para interatividade do FAQ
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      // Fecha todos os outros
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      
+      // Abre o clicado se não estava ativo
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
