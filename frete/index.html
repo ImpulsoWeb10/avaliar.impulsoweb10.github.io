@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camião em Looping</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            overflow-x: hidden; /* Esconde a barra de rolagem horizontal */
+            position: relative;
+            height: 100vh;
+        }
+
+        /* Estilo do Camião */
+        .camiao-loop {
+            position: absolute;
+            font-size: 40px; /* Tamanho do camião */
+            width: 50px;
+            height: 50px;
+            
+            /* Ponto de partida inicial (escondido no topo) */
+            top: -60px; 
+            left: 100px;
+
+            /* 
+               5s = tempo total de cada ciclo
+               infinite = repete para sempre
+               linear = velocidade constante
+            */
+            animation: cairPausarCorrer 5s linear infinite;
+        }
+
+        /* Linha do tempo da animação contínua */
+        @keyframes cairPausarCorrer {
+            /* 0% a 5%: O camião começa escondido no topo */
+            0%, 5% {
+                top: -60px;
+                left: 100px;
+                opacity: 0; /* Invisível enquanto se prepara */
+            }
+
+            /* 10%: Ele aparece e começa a descer */
+            10% {
+                opacity: 1;
+            }
+            
+            /* 30%: Ele cai até a posição desejada (ex: 250px do topo) */
+            30% {
+                top: 250px;
+                left: 100px;
+            }
+
+            /* 50%: Ele fica parado nessa posição (efeito de pausa no frete) */
+            50% {
+                top: 250px;
+                left: 100px;
+                opacity: 1;
+            }
+
+            /* 85%: Ele arranca e sai pela direita da tela */
+            85% {
+                top: 250px;
+                left: 100vw;
+                opacity: 1;
+            }
+
+            /* 86% a 100%: Ele fica invisível na direita e o ciclo reinicia no topo */
+            86%, 100% {
+                top: 250px;
+                left: 100vw;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- O Camião que vai rodar em loop (pode ser trocado por uma tag <img>) -->
+    <div class="camiao-loop">🚚</div>
+
+</body>
+</html>
