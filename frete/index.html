@@ -1,85 +1,810 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camião em Looping</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            overflow-x: hidden; /* Esconde a barra de rolagem horizontal */
-            position: relative;
-            height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ursão Transportes — Fretes, carretos, coletas e entregas rápidas. Atendimento 24 horas para Capital, Litoral e Interior.">
+<meta name="keywords" content="Fretes, Carretos, Coletas, Entregas Rápidas, Ursão Transportes, Atendimento 24 horas">
+<meta name="author" content="ImpulsoWeb10">
 
-        /* Estilo do Camião */
-        .camiao-loop {
-            position: absolute;
-            font-size: 40px; /* Tamanho do camião */
-            width: 50px;
-            height: 50px;
-            
-            /* Ponto de partida inicial (escondido no topo) */
-            top: -60px; 
-            left: 100px;
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://avaliar.impulsoweb10.com.br/ursaotransportes/">
+<meta property="og:title" content="Ursão Transportes | Fretes e Carretos">
+<meta property="og:description" content="Fretes, carretos, coletas e entregas rápidas. Atendimento 24 horas. Solicite seu orçamento via WhatsApp!">
+<meta property="og:locale" content="pt_BR">
 
-            /* 
-               5s = tempo total de cada ciclo
-               infinite = repete para sempre
-               linear = velocidade constante
-            */
-            animation: cairPausarCorrer 5s linear infinite;
-        }
+<title>Ursão Transportes | Fretes e Carretos</title>
 
-        /* Linha do tempo da animação contínua */
-        @keyframes cairPausarCorrer {
-            /* 0% a 5%: O camião começa escondido no topo */
-            0%, 5% {
-                top: -60px;
-                left: 100px;
-                opacity: 0; /* Invisível enquanto se prepara */
-            }
+<!-- Favicon SVG Embutido -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9a96e'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/></svg>">
 
-            /* 10%: Ele aparece e começa a descer */
-            10% {
-                opacity: 1;
-            }
-            
-            /* 30%: Ele cai até a posição desejada (ex: 250px do topo) */
-            30% {
-                top: 250px;
-                left: 100px;
-            }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
-            /* 50%: Ele fica parado nessa posição (efeito de pausa no frete) */
-            50% {
-                top: 250px;
-                left: 100px;
-                opacity: 1;
-            }
+<style>
+/* RESET & VARIAVEIS */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-            /* 85%: Ele arranca e sai pela direita da tela */
-            85% {
-                top: 250px;
-                left: 100vw;
-                opacity: 1;
-            }
+:root {
+  --bg-dark: #050b14;
+  --bg-card: #0b1525;
+  --bg-card-hover: #101d32;
+  --gold: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-dark: #aa8c2c;
+  --text-main: #f0f4f8;
+  --text-muted: #94a3b8;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #1ebe5d;
+  --border-color: rgba(212, 175, 55, 0.25);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-            /* 86% a 100%: Ele fica invisível na direita e o ciclo reinicia no topo */
-            86%, 100% {
-                top: 250px;
-                left: 100vw;
-                opacity: 0;
-            }
-        }
-    </style>
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* BACKGROUND INDUSTRIAL COM TEXTURA E BRILHOS */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(13, 30, 55, 0.6) 0%, transparent 60%),
+    linear-gradient(to bottom, #03070d, #08111f);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* CONTAINER PRINCIPAL (ESTILO MOBILE FIRST / LINK PERSONALIZADO) */
+.page-wrapper {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  gap: 1.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================================== */
+/* ANIMAÇÃO DO CAMINHÃO (QUEDA + IMPACTO + CORRIDA INFINITA) */
+/* ========================================================== */
+.truck-stage {
+  width: 100%;
+  height: 90px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -0.5rem;
+  border-bottom: 2px dashed rgba(212, 175, 55, 0.2);
+}
+
+.truck-container {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  /* Animação horizontal infinita */
+  animation: driveAcross 6s linear infinite;
+}
+
+@keyframes dropAndDrive {
+  0% {
+    transform: translateY(-80px) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(-10px) scale(1.05, 0.95); /* Quicada / Impacto */
+  }
+  25% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes driveAcross {
+  0% {
+    transform: translateX(-120px);
+  }
+  100% {
+    transform: translateX(500px);
+  }
+}
+
+.truck-wrapper-anim {
+  animation: dropAndDrive 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Estilo do Caminhão SVG detalhado com Cores Premium */
+.truck-svg {
+  width: 85px;
+  height: auto;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
+}
+
+.wheel {
+  animation: rotateWheel 0.6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotateWheel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================================== */
+/* SEÇÃO 1 — HERO */
+/* ========================================================== */
+.hero-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-color);
+  padding: 0.3rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.brand-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.brand-title span {
+  color: var(--gold);
+  display: block;
+  font-size: 1.6rem;
+}
+
+.hero-tagline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-badges-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.2rem;
+}
+
+.mini-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.hero-slogan {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 600;
+  margin-top: 0.4rem;
+  padding: 0 1rem;
+  line-height: 1.4;
+  border-left: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.08), transparent);
+}
+
+/* ========================================================== */
+/* SEÇÃO 2 — BOTÃO PRINCIPAL WHATSAPP */
+/* ========================================================== */
+.cta-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.btn-whatsapp-main {
+  width: 100%;
+  background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.btn-whatsapp-main::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  animation: shimmerBtn 3s infinite ease-in-out;
+}
+
+@keyframes shimmerBtn {
+  0% { left: -100%; }
+  20%, 100% { left: 150%; }
+}
+
+.btn-whatsapp-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+}
+
+.btn-whatsapp-main svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: #ffffff;
+}
+
+.contact-info-box {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.contact-info-box strong {
+  color: var(--gold-light);
+}
+
+/* ========================================================== */
+/* SEÇÃO 3 — SERVIÇOS */
+/* ========================================================== */
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-color), transparent);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+}
+
+.service-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.1rem;
+}
+
+.service-card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.service-card p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ========================================================== */
+/* SEÇÃO 4 — ÁREA DE ATENDIMENTO */
+/* ========================================================== */
+.coverage-card {
+  background: linear-gradient(145deg, #0b1525 0%, #07101e 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+
+.coverage-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.coverage-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.7rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.coverage-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+}
+
+.coverage-item span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+/* ========================================================== */
+/* SEÇÃO 5 — POR QUE ESCOLHER A URSÃO? */
+/* ========================================================== */
+.features-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.feature-check {
+  width: 18px;
+  height: 18px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ========================================================== */
+/* SEÇÃO 6 — CHAMADA FINAL */
+/* ========================================================== */
+.final-cta {
+  background: linear-gradient(135deg, #12223a 0%, #08111f 100%);
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.final-cta h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.final-cta p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.btn-whatsapp-secondary {
+  width: 100%;
+  background: var(--whatsapp);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp-secondary:hover {
+  background: var(--whatsapp-dark);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp-secondary svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+/* ========================================================== */
+/* RODAPÉ */
+/* ========================================================== */
+.footer {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.footer-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-services-text {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.footer-dev {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.footer-dev a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.footer-dev a:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+/* ANIMAÇÕES GLOBAIS DE ENTRADA */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVIDADE TABLET / DESKTOP */
+@media (min-width: 600px) {
+  .page-wrapper {
+    max-width: 520px;
+    padding: 2rem 1.5rem;
+  }
+  .brand-title {
+    font-size: 2.6rem;
+  }
+}
+
+/* PREFERS REDUCED MOTION (Respeito a acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  .truck-container, .truck-wrapper-anim, .btn-whatsapp-main::after, .wheel {
+    animation: none !important;
+  }
+  .truck-container {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+</style>
 </head>
 <body>
 
-    <!-- O Camião que vai rodar em loop (pode ser trocado por uma tag <img>) -->
-    <div class="camiao-loop">🚚</div>
+<div class="page-wrapper">
+
+  <!-- ANIMAÇÃO DO CAMINHÃO -->
+  <div class="truck-stage" aria-hidden="true">
+    <div class="truck-container">
+      <div class="truck-wrapper-anim">
+        <!-- SVG Personalizado Caminhão Pesado Profissional -->
+        <svg class="truck-svg" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <!-- Carroceria / Baú (Branco com detalhe dourado) -->
+          <rect x="5" y="25" width="115" height="55" rx="4" fill="#f8fafc" stroke="#d4af37" stroke-width="2"/>
+          <text x="62" y="58" font-family="'Oswald', sans-serif" font-weight="700" font-size="16" fill="#0b1525" text-anchor="middle">URSÃO</text>
+          
+          <!-- Cabine (Azul Escuro / Preto com vidro) -->
+          <path d="M120 40 L150 40 Q160 40 165 48 L178 70 Q180 75 180 80 L120 80 Z" fill="#0b1525" stroke="#d4af37" stroke-width="2"/>
+          <path d="M132 45 L152 45 Q158 45 162 50 L170 70 L132 70 Z" fill="#1e293b" stroke="#d4af37" stroke-width="1"/>
+          
+          <!-- Detalhe Pata / Urso Dourado na cabine -->
+          <circle cx="145" cy="58" r="4" fill="#d4af37"/>
+          <circle cx="141" cy="53" r="1.5" fill="#d4af37"/>
+          <circle cx="149" cy="53" r="1.5" fill="#d4af37"/>
+
+          <!-- Chassi / Parachoque -->
+          <rect x="0" y="78" width="185" height="6" rx="2" fill="#334155"/>
+          <rect x="175" y="65" width="8" height="15" rx="2" fill="#d4af37"/>
+          
+          <!-- Rodas com calota dourada (Efeito rotativo via CSS) -->
+          <g class="wheel" transform="translate(35, 84)">
+            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
+            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
+          </g>
+          <g class="wheel" transform="translate(145, 84)">
+            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
+            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
+          </g>
+          <g class="wheel" transform="translate(168, 84)">
+            <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
+            <circle cx="0" cy="0" r="5" fill="#d4af37"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero-section">
+    <div class="brand-badge">
+      <span>🐻</span> Transporte & Logística
+    </div>
+    <h1 class="brand-title">
+      Ursão
+      <span>Transportes</span>
+    </h1>
+    <p class="hero-tagline">Fretes e Carretos</p>
+    
+    <div class="hero-badges-row">
+      <span class="mini-badge">Coletas e Entregas Rápidas</span>
+      <span class="mini-badge">Atendimento 24 horas</span>
+    </div>
+
+    <div class="hero-slogan">
+      "Seu transporte com agilidade, segurança e compromisso."
+    </div>
+  </header>
+
+  <!-- BOTÃO PRINCIPAL WHATSAPP -->
+  <section class="cta-container">
+    <a 
+      href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento%20para%20frete." 
+      class="btn-whatsapp-main"
+      target="_blank"
+      rel="noopener"
+      aria-label="Solicitar orçamento pelo WhatsApp com Adriano"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+      </svg>
+      SOLICITAR ORÇAMENTO PELO WHATSAPP
+    </a>
+    <div class="contact-info-box">
+      Contato: <strong>(11) 95277-3491</strong> &bull; Fale com <strong>Adriano</strong>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="services-section">
+    <h2 class="section-title">Nossos Serviços</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <h3>Fretes</h3>
+        <p>Transporte seguro e dedicado para diferentes necessidades.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>Carretos</h3>
+        <p>Soluções práticas para pequenas e grandes cargas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Coletas Rápidas</h3>
+        <p>Agilidade máxima para retirar e entregar sua mercadoria.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🕐</div>
+        <h3>Atendimento 24h</h3>
+        <p>Disponibilidade integral para atender sua urgência.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁREA DE ATENDIMENTO -->
+  <section class="coverage-section">
+    <h2 class="section-title">Área de Atendimento</h2>
+    <div class="coverage-card">
+      <div class="coverage-list">
+        <div class="coverage-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 9v0M9 13v0M9 17v0"/></svg>
+          <span>Capital</span>
+        </div>
+        <div class="coverage-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 16h20M6 8l6-4 6 4"/></svg>
+          <span>Litoral</span>
+        </div>
+        <div class="coverage-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zM2 12h20"/></svg>
+          <span>Interior</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUE ESCOLHER A URSÃO? -->
+  <section class="features-section">
+    <h2 class="section-title">Por que escolher a Ursão?</h2>
+    <div class="features-card">
+      <div class="features-list">
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <span>Atendimento rápido e direto</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <span>Agilidade nas coletas e entregas</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <span>Atendimento 24 horas</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <span>Transporte com total responsabilidade</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <span>Atendimento personalizado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAMADA FINAL -->
+  <section class="final-cta">
+    <h3>Precisa de um frete?</h3>
+    <p>Fale agora com a Ursão Transportes e garanta o melhor atendimento.</p>
+    <a 
+      href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento." 
+      class="btn-whatsapp-secondary"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chamar no WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+      </svg>
+      CHAMAR NO WHATSAPP
+    </a>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    <div class="footer-brand">Ursão Transportes</div>
+    <div class="footer-services-text">Fretes &bull; Carretos &bull; Coletas &bull; Entregas</div>
+    <div class="footer-dev">
+      Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" rel="noopener">ImpulsoWeb10</a>
+    </div>
+  </footer>
+
+</div>
 
 </body>
 </html>
