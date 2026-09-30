@@ -60,6 +60,9 @@
 }
 </script>
 
+<!-- Biblioteca de Confetes -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -74,7 +77,7 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:0.5rem;
+  padding:0.2rem;
   overflow-x:hidden;
   position:relative;
   perspective: 1200px;
@@ -92,32 +95,32 @@ body::before{
   z-index:0;
 }
 
-/* Container principal ajustado para ocupar melhor a tela do celular */
+/* Container principal expandido para preencher melhor a tela */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.5rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
   position: relative;
   z-index: 1;
 }
 
-/* Moldura externa (Cartão 3D) otimizada para encaixe */
+/* Moldura externa (Cartão 3D) expandida */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   border: 2px solid #ffffff;
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: 
     0 0 10px #ffffff,
     0 0 20px rgba(255, 255, 255, 0.7),
     0 0 30px rgba(255, 255, 255, 0.3),
     0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.1rem 1.1rem 1rem;
+  padding: 1.2rem 1rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -268,7 +271,7 @@ body::before{
 /* Address */
 .address{font-size:.72rem;color:#8ba4c4;line-height:1.35}
 
-/* Banner Infinito com velocidade aumentada */
+/* Banner Infinito */
 .ticker-banner {
   width: 100%;
   overflow: hidden;
@@ -281,7 +284,7 @@ body::before{
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: infinite-scroll 10s linear infinite; /* Velocidade otimizada (mais rápida) */
+  animation: infinite-scroll 10s linear infinite;
 }
 .ticker-item {
   font-size: 0.74rem;
@@ -339,20 +342,29 @@ body::before{
 .footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
 .footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
-/* Botão no Rodapé Interno */
+/* Botão Giroscópio em Verde Neon Pulsante para chamar muita atenção */
 .btn-gyro {
-  background: rgba(255, 255, 255, 0.08);
-  color: #90caf9;
-  border: 1px solid rgba(100, 181, 246, 0.4);
-  border-radius: 10px;
-  padding: 0.15rem 0.4rem;
-  font-size: 0.62rem;
+  background: rgba(0, 255, 128, 0.15);
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.65rem;
   cursor: pointer;
   font-family: inherit;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+  animation: pulse-neon 1.5s infinite;
   transition: all 0.2s;
 }
-.btn-gyro:hover { background: rgba(100, 181, 246, 0.2); }
-.btn-gyro.active { background: #2563eb; color: #ffffff; border-color: #3b82f6; }
+.btn-gyro:hover { background: rgba(0, 255, 128, 0.3); }
+.btn-gyro.active { background: #00ff88; color: #07101e; box-shadow: 0 0 15px #00ff88; }
+
+@keyframes pulse-neon {
+  0% { transform: scale(1); box-shadow: 0 0 5px rgba(0,255,136,0.5); }
+  50% { transform: scale(1.08); box-shadow: 0 0 14px rgba(0,255,136,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 5px rgba(0,255,136,0.5); }
+}
 </style>
 </head>
 <body>
@@ -387,6 +399,7 @@ body::before{
         <a
           href="https://g.page/r/CRECbD178tUDEAE/review"
           class="btn-google"
+          id="btnGoogle"
           target="_blank"
           rel="noopener"
           aria-label="Avaliar no Google"
@@ -460,7 +473,7 @@ body::before{
       </div>
       <p class="footer-dev">
         Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
+        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscópio()">Giroscópio: OFF</button>
       </p>
     </div>
   </div>
@@ -470,9 +483,9 @@ body::before{
 <script>
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
+  const btnGoogle = document.getElementById('btnGoogle');
 
   let giroscopioAtivo = false;
-  // Intensidade equilibrada e segura (maior que o nível 1 anterior, mas sem virar a página)
   const config = { intensidadeCelular: 1.6, intensidadeMouse: 45, anguloMax: 42 };
 
   function handleOrientation(e) {
@@ -519,6 +532,15 @@ body::before{
       ativandoOorientacao();
     }
   }
+
+  /* Efeito de Confetes no clique do Botão Amarelo */
+  btnGoogle.addEventListener('click', (e) => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  });
 
   /* Movimento no Desktop */
   document.addEventListener('mousemove', (e) => {
