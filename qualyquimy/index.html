@@ -165,21 +165,6 @@ body::before{
   pointer-events: none;
 }
 
-/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
-body.mode-xray .device-frame {
-  transform: rotateY(-35deg) rotateX(15deg) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
-}
-body.mode-xray .layer-back { transform: translateZ(-30px) !important; opacity: 0.75; transition: transform 0.6s ease; }
-body.mode-xray .layer-mid { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .layer-front { transform: translateZ(110px) !important; transition: transform 0.6s ease; }
-body.mode-xray .layer-pop { transform: translateZ(170px) !important; transition: transform 0.6s ease; }
-
-body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-fundo { transform: translateZ(-50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-mago { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; transition: transform 0.6s ease; }
-
 /* Estrutura de conteúdo 3D da Frente */
 .page {
   position:relative;
@@ -370,7 +355,7 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   100% { transform: translateX(-50%); }
 }
 
-/* Footer interno otimizado para SEO */
+/* Rodapé Interno otimizado para SEO */
 .footer{
   font-size:.72rem;
   color:#d0dce8;
@@ -421,80 +406,47 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
 .footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
 .footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
-/* Botão no Rodapé Interno */
+/* Botão de Giroscópio com Neon Pulsante */
+@keyframes neon-pulse {
+  0% {
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.4), 0 0 10px rgba(37, 99, 235, 0.2);
+    border-color: rgba(100, 181, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(96, 165, 250, 0.5);
+    border-color: #60a5fa;
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.4), 0 0 10px rgba(37, 99, 235, 0.2);
+    border-color: rgba(100, 181, 246, 0.5);
+  }
+}
+
 .btn-gyro {
   background: rgba(255, 255, 255, 0.08);
   color: #90caf9;
   border: 1px solid rgba(100, 181, 246, 0.4);
-  border-radius: 12px;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.65rem;
+  border-radius: 14px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.7rem;
   cursor: pointer;
   font-family: inherit;
-  transition: all 0.2s;
-}
-.btn-gyro:hover {
-  background: rgba(100, 181, 246, 0.2);
-}
-.btn-gyro.active {
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #3b82f6;
-}
-
-/* CONTROLES EXTERNOS (Com Botão Liga/Desliga e Raio-X) */
-.external-controls {
-  display: flex;
-  gap: 0.6rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding-top: 0.2rem;
-  flex-wrap: wrap;
-}
-
-.level-btn {
-  background: rgba(15, 23, 42, 0.85);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 0.45rem 1.1rem;
-  font-size: 0.75rem;
   font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: neon-pulse 2s infinite ease-in-out;
 }
 
-.level-btn:hover {
-  border-color: #64b5f6;
+.btn-gyro:hover {
+  background: rgba(100, 181, 246, 0.25);
   color: #ffffff;
 }
 
-.level-btn.active {
+.btn-gyro.active {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
   border-color: #60a5fa;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-}
-
-/* Estilo do Botão Raio-X */
-.xray-btn {
-  background: rgba(88, 28, 135, 0.85);
-  color: #d8b4fe;
-  border: 1px solid rgba(192, 132, 252, 0.4);
-}
-.xray-btn:hover {
-  border-color: #c084fc;
-  color: #ffffff;
-}
-.xray-btn.active {
-  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
-  color: #ffffff;
-  border-color: #e9d5ff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.9);
+  animation: none; /* Mantém fixo e forte quando ligado */
 }
 </style>
 </head>
@@ -619,64 +571,19 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
     </footer>
   </div>
 
-  <!-- Controles Externos com Botão Liga/Desliga e Raio-X -->
-  <div class="external-controls">
-    <button class="level-btn active" id="btnLvlToggle" onclick="alternarEfeitoPrincipal()">Efeito 3D: LIGADO</button>
-    <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
-  </div>
-
 </div>
 
 <script>
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
-  const btnLvlToggle = document.getElementById('btnLvlToggle');
-  const btnXray = document.getElementById('btnXray');
 
   let giroscopioAtivo = false;
-  let modoRaioX = false;
-  let efeitoLigado = true; // Nível 1,5 ativado por padrão
-
-  // Configuração refinada (Nível 1,5 intermediário equilibrado)
+  
+  // Configuração fixa para o Nível 1,5 quando ligado
   const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
 
-  function alternarEfeitoPrincipal() {
-    if (modoRaioX) desativarRaioX();
-    efeitoLigado = !efeitoLigado;
-    
-    if (efeitoLigado) {
-      btnLvlToggle.classList.add('active');
-      btnLvlToggle.innerText = 'Efeito 3D: LIGADO';
-    } else {
-      btnLvlToggle.classList.remove('active');
-      btnLvlToggle.innerText = 'Efeito 3D: DESLIGADO';
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
-  }
-
-  function alternarRaioX() {
-    modoRaioX = !modoRaioX;
-    if (modoRaioX) {
-      document.body.classList.add('mode-xray');
-      btnXray.classList.add('active');
-      btnLvlToggle.classList.remove('active');
-    } else {
-      desativarRaioX();
-    }
-  }
-
-  function desativarRaioX() {
-    modoRaioX = false;
-    document.body.classList.remove('mode-xray');
-    btnXray.classList.remove('active');
-    if (efeitoLigado) {
-      btnLvlToggle.classList.add('active');
-    }
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  }
-
   function handleOrientation(e) {
-    if (!giroscopioAtivo || modoRaioX || !efeitoLigado || e.gamma === null || e.beta === null) return;
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
 
     let x = Math.min(Math.max(e.gamma, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
     let y = Math.min(Math.max(e.beta - 45, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
@@ -696,9 +603,7 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
     giroscopioAtivo = false;
     btnGyro.innerText = 'Giroscópio: OFF';
     btnGyro.classList.remove('active');
-    if (!modoRaioX && efeitoLigado) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
 
   function alternarGiroscopio() {
@@ -722,9 +627,9 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
     }
   }
 
-  /* Movimento no Desktop */
+  /* Movimento no Desktop (Ativo somente se giroscópio/efeito estiver ON) */
   document.addEventListener('mousemove', (e) => {
-    if (modoRaioX || !efeitoLigado) return;
+    if (!giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
@@ -733,7 +638,7 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   });
 
   document.addEventListener('mouseleave', () => {
-    if (efeitoLigado && !modoRaioX) {
+    if (giroscopioAtivo) {
       frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
     }
   });
