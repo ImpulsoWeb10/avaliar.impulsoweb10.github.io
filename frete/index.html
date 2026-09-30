@@ -63,6 +63,7 @@ body {
   overflow-x: hidden;
   position: relative;
   padding: 1rem;
+  perspective: 1200px; /* Profundidade global para o 3D das imagens e elementos */
 }
 
 /* BACKGROUND INDUSTRIAL COM TEXTURA E BRILHOS */
@@ -78,7 +79,7 @@ body::before {
   z-index: -2;
 }
 
-/* CONTAINER PRINCIPAL COM MOLDURA E LUZ NEON INTENSA */
+/* CONTAINER PRINCIPAL COM MOLDURA, LUZ NEON (NÍVEL 1.5) E 3D */
 .page-wrapper {
   width: 100%;
   max-width: 480px;
@@ -95,9 +96,9 @@ body::before {
   /* Moldura Neon Multi-camadas com nível 1.5 de intensidade */
   border: 2px solid var(--orange);
   box-shadow: 
-    0 0 10px rgba(255, 153, 0, 0.6),
-    0 0 25px rgba(255, 153, 0, 0.4),
-    0 0 45px rgba(255, 153, 0, 0.2),
+    0 0 12px rgba(255, 153, 0, 0.65),
+    0 0 30px rgba(255, 153, 0, 0.45),
+    0 0 50px rgba(255, 153, 0, 0.25),
     inset 0 0 20px rgba(255, 153, 0, 0.15),
     inset 0 0 40px rgba(255, 153, 0, 0.05);
   
@@ -106,7 +107,7 @@ body::before {
   will-change: transform;
 }
 
-/* CONTROLE DE GIROSCÓPIO (FLUTUANTE NO CANTO SUPERIOR DIREITO) */
+/* CONTROLE DE GIROSCÓPIO ATUALIZADO (TEXTO "Ativar / Não") */
 .gyro-control {
   position: absolute;
   top: 15px;
@@ -114,10 +115,10 @@ body::before {
   z-index: 10;
   display: flex;
   align-items: center;
-  background: rgba(18, 24, 36, 0.9);
+  background: rgba(18, 24, 36, 0.95);
   border: 1px solid var(--border-color);
   border-radius: 50px;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
@@ -136,7 +137,7 @@ body::before {
   color: var(--text-muted);
   font-size: 0.65rem;
   font-weight: 700;
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 20px;
   cursor: pointer;
   transition: var(--transition);
@@ -147,7 +148,53 @@ body::before {
   background: var(--orange);
   color: #000000;
   border-color: var(--orange);
-  box-shadow: 0 0 8px rgba(255, 153, 0, 0.6);
+  box-shadow: 0 0 10px rgba(255, 153, 0, 0.8);
+}
+
+/* ========================================================== */
+/* EFEITO 3D NAS IMAGENS E ITENS DO CARD */
+/* ========================================================== */
+.logo-container, 
+.service-card, 
+.pulsing-box-btn, 
+.btn-whatsapp-main, 
+.btn-facebook-main, 
+.coverage-card {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Elevando a logo no eixo Z para destaque 3D real */
+.logo-img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
+  border-radius: 8px;
+  transform: translateZ(35px); /* Salta para fora da tela em 3D */
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover .logo-img {
+  transform: translateZ(50px) scale(1.05);
+}
+
+/* Efeito 3D nos cards de serviço */
+.service-card {
+  transform: translateZ(15px);
+}
+.service-card:hover {
+  transform: translateZ(30px) translateY(-3px);
+}
+
+/* Efeito 3D nos botões principais */
+.pulsing-box-btn {
+  transform: translateZ(25px);
+}
+.btn-whatsapp-main {
+  transform: translateZ(20px);
+}
+.btn-facebook-main {
+  transform: translateZ(20px);
 }
 
 /* ========================================================== */
@@ -161,25 +208,19 @@ body::before {
   gap: 1rem;
   animation: fadeInDown 0.8s ease-out;
   margin-top: 1rem;
+  transform-style: preserve-3d;
 }
 
 .logo-container {
   width: 100%;
-  max-width: 130px; /* Logo pequena conforme solicitado */
+  max-width: 130px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.logo-img {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
-  border-radius: 8px;
-}
-
-/* BOTÃO RETANGULAR COM PULSO E BRILHO NEON */
+/* BOTÃO RETANGULAR COM PULSO E BRILHO NEON (NÍVEL 1.5) */
 .pulsing-box-btn {
   width: 100%;
   background: linear-gradient(135deg, #161f30 0%, #0d131f 100%);
@@ -194,30 +235,30 @@ body::before {
   gap: 0.3rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(255, 153, 0, 0.4), inset 0 0 15px rgba(255, 153, 0, 0.1);
+  box-shadow: 0 0 18px rgba(255, 153, 0, 0.5), inset 0 0 15px rgba(255, 153, 0, 0.15);
   animation: pulseGlow 2.5s infinite ease-in-out;
   transition: var(--transition);
 }
 
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 10px rgba(255, 153, 0, 0.3), inset 0 0 10px rgba(255, 153, 0, 0.1);
+    box-shadow: 0 0 12px rgba(255, 153, 0, 0.35), inset 0 0 10px rgba(255, 153, 0, 0.1);
     border-color: rgba(255, 153, 0, 0.6);
   }
   50% {
-    box-shadow: 0 0 25px rgba(255, 153, 0, 0.8), inset 0 0 20px rgba(255, 153, 0, 0.25);
+    box-shadow: 0 0 32px rgba(255, 153, 0, 0.85), inset 0 0 25px rgba(255, 153, 0, 0.3);
     border-color: #ffb733;
-    transform: scale(1.02);
+    transform: translateZ(35px) scale(1.02);
   }
   100% {
-    box-shadow: 0 0 10px rgba(255, 153, 0, 0.3), inset 0 0 10px rgba(255, 153, 0, 0.1);
+    box-shadow: 0 0 12px rgba(255, 153, 0, 0.35), inset 0 0 10px rgba(255, 153, 0, 0.1);
     border-color: rgba(255, 153, 0, 0.6);
   }
 }
 
 .pulsing-box-btn:hover {
   background: linear-gradient(135deg, #1c273c 0%, #121a29 100%);
-  transform: scale(1.03);
+  transform: translateZ(40px) scale(1.03);
 }
 
 .pulsing-box-title {
@@ -251,6 +292,7 @@ body::before {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  transform: translateZ(10px);
 }
 
 /* ========================================================== */
@@ -263,6 +305,7 @@ body::before {
   gap: 0.8rem;
   align-items: center;
   animation: fadeInUp 0.8s ease-out 0.2s both;
+  transform-style: preserve-3d;
 }
 
 .btn-whatsapp-main {
@@ -285,7 +328,7 @@ body::before {
 }
 
 .btn-whatsapp-main:hover {
-  transform: translateY(-3px);
+  transform: translateZ(30px) translateY(-3px);
   box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
 }
 
@@ -316,7 +359,7 @@ body::before {
 }
 
 .btn-facebook-main:hover {
-  transform: translateY(-2px);
+  transform: translateZ(30px) translateY(-2px);
   box-shadow: 0 10px 25px rgba(24, 119, 242, 0.45);
 }
 
@@ -364,6 +407,7 @@ body::before {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
+  transform-style: preserve-3d;
 }
 
 .service-card {
@@ -380,8 +424,7 @@ body::before {
 .service-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--orange);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 153, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(255, 153, 0, 0.2);
 }
 
 .service-icon {
@@ -414,6 +457,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  transform: translateZ(10px);
 }
 
 .coverage-list {
@@ -432,6 +476,12 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
+  transition: transform 0.2s ease;
+}
+
+.coverage-item:hover {
+  transform: translateZ(20px);
+  border-color: var(--orange);
 }
 
 .coverage-item svg {
@@ -522,6 +572,7 @@ body::before {
   white-space: nowrap;
   position: relative;
   margin: 0.5rem 0;
+  transform: translateZ(10px);
 }
 
 .marquee-track {
@@ -567,6 +618,7 @@ body::before {
   flex-direction: column;
   gap: 0.6rem;
   margin-top: auto;
+  transform: translateZ(10px);
 }
 
 .footer-promo-box {
@@ -656,10 +708,10 @@ body::before {
 
 <div class="page-wrapper" id="cardContainer">
 
-  <!-- BOTÃO GIROSCOPIO OFF/ON -->
+  <!-- BOTÃO GIROSCOPIO ATUALIZADO (Ativar / Não) -->
   <div class="gyro-control">
     <span class="gyro-label">Giro:</span>
-    <button id="gyroToggle" class="gyro-switch" onclick="toggleGyroscope()">OFF</button>
+    <button id="gyroToggle" class="gyro-switch" onclick="toggleGyroscope()">Não</button>
   </div>
 
   <!-- HERO & LOGO PEQUENA + BOTÃO RETANGULAR PULSANTE -->
@@ -668,7 +720,7 @@ body::before {
       <img src="ursaotransporte.png" alt="Ursão Transportes Logo" class="logo-img">
     </div>
 
-    <!-- Botão Retangular Pulsante com Brilho Neon -->
+    <!-- Botão Retangular Pulsante com Brilho Neon (Nível 1.5) -->
     <a href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="pulsing-box-btn">
       <div class="pulsing-box-title">
         <span>⚡</span> ATENDIMENTO 24 HORAS
@@ -833,7 +885,7 @@ body::before {
     });
   });
 
-  // Controle do Giroscópio (Nível 1.5 de sensibilidade e intensidade)
+  // Controle do Giroscópio Atualizado ("Ativar" / "Não") com Nível 1.5
   let gyroActive = false;
   const gyroBtn = document.getElementById('gyroToggle');
   const cardContainer = document.getElementById('cardContainer');
@@ -858,14 +910,14 @@ body::before {
 
   function activateGyro() {
     gyroActive = true;
-    gyroBtn.textContent = 'ON';
+    gyroBtn.textContent = 'Ativar';
     gyroBtn.classList.add('active');
     window.addEventListener('deviceorientation', handleOrientation, true);
   }
 
   function deactivateGyro() {
     gyroActive = false;
-    gyroBtn.textContent = 'OFF';
+    gyroBtn.textContent = 'Não';
     gyroBtn.classList.remove('active');
     window.removeEventListener('deviceorientation', handleOrientation, true);
     cardContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
@@ -873,15 +925,14 @@ body::before {
 
   function handleOrientation(event) {
     if (!gyroActive) return;
-    let beta = event.beta;   // Inclinação frontal/traseira (-180 a 180)
-    let gamma = event.gamma; // Inclinação lateral (-90 a 90)
+    let beta = event.beta;   // Inclinação frontal/traseira
+    let gamma = event.gamma; // Inclinação lateral
 
     if (beta !== null && gamma !== null) {
-      // Fator de nível 1.5 aplicado para intensificar o efeito de inclinação
+      // Fator de sensibilidade nível 1.5 aplicado
       let tiltX = (beta / 6) * 1.5; 
       let tiltY = (gamma / 6) * 1.5;
 
-      // Limites máximos para manter a estabilidade visual
       tiltX = Math.max(Math.min(tiltX, 18), -18);
       tiltY = Math.max(Math.min(tiltY, 18), -18);
 
@@ -889,10 +940,19 @@ body::before {
     }
   }
 
-  // Efeito interativo de movimento com o Mouse para desktop quando o giro estiver ON
+  // Efeito interativo 3D com o Mouse no Desktop / Toque mobile quando o giroscópio estiver desativado
   document.addEventListener('mousemove', (e) => {
     if (!gyroActive && window.innerWidth > 768) {
-      // Opcional: leve movimento com o mouse caso queira testar a profundidade sem giroscópio físico
+      let xCoord = (window.innerWidth / 2 - e.pageX) / 35;
+      let yCoord = (window.innerHeight / 2 - e.pageY) / 35;
+      cardContainer.style.transform = `perspective(1000px) rotateX(${yCoord * 1.5}deg) rotateY(${-xCoord * 1.5}deg)`;
+    }
+  });
+
+  // Retorna à posição original ao tirar o mouse
+  document.addEventListener('mouseleave', () => {
+    if (!gyroActive && window.innerWidth > 768) {
+      cardContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     }
   });
 </script>
