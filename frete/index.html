@@ -31,7 +31,7 @@
 }
 
 :root {
-  --bg-dark: #0a0e14;
+  --bg-dark: #070a0f;
   --bg-card: #121824;
   --bg-card-hover: #1a2233;
   --orange: #ff9900;
@@ -43,7 +43,7 @@
   --whatsapp-dark: #1ebe5d;
   --facebook: #1877f2;
   --facebook-dark: #145dbf;
-  --border-color: rgba(255, 153, 0, 0.3);
+  --border-color: rgba(255, 153, 0, 0.4);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -59,8 +59,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow-x: hidden;
   position: relative;
+  padding: 1rem;
 }
 
 /* BACKGROUND INDUSTRIAL COM TEXTURA E BRILHOS */
@@ -69,28 +71,83 @@ body::before {
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 10%, rgba(255, 153, 0, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(20, 15, 5, 0.6) 0%, transparent 60%),
-    linear-gradient(to bottom, #06080d, #0d121c);
+    radial-gradient(circle at 20% 10%, rgba(255, 153, 0, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(20, 15, 5, 0.7) 0%, transparent 60%),
+    linear-gradient(to bottom, #04060a, #0d121c);
   pointer-events: none;
-  z-index: -1;
+  z-index: -2;
 }
 
-/* CONTAINER PRINCIPAL COM MOLDURA NEON */
+/* CONTAINER PRINCIPAL COM MOLDURA E LUZ NEON INTENSA */
 .page-wrapper {
   width: 100%;
   max-width: 480px;
-  min-height: 100vh;
+  min-height: calc(100vh - 2rem);
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1rem;
   gap: 1.8rem;
   position: relative;
   z-index: 1;
-  border-left: 2px solid rgba(255, 153, 0, 0.4);
-  border-right: 2px solid rgba(255, 153, 0, 0.4);
-  box-shadow: inset 0 0 25px rgba(255, 153, 0, 0.08), 0 0 30px rgba(0, 0, 0, 0.8);
-  background: rgba(10, 14, 20, 0.95);
+  background: rgba(10, 14, 20, 0.96);
+  border-radius: 18px;
+  
+  /* Moldura Neon Multi-camadas com nível 1.5 de intensidade */
+  border: 2px solid var(--orange);
+  box-shadow: 
+    0 0 10px rgba(255, 153, 0, 0.6),
+    0 0 25px rgba(255, 153, 0, 0.4),
+    0 0 45px rgba(255, 153, 0, 0.2),
+    inset 0 0 20px rgba(255, 153, 0, 0.15),
+    inset 0 0 40px rgba(255, 153, 0, 0.05);
+  
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* CONTROLE DE GIROSCÓPIO (FLUTUANTE NO CANTO SUPERIOR DIREITO) */
+.gyro-control {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background: rgba(18, 24, 36, 0.9);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.gyro-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-right: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+.gyro-switch {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.gyro-switch.active {
+  background: var(--orange);
+  color: #000000;
+  border-color: var(--orange);
+  box-shadow: 0 0 8px rgba(255, 153, 0, 0.6);
 }
 
 /* ========================================================== */
@@ -103,6 +160,7 @@ body::before {
   align-items: center;
   gap: 1rem;
   animation: fadeInDown 0.8s ease-out;
+  margin-top: 1rem;
 }
 
 .logo-container {
@@ -596,12 +654,17 @@ body::before {
 </head>
 <body>
 
-<div class="page-wrapper">
+<div class="page-wrapper" id="cardContainer">
+
+  <!-- BOTÃO GIROSCOPIO OFF/ON -->
+  <div class="gyro-control">
+    <span class="gyro-label">Giro:</span>
+    <button id="gyroToggle" class="gyro-switch" onclick="toggleGyroscope()">OFF</button>
+  </div>
 
   <!-- HERO & LOGO PEQUENA + BOTÃO RETANGULAR PULSANTE -->
   <header class="hero-section">
     <div class="logo-container">
-      <!-- Exibindo a logo fornecida (ursaotransporte.png) de tamanho pequeno -->
       <img src="ursaotransporte.png" alt="Ursão Transportes Logo" class="logo-img">
     </div>
 
@@ -634,7 +697,6 @@ body::before {
       SOLICITAR ORÇAMENTO PELO WHATSAPP
     </a>
 
-    <!-- Botão do Facebook solicitado -->
     <a 
       href="https://www.facebook.com/profile.php?id=100070057865265" 
       class="btn-facebook-main"
@@ -740,7 +802,7 @@ body::before {
     </div>
   </div>
 
-  <!-- RODAPÉ ATUALIZADO COM CHAMADA DE LINK PERSONALIZADO E CONTATO 11954950044 -->
+  <!-- RODAPÉ -->
   <footer class="footer">
     <div class="footer-promo-box">
       <div class="footer-promo-text">Quer ter um link assim para sua empresa?</div>
@@ -759,20 +821,79 @@ body::before {
 </div>
 
 <script>
-  // Script simples para interatividade do FAQ
+  // Interatividade do FAQ
   document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
       const item = question.parentElement;
       const isActive = item.classList.contains('active');
-      
-      // Fecha todos os outros
       document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-      
-      // Abre o clicado se não estava ativo
       if (!isActive) {
         item.classList.add('active');
       }
     });
+  });
+
+  // Controle do Giroscópio (Nível 1.5 de sensibilidade e intensidade)
+  let gyroActive = false;
+  const gyroBtn = document.getElementById('gyroToggle');
+  const cardContainer = document.getElementById('cardContainer');
+
+  function toggleGyroscope() {
+    if (!gyroActive) {
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().then(response => {
+          if (response === 'granted') {
+            activateGyro();
+          } else {
+            alert('Permissão do sensor negada.');
+          }
+        }).catch(console.error);
+      } else {
+        activateGyro();
+      }
+    } else {
+      deactivateGyro();
+    }
+  }
+
+  function activateGyro() {
+    gyroActive = true;
+    gyroBtn.textContent = 'ON';
+    gyroBtn.classList.add('active');
+    window.addEventListener('deviceorientation', handleOrientation, true);
+  }
+
+  function deactivateGyro() {
+    gyroActive = false;
+    gyroBtn.textContent = 'OFF';
+    gyroBtn.classList.remove('active');
+    window.removeEventListener('deviceorientation', handleOrientation, true);
+    cardContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  }
+
+  function handleOrientation(event) {
+    if (!gyroActive) return;
+    let beta = event.beta;   // Inclinação frontal/traseira (-180 a 180)
+    let gamma = event.gamma; // Inclinação lateral (-90 a 90)
+
+    if (beta !== null && gamma !== null) {
+      // Fator de nível 1.5 aplicado para intensificar o efeito de inclinação
+      let tiltX = (beta / 6) * 1.5; 
+      let tiltY = (gamma / 6) * 1.5;
+
+      // Limites máximos para manter a estabilidade visual
+      tiltX = Math.max(Math.min(tiltX, 18), -18);
+      tiltY = Math.max(Math.min(tiltY, 18), -18);
+
+      cardContainer.style.transform = `perspective(1000px) rotateX(${-tiltX}deg) rotateY(${tiltY}deg)`;
+    }
+  }
+
+  // Efeito interativo de movimento com o Mouse para desktop quando o giro estiver ON
+  document.addEventListener('mousemove', (e) => {
+    if (!gyroActive && window.innerWidth > 768) {
+      // Opcional: leve movimento com o mouse caso queira testar a profundidade sem giroscópio físico
+    }
   });
 </script>
 
