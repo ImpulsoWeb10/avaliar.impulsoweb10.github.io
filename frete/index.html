@@ -63,7 +63,7 @@ body {
   overflow-x: hidden;
   position: relative;
   padding: 1rem;
-  perspective: 1200px; /* Profundidade global para o 3D das imagens e elementos */
+  perspective: 1200px;
 }
 
 /* BACKGROUND INDUSTRIAL COM TEXTURA E BRILHOS */
@@ -107,50 +107,6 @@ body::before {
   will-change: transform;
 }
 
-/* CONTROLE DE GIROSCÓPIO ATUALIZADO (TEXTO "Ativar / Não") */
-.gyro-control {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  background: rgba(18, 24, 36, 0.95);
-  border: 1px solid var(--border-color);
-  border-radius: 50px;
-  padding: 0.25rem 0.6rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-
-.gyro-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-right: 0.4rem;
-  letter-spacing: 0.05em;
-}
-
-.gyro-switch {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text-muted);
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: var(--transition);
-  text-transform: uppercase;
-}
-
-.gyro-switch.active {
-  background: var(--orange);
-  color: #000000;
-  border-color: var(--orange);
-  box-shadow: 0 0 10px rgba(255, 153, 0, 0.8);
-}
-
 /* ========================================================== */
 /* EFEITO 3D NAS IMAGENS E ITENS DO CARD */
 /* ========================================================== */
@@ -164,13 +120,12 @@ body::before {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Elevando a logo no eixo Z para destaque 3D real */
 .logo-img {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
   border-radius: 8px;
-  transform: translateZ(35px); /* Salta para fora da tela em 3D */
+  transform: translateZ(35px);
   transition: transform 0.3s ease;
 }
 
@@ -178,7 +133,6 @@ body::before {
   transform: translateZ(50px) scale(1.05);
 }
 
-/* Efeito 3D nos cards de serviço */
 .service-card {
   transform: translateZ(15px);
 }
@@ -186,14 +140,10 @@ body::before {
   transform: translateZ(30px) translateY(-3px);
 }
 
-/* Efeito 3D nos botões principais */
 .pulsing-box-btn {
   transform: translateZ(25px);
 }
-.btn-whatsapp-main {
-  transform: translateZ(20px);
-}
-.btn-facebook-main {
+.btn-whatsapp-main, .btn-facebook-main {
   transform: translateZ(20px);
 }
 
@@ -220,7 +170,6 @@ body::before {
   align-items: center;
 }
 
-/* BOTÃO RETANGULAR COM PULSO E BRILHO NEON (NÍVEL 1.5) */
 .pulsing-box-btn {
   width: 100%;
   background: linear-gradient(135deg, #161f30 0%, #0d131f 100%);
@@ -608,7 +557,7 @@ body::before {
 }
 
 /* ========================================================== */
-/* RODAPÉ E PROMOÇÃO DE LINK PERSONALIZADO */
+/* RODAPÉ E BOTÃO DE GIROSCÓPIO ESTILO QUALYQUIMY */
 /* ========================================================== */
 .footer {
   text-align: center;
@@ -616,9 +565,52 @@ body::before {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
   margin-top: auto;
   transform: translateZ(10px);
+}
+
+/* Container do Giroscópio no Rodapé (Estilo Qualyquimy) */
+.gyro-footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: rgba(18, 24, 36, 0.8);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  width: fit-content;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.gyro-footer-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gyro-footer-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.gyro-footer-btn.active {
+  background: var(--orange);
+  color: #000000;
+  border-color: var(--orange);
+  box-shadow: 0 0 10px rgba(255, 153, 0, 0.8);
 }
 
 .footer-promo-box {
@@ -626,7 +618,7 @@ body::before {
   border: 1px dashed var(--orange);
   border-radius: 10px;
   padding: 0.8rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -707,12 +699,6 @@ body::before {
 <body>
 
 <div class="page-wrapper" id="cardContainer">
-
-  <!-- BOTÃO GIROSCOPIO ATUALIZADO (Ativar / Não) -->
-  <div class="gyro-control">
-    <span class="gyro-label">Giro:</span>
-    <button id="gyroToggle" class="gyro-switch" onclick="toggleGyroscope()">Não</button>
-  </div>
 
   <!-- HERO & LOGO PEQUENA + BOTÃO RETANGULAR PULSANTE -->
   <header class="hero-section">
@@ -854,8 +840,14 @@ body::before {
     </div>
   </div>
 
-  <!-- RODAPÉ -->
+  <!-- RODAPÉ COM O BOTÃO DE GIROSCÓPIO ESTILO QUALYQUIMY -->
   <footer class="footer">
+    <!-- Botão de Giroscópio no Rodapé -->
+    <div class="gyro-footer-container">
+      <span class="gyro-footer-label">Giroscópio:</span>
+      <button id="gyroToggle" class="gyro-footer-btn" onclick="toggleGyroscope()">Não</button>
+    </div>
+
     <div class="footer-promo-box">
       <div class="footer-promo-text">Quer ter um link assim para sua empresa?</div>
       <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20ter%20um%20link%20personalizado." class="footer-promo-link" target="_blank" rel="noopener">
@@ -885,7 +877,7 @@ body::before {
     });
   });
 
-  // Controle do Giroscópio Atualizado ("Ativar" / "Não") com Nível 1.5
+  // Controle do Giroscópio no Rodapé ("Ativar" / "Não") com Nível 1.5
   let gyroActive = false;
   const gyroBtn = document.getElementById('gyroToggle');
   const cardContainer = document.getElementById('cardContainer');
@@ -940,7 +932,7 @@ body::before {
     }
   }
 
-  // Efeito interativo 3D com o Mouse no Desktop / Toque mobile quando o giroscópio estiver desativado
+  // Efeito interativo 3D com o Mouse no Desktop quando o giroscópio estiver desativado
   document.addEventListener('mousemove', (e) => {
     if (!gyroActive && window.innerWidth > 768) {
       let xCoord = (window.innerWidth / 2 - e.pageX) / 35;
@@ -949,7 +941,6 @@ body::before {
     }
   });
 
-  // Retorna à posição original ao tirar o mouse
   document.addEventListener('mouseleave', () => {
     if (!gyroActive && window.innerWidth > 768) {
       cardContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
