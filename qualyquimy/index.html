@@ -3,10 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Tintas Qualy Quimy em Itaquaquecetuba — Qualidade, confiança e compromisso. Tintas, texturas e acabamentos para a sua obra.">
-<meta property="og:title" content="Tintas Qualy Quimy | Itaquaquecetuba SP">
-<meta property="og:description" content="Qualidade, confiança e compromisso. Avalie nosso atendimento e fale conosco no WhatsApp.">
-<title>Tintas Qualy Quimy | Itaquaquecetuba</title>
+<meta name="description" content="Tintas Qualy Quimy em Itaquaquecetuba — Fabricantes e especialistas em Grafiato, Textura Lisa, Tinta Acrílica, Impermeabilizantes, Massa Acrílica e Resinas. Compre direto da fábrica!">
+<meta property="og:title" content="Tintas Qualy Quimy | Fábrica de Tintas e Texturas em Itaquaquecetuba SP">
+<meta property="og:description" content="Qualidade, confiança e compromisso. Conheça nossos produtos, avalie nosso atendimento e fale conosco no WhatsApp.">
+<title>Tintas Qualy Quimy | Fábrica de Tintas e Texturas em Itaquaquecetuba</title>
+
+<!-- Schema.org Otimizado para SEO Local e Motores de Busca (Google e Bing) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "PaintStore",
+      "@id": "https://avaliar.impulsoweb10.com.br/qualyquimy/#store",
+      "name": "Tintas Qualy Quimy",
+      "description": "Fabricantes e especialistas em Grafiato, Textura Lisa, Projetada, Granline, massa niveladora, Tinta acrílica a base de água, econômica, standard, premium, piso, emborrachada, tinta telha, massa pva, massa acrílica, seladora acrílica, seladora gesso, tinta gesso, impermeabilizante, primer, cimento queimado, líquido brilho, resina e Pedras Naturais em Itaquaquecetuba.",
+      "image": "https://avaliar.impulsoweb10.com.br/qualyquimy/logotintasqualyquimy.png",
+      "url": "https://avaliar.impulsoweb10.com.br/qualyquimy/",
+      "telephone": "+55-11-4643-2301",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Leiria, 45 - Chácara Cuiabá",
+        "addressLocality": "Itaquaquecetuba",
+        "addressRegion": "SP",
+        "postalCode": "08587-100",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -23.4831,
+        "longitude": -46.3456
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "17:30"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/tintasqualyquimy/",
+        "https://shopee.com.br/qualyquimy"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-11-95495-0044",
+        "contactType": "sales",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese",
+        "option": "Atendimento Comercial via WhatsApp"
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -75,64 +128,44 @@ body::before{
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO COM AS TRÊS IMAGENS SEPARADAS EM CAMADAS */
+/* VERSO DO CARTÃO (Mantido para o modo Raio-X) */
 .secret-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #050b14; /* Fundo base escuro */
+  background: #050b14;
   border-radius: 22px;
   transform: rotateY(180deg);
   backface-visibility: hidden;
   z-index: 2;
-  transform-style: preserve-3d; /* Essencial para o efeito 3D nas imagens internas */
-  overflow: hidden; /* Mantém as imagens dentro das bordas arredondadas */
+  transform-style: preserve-3d;
+  overflow: hidden;
 }
 
-/* Estilo comum para as três imagens do verso */
 .back-layer {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta a imagem para preencher sem distorcer */
+  object-fit: cover;
   top: 0;
   left: 0;
   border-radius: 22px;
 }
+.back-layer-fundo { transform: translateZ(-20px); }
+.back-layer-mago { transform: translateZ(30px); }
+.back-layer-moldura { transform: translateZ(80px); pointer-events: none; }
 
-/* Camada 1: O Fundo (Mais ao fundo) */
-.back-layer-fundo {
-  transform: translateZ(-20px); /* Move para trás */
-}
-
-/* Camada 2: O Mago (No meio) */
-.back-layer-mago {
-  transform: translateZ(30px); /* Move para frente */
-}
-
-/* Camada 3: A Moldura de Galhos (Mais à frente) */
-.back-layer-moldura {
-  transform: translateZ(80px); /* Move muito para frente */
-  pointer-events: none; /* Garante que os cliques passem pela moldura */
-}
-
-/* ESTILOS DO MODO RAIO-X (VISÃO EXPLODIDA) */
+/* ESTILOS DO MODO RAIO-X */
 body.mode-xray .device-frame {
   transform: rotateY(-35deg) rotateX(15deg) !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(96, 165, 250, 0.4);
 }
-/* Explode as camadas da FRENTE */
 body.mode-xray .layer-back { transform: translateZ(-30px) !important; opacity: 0.75; transition: transform 0.6s ease; }
 body.mode-xray .layer-mid { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
 body.mode-xray .layer-front { transform: translateZ(110px) !important; transition: transform 0.6s ease; }
 body.mode-xray .layer-pop { transform: translateZ(170px) !important; transition: transform 0.6s ease; }
-
-/* Explode as camadas do VERSO */
 body.mode-xray .secret-back { transform: rotateY(180deg) translateZ(-100px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-fundo { transform: translateZ(-50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-mago { transform: translateZ(50px) !important; transition: transform 0.6s ease; }
-body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; transition: transform 0.6s ease; }
 
 /* Estrutura de conteúdo 3D da Frente */
 .page {
@@ -147,36 +180,13 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   backface-visibility: hidden;
 }
 
-/* DEFINIÇÃO DAS CAMADAS EM ALTURAS (Frente) */
-.layer-back {
-  transform: translateZ(15px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-mid {
-  transform: translateZ(35px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-front {
-  transform: translateZ(55px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
-}
-
-.layer-pop {
-  transform: translateZ(75px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
-}
+.layer-back { transform: translateZ(15px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-mid { transform: translateZ(35px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-front { transform: translateZ(55px); transform-style: preserve-3d; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: transform 0.4s ease; }
+.layer-pop { transform: translateZ(75px); transform-style: preserve-3d; filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6)); transition: transform 0.4s ease; }
 
 /* Logo area */
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
-
 .logo-frame{
   position:relative;
   border-radius:14px;
@@ -380,14 +390,8 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   font-family: inherit;
   transition: all 0.2s;
 }
-.btn-gyro:hover {
-  background: rgba(100, 181, 246, 0.2);
-}
-.btn-gyro.active {
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #3b82f6;
-}
+.btn-gyro:hover { background: rgba(100, 181, 246, 0.2); }
+.btn-gyro.active { background: #2563eb; color: #ffffff; border-color: #3b82f6; }
 
 /* CONTROLES EXTERNOS */
 .external-controls {
@@ -414,12 +418,7 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-.level-btn:hover {
-  border-color: #64b5f6;
-  color: #ffffff;
-}
-
+.level-btn:hover { border-color: #64b5f6; color: #ffffff; }
 .level-btn.active {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
@@ -427,16 +426,12 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
 }
 
-/* Estilo do Botão Raio-X */
 .xray-btn {
   background: rgba(88, 28, 135, 0.85);
   color: #d8b4fe;
   border: 1px solid rgba(192, 132, 252, 0.4);
 }
-.xray-btn:hover {
-  border-color: #c084fc;
-  color: #ffffff;
-}
+.xray-btn:hover { border-color: #c084fc; color: #ffffff; }
 .xray-btn.active {
   background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
   color: #ffffff;
@@ -451,15 +446,10 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (TRÊS IMAGENS SEPARADAS EM CAMADAS) -->
+    <!-- VERSO DO CARTÃO -->
     <div class="secret-back">
-      <!-- Camada 1: O Fundo -->
       <img src="fundo.png" alt="Cenário de Fundo" class="back-layer back-layer-fundo">
-      
-      <!-- Camada 2: O Mago -->
       <img src="mago.png" alt="Ilustração do Mago" class="back-layer back-layer-mago">
-      
-      <!-- Camada 3: A Moldura de Galhos -->
       <img src="moldura.png" alt="Moldura de Galhos e Cristais" class="back-layer back-layer-moldura">
     </div>
 
@@ -569,7 +559,7 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
 
   <div class="external-controls">
     <button class="level-btn active" id="btnLvl1" onclick="definirNivel(1)">Nível 1 (Padrão)</button>
-    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 2 (Ângulo Maior)</button>
+    <button class="level-btn" id="btnLvl2" onclick="definirNivel(2)">Nível 1.5 (Dinâmico Seguro)</button>
     <button class="level-btn xray-btn" id="btnXray" onclick="alternarRaioX()">🔬 Modo Raio-X</button>
   </div>
 
@@ -586,9 +576,10 @@ body.mode-xray .back-layer-moldura { transform: translateZ(150px) !important; tr
   let modoRaioX = false;
   let nivelAtual = 1;
 
+  // Configuração modificada para o Nível 2 ser o "Nível 1.5 Seguro" (maior que o nível 1, mas limitado para nunca virar a página)
   const configuracoes = {
     1: { intensidadeCelular: 0.8, intensidadeMouse: 18, anguloMax: 35 },
-    2: { intensidadeCelular: 3.2, intensidadeMouse: 180, anguloMax: 180 }
+    2: { intensidadeCelular: 1.6, intensidadeMouse: 45, anguloMax: 45 } 
   };
 
   function definirNivel(lvl) {
