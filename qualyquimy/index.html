@@ -8,7 +8,7 @@
 <meta property="og:description" content="Qualidade, confiança e compromisso. Conheça nossos produtos, avalie nosso atendimento e fale conosco no WhatsApp.">
 <title>Tintas Qualy Quimy | Fábrica de Tintas e Texturas em Itaquaquecetuba</title>
 
-<!-- Schema.org Otimizado para SEO Local e Motores de Busca (Google e Bing) -->
+<!-- Schema.org Otimizado para SEO Local e Motores de Busca -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -17,7 +17,7 @@
       "@type": "PaintStore",
       "@id": "https://avaliar.impulsoweb10.com.br/qualyquimy/#store",
       "name": "Tintas Qualy Quimy",
-      "description": "Fabricantes e especialistas em Grafiato, Textura Lisa, Projetada, Granline, massa niveladora, Tinta acrílica a base de água, econômica, standard, premium, piso, emborrachada, tinta telha, massa pva, massa acrílica, seladora acrílica, seladora gesso, tinta gesso, impermeabilizante, primer, cimento queimado, líquido brilho, resina e Pedras Naturais em Itaquaquecetuba.",
+      "description": "Fabricantes e especialistas em Grafiato, Textura Lisa, Tinta Acrílica, Impermeabilizantes, Massa Acrílica e Resinas em Itaquaquecetuba.",
       "image": "https://avaliar.impulsoweb10.com.br/qualyquimy/logotintasqualyquimy.png",
       "url": "https://avaliar.impulsoweb10.com.br/qualyquimy/",
       "telephone": "+55-11-4643-2301",
@@ -46,15 +46,7 @@
       "sameAs": [
         "https://www.instagram.com/tintasqualyquimy/",
         "https://shopee.com.br/qualyquimy"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-11-95495-0044",
-        "contactType": "sales",
-        "areaServed": "BR",
-        "availableLanguage": "Portuguese",
-        "option": "Atendimento Comercial via WhatsApp"
-      }
+      ]
     }
   ]
 }
@@ -67,7 +59,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
+html,body{height:100%;width:100%;overflow-x:hidden}
 body{
   font-family:'DM Sans',sans-serif;
   background:#07101e;
@@ -77,13 +69,12 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:0.2rem;
-  overflow-x:hidden;
+  padding:0;
   position:relative;
   perspective: 1200px;
 }
 
-/* Background glow subtle */
+/* Background glow */
 body::before{
   content:'';
   position:fixed;
@@ -95,181 +86,138 @@ body::before{
   z-index:0;
 }
 
-/* Container principal expandido para preencher melhor a tela */
+/* Container principal preenchendo totalmente a tela na horizontal */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 480px;
+  justify-content: center;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 0.4rem;
   position: relative;
   z-index: 1;
 }
 
-/* Moldura externa (Cartão 3D) expandida */
+/* Moldura preenchendo o espaço do celular sem sobra lateral excessiva */
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 460px;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
-  border: 2px solid #ffffff;
-  border-radius: 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
   box-shadow: 
-    0 0 10px #ffffff,
-    0 0 20px rgba(255, 255, 255, 0.7),
-    0 0 30px rgba(255, 255, 255, 0.3),
-    0 15px 35px rgba(0, 0, 0, 0.6);
-  padding: 1.2rem 1rem 1rem;
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 15px 35px rgba(0, 0, 0, 0.7);
+  padding: 1rem 0.8rem 0.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.9rem;
+  gap: 0.8rem;
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s ease-out;
   will-change: transform;
 }
 
-/* Estrutura de conteúdo 3D da Frente */
+/* Estrutura 3D */
 .page {
   position:relative;
   z-index:1;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:0.9rem;
+  gap:0.8rem;
   width:100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
 
-.layer-back { transform: translateZ(12px); transform-style: preserve-3d; transition: transform 0.4s ease; }
-.layer-mid { transform: translateZ(28px); transform-style: preserve-3d; transition: transform 0.4s ease; }
-.layer-front { transform: translateZ(44px); transform-style: preserve-3d; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5)); transition: transform 0.4s ease; }
-.layer-pop { transform: translateZ(60px); transform-style: preserve-3d; filter: drop-shadow(0 10px 16px rgba(0,0,0,0.6)); transition: transform 0.4s ease; }
+.layer-back { transform: translateZ(10px); transform-style: preserve-3d; }
+.layer-mid { transform: translateZ(22px); transform-style: preserve-3d; }
+.layer-front { transform: translateZ(36px); transform-style: preserve-3d; }
+.layer-pop { transform: translateZ(50px); transform-style: preserve-3d; }
 
-/* Logo area */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
-.logo-frame{
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
-  display:inline-block;
-  animation:logo-pulse 2.6s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(201,169,110,.5);
-}
-.logo-frame::after{
-  content:'';
-  position:absolute;
-  top:0;left:-110%;
-  width:55%;height:100%;
-  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
-  transform:skewX(-18deg);
-  animation:logo-shimmer 2.6s ease-in-out infinite;
-  pointer-events:none;
-  z-index:2;
-}
-@keyframes logo-pulse{
-  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 6px 20px rgba(201,169,110,.25)}
-  55% {box-shadow:0 0 0 10px rgba(201,169,110,0), 0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 6px 20px rgba(201,169,110,.25)}
-}
-@keyframes logo-shimmer{
-  0%     {left:-110%}
-  45%,100%{left:160%}
-}
-
-.logo-img{
-  display:block;
-  width:160px;
-  height:auto;
-  max-height:75px;
-  border-radius:10px;
-  border:2px solid rgba(201,169,110,.4);
-  object-fit:contain;
-  background:rgba(201,169,110,0.06);
-  position:relative;z-index:1;
-}
-.logo-img-fallback{
-  width:160px;height:70px;
-  border-radius:10px;
-  border:2px solid rgba(201,169,110,.4);
-  background:rgba(201,169,110,0.06);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.5rem;color:#c9a96e;font-weight:600;
-  letter-spacing:.08em;
-  position:relative;z-index:1;
-}
-.brand{
+/* SEO Headings visuais e estruturais */
+.seo-title {
   font-family:'Cormorant Garamond',serif;
   font-size:1.6rem;font-weight:600;
   color:#f0ece5;letter-spacing:.06em;line-height:1.1;
 }
-.brand em{color:#c9a96e;font-style:italic}
-.tagline{font-size:.74rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
+.seo-title em{color:#c9a96e;font-style:italic}
+.seo-subtitle {
+  font-size:.74rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase;
+}
 
-/* Rating stars */
+/* Logo area */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
+.logo-frame{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  display:inline-block;
+  animation:logo-pulse 2.6s ease-in-out infinite;
+}
+@keyframes logo-pulse{
+  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55), 0 4px 15px rgba(201,169,110,.25)}
+  55% {box-shadow:0 0 0 8px rgba(201,169,110,0), 0 4px 15px rgba(201,169,110,.1)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),   0 4px 15px rgba(201,169,110,.25)}
+}
+.logo-img{
+  display:block;
+  width:150px;
+  height:auto;
+  max-height:70px;
+  border-radius:8px;
+  border:2px solid rgba(201,169,110,.4);
+  object-fit:contain;
+  background:rgba(201,169,110,0.06);
+}
+
+/* Estrelas */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
-.star{font-size:1.05rem;color:#ffd700}
-.rating-text{font-size:.74rem;color:#a3c0e4;margin-top:.1rem}
+.star{font-size:1rem;color:#ffd700}
+.rating-text{font-size:.72rem;color:#a3c0e4;margin-top:.1rem}
 
-/* 4 icon buttons row */
-.social-row{display:flex;gap:.65rem;justify-content:center;align-items:center}
+/* Botão Google com confete */
+.btn-google{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:#FBBC05;
+  color:#1a1200;font-weight:700;
+  padding:.55rem 1rem;
+  border-radius:50px;
+  font-size:.8rem;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;
+  border:none;cursor:pointer;
+  width:100%;max-width:240px;justify-content:center;
+  box-shadow:0 4px 15px rgba(251,188,5,.3);
+  transition: transform 0.1s;
+}
+.btn-google:active { transform: scale(0.96); }
+.btn-google svg{width:15px;height:15px;flex-shrink:0}
+
+/* Redes Sociais */
+.social-row{display:flex;gap:.6rem;justify-content:center;align-items:center}
 .social-btn{
   display:flex;flex-direction:column;align-items:center;gap:.2rem;
   text-decoration:none;
   transition:transform .2s;
 }
-.social-btn:hover{transform:translateY(-3px)}
+.social-btn:hover{transform:translateY(-2px)}
 .social-icon{
-  width:40px;height:40px;border-radius:50%;
+  width:38px;height:38px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,255,255,.3);
-  transition:border-color .2s,box-shadow .2s;
 }
-.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.social-icon svg{width:18px;height:18px}
-.social-label{font-size:.64rem;color:#9bb5d4;letter-spacing:.04em}
+.social-icon svg{width:17px;height:17px}
+.social-label{font-size:.62rem;color:#9bb5d4;letter-spacing:.04em}
 
-/* Google button */
-.btn-google{
-  display:inline-flex;align-items:center;gap:.4rem;
-  background:#FBBC05;
-  color:#1a1200;font-weight:700;
-  padding:.6rem 1.1rem;
-  border-radius:50px;
-  font-size:.82rem;text-decoration:none;
-  font-family:'DM Sans',sans-serif;
-  letter-spacing:.02em;
-  border:none;cursor:pointer;
-  width:100%;max-width:240px;justify-content:center;
-  position:relative;overflow:hidden;
-  animation:pulse-google 2.2s ease-in-out infinite;
-}
-.btn-google::after{
-  content:'';
-  position:absolute;
-  top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
-  transform:skewX(-20deg);
-  animation:shimmer 2.2s ease-in-out infinite;
-}
-@keyframes pulse-google{
-  0%{box-shadow:0 0 0 0 rgba(251,188,5,.45),0 4px 15px rgba(251,188,5,.25)}
-  60%{box-shadow:0 0 0 10px rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.1)}
-  100%{box-shadow:0 0 0 0 rgba(251,188,5,0),0 4px 15px rgba(251,188,5,.25)}
-}
-@keyframes shimmer{
-  0%{left:-120%}
-  55%,100%{left:160%}
-}
-.btn-google svg{width:15px;height:15px;flex-shrink:0}
-.btn-google:hover{background:#fcc419;transform:translateY(-1px)}
-
-/* Address */
-.address{font-size:.72rem;color:#8ba4c4;line-height:1.35}
+/* Endereço */
+.address{font-size:.7rem;color:#8ba4c4;line-height:1.3}
 
 /* Banner Infinito */
 .ticker-banner {
@@ -278,19 +226,18 @@ body::before{
   background: rgba(201, 169, 110, 0.15);
   border: 1px solid rgba(201, 169, 110, 0.35);
   border-radius: 6px;
-  padding: 0.3rem 0;
+  padding: 0.25rem 0;
   display: flex;
 }
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: infinite-scroll 10s linear infinite;
+  animation: infinite-scroll 8s linear infinite;
 }
 .ticker-item {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: #fce8bd;
   font-weight: 500;
-  letter-spacing: 0.03em;
   padding-right: 2rem;
   white-space: nowrap;
 }
@@ -301,69 +248,61 @@ body::before{
 
 /* Footer interno */
 .footer{
-  font-size:.68rem;
+  font-size:.66rem;
   color:#d0dce8;
-  margin-top:0.1rem;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.35rem;
+  gap:.3rem;
   width:100%;
   border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:0.7rem;
+  padding-top:0.6rem;
 }
 .footer-promo{
-  font-size:.74rem;
+  font-size:.72rem;
   color:#ffffff;
-  line-height:1.35;
+  line-height:1.3;
   text-align:center;
-  font-weight:400;
 }
 .footer-promo a{
   color:#ffe082;
   text-decoration:none;
   font-weight:700;
   border-bottom:1px solid #ffe082;
-  padding-bottom:1px;
-  transition:color .2s;
 }
-.footer-promo a:hover{color:#ffffff;border-color:#ffffff;}
-.footer-ssl{display:flex;align-items:center;gap:.3rem;font-size:.64rem;color:#8ba4c4}
-.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.8;stroke:#8ba4c4}
+.footer-ssl{display:flex;align-items:center;gap:.3rem;font-size:.62rem;color:#8ba4c4}
+.footer-ssl svg{width:9px;height:9px;stroke:#8ba4c4}
 .footer-dev{
-  font-size:.68rem;
+  font-size:.66rem;
   color:#b0c4de;
   display:flex;
   align-items:center;
-  gap:.35rem;
+  gap:.3rem;
   flex-wrap:wrap;
   justify-content:center;
 }
-.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
-.footer-dev a:hover{color:#90caf9;text-decoration:underline}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
 
-/* Botão Giroscópio em Verde Neon Pulsante para chamar muita atenção */
+/* Botão Giroscópio em Verde Neon Pulsante (Nível 1.5) */
 .btn-gyro {
   background: rgba(0, 255, 128, 0.15);
   color: #00ff88;
   border: 1px solid #00ff88;
-  border-radius: 12px;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.65rem;
+  border-radius: 10px;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.62rem;
   cursor: pointer;
   font-family: inherit;
   font-weight: 700;
   box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-  animation: pulse-neon 1.5s infinite;
-  transition: all 0.2s;
+  animation: pulse-neon 1.4s infinite;
 }
-.btn-gyro:hover { background: rgba(0, 255, 128, 0.3); }
-.btn-gyro.active { background: #00ff88; color: #07101e; box-shadow: 0 0 15px #00ff88; }
+.btn-gyro.active { background: #00ff88; color: #07101e; box-shadow: 0 0 14px #00ff88; }
 
 @keyframes pulse-neon {
-  0% { transform: scale(1); box-shadow: 0 0 5px rgba(0,255,136,0.5); }
-  50% { transform: scale(1.08); box-shadow: 0 0 14px rgba(0,255,136,0.9); }
-  100% { transform: scale(1); box-shadow: 0 0 5px rgba(0,255,136,0.5); }
+  0% { transform: scale(1); box-shadow: 0 0 4px rgba(0,255,136,0.5); }
+  50% { transform: scale(1.06); box-shadow: 0 0 12px rgba(0,255,136,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 4px rgba(0,255,136,0.5); }
 }
 </style>
 </head>
@@ -373,18 +312,17 @@ body::before{
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- FRENTE DO CARD -->
+    <!-- FRENTE DO CARD COM SEO H1 e H2 -->
     <div class="page">
 
       <div class="logo-wrap layer-mid">
         <div class="logo-frame">
           <img class="logo-img" src="logotintasqualyquimy.png" alt="Logo Tintas Qualy Quimy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-img-fallback" style="display:none;">Qualy Quimy</div>
         </div>
         <div>
-          <div class="brand">Tintas <em>Qualy Quimy</em></div>
-          <div class="tagline">Qualidade · Confiança · Compromisso</div>
+          <h1 class="seo-title">Tintas <em>Qualy Quimy</em></h1>
+          <h2 class="seo-subtitle">Fábrica de Tintas e Texturas em Itaquaquecetuba</h2>
         </div>
       </div>
 
@@ -396,17 +334,15 @@ body::before{
       </div>
 
       <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
-        <a
-          href="https://g.page/r/CRECbD178tUDEAE/review"
+        <button
+          type="button"
           class="btn-google"
           id="btnGoogle"
-          target="_blank"
-          rel="noopener"
           aria-label="Avaliar no Google"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Avaliar no Google ⭐⭐⭐⭐⭐
-        </a>
+        </button>
       </div>
 
       <div class="social-row layer-front" aria-label="Redes sociais e contato">
@@ -449,9 +385,9 @@ body::before{
 
       </div>
 
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
-        <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
-        CEP <span itemprop="postalCode">08587-100</span> · Tel: <span itemprop="telephone">(11) 4643-2301</span>
+      <div class="address layer-back">
+        <span>Rua Leiria, 45</span> · Chácara Cuiabá<br>
+        CEP <span>08587-100</span> · Tel: <span>(11) 4643-2301</span>
       </div>
 
       <div class="ticker-banner layer-mid">
@@ -473,7 +409,7 @@ body::before{
       </div>
       <p class="footer-dev">
         Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscópio()">Giroscópio: OFF</button>
+        <button type="button" class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
       </p>
     </div>
   </div>
@@ -486,7 +422,8 @@ body::before{
   const btnGoogle = document.getElementById('btnGoogle');
 
   let giroscopioAtivo = false;
-  const config = { intensidadeCelular: 1.6, intensidadeMouse: 45, anguloMax: 42 };
+  // Sensibilidade ajustada para Nível 1.5
+  const config = { intensidadeCelular: 1.3, intensidadeMouse: 30, anguloMax: 30 };
 
   function handleOrientation(e) {
     if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
@@ -518,31 +455,39 @@ body::before{
       return;
     }
 
+    // Tratamento estrito para celulares iOS modernos e Android
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission().then(state => {
         if (state === 'granted') {
           ativandoOorientacao();
         } else {
-          alert('Permissão de orientação negada.');
+          alert('Permissão de orientação negada nas configurações do navegador.');
         }
-      }).catch(() => {
-        ativandoOorientacao();
+      }).catch(err => {
+        console.error(err);
+        alert('Erro ao solicitar permissão de giroscópio.');
       });
-    } else {
+    } else if ('deviceorientation' in window) {
       ativandoOorientacao();
+    } else {
+      alert('Seu dispositivo ou navegador não suporta giroscópio.');
     }
   }
 
-  /* Efeito de Confetes no clique do Botão Amarelo */
-  btnGoogle.addEventListener('click', (e) => {
+  /* Confetes e Abertura do Google Review */
+  btnGoogle.addEventListener('click', () => {
     confetti({
-      particleCount: 100,
-      spread: 70,
+      particleCount: 120,
+      spread: 80,
       origin: { y: 0.6 }
     });
+
+    setTimeout(() => {
+      window.open('https://g.page/r/CRECbD178tUDEAE/review', '_blank');
+    }, 400);
   });
 
-  /* Movimento no Desktop */
+  /* Movimento do Mouse no Desktop */
   document.addEventListener('mousemove', (e) => {
     if (!giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
