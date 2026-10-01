@@ -557,7 +557,7 @@ body::before {
 }
 
 /* ========================================================== */
-/* RODAPÉ E BOTÃO DE GIROSCÓPIO ESTILO QUALYQUIMY */
+/* RODAPÉ */
 /* ========================================================== */
 .footer {
   text-align: center;
@@ -568,49 +568,6 @@ body::before {
   gap: 0.8rem;
   margin-top: auto;
   transform: translateZ(10px);
-}
-
-/* Container do Giroscópio no Rodapé (Estilo Qualyquimy) */
-.gyro-footer-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  background: rgba(18, 24, 36, 0.8);
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  width: fit-content;
-  margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
-
-.gyro-footer-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.gyro-footer-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.25rem 0.8rem;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: var(--transition);
-  text-transform: uppercase;
-}
-
-.gyro-footer-btn.active {
-  background: var(--orange);
-  color: #000000;
-  border-color: var(--orange);
-  box-shadow: 0 0 10px rgba(255, 153, 0, 0.8);
 }
 
 .footer-promo-box {
@@ -703,7 +660,7 @@ body::before {
   <!-- HERO & LOGO PEQUENA + BOTÃO RETANGULAR PULSANTE -->
   <header class="hero-section">
     <div class="logo-container">
-      <img src="ursaotransporte.png" alt="Ursão Transportes Logo" class="logo-img">
+      <img src="ursaotransporte.jpg" alt="Ursão Transportes Logo" class="logo-img">
     </div>
 
     <!-- Botão Retangular Pulsante com Brilho Neon (Nível 1.5) -->
@@ -840,14 +797,8 @@ body::before {
     </div>
   </div>
 
-  <!-- RODAPÉ COM O BOTÃO DE GIROSCÓPIO ESTILO QUALYQUIMY -->
+  <!-- RODAPÉ -->
   <footer class="footer">
-    <!-- Botão de Giroscópio no Rodapé -->
-    <div class="gyro-footer-container">
-      <span class="gyro-footer-label">Giroscópio:</span>
-      <button id="gyroToggle" class="gyro-footer-btn" onclick="toggleGyroscope()">Não</button>
-    </div>
-
     <div class="footer-promo-box">
       <div class="footer-promo-text">Quer ter um link assim para sua empresa?</div>
       <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20ter%20um%20link%20personalizado." class="footer-promo-link" target="_blank" rel="noopener">
@@ -877,64 +828,11 @@ body::before {
     });
   });
 
-  // Controle do Giroscópio no Rodapé ("Ativar" / "Não") com Nível 1.5
-  let gyroActive = false;
-  const gyroBtn = document.getElementById('gyroToggle');
   const cardContainer = document.getElementById('cardContainer');
 
-  function toggleGyroscope() {
-    if (!gyroActive) {
-      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission().then(response => {
-          if (response === 'granted') {
-            activateGyro();
-          } else {
-            alert('Permissão do sensor negada.');
-          }
-        }).catch(console.error);
-      } else {
-        activateGyro();
-      }
-    } else {
-      deactivateGyro();
-    }
-  }
-
-  function activateGyro() {
-    gyroActive = true;
-    gyroBtn.textContent = 'Ativar';
-    gyroBtn.classList.add('active');
-    window.addEventListener('deviceorientation', handleOrientation, true);
-  }
-
-  function deactivateGyro() {
-    gyroActive = false;
-    gyroBtn.textContent = 'Não';
-    gyroBtn.classList.remove('active');
-    window.removeEventListener('deviceorientation', handleOrientation, true);
-    cardContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
-  }
-
-  function handleOrientation(event) {
-    if (!gyroActive) return;
-    let beta = event.beta;   // Inclinação frontal/traseira
-    let gamma = event.gamma; // Inclinação lateral
-
-    if (beta !== null && gamma !== null) {
-      // Fator de sensibilidade nível 1.5 aplicado
-      let tiltX = (beta / 6) * 1.5; 
-      let tiltY = (gamma / 6) * 1.5;
-
-      tiltX = Math.max(Math.min(tiltX, 18), -18);
-      tiltY = Math.max(Math.min(tiltY, 18), -18);
-
-      cardContainer.style.transform = `perspective(1000px) rotateX(${-tiltX}deg) rotateY(${tiltY}deg)`;
-    }
-  }
-
-  // Efeito interativo 3D com o Mouse no Desktop quando o giroscópio estiver desativado
+  // Efeito interativo 3D com o Mouse no Desktop
   document.addEventListener('mousemove', (e) => {
-    if (!gyroActive && window.innerWidth > 768) {
+    if (window.innerWidth > 768) {
       let xCoord = (window.innerWidth / 2 - e.pageX) / 35;
       let yCoord = (window.innerHeight / 2 - e.pageY) / 35;
       cardContainer.style.transform = `perspective(1000px) rotateX(${yCoord * 1.5}deg) rotateY(${-xCoord * 1.5}deg)`;
@@ -942,7 +840,7 @@ body::before {
   });
 
   document.addEventListener('mouseleave', () => {
-    if (!gyroActive && window.innerWidth > 768) {
+    if (window.innerWidth > 768) {
       cardContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     }
   });
