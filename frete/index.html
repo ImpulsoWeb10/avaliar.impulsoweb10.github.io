@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ursão Transportes — Fretes, carretos, mudanças e entregas rápidas em Itaquaquecetuba - SP e região. Atendimento 24 horas.">
-<meta name="keywords" content="Fretes, Carretos, Mudanças, Itaquaquecetuba, Ursão Transportes">
+<meta name="description" content="Ursão Transportes — Fretes, carretos, mudanças e entregas rápidas em São Paulo e região. Atendimento 24 horas.">
+<meta name="keywords" content="Fretes, Carretos, Mudanças, São Paulo, Ursão Transportes">
 <meta name="author" content="ImpulsoWeb10">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/ursaotransportes/">
 <meta property="og:title" content="Ursão Transportes | Fretes e Carretos">
-<meta property="og:description" content="Fretes, carretos, mudanças e coletas rápidas. Itaquaquecetuba - SP. Solicite seu orçamento via WhatsApp!">
+<meta property="og:description" content="Fretes, carretos, mudanças e coletas rápidas. São Paulo - SP. Solicite seu orçamento via WhatsApp!">
 <meta property="og:locale" content="pt_BR">
 
 <title>Ursão Transportes | Fretes e Carretos</title>
@@ -66,7 +66,6 @@ body {
   perspective: 1200px;
 }
 
-/* BACKGROUND INDUSTRIAL COM TEXTURA E BRILHOS */
 body::before {
   content: '';
   position: fixed;
@@ -79,7 +78,6 @@ body::before {
   z-index: -2;
 }
 
-/* CONTAINER PRINCIPAL COM MOLDURA, LUZ NEON (NÍVEL 1.5) E 3D */
 .page-wrapper {
   width: 100%;
   max-width: 480px;
@@ -92,8 +90,6 @@ body::before {
   z-index: 1;
   background: rgba(10, 14, 20, 0.96);
   border-radius: 18px;
-  
-  /* Moldura Neon Multi-camadas com nível 1.5 de intensidade */
   border: 2px solid var(--orange);
   box-shadow: 
     0 0 12px rgba(255, 153, 0, 0.65),
@@ -101,23 +97,31 @@ body::before {
     0 0 50px rgba(255, 153, 0, 0.25),
     inset 0 0 20px rgba(255, 153, 0, 0.15),
     inset 0 0 40px rgba(255, 153, 0, 0.05);
-  
   transition: transform 0.1s ease-out;
   transform-style: preserve-3d;
   will-change: transform;
 }
 
-/* ========================================================== */
-/* EFEITO 3D NAS IMAGENS E ITENS DO CARD */
-/* ========================================================== */
+/* EFEITOS 3D */
 .logo-container, 
 .service-card, 
 .pulsing-box-btn, 
 .btn-whatsapp-main, 
 .btn-facebook-main, 
-.coverage-card {
+.coverage-card,
+.faq-modal-btn {
   transform-style: preserve-3d;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* LOGO MAIOR ABAIXO DO BOTÃO */
+.logo-container {
+  width: 100%;
+  max-width: 190px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-img {
@@ -147,27 +151,16 @@ body::before {
   transform: translateZ(20px);
 }
 
-/* ========================================================== */
-/* SEÇÃO 1 — HERO COM LOGO PEQUENA E BOTÃO RETANGULAR PULSANTE */
-/* ========================================================== */
+/* HERO SECTION */
 .hero-section {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   animation: fadeInDown 0.8s ease-out;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   transform-style: preserve-3d;
-}
-
-.logo-container {
-  width: 100%;
-  max-width: 130px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .pulsing-box-btn {
@@ -244,9 +237,7 @@ body::before {
   transform: translateZ(10px);
 }
 
-/* ========================================================== */
-/* SEÇÃO 2 — BOTÕES DE AÇÃO (WHATSAPP E FACEBOOK) */
-/* ========================================================== */
+/* CTA CONTAINER */
 .cta-container {
   width: 100%;
   display: flex;
@@ -330,9 +321,7 @@ body::before {
   color: var(--orange-light);
 }
 
-/* ========================================================== */
-/* SEÇÃO 3 — SERVIÇOS */
-/* ========================================================== */
+/* SEÇÃO DE SERVIÇOS */
 .section-title {
   font-family: 'Oswald', sans-serif;
   font-size: 1.3rem;
@@ -395,9 +384,7 @@ body::before {
   line-height: 1.4;
 }
 
-/* ========================================================== */
-/* SEÇÃO 4 — ÁREA DE ATENDIMENTO (SÃO PAULO) */
-/* ========================================================== */
+/* ÁREA DE ATENDIMENTO (SÃO PAULO) */
 .coverage-card {
   background: linear-gradient(145deg, #121824 0%, #0a0e14 100%);
   border: 1px solid var(--border-color);
@@ -440,76 +427,57 @@ body::before {
   line-height: 1.4;
 }
 
-/* ========================================================== */
-/* SEÇÃO 5 — FAQ (SANFONA / ACORDEÃO) */
-/* ========================================================== */
+/* FAQ ESCONDIDO / MODAIS ESTILIZADOS NO RODAPÉ */
 .faq-section {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  margin-top: 0.5rem;
 }
 
-.faq-container {
+.faq-grid {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
 
-.faq-item {
+.faq-modal-btn {
+  width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: var(--transition);
-}
-
-.faq-question {
+  border-radius: 12px;
   padding: 0.9rem 1rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-main);
+  text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background: rgba(255, 153, 0, 0.03);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  transition: var(--transition);
 }
 
-.faq-question::after {
-  content: '+';
-  font-size: 1rem;
+.faq-modal-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--orange);
+  box-shadow: 0 6px 20px rgba(255, 153, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.faq-modal-btn span {
   color: var(--orange);
+  font-size: 1rem;
   font-weight: bold;
-  transition: transform 0.3s;
 }
 
-.faq-item.active .faq-question::after {
-  transform: rotate(45deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out, padding 0.3s ease;
-  padding: 0 1rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.faq-item.active .faq-answer {
-  max-height: 150px;
-  padding: 0 1rem 0.9rem 1rem;
-}
-
-/* ========================================================== */
-/* MODAL SOBRE O POSTO / DUVIDAS */
-/* ========================================================== */
+/* MODAL POP-UP ESTILIZADO */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 6, 10, 0.85);
-  backdrop-filter: blur(5px);
+  background: rgba(4, 6, 10, 0.88);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -526,18 +494,18 @@ body::before {
 }
 
 .modal-box {
-  background: var(--bg-card);
+  background: linear-gradient(145deg, #121824 0%, #0a0e14 100%);
   border: 2px solid var(--orange);
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 18px;
+  padding: 1.6rem;
   width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  box-shadow: 0 10px 40px rgba(255, 153, 0, 0.3);
-  transform: scale(0.95);
-  transition: transform 0.3s ease;
+  gap: 1.2rem;
+  box-shadow: 0 15px 50px rgba(255, 153, 0, 0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .modal-overlay.open .modal-box {
@@ -549,76 +517,65 @@ body::before {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.8rem;
 }
 
 .modal-title {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--orange-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .modal-close {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.2rem;
+  background: rgba(255, 153, 0, 0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: var(--transition);
 }
 
 .modal-close:hover {
-  color: var(--orange);
+  background: var(--orange);
+  color: #000;
 }
 
 .modal-body {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .modal-footer-btn {
-  background: var(--orange);
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
   color: #000;
   font-weight: 700;
-  font-size: 0.85rem;
-  padding: 0.7rem;
-  border-radius: 8px;
+  font-size: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: var(--transition);
   display: block;
+  box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
 }
 
 .modal-footer-btn:hover {
-  background: var(--orange-light);
+  background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+  transform: translateY(-2px);
 }
 
-/* Link estilizado no FAQ para disparar o modal */
-.faq-modal-trigger {
-  display: inline-block;
-  margin-top: 0.4rem;
-  color: var(--orange);
-  font-weight: 700;
-  text-decoration: underline;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 0.75rem;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
-}
-.faq-modal-trigger:hover {
-  color: var(--orange-light);
-}
-
-/* ========================================================== */
-/* SEÇÃO 6 — BANNER ESTEIRA (MARQUEE INFINITO NO RODAPÉ) */
-/* ========================================================== */
+/* BANNER ESTEIRA (MARQUEE INFINITO) */
 .marquee-wrapper {
   width: 100%;
   background: linear-gradient(90deg, #121824, #1a2233, #121824);
@@ -664,9 +621,7 @@ body::before {
   100% { transform: translateX(-50%); }
 }
 
-/* ========================================================== */
 /* RODAPÉ */
-/* ========================================================== */
 .footer {
   text-align: center;
   padding: 1.2rem 0 0.5rem;
@@ -765,13 +720,9 @@ body::before {
 
 <div class="page-wrapper" id="cardContainer">
 
-  <!-- HERO & LOGO PEQUENA + BOTÃO RETANGULAR PULSANTE -->
+  <!-- HERO & BOTÃO RETANGULAR PULSANTE (LOGO ABAIXO) -->
   <header class="hero-section">
-    <div class="logo-container">
-      <img src="ursaotransporte.jpg" alt="Ursão Transportes Logo" class="logo-img">
-    </div>
-
-    <!-- Botão Retangular Pulsante com Brilho Neon (Nível 1.5) -->
+    <!-- Botão Retangular Pulsante com Brilho Neon -->
     <a href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vim%20pelo%20link%20da%20Ursão%20Transportes%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="pulsing-box-btn">
       <div class="pulsing-box-title">
         <span>⚡</span> ATENDIMENTO 24 HORAS
@@ -779,8 +730,13 @@ body::before {
       <div class="pulsing-box-subtitle">Clique aqui e faça seu orçamento imediato</div>
     </a>
 
+    <!-- Logo maior logo abaixo do botão de Atendimento -->
+    <div class="logo-container">
+      <img src="ursaotransporte.png" alt="Ursão Transportes Logo" class="logo-img">
+    </div>
+
     <div class="location-badge">
-      <span>📍</span> Itaquaquecetuba - SP e Região
+      <span>📍</span> São Paulo - SP e Região
     </div>
   </header>
 
@@ -859,37 +815,6 @@ body::before {
     </div>
   </section>
 
-  <!-- FAQ (SANFONA / ACORDEÃO) -->
-  <section class="faq-section">
-    <h2 class="section-title">Dúvidas Frequentes</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question">Como solicitar um orçamento de frete ou carreto?</div>
-        <div class="faq-answer">
-          Basta clicar em qualquer um dos botões do WhatsApp nesta página. Você falará diretamente com o Adriano para informar os endereços de coleta e entrega e o tipo de carga.
-          <br>
-          <button class="faq-modal-trigger" onclick="openModal('Orçamento Rápido', 'Para agilizar seu orçamento com o Adriano, tenha em mãos os endereços de origem e destino, além de fotos ou descrição dos itens que serão transportados.')">Ver detalhes sobre o posto de atendimento</button>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Vocês realizam atendimentos de urgência 24 horas?</div>
-        <div class="faq-answer">
-          Sim! Contamos com atendimento 24 horas para garantir que sua necessidade de transporte urgente seja resolvida com total agilidade e segurança.
-          <br>
-          <button class="faq-modal-trigger" onclick="openModal('Atendimento 24h & Postos de Apoio', 'Nossos veículos ficam estrategicamente posicionados para atender chamados de emergência a qualquer hora do dia ou da noite em São Paulo e região.')">Saiba mais sobre a nossa base</button>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Quais regiões são atendidas pela Ursão Transportes?</div>
-        <div class="faq-answer">
-          Estamos baseados em Itaquaquecetuba e realizamos fretes, carretos e mudanças para toda a cidade de São Paulo e arredores.
-          <br>
-          <button class="faq-modal-trigger" onclick="openModal('Cobertura e Postos', 'Realizamos viagens programadas e coletas expressas saindo de nossa base principal para toda a Grande São Paulo.')">Ver mapa de atuação</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- BANNER ESTEIRA (MARQUEE INFINITO) -->
   <div class="marquee-wrapper">
     <div class="marquee-track">
@@ -910,6 +835,22 @@ body::before {
     </div>
   </div>
 
+  <!-- FAQ / DÚVIDAS ESCONDIDAS (ABREM MODAL ESTILOSO) -->
+  <section class="faq-section">
+    <h2 class="section-title">Dúvidas Frequentes</h2>
+    <div class="faq-grid">
+      <button class="faq-modal-btn" onclick="openModal('Como solicitar orçamento?', 'Para agilizar seu orçamento com o Adriano, tenha em mãos os endereços de origem e destino, além de fotos ou descrição dos itens que serão transportados. Clique no botão abaixo para falar direto.')">
+        Como solicitar um orçamento? <span>+</span>
+      </button>
+      <button class="faq-modal-btn" onclick="openModal('Atendimento 24h & Postos', 'Nossos veículos ficam estrategicamente posicionados para atender chamados de emergência a qualquer hora do dia ou da noite em São Paulo e região.')">
+        Como funciona o atendimento 24h? <span>+</span>
+      </button>
+      <button class="faq-modal-btn" onclick="openModal('Regiões Atendidas', 'Realizamos viagens programadas e coletas expressas saindo de nossa base principal para toda a Grande São Paulo e arredores.')">
+        Quais regiões são atendidas? <span>+</span>
+      </button>
+    </div>
+  </section>
+
   <!-- RODAPÉ -->
   <footer class="footer">
     <div class="footer-promo-box">
@@ -928,36 +869,24 @@ body::before {
 
 </div>
 
-<!-- MODAL POP-UP -->
+<!-- MODAL POP-UP ESTILIZADO -->
 <div id="customModal" class="modal-overlay">
   <div class="modal-box">
     <div class="modal-header">
-      <h3 id="modalTitle" class="modal-title">Título do Posto</h3>
+      <h3 id="modalTitle" class="modal-title">Título</h3>
       <button class="modal-close" onclick="closeModal()">&times;</button>
     </div>
     <div id="modalBody" class="modal-body">
-      Conteúdo detalhado sobre o posto e atendimento.
+      Conteúdo detalhado do posto e dúvidas.
     </div>
-    <a href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Vi%20mais%20detalhes%20no%20site%20e%20gostaria%20de%20falar%20com%20você." class="modal-footer-btn" target="_blank" rel="noopener">
+    <a href="https://wa.me/5511952773491?text=Olá%20Adriano!%20Li%20as%20informações%20no%20site%20e%20gostaria%20de%20falar%20com%20você." class="modal-footer-btn" target="_blank" rel="noopener">
       Falar no WhatsApp agora
     </a>
   </div>
 </div>
 
 <script>
-  // Interatividade do FAQ (Sanfona / Acordeão)
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', (e) => {
-      const item = question.parentElement;
-      const isActive = item.classList.contains('active');
-      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-      if (!isActive) {
-        item.classList.add('active');
-      }
-    });
-  });
-
-  // Funções do Modal de Postos / Dúvidas
+  // Funções do Modal Estiloso
   function openModal(title, text) {
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalBody').textContent = text;
@@ -968,7 +897,7 @@ body::before {
     document.getElementById('customModal').classList.remove('open');
   }
 
-  // Fechar modal clicando fora da caixa
+  // Fechar modal clicando no fundo escuro
   document.getElementById('customModal').addEventListener('click', (e) => {
     if (e.target.id === 'customModal') {
       closeModal();
