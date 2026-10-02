@@ -66,13 +66,18 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#060b18;--card:#0c1730;--blue:#2f6bff;--cyan:#22d3ee;--amber:#ffb020;--txt:#e6ecf8;--mut:#93a6c9}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding:1rem .6rem 2rem;overflow-x:hidden;perspective:1200px;line-height:1.5}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding:1rem .6rem 2rem;overflow-x:hidden;line-height:1.5}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
 /* Cartão principal (foco no celular) */
-.wrap{width:100%;max-width:480px;position:relative;z-index:2}
-.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem;box-shadow:0 0 10px #fff,0 0 22px rgba(255,255,255,.7),0 0 34px rgba(47,107,255,.45),0 15px 35px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
+.wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1200px}
+.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem;box-shadow:0 0 10px #fff,0 0 22px rgba(255,255,255,.7),0 0 34px rgba(47,107,255,.45),0 15px 35px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
+.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .4s ease}
+.z1{transform:translateZ(15px)}
+.z2{transform:translateZ(35px)}
+.z3{transform:translateZ(55px);filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+.z4{transform:translateZ(75px);filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
 
 .head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem}
 .logo{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font:800 1.7rem 'Sora',sans-serif;color:#fff;border:2px solid rgba(255,255,255,.5);animation:pulse 2.6s ease-in-out infinite}
@@ -83,17 +88,24 @@ h1 span{display:block;font:500 .82rem/1.4 'DM Sans',sans-serif;color:var(--mut);
 .stars{color:#ffd700;font-size:1.05rem;letter-spacing:.1em}
 .stars small{display:block;color:var(--mut);font-size:.74rem;letter-spacing:0;margin-top:.1rem}
 
-.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:300px;background:var(--amber);color:#1c1200;font-weight:700;font-size:.92rem;text-decoration:none;padding:.8rem 1.2rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite}
+.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:300px;background:#25d366;color:#04210f;font-weight:700;font-size:.92rem;text-decoration:none;padding:.8rem 1.2rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite}
 .cta::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 2.2s ease-in-out infinite}
-@keyframes cta{0%{box-shadow:0 0 0 0 rgba(255,176,32,.5)}60%{box-shadow:0 0 0 10px rgba(255,176,32,0)}100%{box-shadow:0 0 0 0 rgba(255,176,32,0)}}
+@keyframes cta{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}60%{box-shadow:0 0 0 10px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.cta.g{background:#FBBC05;color:#1a1200;animation-name:ctag}
+@keyframes ctag{0%{box-shadow:0 0 0 0 rgba(251,188,5,.5)}60%{box-shadow:0 0 0 10px rgba(251,188,5,0)}100%{box-shadow:0 0 0 0 rgba(251,188,5,0)}}
+.cta.s{background:rgba(34,211,238,.12);color:#fff;border:1.5px solid var(--cyan);animation:none;font:700 .92rem 'DM Sans',sans-serif;cursor:pointer}
+.cta.s::after{display:none}
 @keyframes shine{0%{left:-120%}55%,100%{left:160%}}
 .cta svg{width:20px;height:20px;flex-shrink:0}
 
 .icons{display:flex;gap:.8rem;justify-content:center}
 .ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.7rem;color:var(--mut);transition:transform .2s}
 .ic:hover{transform:translateY(-3px)}
-.ic i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
-.ic svg{width:21px;height:21px}
+.ic{font-weight:500;letter-spacing:.02em}
+.ic i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.6);background:var(--g);box-shadow:inset 0 2px 3px rgba(255,255,255,.6),inset 0 -5px 8px rgba(0,0,0,.3),0 6px 12px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07);transition:transform .15s,box-shadow .15s}
+.ic i::after{content:'';position:absolute;top:4px;left:11px;right:11px;height:42%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.45),transparent);pointer-events:none}
+.ic:active i{transform:translateY(2px) scale(.96);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07)}
+.ic svg{width:25px;height:25px;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 
 .block{width:100%;display:flex;flex-direction:column;gap:.5rem}
 .block>h2{font:700 .98rem 'Sora',sans-serif;text-align:center;color:#fff}
@@ -107,6 +119,16 @@ details p,details ul{padding:0 .95rem .85rem;font-size:.82rem;color:var(--mut)}
 details ul{list-style:none;display:grid;gap:.25rem}
 details li::before{content:'✓ ';color:var(--cyan);font-weight:700}
 
+.modal{border:2px solid #fff;border-radius:22px;background:linear-gradient(175deg,#10224a,var(--card) 60%);color:var(--txt);width:min(560px,94vw);max-height:90vh;padding:0;margin:auto;overflow:hidden;box-shadow:0 0 24px rgba(47,107,255,.5),0 20px 50px rgba(0,0,0,.7)}
+.modal[open]{display:flex;flex-direction:column}
+.modal::backdrop{background:rgba(3,7,16,.82);backdrop-filter:blur(4px)}
+.mhead{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.7rem .9rem;border-bottom:1px solid rgba(255,255,255,.15);background:rgba(6,11,24,.6)}
+.mbtn{font:700 .8rem 'DM Sans',sans-serif;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:.45rem .95rem;cursor:pointer}
+.mbtn:hover{background:rgba(255,255,255,.18)}
+.mx{width:38px;height:38px;padding:0;font-size:1.1rem;border-radius:50%;line-height:1}
+.mbody{overflow-y:auto;padding:1rem .95rem 1.2rem;display:flex;flex-direction:column;gap:1.3rem;overscroll-behavior:contain}
+.mbody .mbtn{align-self:center}
+body.lock{overflow:hidden}
 .steps{list-style:none;counter-reset:s;display:grid;gap:.5rem}
 .steps li{counter-increment:s;display:flex;gap:.7rem;align-items:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:.7rem .85rem;font-size:.82rem;color:var(--mut)}
 .steps li::before{content:counter(s);flex:0 0 26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.8rem}
@@ -156,25 +178,30 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 <main class="wrap">
   <div class="frame" id="frame">
 
-    <header class="head">
+    <header class="head z2">
       <div class="logo" aria-hidden="true">iW</div>
       <h1>ImpulsoWeb10<span>Criação de landing pages e links personalizados para o seu negócio</span></h1>
       <p class="tag">Presença digital · Itaquaquecetuba e região</p>
       <div class="stars" aria-label="Atendimento 5 estrelas">★★★★★<small>Sites e links pensados primeiro para o celular</small></div>
     </header>
 
-    <a class="cta" href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vim%20pelo%20link%20da%20ImpulsoWeb10%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="#1c1200" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.84L.06 23.06a.75.75 0 0 0 .92.93l5.35-1.48A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg>
-      Peça seu orçamento grátis
-    </a>
+    <a class="cta g z4" href="https://g.page/r/CQ3R5P3YHRiUEBM/review" target="_blank" rel="noopener" aria-label="Avaliar a ImpulsoWeb10 no Google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Avaliar no Google ⭐⭐⭐⭐⭐</a>
 
-    <nav class="icons" aria-label="Contato e localização">
-      <a class="ic" href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="WhatsApp"><i><svg viewBox="0 0 24 24" fill="#25d366"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.84L.06 23.06a.75.75 0 0 0 .92.93l5.35-1.48A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></i>WhatsApp</a>
-      <a class="ic" href="tel:+5511954950044" aria-label="Ligar"><i><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></i>Ligar</a>
-      <a class="ic" href="https://www.google.com/maps/search/?api=1&query=Itaquaquecetuba+SP" target="_blank" rel="noopener" aria-label="Ver localização no Maps"><i><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/><circle cx="12" cy="9" r="2.5" fill="#fff"/></svg></i>Maps</a>
-      <a class="ic" href="https://www.tintasqualyquimy.com.br/" target="_blank" rel="noopener" aria-label="Ver exemplo de trabalho"><i><svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></i>Exemplo</a>
+    <nav class="icons z3" aria-label="Contato e localização">
+      <a class="ic" style="--g:linear-gradient(150deg,#4be584,#0f8f45)" href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="WhatsApp"><i><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.84L.06 23.06a.75.75 0 0 0 .92.93l5.35-1.48A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></i>WhatsApp</a>
+      <a class="ic" style="--g:linear-gradient(150deg,#6aaaff,#1b55d6)" href="tel:+5511954950044" aria-label="Ligar"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></i>Ligar</a>
+      <a class="ic" style="--g:linear-gradient(150deg,#ff7b6e,#c5221f)" href="https://www.google.com/maps/search/?api=1&query=Itaquaquecetuba+SP" target="_blank" rel="noopener" aria-label="Ver localização no Maps"><i><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#fff"/><circle cx="12" cy="9" r="2.5" fill="#c5221f"/></svg></i>Maps</a>
+      <a class="ic" style="--g:linear-gradient(150deg,#5ee7ff,#0a7fb0)" href="https://avaliar.impulsoweb10.com.br/" target="_blank" rel="noopener" aria-label="Ver exemplo de página de avaliação"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></i>Exemplo</a>
     </nav>
 
+    <button class="cta s z4" type="button" id="abrirServ" aria-haspopup="dialog">Serviços, como funciona e FAQ</button>
+
+    <dialog class="modal" id="modal" aria-labelledby="servicos">
+    <div class="mhead">
+      <button class="mbtn" type="button" data-fechar>← Voltar</button>
+      <button class="mbtn mx" type="button" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <div class="mbody">
     <section class="block" aria-labelledby="servicos">
       <h2 id="servicos">Serviços da ImpulsoWeb10</h2>
       <details open>
@@ -186,7 +213,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
         <ul><li>WhatsApp, telefone, redes sociais e mapa em um só endereço</li><li>Ideal para bio do Instagram, QR Code e cartão de visita</li><li>Visual com a identidade da sua marca</li></ul>
       </details>
       <details>
-        <summary><h3>https://g.page/r/CQ3R5P3YHRiUEBM/review</h3></summary>
+        <summary><h3>Página de avaliação no Google</h3></summary>
         <p>Uma página direta que leva o cliente satisfeito a deixar a nota 5 estrelas no seu perfil, fortalecendo a confiança de quem pesquisa sua empresa.</p>
       </details>
       <details>
@@ -229,12 +256,16 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <details><summary><h3>Vocês cuidam do SEO?</h3></summary><p>Sim. Estrutura de títulos, dados estruturados e orientação de indexação no Google fazem parte do trabalho.</p></details>
     </section>
 
-    <div class="ticker" aria-hidden="true"><div class="track">
+    <button class="mbtn" type="button" data-fechar>← Voltar</button>
+    </div>
+    </dialog>
+
+    <div class="ticker z2" aria-hidden="true"><div class="track">
       <span>IMPULSOWEB10 • Landing pages • Links personalizados • Avaliação Google • SEO local • Itaquaquecetuba – SP •</span>
       <span>IMPULSOWEB10 • Landing pages • Links personalizados • Avaliação Google • SEO local • Itaquaquecetuba – SP •</span>
     </div></div>
 
-    <footer>
+    <footer class="z1">
       <p>Criação de landing pages e links personalizados em Itaquaquecetuba e região.</p>
       <p>Quer um link como este? <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Quero%20um%20link%20personalizado." target="_blank" rel="noopener">Fale com a ImpulsoWeb10</a></p>
       <button class="gyro" id="gyro" type="button">Efeito 3D: OFF</button>
@@ -276,14 +307,22 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 
 <script>
 (function(){
-  var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false,max=30;
+  var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false,max=60,cel=1.5,mouse=60,cap=75;
+  var modal=document.getElementById('modal');
+  function abrir(){modal.showModal();document.body.classList.add('lock');modal.querySelector('.mbody').scrollTop=0}
+  function fechar(){modal.close()}
+  document.getElementById('abrirServ').addEventListener('click',abrir);
+  modal.querySelectorAll('[data-fechar]').forEach(function(b){b.addEventListener('click',fechar)});
+  modal.addEventListener('click',function(e){if(e.target===modal)fechar()});
+  modal.addEventListener('close',function(){document.body.classList.remove('lock')});
   document.getElementById('ano').textContent=new Date().getFullYear();
-  function tilt(x,y){frame.style.transform='rotateY('+x+'deg) rotateX('+(-y)+'deg)'}
+  function lim(v){return Math.max(-cap,Math.min(cap,v))}
+  function tilt(x,y){frame.style.transform='rotateY('+lim(x)+'deg) rotateX('+lim(-y)+'deg)'}
   function reset(){frame.style.transform='rotateY(0deg) rotateX(0deg)'}
   function orient(e){
     if(!on||e.gamma===null||e.beta===null)return;
     var x=Math.max(-max,Math.min(max,e.gamma)),y=Math.max(-max,Math.min(max,e.beta-45));
-    tilt(x*.6,y*.6);
+    tilt(x*cel,y*cel);
   }
   function start(){on=true;window.addEventListener('deviceorientation',orient);btn.textContent='Efeito 3D: ON';btn.classList.add('on')}
   function stop(){on=false;window.removeEventListener('deviceorientation',orient);btn.textContent='Efeito 3D: OFF';btn.classList.remove('on');reset()}
@@ -296,7 +335,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
   document.addEventListener('mousemove',function(e){
     if(!on)return;
     var x=(e.clientX-innerWidth/2)/(innerWidth/2),y=(e.clientY-innerHeight/2)/(innerHeight/2);
-    tilt(x*12,y*12);
+    tilt(x*mouse,y*mouse);
   });
   document.addEventListener('mouseleave',function(){if(on)reset()});
 })();
