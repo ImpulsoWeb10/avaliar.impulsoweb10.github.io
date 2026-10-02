@@ -9,6 +9,7 @@
 <meta name="author" content="ImpulsoWeb10">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#060b18">
+<link rel="icon" href="logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ImpulsoWeb10 | Landing Pages e Links Personalizados">
 <meta property="og:description" content="Seu negócio com presença digital profissional: landing pages, links personalizados, avaliações no Google e SEO local.">
@@ -80,7 +81,12 @@ a{color:inherit}
 .z4{transform:translateZ(75px);filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
 
 .head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem}
-.logo{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font:800 1.7rem 'Sora',sans-serif;color:#fff;border:2px solid rgba(255,255,255,.5);animation:pulse 2.6s ease-in-out infinite}
+.logo{display:grid;place-items:center;border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.06);animation:pulse 2.6s ease-in-out infinite}
+.logo img{display:block;max-width:190px;max-height:90px;width:auto;height:auto;object-fit:contain}
+.logo span{display:none}
+.logo.nologo{width:74px;height:74px;background:linear-gradient(135deg,var(--blue),var(--cyan))}
+.logo.nologo img{display:none}
+.logo.nologo span{display:block;font:800 1.7rem 'Sora',sans-serif;color:#fff}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,211,238,.55)}60%{box-shadow:0 0 0 14px rgba(34,211,238,0)}100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}}
 h1{font:700 1.35rem/1.2 'Sora',sans-serif;letter-spacing:.01em}
 h1 span{display:block;font:500 .82rem/1.4 'DM Sans',sans-serif;color:var(--mut);margin-top:.3rem}
@@ -179,7 +185,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
   <div class="frame" id="frame">
 
     <header class="head z2">
-      <div class="logo" aria-hidden="true">iW</div>
+      <div class="logo"><img src="logo.png" alt="Logo ImpulsoWeb10" width="190" height="90" decoding="async" onerror="this.parentNode.classList.add('nologo')"><span aria-hidden="true">iW</span></div>
       <h1>ImpulsoWeb10<span>Criação de landing pages e links personalizados para o seu negócio</span></h1>
       <p class="tag">Presença digital · Itaquaquecetuba e região</p>
       <div class="stars" aria-label="Atendimento 5 estrelas">★★★★★<small>Sites e links pensados primeiro para o celular</small></div>
