@@ -1,202 +1,272 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQEEFFQCDS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DQEEFFQCDS');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQEEFFQCDS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DQEEFFQCDS');
+</script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avalie Sonat Music | Experiência Premium ⭐⭐⭐⭐⭐</title>
-    
-    <meta name="description" content="Sua avaliação é o nosso maior aplauso! Deixe seu feedback para a Sonat Music em Itaquaquecetuba e ajude-nos a transformar mais vidas através da música.">
-    <meta name="keywords" content="Sonat Music, Escola de Música Itaquaquecetuba, Aula de Violão, Avaliação Google, Harmonia">
-    <meta name="author" content="ImpulsoWeb10">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalie Sonat Music | Experiência Premium ⭐⭐⭐⭐⭐</title>
+<meta name="description" content="Sua avaliação é o nosso maior aplauso! Deixe seu feedback para a Sonat Music em Itaquaquecetuba e ajude-nos a transformar mais vidas através da música.">
+<meta name="keywords" content="Sonat Music, Escola de Música Itaquaquecetuba, Aula de Violão, Avaliação Google, Harmonia">
+<meta name="author" content="ImpulsoWeb10">
+<meta name="theme-color" content="#0b0620">
+<meta property="og:title" content="Avalie a Sonat Music ⭐⭐⭐⭐⭐">
+<meta property="og:description" content="Sua nota 5 estrelas é o nosso maior prêmio. Clique e avalie!">
+<meta property="og:image" content="logo.jpeg">
+<meta property="og:type" content="website">
 
-    <meta property="og:title" content="Avalie a Sonat Music ⭐⭐⭐⭐⭐">
-    <meta property="og:description" content="Sua nota 5 estrelas é o nosso maior prêmio. Clique e avalie!">
-    <meta property="og:image" content="logo.jpeg">
-    <meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    <style>
-        :root { --gold: #fbbf24; --accent: #38bdf8; --silver: #b0bec5; }
-        body { margin:0; font-family:'Segoe UI',sans-serif; background:linear-gradient(-45deg,#0f172a,#1e293b,#2e1065,#0f172a); background-size:400% 400%; animation:grad 12s infinite; display:flex; justify-content:center; align-items:center; min-height:100vh; color:white; text-align:center; overflow-x:hidden; position: relative;}
-        @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+/* ====== CORES (troque aqui para combinar com o logo) ====== */
+:root{
+  --bg:#0b0620;
+  --card:#150c33;
+  --brand:#fbbf24;        /* cor principal do botão (dourado) */
+  --brand-dark:#b7790a;   /* sombra/borda 3D do botão */
+  --neon:#a855f7;         /* brilho da moldura */
+  --accent:#38bdf8;
+  --silver:#b0bec5;
+  --txt:#f1ecff;
+  --mut:#b3a8d6;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:linear-gradient(-45deg,#0b0620,#1a1040,#2e1065,#0b0620);background-size:400% 400%;animation:grad 14s infinite;color:var(--txt);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:1rem .6rem 2rem;overflow-x:hidden;line-height:1.5;text-align:center}
+@keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-        .card { background:rgba(0,0,0,0.55); padding:40px 25px; border-radius:30px; backdrop-filter:blur(15px); max-width:350px; width:90%; box-shadow:0 25px 50px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.1); animation:up 0.8s; position: relative; z-index: 10;}
-        @keyframes up { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+/* ====== MOLDURA NEON + 3D ====== */
+.wrap{width:100%;max-width:440px;position:relative;z-index:2;perspective:1200px}
+.frame{width:100%;background:linear-gradient(175deg,#26145a 0%,var(--card) 62%);border:2px solid #fff;border-radius:24px;padding:1.4rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:1.05rem;box-shadow:0 0 10px #fff,0 0 22px rgba(255,255,255,.7),0 0 38px rgba(168,85,247,.55),0 15px 35px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
 
-        .logo { width:110px; border-radius:15px; margin-bottom:15px; background:white; box-shadow: 0 0 25px rgba(255,255,255,0.1); }
-        .stars { color: var(--gold); font-size:24px; margin-bottom:10px; animation: starPulse 2.5s infinite; }
-        @keyframes starPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15); text-shadow:0 0 20px var(--gold);} }
+/* camadas de profundidade */
+.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .4s ease}
+.z1{transform:translateZ(15px)}
+.z2{transform:translateZ(35px)}
+.z3{transform:translateZ(55px);filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+.z4{transform:translateZ(75px);filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
+.icons.z3{transform:translateZ(20px);filter:none;transform-style:preserve-3d}
 
-        .seo-phrase { font-size: 13px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; display: block; }
+/* ====== CABEÇALHO ====== */
+.head{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.logo{width:110px;height:110px;border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.55);background:#fff;animation:pulse 2.6s ease-in-out infinite;display:grid;place-items:center}
+.logo img{display:block;width:100%;height:100%;object-fit:cover}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(168,85,247,.6)}60%{box-shadow:0 0 0 14px rgba(168,85,247,0)}100%{box-shadow:0 0 0 0 rgba(168,85,247,0)}}
+h1{font:800 1.6rem/1.15 'Sora',sans-serif;letter-spacing:.01em}
+.seo-phrase{font-size:.74rem;color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+.stars{color:#ffd700;font-size:1.3rem;letter-spacing:.12em;animation:starPulse 2.5s infinite}
+@keyframes starPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12);text-shadow:0 0 18px var(--brand)}}
+#msg-box{min-height:1.4rem;font-size:.9rem;font-weight:700;color:var(--accent);opacity:0;transition:.4s}
+.show-msg{opacity:1!important}
 
-        /* BOX DE MENSAGEM - 4 SEGUNDOS */
-        #msg-box { height: 45px; font-size: 15px; font-weight: 700; color: var(--accent); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.4s; margin-bottom: 5px; }
-        .show-msg { opacity: 1 !important; transform: translateY(-5px); }
+/* ====== BOTÃO GOOGLE (retangular, 3D) ====== */
+.cta{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;max-width:340px;background:linear-gradient(180deg,#ffd75e 0%,var(--brand) 55%,#e8a406 100%);color:#2a1a00;font:800 .95rem 'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;padding:1rem 1.2rem;border-radius:14px;border:2px solid rgba(255,255,255,.75);position:relative;overflow:hidden;cursor:pointer;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.8),inset 0 -5px 8px rgba(0,0,0,.2),0 6px 0 var(--brand-dark),0 12px 18px rgba(0,0,0,.55);
+  transition:transform .12s,box-shadow .12s;animation:cta 2.2s ease-in-out infinite}
+.cta:active{transform:translateY(5px);box-shadow:inset 0 3px 8px rgba(0,0,0,.3),0 1px 0 var(--brand-dark),0 3px 6px rgba(0,0,0,.5)}
+.cta::after{content:'';position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:shine 2.8s ease-in-out infinite}
+@keyframes cta{0%,100%{filter:drop-shadow(0 0 0 rgba(251,191,36,0))}50%{filter:drop-shadow(0 0 12px rgba(251,191,36,.7))}}
+@keyframes shine{0%{left:-120%}55%,100%{left:160%}}
+.cta i{font-size:1.15rem;position:relative;z-index:1}
 
-        /* BOTÃO GOOGLE PULSANDO E COM BRILHO */
-        .btn-google { position:relative; display:block; margin:10px auto; padding:16px; width:90%; font-weight:800; text-decoration:none; border-radius:50px; background: var(--gold); color:#000; text-transform:uppercase; font-size:14px; overflow:hidden; animation: pulseBtn 2s infinite; border:none; cursor:pointer; z-index: 15;}
-        @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
-        .btn-google::after { content: ''; position: absolute; top: -50%; left: -60%; width: 25%; height: 200%; background: rgba(255,255,255,0.5); transform: rotate(30deg); animation: shine 3.5s infinite; }
-        @keyframes shine { 0% { left: -60%; } 25% { left: 130%; } 100% { left: 130%; } }
+/* ====== ÍCONES 3D EM NÍVEIS ====== */
+.icons{display:flex;gap:.7rem;justify-content:center}
+.ic{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-decoration:none;font-size:.68rem;color:var(--mut);font-weight:500;letter-spacing:.02em;cursor:pointer;transform:translateZ(var(--z,0px));transform-style:preserve-3d;transition:transform .4s ease}
+.ic:hover{transform:translateZ(var(--z,0px)) translateY(-4px)}
+.ic .b{width:58px;height:50px;border-radius:14px;display:grid;place-items:center;position:relative;color:#fff;font-size:1.3rem;border:2px solid rgba(255,255,255,.65);background:var(--g);
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.6),inset 0 -5px 8px rgba(0,0,0,.3),0 5px 0 var(--d),0 10px 14px rgba(0,0,0,.5);
+  transition:transform .12s,box-shadow .12s}
+.ic .b::after{content:'';position:absolute;top:3px;left:6px;right:6px;height:40%;border-radius:10px 10px 50% 50%;background:linear-gradient(rgba(255,255,255,.4),transparent);pointer-events:none}
+.ic:active .b{transform:translateY(4px);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 1px 0 var(--d),0 3px 6px rgba(0,0,0,.5)}
+.ic .b i{position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 
-        .social-row { display:flex; justify-content:center; gap:12px; margin:20px 0; }
-        .icon-btn { width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; color:white; font-size:20px; transition:0.3s; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); cursor:pointer;}
-        .wa { background:#25D366; } .ig { background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045); } .maps { background:#ea4335; } .tel { background:#38bdf8; }
-        .icon-btn:hover { transform:translateY(-7px) scale(1.1); filter: brightness(1.2); }
+.endereco{font-size:.74rem;color:var(--mut);line-height:1.5}
+.endereco i{color:var(--brand)}
 
-        .endereco { font-size:11px; opacity:0.6; margin:15px 0; line-height:1.4; letter-spacing: 0.5px; }
+/* ====== BANNER PASSANDO ====== */
+.ticker{width:100%;overflow:hidden;background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.6);border-radius:8px;padding:.4rem 0}
+.track{display:flex;width:max-content;animation:scroll 26s linear infinite}
+.track span{font-size:.78rem;color:#efe3ff;font-weight:600;padding-right:2rem;white-space:nowrap}
+.track b{color:var(--brand)}
+@keyframes scroll{to{transform:translateX(-50%)}}
 
-        /* MODAL COM "X" DE FECHAR */
-        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(15px); z-index:999; justify-content:center; align-items:center; }
-        .modal-content { background:rgba(255,255,255,0.05); padding:40px 30px; border-radius:25px; border:1px solid rgba(255,255,255,0.2); max-width:300px; width:85%; position:relative; }
-        .close-modal { position:absolute; top:15px; right:20px; font-size:24px; color:white; cursor:pointer; opacity:0.6; transition:0.3s; }
-        .close-modal:hover { opacity:1; transform:scale(1.2); }
-        .modal-icon { font-size: 50px; margin-bottom: 20px; color: var(--gold); }
-        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 25px; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: var(--gold); }
+/* ====== RODAPÉ ====== */
+footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.9rem;font-size:.7rem;color:var(--mut);display:flex;flex-direction:column;gap:.55rem;align-items:center}
+.cta-vendas{display:block;width:100%;background:rgba(56,189,248,.14);padding:.7rem;border-radius:12px;border:1px solid rgba(56,189,248,.35)}
+.cta-vendas b{color:var(--accent);display:block;font-size:.72rem;margin-bottom:.4rem}
+.cta-vendas a{display:inline-block;color:#000;background:var(--accent);padding:.3rem .7rem;border-radius:8px;text-decoration:none;font-weight:800;font-size:.66rem;text-transform:uppercase}
+.gyro{background:rgba(255,255,255,.08);color:#d8b4fe;border:1px solid rgba(216,180,254,.45);border-radius:14px;padding:.3rem .8rem;font:600 .7rem 'DM Sans',sans-serif;cursor:pointer}
+.gyro.on{background:var(--neon);color:#fff}
+.copy{opacity:.55;font-size:.62rem}
 
-        /* RODAPÉ ESTRATÉGICO IMPULSOWEB10 */
-        footer { margin-top:25px; padding-top:20px; font-size:10px; border-top:1px solid rgba(255,255,255,0.1); opacity: 0.8;}
-        .cta-vendas { display: block; background: rgba(56, 189, 248, 0.15); padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(56, 189, 248, 0.3); }
-        .cta-vendas b { color: var(--accent); display: block; font-size: 11px; margin-bottom: 5px; }
-        .cta-vendas a { color: #000; background: var(--accent); padding: 4px 10px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 10px; text-transform: uppercase; }
+/* ====== MODAL DE REDIRECIONAMENTO ====== */
+#modal{display:none;position:fixed;inset:0;background:rgba(5,2,15,.9);backdrop-filter:blur(12px);z-index:999;justify-content:center;align-items:center}
+.modal-content{background:linear-gradient(175deg,#26145a,var(--card));padding:2.2rem 1.6rem;border-radius:22px;border:2px solid #fff;box-shadow:0 0 22px rgba(168,85,247,.6);max-width:320px;width:85%;position:relative}
+.close-modal{position:absolute;top:10px;right:16px;font-size:1.6rem;color:#fff;cursor:pointer;opacity:.7;transition:.3s;background:none;border:none}
+.close-modal:hover{opacity:1;transform:scale(1.2)}
+.modal-icon{font-size:2.8rem;margin-bottom:1rem;color:var(--brand)}
+#modal-text{font-size:1.05rem;line-height:1.4}
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,.12);border-radius:10px;margin-top:1.4rem;overflow:hidden}
+.progress-fill{width:0%;height:100%;background:var(--brand);transition:width 4s linear}
+.modal-note{font-size:.65rem;margin-top:.9rem;opacity:.55}
 
-        /* CONFETES DE PRATA */
-        .confetti { position: fixed; width: 10px; height: 10px; background-color: var(--silver); border-radius: 50%; z-index: 5; animation: fall linear forwards; opacity: 0.8; box-shadow: 0 0 5px rgba(176, 190, 197, 0.5); }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-    </style>
+/* ====== CONFETES DE PRATA ====== */
+.confetti{position:fixed;top:-20px;background:var(--silver);border-radius:50%;z-index:5;animation:fall linear forwards;opacity:.85;box-shadow:0 0 5px rgba(176,190,197,.5);pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 
-<main class="card">
-    <img src="logo.jpeg" class="logo" alt="Logo Sonat Music">
-    <h1 style="font-size:26px; margin:0;">Sonat Music</h1>
-    <span class="seo-phrase">Onde sua música ganha vida</span>
+<main class="wrap">
+  <div class="frame" id="frame">
 
-    <div class="stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-    </div>
+    <header class="head z2">
+      <div class="logo"><img src="logo.jpeg" alt="Logo Sonat Music" width="110" height="110"></div>
+      <h1>Sonat Music</h1>
+      <span class="seo-phrase">Onde sua música ganha vida</span>
+      <div class="stars" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div id="msg-box">Sua nota 5 estrelas é nossa meta!</div>
+    </header>
 
-    <div id="msg-box">Sua nota 5 estrelas é nossa meta!</div>
-
-    <button class="btn-google" target="_blank" onclick="openModalWithConfetti('google', 'https://g.page/r/CRkmaq9U_Z8dEAE/review', 'Sua avaliação no Google nos ajuda muito! ⭐')">
-        <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+    <button class="cta z4" type="button" aria-label="Avaliar a Sonat Music no Google"
+      onclick="openModalWithConfetti('google', 'https://g.page/r/CRkmaq9U_Z8dEAE/review', 'Sua avaliação no Google nos ajuda muito! ⭐')">
+      <i class="fab fa-google"></i> Avaliar no Google ⭐⭐⭐⭐⭐
     </button>
 
-    <div class="social-row">
-        <div class="icon-btn wa" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')"><i class="fab fa-whatsapp"></i></div>
-        <div class="icon-btn tel" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonat Music... 📞')"><i class="fas fa-phone"></i></div>
-        <div class="icon-btn ig" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')"><i class="fab fa-instagram"></i></div>
-        <div class="icon-btn maps" onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')"><i class="fas fa-location-dot"></i></div>
+    <nav class="icons z3" aria-label="Contato e localização">
+      <div class="ic" style="--z:0px;--g:linear-gradient(150deg,#4be584,#0f8f45);--d:#0a6a33" role="button" tabindex="0" aria-label="WhatsApp"
+        onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
+        <span class="b"><i class="fab fa-whatsapp"></i></span>WhatsApp</div>
+      <div class="ic" style="--z:25px;--g:linear-gradient(150deg,#6ac6ff,#1b7fd6);--d:#115a9c" role="button" tabindex="0" aria-label="Ligar"
+        onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonat Music... 📞')">
+        <span class="b"><i class="fas fa-phone"></i></span>Ligar</div>
+      <div class="ic" style="--z:50px;--g:linear-gradient(150deg,#c45be8,#fd1d1d 70%,#fcb045);--d:#8a1f6a" role="button" tabindex="0" aria-label="Instagram"
+        onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')">
+        <span class="b"><i class="fab fa-instagram"></i></span>Instagram</div>
+      <div class="ic" style="--z:75px;--g:linear-gradient(150deg,#ff7b6e,#c5221f);--d:#8e1613" role="button" tabindex="0" aria-label="Localização"
+        onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')">
+        <span class="b"><i class="fas fa-location-dot"></i></span>Maps</div>
+    </nav>
+
+    <div class="endereco z2">
+      <i class="fas fa-map-marker-alt"></i> Av. Turmalina, 1111 - Estância Fraternidade<br>Itaquaquecetuba - SP
     </div>
 
-    <div class="endereco">
-        <i class="fas fa-map-marker-alt"></i> Av. Turmalina, 1111 - Estância Fraternidade<br>Itaquaquecetuba - SP
-    </div>
+    <!-- Banner passando -->
+    <div class="ticker z2" aria-hidden="true"><div class="track">
+      <span><b>SONAT MUSIC</b> • Onde sua música ganha vida • Escola de música em Itaquaquecetuba • Sua avaliação é o nosso maior aplauso • Transformando vidas através da música •</span>
+      <span><b>SONAT MUSIC</b> • Onde sua música ganha vida • Escola de música em Itaquaquecetuba • Sua avaliação é o nosso maior aplauso • Transformando vidas através da música •</span>
+    </div></div>
 
-    <footer>
-        <div class="cta-vendas">
-            <b>Deseja ter "seu" link personalizado igual a esse,para ser mais relevante nas pesquisas do Google?</b>
-            <a href="https://wa.me/5511954950044?text=Olá! Vi o link da Sonat Music e quero um link personalizado premium assim." target="_blank">
-                SAIBA MAIS AQUI <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div style="opacity: 0.5; font-size: 9px;">
-            Desenvolvido por <b>ImpulsoWeb10</b><br>
-            © 2026 Todos os direitos reservados.
-        </div>
+    <footer class="z1">
+      <div class="cta-vendas">
+        <b>Deseja ter "seu" link personalizado igual a esse, para ser mais relevante nas pesquisas do Google?</b>
+        <a href="https://wa.me/5511954950044?text=Olá! Vi o link da Sonat Music e quero um link personalizado premium assim." target="_blank" rel="noopener">Saiba mais aqui <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <button class="gyro" id="gyro" type="button">Efeito 3D: OFF</button>
+      <p class="copy">Desenvolvido por <b>ImpulsoWeb10</b><br>© 2026 Todos os direitos reservados.</p>
     </footer>
+
+  </div>
 </main>
 
+<!-- Modal de redirecionamento -->
 <div id="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-icon"><i id="modal-i"></i></div>
-        <h3 id="modal-text" style="font-size:18px; line-height:1.4;">Carregando...</h3>
-        <div class="progress-bar"><div id="fill" class="progress-fill" style="transition: width 4s linear;"></div></div>
-        <p style="font-size:10px; margin-top:15px; opacity:0.5;">Aguarde o redirecionamento seguro...</p>
-    </div>
+  <div class="modal-content">
+    <button class="close-modal" type="button" onclick="closeModal()" aria-label="Fechar">&times;</button>
+    <div class="modal-icon"><i id="modal-i"></i></div>
+    <h3 id="modal-text">Carregando...</h3>
+    <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
+    <p class="modal-note">Aguarde o redirecionamento seguro...</p>
+  </div>
 </div>
 
 <script>
-let redirectTimer;
-
-function openModal(icon, url, text) {
-    const modal = document.getElementById('modal');
-    const modalText = document.getElementById('modal-text');
-    const modalIcon = document.getElementById('modal-i');
-    const fill = document.getElementById('fill');
-
-    modalIcon.className = 'fas fa-' + icon;
-    modalText.innerText = text;
-    modal.style.display = 'flex';
-    
-    // Reset da barra e início da animação
-    fill.style.width = '0%';
-    setTimeout(() => { fill.style.width = '100%'; }, 50);
-
-    // Salva o timer para poder cancelar se clicar no X
-    redirectTimer = setTimeout(() => {
-        window.location.href = url;
-    }, 4000);
+/* ===== MODAL + REDIRECIONAMENTO ===== */
+var redirectTimer;
+function openModal(icon, url, text){
+  var fill=document.getElementById('fill');
+  document.getElementById('modal-i').className='fas fa-'+icon;
+  if(icon==='whatsapp'||icon==='instagram'||icon==='google')document.getElementById('modal-i').className='fab fa-'+icon;
+  document.getElementById('modal-text').innerText=text;
+  document.getElementById('modal').style.display='flex';
+  fill.style.transition='none';fill.style.width='0%';
+  setTimeout(function(){fill.style.transition='width 4s linear';fill.style.width='100%';},50);
+  clearTimeout(redirectTimer);
+  redirectTimer=setTimeout(function(){window.location.href=url;},4000);
 }
-
-function closeModal() {
-    const modal = document.getElementById('modal');
-    const fill = document.getElementById('fill');
-    
-    // Cancela o redirecionamento
-    clearTimeout(redirectTimer);
-    
-    // Fecha o modal e reseta a barra
-    modal.style.display = 'none';
-    fill.style.width = '0%';
+function closeModal(){
+  clearTimeout(redirectTimer);
+  document.getElementById('modal').style.display='none';
+  var fill=document.getElementById('fill');fill.style.transition='none';fill.style.width='0%';
 }
-
-// Fecha o modal se pressionar a tecla "Esc"
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") closeModal();
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+document.querySelectorAll('.ic').forEach(function(el){
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
 });
 
-// FUNÇÃO PARA LANÇAR CONFETES DE PRATA
-function shootConfetti() {
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        
-        // Configurações aleatórias para cada confete
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
-        confetti.style.animationDuration = (Math.random() * 2 + 3) + 's'; // 3 a 5 segundos
-        
-        // Tamanhos aleatórios
-        const size = Math.random() * 8 + 5 + 'px'; // 5 a 13px
-        confetti.style.width = size;
-        confetti.style.height = size;
-
-        document.body.appendChild(confetti);
-
-        // Remove o confete da tela após a animação acabar
-        confetti.addEventListener('animationend', () => {
-            confetti.remove();
-        });
-    }
+/* ===== CONFETES DE PRATA ===== */
+function shootConfetti(){
+  for(var i=0;i<50;i++){
+    var c=document.createElement('div');
+    c.className='confetti';
+    var s=(Math.random()*8+5)+'px';
+    c.style.cssText+='left:'+(Math.random()*100)+'vw;width:'+s+';height:'+s+';animation-delay:'+(Math.random()*.5)+'s;animation-duration:'+(Math.random()*2+3)+'s';
+    document.body.appendChild(c);
+    c.addEventListener('animationend',function(){this.remove();});
+  }
 }
+function openModalWithConfetti(icon,url,text){shootConfetti();openModal(icon,url,text);}
 
-// FUNÇÃO ESPECÍFICA PARA O BOTÃO GOOGLE COM CONFETES
-function openModalWithConfetti(icon, url, text) {
-    shootConfetti(); // Joga confetes
-    openModal(icon, url, text); // Abre o modal
-}
+/* ===== EFEITO 3D (giroscópio no celular / mouse no desktop) ===== */
+(function(){
+  var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false,max=60,cel=1.5,mouse=60,cap=75;
+  function lim(v){return Math.max(-cap,Math.min(cap,v));}
+  function tilt(x,y){frame.style.transform='rotateY('+lim(x)+'deg) rotateX('+lim(-y)+'deg)';}
+  function reset(){frame.style.transform='rotateY(0deg) rotateX(0deg)';}
+  function orient(e){
+    if(!on||e.gamma===null||e.beta===null)return;
+    var x=Math.max(-max,Math.min(max,e.gamma)),y=Math.max(-max,Math.min(max,e.beta-45));
+    tilt(x*cel,y*cel);
+  }
+  function start(){on=true;window.addEventListener('deviceorientation',orient);btn.textContent='Efeito 3D: ON';btn.classList.add('on');}
+  function stop(){on=false;window.removeEventListener('deviceorientation',orient);btn.textContent='Efeito 3D: OFF';btn.classList.remove('on');reset();}
+  btn.addEventListener('click',function(){
+    if(on){stop();return;}
+    if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+      DeviceOrientationEvent.requestPermission().then(function(s){s==='granted'?start():alert('Permissão de orientação negada.');}).catch(start);
+    }else start();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!on)return;
+    var x=(e.clientX-innerWidth/2)/(innerWidth/2),y=(e.clientY-innerHeight/2)/(innerHeight/2);
+    tilt(x*mouse,y*mouse);
+  });
+  document.addEventListener('mouseleave',function(){if(on)reset();});
+})();
+
+/* ===== MENSAGENS ALTERNANDO (4s) ===== */
+(function(){
+  var msgs=['Sua nota 5 estrelas é nossa meta!','Sua avaliação é o nosso maior aplauso! 👏','Ajude-nos a transformar mais vidas com música 🎶'];
+  var box=document.getElementById('msg-box'),i=0;
+  function show(){box.textContent=msgs[i%msgs.length];box.classList.add('show-msg');i++;}
+  setTimeout(show,600);
+  setInterval(function(){box.classList.remove('show-msg');setTimeout(show,400);},4000);
+})();
 </script>
 
 </body>
