@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonat Music | Onde sua música ganha vida em Itaquaquecetuba</title>
-<meta name="description" content="Escola de música Sonat Music em Itaquaquecetuba. Aulas de violão, piano, canto, instrumentos e avaliação 5 estrelas.">
-<meta name="keywords" content="Sonat Music, Escola de Música Itaquaquecetuba, Aula de Violão, Avaliação Google">
+<title>Sonat Music | Há mais de 20 anos transformando o amor pela música em talento real</title>
+<meta name="description" content="Escola de música Sonat Music em Itaquaquecetuba. Ensino focado em órgão eletrônico, teclado, piano, musicalização infantil, violão e violino com professores licenciados.">
+<meta name="keywords" content="Sonat Music, Escola de Música Itaquaquecetuba, Aula de Violão, Órgão Eletrônico, Piano, Professores Licenciados">
 <meta name="author" content="ImpulsoWeb10">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#060b18">
 <link rel="icon" href="logo.jpeg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sonat Music | Experiência Musical Premium">
-<meta property="og:description" content="Sua avaliação é o nosso maior aplauso! Deixe seu feedback para a Sonat Music.">
+<meta property="og:description" content="Há mais de 20 anos transformando o amor pela música em talento real. Deixe seu feedback!">
 <meta property="og:locale" content="pt_BR">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
-/* Cartão principal com moldura e neon idêntico ao ImpulsoWeb10 */
+/* Cartão central (Celular) */
 .wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1200px}
 .frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem;box-shadow:0 0 10px #fff,0 0 22px rgba(255,255,255,.7),0 0 34px rgba(56,189,248,.45),0 15px 35px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
 
@@ -41,9 +41,9 @@ a{color:inherit}
 
 .head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem}
 
-/* Logo mais retangular e elegante */
+/* Logo Retangular */
 .logo{display:grid;place-items:center;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.06);animation:pulse 2.6s ease-in-out infinite;padding:4px}
-.logo img{display:block;width:150px;height:75px;object-fit:cover;border-radius:10px}
+.logo img{display:block;width:160px;height:70px;object-fit:cover;border-radius:8px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,191,36,.55)}60%{box-shadow:0 0 0 14px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 
 h1{font:700 1.35rem/1.2 'Sora',sans-serif;letter-spacing:.01em}
@@ -51,31 +51,30 @@ h1 span{display:block;font:500 .82rem/1.4 'DM Sans',sans-serif;color:var(--mut);
 .seo-phrase{font-size:.72rem;color:var(--gold);letter-spacing:.08em;font-weight:700;text-transform:uppercase}
 .stars{color:var(--gold);font-size:1.05rem;letter-spacing:.1em;animation: starPulse 2.5s infinite}
 @keyframes starPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15); text-shadow:0 0 20px var(--gold);} }
-.stars small{display:block;color:var(--mut);font-size:.74rem;letter-spacing:0;margin-top:.1rem}
 
-/* Botão Google 3D Estilizado */
+/* Botão Google 3D */
 .cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:300px;background:var(--gold);color:#1a1200;font-weight:800;font-size:.92rem;text-decoration:none;padding:.8rem 1.2rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite;border:none;cursor:pointer}
 .cta::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 2.2s ease-in-out infinite}
 @keyframes cta{0%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}60%{box-shadow:0 0 0 10px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 @keyframes shine{0%{left:-120%}55%,100%{left:160%}}
 
-/* Ícones Sociais 3D em Camadas */
+/* Botões Redondos Profissionais em Camadas 3D */
 .icons{display:flex;gap:.8rem;justify-content:center}
 .ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.7rem;color:var(--mut);transform:translateZ(var(--z,0px));transform-style:preserve-3d;transition:transform .4s ease;cursor:pointer}
 .ic:hover{transform:translateZ(var(--z,0px)) translateY(-3px)}
 .ic{font-weight:500;letter-spacing:.02em}
-.ic i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.6);background:var(--g);box-shadow:inset 0 2px 3px rgba(255,255,255,.6),inset 0 -5px 8px rgba(0,0,0,.3),0 6px 12px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07);transition:transform .15s,box-shadow .15s}
+.ic i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.6);background:var(--g);box-shadow:inset 0 2px 4px rgba(255,255,255,.7),inset 0 -6px 10px rgba(0,0,0,.35),0 6px 14px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07);transition:transform .15s,box-shadow .15s}
 .ic i::after{content:'';position:absolute;top:4px;left:11px;right:11px;height:42%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.45),transparent);pointer-events:none}
 .ic:active i{transform:translateY(2px) scale(.96);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07)}
-.ic svg,.ic .fa-solid,.ic .fab{font-size:22px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.ic .fa-solid,.ic .fab{font-size:22px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 
-/* Banner de Frases Passando (Ticker) */
+/* Banner de Frase Oficial Passando */
 .ticker{width:100%;overflow:hidden;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.4);border-radius:10px;padding:.4rem 0}
-.track{display:flex;width:max-content;animation:scroll 22s linear infinite}
-.track span{font-size:.78rem;color:var(--gold);font-weight:700;padding-right:2rem;white-space:nowrap;letter-spacing:.5px}
+.track{display:flex;width:max-content;animation:scroll 26s linear infinite}
+.track span{font-size:.76rem;color:var(--gold);font-weight:700;padding-right:2rem;white-space:nowrap;letter-spacing:.5px}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
-.endereco{font-size:.75rem;opacity:0.75;line-height:1.4;letter-spacing:0.5px}
+.endereco{font-size:.75rem;opacity:0.8;line-height:1.4;letter-spacing:0.5px}
 
 /* Rodapé e CTA de Vendas ImpulsoWeb10 */
 footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.9rem;text-align:center;font-size:.72rem;color:var(--mut);display:flex;flex-direction:column;gap:.6rem;align-items:center}
@@ -85,6 +84,27 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.9rem;t
 footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 .gyro{background:rgba(255,255,255,.08);color:#90caf9;border:1px solid rgba(100,181,246,.45);border-radius:14px;padding:.3rem .8rem;font:600 .7rem 'DM Sans',sans-serif;cursor:pointer}
 .gyro.on{background:var(--blue);color:#fff}
+
+/* Colunas Laterais para PC / Notebook */
+.side{display:none}
+
+@media (min-width:1024px){
+  body{align-items:flex-start;padding-top:2rem}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;background:
+    radial-gradient(ellipse 34% 85% at 50% 50%,rgba(6,11,24,.95) 0%,rgba(6,11,24,.6) 60%,transparent 100%),
+    radial-gradient(ellipse 45% 40% at 15% 10%,rgba(56,189,248,.18),transparent 70%),
+    radial-gradient(ellipse 45% 40% at 90% 90%,rgba(251,191,36,.12),transparent 70%),
+    linear-gradient(135deg,#0a1530,#060b18 55%,#0a1a2e)}
+  
+  .side{display:flex;flex-direction:column;justify-content:flex-start;gap:1.2rem;position:absolute;top:2rem;min-height:calc(100vh - 4rem);width:clamp(230px,calc((100vw - 480px)/2 - 3vw),380px);z-index:1;color:rgba(230,236,248,.8);text-align:left;padding:0.5rem 1rem}
+  .side.l{left:2vw}.side.r{right:2vw}
+  .side h2{font:700 1.05rem/1.3 'Sora',sans-serif;color:var(--gold);margin-bottom:.35rem}
+  .side h3{font:700 .86rem 'Sora',sans-serif;color:#fff;margin:.8rem 0 .25rem}
+  .side p{font-size:.8rem;line-height:1.6}
+  .side ul{list-style:none;font-size:.8rem;line-height:1.7}
+  .side.l li::before{content:'✓ ';color:var(--gold);font-weight:700}
+  .side.r li::before{content:'★ ';color:var(--gold)}
+}
 
 /* Modal */
 #modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);backdrop-filter:blur(15px);z-index:999;justify-content:center;align-items:center}
@@ -101,6 +121,25 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 </head>
 <body>
 
+<!-- Coluna Esquerda (Visível em Computadores e Notebooks) -->
+<aside class="side l" aria-label="Especialidades e Professores">
+  <div>
+    <h2>Sonat Music Itaquaquecetuba</h2>
+    <p><b>Há mais de 20 anos transformando o amor pela música em talento real.</b> Formando músicos e construindo histórias de sucesso no Alto Tietê.</p>
+    
+    <h3>Especialidades & Aulas</h3>
+    <ul>
+      <li>Ensino focado em Órgão Eletrônico</li>
+      <li>Teclado e Piano com método completo</li>
+      <li>Musicalização Infantil</li>
+      <li>Aulas de Violão e Violino</li>
+    </ul>
+
+    <h3>Professores Licenciados</h3>
+    <p>Conte com uma equipe pedagógica altamente qualificada, com formação superior e licenciados em música para garantir o seu aprendizado técnico e prático.</p>
+  </div>
+</aside>
+
 <main class="wrap">
   <div class="frame" id="frame">
 
@@ -110,14 +149,14 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       </div>
       <h1>Sonat Music<span>Escola de Música em Itaquaquecetuba</span></h1>
       <span class="seo-phrase">Onde sua música ganha vida ⭐</span>
-      <div class="stars" aria-label="Atendimento 5 estrelas">★★★★★<small>Experiência musical premium e aulas personalizadas</small></div>
+      <div class="stars" aria-label="Atendimento 5 estrelas">★★★★★</div>
     </header>
 
-    <!-- Banner de Frases Passando sobre a Sonat -->
+    <!-- Banner com Frase Oficial -->
     <div class="ticker z2" aria-hidden="true">
       <div class="track">
-        <span>🎶 SONAT MUSIC • Onde sua música ganha vida • Aulas de Violão, Piano e Canto • Itaquaquecetuba – SP •</span>
-        <span>🎶 SONAT MUSIC • Onde sua música ganha vida • Aulas de Violão, Piano e Canto • Itaquaquecetuba – SP •</span>
+        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonat Music • Itaquaquecetuba – SP •</span>
+        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonat Music • Itaquaquecetuba – SP •</span>
       </div>
     </div>
 
@@ -126,7 +165,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <i class="fab fa-google"></i> AVALIAR NO GOOGLE
     </button>
 
-    <!-- Ícones com Níveis Diferentes em Camadas 3D (z0 a z75) -->
+    <!-- Botões Redondos Profissionais em Camadas 3D -->
     <nav class="icons z3" aria-label="Redes Sociais e Contato">
       <a class="ic" style="--z:0px;--g:linear-gradient(150deg,#4be584,#0f8f45)" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
         <i><i class="fab fa-whatsapp"></i></i>WhatsApp
@@ -149,7 +188,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
     <footer class="z1">
       <div class="cta-vendas">
         <b>Deseja ter um link personalizado igual a esse para o seu negócio?</b>
-        <a href="https://wa.me/5511954950044?text=Olá! Vi o link da Sonat Music e quero um link personalizado premium assim." target="_blank" rel="noopener">
+        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Sonat%20Music%20e%20quero%20um%20link%20personalizado%20premium%20assim." target="_blank" rel="noopener">
           SAIBA MAIS AQUI <i class="fas fa-arrow-right"></i>
         </a>
       </div>
@@ -160,6 +199,27 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 
   </div>
 </main>
+
+<!-- Coluna Direita (Visível em Computadores e Notebooks) -->
+<aside class="side r" aria-label="Informações de Contato e Localização">
+  <div>
+    <h2>Localização & Contato</h2>
+    <p>Venha nos fazer uma visita e conhecer nossa estrutura dedicada ao ensino musical de excelência.</p>
+    
+    <h3>Endereço</h3>
+    <p>Av. Turmalina, 1111<br>Estância Fraternidade<br>Itaquaquecetuba - SP</p>
+
+    <h3>Canais Oficiais</h3>
+    <ul>
+      <li>WhatsApp: (11) 91203-5161</li>
+      <li>Telefone: (11) 94703-7628</li>
+      <li>Instagram: @sonat_amusic</li>
+    </ul>
+
+    <h3>Por que escolher a Sonat?</h3>
+    <p>Ambiente acolhedor, aulas sob medida para todas as idades e foco total no desenvolvimento prático do aluno.</p>
+  </div>
+</aside>
 
 <!-- Modal de Redirecionamento -->
 <div id="modal">
@@ -226,7 +286,7 @@ function openModalWithConfetti(icon, url, text) {
     openModal(icon, url, text);
 }
 
-/* Lógica do Efeito 3D com Giroscópio e Mouse (Igual ImpulsoWeb10) */
+/* Lógica do Efeito 3D com Giroscópio e Mouse */
 (function(){
   var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false,max=60,cel=1.5,mouse=60,cap=75;
   function lim(v){return Math.max(-cap,Math.min(cap,v))}
