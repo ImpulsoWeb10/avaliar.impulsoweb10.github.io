@@ -28,17 +28,17 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
-/* Cartão central com altura e perspectiva 3D otimizadas */
-.wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1000px}
-.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.15rem 1.15rem 1rem;display:flex;flex-direction:column;align-items:center;gap:1rem;box-shadow:0 0 12px #fff,0 0 24px rgba(255,255,255,.6),0 0 32px rgba(56,189,248,.4),0 15px 35px rgba(0,0,0,.65);transition:transform .4s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
+/* Cartão central com perspectiva idêntica ao anexo */
+.wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1200px}
+.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.15rem 1.15rem 1rem;display:flex;flex-direction:column;align-items:center;gap:1rem;box-shadow:0 0 12px #fff,0 0 24px rgba(255,255,255,.6),0 0 32px rgba(56,189,248,.4),0 15px 35px rgba(0,0,0,.65);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
 
-/* Camadas 3D pronunciadas */
-.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .35s ease}
-.z1{transform:translateZ(18px)}
-.z2{transform:translateZ(32px)}
-.z3{transform:translateZ(48px)}
-.z4{transform:translateZ(65px);filter:drop-shadow(0 10px 16px rgba(0,0,0,.55))}
-.icons.z3{transform:translateZ(40px);filter:none;transform-style:preserve-3d}
+/* Camadas 3D rigorosamente idênticas ao anexo */
+.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .4s ease}
+.z1{transform:translateZ(15px)}
+.z2{transform:translateZ(35px)}
+.z3{transform:translateZ(55px);filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+.z4{transform:translateZ(75px);filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
+.icons.z3{transform:translateZ(20px);filter:none;transform-style:preserve-3d}
 
 .head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.45rem}
 
@@ -59,10 +59,10 @@ h1 span{display:block;font:500 .8rem/1.3 'DM Sans',sans-serif;color:var(--mut);m
 @keyframes cta{0%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}60%{box-shadow:0 0 0 10px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 @keyframes shine{0%{left:-120%}55%,100%{left:160%}}
 
-/* Botões Redondos com Efeito Gloss 3D Pro */
+/* Botões Redondos com Efeito Gloss 3D e profundidade individual por variável --z */
 .icons{display:flex;gap:.8rem;justify-content:center;width:100%}
-.ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.02em;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);cursor:pointer}
-.ic:hover{transform:translateY(-4px) scale(1.06)}
+.ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.02em;transform:translateZ(var(--z,0px));transform-style:preserve-3d;transition:transform .4s ease;cursor:pointer}
+.ic:hover{transform:translateZ(var(--z,0px)) translateY(-3px)}
 .ic i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.8);background:var(--g);box-shadow:inset 0 3px 5px rgba(255,255,255,.85),inset 0 -7px 12px rgba(0,0,0,.45),0 8px 16px rgba(0,0,0,.5),0 0 0 3px rgba(255,255,255,.1);transition:transform .15s,box-shadow .15s}
 .ic i::after{content:'';position:absolute;top:3px;left:10px;right:10px;height:42%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.6),transparent);pointer-events:none}
 .ic:active i{transform:translateY(2px) scale(.95);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5)}
@@ -174,19 +174,19 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <i class="fab fa-google"></i> AVALIAR NO GOOGLE
     </button>
 
-    <!-- Botões Redondos Atualizados com Nível 3D e Gloss Prominente -->
+    <!-- Botões Redondos com Profundidade --z idêntica ao anexo -->
     <nav class="icons z3" aria-label="Redes Sociais e Contato">
-      <a class="ic" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
-        <i style="--g:linear-gradient(150deg,#25D366,#128C7E)"><i class="fab fa-whatsapp"></i></i>WhatsApp
+      <a class="ic" style="--z:0px;--g:linear-gradient(150deg,#25D366,#128C7E)" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
+        <i><i class="fab fa-whatsapp"></i></i>WhatsApp
       </a>
-      <a class="ic" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonata Music... 📞')">
-        <i style="--g:linear-gradient(150deg,#3b82f6,#1d4ed8)"><i class="fas fa-phone"></i></i>Ligar
+      <a class="ic" style="--z:25px;--g:linear-gradient(150deg,#3b82f6,#1d4ed8)" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonata Music... 📞')">
+        <i><i class="fas fa-phone"></i></i>Ligar
       </a>
-      <a class="ic" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')">
-        <i style="--g:linear-gradient(150deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)"><i class="fab fa-instagram"></i></i>Instagram
+      <a class="ic" style="--z:50px;--g:linear-gradient(150deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')">
+        <i><i class="fab fa-instagram"></i></i>Instagram
       </a>
-      <a class="ic" onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')">
-        <i style="--g:linear-gradient(150deg,#ea4335,#a50e0e)"><i class="fas fa-location-dot"></i></i>Maps
+      <a class="ic" style="--z:75px;--g:linear-gradient(150deg,#ea4335,#a50e0e)" onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')">
+        <i><i class="fas fa-location-dot"></i></i>Maps
       </a>
     </nav>
 
@@ -310,11 +310,9 @@ function openModalWithConfetti(icon, url, text) {
     openModal(icon, url, text);
 }
 
-/* Lógica do Efeito 3D com Nível Perfeitamente Visível */
+/* Lógica e parâmetros do Efeito 3D idênticos ao código de referência */
 (function(){
-  var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false;
-  /* Configuração otimizada para evidenciar a profundidade das camadas 3D */
-  var max=40, cel=1.0, mouse=35, cap=42;
+  var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false,max=60,cel=1.5,mouse=60,cap=75;
 
   function lim(v){return Math.max(-cap,Math.min(cap,v))}
   function tilt(x,y){frame.style.transform='rotateY('+lim(x)+'deg) rotateX('+lim(-y)+'deg)'}
@@ -332,7 +330,7 @@ function openModalWithConfetti(icon, url, text) {
   btn.addEventListener('click',function(){
     if(on){stop();return}
     if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
-      DeviceOrientationEvent.requestPermission().then(function(s){s==='granted'?start():alert('Permissão negada.')}).catch(start);
+      DeviceOrientationEvent.requestPermission().then(function(s){s==='granted'?start():alert('Permissão de orientação negada.')}).catch(start);
     }else start();
   });
 
