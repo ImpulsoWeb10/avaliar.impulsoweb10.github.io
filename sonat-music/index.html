@@ -24,71 +24,72 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#060b18;--card:#0c1730;--blue:#38bdf8;--cyan:#22d3ee;--gold:#fbbf24;--txt:#e6ecf8;--mut:#93a6c9}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:.6rem;overflow-x:hidden;line-height:1.4}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:.8rem .6rem;overflow-x:hidden;line-height:1.4}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
-/* Cartão central compacto */
-.wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1200px}
-.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:22px;padding:.9rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:.85rem;box-shadow:0 0 10px #fff,0 0 20px rgba(255,255,255,.6),0 0 30px rgba(56,189,248,.35),0 12px 30px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.16,1,.3,1);will-change:transform;transform-style:preserve-3d}
+/* Cartão central com altura e perspectiva 3D otimizadas */
+.wrap{width:100%;max-width:480px;position:relative;z-index:2;perspective:1000px}
+.frame{width:100%;background:linear-gradient(175deg,#10224a 0%,var(--card) 60%);border:2px solid #fff;border-radius:24px;padding:1.15rem 1.15rem 1rem;display:flex;flex-direction:column;align-items:center;gap:1rem;box-shadow:0 0 12px #fff,0 0 24px rgba(255,255,255,.6),0 0 32px rgba(56,189,248,.4),0 15px 35px rgba(0,0,0,.65);transition:transform .4s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
 
-.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .4s ease}
-.z1{transform:translateZ(8px)}
-.z2{transform:translateZ(18px)}
-.z3{transform:translateZ(28px)}
-.z4{transform:translateZ(38px);filter:drop-shadow(0 8px 12px rgba(0,0,0,.5))}
-.icons.z3{transform:translateZ(18px);filter:none;transform-style:preserve-3d}
+/* Camadas 3D pronunciadas */
+.z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .35s ease}
+.z1{transform:translateZ(18px)}
+.z2{transform:translateZ(32px)}
+.z3{transform:translateZ(48px)}
+.z4{transform:translateZ(65px);filter:drop-shadow(0 10px 16px rgba(0,0,0,.55))}
+.icons.z3{transform:translateZ(40px);filter:none;transform-style:preserve-3d}
 
-.head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.45rem}
 
-/* Logo Retangular Reduzida */
+/* Logo Retangular */
 .logo{display:grid;place-items:center;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.06);animation:pulse 2.6s ease-in-out infinite;padding:3px}
-.logo img{display:block;width:140px;height:92px;object-fit:cover;border-radius:6px}
+.logo img{display:block;width:148px;height:90px;object-fit:cover;border-radius:6px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,191,36,.55)}60%{box-shadow:0 0 0 12px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 
-h1{font:700 1.25rem/1.2 'Sora',sans-serif;letter-spacing:.01em}
-h1 span{display:block;font:500 .78rem/1.3 'DM Sans',sans-serif;color:var(--mut);margin-top:.2rem}
-.seo-phrase{font-size:.68rem;color:var(--gold);letter-spacing:.06em;font-weight:700;text-transform:uppercase}
-.stars{color:var(--gold);font-size:.95rem;letter-spacing:.08em;animation: starPulse 2.5s infinite}
-@keyframes starPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1); text-shadow:0 0 15px var(--gold);} }
+h1{font:700 1.3rem/1.2 'Sora',sans-serif;letter-spacing:.01em}
+h1 span{display:block;font:500 .8rem/1.3 'DM Sans',sans-serif;color:var(--mut);margin-top:.25rem}
+.seo-phrase{font-size:.7rem;color:var(--gold);letter-spacing:.07em;font-weight:700;text-transform:uppercase}
+.stars{color:var(--gold);font-size:1rem;letter-spacing:.08em;animation: starPulse 2.5s infinite}
+@keyframes starPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12); text-shadow:0 0 16px var(--gold);} }
 
 /* Botão Google 3D */
-.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:290px;background:var(--gold);color:#1a1200;font-weight:800;font-size:.88rem;text-decoration:none;padding:.7rem 1.1rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite;border:none;cursor:pointer}
+.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:295px;background:var(--gold);color:#1a1200;font-weight:800;font-size:.9rem;text-decoration:none;padding:.75rem 1.15rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite;border:none;cursor:pointer}
 .cta::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 2.2s ease-in-out infinite}
 @keyframes cta{0%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}60%{box-shadow:0 0 0 10px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 @keyframes shine{0%{left:-120%}55%,100%{left:160%}}
 
-/* Botões Redondos Atualizados - Modelo Google 3D Gloss */
-.icons{display:flex;gap:.75rem;justify-content:center;width:100%}
-.ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.68rem;color:var(--mut);font-weight:600;letter-spacing:.02em;transition:transform .3s ease;cursor:pointer}
-.ic:hover{transform:translateY(-3px) scale(1.04)}
-.ic i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.75);background:var(--g);box-shadow:inset 0 2px 4px rgba(255,255,255,.8),inset 0 -6px 10px rgba(0,0,0,.4),0 6px 14px rgba(0,0,0,.5),0 0 0 3px rgba(255,255,255,.1);transition:transform .15s,box-shadow .15s}
-.ic i::after{content:'';position:absolute;top:3px;left:10px;right:10px;height:40%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.55),transparent);pointer-events:none}
+/* Botões Redondos com Efeito Gloss 3D Pro */
+.icons{display:flex;gap:.8rem;justify-content:center;width:100%}
+.ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.02em;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);cursor:pointer}
+.ic:hover{transform:translateY(-4px) scale(1.06)}
+.ic i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.8);background:var(--g);box-shadow:inset 0 3px 5px rgba(255,255,255,.85),inset 0 -7px 12px rgba(0,0,0,.45),0 8px 16px rgba(0,0,0,.5),0 0 0 3px rgba(255,255,255,.1);transition:transform .15s,box-shadow .15s}
+.ic i::after{content:'';position:absolute;top:3px;left:10px;right:10px;height:42%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.6),transparent);pointer-events:none}
 .ic:active i{transform:translateY(2px) scale(.95);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5)}
-.ic .fa-solid,.ic .fab{font-size:21px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.ic .fa-solid,.ic .fab{font-size:22px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
 
 /* Banner de Frase Oficial Passando */
-.ticker{width:100%;overflow:hidden;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);border-radius:8px;padding:.3rem 0}
+.ticker{width:100%;overflow:hidden;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);border-radius:8px;padding:.35rem 0}
 .track{display:flex;width:max-content;animation:scroll 26s linear infinite}
-.track span{font-size:.72rem;color:var(--gold);font-weight:700;padding-right:2rem;white-space:nowrap;letter-spacing:.4px}
+.track span{font-size:.74rem;color:var(--gold);font-weight:700;padding-right:2rem;white-space:nowrap;letter-spacing:.4px}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
-.endereco{font-size:.72rem;opacity:0.85;line-height:1.3;letter-spacing:0.4px;text-align:center}
+.endereco{font-size:.74rem;opacity:0.85;line-height:1.35;letter-spacing:0.4px;text-align:center}
 
 /* Rodapé e CTA de Vendas ImpulsoWeb10 */
-footer{width:100%;border-top:1px solid rgba(255,255,255,.12);padding-top:.7rem;text-align:center;font-size:.68rem;color:var(--mut);display:flex;flex-direction:column;gap:.45rem;align-items:center}
-.cta-vendas{display:block;background:rgba(56,189,248,0.1);padding:8px 10px;border-radius:12px;border:1px solid rgba(56,189,248,0.25);width:100%;text-align:center}
-.cta-vendas b{color:var(--blue);display:block;font-size:.72rem;margin-bottom:4px}
-.cta-vendas a{color:#000;background:var(--blue);padding:5px 10px;border-radius:6px;text-decoration:none;font-weight:800;font-size:.68rem;text-transform:uppercase;display:inline-block}
+footer{width:100%;border-top:1px solid rgba(255,255,255,.14);padding-top:.8rem;text-align:center;font-size:.7rem;color:var(--mut);display:flex;flex-direction:column;gap:.5rem;align-items:center}
+.cta-vendas{display:block;background:rgba(56,189,248,0.1);padding:10px 12px;border-radius:12px;border:1px solid rgba(56,189,248,0.28);width:100%;text-align:center}
+.cta-vendas b{color:var(--blue);display:block;font-size:.74rem;margin-bottom:5px}
+.cta-vendas a{color:#000;background:var(--blue);padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:800;font-size:.7rem;text-transform:uppercase;display:inline-block}
 footer a{color:#7db4ff;font-weight:700;text-decoration:none}
-.gyro{background:rgba(255,255,255,.08);color:#90caf9;border:1px solid rgba(100,181,246,.4);border-radius:12px;padding:.25rem .7rem;font:600 .68rem 'DM Sans',sans-serif;cursor:pointer}
+.gyro{background:rgba(255,255,255,.08);color:#90caf9;border:1px solid rgba(100,181,246,.4);border-radius:12px;padding:.28rem .75rem;font:600 .7rem 'DM Sans',sans-serif;cursor:pointer}
 .gyro.on{background:var(--blue);color:#fff}
 
 /* Colunas Laterais para Desktop / Notebook */
 .side{display:none}
 
 @media (min-width:1024px){
-  body{align-items:flex-start;padding-top:1.5rem;min-height:100vh}
+  body{align-items:flex-start;padding-top:1.8rem;min-height:100vh}
   body::before{content:'';position:fixed;inset:0;z-index:-1;background:
     radial-gradient(ellipse 34% 85% at 50% 50%,rgba(6,11,24,.95) 0%,rgba(6,11,24,.6) 60%,transparent 100%),
     radial-gradient(ellipse 45% 40% at 15% 10%,rgba(56,189,248,.18),transparent 70%),
@@ -97,27 +98,27 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
     repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 44px),
     linear-gradient(135deg,#0a1530,#060b18 55%,#0a1a2e)}
   
-  .side{display:flex;flex-direction:column;justify-content:space-between;gap:1.2rem;position:absolute;top:1.5rem;min-height:calc(100vh - 3rem);width:clamp(210px,calc((100vw - 480px)/2 - 4vw),460px);z-index:1;color:rgba(230,236,248,.72)}
+  .side{display:flex;flex-direction:column;justify-content:space-between;gap:1.3rem;position:absolute;top:1.8rem;min-height:calc(100vh - 3.6rem);width:clamp(210px,calc((100vw - 480px)/2 - 4vw),460px);z-index:1;color:rgba(230,236,248,.72)}
   .side.l{left:2.5vw;text-align:left}
   .side.r{right:2.5vw;text-align:right}
   .side h2{font:700 1.05rem/1.3 'Sora',sans-serif;color:var(--gold);margin-bottom:.35rem}
-  .side h3{font:700 .86rem 'Sora',sans-serif;color:#fff;margin:.8rem 0 .2rem}
-  .side p{font-size:.8rem;line-height:1.6}
-  .side ul{list-style:none;font-size:.8rem;line-height:1.65}
+  .side h3{font:700 .86rem 'Sora',sans-serif;color:#fff;margin:.85rem 0 .2rem}
+  .side p{font-size:.82rem;line-height:1.6}
+  .side ul{list-style:none;font-size:.82rem;line-height:1.65}
   .side.l li::before{content:'✓ ';color:var(--gold);font-weight:700}
   .side.r li::after{content:' ★';color:var(--gold)}
 
-  .side-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);padding:8px 12px;border-radius:10px;color:var(--txt);text-decoration:none;font-size:0.72rem;font-weight:700;margin-top:.3rem;transition:0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
+  .side-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);padding:9px 13px;border-radius:11px;color:var(--txt);text-decoration:none;font-size:0.74rem;font-weight:700;margin-top:.35rem;transition:0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
   .side-btn:hover{background:rgba(251,191,36,0.15);border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
   .side-btn i{color:#e1306c;font-size:15px}
 }
 
 /* Modal */
 #modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);z-index:999;justify-content:center;align-items:center}
-.modal-content{background:rgba(255,255,255,0.05);padding:32px 24px;border-radius:20px;border:1px solid rgba(255,255,255,0.2);max-width:290px;width:85%;position:relative;text-align:center}
+.modal-content{background:rgba(255,255,255,0.05);padding:35px 26px;border-radius:22px;border:1px solid rgba(255,255,255,0.2);max-width:295px;width:85%;position:relative;text-align:center}
 .close-modal{position:absolute;top:12px;right:16px;font-size:22px;color:white;cursor:pointer;opacity:0.6;transition:0.3s}
 .close-modal:hover{opacity:1;transform:scale(1.2)}
-.progress-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:10px;margin-top:20px;overflow:hidden}
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:10px;margin-top:22px;overflow:hidden}
 .progress-fill{width:0%;height:100%;background:var(--gold);transition:width 4s linear}
 
 /* Confetes */
@@ -173,7 +174,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <i class="fab fa-google"></i> AVALIAR NO GOOGLE
     </button>
 
-    <!-- Botões Redondos Atualizados com Estilo Glare 3D -->
+    <!-- Botões Redondos Atualizados com Nível 3D e Gloss Prominente -->
     <nav class="icons z3" aria-label="Redes Sociais e Contato">
       <a class="ic" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
         <i style="--g:linear-gradient(150deg,#25D366,#128C7E)"><i class="fab fa-whatsapp"></i></i>WhatsApp
@@ -248,10 +249,10 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 <div id="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div style="font-size: 45px; margin-bottom: 15px; color: var(--gold);"><i id="modal-i" class="fas fa-star"></i></div>
-        <h3 id="modal-text" style="font-size:16px; line-height:1.4;">Carregando...</h3>
+        <div style="font-size: 48px; margin-bottom: 16px; color: var(--gold);"><i id="modal-i" class="fas fa-star"></i></div>
+        <h3 id="modal-text" style="font-size:17px; line-height:1.4;">Carregando...</h3>
         <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
-        <p style="font-size:10px; margin-top:12px; opacity:0.5;">Aguarde o redirecionamento seguro...</p>
+        <p style="font-size:11px; margin-top:14px; opacity:0.5;">Aguarde o redirecionamento seguro...</p>
     </div>
 </div>
 
@@ -290,7 +291,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function shootConfetti() {
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 48; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + 'vw';
@@ -309,11 +310,11 @@ function openModalWithConfetti(icon, url, text) {
     openModal(icon, url, text);
 }
 
-/* Lógica do Efeito 3D com Sensibilidade Suave (Reduzida) */
+/* Lógica do Efeito 3D com Nível Perfeitamente Visível */
 (function(){
   var frame=document.getElementById('frame'),btn=document.getElementById('gyro'),on=false;
-  /* Fatores de sensibilidade bem mais suaves */
-  var max=25, cel=0.6, mouse=22, cap=25;
+  /* Configuração otimizada para evidenciar a profundidade das camadas 3D */
+  var max=40, cel=1.0, mouse=35, cap=42;
 
   function lim(v){return Math.max(-cap,Math.min(cap,v))}
   function tilt(x,y){frame.style.transform='rotateY('+lim(x)+'deg) rotateX('+lim(-y)+'deg)'}
