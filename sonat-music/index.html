@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonat Music | Há mais de 20 anos transformando o amor pela música em talento real</title>
-<meta name="description" content="Escola de música Sonat Music em Itaquaquecetuba. Ensino focado em órgão eletrônico, teclado, piano, musicalização infantil, violão e violino com professores licenciados.">
-<meta name="keywords" content="Sonat Music, Escola de Música Itaquaquecetuba, Aula de Violão, Órgão Eletrônico, Piano, Professores Licenciados">
+<title>Sonata Music | Há mais de 20 anos transformando o amor pela música em talento real</title>
+<meta name="description" content="Escola de música Sonata Music em Itaquaquecetuba. Ensino focado em órgão eletrônico, teclado, piano, musicalização infantil, violão e violino com professores licenciados.">
+<meta name="keywords" content="Sonata Music, Escola de Música Itaquaquecetuba, Aula de Violão, Órgão Eletrônico, Piano, Professores Licenciados">
 <meta name="author" content="ImpulsoWeb10">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#060b18">
 <link rel="icon" href="logo.jpeg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sonat Music | Experiência Musical Premium">
+<meta property="og:title" content="Sonata Music | Experiência Musical Premium">
 <meta property="og:description" content="Há mais de 20 anos transformando o amor pela música em talento real. Deixe seu feedback!">
 <meta property="og:locale" content="pt_BR">
 
@@ -68,7 +68,7 @@ h1 span{display:block;font:500 .82rem/1.4 'DM Sans',sans-serif;color:var(--mut);
 .ic:active i{transform:translateY(2px) scale(.96);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07)}
 .ic .fa-solid,.ic .fab{font-size:22px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 
-/* Banner de Frase Oficial Passando */
+/* Banner de Frase Oficial Passando (Movido para a parte de baixo) */
 .ticker{width:100%;overflow:hidden;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.4);border-radius:10px;padding:.4rem 0}
 .track{display:flex;width:max-content;animation:scroll 26s linear infinite}
 .track span{font-size:.76rem;color:var(--gold);font-weight:700;padding-right:2rem;white-space:nowrap;letter-spacing:.5px}
@@ -85,7 +85,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 .gyro{background:rgba(255,255,255,.08);color:#90caf9;border:1px solid rgba(100,181,246,.45);border-radius:14px;padding:.3rem .8rem;font:600 .7rem 'DM Sans',sans-serif;cursor:pointer}
 .gyro.on{background:var(--blue);color:#fff}
 
-/* Colunas Laterais para PC / Notebook */
+/* Colunas Laterais para PC / Notebook com Botões "Alunas da Sonata Music" */
 .side{display:none}
 
 @media (min-width:1024px){
@@ -96,7 +96,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
     radial-gradient(ellipse 45% 40% at 90% 90%,rgba(251,191,36,.12),transparent 70%),
     linear-gradient(135deg,#0a1530,#060b18 55%,#0a1a2e)}
   
-  .side{display:flex;flex-direction:column;justify-content:flex-start;gap:1.2rem;position:absolute;top:2rem;min-height:calc(100vh - 4rem);width:clamp(230px,calc((100vw - 480px)/2 - 3vw),380px);z-index:1;color:rgba(230,236,248,.8);text-align:left;padding:0.5rem 1rem}
+  .side{display:flex;flex-direction:column;justify-content:flex-start;gap:1.2rem;position:absolute;top:2rem;min-height:calc(100vh - 4rem);width:clamp(230px,calc((100vw - 480px)/2 - 3vw),340px);z-index:1;color:rgba(230,236,248,.8);text-align:left;padding:0.5rem .8rem}
   .side.l{left:2vw}.side.r{right:2vw}
   .side h2{font:700 1.05rem/1.3 'Sora',sans-serif;color:var(--gold);margin-bottom:.35rem}
   .side h3{font:700 .86rem 'Sora',sans-serif;color:#fff;margin:.8rem 0 .25rem}
@@ -104,6 +104,11 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
   .side ul{list-style:none;font-size:.8rem;line-height:1.7}
   .side.l li::before{content:'✓ ';color:var(--gold);font-weight:700}
   .side.r li::before{content:'★ ';color:var(--gold)}
+
+  /* Estilo dos Botões Laterais "Alunas da Sonata Music" */
+  .side-btn{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);padding:10px 14px;border-radius:12px;color:var(--txt);text-decoration:none;font-size:0.75rem;font-weight:700;margin-top:.4rem;transition:0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
+  .side-btn:hover{background:rgba(251,191,36,0.15);border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+  .side-btn i{color:#e1306c;font-size:16px}
 }
 
 /* Modal */
@@ -121,10 +126,10 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 </head>
 <body>
 
-<!-- Coluna Esquerda (Visível em Computadores e Notebooks) -->
-<aside class="side l" aria-label="Especialidades e Professores">
+<!-- Coluna Esquerda (PC/Notebook) com 2 botões de Alunas da Sonata Music -->
+<aside class="side l" aria-label="Especialidades e Alunas">
   <div>
-    <h2>Sonat Music Itaquaquecetuba</h2>
+    <h2>Sonata Music Itaquaquecetuba</h2>
     <p><b>Há mais de 20 anos transformando o amor pela música em talento real.</b> Formando músicos e construindo histórias de sucesso no Alto Tietê.</p>
     
     <h3>Especialidades & Aulas</h3>
@@ -136,7 +141,16 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
     </ul>
 
     <h3>Professores Licenciados</h3>
-    <p>Conte com uma equipe pedagógica altamente qualificada, com formação superior e licenciados em música para garantir o seu aprendizado técnico e prático.</p>
+    <p>Equipe pedagógica altamente qualificada com formação superior e licenciados em música.</p>
+
+    <h3>Destaques</h3>
+    <!-- 2 Botões de Alunas na Esquerda -->
+    <a href="https://www.instagram.com/reel/DdoMiqAutDa/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
+      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 1)
+    </a>
+    <a href="https://www.instagram.com/reel/Dd1BNWXBvpM/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
+      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 2)
+    </a>
   </div>
 </aside>
 
@@ -145,20 +159,12 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
 
     <header class="head z2">
       <div class="logo">
-        <img src="logo.jpeg" alt="Logo Sonat Music" decoding="async">
+        <img src="logo.jpeg" alt="Logo Sonata Music" decoding="async">
       </div>
-      <h1>Sonat Music<span>Escola de Música em Itaquaquecetuba</span></h1>
+      <h1>Sonata Music<span>Escola de Música em Itaquaquecetuba</span></h1>
       <span class="seo-phrase">Onde sua música ganha vida ⭐</span>
       <div class="stars" aria-label="Atendimento 5 estrelas">★★★★★</div>
     </header>
-
-    <!-- Banner com Frase Oficial -->
-    <div class="ticker z2" aria-hidden="true">
-      <div class="track">
-        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonat Music • Itaquaquecetuba – SP •</span>
-        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonat Music • Itaquaquecetuba – SP •</span>
-      </div>
-    </div>
 
     <!-- Botão Principal 3D -->
     <button class="cta z4" onclick="openModalWithConfetti('google', 'https://g.page/r/CRkmaq9U_Z8dEAE/review', 'Sua avaliação no Google nos ajuda muito! ⭐')">
@@ -170,7 +176,7 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <a class="ic" style="--z:0px;--g:linear-gradient(150deg,#4be584,#0f8f45)" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
         <i><i class="fab fa-whatsapp"></i></i>WhatsApp
       </a>
-      <a class="ic" style="--z:25px;--g:linear-gradient(150deg,#6aaaff,#1b55d6)" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonat Music... 📞')">
+      <a class="ic" style="--z:25px;--g:linear-gradient(150deg,#6aaaff,#1b55d6)" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonata Music... 📞')">
         <i><i class="fas fa-phone"></i></i>Ligar
       </a>
       <a class="ic" style="--z:50px;--g:linear-gradient(150deg,#ff7b6e,#833ab4)" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')">
@@ -185,23 +191,31 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <i class="fas fa-map-marker-alt"></i> Av. Turmalina, 1111 - Estância Fraternidade<br>Itaquaquecetuba - SP
     </div>
 
+    <!-- Banner com Frase Oficial (Movido para a parte de baixo) -->
+    <div class="ticker z2" aria-hidden="true">
+      <div class="track">
+        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonata Music • Itaquaquecetuba – SP •</span>
+        <span>🎵 Há mais de 20 anos transformando o amor pela música em talento real • Sonata Music • Itaquaquecetuba – SP •</span>
+      </div>
+    </div>
+
     <footer class="z1">
       <div class="cta-vendas">
         <b>Deseja ter um link personalizado igual a esse para o seu negócio?</b>
-        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Sonat%20Music%20e%20quero%20um%20link%20personalizado%20premium%20assim." target="_blank" rel="noopener">
+        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20o%20link%20da%20Sonata%20Music%20e%20quero%20um%20link%20personalizado%20premium%20assim." target="_blank" rel="noopener">
           SAIBA MAIS AQUI <i class="fas fa-arrow-right"></i>
         </a>
       </div>
       <p>Desenvolvido com tecnologia <b>ImpulsoWeb10</b></p>
       <button class="gyro" id="gyro" type="button">Efeito 3D: OFF</button>
-      <p>© <span id="ano">2026</span> Sonat Music · Todos os direitos reservados</p>
+      <p>© <span id="ano">2026</span> Sonata Music · Todos os direitos reservados</p>
     </footer>
 
   </div>
 </main>
 
-<!-- Coluna Direita (Visível em Computadores e Notebooks) -->
-<aside class="side r" aria-label="Informações de Contato e Localização">
+<!-- Coluna Direita (PC/Notebook) com os outros 2 botões de Alunas da Sonata Music -->
+<aside class="side r" aria-label="Informações de Contato e Alunas">
   <div>
     <h2>Localização & Contato</h2>
     <p>Venha nos fazer uma visita e conhecer nossa estrutura dedicada ao ensino musical de excelência.</p>
@@ -216,8 +230,14 @@ footer a{color:#7db4ff;font-weight:700;text-decoration:none}
       <li>Instagram: @sonat_amusic</li>
     </ul>
 
-    <h3>Por que escolher a Sonat?</h3>
-    <p>Ambiente acolhedor, aulas sob medida para todas as idades e foco total no desenvolvimento prático do aluno.</p>
+    <h3>Nossas Alunas</h3>
+    <!-- 2 Botões de Alunas na Direita -->
+    <a href="https://www.instagram.com/reel/Dd85GIShiIC/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
+      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 3)
+    </a>
+    <a href="https://www.instagram.com/reel/Dd6qDZxBgWF/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
+      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 4)
+    </a>
   </div>
 </aside>
 
