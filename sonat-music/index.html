@@ -18,18 +18,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#060b18;--card:#0c1730;--neon:#e879f9;--neon-glow:#d946ef;--gold:#fbbf24;--txt:#e6ecf8;--mut:#93a6c9}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding:1rem .6rem 2rem;overflow-x:hidden;line-height:1.5}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding:1rem .4rem 2rem;overflow-x:hidden;line-height:1.5}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--neon);outline-offset:2px}
 
-/* Cartão central ampliado na horizontal (560px) com Neon Magenta/Roxo */
-.wrap{width:100%;max-width:560px;position:relative;z-index:2;perspective:1200px}
+/* Cartão central ampliado para aproveitar melhor a largura da tela (620px) */
+.wrap{width:100%;max-width:620px;position:relative;z-index:2;perspective:1200px}
 .frame{width:100%;background:linear-gradient(175deg,#1b1030 0%,var(--card) 60%);border:2px solid var(--neon);border-radius:24px;padding:1.4rem 1.4rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem;box-shadow:0 0 12px var(--neon),0 0 25px rgba(232,121,249,.5),0 0 40px rgba(217,70,239,.3),0 15px 35px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform;transform-style:preserve-3d}
 
 .z1,.z2,.z3,.z4{transform-style:preserve-3d;transition:transform .4s ease}
@@ -43,7 +42,7 @@ a{color:inherit}
 
 /* Logo Retangular */
 .logo{display:grid;place-items:center;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.06);animation:pulse 2.6s ease-in-out infinite;padding:4px}
-.logo img{display:block;width:170px;height:72px;object-fit:cover;border-radius:8px}
+.logo img{display:block;width:170px;height:82px;object-fit:cover;border-radius:8px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,121,249,.55)}60%{box-shadow:0 0 0 14px rgba(232,121,249,0)}100%{box-shadow:0 0 0 0 rgba(232,121,249,0)}}
 
 h1{font:700 1.4rem/1.2 'Sora',sans-serif;letter-spacing:.01em}
@@ -53,20 +52,21 @@ h1 span{display:block;font:500 .85rem/1.4 'DM Sans',sans-serif;color:var(--mut);
 @keyframes starPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15); text-shadow:0 0 20px var(--gold);} }
 
 /* Botão Google 3D */
-.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:320px;background:var(--gold);color:#1a1200;font-weight:800;font-size:.92rem;text-decoration:none;padding:.8rem 1.2rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite;border:none;cursor:pointer}
+.cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;max-width:340px;background:var(--gold);color:#1a1200;font-weight:800;font-size:.92rem;text-decoration:none;padding:.8rem 1.2rem;border-radius:50px;position:relative;overflow:hidden;animation:cta 2.2s ease-in-out infinite;border:none;cursor:pointer}
 .cta::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 2.2s ease-in-out infinite}
 @keyframes cta{0%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}60%{box-shadow:0 0 0 10px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 @keyframes shine{0%{left:-120%}55%,100%{left:160%}}
+.cta svg{width:20px;height:20px;flex-shrink:0}
 
-/* Botões Redondos Profissionais em Camadas 3D */
-.icons{display:flex;gap:1.2rem;justify-content:center}
+/* Ícones Redondos Estilo ImpulsoWeb10 */
+.icons{display:flex;gap:.9rem;justify-content:center}
 .ic{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;font-size:.7rem;color:var(--mut);transform:translateZ(var(--z,0px));transform-style:preserve-3d;transition:transform .4s ease;cursor:pointer}
 .ic:hover{transform:translateZ(var(--z,0px)) translateY(-3px)}
 .ic{font-weight:500;letter-spacing:.02em}
-.ic i{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.6);background:var(--g);box-shadow:inset 0 2px 4px rgba(255,255,255,.7),inset 0 -6px 10px rgba(0,0,0,.35),0 6px 14px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07);transition:transform .15s,box-shadow .15s}
+.ic i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;border:2px solid rgba(255,255,255,.6);background:var(--g);box-shadow:inset 0 2px 3px rgba(255,255,255,.6),inset 0 -5px 8px rgba(0,0,0,.3),0 6px 12px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07);transition:transform .15s,box-shadow .15s}
 .ic i::after{content:'';position:absolute;top:4px;left:11px;right:11px;height:42%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.45),transparent);pointer-events:none}
 .ic:active i{transform:translateY(2px) scale(.96);box-shadow:inset 0 3px 8px rgba(0,0,0,.4),0 2px 5px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.07)}
-.ic .fa-solid,.ic .fab{font-size:22px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.ic svg{width:25px;height:25px;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 
 /* Banner de Frase Oficial na Parte de Baixo */
 .ticker{width:100%;overflow:hidden;background:rgba(232,121,249,.12);border:1px solid rgba(232,121,249,.4);border-radius:10px;padding:.4rem 0}
@@ -76,7 +76,7 @@ h1 span{display:block;font:500 .85rem/1.4 'DM Sans',sans-serif;color:var(--mut);
 
 .endereco{font-size:.76rem;opacity:0.8;line-height:1.4;letter-spacing:0.5px;text-align:center}
 
-/* Rodapé Ajustado em uma linha com "Saiba Mais" Neon */
+/* Rodapé em uma linha com "Saiba Mais" Neon */
 footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;text-align:center;font-size:.72rem;color:var(--mut);display:flex;flex-direction:column;gap:.5rem;align-items:center}
 .footer-line{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;width:100%}
 .neon-saiba{color:var(--neon);font-weight:800;text-decoration:none;text-shadow:0 0 10px var(--neon-glow);transition:0.3s}
@@ -88,7 +88,7 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
 /* Colunas Laterais para PC / Notebook adaptadas ao novo layout */
 .side{display:none}
 
-@media (min-width:1100px){
+@media (min-width:1150px){
   body{align-items:flex-start;padding-top:2rem}
   body::before{content:'';position:fixed;inset:0;z-index:-1;background:
     radial-gradient(ellipse 34% 85% at 50% 50%,rgba(6,11,24,.95) 0%,rgba(6,11,24,.6) 60%,transparent 100%),
@@ -96,7 +96,7 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
     radial-gradient(ellipse 45% 40% at 90% 90%,rgba(56,189,248,.12),transparent 70%),
     linear-gradient(135deg,#120a2e,#060b18 55%,#0a122e)}
   
-  .side{display:flex;flex-direction:column;justify-content:flex-start;gap:1.2rem;position:absolute;top:2rem;min-height:calc(100vh - 4rem);width:clamp(240px,calc((100vw - 560px)/2 - 3vw),340px);z-index:1;color:rgba(230,236,248,.8);text-align:left;padding:0.5rem .8rem}
+  .side{display:flex;flex-direction:column;justify-content:flex-start;gap:1.2rem;position:absolute;top:2rem;min-height:calc(100vh - 4rem);width:clamp(240px,calc((100vw - 620px)/2 - 3vw),340px);z-index:1;color:rgba(230,236,248,.8);text-align:left;padding:0.5rem .8rem}
   .side.l{left:2vw}.side.r{right:2vw}
   .side h2{font:700 1.05rem/1.3 'Sora',sans-serif;color:var(--neon);margin-bottom:.35rem;text-shadow:0 0 8px rgba(232,121,249,.3)}
   .side h3{font:700 .86rem 'Sora',sans-serif;color:#fff;margin:.8rem 0 .25rem}
@@ -105,10 +105,9 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
   .side.l li::before{content:'✓ ';color:var(--neon);font-weight:700}
   .side.r li::before{content:'★ ';color:var(--neon)}
 
-  /* Estilo dos Botões Laterais "Alunas da Sonata Music" */
   .side-btn{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(232,121,249,0.3);padding:10px 14px;border-radius:12px;color:var(--txt);text-decoration:none;font-size:0.75rem;font-weight:700;margin-top:.4rem;transition:0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
   .side-btn:hover{background:rgba(232,121,249,0.15);border-color:var(--neon);color:var(--neon);transform:translateY(-2px);box-shadow:0 0 12px rgba(232,121,249,0.4)}
-  .side-btn i{color:#e1306c;font-size:16px}
+  .side-btn svg{width:16px;height:16px;fill:#e1306c}
 }
 
 /* Modal */
@@ -126,7 +125,7 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
 </head>
 <body>
 
-<!-- Coluna Esquerda (PC/Notebook) com 2 botões de Alunas da Sonata Music -->
+<!-- Coluna Esquerda (PC/Notebook) -->
 <aside class="side l" aria-label="Especialidades e Alunas">
   <div>
     <h2>Sonata Music Itaquaquecetuba</h2>
@@ -145,10 +144,10 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
 
     <h3>Destaques</h3>
     <a href="https://www.instagram.com/reel/DdoMiqAutDa/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
-      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 1)
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Alunas da Sonata Music (Vídeo 1)
     </a>
     <a href="https://www.instagram.com/reel/Dd1BNWXBvpM/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
-      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 2)
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Alunas da Sonata Music (Vídeo 2)
     </a>
   </div>
 </aside>
@@ -167,22 +166,22 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
 
     <!-- Botão Principal 3D -->
     <button class="cta z4" onclick="openModalWithConfetti('google', 'https://g.page/r/CRkmaq9U_Z8dEAE/review', 'Sua avaliação no Google nos ajuda muito! ⭐')">
-      <i class="fab fa-google"></i> AVALIAR NO GOOGLE
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> AVALIAR NO GOOGLE
     </button>
 
-    <!-- Botões Redondos Profissionais em Camadas 3D -->
+    <!-- Ícones Redondos com SVG no Padrão ImpulsoWeb10 -->
     <nav class="icons z3" aria-label="Redes Sociais e Contato">
-      <a class="ic" style="--z:0px;--g:linear-gradient(150deg,#4be584,#0f8f45)" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')">
-        <i><i class="fab fa-whatsapp"></i></i>WhatsApp
+      <a class="ic" style="--z:0px;--g:linear-gradient(150deg,#4be584,#0f8f45)" onclick="openModal('whatsapp', 'https://wa.me/5511912035161', 'O primeiro acorde da sua jornada começa agora no Zap! 💬')" aria-label="WhatsApp">
+        <i><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.84L.06 23.06a.75.75 0 0 0 .92.93l5.35-1.48A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></i>WhatsApp
       </a>
-      <a class="ic" style="--z:25px;--g:linear-gradient(150deg,#6aaaff,#1b55d6)" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonata Music... 📞')">
-        <i><i class="fas fa-phone"></i></i>Ligar
+      <a class="ic" style="--z:25px;--g:linear-gradient(150deg,#6aaaff,#1b55d6)" onclick="openModal('phone', 'tel:11947037628', 'Ligando para a equipe Sonata Music... 📞')" aria-label="Ligar">
+        <i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></i>Ligar
       </a>
-      <a class="ic" style="--z:50px;--g:linear-gradient(150deg,#ff7b6e,#833ab4)" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')">
-        <i><i class="fab fa-instagram"></i></i>Instagram
+      <a class="ic" style="--z:50px;--g:linear-gradient(150deg,#ff7b6e,#833ab4)" onclick="openModal('instagram', 'https://www.instagram.com/sonat_amusic', 'Prepare-se para se inspirar com nossos talentos! 📸')" aria-label="Instagram">
+        <i><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#fff"/></svg></i>Instagram
       </a>
-      <a class="ic" style="--z:75px;--g:linear-gradient(150deg,#5ee7ff,#ea4335)" onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')">
-        <i><i class="fas fa-location-dot"></i></i>Maps
+      <a class="ic" style="--z:75px;--g:linear-gradient(150deg,#5ee7ff,#ea4335)" onclick="openModal('location-dot', 'https://goo.gl/maps/CRkmaq9U_Z8dEAE', 'Estamos esperando por você em nossa escola! 📍')" aria-label="Maps">
+        <i><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#fff"/><circle cx="12" cy="9" r="2.5" fill="#ea4335"/></svg></i>Maps
       </a>
     </nav>
 
@@ -211,7 +210,7 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
   </div>
 </main>
 
-<!-- Coluna Direita (PC/Notebook) com os outros 2 botões de Alunas da Sonata Music -->
+<!-- Coluna Direita (PC/Notebook) -->
 <aside class="side r" aria-label="Informações de Contato e Alunas">
   <div>
     <h2>Localização & Contato</h2>
@@ -229,10 +228,10 @@ footer{width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.8rem;t
 
     <h3>Nossas Alunas</h3>
     <a href="https://www.instagram.com/reel/Dd85GIShiIC/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
-      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 3)
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Alunas da Sonata Music (Vídeo 3)
     </a>
     <a href="https://www.instagram.com/reel/Dd6qDZxBgWF/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="side-btn">
-      <i class="fab fa-instagram"></i> Alunas da Sonata Music (Vídeo 4)
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Alunas da Sonata Music (Vídeo 4)
     </a>
   </div>
 </aside>
