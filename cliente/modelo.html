@@ -1,63 +1,283 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Avalia — ImpulsoWeb10</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--y:#FBBC04;--b:#1A73E8;--r:#EA4335;--g:#34A853;--wa:#25D366;--dark:#09090B;--card:#18181B;--surface:#27272A;--border:rgba(255,255,255,0.08);--text:#FAFAFA;--muted:#71717A;--muted2:#A1A1AA;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;padding-bottom:5rem}
+nav{position:sticky;top:0;z-index:100;padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(9,9,11,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:'Syne',sans-serif;font-weight:700}
+.logo-dots{display:flex;gap:4px}.ld{width:9px;height:9px;border-radius:50%}.ld-b{background:var(--b)}.ld-r{background:var(--r)}.ld-y{background:var(--y)}.ld-g{background:var(--g)}
+.btn-limpar-topo{background:rgba(234,67,53,0.15);color:#ea4335;border:1px solid rgba(234,67,53,0.4);padding:.4rem .9rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-limpar-topo:hover{background:rgba(234,67,53,0.3);color:#fff}
+
+main{max-width:760px;margin:0 auto;padding:2rem 1.5rem}
+.hero{text-align:center;margin-bottom:2rem}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;margin-bottom:.5rem}
+h1 em{font-style:normal;color:var(--b)}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;display:flex;flex-direction:column;gap:1.2rem}
+.section-title{font-size:.85rem;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:.08em;margin-top:.5rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr}}
+.field-grp{display:flex;flex-direction:column;gap:.4rem}
+label{font-size:.78rem;font-weight:600;color:var(--muted2)}
+input{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none}
+input:focus{border-color:var(--b)}
+
+/* Link Place ID */
+.help-placeid {
+    font-size: 0.75rem; color: var(--b); text-decoration: none; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.2rem; width: fit-content;
+}
+.help-placeid:hover { text-decoration: underline; color: #60a5fa; }
+
+.btn-gen{width:100%;padding:1rem;background:var(--b);color:#fff;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:1rem;transition:opacity .2s}
+.btn-gen:hover{opacity:.9}
+.results{display:none;margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem}
+.results.show{display:block}
+.action-box{background:rgba(52,168,83,0.08);border:1px solid rgba(52,168,83,0.3);border-radius:12px;padding:1.4rem;text-align:center;margin-top:1.2rem}
+.btn-dl{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.6rem;background:var(--g);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.95rem;margin-top:1rem;text-decoration:none}
+.btn-dl:hover{background:#2e9648}
+.btn-dl-qr{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:6px;font-weight:600;cursor:pointer;font-size:.78rem;margin-top:.8rem;transition:all .2s}
+.btn-dl-qr:hover{background:#3f3f46;color:#fff}
+
+#qrbox{display:inline-block;padding:.8rem;background:#fff;border-radius:10px;margin:1rem 0}
+
+/* Estilo dos Modais */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px);
+    display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;
+}
+.modal-overlay.active { display: flex; }
+.modal-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 2rem; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+.modal-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; margin-bottom: .6rem; color: #fff; }
+.modal-desc { font-size: .85rem; color: var(--muted2); margin-bottom: 1.5rem; line-height: 1.4; }
+.modal-actions { display: flex; gap: 1rem; justify-content: center; }
+.modal-btn { padding: .7rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: .85rem; cursor: pointer; border: none; }
+.modal-btn-cancel { background: var(--surface); color: var(--text); }
+.modal-btn-cancel:hover { background: #3f3f46; }
+.modal-btn-confirm { background: var(--r); color: #fff; }
+.modal-btn-confirm:hover { opacity: .9; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="logo-dots"><div class="ld ld-b"></div><div class="ld ld-r"></div><div class="ld ld-y"></div><div class="ld ld-g"></div></div>
+    <span>Avalia — ImpulsoWeb10</span>
+  </div>
+  <button class="btn-limpar-topo" onclick="abrirModalLimpar()">🗑️ Limpar Tudo</button>
+</nav>
+
+<!-- Modal de Confirmação de Limpeza -->
+<div class="modal-overlay" id="modalLimpar">
+  <div class="modal-card">
+    <div class="modal-title">Deseja limpar todos os campos?</div>
+    <div class="modal-desc">Todas as informações preenchidas e os resultados gerados serão apagados permanentemente.</div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLimpar()">Cancelar</button>
+      <button class="modal-btn modal-btn-confirm" onclick="executarLimpeza()">Sim, limpar tudo</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="hero">
+    <h1>Gerador de Cartão <em>3D + Avaliação</em></h1>
+    <p>Preencha as informações para preencher o modelo e baixar o ficheiro HTML do cliente[cite: 1].</p>
+  </div>
+
+  <div class="form-card">
+    <div class="section-title">1. Dados Principais do Google</div>
+    <div class="grid-2">
+      <div class="field-grp">
+        <label>Place ID do Negócio no Google *</label>
+        <input type="text" id="inPid" placeholder="Ex: ChIJN1t_tDeuEmsRUsoyG83frY4"/>
+        <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank" rel="noopener" class="help-placeid">Não sabe o Place ID? Encontrar →[cite: 1]</a>
+      </div>
+      <div class="field-grp">
+        <label>Nome da Empresa *</label>
+        <input type="text" id="inNome" placeholder="Ex: Dep Cuiabá"/>
+      </div>
+    </div>
+
+    <div class="section-title">2. Contactos e Redes Sociais</div>
+    <div class="grid-2">
+      <div class="field-grp">
+        <label>WhatsApp (só números com DDD)</label>
+        <input type="text" id="inWa" placeholder="Ex: 5511999999999"/>
+      </div>
+      <div class="field-grp">
+        <label>Instagram (Nome do utilizador sem @)</label>
+        <input type="text" id="inIg" placeholder="Ex: dep_cuiaba"/>
+      </div>
+    </div>
+
+    <div class="section-title">3. Localização e Endereço</div>
+    <div class="grid-2">
+      <div class="field-grp">
+        <label>Cidade / Estado</label>
+        <input type="text" id="inCidade" placeholder="Ex: Cuiabá MT"/>
+      </div>
+      <div class="field-grp">
+        <label>Endereço Completo</label>
+        <input type="text" id="inEndereco" placeholder="Ex: Rua Exemplo, 123 - Bairro"/>
+      </div>
+    </div>
+
+    <div class="section-title">4. SEO & Ramo de Atuação</div>
+    <div class="grid-2">
+      <div class="field-grp">
+        <label>Segmento de Atuação</label>
+        <input type="text" id="inSegmento" placeholder="Ex: Depósito de Bebidas"/>
+      </div>
+      <div class="field-grp">
+        <label>Produtos / Serviços Principais</label>
+        <input type="text" id="inServicos" placeholder="Ex: Bebidas em Geral • Entrega Rápida"/>
+      </div>
+    </div>
+
+    <button class="btn-gen" onclick="gerarTudo()">🚀 Gerar Link, QR Code & Baixar HTML</button>
+  </div>
+
+  <div class="results" id="resBox">
+    <div style="color:var(--g);font-weight:700;font-size:1rem;margin-bottom:.5rem;">✓ Dados Processados com Sucesso!</div>
+    
+    <label style="font-size:.78rem;color:var(--muted2);">Link da Página do Cliente:</label>
+    <input type="text" id="outLinkCliente" style="width:100%;margin-top:.3rem;margin-bottom:1rem;" readonly/>
+
+    <label style="font-size:.78rem;color:var(--muted2);">Link Direto de Avaliação Google (Inserido no botão do HTML):</label>
+    <input type="text" id="outLinkGoogle" style="width:100%;margin-top:.3rem;margin-bottom:1rem;" readonly/>
+
+    <div style="text-align:center;margin:1rem 0;">
+      <div style="font-size:.85rem;color:var(--muted2);margin-bottom:.2rem;">QR Code Gerado (Aponta para a Página do Cliente):</div>
+      <div id="qrbox"></div>
+      <div>
+        <button class="btn-dl-qr" onclick="baixarQRCode()">📥 Baixar Imagem do QR Code</button>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <h3 style="color:#fff;font-size:1.1rem;">Ficheiro index.html Pronto!</h3>
+      <p style="color:var(--muted2);font-size:.85rem;margin-top:.4rem;line-height:1.5;">
+        Clique no botão abaixo para baixar o ficheiro <code>index.html</code>. Guarde-o na pasta do GitHub Pages em:<br>
+        <strong style="color:var(--y);" id="txtCaminhoGithub">https://avaliar.impulsoweb10.com.br/cliente/nome-da-empresa/index.html</strong>
+      </p>
+      <button class="btn-dl" onclick="baixarHTML()">📥 Baixar index.html do Cliente</button>
+    </div>
+  </div>
+</main>
+
+<script>
+let htmlFinal = "";
+let nomeEmpresaSlug = "cliente";
+
+function formatarSlug(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function abrirModalLimpar() {
+  document.getElementById('modalLimpar').classList.add('active');
+}
+
+function fecharModalLimpar() {
+  document.getElementById('modalLimpar').classList.remove('active');
+}
+
+function executarLimpeza() {
+  document.getElementById('inPid').value = '';
+  document.getElementById('inNome').value = '';
+  document.getElementById('inWa').value = '';
+  document.getElementById('inIg').value = '';
+  document.getElementById('inCidade').value = '';
+  document.getElementById('inEndereco').value = '';
+  document.getElementById('inSegmento').value = '';
+  document.getElementById('inServicos').value = '';
+
+  document.getElementById('resBox').classList.remove('show');
+  document.getElementById('qrbox').innerHTML = '';
+  htmlFinal = '';
+  nomeEmpresaSlug = "cliente";
+
+  fecharModalLimpar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function gerarTudo() {
+  const pid = document.getElementById('inPid').value.trim();
+  const nome = document.getElementById('inNome').value.trim();
+  const wa = document.getElementById('inWa').value.trim() || '5511999999999';
+  const ig = document.getElementById('inIg').value.trim().replace('@','');
+  const cidade = document.getElementById('inCidade').value.trim() || 'Sua Cidade';
+  const endereco = document.getElementById('inEndereco').value.trim() || 'Rua Exemplo, 123';
+  const segmento = document.getElementById('inSegmento').value.trim() || 'Serviços';
+  const servicos = document.getElementById('inServicos').value.trim() || 'Atendimento de Qualidade';
+
+  if(!pid || !nome) {
+    alert("Por favor, preencha o Place ID e o Nome da Empresa.");
+    return;
+  }
+
+  const linkGoogleAvaliacao = `https://search.google.com/local/writereview?placeid=${encodeURIComponent(pid)}`;
+  document.getElementById('outLinkGoogle').value = linkGoogleAvaliacao;
+
+  nomeEmpresaSlug = formatarSlug(nome);
+  const linkPaginaCliente = `https://avaliar.impulsoweb10.com.br/cliente/${nomeEmpresaSlug}/`;
+  document.getElementById('outLinkCliente').value = linkPaginaCliente;
+  document.getElementById('txtCaminhoGithub').textContent = `${linkPaginaCliente}index.html`;
+
+  const qrDiv = document.getElementById('qrbox');
+  qrDiv.innerHTML = '';
+  new QRCode(qrDiv, { text: linkPaginaCliente, width: 160, height: 160 });
+
+  htmlFinal = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="[NOME DA SUA EMPRESA] — [SUA DESCRIÇÃO / TÍTULO CURTO DA SUA EMPRESA]. [RÁPIDO RESUMO DOS SEUS SERVIÇOS OU PRODUTOS].">
-<meta name="keywords" content="[PALAVRA-CHAVE 1], [PALAVRA-CHAVE 2], [Sua Cidade], [NOME DA SUA EMPRESA]">
+<meta name="description" content="${nome} — ${segmento}. ${servicos}.">
+<meta name="keywords" content="${segmento}, ${cidade}, ${nome}">
 <meta name="author" content="ImpulsoWeb10">
 
-<!-- Open Graph / Social Meta Tags -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.seu-site.com.br/">
-<meta property="og:title" content="[NOME DA SUA EMPRESA] | [Sua Cidade SP]">
-<meta property="og:description" content="[SUA DESCRIÇÃO REDUZIDA PARA REDES SOCIAIS]. Avalie nosso atendimento e fale conosco no WhatsApp.">
+<meta property="og:url" content="${linkPaginaCliente}">
+<meta property="og:title" content="${nome} | ${cidade}">
+<meta property="og:description" content="Avalie nosso atendimento e fale conosco no WhatsApp.">
 <meta property="og:locale" content="pt_BR">
 
-<title>[NOME DA SUA EMPRESA] | [Sua Cidade]</title>
+<title>${nome} | ${cidade}</title>
 
-<!-- Schema.org (JSON-LD) Completo para LocalBusiness -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "[NOME DA SUA EMPRESA]",
-  "image": "https://www.seu-site.com.br/logo.png",
-  "@id": "https://www.seu-site.com.br/#store",
-  "url": "https://www.seu-site.com.br/",
-  "telephone": "+5511999999999",
-  "priceRange": "$$",
+  "name": "${nome}",
+  "image": "logo.png",
+  "url": "${linkPaginaCliente}",
+  "telephone": "+${wa}",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Rua Exemplo, 123",
-    "addressLocality": "Sua Cidade",
-    "addressRegion": "SP",
-    "postalCode": "00000-000",
+    "streetAddress": "${endereco}",
+    "addressLocality": "${cidade}",
     "addressCountry": "BR"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": -23.000,
-    "longitude": -46.000
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "opens": "08:00",
-    "closes": "18:00"
-  },
-  "sameAs": [
-    "https://www.instagram.com/seu_perfil"
-  ]
+  }
 }
-</script>
+<\/script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -79,7 +299,6 @@ body{
   perspective: 1200px;
 }
 
-/* Background glow subtle */
 body::before{
   content:'';
   position:fixed;
@@ -91,7 +310,6 @@ body::before{
   z-index:0;
 }
 
-/* Container principal */
 .app-wrapper {
   display: flex;
   flex-direction: column;
@@ -103,17 +321,23 @@ body::before{
   z-index: 1;
 }
 
-/* Moldura externa (Cartão 3D) */
+:root {
+  --theme-bg-start: #102040;
+  --theme-bg-end: #0b1a2e;
+  --theme-neon: #ffffff;
+  --theme-shadow: rgba(255, 255, 255, 0.8);
+}
+
 .device-frame {
   position: relative;
   z-index: 1;
   width: 100%;
-  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
-  border: 2px solid #ffffff;
+  background: linear-gradient(175deg, var(--theme-bg-start) 0%, var(--theme-bg-end) 100%);
+  border: 2px solid var(--theme-neon);
   border-radius: 24px;
   box-shadow: 
-    0 0 10px #ffffff,
-    0 0 20px rgba(255, 255, 255, 0.8),
+    0 0 10px var(--theme-neon),
+    0 0 20px var(--theme-shadow),
     0 0 30px rgba(255, 255, 255, 0.35),
     0 15px 35px rgba(0, 0, 0, 0.6);
   padding: 1.4rem 1.4rem 1.2rem;
@@ -123,11 +347,10 @@ body::before{
   text-align: center;
   gap: 1.1rem;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   will-change: transform;
 }
 
-/* VERSO DO CARTÃO COM AS TRÊS IMAGENS SEPARADAS EM CAMADAS */
 .secret-back {
   position: absolute;
   inset: 0;
@@ -152,20 +375,10 @@ body::before{
   border-radius: 22px;
 }
 
-.back-layer-fundo {
-  transform: translateZ(-20px);
-}
+.back-layer-fundo { transform: translateZ(-20px); }
+.back-layer-mago { transform: translateZ(30px); }
+.back-layer-moldura { transform: translateZ(80px); pointer-events: none; }
 
-.back-layer-mago {
-  transform: translateZ(30px);
-}
-
-.back-layer-moldura {
-  transform: translateZ(80px);
-  pointer-events: none;
-}
-
-/* Estrutura de conteúdo 3D da Frente */
 .page {
   position:relative;
   z-index:1;
@@ -178,33 +391,11 @@ body::before{
   backface-visibility: hidden;
 }
 
-.layer-back {
-  transform: translateZ(15px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
+.layer-back { transform: translateZ(15px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-mid { transform: translateZ(35px); transform-style: preserve-3d; transition: transform 0.4s ease; }
+.layer-front { transform: translateZ(55px); transform-style: preserve-3d; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: transform 0.4s ease; }
+.layer-pop { transform: translateZ(75px); transform-style: preserve-3d; filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6)); transition: transform 0.4s ease; }
 
-.layer-mid {
-  transform: translateZ(35px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-}
-
-.layer-front {
-  transform: translateZ(55px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  transition: transform 0.4s ease;
-}
-
-.layer-pop {
-  transform: translateZ(75px);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.6));
-  transition: transform 0.4s ease;
-}
-
-/* Logo area */
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
 
 .logo-frame{
@@ -212,9 +403,12 @@ body::before{
   border-radius:14px;
   overflow:hidden;
   display:inline-block;
+  cursor: pointer;
   animation:logo-pulse 2.6s ease-in-out infinite;
   box-shadow:0 0 0 0 rgba(201,169,110,.5);
+  transition: transform 0.2s;
 }
+.logo-frame:hover { transform: scale(1.03); }
 .logo-frame::after{
   content:'';
   position:absolute;
@@ -266,12 +460,10 @@ body::before{
 .brand em{color:#c9a96e;font-style:italic}
 .tagline{font-size:.78rem;color:#9bb5d4;font-weight:300;letter-spacing:.08em;text-transform:uppercase}
 
-/* Rating stars */
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
 .star{font-size:1.15rem;color:#ffd700}
 .rating-text{font-size:.78rem;color:#a3c0e4;margin-top:.15rem}
 
-/* 4 icon buttons row */
 .social-row{display:flex;gap:.75rem;justify-content:center;align-items:center}
 .social-btn{
   display:flex;flex-direction:column;align-items:center;gap:.25rem;
@@ -289,7 +481,6 @@ body::before{
 .social-icon svg{width:20px;height:20px}
 .social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.04em}
 
-/* Google button */
 .btn-google{
   display:inline-flex;align-items:center;gap:.5rem;
   background:#FBBC05;
@@ -324,10 +515,8 @@ body::before{
 .btn-google svg{width:16px;height:16px;flex-shrink:0}
 .btn-google:hover{background:#fcc419;transform:translateY(-1px)}
 
-/* Address */
 .address{font-size:.76rem;color:#8ba4c4;line-height:1.4}
 
-/* Banner Infinito */
 .ticker-banner {
   width: 100%;
   overflow: hidden;
@@ -355,7 +544,6 @@ body::before{
   100% { transform: translateX(-50%); }
 }
 
-/* Rodapé Interno otimizado para SEO */
 .footer{
   font-size:.72rem;
   color:#d0dce8;
@@ -406,20 +594,10 @@ body::before{
 .footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700;transition:color .2s}
 .footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
-/* Botão de Giroscópio com Neon Pulsante */
 @keyframes neon-pulse {
-  0% {
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.4), 0 0 10px rgba(37, 99, 235, 0.2);
-    border-color: rgba(100, 181, 246, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(96, 165, 250, 0.5);
-    border-color: #60a5fa;
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.4), 0 0 10px rgba(37, 99, 235, 0.2);
-    border-color: rgba(100, 181, 246, 0.5);
-  }
+  0% { box-shadow: 0 0 5px rgba(37, 99, 235, 0.4); border-color: rgba(100, 181, 246, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.8); border-color: #60a5fa; }
+  100% { box-shadow: 0 0 5px rgba(37, 99, 235, 0.4); border-color: rgba(100, 181, 246, 0.5); }
 }
 
 .btn-gyro {
@@ -436,11 +614,7 @@ body::before{
   animation: neon-pulse 2s infinite ease-in-out;
 }
 
-.btn-gyro:hover {
-  background: rgba(100, 181, 246, 0.25);
-  color: #ffffff;
-}
-
+.btn-gyro:hover { background: rgba(100, 181, 246, 0.25); color: #ffffff; }
 .btn-gyro.active {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
@@ -449,7 +623,24 @@ body::before{
   animation: none;
 }
 
-/* ===== FUNDO EXTERNO (SOMENTE DESKTOP) ===== */
+/* Estilo do Modal de Cores Integrado */
+.color-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;
+}
+.color-modal-overlay.active { display: flex; }
+.color-modal-card {
+  background: #18181b; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px;
+  padding: 1.5rem; max-width: 300px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+.color-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: #f0ece5; margin-bottom: 0.3rem; }
+.color-modal-desc { font-size: 0.75rem; color: #a1a1aa; margin-bottom: 1.2rem; }
+.color-options-grid { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+.color-bubble { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+.color-bubble:hover { transform: scale(1.15); border-color: #fff; }
+.color-modal-close { background: #27272a; color: #e4e4e7; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
+.color-modal-close:hover { background: #3f3f46; }
+
 .bg-seo{display:none}
 @media (min-width:1024px){
   html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1}
@@ -485,25 +676,22 @@ body::before{
   
   <div class="device-frame" id="deviceFrame">
     
-    <!-- VERSO DO CARTÃO (TRÊS IMAGENS SEPARADAS EM CAMADAS) -->
     <div class="secret-back">
       <img src="fundo.png" alt="Cenário de Fundo" class="back-layer back-layer-fundo">
       <img src="mago.png" alt="Ilustração de Destaque" class="back-layer back-layer-mago">
       <img src="moldura.png" alt="Moldura Decorativa" class="back-layer back-layer-moldura">
     </div>
 
-    <!-- FRENTE DO CARD -->
     <div class="page">
 
       <div class="logo-wrap layer-mid">
-        <div class="logo-frame">
-          <img class="logo-img" src="logo.png" alt="Logo [NOME DA EMPRESA]"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-img-fallback" style="display:none;">[Sua Empresa]</div>
+        <div class="logo-frame" onclick="abrirModalCores()" title="Clique para alterar as cores do tema">
+          <img class="logo-img" src="logo.png" alt="Logo ${nome}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none;">${nome}</div>
         </div>
         <div>
-          <div class="brand">[NOME DA] <em>[EMPRESA]</em></div>
-          <div class="tagline">[QUALIDADE] · [CONFIANÇA] · [COMPROMISSO]</div>
+          <div class="brand">${nome}</div>
+          <div class="tagline">${segmento} · COMPROMISSO · QUALIDADE</div>
         </div>
       </div>
 
@@ -515,30 +703,23 @@ body::before{
       </div>
 
       <div class="layer-pop" style="width: 100%; display: flex; justify-content: center;">
-        <a
-          href="https://g.page/r/[LINK_DE_AVALIACAO_GOOGLE]/review"
-          class="btn-google"
-          target="_blank"
-          rel="noopener"
-          aria-label="Avaliar no Google"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <a href="${linkGoogleAvaliacao}" class="btn-google" target="_blank" rel="noopener" aria-label="Avaliar no Google">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Avaliar no Google ⭐⭐⭐⭐⭐
         </a>
       </div>
 
-      <div class="social-row layer-front" aria-label="Redes sociais e contato">
-
-        <a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <div class="social-row layer-front">
+        <a href="https://wa.me/${wa}?text=Olá!%20Vim%20pelo%20site%20e%20quero%20mais%20informações." class="social-btn" target="_blank" rel="noopener">
           <div class="social-icon" style="background:#1a2e1a;">
-            <svg viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
           </div>
           <span class="social-label">WhatsApp</span>
         </a>
 
-        <a href="https://www.instagram.com/seu_perfil" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+        <a href="https://www.instagram.com/${ig}" class="social-btn" target="_blank" rel="noopener">
           <div class="social-icon" style="background:#2a1a2e;">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
               <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
               <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/>
               <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="1.8"/>
@@ -548,9 +729,9 @@ body::before{
           <span class="social-label">Instagram</span>
         </a>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=Sua+Rua+123+Seu+Bairro+CEP+00000000" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco + ' ' + cidade)}" class="social-btn" target="_blank" rel="noopener">
           <div class="social-icon" style="background:#1a2030;">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
               <circle cx="12" cy="9" r="2.5" fill="#fff"/>
             </svg>
@@ -558,39 +739,35 @@ body::before{
           <span class="social-label">Maps</span>
         </a>
 
-        <a href="tel:+5511999999999" class="social-btn" aria-label="Ligar para a empresa">
+        <a href="tel:+${wa}" class="social-btn">
           <div class="social-icon" style="background:#1a2a1a;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
           </div>
           <span class="social-label">Ligar</span>
         </a>
-
       </div>
 
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
-        <span itemprop="streetAddress">Rua Exemplo, 123</span> · Bairro Exemplo<br>
-        CEP <span itemprop="postalCode">00000-000</span> · Tel: <span itemprop="telephone">(11) 9999-9999</span>
+      <div class="address layer-back">
+        ${endereco}<br>
+        ${cidade}
       </div>
 
       <div class="ticker-banner layer-mid">
         <div class="ticker-track">
-          <span class="ticker-item">[NOME DA SUA EMPRESA] • [SERVIÇO OU PRODUTO 1] • [SERVIÇO OU PRODUTO 2] • [SUA CIDADE – SP].</span>
-          <span class="ticker-item">[FRASE DE DESTAQUE OU DIFERENCIAL DO SEU NEGÓCIO].</span>
+          <span class="ticker-item">${nome} • ${segmento} • ${servicos} • ${cidade}.</span>
+          <span class="ticker-item">QUALIDADE E MELHOR ATENDIMENTO NA REGIÃO.</span>
         </div>
       </div>
 
     </div>
 
-    <!-- Rodapé Otimizado para SEO -->
-    <footer class="footer layer-back" itemscope itemtype="https://schema.org/WPFooter">
-      <p class="footer-seo-text">
-        Referência em <span itemprop="about">[SEU SEGMENTO DE ATUAÇÃO]</span> em [Sua Cidade] e região.
-      </p>
+    <footer class="footer layer-back">
+      <p class="footer-seo-text">Referência em <span>${segmento}</span> em ${cidade} e região.</p>
       <p class="footer-promo">Deseja um link como este para sua empresa?<br>
         <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20este%20modelo%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
       </p>
       <div class="footer-ssl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         Protegido por SSL
       </div>
       <p class="footer-dev">
@@ -602,54 +779,85 @@ body::before{
 
 </div>
 
+<!-- Modal de Cores Embutido no Cliente -->
+<div class="color-modal-overlay" id="colorModal">
+  <div class="color-modal-card">
+    <div class="color-modal-title">Estilo do Cartão</div>
+    <div class="color-modal-desc">Escolha uma cor para o tema e o neon:</div>
+    <div class="color-options-grid">
+      <div class="color-bubble" style="background: linear-gradient(135deg, #102040, #0b1a2e); border-color: #ffffff;" onclick="mudarTema('#102040', '#0b1a2e', '#ffffff', 'rgba(255,255,255,0.8)')" title="Clássico"></div>
+      <div class="color-bubble" style="background: linear-gradient(135deg, #1e1b4b, #311042);" onclick="mudarTema('#311042', '#150824', '#c084fc', 'rgba(192, 132, 252, 0.8)')" title="Roxo"></div>
+      <div class="color-bubble" style="background: linear-gradient(135deg, #064e3b, #022c22);" onclick="mudarTema('#064e3b', '#022c22', '#34d399', 'rgba(52, 211, 153, 0.8)')" title="Verde"></div>
+      <div class="color-bubble" style="background: linear-gradient(135deg, #7c2d12, #431407);" onclick="mudarTema('#7c2d12', '#431407', '#fb923c', 'rgba(251, 146, 60, 0.8)')" title="Bronze"></div>
+      <div class="color-bubble" style="background: linear-gradient(135deg, #831843, #500724);" onclick="mudarTema('#831843', '#500724', '#f472b6', 'rgba(244, 114, 182, 0.8)')" title="Rosa"></div>
+    </div>
+    <button class="color-modal-close" onclick="fecharModalCores()">Concluído</button>
+  </div>
+</div>
 
-<!-- Camada SEO discreta (HTML real, só aparece no desktop) -->
 <aside class="bg-seo">
   <div>
     <div class="txt">
-      <h1>[NOME DA SUA EMPRESA]</h1>
-      <h2>[PRINCIPAL SERVIÇO OU PRODUTO NO SEU MUNICÍPIO]</h2>
-      <p>[TEXTO DE APRESENTACAO INSTITUCIONAL COM PALAVRAS-CHAVE DA SUA REGIAO E DO SEU TIPO DE NEGOCIO].</p>
-      <h2>[SUBTÍTULO SEO 1]</h2>
-      <p>[DESCRIÇÃO DETALHADA DO PRIMEIRO PRINCIPAL PRODUTO OU SERVIÇO ATENDIDO].</p>
+      <h1>${nome}</h1>
+      <h2>${segmento} em ${cidade}</h2>
+      <p>A ${nome} é referência em ${segmento} na cidade de ${cidade}.</p>
     </div>
     <div class="fotos">
-      <img src="imagem_01.png" alt="[DESCRIÇÃO DA IMAGEM 1 DENTRO DO CONTEXTO DO SEU NEGÓCIO]" width="400" height="400" loading="lazy" decoding="async">
-      <img src="imagem_02.png" alt="[DESCRIÇÃO DA IMAGEM 2 DENTRO DO CONTEXTO DO SEU NEGÓCIO]" width="400" height="400" loading="lazy" decoding="async">
+      <img src="imagem_01.png" alt="${nome}" width="400" height="400">
+      <img src="imagem_02.png" alt="${segmento}" width="400" height="400">
     </div>
   </div>
   <div>
     <div class="txt">
-      <h2>[SUBTÍTULO SEO 2]</h2>
-      <p>[DESCRIÇÃO DETALHADA DO SEGUNDO PRINCIPAL PRODUTO OU SERVIÇO ATENDIDO].</p>
-      <h2>[SUBTÍTULO SEO 3]</h2>
-      <p>[INFORMAÇÕES SOBRE MATERIAIS, ATENDIMENTO OU PROCESSOS DA SUA EMPRESA].</p>
       <h2>Atendimento na Região</h2>
-      <p>[ENDEREÇO COMPLETO E CONTATO PARA TIRAR DÚVIDAS E SOLICITAR ORÇAMENTOS].</p>
+      <p>${endereco} — ${cidade}.</p>
     </div>
     <div class="fotos">
-      <img src="imagem_03.png" alt="[DESCRIÇÃO DA IMAGEM 3 DENTRO DO CONTEXTO DO SEU NEGÓCIO]" width="400" height="400" loading="lazy" decoding="async">
-      <img src="imagem_04.png" alt="[DESCRIÇÃO DA IMAGEM 4 DENTRO DO CONTEXTO DO SEU NEGÓCIO]" width="400" height="400" loading="lazy" decoding="async">
+      <img src="imagem_03.png" alt="${cidade}" width="400" height="400">
+      <img src="imagem_04.png" alt="${servicos}" width="400" height="400">
     </div>
   </div>
 </aside>
 
 <script>
+  // Inicialização de Tema Salvo no Cliente
+  (function() {
+    const savedTheme = localStorage.getItem('card_theme_config');
+    if (savedTheme) {
+      try {
+        const t = JSON.parse(savedTheme);
+        const root = document.documentElement;
+        root.style.setProperty('--theme-bg-start', t.bgStart);
+        root.style.setProperty('--theme-bg-end', t.bgEnd);
+        root.style.setProperty('--theme-neon', t.neonColor);
+        root.style.setProperty('--theme-shadow', t.shadowColor);
+      } catch(e) {}
+    }
+  })();
+
+  function abrirModalCores() { document.getElementById('colorModal').classList.add('active'); }
+  function fecharModalCores() { document.getElementById('colorModal').classList.remove('active'); }
+
+  function mudarTema(bgStart, bgEnd, neonColor, shadowColor) {
+    const root = document.documentElement;
+    root.style.setProperty('--theme-bg-start', bgStart);
+    root.style.setProperty('--theme-bg-end', bgEnd);
+    root.style.setProperty('--theme-neon', neonColor);
+    root.style.setProperty('--theme-shadow', shadowColor);
+    localStorage.setItem('card_theme_config', JSON.stringify({ bgStart, bgEnd, neonColor, shadowColor }));
+    fecharModalCores();
+  }
+
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
-
   let giroscopioAtivo = false;
-  
-  // Configuração fixa para o Nível 1,5 quando ligado
   const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
 
   function handleOrientation(e) {
     if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
-
     let x = Math.min(Math.max(e.gamma, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
     let y = Math.min(Math.max(e.beta - 45, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
-
-    frame.style.transform = `rotateY(${x * configNivel1_5.intensidadeCelular}deg) rotateX(${-y * configNivel1_5.intensidadeCelular}deg)`;
+    frame.style.transform = \`rotateY(\${x * configNivel1_5.intensidadeCelular}deg) rotateX(\${-y * configNivel1_5.intensidadeCelular}deg)\`;
   }
 
   function ativandoOorientacao() {
@@ -668,42 +876,63 @@ body::before{
   }
 
   function alternarGiroscopio() {
-    if (giroscopioAtivo) {
-      desativarGiroscopio();
-      return;
-    }
-
+    if (giroscopioAtivo) { desativarGiroscopio(); return; }
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission().then(state => {
-        if (state === 'granted') {
-          ativandoOorientacao();
-        } else {
-          alert('Permissão de orientação negada.');
-        }
-      }).catch(() => {
-        ativandoOorientacao();
-      });
-    } else {
-      ativandoOorientacao();
-    }
+        if (state === 'granted') { ativandoOorientacao(); } else { alert('Permissão de orientação negada.'); }
+      }).catch(() => { ativandoOorientacao(); });
+    } else { ativandoOorientacao(); }
   }
 
-  /* Movimento no Desktop (Ativo somente se giroscópio/efeito estiver ON) */
   document.addEventListener('mousemove', (e) => {
     if (!giroscopioAtivo) return;
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-
-    frame.style.transform = `rotateY(${x * configNivel1_5.intensidadeMouse}deg) rotateX(${-y * configNivel1_5.intensidadeMouse}deg)`;
+    frame.style.transform = \`rotateY(\${x * configNivel1_5.intensidadeMouse}deg) rotateX(\${-y * configNivel1_5.intensidadeMouse}deg)\`;
   });
 
   document.addEventListener('mouseleave', () => {
-    if (giroscopioAtivo) {
-      frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    }
+    if (giroscopioAtivo) { frame.style.transform = 'rotateY(0deg) rotateX(0deg)'; }
   });
-</script>
+<\/script>
 
+</body>
+</html>`;
+
+  document.getElementById('resBox').classList.add('show');
+  document.getElementById('resBox').scrollIntoView({ behavior: 'smooth' });
+}
+
+function baixarQRCode() {
+  const qrImg = document.querySelector('#qrbox img');
+  const qrCanvas = document.querySelector('#qrbox canvas');
+  
+  let imageUrl = "";
+  if (qrImg) {
+    imageUrl = qrImg.src;
+  } else if (qrCanvas) {
+    imageUrl = qrCanvas.toDataURL("image/png");
+  }
+
+  if (!imageUrl) {
+    alert("Gerencie o QR Code primeiro!");
+    return;
+  }
+
+  const a = document.createElement("a");
+  a.href = imageUrl;
+  a.download = `qrcode-${nomeEmpresaSlug}.png`;
+  a.click();
+}
+
+function baixarHTML() {
+  const blob = new Blob([htmlFinal], { type: "text/html;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "index.html";
+  a.click();
+}
+</script>
 </body>
 </html>
