@@ -45,9 +45,9 @@
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     "opens": "08:00",
-    "closes": "17:30"
+    "closes": "18:00"
   },
   "sameAs": [
     "https://www.instagram.com/tintasqualyquimy"
@@ -169,8 +169,26 @@ body::before{
   border-radius:14px;
   overflow:hidden;
   display:inline-block;
-  box-shadow:0 6px 20px rgba(201,169,110,.22);
+  animation:logo-pulse 2.6s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(201,169,110,.5);
 }
+.logo-frame::after{
+  content:'';
+  position:absolute;
+  top:0;left:-110%;
+  width:55%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  animation:logo-shimmer 2.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@keyframes logo-pulse{
+  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55),0 6px 20px rgba(201,169,110,.25)}
+  55% {box-shadow:0 0 0 12px rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.1)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.25)}
+}
+@keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
 .logo-img{
   display:block;
   width:160px;
@@ -208,7 +226,7 @@ body::before{
 }
 .chip svg{width:13px;height:13px;flex-shrink:0;stroke:#c9a96e;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* ESTRELAS = botão de avaliar (substitui o botão amarelo) */
+/* ESTRELAS = botão de avaliar */
 .stars-cta{
   display:flex;flex-direction:column;align-items:center;gap:.3rem;
   text-decoration:none;
@@ -222,7 +240,7 @@ body::before{
 .star{
   font-size:2.2rem;line-height:1;color:#ffd700;
   text-shadow:0 0 12px rgba(255,215,0,.5);
-  animation:star-wave 3.6s ease-in-out infinite;
+  animation:star-wave 2.6s ease-in-out infinite;
 }
 .star:nth-child(2){animation-delay:.12s}
 .star:nth-child(3){animation-delay:.24s}
@@ -240,8 +258,8 @@ body::before{
 .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
 .btn-act{
   display:flex;align-items:center;justify-content:center;gap:.45rem;
-  min-height:52px;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.94rem;
+  min-height:46px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;
   text-decoration:none;transition:transform .2s;
 }
 .btn-act:hover{transform:translateY(-2px)}
@@ -267,25 +285,78 @@ body::before{
 .social-icon svg{width:20px;height:20px}
 .social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.03em}
 
-/* Horário + endereço */
-.hours{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-size:.76rem;color:#e8eef7;font-weight:600;padding:.3rem .85rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+/* Horário + endereço clicável para cópia rápida */
+.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#d0dce8;font-weight:500}
 .hours .dot{width:8px;height:8px;border-radius:50%;background:#8ba4c4;flex-shrink:0}
-.hours.open{background:rgba(34,197,94,.12);border-color:rgba(74,222,128,.5)}
 .hours.open .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
-.hours.closed{background:rgba(248,113,113,.10);border-color:rgba(248,113,113,.5)}
-.hours.closed .dot{background:#f87171;box-shadow:0 0 8px #f87171}
-.address{font-size:.74rem;color:#8ba4c4;line-height:1.4}
+.hours.closed .dot{background:#f87171}
+.address{
+  font-size:.74rem;color:#8ba4c4;line-height:1.4;cursor:pointer;
+  transition:color .2s;position:relative;display:inline-block;
+}
+.address:hover{color:#ffe082}
+.address::after{
+  content:'(Copiar)';display:block;font-size:.6rem;color:#c9a96e;opacity:.8;margin-top:-1px;
+}
 
-/* Entregas */
-.delivery{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;font-size:.8rem;font-weight:500;color:#fce8bd;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.35);border-radius:10px;padding:.5rem .7rem}
-.delivery svg{width:17px;height:17px;flex-shrink:0;stroke:#c9a96e;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.delivery strong{color:#fff;font-weight:700}
+/* Banner infinito */
+.ticker-banner{
+  width:100%;
+  overflow:hidden;
+  background:rgba(201,169,110,.15);
+  border:1px solid rgba(201,169,110,.35);
+  border-radius:8px;
+  padding:.35rem 0;
+  display:flex;
+}
+.ticker-track{display:flex;width:max-content;animation:infinite-scroll 36s linear infinite}
+.ticker-item{font-size:.76rem;color:#fce8bd;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
+@keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* Rodapé compacto */
-.footer{font-size:.7rem;color:#9bb5d4;width:100%;text-align:center;border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem}
-.footer a{color:#ffe082;text-decoration:none;font-weight:700;border-bottom:1px solid rgba(255,224,130,.6)}
-.footer a:hover{color:#fff;border-color:#fff}
-.btn-gyro.active{background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);border-color:#60a5fa}
+.footer{
+  font-size:.72rem;
+  color:#d0dce8;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.35rem;
+  width:100%;
+  border-top:1px solid rgba(255,255,255,.15);
+  padding-top:.7rem;
+}
+.footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
+.footer-promo a{color:#ffe082;text-decoration:none;font-weight:700;border-bottom:1px solid #ffe082;padding-bottom:1px}
+.footer-promo a:hover{color:#fff;border-color:#fff}
+.footer-dev{font-size:.7rem;color:#b0c4de;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
+.footer-dev a:hover{color:#90caf9;text-decoration:underline}
+
+/* Botão do efeito 3D */
+@keyframes neon-pulse{
+  0%,100%{box-shadow:0 0 5px rgba(37,99,235,.4),0 0 10px rgba(37,99,235,.2);border-color:rgba(100,181,246,.5)}
+  50%{box-shadow:0 0 15px rgba(59,130,246,.8),0 0 25px rgba(96,165,250,.5);border-color:#60a5fa}
+}
+.btn-gyro{
+  background:rgba(255,255,255,.08);
+  color:#90caf9;
+  border:1px solid rgba(100,181,246,.4);
+  border-radius:14px;
+  padding:.3rem .7rem;
+  font-size:.7rem;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:600;
+  transition:all .3s ease;
+  animation:neon-pulse 2s infinite ease-in-out;
+}
+.btn-gyro:hover{background:rgba(100,181,246,.25);color:#fff}
+.btn-gyro.active{
+  background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);
+  color:#fff;border-color:#60a5fa;
+  box-shadow:0 0 20px rgba(37,99,235,.9);
+  animation:none;
+}
 
 /* ===== TELA "VER MAIS" (gaveta) ===== */
 .sheet{
@@ -315,12 +386,12 @@ body::before{
 .sheet h3{font-size:.9rem;font-weight:700;color:#c9a96e;margin-bottom:.4rem}
 .sheet p{font-size:.82rem;line-height:1.55;color:#c9d6e6}
 .sheet a.inline{color:#ffe082;font-weight:700;text-decoration:none;border-bottom:1px solid #ffe082}
-.sheet-close{
+.sheet-Close{
   width:40px;height:40px;border-radius:50%;flex-shrink:0;
   background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);
   color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;font-family:inherit;
 }
-.sheet-close:hover{background:rgba(255,255,255,.18)}
+.sheet-Close:hover{background:rgba(255,255,255,.18)}
 .svc-list{list-style:none;display:grid;gap:.5rem}
 .svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:#e8e2d8;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem}
@@ -336,9 +407,7 @@ body::before{
 .btn-share svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .toast{min-height:1.1em;text-align:center;font-size:.78rem;color:#4ade80}
 
-/* ===== FUNDO EXTERNO (SOMENTE DESKTOP) — Qualy Quimy =====
-   Isolado: usa html::before (nada da moldura/página é tocado).
-   Abaixo de 1024px nada disto é aplicado. */
+/* ===== FUNDO EXTERNO (SOMENTE DESKTOP) ===== */
 .bg-seo{display:none}
 @media (min-width:1024px){
   html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1}
@@ -365,7 +434,6 @@ body::before{
   .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
   .bg-seo .fotos{display:flex;gap:.6rem}
   .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
-  /* no desktop a gaveta vira janela centralizada */
   .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
 }
 
@@ -380,7 +448,7 @@ body::before{
   .social-icon{width:40px;height:40px}
 }
 @media (max-height:600px){
-  .chips{display:none}
+  .ticker-banner,.chips{display:none}
   .address{font-size:.7rem}
 }
 
@@ -395,7 +463,7 @@ body::before{
 
   <div class="device-frame" id="deviceFrame">
 
-    <!-- VERSO DO CARTÃO (três imagens separadas em camadas) -->
+    <!-- VERSO DO CARTÃO -->
     <div class="secret-back" aria-hidden="true">
       <img src="fundo.png" alt="" class="back-layer back-layer-fundo" loading="lazy" decoding="async">
       <img src="mago.png" alt="" class="back-layer back-layer-mago" loading="lazy" decoding="async">
@@ -423,7 +491,7 @@ body::before{
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>Texturas</span>
       </div>
 
-      <!-- ESTRELAS: tocar nelas abre a avaliação no Google -->
+      <!-- ESTRELAS: avaliação no Google -->
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
         <a
           href="https://g.page/r/CRECbD178tUDEAE/review"
@@ -492,20 +560,31 @@ body::before{
         </button>
       </div>
 
-      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">Seg a sex · 8h às 17h30</span></div>
+      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">Seg a sáb · 8h às 18h</span></div>
 
-      <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
+      <!-- Endereço com função de cópia rápida -->
+      <div class="address layer-back" onclick="copiarEndereco()" title="Clique para copiar o endereço" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         Itaquaquecetuba - SP · CEP <span itemprop="postalCode">08587-100</span>
       </div>
 
-      <div class="delivery layer-mid">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-        <span>Entregas por <strong>Lalamove</strong> e <strong>99</strong></span>
+      <div class="ticker-banner layer-mid" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">QUALY QUIMY • Tintas, Massas, Texturas e Grafiato • Soluções para pintura residencial e comercial • Itaquaquecetuba – SP.</span>
+          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
+          <span class="ticker-item">QUALY QUIMY • Tintas, Massas, Texturas e Grafiato • Soluções para pintura residencial e comercial • Itaquaquecetuba – SP.</span>
+          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
+        </div>
       </div>
 
       <footer class="footer layer-back">
-        Quer um link como este? <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">Fale com a ImpulsoWeb10</a>
+        <p class="footer-promo">Quer um link como este para sua empresa?
+          <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">Saiba mais</a>
+        </p>
+        <p class="footer-dev">
+          Desenvolvido por <a href="https://wa.me/5511954950044?text=Ol%C3%A1%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
+          <button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button>
+        </p>
       </footer>
 
     </div>
@@ -518,7 +597,7 @@ body::before{
   <div class="sheet-body">
     <div class="sheet-head">
       <h2 id="sheetTitulo">Tintas Qualy Quimy</h2>
-      <button type="button" class="sheet-close" onclick="fecharMais()" aria-label="Fechar">×</button>
+      <button type="button" class="sheet-Close" onclick="fecharMais()" aria-label="Fechar">×</button>
     </div>
 
     <section>
@@ -533,12 +612,7 @@ body::before{
 
     <section>
       <h3>Horário</h3>
-      <p>Segunda a sexta, das 8h às 17h30.</p>
-    </section>
-
-    <section>
-      <h3>Entregas</h3>
-      <p>Entregamos por Lalamove e 99. Fale com a loja pelo WhatsApp ou telefone para combinar.</p>
+      <p>Segunda a sábado, das 8h às 18h.</p>
     </section>
 
     <section>
@@ -546,7 +620,8 @@ body::before{
       <p>Rua Leiria, 45 · Chácara Cuiabá<br>
         Itaquaquecetuba - SP · CEP 08587-100<br>
         Telefone: <a class="inline" href="tel:+551146432301">(11) 4643-2301</a><br>
-        <a class="inline" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Leiria+45+Chacara+Cuiaba+CEP+08587100" target="_blank" rel="noopener">Como chegar</a>
+        <a class="inline" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Leiria+45+Chacara+Cuiaba+CEP+08587100" target="_blank" rel="noopener">Abrir no Google Maps</a> · 
+        <a class="inline" href="https://waze.com/ul?q=Rua+Leiria+45+Itaquaquecetuba" target="_blank" rel="noopener">Abrir no Waze</a>
       </p>
     </section>
 
@@ -561,12 +636,11 @@ body::before{
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>
       Compartilhar este link
     </button>
-    <button class="btn-share btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button>
     <p class="toast" id="toast" role="status" aria-live="polite"></p>
   </div>
 </dialog>
 
-<!-- Camada SEO discreta (HTML real, só aparece no desktop) -->
+<!-- Camada SEO discreta -->
 <aside class="bg-seo">
   <div>
     <div class="txt">
@@ -588,7 +662,7 @@ body::before{
       <h2>Seladora, Esmalte e Qualy Color</h2>
       <p>A seladora uniformiza a absorção da parede e melhora a aderência da tinta. O esmalte protege madeira e metal. Para pinturas de uso interno, a tinta econômica Qualy Color é uma opção.</p>
       <h2>Atendimento no Alto Tietê</h2>
-      <p>Na Rua Leiria, 45, Chácara Cuiabá, em Itaquaquecetuba - SP. Fale com a loja pelo WhatsApp ou pelo telefone (11) 4643-2301 e tire suas dúvidas sobre o produto certo para cada superfície. Atendemos de segunda a sexta, das 8h às 17h30, e fazemos entregas por Lalamove e 99.</p>
+      <p>Na Rua Leiria, 45, Chácara Cuiabá, em Itaquaquecetuba - SP. Fale com a loja pelo WhatsApp ou pelo telefone (11) 4643-2301 e tire suas dúvidas sobre o produto certo para cada superfície.</p>
     </div>
     <div class="fotos">
       <img src="galao_3_6lts.jpg" alt="Galão de 3,6 litros Tintas Qualy Quimy Color, para uso exterior e interior" width="640" height="482" loading="lazy" decoding="async">
@@ -599,9 +673,6 @@ body::before{
 
 <script>
   const PAGE_URL = location.href.split('#')[0].split('?')[0];
-
-  /* ===== DADOS OPCIONAIS (preencher só com informação REAL) =====
-     nota: ex. '4,9'    avaliacoes: ex. '120' */
   const PROVA = { nota: '', avaliacoes: '' };
 
   (function(){
@@ -612,28 +683,39 @@ body::before{
     }
   })();
 
-  /* ===== HORÁRIO (seg a sex, 8h às 17h30 — horário de Brasília) ===== */
+  /* ===== HORÁRIO ===== */
   (function(){
     const box = document.getElementById('hours');
     const txt = document.getElementById('hoursText');
     try {
       const partes = {};
-      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false })
+      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', hour12: false })
         .formatToParts(new Date()).forEach(function(p){ partes[p.type] = p.value; });
-      const dia = partes.weekday;               // Mon..Sun
-      const t = (parseInt(partes.hour, 10) % 24) * 60 + parseInt(partes.minute, 10);
-      const util = ['Mon','Tue','Wed','Thu','Fri'].indexOf(dia) !== -1;
-      if (util && t >= 480 && t < 1050) {
+      const dia = partes.weekday;
+      const h = parseInt(partes.hour, 10) % 24;
+      const util = ['Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(dia) !== -1;
+      if (util && h >= 8 && h < 18) {
         box.classList.add('open');
-        txt.textContent = 'Aberto agora · fecha às 17h30';
+        txt.textContent = 'Aberto agora · fecha às 18h';
       } else {
         box.classList.add('closed');
-        if (util && t < 480) txt.textContent = 'Fechado · abre hoje às 8h';
-        else if (dia === 'Fri' || dia === 'Sat') txt.textContent = 'Fechado · abre segunda às 8h';
+        if (util && h < 8) txt.textContent = 'Fechado · abre hoje às 8h';
+        else if (dia === 'Sat') txt.textContent = 'Fechado · abre segunda às 8h';
         else txt.textContent = 'Fechado · abre amanhã às 8h';
       }
-    } catch (e) { /* mantém o texto fixo */ }
+    } catch (e) {}
   })();
+
+  /* ===== COPIAR ENDEREÇO RÁPIDO ===== */
+  async function copiarEndereco() {
+    const endTexto = "Rua Leiria, 45, Chácara Cuiabá, Itaquaquecetuba - SP, CEP 08587-100";
+    try {
+      await navigator.clipboard.writeText(endTexto);
+      alert("Endereço copiado para a área de transferência!");
+    } catch (err) {
+      alert("Não foi possível copiar o endereço automaticamente.");
+    }
+  }
 
   /* ===== TELA "VER MAIS" ===== */
   const sheet = document.getElementById('sheetMais');
@@ -688,7 +770,7 @@ body::before{
     }
   }
 
-  /* ===== EFEITO 3D (giroscópio / mouse) ===== */
+  /* ===== EFEITO 3D ===== */
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
   let giroscopioAtivo = false;
@@ -703,7 +785,6 @@ body::before{
   function ativandoOorientacao(){
     window.addEventListener('deviceorientation', handleOrientation);
     giroscopioAtivo = true;
-    fecharMais();
     btnGyro.innerText = 'Efeito 3D: ON';
     btnGyro.classList.add('active');
   }
