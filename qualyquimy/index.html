@@ -45,9 +45,9 @@
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
     "opens": "08:00",
-    "closes": "18:00"
+    "closes": "17:30"
   },
   "sameAs": [
     "https://www.instagram.com/tintasqualyquimy"
@@ -169,26 +169,8 @@ body::before{
   border-radius:14px;
   overflow:hidden;
   display:inline-block;
-  animation:logo-pulse 2.6s ease-in-out infinite;
-  box-shadow:0 0 0 0 rgba(201,169,110,.5);
+  box-shadow:0 6px 20px rgba(201,169,110,.22);
 }
-.logo-frame::after{
-  content:'';
-  position:absolute;
-  top:0;left:-110%;
-  width:55%;height:100%;
-  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);
-  transform:skewX(-18deg);
-  animation:logo-shimmer 2.6s ease-in-out infinite;
-  pointer-events:none;
-  z-index:2;
-}
-@keyframes logo-pulse{
-  0%  {box-shadow:0 0 0 0 rgba(201,169,110,.55),0 6px 20px rgba(201,169,110,.25)}
-  55% {box-shadow:0 0 0 12px rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.1)}
-  100%{box-shadow:0 0 0 0 rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.25)}
-}
-@keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
 .logo-img{
   display:block;
   width:160px;
@@ -240,7 +222,7 @@ body::before{
 .star{
   font-size:2.2rem;line-height:1;color:#ffd700;
   text-shadow:0 0 12px rgba(255,215,0,.5);
-  animation:star-wave 2.6s ease-in-out infinite;
+  animation:star-wave 3.6s ease-in-out infinite;
 }
 .star:nth-child(2){animation-delay:.12s}
 .star:nth-child(3){animation-delay:.24s}
@@ -258,8 +240,8 @@ body::before{
 .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
 .btn-act{
   display:flex;align-items:center;justify-content:center;gap:.45rem;
-  min-height:46px;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;
+  min-height:52px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.94rem;
   text-decoration:none;transition:transform .2s;
 }
 .btn-act:hover{transform:translateY(-2px)}
@@ -286,70 +268,24 @@ body::before{
 .social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.03em}
 
 /* Horário + endereço */
-.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#d0dce8;font-weight:500}
+.hours{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-size:.76rem;color:#e8eef7;font-weight:600;padding:.3rem .85rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
 .hours .dot{width:8px;height:8px;border-radius:50%;background:#8ba4c4;flex-shrink:0}
+.hours.open{background:rgba(34,197,94,.12);border-color:rgba(74,222,128,.5)}
 .hours.open .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
-.hours.closed .dot{background:#f87171}
+.hours.closed{background:rgba(248,113,113,.10);border-color:rgba(248,113,113,.5)}
+.hours.closed .dot{background:#f87171;box-shadow:0 0 8px #f87171}
 .address{font-size:.74rem;color:#8ba4c4;line-height:1.4}
 
-/* Banner infinito */
-.ticker-banner{
-  width:100%;
-  overflow:hidden;
-  background:rgba(201,169,110,.15);
-  border:1px solid rgba(201,169,110,.35);
-  border-radius:8px;
-  padding:.35rem 0;
-  display:flex;
-}
-.ticker-track{display:flex;width:max-content;animation:infinite-scroll 36s linear infinite}
-.ticker-item{font-size:.76rem;color:#fce8bd;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
-@keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* Entregas */
+.delivery{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;font-size:.8rem;font-weight:500;color:#fce8bd;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.35);border-radius:10px;padding:.5rem .7rem}
+.delivery svg{width:17px;height:17px;flex-shrink:0;stroke:#c9a96e;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.delivery strong{color:#fff;font-weight:700}
 
 /* Rodapé compacto */
-.footer{
-  font-size:.72rem;
-  color:#d0dce8;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.35rem;
-  width:100%;
-  border-top:1px solid rgba(255,255,255,.15);
-  padding-top:.7rem;
-}
-.footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
-.footer-promo a{color:#ffe082;text-decoration:none;font-weight:700;border-bottom:1px solid #ffe082;padding-bottom:1px}
-.footer-promo a:hover{color:#fff;border-color:#fff}
-.footer-dev{font-size:.7rem;color:#b0c4de;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
-.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
-.footer-dev a:hover{color:#90caf9;text-decoration:underline}
-
-/* Botão do efeito 3D */
-@keyframes neon-pulse{
-  0%,100%{box-shadow:0 0 5px rgba(37,99,235,.4),0 0 10px rgba(37,99,235,.2);border-color:rgba(100,181,246,.5)}
-  50%{box-shadow:0 0 15px rgba(59,130,246,.8),0 0 25px rgba(96,165,250,.5);border-color:#60a5fa}
-}
-.btn-gyro{
-  background:rgba(255,255,255,.08);
-  color:#90caf9;
-  border:1px solid rgba(100,181,246,.4);
-  border-radius:14px;
-  padding:.3rem .7rem;
-  font-size:.7rem;
-  cursor:pointer;
-  font-family:inherit;
-  font-weight:600;
-  transition:all .3s ease;
-  animation:neon-pulse 2s infinite ease-in-out;
-}
-.btn-gyro:hover{background:rgba(100,181,246,.25);color:#fff}
-.btn-gyro.active{
-  background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);
-  color:#fff;border-color:#60a5fa;
-  box-shadow:0 0 20px rgba(37,99,235,.9);
-  animation:none;
-}
+.footer{font-size:.7rem;color:#9bb5d4;width:100%;text-align:center;border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem}
+.footer a{color:#ffe082;text-decoration:none;font-weight:700;border-bottom:1px solid rgba(255,224,130,.6)}
+.footer a:hover{color:#fff;border-color:#fff}
+.btn-gyro.active{background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);border-color:#60a5fa}
 
 /* ===== TELA "VER MAIS" (gaveta) ===== */
 .sheet{
@@ -444,7 +380,7 @@ body::before{
   .social-icon{width:40px;height:40px}
 }
 @media (max-height:600px){
-  .ticker-banner,.chips{display:none}
+  .chips{display:none}
   .address{font-size:.7rem}
 }
 
@@ -556,30 +492,20 @@ body::before{
         </button>
       </div>
 
-      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">Seg a sáb · 8h às 18h</span></div>
+      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">Seg a sex · 8h às 17h30</span></div>
 
       <div class="address layer-back" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">Rua Leiria, 45</span> · Chácara Cuiabá<br>
         Itaquaquecetuba - SP · CEP <span itemprop="postalCode">08587-100</span>
       </div>
 
-      <div class="ticker-banner layer-mid" aria-hidden="true">
-        <div class="ticker-track">
-          <span class="ticker-item">QUALY QUIMY • Tintas, Massas, Texturas e Grafiato • Soluções para pintura residencial e comercial • Itaquaquecetuba – SP.</span>
-          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
-          <span class="ticker-item">QUALY QUIMY • Tintas, Massas, Texturas e Grafiato • Soluções para pintura residencial e comercial • Itaquaquecetuba – SP.</span>
-          <span class="ticker-item">Tintas, massas, texturas, acabamento em Geral, é aqui nas Tintas Qualy Quimy.</span>
-        </div>
+      <div class="delivery layer-mid">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        <span>Entregas por <strong>Lalamove</strong> e <strong>99</strong></span>
       </div>
 
       <footer class="footer layer-back">
-        <p class="footer-promo">Quer um link como este para sua empresa?
-          <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">Saiba mais</a>
-        </p>
-        <p class="footer-dev">
-          Desenvolvido por <a href="https://wa.me/5511954950044?text=Ol%C3%A1%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-          <button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button>
-        </p>
+        Quer um link como este? <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Qualy%20Quimy%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">Fale com a ImpulsoWeb10</a>
       </footer>
 
     </div>
@@ -607,7 +533,12 @@ body::before{
 
     <section>
       <h3>Horário</h3>
-      <p>Segunda a sábado, das 8h às 18h.</p>
+      <p>Segunda a sexta, das 8h às 17h30.</p>
+    </section>
+
+    <section>
+      <h3>Entregas</h3>
+      <p>Entregamos por Lalamove e 99. Fale com a loja pelo WhatsApp ou telefone para combinar.</p>
     </section>
 
     <section>
@@ -630,6 +561,7 @@ body::before{
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>
       Compartilhar este link
     </button>
+    <button class="btn-share btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button>
     <p class="toast" id="toast" role="status" aria-live="polite"></p>
   </div>
 </dialog>
@@ -656,7 +588,7 @@ body::before{
       <h2>Seladora, Esmalte e Qualy Color</h2>
       <p>A seladora uniformiza a absorção da parede e melhora a aderência da tinta. O esmalte protege madeira e metal. Para pinturas de uso interno, a tinta econômica Qualy Color é uma opção.</p>
       <h2>Atendimento no Alto Tietê</h2>
-      <p>Na Rua Leiria, 45, Chácara Cuiabá, em Itaquaquecetuba - SP. Fale com a loja pelo WhatsApp ou pelo telefone (11) 4643-2301 e tire suas dúvidas sobre o produto certo para cada superfície.</p>
+      <p>Na Rua Leiria, 45, Chácara Cuiabá, em Itaquaquecetuba - SP. Fale com a loja pelo WhatsApp ou pelo telefone (11) 4643-2301 e tire suas dúvidas sobre o produto certo para cada superfície. Atendemos de segunda a sexta, das 8h às 17h30, e fazemos entregas por Lalamove e 99.</p>
     </div>
     <div class="fotos">
       <img src="galao_3_6lts.jpg" alt="Galão de 3,6 litros Tintas Qualy Quimy Color, para uso exterior e interior" width="640" height="482" loading="lazy" decoding="async">
@@ -680,24 +612,24 @@ body::before{
     }
   })();
 
-  /* ===== HORÁRIO (seg a sáb, 8h às 18h — horário de Brasília) ===== */
+  /* ===== HORÁRIO (seg a sex, 8h às 17h30 — horário de Brasília) ===== */
   (function(){
     const box = document.getElementById('hours');
     const txt = document.getElementById('hoursText');
     try {
       const partes = {};
-      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', hour12: false })
+      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false })
         .formatToParts(new Date()).forEach(function(p){ partes[p.type] = p.value; });
       const dia = partes.weekday;               // Mon..Sun
-      const h = parseInt(partes.hour, 10) % 24;
-      const util = ['Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(dia) !== -1;
-      if (util && h >= 8 && h < 18) {
+      const t = (parseInt(partes.hour, 10) % 24) * 60 + parseInt(partes.minute, 10);
+      const util = ['Mon','Tue','Wed','Thu','Fri'].indexOf(dia) !== -1;
+      if (util && t >= 480 && t < 1050) {
         box.classList.add('open');
-        txt.textContent = 'Aberto agora · fecha às 18h';
+        txt.textContent = 'Aberto agora · fecha às 17h30';
       } else {
         box.classList.add('closed');
-        if (util && h < 8) txt.textContent = 'Fechado · abre hoje às 8h';
-        else if (dia === 'Sat') txt.textContent = 'Fechado · abre segunda às 8h';
+        if (util && t < 480) txt.textContent = 'Fechado · abre hoje às 8h';
+        else if (dia === 'Fri' || dia === 'Sat') txt.textContent = 'Fechado · abre segunda às 8h';
         else txt.textContent = 'Fechado · abre amanhã às 8h';
       }
     } catch (e) { /* mantém o texto fixo */ }
@@ -771,6 +703,7 @@ body::before{
   function ativandoOorientacao(){
     window.addEventListener('deviceorientation', handleOrientation);
     giroscopioAtivo = true;
+    fecharMais();
     btnGyro.innerText = 'Efeito 3D: ON';
     btnGyro.classList.add('active');
   }
