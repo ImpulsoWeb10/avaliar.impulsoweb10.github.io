@@ -77,12 +77,12 @@ body::before{
     0 0 25px rgba(255, 215, 0, 0.35),
     0 0 50px rgba(255, 0, 0, 0.25),
     inset 0 0 15px rgba(255, 215, 0, 0.1);
-  padding: 1.8rem 1.2rem 1.4rem;
+  padding: 1.2rem 1.2rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.2rem;
+  gap: .8rem;
   transform-style: preserve-3d;
   transition: transform .6s cubic-bezier(.175,.885,.32,1.275);
   will-change: transform;
@@ -94,19 +94,20 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:1.15rem;
+  gap:.8rem;
   width:100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
 
-/* Camadas de profundidade 3D opcionais */
+/* Camadas de profundidade 3D */
 .layer-back{transform:translateZ(10px);transform-style:preserve-3d}
 .layer-mid{transform:translateZ(25px);transform-style:preserve-3d}
 .layer-front{transform:translateZ(40px);transform-style:preserve-3d}
+.layer-pop{transform:translateZ(55px);transform-style:preserve-3d}
 
-/* Logo Retangular com Shimmer Dourado e Clicável para 3D */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
+/* Logo Retangular com Clicável para 3D */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
 
 .logo-btn-interactive{
   background: none;
@@ -122,7 +123,7 @@ body::before{
 
 .logo-frame{
   position:relative;
-  border-radius:14px;
+  border-radius:12px;
   overflow:hidden;
   display:inline-block;
   animation:logo-pulse 2.6s ease-in-out infinite;
@@ -156,10 +157,10 @@ body::before{
 
 .logo-img{
   display:block;
-  width:145px;
+  width:130px;
   height:auto;
-  max-height:78px;
-  border-radius:12px;
+  max-height:65px;
+  border-radius:10px;
   border:1.5px solid rgba(212, 175, 55, 0.8);
   object-fit:contain;
   background:#0a0a0a;
@@ -169,96 +170,101 @@ body::before{
 
 .brand{
   font-family:'Poppins',sans-serif;
-  font-size:1.4rem;font-weight:800;
+  font-size:1.25rem;font-weight:800;
   color:#ffffff;letter-spacing:.02em;line-height:1.1;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 .brand em{color:#ffd700;font-style:normal}
-.tagline{font-size:.74rem;color:#d4af37;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tagline{font-size:.7rem;color:#d4af37;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
 
 /* Avaliação / Estrelas */
-.stars-row{display:flex;align-items:center;gap:.35rem;justify-content:center}
-.star{font-size:1.1rem;color:#ffd700}
-.rating-text{font-size:.74rem;color:#cccccc;margin-top:.15rem}
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.star{font-size:1rem;color:#ffd700}
+.rating-text{font-size:.7rem;color:#cccccc;margin-top:.1rem}
 
-/* BOTÃO GOOGLE SEM BORDA BRANCA */
-.btn-google-container {
-  width: 70%;
-  max-width: 260px;
-  position: relative;
-  border-radius: 999px; 
-  overflow: hidden;
-  cursor: pointer;
-  display: block;
-  background: transparent;
-  animation: pulse-google 2.2s ease-in-out infinite;
-}
-
-.btn-google-img {
+/* BOTÃO WHATSAPP GRANDE DE DESTAQUE (LARGURA TOTAL) */
+.btn-whatsapp-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
   width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 999px;
-  object-fit: cover;
-  mix-blend-mode: multiply;
-  background: #ffcc00;
+  min-height: 44px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-whatsapp-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+.btn-whatsapp-main svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  flex-shrink: 0;
 }
 
-.btn-google-container::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -120%;
-  width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 2.2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes pulse-google {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0.6); }
-  50% { transform: scale(1.03); box-shadow: 0 0 18px 4px rgba(251,188,5,0.5); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251,188,5,0); }
-}
-
-@keyframes shimmer {
-  0% { left: -120%; }
-  55%, 100% { left: 160%; }
-}
-
-/* Grade de Botões de Ação */
-.social-row{display:flex;gap:.85rem;justify-content:center;align-items:center;width:100%}
+/* Grade de Botões Secundários */
+.social-row{display:flex;gap:.7rem;justify-content:center;align-items:center;width:100%}
 .social-btn{
-  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
   text-decoration:none;
   transition:transform .22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.social-btn:hover{transform:translateY(-4px)}
+.social-btn:hover{transform:translateY(-3px)}
 .social-icon{
-  width:48px;height:48px;border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:1.5px solid rgba(255,215,0,.4);
-  box-shadow:0 0 10px rgba(212,175,55,0.2), 0 6px 16px rgba(0,0,0,0.6);
+  box-shadow:0 0 10px rgba(212,175,55,0.2), 0 4px 12px rgba(0,0,0,0.6);
   transition:all .2s ease;
 }
 .social-btn:hover .social-icon{
   border-color:#ffd700;
-  box-shadow:0 0 15px rgba(255,215,0,0.6), 0 8px 20px rgba(180,0,0,.4);
+  box-shadow:0 0 15px rgba(255,215,0,0.6), 0 6px 16px rgba(180,0,0,.4);
 }
-.social-icon svg{width:22px;height:22px}
-.social-label{font-size:.7rem;color:#cccccc;font-weight:500;letter-spacing:.02em}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:#cccccc;font-weight:500}
+
+/* Botão Google Avaliar Pequeno / Discreto ou Link */
+.btn-google-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  color: #ffcc00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-google-row:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+}
 
 /* FAQ link */
 .faq-link{
   background:none;border:none;
   color:#ffffff;
-  font-size:.82rem;font-family:'DM Sans',sans-serif;
-  cursor:pointer;letter-spacing:.03em;
-  display:flex;align-items:center;gap:.4rem;
+  font-size:.78rem;font-family:'DM Sans',sans-serif;
+  cursor:pointer;letter-spacing:.02em;
+  display:flex;align-items:center;gap:.35rem;
   text-decoration:none;
   transition:all .2s;
-  padding:.35rem .85rem;
+  padding:.3rem .75rem;
   border-radius:20px;
   border: 1px solid rgba(212,175,55,0.4);
 }
@@ -267,11 +273,11 @@ body::before{
   box-shadow:0 0 10px rgba(212,175,55,0.4);
   color:#ffd700;
 }
-.faq-link svg{width:14px;height:14px}
+.faq-link svg{width:13px;height:13px}
 
 /* Endereço clicável para cópia rápida */
 .address{
-  font-size:.75rem;color:#aaaaaa;line-height:1.45;
+  font-size:.72rem;color:#aaaaaa;line-height:1.4;
   cursor: pointer;
   transition: color .2s;
   position: relative;
@@ -279,7 +285,7 @@ body::before{
 }
 .address:hover{color:#ffd700}
 .address::after{
-  content:'(Clique para copiar)';display:block;font-size:.58rem;color:#d4af37;opacity:.85;margin-top:1px;
+  content:'(Clique para copiar)';display:block;font-size:.55rem;color:#d4af37;opacity:.85;margin-top:1px;
 }
 
 /* FAIXA BANNER ABAIXO DO ENDEREÇO */
@@ -288,12 +294,12 @@ body::before{
   background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0.18) 50%, rgba(255,215,0,0.05) 100%);
   border-top: 1px solid rgba(255, 215, 0, 0.4);
   border-bottom: 1px solid rgba(255, 215, 0, 0.4);
-  padding: 0.45rem 0;
-  margin-top: 0.2rem;
+  padding: 0.35rem 0;
   overflow: hidden;
   position: relative;
   display: flex;
   white-space: nowrap;
+  border-radius: 6px;
 }
 
 .quote-track {
@@ -303,13 +309,13 @@ body::before{
 }
 
 .quote-item {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   text-shadow: 0 0 8px rgba(255,215,0,0.6);
-  padding: 0 1.8rem;
+  padding: 0 1.5rem;
 }
 
 @keyframes scroll-left {
@@ -317,36 +323,34 @@ body::before{
   100% { transform: translateX(-50%); }
 }
 
-/* RODAPÉ COMPACTO */
+/* RODAPÉ COMPACTO (Em uma única linha na parte de baixo) */
 .footer{
   font-size:.65rem;
-  color:#777777;
-  margin-top:0.2rem;
+  color:#888888;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.4rem;
+  gap:.3rem;
   width:100%;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:0.8rem;
+  border-top:1px solid rgba(255,255,255,0.12);
+  padding-top:0.5rem;
 }
-.footer-promo{font-size:.68rem;color:#999999;line-height:1.35;text-align:center}
-.footer-promo a{color:#ffd700;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:1px;transition:color .2s}
-.footer-promo a:hover{color:#ffffff}
+.footer-promo{font-size:.7rem;color:#cccccc;text-align:center}
+.footer-promo a{color:#ffd700;text-decoration:none;font-weight:700;border-bottom:1px solid rgba(255,215,0,.4);padding-bottom:1px}
+.footer-promo a:hover{color:#fff}
 
 .footer-bottom-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   width: 100%;
-  font-size: 0.63rem;
-  color: #666666;
+  font-size: 0.62rem;
+  color: #777777;
+  flex-wrap: wrap;
 }
-.footer-ssl{display:flex;align-items:center;gap:.25rem;}
-.footer-ssl svg{width:10px;height:10px;flex-shrink:0;opacity:.75;stroke:#25d366}
-.footer-dev a{color:#888888;text-decoration:none;transition:color .2s}
-.footer-dev a:hover{color:#cccccc}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
+.footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
 /* ===== MODAL OVERLAY ===== */
 .overlay{
@@ -378,7 +382,7 @@ body::before{
 }
 .overlay.open .sheet{transform:translateY(0)}
 
-.sheet-handle{width:40px;height:4px;background:rgba(255,255,255,0.3);border-radius:2px;margin:12px auto 4px;flex-shrink: 0;}
+.sheet-handle{width:40px;height:4px;background:rgba(255,255,255,0.3);border-radius:2px;margin:10px auto 4px;flex-shrink: 0;}
 
 .sheet-inner{
   position:relative;
@@ -399,90 +403,86 @@ body::before{
 /* Cabeçalho do Modal */
 .sheet-head{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0.8rem 1.4rem;
+  padding:0.7rem 1.2rem;
   border-bottom:1px solid rgba(255,255,255,0.1);
   background: rgba(0,0,0,0.4);
 }
 .sheet-title{
   font-family:'Poppins',sans-serif;
-  font-size:1.05rem;font-weight:600;color:#ffffff;
+  font-size:1rem;font-weight:600;color:#ffffff;
   text-shadow: 0 0 8px rgba(212,175,55,0.3);
 }
 .btn-close{
   background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);
   color:#ffffff;cursor:pointer;
-  width:30px;height:30px;border-radius:50%;
-  font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  font-size:.85rem;display:flex;align-items:center;justify-content:center;
   transition:all .2s;flex-shrink:0;
 }
-.btn-close:hover{background:rgba(255,255,255,.25);box-shadow:0 0 8px rgba(255,255,255,0.5)}
+.btn-close:hover{background:rgba(255,255,255,.25)}
 
 /* Lista de Perguntas */
-.faq-list{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.6rem}
+.faq-list{padding:.8rem 1rem;display:flex;flex-direction:column;gap:.5rem}
 
 .faq-item-btn{
   width:100%;background:rgba(255,255,255,.05);
   border:1px solid rgba(212,175,55,.2);
-  border-radius:12px;
-  padding:.9rem 1rem;
-  color:#dddddd;font-size:.85rem;
+  border-radius:10px;
+  padding:.8rem .9rem;
+  color:#dddddd;font-size:.82rem;
   font-family:'DM Sans',sans-serif;
   text-align:left;cursor:pointer;
   display:flex;align-items:center;justify-content:space-between;gap:.8rem;
   transition:all .22s;
-  line-height:1.35;
+  line-height:1.3;
 }
 .faq-item-btn:hover{
   background:rgba(212,175,55,.15);
   border-color:#ffd700;
   color:#ffffff;
-  box-shadow:0 0 10px rgba(212,175,55,0.2);
-  transform:translateX(3px);
 }
-.faq-item-btn svg{flex-shrink:0;opacity:.6;width:14px;height:14px}
-.faq-item-btn:hover svg{opacity:1}
+.faq-item-btn svg{flex-shrink:0;opacity:.6;width:13px;height:13px}
 
 /* Resposta do Modal */
 .answer-head{
-  display:flex;align-items:center;gap:.7rem;
-  padding:0.8rem 1.2rem;
+  display:flex;align-items:center;gap:.6rem;
+  padding:0.7rem 1rem;
   border-bottom:1px solid rgba(255,255,255,0.1);
   background: rgba(0,0,0,0.4);
 }
 .btn-back{
   background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);
   color:#ffd700;cursor:pointer;
-  width:32px;height:32px;border-radius:50%;
-  font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  font-size:.85rem;display:flex;align-items:center;justify-content:center;
   transition:all .2s;flex-shrink:0;
 }
-.btn-back:hover{background:rgba(255,255,255,.25);box-shadow:0 0 8px rgba(255,255,255,0.4)}
 .answer-title{
   font-family:'Poppins',sans-serif;
-  font-size:0.95rem;font-weight:600;color:#ffffff;
+  font-size:0.9rem;font-weight:600;color:#ffffff;
   line-height:1.3;flex:1;
 }
 
-.answer-body{padding:1.4rem 1.4rem 0.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;}
-.answer-icon{font-size:2.4rem;margin-bottom:.6rem;display:block}
+.answer-body{padding:1.2rem 1.2rem 0.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.answer-icon{font-size:2.2rem;margin-bottom:.5rem;display:block}
 .answer-text{
-  font-size:.88rem;color:#cccccc;line-height:1.6;
-  margin-bottom:1.4rem;
+  font-size:.85rem;color:#cccccc;line-height:1.5;
+  margin-bottom:1.2rem;
   word-break: break-word;
 }
 .answer-cta{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
   width:100%;
   background:linear-gradient(135deg,#25d366,#1aab55);
-  color:#fff;font-weight:700;font-size:.88rem;
-  padding:.9rem;border-radius:50px;
+  color:#fff;font-weight:700;font-size:.85rem;
+  padding:.8rem;border-radius:50px;
   text-decoration:none;border:none;cursor:pointer;
   font-family:'DM Sans',sans-serif;
-  box-shadow:0 4px 16px rgba(37,211,102,.3);
-  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 14px rgba(37,211,102,.3);
+  transition:transform .2s;
 }
-.answer-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.5)}
-.answer-cta svg{width:18px;height:18px}
+.answer-cta:hover{transform:translateY(-1px)}
+.answer-cta svg{width:16px;height:16px}
 </style>
 </head>
 <body>
@@ -496,7 +496,7 @@ body::before{
         <div class="logo-frame">
           <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-img-fallback" style="display:none; width:145px; height:75px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
+          <div class="logo-img-fallback" style="display:none; width:130px; height:65px; border-radius:10px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
         </div>
       </button>
       <div>
@@ -513,25 +513,17 @@ body::before{
       <div class="rating-text">Sua evolução é a nossa prioridade!</div>
     </div>
 
-    <!-- Botão Google -->
-    <div class="layer-front" style="width:100%;display:flex;justify-content:center;">
-      <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
-        <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
+    <!-- BOTÃO WHATSAPP PRINCIPAL MAIOR (LARGURA TOTAL) -->
+    <div class="layer-front" style="width:100%;">
+      <a href="https://api.whatsapp.com/send/?phone=5511941029898&text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20quero%20mais%20informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0" class="btn-whatsapp-main" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Falar no WhatsApp
       </a>
     </div>
 
-    <!-- Ícones de Acesso Rápido / Redes Sociais -->
-    <div class="social-row layer-front" aria-label="Redes sociais e contato">
-
-      <!-- WhatsApp -->
-      <a href="https://api.whatsapp.com/send/?phone=5511941029898&text&type=phone_number&app_absent=0" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <div class="social-icon" style="background: linear-gradient(135deg, #25d366, #128c7e);">
-          <svg viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-        </div>
-        <span class="social-label">WhatsApp</span>
-      </a>
-
-      <!-- Instagram -->
+    <!-- Ícones Secundários (Instagram, Maps, Planos, Avaliar Google) -->
+    <div class="social-row layer-front" aria-label="Mais opções e redes sociais">
+      
       <a href="https://www.instagram.com/_academiaspartancauibi/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
         <div class="social-icon" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -543,8 +535,7 @@ body::before{
         <span class="social-label">Instagram</span>
       </a>
 
-      <!-- Maps -->
-      <a href="https://www.google.com/maps/search/?api=1&query=Estr.+dos+Indios,+861+-+Jardim+Caiubi,+Itaquaquecetuba+-+SP,+08588-000" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+      <a href="https://www.google.com/maps/search/?api=1&query=Estr.+dos+Indios,+861+-+Jardim+Caiubi,+Itaquaquecetuba+-+SP,+08588-000" class="social-btn" target="_blank" rel="noopener" aria-label="Maps">
         <div class="social-icon" style="background: linear-gradient(135deg, #ea4335, #c5221f);">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ffffff"/>
@@ -554,8 +545,7 @@ body::before{
         <span class="social-label">Maps</span>
       </a>
 
-      <!-- Planos -->
-      <a href="https://api.whatsapp.com/send/?phone=5511941029898&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos%20e%20modalidades.&type=phone_number&app_absent=0" class="social-btn" target="_blank" rel="noopener" aria-label="Ver Planos">
+      <a href="https://api.whatsapp.com/send/?phone=5511941029898&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos%20e%20modalidades.&type=phone_number&app_absent=0" class="social-btn" target="_blank" rel="noopener" aria-label="Planos">
         <div class="social-icon" style="background: linear-gradient(135deg, #d4af37, #996515);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 5v14M18 5v14M3 9h3M18 9h3M3 15h3M18 15h3M6 12h12"/>
@@ -564,12 +554,21 @@ body::before{
         <span class="social-label">Planos</span>
       </a>
 
+      <button type="button" class="social-btn" onclick="openThanksModal()" aria-label="Avaliar no Google">
+        <div class="social-icon" style="background: linear-gradient(135deg, #fbbc05, #f57c00);">
+          <svg viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+        </div>
+        <span class="social-label">Avaliar</span>
+      </button>
+
     </div>
 
     <!-- FAQ Link -->
     <button class="faq-link layer-front" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      Tire suas dúvidas
+      Tire suas dúvidas (FAQ)
     </button>
 
     <!-- Endereço com cópia rápida -->
@@ -578,7 +577,7 @@ body::before{
       <span itemprop="addressLocality">Itaquaquecetuba</span>, <span itemprop="addressRegion">SP</span> · Musculação & Lutas
     </div>
 
-    <!-- FAIXA BANNER ABAIXO DO ENDEREÇO -->
+    <!-- FAIXA BANNER DE CITAÇÃO -->
     <div class="quote-banner layer-mid">
       <div class="quote-track">
         <span class="quote-item">"O seu único limite é você mesmo."</span>
@@ -594,19 +593,13 @@ body::before{
 
   </div>
 
-  <!-- Rodapé -->
+  <!-- Rodapé Compacto em uma linha -->
   <div class="footer layer-back">
-    <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
-      <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
-    </p>
-
+    <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20assim." target="_blank" rel="noopener">Saiba mais</a></p>
     <div class="footer-bottom-row">
-      <div class="footer-ssl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <span>Protegido por SSL</span>
-      </div>
+      <span>🔒 Protegido por SSL</span>
       <span>•</span>
-      <p class="footer-dev">Desenvolvido por <a href="https://avaliar.impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
+      <p class="footer-dev">Desenvolvido por <a href="https://wa.me/5511954950044?text=Ol%C3%A1%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a></p>
     </div>
   </div>
 </div>
