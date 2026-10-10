@@ -10,7 +10,7 @@
 </script>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Academia Spartan Fight Fit Caiubi em Itaquaquecetuba — Musculação, Lutas, Ritmos e Treinamento de Alta Performance. Vem treinar com a gente!">
 <meta property="og:title" content="Academia Spartan Fight Fit | Caiubi - Itaquaquecetuba SP">
 <meta property="og:description" content="Desde 2018 ajudando pessoas a reconquistarem sua autoestima e confiança. Venha fazer uma aula experimental!">
@@ -42,12 +42,14 @@ body{
   background:#050505;
   color:#f5f5f5;
   min-height:100vh;
+  min-height:100dvh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0.4rem 0.8rem; /* Reduzido o espaço fora para sobra pouco em cima e embaixo */
+  padding:max(.4rem,env(safe-area-inset-top)) .8rem max(.4rem,env(safe-area-inset-bottom));
   overflow-x:hidden;
   position:relative;
+  perspective:1200px;
 }
 
 /* Fundo com iluminação Neon Dourado/Vermelho Forte atrás da moldura */
@@ -62,7 +64,7 @@ body::before{
   z-index:0;
 }
 
-/* Frame estilo Smartphone expandido verticalmente */
+/* Frame estilo Smartphone com suporte a 3D */
 .device-frame {
   position: relative;
   z-index: 1;
@@ -75,12 +77,15 @@ body::before{
     0 0 25px rgba(255, 215, 0, 0.35),
     0 0 50px rgba(255, 0, 0, 0.25),
     inset 0 0 15px rgba(255, 215, 0, 0.1);
-  padding: 1.8rem 1.2rem 1.4rem; /* Aumentado padding interno */
+  padding: 1.8rem 1.2rem 1.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.2rem; /* Mais espaçamento interno entre os elementos */
+  gap: 1.2rem;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.175,.885,.32,1.275);
+  will-change: transform;
 }
 
 .page{
@@ -89,12 +94,31 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:1.15rem; /* Espaçamento interno da página ampliado */
-  width:100%
+  gap:1.15rem;
+  width:100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-/* Logo Retangular com Shimmer Dourado */
+/* Camadas de profundidade 3D opcionais */
+.layer-back{transform:translateZ(10px);transform-style:preserve-3d}
+.layer-mid{transform:translateZ(25px);transform-style:preserve-3d}
+.layer-front{transform:translateZ(40px);transform-style:preserve-3d}
+
+/* Logo Retangular com Shimmer Dourado e Clicável para 3D */
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem}
+
+.logo-btn-interactive{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
 
 .logo-frame{
   position:relative;
@@ -102,7 +126,10 @@ body::before{
   overflow:hidden;
   display:inline-block;
   animation:logo-pulse 2.6s ease-in-out infinite;
+  transition: transform .2s;
 }
+
+.logo-btn-interactive:active .logo-frame{transform:scale(.95)}
 
 .logo-frame::after{
   content:'';
@@ -242,8 +269,18 @@ body::before{
 }
 .faq-link svg{width:14px;height:14px}
 
-/* Endereço */
-.address{font-size:.75rem;color:#aaaaaa;line-height:1.45}
+/* Endereço clicável para cópia rápida */
+.address{
+  font-size:.75rem;color:#aaaaaa;line-height:1.45;
+  cursor: pointer;
+  transition: color .2s;
+  position: relative;
+  display: inline-block;
+}
+.address:hover{color:#ffd700}
+.address::after{
+  content:'(Clique para copiar)';display:block;font-size:.58rem;color:#d4af37;opacity:.85;margin-top:1px;
+}
 
 /* FAIXA BANNER ABAIXO DO ENDEREÇO */
 .quote-banner {
@@ -446,21 +483,22 @@ body::before{
 }
 .answer-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.5)}
 .answer-cta svg{width:18px;height:18px}
-
 </style>
 </head>
 <body>
 
-<div class="device-frame">
+<div class="device-frame" id="deviceFrame">
   <div class="page">
 
-    <!-- Logo / Marca -->
-    <div class="logo-wrap">
-      <div class="logo-frame">
-        <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-img-fallback" style="display:none; width:145px; height:75px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
-      </div>
+    <!-- Logo / Marca (Clique no logo ativa/desativa o 3D) -->
+    <div class="logo-wrap layer-mid">
+      <button type="button" class="logo-btn-interactive" onclick="alternarGiroscopio()" title="Clique para ativar/desativar o Efeito 3D" aria-label="Ativar ou desativar o Efeito 3D">
+        <div class="logo-frame">
+          <img class="logo-img" src="spartan.png" alt="Logo Academia Spartan"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none; width:145px; height:75px; border-radius:12px; border:1.5px solid rgba(212,175,55,.8); background:#0c0c0c; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffd700; font-weight:800; text-transform:uppercase;">SPARTAN</div>
+        </div>
+      </button>
       <div>
         <div class="brand">Spartan <em>Fight Fit</em></div>
         <div class="tagline">Jardim Caiubi · Itaquaquecetuba</div>
@@ -468,7 +506,7 @@ body::before{
     </div>
 
     <!-- Estrelas -->
-    <div>
+    <div class="layer-back">
       <div class="stars-row" aria-label="Avaliação 5 estrelas">
         <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
       </div>
@@ -476,12 +514,14 @@ body::before{
     </div>
 
     <!-- Botão Google -->
-    <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
-      <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
-    </a>
+    <div class="layer-front" style="width:100%;display:flex;justify-content:center;">
+      <a class="btn-google-container" onclick="openThanksModal()" aria-label="Avaliar no Google">
+        <img class="btn-google-img" src="btn-google.png" alt="Avaliar no Google" onerror="this.onerror=null; this.src='https://i.imgur.com/8QzX3Yv.png';">
+      </a>
+    </div>
 
     <!-- Ícones de Acesso Rápido / Redes Sociais -->
-    <div class="social-row" aria-label="Redes sociais e contato">
+    <div class="social-row layer-front" aria-label="Redes sociais e contato">
 
       <!-- WhatsApp -->
       <a href="https://api.whatsapp.com/send/?phone=5511941029898&text&type=phone_number&app_absent=0" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -527,25 +567,24 @@ body::before{
     </div>
 
     <!-- FAQ Link -->
-    <button class="faq-link" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
+    <button class="faq-link layer-front" onclick="openFaq()" aria-label="Abrir perguntas frequentes" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Tire suas dúvidas
     </button>
 
-    <!-- Endereço -->
-    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <!-- Endereço com cópia rápida -->
+    <div class="address layer-back" onclick="copiarEndereco()" title="Clique para copiar o endereço" itemscope itemtype="https://schema.org/PostalAddress">
       <span itemprop="streetAddress">Estrada dos Índios, 861</span> · Jd. Caiubi<br>
       <span itemprop="addressLocality">Itaquaquecetuba</span>, <span itemprop="addressRegion">SP</span> · Musculação & Lutas
     </div>
 
     <!-- FAIXA BANNER ABAIXO DO ENDEREÇO -->
-    <div class="quote-banner">
+    <div class="quote-banner layer-mid">
       <div class="quote-track">
         <span class="quote-item">"O seu único limite é você mesmo."</span>
         <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
         <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
         <span class="quote-item">"A constância vence o talento."</span>
-        <!-- Repetição para animação infinita sem falhas -->
         <span class="quote-item">"O seu único limite é você mesmo."</span>
         <span class="quote-item">"Um passo de cada vez, todos os dias."</span>
         <span class="quote-item">"Mantenha o ritmo. O resultado vem."</span>
@@ -556,7 +595,7 @@ body::before{
   </div>
 
   <!-- Rodapé -->
-  <div class="footer">
+  <div class="footer layer-back">
     <p class="footer-promo">Deseja um link personalizado assim para o seu negócio?<br>
       <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20Academia%20Spartan%20e%20quero%20um%20projeto%20assim." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
     </p>
@@ -741,6 +780,61 @@ function showAnswer(i) {
 function backToList() {
   showList();
 }
+
+/* ===== COPIAR ENDEREÇO RÁPIDO ===== */
+async function copiarEndereco() {
+  const endTexto = "Estrada dos Índios, 861 - Jardim Caiubi, Itaquaquecetuba - SP, 08588-000";
+  try {
+    await navigator.clipboard.writeText(endTexto);
+    alert("Endereço copiado para a área de transferência!");
+  } catch (err) {
+    alert("Não foi possível copiar o endereço automaticamente.");
+  }
+}
+
+/* ===== EFEITO 3D (Ativado/Desativado clicando no Logo) ===== */
+const frame = document.getElementById('deviceFrame');
+let giroscopioAtivo = false;
+const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 50, anguloMax: 60 };
+
+function handleOrientation(e){
+  if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
+  let x = Math.min(Math.max(e.gamma, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
+  let y = Math.min(Math.max(e.beta - 45, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
+  frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeCelular) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeCelular) + 'deg)';
+}
+function ativandoOorientacao(){
+  window.addEventListener('deviceorientation', handleOrientation);
+  giroscopioAtivo = true;
+}
+function desativarGiroscopio(){
+  window.removeEventListener('deviceorientation', handleOrientation);
+  giroscopioAtivo = false;
+  frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+}
+function alternarGiroscopio(){
+  if (giroscopioAtivo) { 
+    desativarGiroscopio(); 
+    return; 
+  }
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission().then(function(state){
+      if (state === 'granted') ativandoOorientacao();
+      else alert('Permissão de orientação negada.');
+    }).catch(function(){ ativandoOorientacao(); });
+  } else {
+    ativandoOorientacao();
+  }
+}
+document.addEventListener('mousemove', function(e){
+  if (!giroscopioAtivo) return;
+  const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+  const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+  frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeMouse) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeMouse) + 'deg)';
+});
+document.addEventListener('mouseleave', function(){
+  if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+});
 
 overlay.addEventListener('click', e => { if (e.target === overlay) closeFaq(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFaq(); });
