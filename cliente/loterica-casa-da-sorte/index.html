@@ -459,6 +459,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
 .horarios li.hoje{color:#ffd36b;font-weight:700}
 .bg-seo .fotos picture{flex:1 1 0;min-width:0;display:block}
 .bg-seo .fotos picture img{width:100%}
+
+.footer{gap:.3rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.1)}
+.footer-copy{font-size:.7rem;color:#a9bdd6;margin:0}
+.footer-aviso{font-size:.62rem;color:#7f97b5;line-height:1.4;margin:0;max-width:92%}
+.footer-dev{font-size:.64rem;color:#7f97b5;gap:.45rem;margin:0}
+.footer-dev a{color:#9cc4ec;font-weight:600}
+.btn-gyro{font-size:.62rem;padding:.2rem .6rem;opacity:.65}
 </style>
 </head>
 <body>
@@ -552,17 +559,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
     </div>
 
     <footer class="footer layer-back">
-      <p class="footer-seo-text"><span>Lotérica</span> no Butantã, São Paulo: jogos e pagamentos perto de você.</p>
-      <p class="footer-promo">Deseja um link como este para sua empresa?<br>
-        <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20este%20modelo%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">👉 Saiba mais aqui</a>
-      </p>
-      <div class="footer-ssl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Protegido por SSL
-      </div>
+      <p class="footer-copy">© 2026 Lotérica Casa da Sorte · Butantã, São Paulo - SP</p>
+      <p class="footer-aviso">Apostas proibidas para menores de 18 anos. Jogue com responsabilidade.</p>
       <p class="footer-dev">
-        Desenvolvido por <a href="https://wa.me/5511954950044?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a>
-        <button class="btn-gyro" id="toggleGyro" onclick="alternarGiroscopio()">Giroscópio: OFF</button>
+        <span>Página criada por <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Lot%C3%A9rica%20Casa%20da%20Sorte%20e%20quero%20uma%20igual%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer">ImpulsoWeb10</a> · Quer uma assim?</span>
+        <button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()" aria-label="Ativar ou desativar o efeito 3D">Efeito 3D: OFF</button>
       </p>
     </footer>
   </div>
@@ -599,8 +600,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <p>A Lotérica Casa da Sorte atende o bairro do Butantã, em São Paulo, com jogos e pagamentos em um só lugar.</p>
     </div>
     <div class="fotos">
-      <picture><source srcset="loterica-casa-da-sorte-butanta.webp" type="image/webp"><img src="loterica-casa-da-sorte-butanta.webp" alt="Lotérica Casa da Sorte, Butantã" loading="lazy" width="400" height="400"></picture>
-      <picture><source srcset="loterica-butanta-sao-paulo.webp" type="image/webp"><img src="loterica-butanta-sao-paulo.webp" alt="Lotérica no Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="loterica-casa-da-sorte-butanta.webp" type="image/webp"><img src="loterica-casa-da-sorte-butanta.png" alt="Lotérica Casa da Sorte, Butantã" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="loterica-butanta-sao-paulo.webp" type="image/webp"><img src="loterica-butanta-sao-paulo.png" alt="Lotérica no Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
     </div>
   </div>
   <div>
@@ -609,8 +610,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <p>Av. Prof. Francisco Morato, 2718 - Butantã, São Paulo - SP, 05512-300, Brasil.</p>
     </div>
     <div class="fotos">
-      <picture><source srcset="regiao-butanta-sao-paulo.webp" type="image/webp"><img src="regiao-butanta-sao-paulo.webp" alt="Região do Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
-      <picture><source srcset="jogos-e-pagamentos-loterica-butanta.webp" type="image/webp"><img src="jogos-e-pagamentos-loterica-butanta.webp" alt="Jogos e pagamentos na Lotérica Casa da Sorte" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="regiao-butanta-sao-paulo.webp" type="image/webp"><img src="regiao-butanta-sao-paulo.png" alt="Região do Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="jogos-e-pagamentos-loterica-butanta.webp" type="image/webp"><img src="jogos-e-pagamentos-loterica-butanta.png" alt="Jogos e pagamentos na Lotérica Casa da Sorte" loading="lazy" width="400" height="400"></picture>
     </div>
   </div>
 </aside>
@@ -631,14 +632,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
   function ativandoOorientacao() {
     window.addEventListener('deviceorientation', handleOrientation);
     giroscopioAtivo = true;
-    btnGyro.innerText = 'Giroscópio: ON';
+    btnGyro.innerText = 'Efeito 3D: ON';
     btnGyro.classList.add('active');
   }
 
   function desativarGiroscopio() {
     window.removeEventListener('deviceorientation', handleOrientation);
     giroscopioAtivo = false;
-    btnGyro.innerText = 'Giroscópio: OFF';
+    btnGyro.innerText = 'Efeito 3D: OFF';
     btnGyro.classList.remove('active');
     frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   }
