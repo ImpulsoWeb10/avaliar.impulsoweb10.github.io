@@ -445,6 +445,20 @@ button.social-btn{background:none;border:none;font-family:inherit;cursor:pointer
 .btn-gyro:hover,.btn-gyro.active{opacity:1}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ffd36b;outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.status{display:inline-flex;align-items:center;gap:.5rem;font-size:.76rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e8e2d8}
+.status[hidden]{display:none}
+.status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:dot-verde 1.8s ease-out infinite}
+.status.fechado .status-dot{background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,.7);animation:dot-vermelho 1.8s ease-out infinite}
+.status.fechado{border-color:rgba(239,68,68,.45)}
+.status.aberto{border-color:rgba(34,197,94,.5)}
+@keyframes dot-verde{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%,100%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+@keyframes dot-vermelho{0%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}70%,100%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.horarios{list-style:none;padding:0;margin:0}
+.horarios li{display:flex;justify-content:space-between;gap:1rem;padding:.2rem 0;border-bottom:1px dashed rgba(255,255,255,.1);font-size:.82rem}
+.horarios li.hoje{color:#ffd36b;font-weight:700}
+.bg-seo .fotos picture{flex:1 1 0;min-width:0;display:block}
+.bg-seo .fotos picture img{width:100%}
 </style>
 </head>
 <body>
@@ -468,7 +482,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
         </div>
         <div>
           <h1 class="brand">Lotérica Casa da Sorte</h1>
-          <div class="tagline">Jogos e pagamentos · Butantã</div>
+          <h2 class="tagline">Lotérica no Butantã · São Paulo</h2>
         </div>
       </div>
 
@@ -523,6 +537,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
         Butantã, São Paulo - SP · CEP 05512-300
       </address>
 
+      <div class="status layer-back" id="status" hidden>
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusTxt"></span>
+      </div>
+
       <div class="ticker-banner layer-mid">
         <div class="ticker-track">
           <span class="ticker-item">Lotérica no Butantã • Jogos e pagamentos • Av. Prof. Francisco Morato, 2718</span>
@@ -562,6 +581,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <a href="https://wa.me/5511954950044" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       <a href="tel:+5511954950044">Ligar</a>
     </div>
+    <h3>Horário de atendimento</h3>
+    <ul class="horarios" id="horariosLista"></ul>
     <h3>Perguntas frequentes</h3>
     <details><summary>Onde fica a Lotérica Casa da Sorte?</summary><p>Na Av. Prof. Francisco Morato, 2718, no Butantã, São Paulo - SP, CEP 05512-300.</p></details>
     <details><summary>Quais serviços a lotérica oferece?</summary><p>Jogos e pagamentos. Para confirmar um serviço específico, chame no WhatsApp (11) 95495-0044.</p></details>
@@ -578,8 +599,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <p>A Lotérica Casa da Sorte atende o bairro do Butantã, em São Paulo, com jogos e pagamentos em um só lugar.</p>
     </div>
     <div class="fotos">
-      <img src="loterica-casa-da-sorte-butanta.webp" alt="Lotérica Casa da Sorte, Butantã" loading="lazy" width="400" height="400">
-      <img src="loterica-butanta-sao-paulo.webp" alt="Lotérica no Butantã, São Paulo" loading="lazy" width="400" height="400">
+      <picture><source srcset="loterica-casa-da-sorte-butanta.webp" type="image/webp"><img src="loterica-casa-da-sorte-butanta.webp" alt="Lotérica Casa da Sorte, Butantã" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="loterica-butanta-sao-paulo.webp" type="image/webp"><img src="loterica-butanta-sao-paulo.webp" alt="Lotérica no Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
     </div>
   </div>
   <div>
@@ -588,8 +609,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <p>Av. Prof. Francisco Morato, 2718 - Butantã, São Paulo - SP, 05512-300, Brasil.</p>
     </div>
     <div class="fotos">
-      <img src="regiao-butanta-sao-paulo.webp" alt="Região do Butantã, São Paulo" loading="lazy" width="400" height="400">
-      <img src="jogos-e-pagamentos-loterica-butanta.webp" alt="Jogos e pagamentos na Lotérica Casa da Sorte" loading="lazy" width="400" height="400">
+      <picture><source srcset="regiao-butanta-sao-paulo.webp" type="image/webp"><img src="regiao-butanta-sao-paulo.webp" alt="Região do Butantã, São Paulo" loading="lazy" width="400" height="400"></picture>
+      <picture><source srcset="jogos-e-pagamentos-loterica-butanta.webp" type="image/webp"><img src="jogos-e-pagamentos-loterica-butanta.webp" alt="Jogos e pagamentos na Lotérica Casa da Sorte" loading="lazy" width="400" height="400"></picture>
     </div>
   </div>
 </aside>
@@ -651,6 +672,59 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
   document.getElementById('abrirSobre').addEventListener('click',function(){d.showModal()});
   document.getElementById('fecharSobre').addEventListener('click',function(){d.close()});
   d.addEventListener('click',function(e){if(e.target===d)d.close()});
+})();
+</script>
+<script>
+/* ===== HORÁRIO DE ATENDIMENTO — EDITE AQUI ===================================
+   Formato: dia da semana (0=domingo ... 6=sábado): ["abre","fecha"] ou null (fechado).
+   ATENÇÃO: horários abaixo são PROVISÓRIOS. Troque pelos horários reais da lotérica. */
+var HORARIOS = {
+  0: null,
+  1: ["08:00","18:00"],
+  2: ["08:00","18:00"],
+  3: ["08:00","18:00"],
+  4: ["08:00","18:00"],
+  5: ["08:00","18:00"],
+  6: ["08:00","18:00"]
+};
+/* ============================================================================ */
+(function(){
+  var NOMES=["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  var CURTOS=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  function min(h){var p=h.split(":");return +p[0]*60+ +p[1]}
+  function agora(){
+    var f=new Intl.DateTimeFormat("en-US",{timeZone:"America/Sao_Paulo",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()),o={};
+    f.forEach(function(x){o[x.type]=x.value});
+    var dia={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[o.weekday];
+    return {dia:dia,m:(+o.hour)*60+(+o.minute)};
+  }
+  function render(){
+    var box=document.getElementById("status"),txt=document.getElementById("statusTxt");
+    if(!box)return;
+    var n=agora(),h=HORARIOS[n.dia],aberto=false,msg="";
+    if(h&&n.m>=min(h[0])&&n.m<min(h[1])){aberto=true;msg="Aberto agora · fecha às "+h[1];}
+    else{
+      if(h&&n.m<min(h[0])){msg="Fechado agora · abre hoje às "+h[0];}
+      else{
+        for(var i=1;i<=7;i++){
+          var d=(n.dia+i)%7,x=HORARIOS[d];
+          if(x){msg="Fechado agora · abre "+(i===1?"amanhã":NOMES[d])+" às "+x[0];break;}
+        }
+        if(!msg)msg="Fechado agora";
+      }
+    }
+    box.className="status layer-back "+(aberto?"aberto":"fechado");
+    txt.textContent=msg;box.hidden=false;
+  }
+  function lista(){
+    var ul=document.getElementById("horariosLista");if(!ul)return;
+    var hoje=agora().dia,ordem=[1,2,3,4,5,6,0];
+    ul.innerHTML=ordem.map(function(d){
+      var h=HORARIOS[d];
+      return '<li'+(d===hoje?' class="hoje"':'')+'><span>'+CURTOS[d]+'</span><span>'+(h?h[0]+" às "+h[1]:"Fechado")+'</span></li>';
+    }).join("");
+  }
+  render();lista();setInterval(render,60000);
 })();
 </script>
 </body>
