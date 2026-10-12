@@ -1,0 +1,68 @@
+```json
+{
+  "dados_formulario_base": {
+    "placeId": "ChIJ0WGThTN8zpQRNfhm105GasU",
+    "nomeEmpresa": "Nova Louzada Materiais para Construção",
+    "whatsapp": "551134864431",
+    "instagram": "novalouzada",
+    "cidadeEstado": "Itaquaquecetuba / SP",
+    "enderecoCompleto": "Avenida Turmalinas, 515, Estância Fraternidade, Itaquaquecetuba - SP, CEP 08589-000",
+    "segmento": "Loja de Materiais de Construção",
+    "produtosPrincipais": "Cimento, areia, pedra, tijolos, blocos, argamassa, ferragens, hidráulica, elétrica, tintas, pisos e revestimentos, ferramentas, entrega de materiais"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/nova-louzada/index.html",
+      "h1": "Nova Louzada Materiais para Construção em Itaquaquecetuba - SP",
+      "meta_description": "Material de construção em Itaquaquecetuba - SP: cimento, areia, pedra, tijolos, ferragens e acabamentos com bom preço e entrega. Peça seu orçamento na Nova Louzada!"
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Cimento, areia, pedra, tijolos e blocos para a base e a estrutura da sua obra em Itaquaquecetuba",
+      "Argamassa, ferragens, material hidráulico e elétrico para reformas e acabamentos",
+      "Tintas, pisos e revestimentos para dar o toque final em casas e comércios da região",
+      "Atendimento no balcão, orçamento rápido e entrega de materiais de construção"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "fachada-nova-louzada-materiais-para-construcao-itaquaquecetuba.webp",
+        "alt_descricao": "Fachada da Nova Louzada Materiais para Construção na Avenida Turmalinas, Estância Fraternidade, Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "cimento-areia-pedra-material-de-construcao-itaquaquecetuba.webp",
+        "alt_descricao": "Cimento, areia e pedra para obra à venda na loja de material de construção em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "tijolos-blocos-argamassa-nova-louzada-itaquaquecetuba.webp",
+        "alt_descricao": "Tijolos, blocos e argamassa para construção e reforma na Nova Louzada em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "atendimento-balcao-loja-material-construcao-itaquaquecetuba.webp",
+        "alt_descricao": "Atendimento no balcão da loja de materiais de construção Nova Louzada, em Itaquaquecetuba - SP"
+      }
+    ],
+    "textos_seo_secoes": {
+      "introducao_bloco": "A Nova Louzada Materiais para Construção é referência em material de construção na Estância Fraternidade, em Itaquaquecetuba - SP. Quem está começando uma obra, tocando uma reforma ou fazendo um pequeno reparo encontra na loja os itens essenciais, com atendimento de balcão e orientação na hora de escolher.",
+      "foco_produtos": "O catálogo reúne cimento, areia, pedra, tijolos e blocos para a estrutura, além de argamassa, ferragens, material hidráulico e elétrico, tintas, pisos e revestimentos para o acabamento. Escolher bons materiais dá mais durabilidade à obra, e por isso a equipe ajuda a definir o item e a quantidade certa para cada etapa.",
+      "chamada_local": "Atendemos moradores, pedreiros e construtores de Itaquaquecetuba e região, na Avenida Turmalinas, 515. Visite a loja, peça seu orçamento e pergunte sobre entrega dos materiais direto no endereço da sua obra."
+    },
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Onde fica a Nova Louzada Materiais para Construção em Itaquaquecetuba?",
+        "resposta": "A loja fica na Avenida Turmalinas, 515, bairro Estância Fraternidade, em Itaquaquecetuba - SP, CEP 08589-000."
+      },
+      {
+        "pergunta": "A Nova Louzada faz entrega de materiais de construção?",
+        "resposta": "Sim. A loja oferece entrega como opção. Informe os itens e o endereço da obra ao pedir o orçamento para combinar prazo e forma de entrega."
+      },
+      {
+        "pergunta": "Quais materiais posso comprar na Nova Louzada?",
+        "resposta": "Cimento, areia, pedra, tijolos, blocos, argamassa, ferragens, itens hidráulicos e elétricos, tintas, pisos, revestimentos e ferramentas para obras e reformas."
+      }
+    ]
+  }
+}
+```
