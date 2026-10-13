@@ -105,12 +105,12 @@ body::before{
     0 0 20px var(--theme-shadow),
     0 0 30px rgba(255,255,255,.35),
     0 15px 35px rgba(0,0,0,.6);
-  padding:1rem 1.2rem .9rem;
+  padding:1.15rem 1.2rem 1.05rem; /* Ajustado +2% na vertical */
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
-  gap:.75rem;
+  gap:.85rem;
   transform-style:preserve-3d;
   transition:transform .6s cubic-bezier(.175,.885,.32,1.275), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   will-change:transform;
@@ -128,7 +128,7 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.75rem;
+  gap:.85rem;
   width:100%;
   transform-style:preserve-3d;
   backface-visibility:hidden;
@@ -139,7 +139,7 @@ body::before{
 .layer-front{transform:translateZ(55px);transform-style:preserve-3d;filter:drop-shadow(0 10px 15px rgba(0,0,0,.5));transition:transform .4s ease}
 .layer-pop{transform:translateZ(75px);transform-style:preserve-3d;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6));transition:transform .4s ease}
 
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.3rem}
 .logo-frame{
   position:relative;
   border-radius:12px;
@@ -241,6 +241,12 @@ body::before{
 .btn-nav-map:hover, .btn-nav-waze:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .btn-nav-map{background:#1a2030;color:#5ff7fe;border:1.5px solid rgba(66,133,244,.6)}
 .btn-nav-waze{background:#10222a;color:#5ff7fe;border:1.5px solid rgba(51,204,255,.6)}
+
+/* Botões Google e Waze Originais dentro do Modal */
+.modal-action-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem}
+.modal-btn-google{display:flex;align-items:center;justify-content:center;gap:.4rem;background:#FBBC05;color:#1a1200;font-weight:700;padding:.7rem;border-radius:50px;font-size:.78rem;text-decoration:none;font-family:'DM Sans',sans-serif}
+.modal-btn-waze{display:flex;align-items:center;justify-content:center;gap:.4rem;background:#33ccff;color:#0b1a2e;font-weight:700;padding:.7rem;border-radius:50px;font-size:.78rem;text-decoration:none;font-family:'DM Sans',sans-serif}
+
 .faq-container{display:flex;flex-direction:column;gap:.45rem}
 .faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;transition:background .2s, border-color .2s}
 .faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(201,169,110,.4)}
@@ -365,9 +371,16 @@ body::before{
     <section>
       <h3>Endereço e rotas</h3>
       <p>Avenida Turmalinas, 515, Estância Fraternidade, Itaquaquecetuba - SP, CEP 08589-000<br>Itaquaquecetuba / SP</p>
-      <div class="nav-buttons-grid">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Avenida%20Turmalinas%2C%20515%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%2C%20CEP%2008589-000%20Itaquaquecetuba%20%2F%20SP" class="btn-nav-map" target="_blank" rel="noopener">Abrir no Google</a>
-        <a href="https://waze.com/ul?q=Avenida%20Turmalinas%2C%20515%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%2C%20CEP%2008589-000%20Itaquaquecetuba%20%2F%20SP" class="btn-nav-waze" target="_blank" rel="noopener">Abrir no Waze</a>
+      <!-- Botões Google e Waze Originais -->
+      <div class="modal-action-row">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Avenida%20Turmalinas%2C%20515%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%2C%20CEP%2008589-000%20Itaquaquecetuba%20%2F%20SP" class="modal-btn-google" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google Maps
+        </a>
+        <a href="https://waze.com/ul?q=Avenida%20Turmalinas%2C%20515%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%2C%20CEP%2008589-000%20Itaquaquecetuba%20%2F%20SP" class="modal-btn-waze" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19.98 8.79a8.43 8.43 0 0 0-1.2-3.15l-1.42 1.41a6.45 6.45 0 0 1 .91 2.38h1.71M12 3.5a8.45 8.45 0 0 0-5.95 2.47l1.42 1.42A6.47 6.47 0 0 1 12 5.5v-2M6.05 8.79a8.43 8.43 0 0 0 0 6.42l1.71-.57a6.45 6.45 0 0 1 0-5.28l-1.71-.57m11.9 6.42a8.43 8.43 0 0 0-1.2-3.15l-1.42 1.41a6.45 6.45 0 0 1 .91 2.38h1.71m-7.95 3.29c2.14 0 4.1-.82 5.58-2.17l-1.21-1.21a6.47 6.47 0 0 1-4.37 1.73v1.65z"/></svg>
+          Waze
+        </a>
       </div>
     </section>
     <section>
