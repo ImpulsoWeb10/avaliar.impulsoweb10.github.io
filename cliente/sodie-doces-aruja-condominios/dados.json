@@ -1,0 +1,66 @@
+{
+  "dados_formulario_base": {
+    "placeId": "EklSb2QuIEFsYmVydG8gSGlub3RvLCAxNjMwIC0gQXJ1amF6aW5obyBJViwgQXJ1asOhIC0gU1AsIDA3NDMyLTU3NSwgQnJhemlsIjESLwoUChIJPzEFAp19zpQR8gTrSSpnDUsQ3gwqFAoSCafuN-T_fM6UET0oEFwWO8Ky",
+    "nomeEmpresa": "Sodiê Doces Arujá - Condomínios",
+    "whatsapp": "5511913389691",
+    "instagram": "SodieDoces",
+    "cidadeEstado": "Arujá / SP",
+    "enderecoCompleto": "Rodovia Alberto Hinoto, 1630, Vila Pedroso (Condomínios), Arujá - SP, CEP 07434-325",
+    "segmento": "Doceria e Confeitaria (Bolos, Doces e Salgados)",
+    "produtosPrincipais": "Bolos, tortas doces, chocolates, doces, salgados, kit festa, balas de coco, bebidas, bolos para aniversário e presentes"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/sodie-doces-aruja-condominios/index.html",
+      "h1": "Sodiê Doces em Arujá - Bolos, Doces e Kit Festa nos Condomínios",
+      "meta_description": "Sodiê Doces Arujá - Condomínios: bolos, tortas, doces, salgados e kit festa na Rod. Alberto Hinoto, 1630. Faça seu pedido pelo WhatsApp e recheie seu dia!"
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Bolos caseiros e tortas doces para aniversários, encontros em família e datas especiais em Arujá",
+      "Kit festa completo com doces, salgados e bolo para comemorações práticas e sem estresse",
+      "Chocolates, balas de coco e doces artesanais ótimos para presentear quem você gosta",
+      "Atendimento de segunda a sábado e também aos domingos e feriados, com pedidos pelo WhatsApp"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "https://sodiedoces.com.br/wp-content/themes/sodiedoces/img/logo-sodie.png",
+        "nome_arquivo_webp": "logo-sodie-doces-aruja-condominios.webp",
+        "alt_descricao": "Logo da Sodiê Doces, loja de bolos e doces em Arujá - Condomínios, SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "bolos-caseiros-sodie-doces-aruja.webp",
+        "alt_descricao": "Bolos caseiros e tortas doces da Sodiê Doces para aniversário em Arujá - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "kit-festa-doces-salgados-aruja.webp",
+        "alt_descricao": "Kit festa com doces e salgados da Sodiê Doces para comemorações em Arujá - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "chocolates-balas-de-coco-sodie-aruja.webp",
+        "alt_descricao": "Chocolates e balas de coco para presente na Sodiê Doces, unidade Condomínios em Arujá - SP"
+      }
+    ],
+    "textos_seo_secoes": {
+      "introducao_bloco": "A Sodiê Doces da unidade Arujá - Condomínios leva a tradição dos bolos caseiros e dos doces artesanais para quem mora e trabalha na região da Vila Pedroso. É o lugar certo para adoçar o dia, preparar uma comemoração ou escolher um presente especial sem sair de Arujá.",
+      "foco_produtos": "A loja reúne bolos, tortas doces, chocolates, doces, salgados, balas de coco e bebidas, além do kit festa para quem quer praticidade na hora de celebrar. Os produtos são artesanais e preparados para tornar aniversários, reuniões e cafés da tarde ainda mais saborosos.",
+      "chamada_local": "Estamos na Rodovia Alberto Hinoto, 1630, em Arujá, com atendimento de segunda a sábado, das 10h às 19h, e aos domingos e feriados, das 10h às 17h. Chame no WhatsApp, tire suas dúvidas e faça o seu pedido."
+    },
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Qual o horário de funcionamento da Sodiê Doces em Arujá - Condomínios?",
+        "resposta": "A loja funciona de segunda a sábado, das 10h às 19h, e aos domingos e feriados, das 10h às 17h."
+      },
+      {
+        "pergunta": "Onde fica a Sodiê Doces de Arujá - Condomínios?",
+        "resposta": "A loja fica na Rodovia Alberto Hinoto, 1630, na região da Vila Pedroso, em Arujá - SP, CEP 07434-325."
+      },
+      {
+        "pergunta": "A Sodiê Doces Arujá vende kit festa, bolos e salgados?",
+        "resposta": "Sim. A unidade oferece bolos, tortas doces, doces, salgados, chocolates, balas de coco e kit festa. Para pedidos e dúvidas, fale pelo WhatsApp (11) 91338-9691."
+      }
+    ]
+  }
+}
