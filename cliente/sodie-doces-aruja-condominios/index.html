@@ -142,9 +142,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .gallery img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;border:1px solid rgba(201,169,110,.5)}
 .nav-buttons-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}
 .btn-nav-map, .btn-nav-waze{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;transition:transform .2s, box-shadow .2s;padding:0 .4rem}
+.btn-nav-map svg, .btn-nav-waze svg{width:16px;height:16px;flex-shrink:0;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .btn-nav-map:hover, .btn-nav-waze:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .btn-nav-map{background:#1a2030;color:#ffffff;border:1.5px solid rgba(66,133,244,.6)}
+.btn-nav-map svg{stroke:#ea4335}
 .btn-nav-waze{background:#10222a;color:#ffffff;border:1.5px solid rgba(51,204,255,.6)}
+.btn-nav-waze svg{stroke:#33ccff}
 .faq-container{display:flex;flex-direction:column;gap:.45rem}
 .faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;transition:background .2s, border-color .2s}
 .faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(201,169,110,.4)}
@@ -195,7 +198,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
       <div class="chips layer-back" aria-label="Produtos">
-        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Bolos, tortas doces, chocolates, doces, salgados, kit festa, balas de coco, bebidas, bolos para aniversário e presentes</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14l-1.6 8.2a1 1 0 0 1-1 .8H7.6a1 1 0 0 1-1-.8z"/><path d="M6.2 12a5.8 5.8 0 0 1 11.6 0"/><path d="M12 6.2V4"/><circle cx="12" cy="3.2" r="1"/></svg>Bolos, tortas doces, chocolates, doces, salgados, kit festa, balas de coco, bebidas, bolos para aniversário e presentes</span>
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/></svg>Qualidade</span>
       </div>
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
@@ -250,14 +253,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <section>
       <h3>O que você encontra</h3>
-      <ul class="svc-list"><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Bolos caseiros e tortas doces para aniversários, encontros em família e datas especiais em Arujá</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Kit festa completo com doces, salgados e bolo para comemorações práticas e sem estresse</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Chocolates, balas de coco e doces artesanais ótimos para presentear quem você gosta</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Atendimento de segunda a sábado e também aos domingos e feriados, com pedidos pelo WhatsApp</li></ul>
+      <ul class="svc-list"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14l-1.6 8.2a1 1 0 0 1-1 .8H7.6a1 1 0 0 1-1-.8z"/><path d="M6.2 12a5.8 5.8 0 0 1 11.6 0"/><path d="M12 6.2V4"/><circle cx="12" cy="3.2" r="1"/></svg>Bolos caseiros e tortas doces para aniversários, encontros em família e datas especiais em Arujá</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Kit festa completo com doces, salgados e bolo para comemorações práticas e sem estresse</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Chocolates, balas de coco e doces artesanais ótimos para presentear quem você gosta</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Atendimento de segunda a sábado e também aos domingos e feriados, com pedidos pelo WhatsApp</li></ul>
     </section>
     <section>
       <h3>Endereço e rotas</h3>
       <p>Rodovia Alberto Hinoto, 1630, Vila Pedroso (Condomínios), Arujá - SP, CEP 07434-325<br>Arujá / SP</p>
       <div class="nav-buttons-grid">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Rodovia%20Alberto%20Hinoto%2C%201630%2C%20Vila%20Pedroso%20(Condom%C3%ADnios)%2C%20Aruj%C3%A1%20-%20SP%2C%20CEP%2007434-325%20Aruj%C3%A1%20%2F%20SP" class="btn-nav-map" target="_blank" rel="noopener">Abrir no Google</a>
-        <a href="https://waze.com/ul?q=Rodovia%20Alberto%20Hinoto%2C%201630%2C%20Vila%20Pedroso%20(Condom%C3%ADnios)%2C%20Aruj%C3%A1%20-%20SP%2C%20CEP%2007434-325%20Aruj%C3%A1%20%2F%20SP" class="btn-nav-waze" target="_blank" rel="noopener">Abrir no Waze</a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Rodovia%20Alberto%20Hinoto%2C%201630%2C%20Vila%20Pedroso%20(Condom%C3%ADnios)%2C%20Aruj%C3%A1%20-%20SP%2C%20CEP%2007434-325%20Aruj%C3%A1%20%2F%20SP" class="btn-nav-map" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Google Maps</a>
+        <a href="https://waze.com/ul?q=Rodovia%20Alberto%20Hinoto%2C%201630%2C%20Vila%20Pedroso%20(Condom%C3%ADnios)%2C%20Aruj%C3%A1%20-%20SP%2C%20CEP%2007434-325%20Aruj%C3%A1%20%2F%20SP" class="btn-nav-waze" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Waze</a>
       </div>
     </section>
     <section>
