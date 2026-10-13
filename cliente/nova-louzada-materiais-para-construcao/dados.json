@@ -1,72 +1,21 @@
 {
   "dados_formulario_base": {
-    "placeId": "ChIJ0WGThTN8zpQRNfhm105GasU",
     "nomeEmpresa": "Nova Louzada Materiais para Construção",
     "whatsapp": "551134864431",
     "instagram": "novalouzada",
-    "cidadeEstado": "Itaquaquecetuba / SP",
-    "enderecoCompleto": "Avenida Turmalinas, 515, Estância Fraternidade, Itaquaquecetuba - SP, CEP 08589-000",
-    "segmento": "Depósito de Materiais de Construção",
-    "produtosPrincipais": "Material básico para obra, cimento, areia, brita, blocos, tijolos, argamassa, ferragens, encanamento, fios e cabos, tintas, revestimentos, ferramentas, entrega de material"
+    "segmento": "Depósito de Materiais de Construção"
   },
   "conteudo_enriquecido_desktop": {
     "seo_tags": {
-      "canonical": "https://impulsoweb10.com.br/nova-louzada/index.html",
-      "h1": "Depósito de Material de Construção em Itaquaquecetuba - Nova Louzada",
-      "meta_description": "Depósito de construção em Itaquaquecetuba - SP: material para obra e reforma, cimento, areia, brita, blocos e acabamentos. Peça orçamento na Nova Louzada!",
       "title": "Nova Louzada Materiais para Construção",
-      "h2": "Depósito de Materiais de Construção"
-    },
-    "lista_beneficios_o_que_encontra": [
-      "Material básico para obra: cimento, areia, brita, blocos e tijolos para levantar paredes e lajes",
-      "Encanamento, fios, cabos e ferragens para instalações e consertos em casa ou no comércio",
-      "Tintas, revestimentos e itens de acabamento para renovar ambientes em Itaquaquecetuba",
-      "Orçamento de material para reforma com atendimento direto e entrega no local da obra"
-    ],
-    "imagens_otimizadas_seo": [
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "deposito-de-construcao-nova-louzada-estancia-fraternidade.webp",
-        "alt_descricao": "Depósito de construção Nova Louzada na Avenida Turmalinas, bairro Estância Fraternidade, Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "material-basico-para-obra-cimento-brita-itaquaquecetuba.webp",
-        "alt_descricao": "Material básico para obra com cimento, areia e brita em loja de construção de Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "material-para-reforma-encanamento-ferragens-itaquaquecetuba.webp",
-        "alt_descricao": "Encanamento, ferragens e material para reforma à venda na Nova Louzada em Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "tintas-revestimentos-acabamento-obra-itaquaquecetuba.webp",
-        "alt_descricao": "Tintas e revestimentos para acabamento de obra na loja de material de construção em Itaquaquecetuba - SP"
-      }
-    ],
-    "textos_seo_secoes": {
-      "introducao_bloco": "Quem procura um depósito de construção em Itaquaquecetuba encontra na Nova Louzada um ponto de apoio para obras de todos os tamanhos. A loja fica na Estância Fraternidade e atende desde quem vai levantar uma casa até quem só precisa de um item para consertar o banheiro ou a cozinha.",
-      "foco_produtos": "Do material básico para obra, como cimento, areia, brita, blocos e tijolos, até encanamento, fios, cabos, ferragens, tintas e revestimentos, a Nova Louzada reúne o que cada etapa da construção ou da reforma exige. Comprar tudo no mesmo lugar economiza tempo, reduz idas e vindas e ajuda a manter o cronograma da obra em dia.",
-      "chamada_local": "Estamos na Avenida Turmalinas, 515, atendendo Itaquaquecetuba e as regiões vizinhas. Faça uma visita, monte a lista de material da sua reforma e peça um orçamento. Pergunte também sobre a entrega no endereço da obra."
-    },
-    "faq_perguntas_frequentes": [
-      {
-        "pergunta": "A Nova Louzada vende material para reforma e obra pequena?",
-        "resposta": "Sim. A loja atende tanto grandes obras quanto pequenos reparos, com itens como cimento, argamassa, encanamento, tintas e ferragens."
-      },
-      {
-        "pergunta": "Posso pedir orçamento de material de construção antes de comprar?",
-        "resposta": "Pode. Leve a lista dos itens e das quantidades, ou peça ajuda no balcão para calcular o material da sua obra, e solicite o orçamento sem compromisso."
-      },
-      {
-        "pergunta": "Como chego ao depósito de construção da Nova Louzada?",
-        "resposta": "A loja fica na Avenida Turmalinas, 515, no bairro Estância Fraternidade, em Itaquaquecetuba - SP, CEP 08589-000."
-      }
-    ]
+      "meta_description": "Depósito de construção em Itaquaquecetuba - SP: material para obra e reforma, cimento, areia, brita, blocos e acabamentos. Peça orçamento na Nova Louzada!",
+      "h1": "Depósito de Material de Construção em Itaquaquecetuba - Nova Louzada",
+      "h2": "Materiais Básicos para Construção e Reforma"
+    }
   },
   "customizacao": {
-    "cor_fundo": "#8f0723",
-    "cor_neon": "#5ff7fe"
+    "cor_fundo": "#1e0a22",
+    "cor_neon": "#a855f7",
+    "cor_interna": "#110c1d"
   }
 }
