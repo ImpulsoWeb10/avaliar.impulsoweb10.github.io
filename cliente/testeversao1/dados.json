@@ -1,92 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!--
+  TEMPLATE MESTRE IMPULSOWEB10 (VERSÃO COM SEO AVANÇADO & RICH SNIPPETS)
+  Todos os campos entre {{CHAVES}} são substituídos pelo sistema gerador.
+
+  TEXTOS SIMPLES
+  {{NOME}} {{SLUG}} {{URL_PAGINA}} {{CATEGORIA}} {{CIDADE}} {{UF}} {{TAGLINE}}
+  {{DESCRICAO_CURTA}} {{RUA_NUMERO}} {{BAIRRO}} {{CEP}} {{ENDERECO_COMPLETO}}
+  {{ENDERECO_URL}} (endereço já codificado para URL)
+  {{TELEFONE_E164}} (ex: +5511999999999)  {{TELEFONE_FORMATADO}} (ex: (11) 99999-9999)
+  {{WHATSAPP_NUMERO}} (só dígitos com 55)  {{INSTAGRAM_USER}}
+  {{LINK_AVALIACAO_GOOGLE}} {{LAT}} {{LNG}} {{TIPO_SCHEMA}} (ex: LocalBusiness, PaintStore, Bakery)
+  {{HORA_ABRE}} (número, ex: 8)  {{HORA_FECHA}} (número, ex: 18)
+  {{HORA_ABRE_HHMM}} (ex: 08:00)  {{HORA_FECHA_HHMM}} (ex: 18:00)
+  {{TEXTO_HORARIO}} (ex: Seg a sáb · 8h às 18h)  {{GA_ID}} (ex: G-XXXXXXXXXX)
+
+  BLOCOS DE HTML
+  {{CHIPS_HTML}}     -> <span class="chip">Produto</span> (repetir)
+  {{SERVICOS_HTML}}  -> <li>Texto</li> (repetir, 4 itens)
+  {{FAQ_HTML}}       -> <details class="faq-item"><summary class="faq-question">P</summary><div class="faq-answer">R</div></details> (repetir)
+  {{TICKER_TEXTO}}   -> frase longa que corre no banner
+
+  SEO LATERAL (DESKTOP)
+  {{SEO_H1}} {{SEO_H2_TOPO}} {{SEO_TEXTO_TOPO}}
+  {{SEO_TITULO_1}} {{SEO_TEXTO_1}}  {{SEO_TITULO_2}} {{SEO_TEXTO_2}}
+  {{SEO_TITULO_3}} {{SEO_TEXTO_3}}  {{SEO_TITULO_4}} {{SEO_TEXTO_4}}
+
+  IMAGENS (.webp, 600x600): {{FOTO_1}} a {{FOTO_4}}  e  {{ALT_FOTO_1}} a {{ALT_FOTO_4}}
+  Imagens fixas da pasta: logo ({{LOGO}}), fundo.png, mago.png, moldura.png
+-->
+<script async src="https://googletagmanager.com{{GA_ID}}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{GA_ID}}');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07101e">
+<title>{{NOME}} | {{CATEGORIA}} em {{CIDADE}}</title>
+<meta name="description" content="{{DESCRICAO_CURTA}}">
+<meta name="author" content="ImpulsoWeb10">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="{{URL_PAGINA}}">
+<link rel="icon" href="{{LOGO}}">
+
+<!-- Open Graph / Redes Sociais -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{NOME}}">
+<meta property="og:url" content="{{URL_PAGINA}}">
+<meta property="og:title" content="{{NOME}} | {{CATEGORIA}} em {{CIDADE}}">
+<meta property="og:description" content="{{DESCRICAO_CURTA}}">
+<meta property="og:image" content="{{URL_PAGINA}}{{LOGO}}">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Schema Principal: LocalBusiness Dinâmico -->
+<script type="application/ld+json">
 {
-  "dados_formulario_base": {
-    "placeId": "ChIJjUxPNAB9zpQRaGwdfRPmwhc",
-    "nomeEmpresa": "Pizzaria Juliana e Favorita",
-    "whatsapp": "5511958338379",
-    "instagram": "pizzariajulianaefavorita",
-    "cidadeEstado": "Itaquaquecetuba / SP",
-    "enderecoCompleto": "Estr. Promissão, 8 - Jardim Carolina, Itaquaquecetuba - SP, 08588-310",
-    "segmento": "Pizzaria com Delivery",
-    "produtosPrincipais": "Pizzas salgadas, pizzas doces, pizzas meio a meio, bordas recheadas, refrigerantes, pedidos por WhatsApp, delivery"
+  "@context": "https://schema.org",
+  "@type": "{{TIPO_SCHEMA}}",
+  "name": "{{NOME}}",
+  "description": "{{DESCRICAO_CURTA}}",
+  "image": "{{URL_PAGINA}}{{LOGO}}",
+  "@id": "{{URL_PAGINA}}#negocio",
+  "url": "{{URL_PAGINA}}",
+  "telephone": "{{TELEFONE_E164}}",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{RUA_NUMERO}}",
+    "addressLocality": "{{CIDADE}}",
+    "addressRegion": "{{UF}}",
+    "postalCode": "{{CEP}}",
+    "addressCountry": "BR"
   },
-  "conteudo_enriquecido_desktop": {
-    "seo_tags": {
-      "canonical": "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html",
-      "h1": "Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita",
-      "meta_description": "Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor, peça pelo WhatsApp (11) 95833-8379 e receba em casa. Clique e faça seu pedido agora!"
-    },
-    "arquitetura_h2_h4": {
-      "secao_principal_h2": {
-        "titulo_h2": "Pizzaria Juliana e Favorita: tradição de forno e sabor em Itaquaquecetuba",
-        "introducao_bloco": "A Pizzaria Juliana e Favorita é uma pizzaria de delivery que leva sabor caseiro para as mesas de Itaquaquecetuba, em São Paulo. Com massa preparada com cuidado, molho bem temperado e coberturas fartas, a casa atende famílias, grupos de amigos e quem só quer uma noite tranquila em casa. O atendimento é próximo e direto: basta chamar no WhatsApp (11) 95833-8379, escolher o sabor e aguardar a entrega, sem filas e sem complicação."
-      },
-      "secao_produtos_h2": {
-        "titulo_h2": "Cardápio de pizzas para todos os paladares",
-        "subsecoes_h3": [
-          {
-            "titulo_h3": "Pizzas salgadas tradicionais",
-            "foco_produtos_conteudo": "As pizzas salgadas reúnem os sabores que a mesa brasileira adora, como mussarela, calabresa, frango com requeijão e portuguesa. A massa assada no ponto certo recebe queijo derretido e recheio generoso, resultando em fatias macias, saborosas e perfeitas para dividir. Quem não consegue escolher apenas um sabor pode montar a pizza meio a meio e agradar todo mundo.",
-            "detalhes_especificos_h4": [
-              "Pizza meio a meio para combinar dois sabores favoritos",
-              "Borda com Catupiry Normal,Borda com Catupiry Original,Borda com Cheddar."
-            ]
-          },
-          {
-            "titulo_h3": "Pizzas doces e bebidas geladas",
-            "foco_produtos_conteudo": "Para a sobremesa ou o lanche da tarde, a pizzaria oferece pizzas doces com chocolate e frutas, boas companheiras de um filme em casa ou de uma comemoração em família. Os refrigerantes gelados completam o pedido e deixam tudo pronto para servir assim que o entregador chegar em Itaquaquecetuba.",
-            "detalhes_especificos_h4": [
-              "Coberturas doces com chocolate e frutas para a sobremesa",
-              "Refrigerantes para acompanhar a pizza no mesmo pedido"
-            ]
-          }
-        ]
-      },
-      "secao_localizacao_h2": {
-        "titulo_h2": "Peça pizza em Itaquaquecetuba pelo WhatsApp",
-        "chamada_local_conteudo": "A Pizzaria Juliana e Favorita atende Itaquaquecetuba - SP por delivery, com pedidos feitos pelo WhatsApp (11) 95833-8379. Envie seu endereço e o sabor desejado, tire dúvidas sobre o cardápio e confirme o horário de atendimento do dia diretamente com a equipe. Acompanhe também o Instagram @pizzariajulianaefavorita para ver novidades e fazer da próxima noite de pizza um momento especial."
-      }
-    },
-    "lista_beneficios_o_que_encontra": [
-      "Massa artesanal assada na hora, com queijo bem derretido e recheio caprichado",
-      "Atendimento direto pelo WhatsApp (11) 95833-8379 e entrega em Itaquaquecetuba - SP",
-      "Variedade de sabores salgados e doces, com opção de pizza meio a meio e borda recheada",
-      "Pedido simples e rápido, ideal para jantar em família ou receber os amigos em casa"
-    ],
-    "imagens_otimizadas_seo": [
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "pizza-mussarela-pizzaria-juliana-e-favorita-itaquaquecetuba.webp",
-        "alt_descricao": "Pizza de mussarela recém-saída do forno na Pizzaria Juliana e Favorita em Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "pizza-calabresa-borda-recheada-itaquaquecetuba.webp",
-        "alt_descricao": "Pizza de calabresa com borda recheada para delivery em Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "pizza-doce-chocolate-delivery-itaquaquecetuba.webp",
-        "alt_descricao": "Pizza doce de chocolate para sobremesa pedida por delivery em Itaquaquecetuba - SP"
-      },
-      {
-        "url_original": "",
-        "nome_arquivo_webp": "pedido-whatsapp-pizzaria-juliana-e-favorita.webp",
-        "alt_descricao": "Caixa de pizza da Pizzaria Juliana e Favorita pronta para entrega por WhatsApp em Itaquaquecetuba - SP"
-      }
-    ],
-    "faq_perguntas_frequentes": [
-      {
-        "pergunta": "Qual o horário de funcionamento da Pizzaria Juliana e Favorita em Itaquaquecetuba?",
-        "resposta": "Os horários e dias de atendimento podem variar. Para confirmar se a pizzaria está aberta e receber o seu pedido, chame no WhatsApp (11) 95833-8379."
-      },
-      {
-        "pergunta": "Onde fica a Pizzaria Juliana e Favorita e ela faz entrega?",
-        "resposta": "A pizzaria atende Itaquaquecetuba - SP por delivery. Para saber se a entrega chega ao seu bairro e combinar o prazo, envie sua localização pelo WhatsApp (11) 95833-8379."
-      },
-      {
-        "pergunta": "Como faço o pedido e quais produtos posso escolher?",
-        "resposta": "O pedido é feito pelo WhatsApp (11) 95833-8379. Você pode escolher pizzas salgadas e doces, pedir meio a meio, adicionar borda recheada e incluir refrigerantes na mesma compra."
-      }
-    ]
-  }
+  "geo": { 
+    "@type": "GeoCoordinates", 
+    "latitude": {{LAT}}, 
+    "longitude": {{LNG}} 
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "{{HORA_ABRE_HHMM}}",
+    "closes": "{{HORA_FECHA_HHMM}}"
+  },
+  "sameAs": ["https://instagram.com{{INSTAGRAM_USER}}"]
 }
+</script>
+
+<link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#07101e;            --bg-rgb:7,16,30;
+  --card-1:#102040;        --card-2:#0b1a2e;
+  --accent:#c9a96e;        --accent-rgb:201,169,110;
+  --accent-soft:#ffe082;
+  --side-a-rgb:58,92,110;  --side-b-rgb:150,88,62;
+  --text:#e8e2d8;          --title:#f0ece5;
+  --muted:#9bb5d4;         --body:#c9d6e6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;position:relative;perspective:1200px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%,rgba(var(--accent-rgb),.08) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(var(--side-a-rgb),.35) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+.app-wrapper{display:flex;flex-direction:column;align-items:center;width:100%;max-width:480px;margin:auto 0;position:relative;z-index:1}
+.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,var(--card-1) 0%,var(--card-2) 100%);border:2px solid #fff;border-radius:24px;box-shadow:0 0 10px #fff,0 15px 35px rgba(0,0,0,.6);padding:1.2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.75rem}
+.logo-img{display:block;width:160px;height:auto;max-height:72px;border-radius:12px;object-fit:contain}
+.chips-container{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:0.5rem 0}
+
+/* Estilização básica das seções de SEO do Desktop */
+.seo-desktop-container {max-width: 1200px; margin: 2rem auto; padding: 1rem; width: 100%}
+.seo-block {margin-bottom: 2rem; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(var(--accent-rgb), 0.1)}
+.seo-images-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem}
+.seo-img {width: 100%; height: auto; border-radius: 8px; object-fit: cover}
+
+/* Modal Ver Mais (Mobile) */
+.modal-ver-mais {background: var(--card-2); border: 1px solid var(--accent); border-radius: 16px; padding: 1rem; margin-top: 1rem; text-align: left}
+</style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- DISPOSITIVO MÓVEL (MOLDURA CELULAR 3D) -->
+    <main class="device-frame">
+      
+      <div class="logo-wrap">
+        <img src="{{LOGO}}" alt="Logo {{NOME}}" class="logo-img" width="160" height="72">
+      </div>
+
+      <!-- Hierarquia de Título Visual do Celular -->
+      <span class="company-heading" style="font-size: 1.5rem; font-weight: bold; color: var(--title)">{{NOME}}</span>
+      <p class="tagline">{{TAGLINE}}</p>
+
+      <!-- Produtos em Chips -->
+      <div class="chips-container">
+        {{CHIPS_HTML}}
+      </div>
+
+      <!-- Ações do Cartão -->
+      <div class="actions" style="margin-top: 1rem;">
+        <a href="https://wa.me{{WHATSAPP_NUMERO}}" class="btn-whatsapp">Ligar agora WhatsApp</a>
+      </div>
+
+      <!-- MODAL CONTEÚDO ADICIONAL (DENTRO DO CELULAR) -->
+      <section class="modal-ver-mais">
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">O que você encontra</h3>
+        <ul>
+          {{SERVICOS_HTML}}
+        </ul>
+
+        <h3 style="color: var(--accent); margin-top: 1rem; margin-bottom: 0.5rem;">Perguntas frequentes</h3>
+        <!-- Bloco de FAQ interativo lido pelo script do robô -->
+        <div class="faq-container-hook">
+          {{FAQ_HTML}}
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- CONTEÚDO EXTRA EXCLUSIVO PARA COMPUTADOR / SEO DESK (FORA DA MOLDURA) -->
+  <aside class="seo-desktop-container">
+    
+    <!-- ARQUITETURA SEMÂNTICA EXIGIDA PELO GOOGLE: H1 ÚNICO -->
+    <article class="seo-block">
+      <h1>{{SEO_H1}}</h1>
+    </article>
+
+    <!-- BLOCO TOPO: H2 E TEXTO -->
+    <article class="seo-block">
+      <h2>{{SEO_H2_TOPO}}</h2>
+      <p>{{SEO_TEXTO_TOPO}}</p>
+    </article>
+
+    <!-- BLOCOS DE PALAVRAS-CHAVE ENRIQUECIDOS (H2, H3 E H4 FLUIDOS) -->
+    <section class="seo-block">
+      <h2>{{SEO_TITULO_1}}</h2>
+      <p>{{SEO_TEXTO_1}}</p>
+      
+      <div class="seo-images-grid">
+        <img src="{{FOTO_1}}" alt="{{ALT_FOTO_1}}" class="seo-img" width="600" height="600" loading="lazy">
+        <img src="{{FOTO_2}}" alt="{{ALT_FOTO_2}}" class="seo-img" width="600" height="600" loading="lazy">
+      </div>
+    </section>
+
+    <section class="seo-block">
+      <h2>{{SEO_TITULO_2}}</h2>
+      <p>{{SEO_TEXTO_2}}</p>
+    </section>
+
+    <section class="seo-block">
+      <h2>{{SEO_TITULO_3}}</h2>
+      <p>{{SEO_TEXTO_3}}</p>
+    </section>
+
+    <section class="seo-block">
+      <h2>{{SEO_TITULO_4}}</h2>
+      <p>{{SEO_TEXTO_4}}</p>
+      
+      <div class="seo-images-grid">
+        <img src="{{FOTO_3}}" alt="{{ALT_FOTO_3}}" class="seo-img" width="600" height="600" loading="lazy">
+        <img src="{{FOTO_4}}" alt="{{ALT_FOTO_4}}" class="seo-img" width="600" height="600" loading="lazy">
+      </div>
+    </section>
+
+  </aside>
+
+<!-- SCRIPT AUTOGERADOR DE RICH SNIPPETS (FAQPAGE) PARA O GOOGLE -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Captura todas as tags <details> injetadas pela variável {{FAQ_HTML}}
+    const faqItems = document.querySelectorAll('.faq-container-hook details');
+    
+    if (faqItems.length > 0) {
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": []
+        };
+
+        faqItems.forEach(item => {
+            const questionElement = item.querySelector('summary');
+            // Remove a tag summary temporariamente para extrair só o texto da resposta limpo
+            const answerText = item.textContent.replace(questionElement ? questionElement.textContent : '', '').trim();
+            const questionText = questionElement ? questionElement.textContent.trim() : '';
+
