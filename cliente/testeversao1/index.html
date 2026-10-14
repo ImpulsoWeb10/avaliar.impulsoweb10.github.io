@@ -147,16 +147,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .footer-dev a:hover{color:#0984e3;text-decoration:underline}
 
 @keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(255,159,67,.5);border-color:rgba(255,159,67,.6)}50%{box-shadow:0 0 15px rgba(255,159,67,.9);border-color:var(--accent-soft)}100%{box-shadow:0 0 5px rgba(255,159,67,.5);border-color:rgba(255,159,67,.6)}}
-.btn-gyro{background:rgba(255,255,255,.1);color:var(--accent-soft);border:1px solid rgba(255,159,67,.5);border-radius:14px;padding:.28rem .65rem;font-size:.68rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.9;margin-top:4px}
+.btn-gyro{background:rgba(255,255,255,.1);color:var(--accent-soft);border:1px solid rgba(255,159,67,.5);border-radius:14px;padding:.28rem .65rem;font-size:.68rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.9;margin-top:6px}
 .btn-gyro:hover,.btn-gyro.active{background:rgba(255,159,67,.3);color:#ffffff;opacity:1}
 .btn-gyro.active{background:linear-gradient(135deg,#ff9f43 0%,#e17055 100%);color:#ffffff;border-color:var(--accent-soft);box-shadow:0 0 20px rgba(255,159,67,.9);animation:none}
 
-/* MODAL AJUSTADO MAIS PARA CIMA */
-.sheet{position:fixed;inset:1rem auto auto 0;margin:0 auto;width:min(500px,96%);max-width:100%;max-height:86vh;max-height:86dvh;overflow-y:auto;border:2px solid rgba(255,159,67,.6);border-radius:22px;background:linear-gradient(175deg,#3b1111 0%,#280a0a 100%);color:var(--text);padding:0;box-shadow:0 15px 40px rgba(0,0,0,.85);font-family:'DM Sans',sans-serif}
+/* MODAL COM A MESMA LARGURA E TAMANHO DA TELA DA FRENTE */
+.sheet{position:fixed;inset:1rem auto auto 0;margin:0 auto;width:100%;max-width:480px;max-height:86vh;max-height:86dvh;overflow-y:auto;border:2px solid #ffffff;border-radius:24px;background:linear-gradient(175deg,var(--card-1) 0%,var(--card-2) 100%);color:var(--text);padding:0;box-shadow:0 0 15px #ffffff,0 0 30px rgba(255,107,107,.45),0 15px 35px rgba(0,0,0,.85);font-family:'DM Sans',sans-serif}
 .sheet::backdrop{background:rgba(10,2,2,.8)}
 .sheet[open]{animation:sheet-down .28s ease-out}
 @keyframes sheet-down{from{transform:translateY(-30px);opacity:0}to{transform:none;opacity:1}}
-.sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
+.sheet-body{padding:1.3rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:var(--title);letter-spacing:.04em}
 .sheet h3{font-size:.9rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
@@ -168,9 +168,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:var(--text);background:rgba(255,255,255,.05);border:1px solid rgba(255,159,67,.2);border-radius:12px;padding:.55rem .75rem}
 .svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* GALERIA FIXA 2x2 (2 EM CIMA, 2 EMBAIXO) BLOQUEADA CONTRA SCROLL HORIZONTAL */
-.gallery{display:grid;grid-template-columns:repeat(2, 1fr);gap:.5rem;width:100%;max-width:100%;overflow:hidden}
-.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#280a0a;border-radius:10px;border:1px solid rgba(255,159,67,.5);box-shadow:0 4px 12px rgba(0,0,0,.5)}
+/* GALERIA EXATA 2x2 (2 EM CIMA, 2 EMBAIXO) COM TAMANHO QUADRADO E SEM ESTOURO */
+.gallery{display:grid;grid-template-columns:repeat(2, 1fr);gap:.6rem;width:100%;max-width:100%;overflow:hidden}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#280a0a;border-radius:12px;border:1px solid rgba(255,159,67,.5);box-shadow:0 4px 12px rgba(0,0,0,.5)}
 
 .nav-buttons-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}
 .btn-nav-map, .btn-nav-waze{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;transition:transform .2s, box-shadow .2s;padding:0 .4rem}
@@ -243,7 +243,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
       <div class="cta-row layer-front">
         <a href="tel:+5511962942622" class="btn-act btn-call">Ligar agora</a>
-        <a href="https://wa.me/5511962942622?text=Olá!%20Vim%20pelo%20link." class="btn-act btn-wa" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/5511962942622?text=Olá!%20Vim%20pelo%20link%20ImpulsoWeb10." class="btn-act btn-wa" target="_blank" rel="noopener">WhatsApp</a>
       </div>
       <div class="social-row layer-front">
         <a href="https://www.instagram.com/pizzariajulianaefavorita" class="social-btn" target="_blank" rel="noopener">
@@ -328,10 +328,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
     <!-- GALERIA PERFEITA 2x2 (2 EM CIMA, 2 EMBAIXO) -->
     <section class="gallery">
-      <img src="pizza-mussarela-pizzaria-juliana-e-favorita-itaquaquecetuba.png" alt="Pizza de mussarela recém-saída do forno na Pizzaria Juliana e Favorita em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
-      <img src="pizza-calabresa-borda-recheada-itaquaquecetuba.png" alt="Pizza de calabresa com borda recheada para delivery em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
-      <img src="pizza-doce-chocolate-delivery-itaquaquecetuba.png" alt="Pizza doce de chocolate para sobremesa pedida por delivery em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
-      <img src="pedido-whatsapp-pizzaria-juliana-e-favorita.png" alt="Caixa de pizza da Pizzaria Juliana e Favorita pronta para entrega por WhatsApp em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
+      <img src="pizza-mussarela-pizzaria-juliana-e-favorita-itaquaquecetuba.webp" alt="Pizza de mussarela recém-saída do forno na Pizzaria Juliana e Favorita em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
+      <img src="pizza-calabresa-borda-recheada-itaquaquecetuba.webp" alt="Pizza de calabresa com borda recheada para delivery em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
+      <img src="pizza-doce-chocolate-delivery-itaquaquecetuba.webp" alt="Pizza doce de chocolate para sobremesa pedida por delivery em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
+      <img src="pedido-whatsapp-pizzaria-juliana-e-favorita.webp" alt="Caixa de pizza da Pizzaria Juliana e Favorita pronta para entrega por WhatsApp em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
     </section>
 
     <button type="button" class="btn-share" onclick="compartilhar()">Compartilhar este link</button>
@@ -368,7 +368,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pizzaria-juliana-e-vcf'; document.body.appendChild(a); a.click(); a.remove();
   }
   async function compartilhar(){
-    try { if (navigator.share) { await navigator.share({ title: document.title, text: 'Pizzaria Juliana e Favorita', url: PAGE_URL }); return; } await navigator.clipboard.writeText(PAGE_URL); alert('Link copiado!'); } catch (err) {}
+    try { 
+      const shareText = 'Vi a página da Pizzaria Juliana e Favorita';
+      if (navigator.share) { 
+        await navigator.share({ title: document.title, text: shareText, url: PAGE_URL }); 
+        return; 
+      } 
+      await navigator.clipboard.writeText(shareText + ' - ' + PAGE_URL); 
+      alert('Link copiado!'); 
+    } catch (err) {}
   }
   
   /* SCRIPT AUTOMÁTICO DE FAQPAGE RICH SNIPPETS */
