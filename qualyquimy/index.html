@@ -606,7 +606,7 @@ body::before{
       </div>
 
       <div class="cta-row layer-front">
-        <a href="tel:+551146432301" class="btn-act btn-call" aria-label="Ligar para a loja">
+        <a href="tel:+5511954950044" class="btn-act btn-call" aria-label="Ligar para a loja">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
           Ligar agora
         </a>
@@ -706,7 +706,7 @@ body::before{
 
     <section>
       <h3>Horário</h3>
-      <p>Segunda a sábado, das 8h às 18h.</p>
+      <p>Segunda a sábado, das 8h às 17:30h.</p>
     </section>
 
     <section>
@@ -739,7 +739,7 @@ body::before{
       <div class="faq-container">
         <details class="faq-item">
           <summary class="faq-question">Quais formas de pagamento são aceitas?</summary>
-          <div class="faq-answer">Aceitamos dinheiro, cartões de crédito e débito, além de PIX para facilitar suas compras com total agilidade.</div>
+          <div class="faq-answer">Aceitamos dinheiro, cartões de crédito e débito, além de PIX e link de pagamento para facilitar suas compras com total agilidade.</div>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Vocês fazem entregas na região?</summary>
@@ -755,7 +755,7 @@ body::before{
         </details>
         <details class="faq-item">
           <summary class="faq-question">A loja abre aos sábados?</summary>
-          <div class="faq-answer">Sim, atendemos de segunda a sábado, das 8h às 18h, prontos para te ajudar em qualquer dia útil da semana.</div>
+          <div class="faq-answer">Não, atendemos de segunda a sexta, das 8h às 17:30h, prontos para te ajudar em qualquer dia útil da semana.</div>
         </details>
       </div>
     </section>
@@ -831,7 +831,7 @@ body::before{
       const util = ['Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(dia) !== -1;
       if (util && h >= 8 && h < 18) {
         box.classList.add('open');
-        txt.textContent = 'Aberto agora · fecha às 18h';
+        txt.textContent = 'Aberto agora · fecha às 17:30h';
       } else {
         box.classList.add('closed');
         if (util && h < 8) txt.textContent = 'Fechado · abre hoje às 8h';
