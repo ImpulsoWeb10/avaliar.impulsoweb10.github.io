@@ -85,6 +85,7 @@ body{
   overflow-x:hidden;
   position:relative;
   perspective:1200px;
+  transition: background 0.4s ease;
 }
 a:focus-visible,button:focus-visible{outline:2px solid #ffe082;outline-offset:3px}
 
@@ -132,7 +133,7 @@ body::before{
   text-align:center;
   gap:.9rem;
   transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.175,.885,.32,1.275);
+  transition:transform .6s cubic-bezier(.175,.885,.32,1.275), box-shadow .4s ease, border-color .4s ease;
   will-change:transform;
 }
 
@@ -179,6 +180,7 @@ body::before{
   border-radius:14px;
   overflow:hidden;
   display:inline-block;
+  cursor:pointer;
   animation:logo-pulse 2.6s ease-in-out infinite;
   box-shadow:0 0 0 0 rgba(201,169,110,.5);
 }
@@ -426,16 +428,6 @@ body::before{
   font-weight: 600;
   color: #f0ece5;
 }
-.pix-alert {
-  font-size: 0.78rem;
-  color: #ffe082;
-  font-weight: 700;
-  background: rgba(201,169,110,0.12);
-  border: 1px solid rgba(201,169,110,0.3);
-  padding: 0.35rem 0.7rem;
-  border-radius: 8px;
-  width: 100%;
-}
 .pix-img-container {
   width: 100%;
   max-width: 240px;
@@ -471,19 +463,25 @@ body::before{
   color: #ffe082;
   word-break: break-all;
 }
-.pix-beneficiario-box {
-  font-size: 0.75rem;
+
+/* Nova mensagem de confirmação e dados no rodapé do modal Pix */
+.pix-msg-final {
+  font-size: 0.76rem;
   color: #c9d6e6;
-  line-height: 1.4;
-  background: rgba(255,255,255,0.04);
-  border: 1px dashed rgba(255,255,255,0.12);
+  line-height: 1.5;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,169,110,0.25);
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 0.6rem;
   width: 100%;
 }
-.pix-beneficiario-box strong {
-  color: #ffffff;
+.pix-msg-final .aviso-confirma {
+  display: block;
+  font-weight: 700;
+  color: #ffe082;
+  margin-bottom: 0.2rem;
 }
+
 .btn-copy-pix {
   display: flex;
   align-items: center;
@@ -507,6 +505,37 @@ body::before{
   background: #16a34a;
 }
 .btn-copy-pix svg { width: 18px; height: 18px; }
+
+/* ===== PAINEL DE SELEÇÃO DE TEMA (5 CORES) ===== */
+.theme-modal {
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0 auto;
+  width: min(420px, 100%);
+  border: 2px solid rgba(201,169,110,0.5);
+  border-bottom: none;
+  border-radius: 22px 22px 0 0;
+  background: #0b1a2e;
+  color: #fff;
+  padding: 1.2rem;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+  z-index: 9999;
+}
+.theme-modal::backdrop { background: rgba(0,0,0,0.7); }
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.theme-btn {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.theme-btn:hover { transform: scale(1.1); }
 
 /* ===== TELA "VER MAIS" (gaveta) ===== */
 .sheet{
@@ -698,7 +727,7 @@ body::before{
 }
 </style>
 </head>
-<body>
+<body id="pageBody">
 
 <div class="app-wrapper">
 
@@ -714,8 +743,9 @@ body::before{
     <!-- FRENTE DO CARTÃO -->
     <div class="page">
 
+      <!-- LOGO COM CONTADOR DE 5 CLIQUES -->
       <div class="logo-wrap layer-mid">
-        <div class="logo-frame">
+        <div class="logo-frame" onclick="clicarLogo()" title="Toque 5 vezes para alterar o tema">
           <img class="logo-img" src="logo-tintas-qualy-quimy.png" alt="Logo Tintas Qualy Quimy" width="170" height="80"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="logo-img-fallback" style="display:none;">Qualy Quimy</div>
@@ -838,7 +868,7 @@ body::before{
 
 </div>
 
-<!-- MODAL DO PIX -->
+<!-- MODAL DO PIX COM MENSAGEM FINAL ATUALIZADA -->
 <dialog class="sheet-pix" id="sheetPix" aria-labelledby="pixTitulo">
   <div class="sheet-pix-body">
     <div class="sheet-pix-head">
@@ -846,22 +876,20 @@ body::before{
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
     </div>
 
-    <!-- Observação solicitada -->
-    <div class="pix-alert">⚠️ Conferir Nome e Banco antes de confirmar</div>
-
-    <!-- Imagem do cartaz informada -->
+    <!-- Imagem do cartaz -->
     <div class="pix-img-container">
-      <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
+      <img src="Cartaz de agradecimento com QR Code Pix(1).png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
     </div>
 
     <div class="pix-key-box">
       <span class="pix-key-label">Chave Pix (CNPJ)</span>
-      <span class="pix-key-value" id="pixCnpjText">10.503.834/0001-73</span>
+      <span class="pix-key-value" id="pixCnpjText">10503834000173</span>
     </div>
 
-    <!-- Dados do Favorecido -->
-    <div class="pix-beneficiario-box">
-      <strong>Qualyquimy Comercio de Tintas Ltda</strong><br>
+    <!-- Mensagem por último no modal contendo o aviso e os dados solicitados -->
+    <div class="pix-msg-final">
+      <span class="aviso-confirma">⚠️ Conferir Nome e Banco antes de confirmar</span>
+      Qualyquimy Comercio de Tintas Ltda<br>
       Banco : CC POUP INV PROGRESSO PR/SP
     </div>
 
@@ -870,6 +898,20 @@ body::before{
       Copiar Chave CNPJ
     </button>
   </div>
+</dialog>
+
+<!-- MODAL DE SELEÇÃO DE TEMA (5 CORES) -->
+<dialog class="theme-modal" id="themeModal">
+  <h3>Escolha o Tema de Cores</h3>
+  <p style="font-size:0.78rem;color:#9bb5d4;margin-top:0.2rem;">Personalize o visual do seu cartão digital:</p>
+  <div class="theme-grid">
+    <button class="theme-btn" style="background:#07101e; border-color:#009EE3;" onclick="mudarTema(0)" title="Azul Clássico"></button>
+    <button class="theme-btn" style="background:#051a10; border-color:#22c55e;" onclick="mudarTema(1)" title="Verde Esmeralda"></button>
+    <button class="theme-btn" style="background:#1f1605; border-color:#c9a96e;" onclick="mudarTema(2)" title="Dourado Luxo"></button>
+    <button class="theme-btn" style="background:#180b22; border-color:#d946ef;" onclick="mudarTema(3)" title="Roxo Imperial"></button>
+    <button class="theme-btn" style="background:#220808; border-color:#ef4444;" onclick="mudarTema(4)" title="Vermelho Fogo"></button>
+  </div>
+  <button type="button" class="btn-share" style="margin-top:1rem;min-height:38px;" onclick="fecharTemaModal()">Fechar</button>
 </dialog>
 
 <!-- TELA "VER MAIS" -->
@@ -1004,6 +1046,53 @@ body::before{
     }
   })();
 
+  /* ===== LÓGICA DE 5 CLIQUES NO LOGO PARA MUDAR TEMA ===== */
+  let cliquesLogo = 0;
+  let tempoUltimoClique = 0;
+
+  function clicarLogo(){
+    const agora = new Date().getTime();
+    if (agora - tempoUltimoClique > 1500) {
+      cliquesLogo = 1;
+    } else {
+      cliquesLogo++;
+    }
+    tempoUltimoClique = agora;
+
+    if (cliquesLogo >= 5) {
+      cliquesLogo = 0;
+      abrirTemaModal();
+    }
+  }
+
+  const themeModal = document.getElementById('themeModal');
+  function abrirTemaModal(){
+    if (typeof themeModal.showModal === 'function') themeModal.showModal();
+    else themeModal.setAttribute('open','');
+  }
+  function fecharTemaModal(){
+    if (typeof themeModal.close === 'function') themeModal.close();
+    else themeModal.removeAttribute('open');
+  }
+
+  // 5 Temas diferentes (Fundo e Neon do cartão)
+  const temas = [
+    { bg: '#07101e', frameBg: 'linear-gradient(175deg,#102040 0%,#0b1a2e 100%)', shadow: '0 0 10px #ffffff, 0 0 20px rgba(255,255,255,.8)' }, // Azul Clássico
+    { bg: '#03120a', frameBg: 'linear-gradient(175deg,#0d2e1a 0%,#051a10 100%)', shadow: '0 0 10px #22c55e, 0 0 20px rgba(34,197,94,.8)' }, // Verde Esmeralda
+    { bg: '#141005', frameBg: 'linear-gradient(175deg,#332510 0%,#1f1605 100%)', shadow: '0 0 10px #ffe082, 0 0 20px rgba(201,169,110,.8)' }, // Dourado Luxo
+    { bg: '#100516', frameBg: 'linear-gradient(175deg,#2b0d3d 0%,#180b22 100%)', shadow: '0 0 10px #d946ef, 0 0 20px rgba(217,70,239,.8)' }, // Roxo Imperial
+    { bg: '#160404', frameBg: 'linear-gradient(175deg,#3d0d0d 0%,#220808 100%)', shadow: '0 0 10px #ef4444, 0 0 20px rgba(239,68,68,.8)' }  // Vermelho Fogo
+  ];
+
+  function mudarTema(indice){
+    const tema = temas[indice];
+    document.getElementById('pageBody').style.background = tema.bg;
+    const deviceFrame = document.getElementById('deviceFrame');
+    deviceFrame.style.background = tema.frameBg;
+    deviceFrame.style.boxShadow = tema.shadow + ', 0 15px 35px rgba(0,0,0,.6)';
+    fecharTemaModal();
+  }
+
   /* ===== HORÁRIO ===== */
   (function(){
     const box = document.getElementById('hours');
@@ -1073,7 +1162,7 @@ body::before{
   }
   sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
 
-  /* ===== SALVAR CONTATO (vCard) ===== */
+  /* ===== SALVAR CONTATO (vCard limpo sem dados de banco) ===== */
  function salvarContato() {
   const PAGE_URL = window.location.href;
 
@@ -1089,7 +1178,7 @@ body::before{
     'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
     'URL;TYPE=WORK:' + PAGE_URL,
     'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com',
-    'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PIX -----\\nChave CNPJ: 10503834000173\\nBeneficiário: Qualyquimy Comercio de Tintas Ltda\\nBanco: CC POUP INV PROGRESSO PR/SP',
+    'NOTE:Tintas\\, massas\\, texturas e acabamentos.',
     'CATEGORIES:Tintas,Construção,Revestimentos',
     'END:VCARD'
   ].join('\r\n');
