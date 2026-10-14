@@ -277,7 +277,7 @@ body::before{
 .btn-call{background:#22c55e;color:#04210f}
 .btn-wa{background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366}
 
-/* Estilo do botão de Pagamento Online / Pix (Mercado Pago #009EE3) */
+/* Estilo do botão de Pagamento Online / Pix (Mercado Pago #009EE3) - Sem ícone */
 .btn-pay{
   grid-column: 1 / -1;
   background:#009EE3;
@@ -411,7 +411,7 @@ body::before{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: .8rem;
   text-align: center;
 }
 .sheet-pix-head {
@@ -426,40 +426,63 @@ body::before{
   font-weight: 600;
   color: #f0ece5;
 }
+.pix-alert {
+  font-size: 0.78rem;
+  color: #ffe082;
+  font-weight: 700;
+  background: rgba(201,169,110,0.12);
+  border: 1px solid rgba(201,169,110,0.3);
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  width: 100%;
+}
 .pix-img-container {
   width: 100%;
-  max-width: 260px;
+  max-width: 240px;
   background: #ffffff;
-  border-radius: 16px;
-  padding: 0.5rem;
+  border-radius: 14px;
+  padding: 0.4rem;
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 .pix-img-container img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 .pix-key-box {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
   width: 100%;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 14px;
-  padding: 0.8rem;
+  border-radius: 12px;
+  padding: 0.6rem;
 }
 .pix-key-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #9bb5d4;
   font-weight: 500;
 }
 .pix-key-value {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #ffe082;
   word-break: break-all;
+}
+.pix-beneficiario-box {
+  font-size: 0.75rem;
+  color: #c9d6e6;
+  line-height: 1.4;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 100%;
+}
+.pix-beneficiario-box strong {
+  color: #ffffff;
 }
 .btn-copy-pix {
   display: flex;
@@ -467,14 +490,14 @@ body::before{
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  min-height: 46px;
+  min-height: 44px;
   background: #22c55e;
   color: #04210f;
   border: none;
   border-radius: 50px;
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
   box-shadow: 0 4px 12px rgba(34,197,94,0.3);
@@ -739,9 +762,8 @@ body::before{
           WhatsApp
         </a>
 
-        <!-- BOTÃO PAGAMENTO / PIX QUE ABRE O MODAL -->
+        <!-- BOTÃO PAGAMENTO / PIX SEM ÍCONE -->
         <button type="button" class="btn-act btn-pay" onclick="abrirPixModal()" aria-label="Pagamento Online ou Pix">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
           💳 Pagamento Online / Pix
         </button>
       </div>
@@ -824,14 +846,23 @@ body::before{
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
     </div>
 
+    <!-- Observação solicitada -->
+    <div class="pix-alert">⚠️ Conferir Nome e Banco antes de confirmar</div>
+
     <!-- Imagem do cartaz informada -->
     <div class="pix-img-container">
-      <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
+      <img src="Cartaz de agradecimento com QR Code Pix(1).png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
     </div>
 
     <div class="pix-key-box">
       <span class="pix-key-label">Chave Pix (CNPJ)</span>
       <span class="pix-key-value" id="pixCnpjText">10.503.834/0001-73</span>
+    </div>
+
+    <!-- Dados do Favorecido -->
+    <div class="pix-beneficiario-box">
+      <strong>Qualyquimy Comercio de Tintas Ltda</strong><br>
+      Banco : CC POUP INV PROGRESSO PR/SP
     </div>
 
     <button type="button" class="btn-copy-pix" onclick="copiarPixChave()">
@@ -950,7 +981,7 @@ body::before{
       <h2>Textura e Grafiato</h2>
       <p>Textura lisa, textura projetada e grafiato dão personalidade a fachadas, muros e paredes decorativas, além de ajudar a disfarçar pequenas imperfeições da superfície.</p>
       <h2>Seladora, Esmalte e Qualy Color</h2>
-      <p>A seladora uniformiza a absorção da parede e melhora a aderência da tinta. Esmalte protege madeira e metal. Para pinturas de uso interno, a tinta econômica Qualy Color é uma opção.</p>
+      <p>A seladora uniformiza a absorção da parede e melhora a aderência da tinta. O esmalte protege madeira e metal. Para pinturas de uso interno, a tinta econômica Qualy Color é uma opção.</p>
       <h2>Atendimento no Alto Tietê</h2>
       <p>Na Rua Leiria, 45, Chácara Cuiabá, em Itaquaquecetuba - SP. Fale com a loja pelo WhatsApp ou pelo telefone (11) 4643-2301 e tire suas dúvidas sobre o produto certo para cada superfície.</p>
     </div>
@@ -1050,7 +1081,7 @@ body::before{
     'BEGIN:VCARD',
     'VERSION:3.0',
     'FN:Tintas Qualy Quimy',
-    'ORG:Qualy Quimy Comercio de Tintas Ltda.',
+    'ORG:Qualyquimy Comercio de Tintas Ltda',
     'TITLE:Indústria de Tintas e Texturas',
     'TEL;TYPE=WORK,VOICE:+551146432301', 
     'TEL;TYPE=CELL,VOICE,PREF:+5511954950044', 
@@ -1058,7 +1089,7 @@ body::before{
     'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
     'URL;TYPE=WORK:' + PAGE_URL,
     'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com',
-    'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PIX -----\\nChave CNPJ: 10503834000173\\nBeneficiário: QUALYQUIMY COMERCIO DE T\\nCidade: Sao Paulo',
+    'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PIX -----\\nChave CNPJ: 10503834000173\\nBeneficiário: Qualyquimy Comercio de Tintas Ltda\\nBanco: CC POUP INV PROGRESSO PR/SP',
     'CATEGORIES:Tintas,Construção,Revestimentos',
     'END:VCARD'
   ].join('\r\n');
