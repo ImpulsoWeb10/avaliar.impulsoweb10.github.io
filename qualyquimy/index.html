@@ -391,8 +391,8 @@ body::before{
   margin:0 auto;
   width:min(520px,100%);
   max-width:100%;
-  max-height:90vh;
-  max-height:90dvh;
+  max-height:95vh;
+  max-height:95dvh;
   overflow-y:auto;
   border:2px solid #fff;
   border-bottom:none;
@@ -552,7 +552,7 @@ body::before{
   .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
   .bg-seo .fotos{display:flex;gap:.6rem}
   .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
-  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
+  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:92vh;max-height:92dvh}
 }
 
 @media (max-height:700px){
@@ -638,14 +638,22 @@ body::before{
           WhatsApp
         </a>
 
-        <!-- NOVO BOTÃO DE PAGAMENTO ONLINE / PIX (Link corrigido) -->
-        <a href="https://link.mercadopago.com.br/tintasqualyquimy" class="btn-act btn-pay" target="_blank" rel="noopener" aria-label="Pagamento Online ou Pix">
+        <!-- NOVO BOTÃO DE PAGAMENTO ONLINE / PIX com link dinâmico via WhatsApp -->
+        <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Fiz%20o%20pagamento%20via%20Pix%20e%20segue%20o%20comprovante." class="btn-act btn-pay" target="_blank" rel="noopener" aria-label="Pagamento Online ou Pix">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
           💳 Pagamento Online / Pix
         </a>
       </div>
 
       <div class="social-row layer-front" aria-label="Mais opções">
+        <!-- BOTÃO SALVAR (Movido para a esquerda do Instagram) -->
+        <button type="button" class="social-btn" onclick="salvarContato()" aria-label="Salvar contato no celular">
+          <div class="social-icon" style="background:#1a2a1a;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+          </div>
+          <span class="social-label">Salvar</span>
+        </button>
+
         <a href="https://www.instagram.com/tintasqualyquimy" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
           <div class="social-icon" style="background:#2a1a2e;">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -667,13 +675,6 @@ body::before{
           </div>
           <span class="social-label">Maps</span>
         </a>
-
-        <button type="button" class="social-btn" onclick="salvarContato()" aria-label="Salvar contato no celular">
-          <div class="social-icon" style="background:#1a2a1a;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
-          </div>
-          <span class="social-label">Salvar</span>
-        </button>
 
         <button type="button" class="social-btn" onclick="abrirMais()" aria-label="Ver mais informações" aria-haspopup="dialog">
           <div class="social-icon" style="background:#2a2310;">
@@ -909,8 +910,8 @@ body::before{
     'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
     'URL;TYPE=WORK:' + PAGE_URL,
     'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com',
-    // Dados do PIX organizados de forma limpa nas anotações do contato:
-    'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PARA PIX -----\\nBanco: Bradesco\\nRazão Social: Qualy Quimy Comercio de Tintas Ltda.\\nChave CNPJ: 10503834000173',
+    // Dados do PIX fornecidos:
+    'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PIX -----\\nChave: robson.ns@hotmail.com\\nBeneficiário: QUALYQUIMY COMERCIO DE T\\nCidade: Sao Paulo\\nPayload: 00020126690014br.gov.bcb.pix0121robson.ns@hotmail.com0222Enviar Recibo Whatssap5204000053039865802BR5924QUALYQUIMY COMERCIO DE T6009Sao Paulo62240520daqr171026019936346663048F4D',
     'CATEGORIES:Tintas,Construção,Revestimentos',
     'END:VCARD'
   ].join('\r\n');
