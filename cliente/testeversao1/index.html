@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!--
+  TEMPLATE MESTRE IMPULSOWEB10
+  Todos os campos entre {{CHAVES}} são substituídos pelo sistema gerador.
+
+  TEXTOS SIMPLES
+  {{NOME}} {{SLUG}} {{URL_PAGINA}} {{CATEGORIA}} {{CIDADE}} {{UF}} {{TAGLINE}}
+  {{DESCRICAO_CURTA}} {{RUA_NUMERO}} {{BAIRRO}} {{CEP}} {{ENDERECO_COMPLETO}}
+  {{ENDERECO_URL}} (endereço já codificado para URL)
+  {{TELEFONE_E164}} (ex: +5511999999999)  {{TELEFONE_FORMATADO}} (ex: (11) 99999-9999)
+  {{WHATSAPP_NUMERO}} (só dígitos com 55)  {{INSTAGRAM_USER}}
+  {{LINK_AVALIACAO_GOOGLE}} {{LAT}} {{LNG}} {{TIPO_SCHEMA}} (ex: LocalBusiness, PaintStore, Bakery)
+  {{HORA_ABRE}} (número, ex: 8)  {{HORA_FECHA}} (número, ex: 18)
+  {{HORA_ABRE_HHMM}} (ex: 08:00)  {{HORA_FECHA_HHMM}} (ex: 18:00)
+  {{TEXTO_HORARIO}} (ex: Seg a sáb · 8h às 18h)  {{GA_ID}} (ex: G-XXXXXXXXXX)
+
+  BLOCOS DE HTML
+  {{CHIPS_HTML}}     -> <span class="chip">Produto</span> (repetir)
+  {{SERVICOS_HTML}}  -> <li>Texto</li> (repetir, 4 itens)
+  {{FAQ_HTML}}       -> <details class="faq-item"><summary class="faq-question">P</summary><div class="faq-answer">R</div></details> (repetir)
+  {{TICKER_TEXTO}}   -> frase longa que corre no banner
+
+  SEO LATERAL (DESKTOP)
+  {{SEO_H1}} {{SEO_H2_TOPO}} {{SEO_TEXTO_TOPO}}
+  {{SEO_TITULO_1}} {{SEO_TEXTO_1}}  {{SEO_TITULO_2}} {{SEO_TEXTO_2}}
+  {{SEO_TITULO_3}} {{SEO_TEXTO_3}}  {{SEO_TITULO_4}} {{SEO_TEXTO_4}}
+
+  IMAGENS (.webp, 600x600): {{FOTO_1}} a {{FOTO_4}}  e  {{ALT_FOTO_1}} a {{ALT_FOTO_4}}
+  Imagens fixas da pasta: logo ({{LOGO}}), fundo.png, mago.png, moldura.png
+
+  CORES: ajustar as variáveis em :root (sempre em pares: HEX e RGB).
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{GA_ID}}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{GA_ID}}');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07101e">
+<title>{{NOME}} | {{CATEGORIA}} em {{CIDADE}}</title>
+<meta name="description" content="{{DESCRICAO_CURTA}}">
+<meta name="author" content="ImpulsoWeb10">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="{{URL_PAGINA}}">
+<link rel="icon" href="{{LOGO}}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{NOME}}">
+<meta property="og:url" content="{{URL_PAGINA}}">
+<meta property="og:title" content="{{NOME}} | {{CATEGORIA}} em {{CIDADE}}">
+<meta property="og:description" content="{{DESCRICAO_CURTA}}">
+<meta property="og:image" content="{{URL_PAGINA}}{{LOGO}}">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{NOME}} | {{CATEGORIA}} em {{CIDADE}}">
+<meta name="twitter:description" content="{{DESCRICAO_CURTA}}">
+<meta name="twitter:image" content="{{URL_PAGINA}}{{LOGO}}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{TIPO_SCHEMA}}",
+  "name": "{{NOME}}",
+  "description": "{{DESCRICAO_CURTA}}",
+  "image": "{{URL_PAGINA}}{{LOGO}}",
+  "@id": "{{URL_PAGINA}}#negocio",
+  "url": "{{URL_PAGINA}}",
+  "telephone": "{{TELEFONE_E164}}",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{RUA_NUMERO}}",
+    "addressLocality": "{{CIDADE}}",
+    "addressRegion": "{{UF}}",
+    "postalCode": "{{CEP}}",
+    "addressCountry": "BR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": {{LAT}}, "longitude": {{LNG}} },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "{{HORA_ABRE_HHMM}}",
+    "closes": "{{HORA_FECHA_HHMM}}"
+  },
+  "sameAs": ["https://www.instagram.com/{{INSTAGRAM_USER}}"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== CORES DO CLIENTE (único lugar para trocar o tema) ===== */
+:root{
+  --bg:#07101e;            --bg-rgb:7,16,30;
+  --card-1:#102040;        --card-2:#0b1a2e;
+  --accent:#c9a96e;        --accent-rgb:201,169,110;
+  --accent-soft:#ffe082;
+  --side-a-rgb:58,92,110;  --side-b-rgb:150,88,62;
+  --text:#e8e2d8;          --title:#f0ece5;
+  --muted:#9bb5d4;         --body:#c9d6e6;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{width:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;width:100%;display:flex;flex-direction:column;align-items:center;padding:max(.7rem,env(safe-area-inset-top)) .6rem max(.7rem,env(safe-area-inset-bottom));overflow-x:hidden;position:relative;perspective:1200px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%,rgba(var(--accent-rgb),.08) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(var(--side-a-rgb),.35) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+.app-wrapper{display:flex;flex-direction:column;align-items:center;width:100%;max-width:480px;margin:auto 0;position:relative;z-index:1}
+
+/* Moldura neon (cartão 3D) */
+.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,var(--card-1) 0%,var(--card-2) 100%);border:2px solid #fff;border-radius:24px;box-shadow:0 0 10px #fff,0 0 20px rgba(255,255,255,.8),0 0 30px rgba(255,255,255,.35),0 15px 35px rgba(0,0,0,.6);padding:1.2rem 1.2rem 1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.75rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
+
+/* Verso do cartão (aparece ao girar) */
+.secret-back{position:absolute;inset:0;width:100%;height:100%;background:var(--bg);border-radius:22px;transform:rotateY(180deg);backface-visibility:hidden;z-index:2;transform-style:preserve-3d;overflow:hidden}
+.back-layer{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;border-radius:22px}
+.back-layer-fundo{transform:translateZ(-20px)}
+.back-layer-mago{transform:translateZ(30px)}
+.back-layer-moldura{transform:translateZ(80px);pointer-events:none}
+
+/* Frente */
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.75rem;width:100%;transform-style:preserve-3d;backface-visibility:hidden}
+.layer-back{transform:translateZ(15px);transform-style:preserve-3d}
+.layer-mid{transform:translateZ(35px);transform-style:preserve-3d}
+.layer-front{transform:translateZ(55px);transform-style:preserve-3d;filter:drop-shadow(0 10px 15px rgba(0,0,0,.5))}
+.layer-pop{transform:translateZ(75px);transform-style:preserve-3d;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6))}
+
+/* Logo */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.logo-frame{position:relative;border-radius:14px;overflow:hidden;display:inline-block;animation:logo-pulse 2.6s ease-in-out infinite}
+.logo-frame::after{content:'';position:absolute;top:0;left:-110%;width:55%;height:100%;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:skewX(-18deg);animation:logo-shimmer 2.6s ease-in-out infinite;pointer-events:none;z-index:2}
+@keyframes logo-pulse{0%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.55),0 6px 20px rgba(var(--accent-rgb),.25)}55%{box-shadow:0 0 0 12px rgba(var(--accent-rgb),0),0 6px 20px rgba(var(--accent-rgb),.1)}100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),0),0 6px 20px rgba(var(--accent-rgb),.25)}}
+@keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
+.logo-img{display:block;width:160px;height:auto;max-height:72px;border-radius:12px;border:2px solid rgba(var(--accent-rgb),.4);object-fit:contain;background:rgba(var(--accent-rgb),.06);position:relative;z-index:1}
+.logo-img-fallback{width:160px;height:66px;padding:0 .5rem;border-radius:12px;border:2px solid rgba(var(--accent-rgb),.4);background:rgba(var(--accent-rgb),.06);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.1;color:var(--accent);font-weight:600;position:relative;z-index:1}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:var(--title);letter-spacing:.04em;line-height:1.1}
+.tagline{margin-top:.25rem;font-size:.78rem;color:var(--muted);letter-spacing:.03em}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.chip{display:inline-flex;align-items:center;font-size:.72rem;color:#e3ecf7;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.28rem .65rem;line-height:1.3}
+
+/* Estrelas */
+.stars-cta{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-decoration:none;padding:.35rem .9rem .45rem;border-radius:18px;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.stars-cta:active{transform:scale(.97)}
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.g-logo{width:30px;height:30px;flex-shrink:0;background:#fff;border-radius:50%;padding:4px;margin-right:.35rem;box-shadow:0 0 10px rgba(255,255,255,.35)}
+.star{font-size:2.2rem;line-height:1;color:#ffd700;text-shadow:0 0 12px rgba(255,215,0,.5);animation:star-wave 2.6s ease-in-out infinite}
+.star:nth-child(3){animation-delay:.12s}
+.star:nth-child(4){animation-delay:.24s}
+.star:nth-child(5){animation-delay:.36s}
+.star:nth-child(6){animation-delay:.48s}
+@keyframes star-wave{0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}}
+.stars-label{font-size:.82rem;font-weight:700;color:#fff;letter-spacing:.01em}
+
+/* Ligar + WhatsApp */
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
+.btn-act{display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:46px;border-radius:50px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;text-decoration:none;transition:transform .2s}
+.btn-act:hover{transform:translateY(-2px)}
+.btn-act svg{width:18px;height:18px;flex-shrink:0}
+.btn-call{background:#22c55e;color:#04210f}
+.btn-wa{background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366}
+
+/* Ícones secundários */
+.social-row{display:flex;gap:.9rem;justify-content:center;align-items:flex-start}
+.social-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;transition:transform .2s}
+.social-btn:hover{transform:translateY(-3px)}
+.social-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05);transition:border-color .2s,box-shadow .2s}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:var(--muted);letter-spacing:.03em}
+
+/* Horário + endereço */
+.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#d0dce8;font-weight:500}
+.hours .dot{width:8px;height:8px;border-radius:50%;background:#8ba4c4;flex-shrink:0}
+.hours.open .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
+.hours.closed .dot{background:#f87171}
+.address{font-size:.74rem;color:#9db3cf;line-height:1.4;cursor:pointer;transition:color .2s;display:inline-block;background:none;border:none;font-family:inherit;text-align:center}
+.address:hover{color:var(--accent-soft)}
+.address::after{content:'(Toque para copiar)';display:block;font-size:.6rem;color:var(--accent);opacity:.85;margin-top:1px}
+
+/* Banner infinito */
+.ticker-banner{width:100%;overflow:hidden;background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.35);border-radius:8px;padding:.35rem 0;display:flex}
+.ticker-track{display:flex;width:max-content;animation:infinite-scroll 40s linear infinite}
+.ticker-item{font-size:.76rem;color:#fce8bd;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
+@keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Rodapé */
+.footer{font-size:.72rem;color:#d0dce8;display:flex;flex-direction:column;align-items:center;gap:.4rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
+.footer-promo{font-size:.74rem;color:#fff;text-align:center}
+.footer-promo a{color:var(--accent-soft);text-decoration:none;font-weight:700;border-bottom:1px solid var(--accent-soft);padding-bottom:1px}
+.footer-promo a:hover{color:#fff;border-color:#fff}
+.footer-dev{font-size:.7rem;color:#b0c4de;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
+.footer-dev a:hover{color:#90caf9;text-decoration:underline}
+
+/* Botão Efeito 3D */
+@keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(var(--accent-rgb),.4);border-color:rgba(var(--accent-rgb),.5)}50%{box-shadow:0 0 15px rgba(var(--accent-rgb),.8);border-color:var(--accent-soft)}100%{box-shadow:0 0 5px rgba(var(--accent-rgb),.4);border-color:rgba(var(--accent-rgb),.5)}}
+.btn-gyro{background:rgba(255,255,255,.08);color:var(--accent-soft);border:1px solid rgba(var(--accent-rgb),.4);border-radius:14px;padding:.3rem .7rem;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.75}
+.btn-gyro:hover{background:rgba(var(--accent-rgb),.25);color:#fff;opacity:1}
+.btn-gyro.active{background:linear-gradient(135deg,var(--accent) 0%,rgba(var(--accent-rgb),.75) 100%);color:#fff;border-color:var(--accent-soft);box-shadow:0 0 20px rgba(var(--accent-rgb),.9);animation:none;opacity:1}
+
+/* ===== TELA "VER MAIS" ===== */
+.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid #fff;border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,var(--card-1) 0%,var(--card-2) 100%);color:var(--text);padding:0;box-shadow:0 -6px 30px rgba(255,255,255,.25);font-family:'DM Sans',sans-serif}
+.sheet::backdrop{background:rgba(var(--bg-rgb),.78)}
+.sheet[open]{animation:sheet-up .28s ease-out}
+@keyframes sheet-up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:var(--title);letter-spacing:.03em;line-height:1.15}
+.sheet h3{font-size:.9rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.sheet p{font-size:.82rem;line-height:1.55;color:var(--body)}
+.sheet a.inline{color:var(--accent-soft);font-weight:700;text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+.sheet-close{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;font-family:inherit}
+.sheet-close:hover{background:rgba(255,255,255,.18)}
+.svc-list{list-style:none;display:grid;gap:.5rem}
+.svc-list li{font-size:.84rem;color:var(--text);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem;line-height:1.4}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.gallery img{width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;border:1px solid rgba(var(--accent-rgb),.5)}
+.nav-buttons-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem}
+.btn-nav-map,.btn-nav-waze{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;border-radius:10px;font-weight:700;font-size:.78rem;text-decoration:none;color:#fff;transition:transform .2s,box-shadow .2s;padding:0 .4rem}
+.btn-nav-map:hover,.btn-nav-waze:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.btn-nav-map{background:#1a2030;border:1.5px solid rgba(66,133,244,.6)}
+.btn-nav-waze{background:#10222a;border:1.5px solid rgba(51,204,255,.6)}
+.btn-nav-map svg,.btn-nav-waze svg{width:16px;height:16px;flex-shrink:0}
+.faq-container{display:flex;flex-direction:column;gap:.45rem}
+.faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;transition:background .2s,border-color .2s}
+.faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(var(--accent-rgb),.4)}
+.faq-question{font-size:.82rem;font-weight:700;color:var(--title);padding:.65rem .8rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.6rem;user-select:none}
+.faq-question::-webkit-details-marker{display:none}
+.faq-question::after{content:'+';font-size:1.1rem;color:var(--accent);font-weight:700;flex-shrink:0}
+.faq-item[open] .faq-question::after{content:'−'}
+.faq-answer{font-size:.78rem;line-height:1.5;color:var(--body);padding:.45rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06)}
+.btn-share{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:46px;background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:50px;font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer}
+.btn-share:hover{background:rgba(255,255,255,.16)}
+.btn-share svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.toast{min-height:1.1em;text-align:center;font-size:.78rem;color:#4ade80}
+
+/* Aviso rápido (substitui alert) */
+.flash{position:fixed;left:50%;bottom:max(1.2rem,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366;border-radius:50px;padding:.55rem 1.1rem;font-size:.8rem;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:99999}
+.flash.show{opacity:1;transform:translate(-50%,0)}
+
+/* ===== FUNDO EXTERNO + SEO LATERAL (SOMENTE DESKTOP) ===== */
+.bg-seo{display:none}
+@media (min-width:1024px){
+  html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+    radial-gradient(ellipse 34% 85% at 50% 50%,rgba(var(--bg-rgb),.94) 0%,rgba(var(--bg-rgb),.7) 55%,rgba(var(--bg-rgb),0) 100%),
+    radial-gradient(ellipse 50% 40% at 50% 0%,rgba(var(--accent-rgb),.10) 0%,transparent 70%),
+    linear-gradient(100deg,rgba(var(--side-a-rgb),.55) 0%,rgba(var(--side-a-rgb),0) 30%),
+    linear-gradient(260deg,rgba(var(--side-b-rgb),.42) 0%,rgba(var(--side-b-rgb),0) 28%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 7px),
+    linear-gradient(135deg,var(--bg) 0%,var(--card-2) 50%,var(--bg) 100%);
+    background-size:auto,auto,auto,auto,260px 260px,auto,auto}
+  .bg-seo{display:flex;justify-content:space-between;align-items:stretch;position:absolute;top:2rem;left:0;right:0;height:calc(100vh - 4rem);overflow:hidden;padding:0 3vw;z-index:0;pointer-events:none;font-family:'DM Sans',sans-serif;color:rgba(232,226,216,.6)}
+  .bg-seo>div{width:clamp(190px,calc((100vw - 480px)/2 - 7vw),380px);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
+  .bg-seo>div:last-child{text-align:right}
+  .bg-seo h1,.bg-seo h2,.bg-seo p{margin:0}
+  .bg-seo h1{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.05em;line-height:1.15;color:rgba(var(--accent-rgb),.9)}
+  .bg-seo h2{margin-top:1.1rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;color:rgba(var(--accent-rgb),.75)}
+  .bg-seo h1+h2{margin-top:.5rem}
+  .bg-seo>div:first-child .txt>h2:first-child{margin-top:0;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.05em;text-transform:none;line-height:1.15;color:rgba(var(--accent-rgb),.9)}
+  .bg-seo>div:first-child .txt>h2:first-child+h2{margin-top:.5rem}
+  .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
+  .bg-seo .fotos{display:flex;gap:.6rem}
+  .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(var(--accent-rgb),.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
+  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
+}
+
+/* Telas baixas (celulares pequenos) */
+@media (max-height:700px){
+  .device-frame{padding:1rem 1rem .8rem;gap:.6rem}
+  .page{gap:.6rem}
+  .logo-img{width:135px;max-height:56px}
+  .logo-img-fallback{width:135px;height:52px;font-size:1rem}
+  .brand{font-size:1.4rem}
+  .star{font-size:1.9rem}
+  .social-icon{width:40px;height:40px}
+}
+@media (max-height:600px){
+  .ticker-banner,.chips{display:none}
+  .address{font-size:.7rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="app-wrapper">
+  <div class="device-frame" id="deviceFrame">
+
+    <!-- Verso do cartão -->
+    <div class="secret-back" aria-hidden="true">
+      <img src="fundo.png" alt="" class="back-layer back-layer-fundo" loading="lazy" decoding="async">
+      <img src="mago.png" alt="" class="back-layer back-layer-mago" loading="lazy" decoding="async">
+      <img src="moldura.png" alt="" class="back-layer back-layer-moldura" loading="lazy" decoding="async">
+    </div>
+
+    <!-- Frente do cartão -->
+    <div class="page">
+
+      <div class="logo-wrap layer-mid">
+        <div class="logo-frame">
+          <img class="logo-img" src="{{LOGO}}" alt="Logo {{NOME}}" width="160" height="72" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none;">{{NOME}}</div>
+        </div>
+        <div>
+          <h1 class="brand">{{NOME}}</h1>
+          <div class="tagline">{{TAGLINE}}</div>
+        </div>
+      </div>
+
+      <div class="chips layer-back" aria-label="Produtos e serviços">
+        {{CHIPS_HTML}}
+      </div>
+
+      <!-- Estrelas: avaliação no Google -->
+      <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+        <a href="{{LINK_AVALIACAO_GOOGLE}}" class="stars-cta" target="_blank" rel="noopener" aria-label="Avaliar {{NOME}} com 5 estrelas no Google">
+          <span class="stars-row" aria-hidden="true">
+            <svg class="g-logo" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </span>
+          <span class="stars-label">Toque nas estrelas e avalie no Google</span>
+        </a>
+      </div>
+
+      <div class="cta-row layer-front">
+        <a href="tel:{{TELEFONE_E164}}" class="btn-act btn-call" aria-label="Ligar para {{NOME}}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.31 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+          Ligar agora
+        </a>
+        <a href="https://wa.me/{{WHATSAPP_NUMERO}}?text=Ol%C3%A1!%20Vim%20pelo%20link%20da%20{{NOME}}." class="btn-act btn-wa" target="_blank" rel="noopener" aria-label="Chamar {{NOME}} no WhatsApp">
+          <svg viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.84L.057 23.057a.75.75 0 0 0 .916.927l5.358-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="social-row layer-front" aria-label="Mais opções">
+        <a href="https://www.instagram.com/{{INSTAGRAM_USER}}" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram de {{NOME}}">
+          <div class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#dc2743"/>
+            </svg>
+          </div>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query={{ENDERECO_URL}}" class="social-btn" target="_blank" rel="noopener" aria-label="Como chegar no Google Maps">
+          <div class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/><circle cx="12" cy="9" r="2.5" fill="#fff"/></svg>
+          </div>
+          <span class="social-label">Maps</span>
+        </a>
+        <button type="button" class="social-btn" onclick="salvarContato()" aria-label="Salvar contato no celular">
+          <div class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+          </div>
+          <span class="social-label">Salvar</span>
+        </button>
+        <button type="button" class="social-btn" onclick="abrirMais()" aria-label="Ver mais informações" aria-haspopup="dialog">
+          <div class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </div>
+          <span class="social-label">Ver mais</span>
+        </button>
+      </div>
+
+      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">{{TEXTO_HORARIO}}</span></div>
+
+      <button type="button" class="address layer-back" onclick="copiarEndereco()" aria-label="Copiar endereço">
+        {{RUA_NUMERO}} · {{BAIRRO}}<br>{{CIDADE}} - {{UF}} · CEP {{CEP}}
+      </button>
+
+      <div class="ticker-banner layer-mid" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">{{TICKER_TEXTO}}</span>
+          <span class="ticker-item">{{TICKER_TEXTO}}</span>
+        </div>
+      </div>
+
+      <footer class="footer layer-back">
+        <p class="footer-promo">Quer um link como este para sua empresa?
+          <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Vi%20o%20link%20da%20{{NOME}}%20e%20quero%20um%20assim%20para%20minha%20empresa." target="_blank" rel="noopener">Saiba mais</a>
+        </p>
+        <p class="footer-dev">
+          <span>Desenvolvido por <a href="https://wa.me/5511954950044?text=Ol%C3%A1%20vim%20pelo%20site" target="_blank" rel="noopener">ImpulsoWeb10</a></span>
+          <button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()" aria-label="Ativar ou desativar o efeito 3D">Efeito 3D: OFF</button>
+        </p>
+      </footer>
+
+    </div>
+  </div>
+</div>
+
+<div class="flash" id="flash" role="status" aria-live="polite"></div>
+
+<!-- Tela "Ver mais" -->
+<dialog class="sheet" id="sheetMais" aria-labelledby="sheetTitulo">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <h2 id="sheetTitulo">{{NOME}}</h2>
+      <button type="button" class="sheet-close" onclick="fecharMais()" aria-label="Fechar">×</button>
+    </div>
+
+    <section>
+      <h3>O que você encontra</h3>
+      <ul class="svc-list">
+        {{SERVICOS_HTML}}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Horário</h3>
+      <p>{{TEXTO_HORARIO}}</p>
+    </section>
+
+    <section>
+      <h3>Endereço e rotas</h3>
+      <p>{{RUA_NUMERO}} · {{BAIRRO}}<br>{{CIDADE}} - {{UF}} · CEP {{CEP}}<br>
+        Telefone: <a class="inline" href="tel:{{TELEFONE_E164}}">{{TELEFONE_FORMATADO}}</a>
+      </p>
+      <div class="nav-buttons-grid">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query={{ENDERECO_URL}}" class="btn-nav-map" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/><circle cx="12" cy="9" r="2.5" fill="#fff"/></svg>
+          Abrir no Google Maps
+        </a>
+        <a href="https://waze.com/ul?q={{ENDERECO_URL}}&amp;navigate=yes" class="btn-nav-waze" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#33ccff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Abrir no Waze
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Perguntas frequentes</h3>
+      <div class="faq-container">
+        {{FAQ_HTML}}
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="Fotos">
+      <img src="{{FOTO_1}}" alt="{{ALT_FOTO_1}}" width="600" height="600" loading="lazy" decoding="async">
+      <img src="{{FOTO_2}}" alt="{{ALT_FOTO_2}}" width="600" height="600" loading="lazy" decoding="async">
+      <img src="{{FOTO_3}}" alt="{{ALT_FOTO_3}}" width="600" height="600" loading="lazy" decoding="async">
+      <img src="{{FOTO_4}}" alt="{{ALT_FOTO_4}}" width="600" height="600" loading="lazy" decoding="async">
+    </section>
+
+    <button type="button" class="btn-share" onclick="compartilhar()">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>
+      Compartilhar este link
+    </button>
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+  </div>
+</dialog>
+
+<!-- SEO lateral: aparece só no desktop, texto real indexável -->
+<aside class="bg-seo" aria-label="Sobre {{NOME}}">
+  <div>
+    <div class="txt">
+      <h2>{{SEO_H1}}</h2>
+      <h2>{{SEO_H2_TOPO}}</h2>
+      <p>{{SEO_TEXTO_TOPO}}</p>
+      <h2>{{SEO_TITULO_1}}</h2>
+      <p>{{SEO_TEXTO_1}}</p>
+    </div>
+    <div class="fotos">
+      <img src="{{FOTO_1}}" alt="{{ALT_FOTO_1}}" width="600" height="600" loading="lazy" decoding="async">
+      <img src="{{FOTO_2}}" alt="{{ALT_FOTO_2}}" width="600" height="600" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <div>
+    <div class="txt">
+      <h2>{{SEO_TITULO_2}}</h2>
+      <p>{{SEO_TEXTO_2}}</p>
+      <h2>{{SEO_TITULO_3}}</h2>
+      <p>{{SEO_TEXTO_3}}</p>
+      <h2>{{SEO_TITULO_4}}</h2>
+      <p>{{SEO_TEXTO_4}}</p>
+    </div>
+    <div class="fotos">
+      <img src="{{FOTO_3}}" alt="{{ALT_FOTO_3}}" width="600" height="600" loading="lazy" decoding="async">
+      <img src="{{FOTO_4}}" alt="{{ALT_FOTO_4}}" width="600" height="600" loading="lazy" decoding="async">
+    </div>
+  </div>
+</aside>
+
+<script>
+  /* ===== DADOS DO CLIENTE (preenchidos pelo sistema) ===== */
+  const CLIENTE = {
+    nome: "{{NOME}}",
+    telefone: "{{TELEFONE_E164}}",
+    endereco: "{{ENDERECO_COMPLETO}}",
+    rua: "{{RUA_NUMERO}}",
+    bairro: "{{BAIRRO}}",
+    cidade: "{{CIDADE}}",
+    uf: "{{UF}}",
+    cep: "{{CEP}}",
+    abre: {{HORA_ABRE}},
+    fecha: {{HORA_FECHA}},
+    dias: ['Mon','Tue','Wed','Thu','Fri','Sat']
+  };
+  const PAGE_URL = location.href.split('#')[0].split('?')[0];
+
+  /* ===== AVISO RÁPIDO ===== */
+  const flashEl = document.getElementById('flash');
+  let flashTimer;
+  function aviso(msg){
+    flashEl.textContent = msg;
+    flashEl.classList.add('show');
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function(){ flashEl.classList.remove('show'); }, 2400);
+  }
+
+  /* ===== HORÁRIO (Aberto agora / Fechado) ===== */
+  (function(){
+    const box = document.getElementById('hours');
+    const txt = document.getElementById('hoursText');
+    try {
+      const partes = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', hour12: false })
+        .formatToParts(new Date()).forEach(function(p){ partes[p.type] = p.value; });
+      const dia = partes.weekday;
+      const h = parseInt(partes.hour, 10) % 24;
+      const util = CLIENTE.dias.indexOf(dia) !== -1;
+      if (util && h >= CLIENTE.abre && h < CLIENTE.fecha) {
+        box.classList.add('open');
+        txt.textContent = 'Aberto agora · fecha às ' + CLIENTE.fecha + 'h';
+      } else {
+        box.classList.add('closed');
+        if (util && h < CLIENTE.abre) txt.textContent = 'Fechado · abre hoje às ' + CLIENTE.abre + 'h';
+        else if (dia === 'Sat') txt.textContent = 'Fechado · abre segunda às ' + CLIENTE.abre + 'h';
+        else txt.textContent = 'Fechado · abre amanhã às ' + CLIENTE.abre + 'h';
+      }
+    } catch (e) {}
+  })();
+
+  /* ===== COPIAR ENDEREÇO ===== */
+  async function copiarEndereco(){
+    try {
+      await navigator.clipboard.writeText(CLIENTE.endereco);
+      aviso('Endereço copiado!');
+    } catch (err) {
+      aviso('Não foi possível copiar o endereço.');
+    }
+  }
+
+  /* ===== TELA "VER MAIS" ===== */
+  const sheet = document.getElementById('sheetMais');
+  function abrirMais(){
+    if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open','');
+    sheet.scrollTop = 0;
+  }
+  function fecharMais(){
+    if (typeof sheet.close === 'function') sheet.close(); else sheet.removeAttribute('open');
+  }
+  sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
+
+  /* ===== SALVAR CONTATO (vCard) ===== */
+  function salvarContato(){
+    const esc = function(s){ return String(s).replace(/([,;])/g, '\\$1'); };
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'FN:' + esc(CLIENTE.nome),
+      'ORG:' + esc(CLIENTE.nome),
+      'TEL;TYPE=WORK,VOICE:' + CLIENTE.telefone,
+      'ADR;TYPE=WORK:;;' + esc(CLIENTE.rua + ' - ' + CLIENTE.bairro) + ';' + esc(CLIENTE.cidade) + ';' + CLIENTE.uf + ';' + CLIENTE.cep + ';Brasil',
+      'URL:' + PAGE_URL,
+      'END:VCARD'
+    ].join('\r\n');
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '{{SLUG}}.vcf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+    aviso('Contato baixado!');
+  }
+
+  /* ===== COMPARTILHAR ===== */
+  async function compartilhar(){
+    const dados = { title: document.title, text: CLIENTE.nome, url: PAGE_URL };
+    try {
+      if (navigator.share) { await navigator.share(dados); return; }
+      await navigator.clipboard.writeText(PAGE_URL);
+      aviso('Link copiado!');
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      aviso('Não foi possível copiar o link.');
+    }
+  }
+
+  /* ===== EFEITO 3D (celular: giroscópio / PC: mouse) ===== */
+  const frame = document.getElementById('deviceFrame');
+  const btnGyro = document.getElementById('toggleGyro');
+  let giroscopioAtivo = false;
+  const cfg3D = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
+
+  function handleOrientation(e){
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
+    const x = Math.min(Math.max(e.gamma, -cfg3D.anguloMax), cfg3D.anguloMax);
+    const y = Math.min(Math.max(e.beta - 45, -cfg3D.anguloMax), cfg3D.anguloMax);
+    frame.style.transform = 'rotateY(' + (x * cfg3D.intensidadeCelular) + 'deg) rotateX(' + (-y * cfg3D.intensidadeCelular) + 'deg)';
+  }
+  function ativar3D(){
+    window.addEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = true;
+    btnGyro.textContent = 'Efeito 3D: ON';
+    btnGyro.classList.add('active');
+  }
+  function desativar3D(){
+    window.removeEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = false;
+    btnGyro.textContent = 'Efeito 3D: OFF';
+    btnGyro.classList.remove('active');
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+  function alternarGiroscopio(){
+    if (giroscopioAtivo) { desativar3D(); return; }
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(function(state){
+        if (state === 'granted') ativar3D(); else aviso('Permissão de movimento negada.');
+      }).catch(function(){ ativar3D(); });
+    } else {
+      ativar3D();
+    }
+  }
+  document.addEventListener('mousemove', function(e){
+    if (!giroscopioAtivo) return;
+    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+    frame.style.transform = 'rotateY(' + (x * cfg3D.intensidadeMouse) + 'deg) rotateX(' + (-y * cfg3D.intensidadeMouse) + 'deg)';
+  });
+  document.addEventListener('mouseleave', function(){
+    if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  });
+</script>
+
+</body>
+</html>
