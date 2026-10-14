@@ -151,7 +151,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn-gyro:hover,.btn-gyro.active{background:rgba(255,159,67,.3);color:#ffffff;opacity:1}
 .btn-gyro.active{background:linear-gradient(135deg,#ff9f43 0%,#e17055 100%);color:#ffffff;border-color:var(--accent-soft);box-shadow:0 0 20px rgba(255,159,67,.9);animation:none}
 
-/* MODAL COM A MESMA LARGURA E TAMANHO DA TELA DA FRENTE */
+/* MODAL COM EXATAMENTE O MESMO TAMANHO E LARGURA DA TELA DA FRENTE */
 .sheet{position:fixed;inset:1rem auto auto 0;margin:0 auto;width:100%;max-width:480px;max-height:86vh;max-height:86dvh;overflow-y:auto;border:2px solid #ffffff;border-radius:24px;background:linear-gradient(175deg,var(--card-1) 0%,var(--card-2) 100%);color:var(--text);padding:0;box-shadow:0 0 15px #ffffff,0 0 30px rgba(255,107,107,.45),0 15px 35px rgba(0,0,0,.85);font-family:'DM Sans',sans-serif}
 .sheet::backdrop{background:rgba(10,2,2,.8)}
 .sheet[open]{animation:sheet-down .28s ease-out}
@@ -168,7 +168,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:var(--text);background:rgba(255,255,255,.05);border:1px solid rgba(255,159,67,.2);border-radius:12px;padding:.55rem .75rem}
 .svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* GALERIA EXATA 2x2 (2 EM CIMA, 2 EMBAIXO) COM TAMANHO QUADRADO E SEM ESTOURO */
+/* GALERIA COM 4 IMAGENS QUADRADAS (2 EM CIMA, 2 EMBAIXO) EM GRID FIXO */
 .gallery{display:grid;grid-template-columns:repeat(2, 1fr);gap:.6rem;width:100%;max-width:100%;overflow:hidden}
 .gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#280a0a;border-radius:12px;border:1px solid rgba(255,159,67,.5);box-shadow:0 4px 12px rgba(0,0,0,.5)}
 
@@ -254,7 +254,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <div class="social-icon" style="background:#281111;"><svg viewBox="0 0 24 24" fill="#EA4335"><circle cx="12" cy="12" r="10"/></svg></div>
           <span class="social-label">Maps</span>
         </a>
-        <!-- BOTÃO REDONDO DE CARDÁPIO (LINK ZESTO) -->
         <a href="https://pedido.zesto.menu/s/bT0WvPv" class="social-btn" target="_blank" rel="noopener">
           <div class="social-icon" style="background:#3d1a11;"><svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg></div>
           <span class="social-label">Cardápio</span>
@@ -326,7 +325,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
     </section>
 
-    <!-- GALERIA PERFEITA 2x2 (2 EM CIMA, 2 EMBAIXO) -->
+    <!-- GALERIA COM 4 IMAGENS QUADRADAS PERFEITAS (2 EM CIMA, 2 EMBAIXO) -->
     <section class="gallery">
       <img src="pizza-mussarela-pizzaria-juliana-e-favorita-itaquaquecetuba.png" alt="Pizza de mussarela recém-saída do forno na Pizzaria Juliana e Favorita em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
       <img src="pizza-calabresa-borda-recheada-itaquaquecetuba.png" alt="Pizza de calabresa com borda recheada para delivery em Itaquaquecetuba - SP" width="600" height="600" loading="lazy" decoding="async">
