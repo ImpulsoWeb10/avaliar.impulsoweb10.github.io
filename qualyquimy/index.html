@@ -464,24 +464,6 @@ body::before{
   word-break: break-all;
 }
 
-/* Nova mensagem de confirmação e dados no rodapé do modal Pix */
-.pix-msg-final {
-  font-size: 0.76rem;
-  color: #c9d6e6;
-  line-height: 1.5;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(201,169,110,0.25);
-  border-radius: 10px;
-  padding: 0.6rem;
-  width: 100%;
-}
-.pix-msg-final .aviso-confirma {
-  display: block;
-  font-weight: 700;
-  color: #ffe082;
-  margin-bottom: 0.2rem;
-}
-
 .btn-copy-pix {
   display: flex;
   align-items: center;
@@ -792,7 +774,7 @@ body::before{
           WhatsApp
         </a>
 
-        <!-- BOTÃO PAGAMENTO / PIX SEM ÍCONE -->
+        <!-- BOTÃO PAGAMENTO / PIX COM O NOME EXATO DA IMAGEM -->
         <button type="button" class="btn-act btn-pay" onclick="abrirPixModal()" aria-label="Pagamento Online ou Pix">
           💳 Pagamento Online / Pix
         </button>
@@ -868,7 +850,7 @@ body::before{
 
 </div>
 
-<!-- MODAL DO PIX COM MENSAGEM FINAL ATUALIZADA -->
+<!-- MODAL DO PIX COM IMAGEM ATUALIZADA -->
 <dialog class="sheet-pix" id="sheetPix" aria-labelledby="pixTitulo">
   <div class="sheet-pix-body">
     <div class="sheet-pix-head">
@@ -876,7 +858,7 @@ body::before{
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
     </div>
 
-    <!-- Imagem do cartaz -->
+    <!-- Imagem com o nome exato solicitado -->
     <div class="pix-img-container">
       <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
     </div>
@@ -884,13 +866,6 @@ body::before{
     <div class="pix-key-box">
       <span class="pix-key-label">Chave Pix (CNPJ)</span>
       <span class="pix-key-value" id="pixCnpjText">10503834000173</span>
-    </div>
-
-    <!-- Mensagem por último no modal contendo o aviso e os dados solicitados -->
-    <div class="pix-msg-final">
-      <span class="aviso-confirma">⚠️ Conferir Nome e Banco antes de confirmar</span>
-      Qualyquimy Comercio de Tintas Ltda<br>
-      Banco : CC POUP INV PROGRESSO PR/SP
     </div>
 
     <button type="button" class="btn-copy-pix" onclick="copiarPixChave()">
@@ -1143,7 +1118,8 @@ body::before{
     const cnpjChave = "10503834000173";
     try {
       await navigator.clipboard.writeText(cnpjChave);
-      alert("Chave Pix CNPJ copiada com sucesso! Abra o aplicativo do seu banco para colar e pagar.");
+      // Mensagem personalizada exibida ao copiar, contendo o aviso e os dados solicitados
+      alert("⚠️ Conferir Nome e Banco antes de confirmar\n\nQualyquimy Comercio de Tintas Ltda\nBanco : CC POUP INV PROGRESSO PR/SP\n\nChave Pix CNPJ copiada com sucesso!");
       fecharPixModal();
     } catch (err) {
       alert("Não foi possível copiar a chave automaticamente.");
@@ -1162,7 +1138,7 @@ body::before{
   }
   sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
 
-  /* ===== SALVAR CONTATO (vCard limpo sem dados de banco) ===== */
+  /* ===== SALVAR CONTATO (vCard limpo) ===== */
  function salvarContato() {
   const PAGE_URL = window.location.href;
 
@@ -1214,7 +1190,7 @@ body::before{
     }
   }
 
-  /* ===== EFEITO 3D (Com botão ON/OFF igual index-14) ===== */
+  /* ===== EFEITO 3D (Com botão ON/OFF) ===== */
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
   let giroscopioAtivo = false;
