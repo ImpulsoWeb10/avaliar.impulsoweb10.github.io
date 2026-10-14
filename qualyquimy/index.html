@@ -246,6 +246,11 @@ body::before{
   border-radius:18px;
   -webkit-tap-highlight-color:transparent;
   transition:transform .15s;
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-family:inherit;
+  width:100%;
 }
 .stars-cta:active{transform:scale(.97)}
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
@@ -386,6 +391,84 @@ body::before{
   animation: none;
 }
 
+/* ===== MODAL DE AVALIAÇÃO + INSTAGRAM ===== */
+.sheet-eval {
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0 auto;
+  width: min(480px, 100%);
+  max-height: 95vh;
+  max-height: 95dvh;
+  overflow-y: auto;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-bottom: none;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
+  color: #e8e2d8;
+  padding: 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+  font-family: 'DM Sans', sans-serif;
+}
+.sheet-eval::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
+.sheet-eval[open] { animation: sheet-up .3s ease-out; }
+@keyframes sheet-up { from { transform: translateY(50px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.sheet-eval-body {
+  padding: 1.4rem 1.3rem calc(1.5rem + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.sheet-eval-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.sheet-eval h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f0ece5;
+}
+.eval-msg-box {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #d9e4f2;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 14px;
+  padding: 1rem;
+  width: 100%;
+}
+.eval-msg-box strong {
+  color: #ffe082;
+}
+.btn-eval-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 48px;
+  background: #22c55e;
+  color: #04210f;
+  border: none;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 15px rgba(34,197,94,0.35);
+}
+.btn-eval-go:hover {
+  transform: translateY(-2px);
+  background: #16a34a;
+}
+
 /* ===== MODAL DE PIX ELEGANTE ===== */
 .sheet-pix {
   position: fixed;
@@ -406,7 +489,6 @@ body::before{
 }
 .sheet-pix::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
 .sheet-pix[open] { animation: sheet-up .3s ease-out; }
-@keyframes sheet-up { from { transform: translateY(50px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 .sheet-pix-body {
   padding: 1.2rem 1.2rem calc(1.5rem + env(safe-area-inset-bottom));
@@ -463,7 +545,6 @@ body::before{
   color: #ffe082;
   word-break: break-all;
 }
-
 .btn-copy-pix {
   display: flex;
   align-items: center;
@@ -688,6 +769,7 @@ body::before{
   .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
   .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:92vh;max-height:92dvh}
   .sheet-pix{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
+  .sheet-eval{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
 }
 
 @media (max-height:700px){
@@ -744,13 +826,12 @@ body::before{
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>Texturas</span>
       </div>
 
-      <!-- ESTRELAS: avaliação no Google -->
+      <!-- ESTRELAS: abre o modal de aviso antes de ir ao Google -->
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
-        <a
-          href="https://g.page/r/CRECbD178tUDEAE/review"
+        <button
+          type="button"
           class="stars-cta"
-          target="_blank"
-          rel="noopener"
+          onclick="abrirEvalModal()"
           aria-label="Avaliar a Tintas Qualy Quimy com 5 estrelas no Google"
         >
           <span class="stars-row" aria-hidden="true">
@@ -760,7 +841,7 @@ body::before{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
             Toque nas estrelas e avalie no Google
           </span>
-        </a>
+        </button>
         <div class="proof" id="proof" hidden></div>
       </div>
 
@@ -774,7 +855,7 @@ body::before{
           WhatsApp
         </a>
 
-        <!-- BOTÃO PAGAMENTO / PIX COM O NOME EXATO DA IMAGEM -->
+        <!-- BOTÃO PAGAMENTO / PIX -->
         <button type="button" class="btn-act btn-pay" onclick="abrirPixModal()" aria-label="Pagamento Online ou Pix">
           💳 Pagamento Online / Pix
         </button>
@@ -850,7 +931,25 @@ body::before{
 
 </div>
 
-<!-- MODAL DO PIX COM IMAGEM ATUALIZADA -->
+<!-- MODAL DE AVALIAÇÃO + INSTAGRAM -->
+<dialog class="sheet-eval" id="sheetEval" aria-labelledby="evalTitulo">
+  <div class="sheet-eval-body">
+    <div class="sheet-eval-head">
+      <h2 id="evalTitulo">Valorizamos sua Opinião</h2>
+      <button type="button" class="sheet-close" onclick="fecharEvalModal()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="eval-msg-box">
+      Após nos avaliar no Google, por gentileza, nos siga na pagina do Instagram , que estará aberta, assim que voltar na pagina.
+    </div>
+
+    <button type="button" class="btn-eval-go" onclick="prosseguirAvaliacao()">
+      Ok, vamos a avaliação!
+    </button>
+  </div>
+</dialog>
+
+<!-- MODAL DO PIX -->
 <dialog class="sheet-pix" id="sheetPix" aria-labelledby="pixTitulo">
   <div class="sheet-pix-body">
     <div class="sheet-pix-head">
@@ -858,7 +957,6 @@ body::before{
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
     </div>
 
-    <!-- Imagem com o nome exato solicitado -->
     <div class="pix-img-container">
       <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
     </div>
@@ -918,7 +1016,6 @@ body::before{
         Itaquaquecetuba - SP · CEP 08587-100<br>
         Telefone: <a class="inline" href="tel:+551146432301">(11) 4643-2301</a>
       </p>
-      <!-- Dois botões profissionais para navegação -->
       <div class="nav-buttons-grid">
         <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Leiria+45+Chacara+Cuiaba+CEP+08587100" class="btn-nav-map" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -936,7 +1033,6 @@ body::before{
       </div>
     </section>
 
-    <!-- Seção FAQ com 5 questões em lista suspensa (acordeão) -->
     <section>
       <h3>Perguntas Frequentes (FAQ)</h3>
       <div class="faq-container">
@@ -1020,6 +1116,27 @@ body::before{
       p.hidden = false;
     }
   })();
+
+  /* ===== MODAL DE AVALIAÇÃO + INSTAGRAM ===== */
+  const sheetEval = document.getElementById('sheetEval');
+  function abrirEvalModal(){
+    if (typeof sheetEval.showModal === 'function') sheetEval.showModal();
+    else sheetEval.setAttribute('open','');
+  }
+  function fecharEvalModal(){
+    if (typeof sheetEval.close === 'function') sheetEval.close();
+    else sheetEval.removeAttribute('open');
+  }
+  sheetEval.addEventListener('click', function(e){ if (e.target === sheetEval) fecharEvalModal(); });
+
+  function prosseguirAvaliacao(){
+    // 1. Abre o Instagram em segundo plano (nova aba)
+    window.open('https://www.instagram.com/tintasqualyquimy', '_blank');
+    // 2. Fecha o modal de aviso
+    fecharEvalModal();
+    // 3. Redireciona para a avaliação do Google[cite: 2]
+    window.location.href = 'https://g.page/r/CRECbD178tUDEAE/review';
+  }
 
   /* ===== LÓGICA DE 5 CLIQUES NO LOGO PARA MUDAR TEMA ===== */
   let cliquesLogo = 0;
@@ -1118,7 +1235,6 @@ body::before{
     const cnpjChave = "10503834000173";
     try {
       await navigator.clipboard.writeText(cnpjChave);
-      // Mensagem personalizada exibida ao copiar, contendo o aviso e os dados solicitados
       alert("⚠️ Conferir Nome e Banco antes de confirmar\n\nQualyquimy Comercio de Tintas Ltda\nBanco : CC POUP INV PROGRESSO PR/SP\n\nChave Pix CNPJ copiada com sucesso!");
       fecharPixModal();
     } catch (err) {
