@@ -391,34 +391,34 @@ body::before{
   animation: none;
 }
 
-/* ===== MODAL DE AVALIAÇÃO + INSTAGRAM ===== */
+/* ===== MODAL CENTRALIZADO ELEGANTE ===== */
 .sheet-eval {
   position: fixed;
-  inset: auto 0 0 0;
-  margin: 0 auto;
-  width: min(480px, 100%);
-  max-height: 95vh;
-  max-height: 95dvh;
+  inset: 0;
+  margin: auto;
+  width: min(420px, 92%);
+  max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
-  border: 2px solid rgba(255,255,255,0.4);
-  border-bottom: none;
-  border-radius: 24px 24px 0 0;
+  border: 2px solid rgba(201,169,110,0.6);
+  border-radius: 24px;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   color: #e8e2d8;
   padding: 0;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.85);
   font-family: 'DM Sans', sans-serif;
+  z-index: 99999;
 }
-.sheet-eval::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
-.sheet-eval[open] { animation: sheet-up .3s ease-out; }
-@keyframes sheet-up { from { transform: translateY(50px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-eval::backdrop { background: rgba(3, 8, 16, 0.85); backdrop-filter: blur(5px); }
+.sheet-eval[open] { animation: modal-center-in .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes modal-center-in { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 .sheet-eval-body {
-  padding: 1.4rem 1.3rem calc(1.5rem + env(safe-area-inset-bottom));
+  padding: 1.5rem 1.3rem calc(1.5rem + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.1rem;
   text-align: center;
 }
 .sheet-eval-head {
@@ -434,11 +434,11 @@ body::before{
   color: #f0ece5;
 }
 .eval-msg-box {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.6;
   color: #d9e4f2;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(201,169,110,0.3);
+  border: 1px solid rgba(201,169,110,0.35);
   border-radius: 14px;
   padding: 1rem;
   width: 100%;
@@ -469,7 +469,7 @@ body::before{
   background: #16a34a;
 }
 
-/* ===== MODAL DE PIX ELEGANTE ===== */
+/* ===== MODAL DO PIX ELEGANTE ===== */
 .sheet-pix {
   position: fixed;
   inset: auto 0 0 0;
@@ -489,6 +489,7 @@ body::before{
 }
 .sheet-pix::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
 .sheet-pix[open] { animation: sheet-up .3s ease-out; }
+@keyframes sheet-up { from { transform: translateY(50px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 .sheet-pix-body {
   padding: 1.2rem 1.2rem calc(1.5rem + env(safe-area-inset-bottom));
@@ -622,7 +623,7 @@ body::before{
 .sheet::backdrop{background:rgba(3,8,16,.74)}
 .sheet[open]{animation:sheet-up .28s ease-out}
 .sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
-.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sheet-head{display:flex;align-items:center;justify-content:between;gap:1rem}
 .sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#f0ece5;letter-spacing:.04em}
 .sheet h3{font-size:.9rem;font-weight:700;color:#c9a96e;margin-bottom:.4rem}
 .sheet p{font-size:.82rem;line-height:1.55;color:#c9d6e6}
@@ -769,7 +770,6 @@ body::before{
   .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
   .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:92vh;max-height:92dvh}
   .sheet-pix{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
-  .sheet-eval{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
 }
 
 @media (max-height:700px){
@@ -826,7 +826,7 @@ body::before{
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>Texturas</span>
       </div>
 
-      <!-- ESTRELAS: abre o modal de aviso antes de ir ao Google -->
+      <!-- ESTRELAS: abre o modal centralizado antes de ir ao Google -->
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
         <button
           type="button"
@@ -931,7 +931,7 @@ body::before{
 
 </div>
 
-<!-- MODAL DE AVALIAÇÃO + INSTAGRAM -->
+<!-- MODAL CENTRALIZADO DE AVALIAÇÃO + INSTAGRAM -->
 <dialog class="sheet-eval" id="sheetEval" aria-labelledby="evalTitulo">
   <div class="sheet-eval-body">
     <div class="sheet-eval-head">
@@ -1117,7 +1117,7 @@ body::before{
     }
   })();
 
-  /* ===== MODAL DE AVALIAÇÃO + INSTAGRAM ===== */
+  /* ===== MODAL CENTRALIZADO DE AVALIAÇÃO + INSTAGRAM ===== */
   const sheetEval = document.getElementById('sheetEval');
   function abrirEvalModal(){
     if (typeof sheetEval.showModal === 'function') sheetEval.showModal();
@@ -1130,12 +1130,12 @@ body::before{
   sheetEval.addEventListener('click', function(e){ if (e.target === sheetEval) fecharEvalModal(); });
 
   function prosseguirAvaliacao(){
-    // 1. Abre o Instagram em segundo plano (nova aba)
+    // 1. Abre o Google Avaliação na janela principal (ou em foco)
+    window.open('https://g.page/r/CRECbD178tUDEAE/review', '_blank');
+    // 2. Abre o Instagram em segundo plano (nova aba)
     window.open('https://www.instagram.com/tintasqualyquimy', '_blank');
-    // 2. Fecha o modal de aviso
+    // 3. Fecha o modal centralizado
     fecharEvalModal();
-    // 3. Redireciona para a avaliação do Google[cite: 2]
-    window.location.href = 'https://g.page/r/CRECbD178tUDEAE/review';
   }
 
   /* ===== LÓGICA DE 5 CLIQUES NO LOGO PARA MUDAR TEMA ===== */
@@ -1159,202 +1159,3 @@ body::before{
 
   const themeModal = document.getElementById('themeModal');
   function abrirTemaModal(){
-    if (typeof themeModal.showModal === 'function') themeModal.showModal();
-    else themeModal.setAttribute('open','');
-  }
-  function fecharTemaModal(){
-    if (typeof themeModal.close === 'function') themeModal.close();
-    else themeModal.removeAttribute('open');
-  }
-
-  // 5 Temas diferentes (Fundo e Neon do cartão)
-  const temas = [
-    { bg: '#07101e', frameBg: 'linear-gradient(175deg,#102040 0%,#0b1a2e 100%)', shadow: '0 0 10px #ffffff, 0 0 20px rgba(255,255,255,.8)' }, // Azul Clássico
-    { bg: '#03120a', frameBg: 'linear-gradient(175deg,#0d2e1a 0%,#051a10 100%)', shadow: '0 0 10px #22c55e, 0 0 20px rgba(34,197,94,.8)' }, // Verde Esmeralda
-    { bg: '#141005', frameBg: 'linear-gradient(175deg,#332510 0%,#1f1605 100%)', shadow: '0 0 10px #ffe082, 0 0 20px rgba(201,169,110,.8)' }, // Dourado Luxo
-    { bg: '#100516', frameBg: 'linear-gradient(175deg,#2b0d3d 0%,#180b22 100%)', shadow: '0 0 10px #d946ef, 0 0 20px rgba(217,70,239,.8)' }, // Roxo Imperial
-    { bg: '#160404', frameBg: 'linear-gradient(175deg,#3d0d0d 0%,#220808 100%)', shadow: '0 0 10px #ef4444, 0 0 20px rgba(239,68,68,.8)' }  // Vermelho Fogo
-  ];
-
-  function mudarTema(indice){
-    const tema = temas[indice];
-    document.getElementById('pageBody').style.background = tema.bg;
-    const deviceFrame = document.getElementById('deviceFrame');
-    deviceFrame.style.background = tema.frameBg;
-    deviceFrame.style.boxShadow = tema.shadow + ', 0 15px 35px rgba(0,0,0,.6)';
-    fecharTemaModal();
-  }
-
-  /* ===== HORÁRIO ===== */
-  (function(){
-    const box = document.getElementById('hours');
-    const txt = document.getElementById('hoursText');
-    try {
-      const partes = {};
-      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', hour12: false })
-        .formatToParts(new Date()).forEach(function(p){ partes[p.type] = p.value; });
-      const dia = partes.weekday;
-      const h = parseInt(partes.hour, 10) % 24;
-      const util = ['Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(dia) !== -1;
-      if (util && h >= 8 && h < 18) {
-        box.classList.add('open');
-        txt.textContent = 'Aberto agora · fecha às 17:30h';
-      } else {
-        box.classList.add('closed');
-        if (util && h < 8) txt.textContent = 'Fechado · abre hoje às 8h';
-        else if (dia === 'Sat') txt.textContent = 'Fechado · abre segunda às 8h';
-        else txt.textContent = 'Fechado · abre amanhã às 8h';
-      }
-    } catch (e) {}
-  })();
-
-  /* ===== COPIAR ENDEREÇO RÁPIDO ===== */
-  async function copiarEndereco() {
-    const endTexto = "Rua Leiria, 45, Chácara Cuiabá, Itaquaquecetuba - SP, CEP 08587-100";
-    try {
-      await navigator.clipboard.writeText(endTexto);
-      alert("Endereço copiado para a área de transferência!");
-    } catch (err) {
-      alert("Não foi possível copiar o endereço automaticamente.");
-    }
-  }
-
-  /* ===== MODAL DO PIX ===== */
-  const sheetPix = document.getElementById('sheetPix');
-  function abrirPixModal(){
-    if (typeof sheetPix.showModal === 'function') sheetPix.showModal();
-    else sheetPix.setAttribute('open','');
-  }
-  function fecharPixModal(){
-    if (typeof sheetPix.close === 'function') sheetPix.close();
-    else sheetPix.removeAttribute('open');
-  }
-  sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharPixModal(); });
-
-  async function copiarPixChave() {
-    const cnpjChave = "10503834000173";
-    try {
-      await navigator.clipboard.writeText(cnpjChave);
-      alert("⚠️ Conferir Nome e Banco antes de confirmar\n\nQualyquimy Comercio de Tintas Ltda\nBanco : CC POUP INV PROGRESSO PR/SP\n\nChave Pix CNPJ copiada com sucesso!");
-      fecharPixModal();
-    } catch (err) {
-      alert("Não foi possível copiar a chave automaticamente.");
-    }
-  }
-
-  /* ===== TELA "VER MAIS" ===== */
-  const sheet = document.getElementById('sheetMais');
-  function abrirMais(){
-    if (typeof sheet.showModal === 'function') sheet.showModal();
-    else sheet.setAttribute('open','');
-  }
-  function fecharMais(){
-    if (typeof sheet.close === 'function') sheet.close();
-    else sheet.removeAttribute('open');
-  }
-  sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
-
-  /* ===== SALVAR CONTATO (vCard limpo) ===== */
- function salvarContato() {
-  const PAGE_URL = window.location.href;
-
-  const vcard = [
-    'BEGIN:VCARD',
-    'VERSION:3.0',
-    'FN:Tintas Qualy Quimy',
-    'ORG:Qualyquimy Comercio de Tintas Ltda',
-    'TITLE:Indústria de Tintas e Texturas',
-    'TEL;TYPE=WORK,VOICE:+551146432301', 
-    'TEL;TYPE=CELL,VOICE,PREF:+5511954950044', 
-    'EMAIL;TYPE=WORK,INTERNET:contato@qualyquimy.com.br', 
-    'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
-    'URL;TYPE=WORK:' + PAGE_URL,
-    'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com',
-    'NOTE:Tintas\\, massas\\, texturas e acabamentos.',
-    'CATEGORIES:Tintas,Construção,Revestimentos',
-    'END:VCARD'
-  ].join('\r\n');
-
-  const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
-  const link = document.createElement('a');
-  
-  if (navigator.msSaveBlob) {
-    navigator.msSaveBlob(blob, 'Salvar Contato Qualy.vcf');
-  } else {
-    link.href = URL.createObjectURL(blob);
-    link.download = 'Salvar Contato Qualy.vcf'; 
-    link.click();
-    URL.revokeObjectURL(link.href);
-  }
-}
-
-  /* ===== COMPARTILHAR ===== */
-  function aviso(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    setTimeout(function(){ t.textContent = ''; }, 2500);
-  }
-  async function compartilhar(){
-    const dados = { title: document.title, text: 'Tintas Qualy Quimy - Itaquaquecetuba - SP', url: PAGE_URL };
-    try {
-      if (navigator.share) { await navigator.share(dados); return; }
-      await navigator.clipboard.writeText(PAGE_URL);
-      aviso('Link copiado!');
-    } catch (err) {
-      if (err && err.name === 'AbortError') return;
-      aviso('Não foi possível copiar. Copie o link na barra do navegador.');
-    }
-  }
-
-  /* ===== EFEITO 3D (Com botão ON/OFF) ===== */
-  const frame = document.getElementById('deviceFrame');
-  const btnGyro = document.getElementById('toggleGyro');
-  let giroscopioAtivo = false;
-  const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
-
-  function handleOrientation(e){
-    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
-    let x = Math.min(Math.max(e.gamma, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
-    let y = Math.min(Math.max(e.beta - 45, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
-    frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeCelular) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeCelular) + 'deg)';
-  }
-  function ativandoOorientacao(){
-    window.addEventListener('deviceorientation', handleOrientation);
-    giroscopioAtivo = true;
-    btnGyro.innerText = 'Efeito 3D: ON';
-    btnGyro.classList.add('active');
-  }
-  function desativarGiroscopio(){
-    window.removeEventListener('deviceorientation', handleOrientation);
-    giroscopioAtivo = false;
-    btnGyro.innerText = 'Efeito 3D: OFF';
-    btnGyro.classList.remove('active');
-    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  }
-  function alternarGiroscopio(){
-    if (giroscopioAtivo) { 
-      desativarGiroscopio(); 
-      return; 
-    }
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission().then(function(state){
-        if (state === 'granted') ativandoOorientacao();
-        else alert('Permissão de orientação negada.');
-      }).catch(function(){ ativandoOorientacao(); });
-    } else {
-      ativandoOorientacao();
-    }
-  }
-  document.addEventListener('mousemove', function(e){
-    if (!giroscopioAtivo) return;
-    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-    frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeMouse) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeMouse) + 'deg)';
-  });
-  document.addEventListener('mouseleave', function(){
-    if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  });
-</script>
-
-</body>
-</html>
