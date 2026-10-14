@@ -1,0 +1,92 @@
+{
+  "dados_formulario_base": {
+    "placeId": "ChIJjUxPNAB9zpQRaGwdfRPmwhc",
+    "nomeEmpresa": "Pizzaria Juliana e Favorita",
+    "whatsapp": "5511958338379",
+    "instagram": "pizzariajulianaefavorita",
+    "cidadeEstado": "Itaquaquecetuba / SP",
+    "enderecoCompleto": "Estr. Promissão, 8 - Jardim Carolina, Itaquaquecetuba - SP, 08588-310",
+    "segmento": "Pizzaria com Delivery",
+    "produtosPrincipais": "Pizzas salgadas, pizzas doces, pizzas meio a meio, bordas recheadas, refrigerantes, pedidos por WhatsApp, delivery"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html",
+      "h1": "Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita",
+      "meta_description": "Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor, peça pelo WhatsApp (11) 95833-8379 e receba em casa. Clique e faça seu pedido agora!"
+    },
+    "arquitetura_h2_h4": {
+      "secao_principal_h2": {
+        "titulo_h2": "Pizzaria Juliana e Favorita: tradição de forno e sabor em Itaquaquecetuba",
+        "introducao_bloco": "A Pizzaria Juliana e Favorita é uma pizzaria de delivery que leva sabor caseiro para as mesas de Itaquaquecetuba, em São Paulo. Com massa preparada com cuidado, molho bem temperado e coberturas fartas, a casa atende famílias, grupos de amigos e quem só quer uma noite tranquila em casa. O atendimento é próximo e direto: basta chamar no WhatsApp (11) 95833-8379, escolher o sabor e aguardar a entrega, sem filas e sem complicação."
+      },
+      "secao_produtos_h2": {
+        "titulo_h2": "Cardápio de pizzas para todos os paladares",
+        "subsecoes_h3": [
+          {
+            "titulo_h3": "Pizzas salgadas tradicionais",
+            "foco_produtos_conteudo": "As pizzas salgadas reúnem os sabores que a mesa brasileira adora, como mussarela, calabresa, frango com requeijão e portuguesa. A massa assada no ponto certo recebe queijo derretido e recheio generoso, resultando em fatias macias, saborosas e perfeitas para dividir. Quem não consegue escolher apenas um sabor pode montar a pizza meio a meio e agradar todo mundo.",
+            "detalhes_especificos_h4": [
+              "Pizza meio a meio para combinar dois sabores favoritos",
+              "Borda recheada com queijo cremoso para fechar cada fatia"
+            ]
+          },
+          {
+            "titulo_h3": "Pizzas doces e bebidas geladas",
+            "foco_produtos_conteudo": "Para a sobremesa ou o lanche da tarde, a pizzaria oferece pizzas doces com chocolate e frutas, boas companheiras de um filme em casa ou de uma comemoração em família. Os refrigerantes gelados completam o pedido e deixam tudo pronto para servir assim que o entregador chegar em Itaquaquecetuba.",
+            "detalhes_especificos_h4": [
+              "Coberturas doces com chocolate e frutas para a sobremesa",
+              "Refrigerantes para acompanhar a pizza no mesmo pedido"
+            ]
+          }
+        ]
+      },
+      "secao_localizacao_h2": {
+        "titulo_h2": "Peça pizza em Itaquaquecetuba pelo WhatsApp",
+        "chamada_local_conteudo": "A Pizzaria Juliana e Favorita atende Itaquaquecetuba - SP por delivery, com pedidos feitos pelo WhatsApp (11) 95833-8379. Envie seu endereço e o sabor desejado, tire dúvidas sobre o cardápio e confirme o horário de atendimento do dia diretamente com a equipe. Acompanhe também o Instagram @pizzariajulianaefavorita para ver novidades e fazer da próxima noite de pizza um momento especial."
+      }
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Massa artesanal assada na hora, com queijo bem derretido e recheio caprichado",
+      "Atendimento direto pelo WhatsApp (11) 95833-8379 e entrega em Itaquaquecetuba - SP",
+      "Variedade de sabores salgados e doces, com opção de pizza meio a meio e borda recheada",
+      "Pedido simples e rápido, ideal para jantar em família ou receber os amigos em casa"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "pizza-mussarela-pizzaria-juliana-e-favorita-itaquaquecetuba.webp",
+        "alt_descricao": "Pizza de mussarela recém-saída do forno na Pizzaria Juliana e Favorita em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "pizza-calabresa-borda-recheada-itaquaquecetuba.webp",
+        "alt_descricao": "Pizza de calabresa com borda recheada para delivery em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "pizza-doce-chocolate-delivery-itaquaquecetuba.webp",
+        "alt_descricao": "Pizza doce de chocolate para sobremesa pedida por delivery em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "pedido-whatsapp-pizzaria-juliana-e-favorita.webp",
+        "alt_descricao": "Caixa de pizza da Pizzaria Juliana e Favorita pronta para entrega por WhatsApp em Itaquaquecetuba - SP"
+      }
+    ],
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Qual o horário de funcionamento da Pizzaria Juliana e Favorita em Itaquaquecetuba?",
+        "resposta": "Os horários e dias de atendimento podem variar. Para confirmar se a pizzaria está aberta e receber o seu pedido, chame no WhatsApp (11) 95833-8379."
+      },
+      {
+        "pergunta": "Onde fica a Pizzaria Juliana e Favorita e ela faz entrega?",
+        "resposta": "A pizzaria atende Itaquaquecetuba - SP por delivery. Para saber se a entrega chega ao seu bairro e combinar o prazo, envie sua localização pelo WhatsApp (11) 95833-8379."
+      },
+      {
+        "pergunta": "Como faço o pedido e quais produtos posso escolher?",
+        "resposta": "O pedido é feito pelo WhatsApp (11) 95833-8379. Você pode escolher pizzas salgadas e doces, pedir meio a meio, adicionar borda recheada e incluir refrigerantes na mesma compra."
+      }
+    ]
+  }
+}
