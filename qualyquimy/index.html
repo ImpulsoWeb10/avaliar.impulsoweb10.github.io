@@ -85,6 +85,7 @@ body{
   overflow-x:hidden;
   position:relative;
   perspective:1200px;
+  transition: background 0.4s ease;
 }
 a:focus-visible,button:focus-visible{outline:2px solid #ffe082;outline-offset:3px}
 
@@ -132,7 +133,7 @@ body::before{
   text-align:center;
   gap:.9rem;
   transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.175,.885,.32,1.275);
+  transition:transform .6s cubic-bezier(.175,.885,.32,1.275), box-shadow .4s ease, border-color .4s ease;
   will-change:transform;
 }
 
@@ -179,6 +180,7 @@ body::before{
   border-radius:14px;
   overflow:hidden;
   display:inline-block;
+  cursor:pointer;
   animation:logo-pulse 2.6s ease-in-out infinite;
   box-shadow:0 0 0 0 rgba(201,169,110,.5);
 }
@@ -240,16 +242,18 @@ body::before{
 .stars-cta{
   display:flex;flex-direction:column;align-items:center;gap:.3rem;
   text-decoration:none;
-  padding:.5rem 1rem;
+  padding:.35rem .9rem .45rem;
   border-radius:18px;
-  cursor:pointer;
-  position:relative;
-  z-index:10;
   -webkit-tap-highlight-color:transparent;
   transition:transform .15s;
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-family:inherit;
+  width:100%;
 }
-.stars-cta:active{transform:scale(.96)}
-.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center;pointer-events:none}
+.stars-cta:active{transform:scale(.97)}
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
 .star{
   font-size:2.2rem;line-height:1;color:#ffd700;
   text-shadow:0 0 12px rgba(255,215,0,.5);
@@ -263,23 +267,35 @@ body::before{
   0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}
   25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}
 }
-.stars-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em;pointer-events:none}
+.stars-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em}
 .stars-label svg{width:15px;height:15px;flex-shrink:0}
 .proof{font-size:.76rem;color:#ffe082;font-weight:700}
 
-/* Ligar + WhatsApp + PIX */
+/* Ligar + WhatsApp + Botão de Pagamento */
 .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
 .btn-act{
   display:flex;align-items:center;justify-content:center;gap:.45rem;
   min-height:46px;border-radius:50px;
   font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;
-  text-decoration:none;border:none;cursor:pointer;transition:transform .2s;
+  text-decoration:none;transition:transform .2s;
 }
 .btn-act:hover{transform:translateY(-2px)}
 .btn-act svg{width:18px;height:18px;flex-shrink:0}
 .btn-call{background:#22c55e;color:#04210f}
 .btn-wa{background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366}
-.btn-pix{background:linear-gradient(135deg, #c9a96e 0%, #b89350 100%);color:#07101e;grid-column:span 2;box-shadow:0 4px 15px rgba(201,169,110,.3)}
+
+/* Estilo do botão de Pagamento Online / Pix (Mercado Pago #009EE3) - Sem ícone */
+.btn-pay{
+  grid-column: 1 / -1;
+  background:#009EE3;
+  color:#ffffff;
+  border:1.5px solid rgba(255,255,255,.3);
+  box-shadow: 0 4px 15px rgba(0,158,227,0.35);
+}
+.btn-pay:hover{
+  background:#008ac6;
+  box-shadow: 0 6px 20px rgba(0,158,227,0.5);
+}
 
 /* Ícones secundários */
 .social-row{display:flex;gap:.9rem;justify-content:center;align-items:flex-start}
@@ -346,7 +362,7 @@ body::before{
 .footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
 .footer-dev a:hover{color:#90caf9;text-decoration:underline}
 
-/* Estilo do botão 3D */
+/* Estilo do botão 3D idêntico ao index-14 */
 @keyframes neon-pulse {
   0% { box-shadow: 0 0 5px rgba(201, 169, 110, 0.4); border-color: rgba(201, 169, 110, 0.5); }
   50% { box-shadow: 0 0 15px rgba(201, 169, 110, 0.8); border-color: #ffe082; }
@@ -375,15 +391,222 @@ body::before{
   animation: none;
 }
 
-/* ===== DIALOGS / MODAIS ===== */
+/* ===== MODAL DE AVALIAÇÃO CENTRALIZADO ELEGANTE ===== */
+.sheet-eval {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(440px, 90%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 24px;
+  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
+  color: #e8e2d8;
+  padding: 0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  font-family: 'DM Sans', sans-serif;
+}
+.sheet-eval::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
+.sheet-eval[open] { animation: modal-center-up .3s ease-out; }
+@keyframes modal-center-up { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.sheet-eval-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.sheet-eval-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.sheet-eval h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f0ece5;
+}
+.eval-msg-box {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #d9e4f2;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 14px;
+  padding: 1rem;
+  width: 100%;
+}
+.eval-msg-box strong {
+  color: #ffe082;
+}
+.btn-eval-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 48px;
+  background: #22c55e;
+  color: #04210f;
+  border: none;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 15px rgba(34,197,94,0.35);
+}
+.btn-eval-go:hover {
+  transform: translateY(-2px);
+  background: #16a34a;
+}
+
+/* ===== MODAL DE PIX ELEGANTE ===== */
+.sheet-pix {
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0 auto;
+  width: min(480px, 100%);
+  max-height: 95vh;
+  max-height: 95dvh;
+  overflow-y: auto;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-bottom: none;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
+  color: #e8e2d8;
+  padding: 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+  font-family: 'DM Sans', sans-serif;
+}
+.sheet-pix::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
+.sheet-pix[open] { animation: sheet-up .3s ease-out; }
+
+.sheet-pix-body {
+  padding: 1.2rem 1.2rem calc(1.5rem + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+  text-align: center;
+}
+.sheet-pix-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.sheet-pix h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f0ece5;
+}
+.pix-img-container {
+  width: 100%;
+  max-width: 240px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.4rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+.pix-img-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+.pix-key-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 0.6rem;
+}
+.pix-key-label {
+  font-size: 0.72rem;
+  color: #9bb5d4;
+  font-weight: 500;
+}
+.pix-key-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffe082;
+  word-break: break-all;
+}
+.btn-copy-pix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  background: #22c55e;
+  color: #04210f;
+  border: none;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+}
+.btn-copy-pix:hover {
+  transform: translateY(-2px);
+  background: #16a34a;
+}
+.btn-copy-pix svg { width: 18px; height: 18px; }
+
+/* ===== PAINEL DE SELEÇÃO DE TEMA (5 CORES) ===== */
+.theme-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(420px, 90%);
+  max-height: 90vh;
+  border: 2px solid rgba(201,169,110,0.5);
+  border-radius: 22px;
+  background: #0b1a2e;
+  color: #fff;
+  padding: 1.4rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  z-index: 9999;
+}
+.theme-modal::backdrop { background: rgba(0,0,0,0.7); }
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.theme-btn {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.theme-btn:hover { transform: scale(1.1); }
+
+/* ===== TELA "VER MAIS" (gaveta) ===== */
 .sheet{
   position:fixed;
   inset:auto 0 0 0;
   margin:0 auto;
   width:min(520px,100%);
   max-width:100%;
-  max-height:90vh;
-  max-height:90dvh;
+  max-height:95vh;
+  max-height:95dvh;
   overflow-y:auto;
   border:2px solid #fff;
   border-bottom:none;
@@ -393,13 +616,11 @@ body::before{
   padding:0;
   box-shadow:0 -6px 30px rgba(255,255,255,.25);
   font-family:'DM Sans',sans-serif;
-  z-index:999;
 }
 .sheet::backdrop{background:rgba(3,8,16,.74)}
 .sheet[open]{animation:sheet-up .28s ease-out}
-@keyframes sheet-up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
-.sheet-head{display:flex;align-items:center;justify-space-between;gap:1rem}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#f0ece5;letter-spacing:.04em}
 .sheet h3{font-size:.9rem;font-weight:700;color:#c9a96e;margin-bottom:.4rem}
 .sheet p{font-size:.82rem;line-height:1.55;color:#c9d6e6}
@@ -417,6 +638,7 @@ body::before{
 .gallery{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
 .gallery img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;border:1px solid rgba(201,169,110,.5)}
 
+/* Botões de navegação no modal */
 .nav-buttons-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -457,6 +679,7 @@ body::before{
   flex-shrink:0;
 }
 
+/* Lista suspensa / FAQ */
 .faq-container{
   display:flex;
   flex-direction:column;
@@ -542,7 +765,8 @@ body::before{
   .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
   .bg-seo .fotos{display:flex;gap:.6rem}
   .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
-  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
+  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:92vh;max-height:92dvh}
+  .sheet-pix{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
 }
 
 @media (max-height:700px){
@@ -564,7 +788,7 @@ body::before{
 }
 </style>
 </head>
-<body>
+<body id="pageBody">
 
 <div class="app-wrapper">
 
@@ -580,8 +804,9 @@ body::before{
     <!-- FRENTE DO CARTÃO -->
     <div class="page">
 
+      <!-- LOGO COM CONTADOR DE 5 CLIQUES -->
       <div class="logo-wrap layer-mid">
-        <div class="logo-frame">
+        <div class="logo-frame" onclick="clicarLogo()" title="Toque 5 vezes para alterar o tema">
           <img class="logo-img" src="logo-tintas-qualy-quimy.png" alt="Logo Tintas Qualy Quimy" width="170" height="80"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="logo-img-fallback" style="display:none;">Qualy Quimy</div>
@@ -598,13 +823,12 @@ body::before{
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>Texturas</span>
       </div>
 
-      <!-- ESTRELAS: avaliação no Google -->
+      <!-- ESTRELAS: abre o modal de aviso antes de ir ao Google -->
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
-        <a
-          href="https://g.page/r/CRECbD178tUDEAE/review"
+        <button
+          type="button"
           class="stars-cta"
-          target="_blank"
-          rel="noopener"
+          onclick="abrirEvalModal()"
           aria-label="Avaliar a Tintas Qualy Quimy com 5 estrelas no Google"
         >
           <span class="stars-row" aria-hidden="true">
@@ -614,7 +838,7 @@ body::before{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
             Toque nas estrelas e avalie no Google
           </span>
-        </a>
+        </button>
         <div class="proof" id="proof" hidden></div>
       </div>
 
@@ -628,14 +852,20 @@ body::before{
           WhatsApp
         </a>
 
-        <!-- Botão Pagamento PIX -->
-        <button type="button" class="btn-act btn-pix" onclick="abrirPix()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h3v3H7z"/><path d="M14 7h3v3h-3z"/><path d="M7 14h3v3H7z"/><path d="M14 14h1v1h-1z"/><path d="M17 17h1v1h-1z"/></svg>
-          Fazer Pagamento via PIX
+        <!-- BOTÃO PAGAMENTO / PIX -->
+        <button type="button" class="btn-act btn-pay" onclick="abrirPixModal()" aria-label="Pagamento Online ou Pix">
+          💳 Pagamento Online / Pix
         </button>
       </div>
 
       <div class="social-row layer-front" aria-label="Mais opções">
+        <button type="button" class="social-btn" onclick="salvarContato()" aria-label="Salvar contato no celular">
+          <div class="social-icon" style="background:#1a2a1a;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+          </div>
+          <span class="social-label">Salvar</span>
+        </button>
+
         <a href="https://www.instagram.com/tintasqualyquimy" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
           <div class="social-icon" style="background:#2a1a2e;">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -658,14 +888,7 @@ body::before{
           <span class="social-label">Maps</span>
         </a>
 
-        <button type="button" class="social-btn" onclick="salvarContato()" aria-label="Salvar contato no celular">
-          <div class="social-icon" style="background:#1a2a1a;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
-          </div>
-          <span class="social-label">Salvar</span>
-        </button>
-
-        <button type="button" class="social-btn" onclick="abrirMais()" aria-label="Ver mais informações">
+        <button type="button" class="social-btn" onclick="abrirMais()" aria-label="Ver mais informações" aria-haspopup="dialog">
           <div class="social-icon" style="background:#2a2310;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
           </div>
@@ -704,6 +927,62 @@ body::before{
   </div>
 
 </div>
+
+<!-- MODAL DE AVALIAÇÃO CENTRALIZADO -->
+<dialog class="sheet-eval" id="sheetEval" aria-labelledby="evalTitulo">
+  <div class="sheet-eval-body">
+    <div class="sheet-eval-head">
+      <h2 id="evalTitulo">Valorizamos sua Opinião</h2>
+      <button type="button" class="sheet-close" onclick="fecharEvalModal()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="eval-msg-box">
+      Após nos avaliar no Google, por gentileza, nos siga na pagina do Instagram , que estará aberta, assim que voltar na pagina.
+    </div>
+
+    <button type="button" class="btn-eval-go" onclick="prosseguirAvaliacao()">
+      Ok, vamos a avaliação!
+    </button>
+  </div>
+</dialog>
+
+<!-- MODAL DO PIX -->
+<dialog class="sheet-pix" id="sheetPix" aria-labelledby="pixTitulo">
+  <div class="sheet-pix-body">
+    <div class="sheet-pix-head">
+      <h2 id="pixTitulo">Pagamento via Pix</h2>
+      <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="pix-img-container">
+      <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
+    </div>
+
+    <div class="pix-key-box">
+      <span class="pix-key-label">Chave Pix (CNPJ)</span>
+      <span class="pix-key-value" id="pixCnpjText">10503834000173</span>
+    </div>
+
+    <button type="button" class="btn-copy-pix" onclick="copiarPixChave()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      Copiar Chave CNPJ
+    </button>
+  </div>
+</dialog>
+
+<!-- MODAL DE SELEÇÃO DE TEMA (5 CORES) -->
+<dialog class="theme-modal" id="themeModal">
+  <h3>Escolha o Tema de Cores</h3>
+  <p style="font-size:0.78rem;color:#9bb5d4;margin-top:0.2rem;">Personalize o visual do seu cartão digital:</p>
+  <div class="theme-grid">
+    <button class="theme-btn" style="background:#07101e; border-color:#009EE3;" onclick="mudarTema(0)" title="Azul Clássico"></button>
+    <button class="theme-btn" style="background:#051a10; border-color:#22c55e;" onclick="mudarTema(1)" title="Verde Esmeralda"></button>
+    <button class="theme-btn" style="background:#1f1605; border-color:#c9a96e;" onclick="mudarTema(2)" title="Dourado Luxo"></button>
+    <button class="theme-btn" style="background:#180b22; border-color:#d946ef;" onclick="mudarTema(3)" title="Roxo Imperial"></button>
+    <button class="theme-btn" style="background:#220808; border-color:#ef4444;" onclick="mudarTema(4)" title="Vermelho Fogo"></button>
+  </div>
+  <button type="button" class="btn-share" style="margin-top:1rem;min-height:38px;" onclick="fecharTemaModal()">Fechar</button>
+</dialog>
 
 <!-- TELA "VER MAIS" -->
 <dialog class="sheet" id="sheetMais" aria-labelledby="sheetTitulo">
@@ -792,39 +1071,6 @@ body::before{
   </div>
 </dialog>
 
-<!-- TELA / MODAL DO PIX -->
-<dialog class="sheet" id="sheetPix" aria-labelledby="pixTitulo">
-  <div class="sheet-body" style="text-align: center;">
-    <div class="sheet-head">
-      <h2 id="pixTitulo">Pagamento via PIX</h2>
-      <button type="button" class="sheet-close" onclick="fecharPix()" aria-label="Fechar">×</button>
-    </div>
-
-    <p>Escaneie o QR Code abaixo com o aplicativo do seu banco ou copie a chave PIX:</p>
-
-    <!-- QR Code PIX -->
-    <div style="background: #fff; padding: 15px; border-radius: 14px; display: inline-block; margin: 0 auto; border: 2px solid rgba(201,169,110,.5);">
-      <img src="qrcode-pix.png" alt="QR Code PIX Tintas Qualy Quimy" style="width: 180px; height: 180px; display: block; border-radius: 6px; object-fit: contain;">
-    </div>
-
-    <!-- Chave PIX Copiável -->
-    <div style="margin-top: 0.5rem;">
-      <label style="font-size: 0.75rem; color: #9bb5d4; display: block; margin-bottom: 0.3rem;">Chave CNPJ da loja:</label>
-      <div style="display: flex; gap: 0.5rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.4rem; align-items: center;">
-        <input type="text" id="chavePixTexto" value="10503834000173" readonly style="background: transparent; border: none; color: #fff; font-family: inherit; font-size: 0.85rem; width: 100%; text-align: center; outline: none;">
-        <button type="button" onclick="copiarChavePix()" style="background: #c9a96e; color: #07101e; border: none; border-radius: 8px; padding: 0.4rem 0.8rem; font-weight: 700; font-size: 0.75rem; cursor: pointer; white-space: nowrap;">Copiar</button>
-      </div>
-    </div>
-
-    <p style="font-size: 0.75rem; color: #4ade80; margin-top: 0.5rem;" id="pixToast" role="status"></p>
-
-    <a href="https://wa.me/5511954950044?text=Ol%C3%A1!%20Acabei%20de%20realizar%20o%20pagamento%20via%20PIX.%20Segue%20o%20comprovante." class="btn-act btn-wa" target="_blank" rel="noopener" style="margin-top: 0.5rem; width: 100%; justify-content: center;">
-      <svg viewBox="0 0 24 24" fill="#25d366" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-      Já paguei, enviar comprovante
-    </a>
-  </div>
-</dialog>
-
 <!-- Camada SEO discreta -->
 <aside class="bg-seo">
   <div>
@@ -868,6 +1114,88 @@ body::before{
     }
   })();
 
+  /* ===== MODAL DE AVALIAÇÃO CENTRALIZADO ===== */
+  const sheetEval = document.getElementById('sheetEval');
+  function abrirEvalModal(){
+    if (typeof sheetEval.showModal === 'function') sheetEval.showModal();
+    else sheetEval.setAttribute('open','');
+  }
+  function fecharEvalModal(){
+    if (typeof sheetEval.close === 'function') sheetEval.close();
+    else sheetEval.removeAttribute('open');
+  }
+  sheetEval.addEventListener('click', function(e){ if (e.target === sheetEval) fecharEvalModal(); });
+
+  function prosseguirAvaliacao(){
+    // 1. Fecha o modal de aviso
+    fecharEvalModal();
+    // 2. Abre o Instagram em segundo plano (nova aba)
+    const instaWindow = window.open('https://www.instagram.com/tintasqualyquimy', '_blank');
+    // 3. Redireciona a página principal para o Google de avaliação
+    window.location.href = 'https://g.page/r/CRECbD178tUDEAE/review';
+  }
+
+  /* ===== LÓGICA DE 5 CLIQUES NO LOGO PARA MUDAR TEMA ===== */
+  let cliquesLogo = 0;
+  let tempoUltimoClique = 0;
+
+  function clicarLogo(){
+    const agora = new Date().getTime();
+    if (agora - tempoUltimoClique > 1500) {
+      cliquesLogo = 1;
+    } else {
+      cliquesLogo++;
+    }
+    tempoUltimoClique = agora;
+
+    if (cliquesLogo >= 5) {
+      cliquesLogo = 0;
+      abrirTemaModal();
+    }
+  }
+
+  const themeModal = document.getElementById('themeModal');
+  function abrirTemaModal(){
+    if (typeof themeModal.showModal === 'function') themeModal.showModal();
+    else themeModal.setAttribute('open','');
+  }
+  function fecharTemaModal(){
+    if (typeof themeModal.close === 'function') themeModal.close();
+    else themeModal.removeAttribute('open');
+  }
+
+  // 5 Temas diferentes (Fundo e Neon do cartão)
+  const temas = [
+    { bg: '#07101e', frameBg: 'linear-gradient(175deg,#102040 0%,#0b1a2e 100%)', shadow: '0 0 10px #ffffff, 0 0 20px rgba(255,255,255,.8)' }, // Azul Clássico
+    { bg: '#03120a', frameBg: 'linear-gradient(175deg,#0d2e1a 0%,#051a10 100%)', shadow: '0 0 10px #22c55e, 0 0 20px rgba(34,197,94,.8)' }, // Verde Esmeralda
+    { bg: '#141005', frameBg: 'linear-gradient(175deg,#332510 0%,#1f1605 100%)', shadow: '0 0 10px #ffe082, 0 0 20px rgba(201,169,110,.8)' }, // Dourado Luxo
+    { bg: '#100516', frameBg: 'linear-gradient(175deg,#2b0d3d 0%,#180b22 100%)', shadow: '0 0 10px #d946ef, 0 0 20px rgba(217,70,239,.8)' }, // Roxo Imperial
+    { bg: '#160404', frameBg: 'linear-gradient(175deg,#3d0d0d 0%,#220808 100%)', shadow: '0 0 10px #ef4444, 0 0 20px rgba(239,68,68,.8)' }  // Vermelho Fogo
+  ];
+
+  function mudarTema(indice){
+    const tema = temas[indice];
+    document.getElementById('pageBody').style.background = tema.bg;
+    const deviceFrame = document.getElementById('deviceFrame');
+    deviceFrame.style.background = tema.frameBg;
+    deviceFrame.style.boxShadow = tema.shadow + ', 0 15px 35px rgba(0,0,0,.6)';
+    
+    // Salvar preferência no localStorage para persistir até mexer de novo
+    localStorage.setItem('qualyquimy_tema_idx', indice);
+    fecharTemaModal();
+  }
+
+  // Carregar tema salvo ao iniciar
+  (function(){
+    const salvo = localStorage.getItem('qualyquimy_tema_idx');
+    if (salvo !== null) {
+      const idx = parseInt(salvo, 10);
+      if (!isNaN(idx) && temas[idx]) {
+        mudarTema(idx);
+      }
+    }
+  })();
+
   /* ===== HORÁRIO ===== */
   (function(){
     const box = document.getElementById('hours');
@@ -902,107 +1230,74 @@ body::before{
     }
   }
 
+  /* ===== MODAL DO PIX ===== */
+  const sheetPix = document.getElementById('sheetPix');
+  function abrirPixModal(){
+    if (typeof sheetPix.showModal === 'function') sheetPix.showModal();
+    else sheetPix.setAttribute('open','');
+  }
+  function fecharPixModal(){
+    if (typeof sheetPix.close === 'function') sheetPix.close();
+    else sheetPix.removeAttribute('open');
+  }
+  sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharPixModal(); });
+
+  async function copiarPixChave() {
+    const cnpjChave = "10503834000173";
+    try {
+      await navigator.clipboard.writeText(cnpjChave);
+      alert("⚠️ Conferir Nome e Banco antes de confirmar\n\nQualyquimy Comercio de Tintas Ltda\nBanco : CC POUP INV PROGRESSO PR/SP\n\nChave Pix CNPJ copiada com sucesso!");
+      fecharPixModal();
+    } catch (err) {
+      alert("Não foi possível copiar a chave automaticamente.");
+    }
+  }
+
   /* ===== TELA "VER MAIS" ===== */
   const sheet = document.getElementById('sheetMais');
   function abrirMais(){
-    if (typeof sheet.showModal === 'function') {
-      sheet.showModal();
-    } else {
-      sheet.setAttribute('open','');
-    }
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else sheet.setAttribute('open','');
   }
   function fecharMais(){
-    if (typeof sheet.close === 'function') {
-      sheet.close();
-    } else {
-      sheet.removeAttribute('open');
-    }
+    if (typeof sheet.close === 'function') sheet.close();
+    else sheet.removeAttribute('open');
   }
-  sheet.addEventListener('click', function(e){
-    const rect = sheet.getBoundingClientRect();
-    if (
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top ||
-      e.clientY > rect.bottom
-    ) {
-      fecharMais();
-    }
-  });
+  sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
 
-  /* ===== MODAL DO PIX ===== */
-  const sheetPix = document.getElementById('sheetPix');
-  function abrirPix(){
-    if (typeof sheetPix.showModal === 'function') {
-      sheetPix.showModal();
-    } else {
-      sheetPix.setAttribute('open','');
-    }
+  /* ===== SALVAR CONTATO (vCard limpo) ===== */
+ function salvarContato() {
+  const PAGE_URL = window.location.href;
+
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:Tintas Qualy Quimy',
+    'ORG:Qualyquimy Comercio de Tintas Ltda',
+    'TITLE:Indústria de Tintas e Texturas',
+    'TEL;TYPE=WORK,VOICE:+551146432301', 
+    'TEL;TYPE=CELL,VOICE,PREF:+5511954950044', 
+    'EMAIL;TYPE=WORK,INTERNET:contato@qualyquimy.com.br', 
+    'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
+    'URL;TYPE=WORK:' + PAGE_URL,
+    'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com',
+    'NOTE:Tintas\\, massas\\, texturas e acabamentos.',
+    'CATEGORIES:Tintas,Construção,Revestimentos',
+    'END:VCARD'
+  ].join('\r\n');
+
+  const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
+  const link = document.createElement('a');
+  
+  if (navigator.msSaveBlob) {
+    navigator.msSaveBlob(blob, 'Salvar Contato Qualy.vcf');
+  } else {
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Salvar Contato Qualy.vcf'; 
+    link.click();
+    URL.revokeObjectURL(link.href);
   }
-  function fecharPix(){
-    if (typeof sheetPix.close === 'function') {
-      sheetPix.close();
-    } else {
-      sheetPix.removeAttribute('open');
-    }
-  }
-  sheetPix.addEventListener('click', function(e){
-    const rect = sheetPix.getBoundingClientRect();
-    if (
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top ||
-      e.clientY > rect.bottom
-    ) {
-      fecharPix();
-    }
-  });
-
-  async function copiarChavePix() {
-    const inputPix = document.getElementById('chavePixTexto');
-    const t = document.getElementById('pixToast');
-    try {
-      await navigator.clipboard.writeText(inputPix.value);
-      t.textContent = 'Chave PIX copiada com sucesso!';
-      setTimeout(() => { t.textContent = ''; }, 3000);
-    } catch (err) {
-      t.textContent = 'Não foi possível copiar automaticamente.';
-    }
-  }
-
-  /* ===== SALVAR CONTATO (vCard) ===== */
-  function salvarContato() {
-    const PAGE_URL = window.location.href;
-
-    const vcard = [
-      'BEGIN:VCARD',
-      'VERSION:3.0',
-      'FN:Tintas Qualy Quimy',
-      'ORG:Qualy Quimy Comercio de Tintas Ltda.',
-      'TITLE:Indústria de Tintas e Texturas',
-      'TEL;TYPE=WORK,VOICE:+551146432301',
-      'TEL;TYPE=CELL,VOICE,PREF:+5511954950044',
-      'EMAIL;TYPE=WORK,INTERNET:contato@qualyquimy.com.br', 
-      'ADR;TYPE=WORK,POSTAL,PARCEL:;;Rua Leiria\\, 45 - Chácara Cuiabá;Itaquaquecetuba;SP;08587-100;Brasil',
-      'URL;TYPE=WORK:' + PAGE_URL,
-      'X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/tintasqualyquimy',
-      'NOTE:Tintas\\, massas\\, texturas e acabamentos.\\n\\n----- DADOS PARA PIX -----\\nBanco: Bradesco\\nRazão Social: Qualy Quimy Comercio de Tintas Ltda.\\nChave CNPJ: 10503834000173',
-      'CATEGORIES:Tintas,Construção,Revestimentos',
-      'END:VCARD'
-    ].join('\r\n');
-
-    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
-    const link = document.createElement('a');
-    
-    if (navigator.msSaveBlob) {
-      navigator.msSaveBlob(blob, 'Salvar Contato Qualy.vcf');
-    } else {
-      link.href = URL.createObjectURL(blob);
-      link.download = 'Salvar Contato Qualy.vcf'; 
-      link.click();
-      URL.revokeObjectURL(link.href);
-    }
-  }
+}
 
   /* ===== COMPARTILHAR ===== */
   function aviso(msg){
@@ -1022,7 +1317,7 @@ body::before{
     }
   }
 
-  /* ===== EFEITO 3D ===== */
+  /* ===== EFEITO 3D (Com botão ON/OFF) ===== */
   const frame = document.getElementById('deviceFrame');
   const btnGyro = document.getElementById('toggleGyro');
   let giroscopioAtivo = false;
