@@ -467,7 +467,7 @@ body::before{
   background: #16a34a;
 }
 
-/* ===== MODAL DE PIX ELEGANTE ===== */
+/* ===== MODAL DO PIX (COM IMAGEM MAIOR) ===== */
 .sheet-pix {
   position: fixed;
   inset: auto 0 0 0;
@@ -510,10 +510,10 @@ body::before{
 }
 .pix-img-container {
   width: 100%;
-  max-width: 240px;
+  max-width: 330px; /* Aumentado para maior destaque */
   background: #ffffff;
   border-radius: 14px;
-  padding: 0.4rem;
+  padding: 0.5rem;
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 .pix-img-container img {
@@ -1130,8 +1130,8 @@ body::before{
     // 1. Fecha o modal de aviso
     fecharEvalModal();
     // 2. Abre o Instagram em segundo plano (nova aba)
-    const instaWindow = window.open('https://www.instagram.com/tintasqualyquimy', '_blank');
-    // 3. Redireciona a página principal para o Google de avaliação
+    window.open('https://www.instagram.com/tintasqualyquimy', '_blank');
+    // 3. Abre o Google primeiro na página principal para avaliação
     window.location.href = 'https://g.page/r/CRECbD178tUDEAE/review';
   }
 
