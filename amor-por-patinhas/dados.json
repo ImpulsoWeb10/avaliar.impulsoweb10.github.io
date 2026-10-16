@@ -1,0 +1,92 @@
+{
+  "dados_formulario_base": {
+    "placeId": "",
+    "nomeEmpresa": "Clínica Veterinária Amor por Patinhas",
+    "whatsapp": "5511910203909",
+    "instagram": "clinicaamorporpatinhas",
+    "cidadeEstado": "Itaquaquecetuba / SP",
+    "enderecoCompleto": "Avenida Turmalinas, 855, Estância Fraternidade, Itaquaquecetuba - SP",
+    "segmento": "Clínica Veterinária Popular",
+    "produtosPrincipais": "Consultas veterinárias, castração de cães e gatos, cirurgias, exames laboratoriais, vacinas V10 e V12, limpeza dentária, farmácia veterinária, atestado de viagem, táxi dog"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/clinica-amor-por-patinhas/index.html",
+      "h1": "Clínica Veterinária Popular em Itaquaquecetuba - Amor por Patinhas",
+      "meta_description": "Clínica veterinária popular em Itaquaquecetuba - SP: castração, vacinas, exames e cirurgias com preço acessível. Agende pelo WhatsApp e cuide do seu pet!"
+    },
+    "arquitetura_h2_h4": {
+      "secao_principal_h2": {
+        "titulo_h2": "Cuidado veterinário acessível para cães e gatos de Itaquaquecetuba",
+        "introducao_bloco": "A Clínica Veterinária Amor por Patinhas foi fundada em outubro de 2024 com um propósito claro: oferecer atendimento veterinário de qualidade a um preço que cabe no orçamento do tutor. Localizada na Avenida Turmalinas, 855, no bairro Estância Fraternidade, em Itaquaquecetuba - SP, a clínica reúne profissionais capacitados e uma estrutura completa para consultas, prevenção e tratamento, sempre com carinho pelo bem-estar de cada animal que passa pela porta."
+      },
+      "secao_produtos_h2": {
+        "titulo_h2": "Serviços veterinários completos para a saúde do seu pet",
+        "subsecoes_h3": [
+          {
+            "titulo_h3": "Castração, cirurgias e atendimento clínico",
+            "foco_produtos_conteudo": "A castração é um dos serviços de destaque da clínica: ajuda a controlar a natalidade, contribui para a longevidade e evita nascimentos indesejados. Além dela, a equipe realiza cirurgias de rotina e emergenciais, como remoção de tumores benignos e malignos e retirada de corpos estranhos, com acompanhamento cuidadoso antes e depois do procedimento no consultório de Itaquaquecetuba.",
+            "detalhes_especificos_h4": [
+              "Castrações agendadas às quartas e quintas-feiras, com vagas limitadas",
+              "Cirurgias gerais e emergenciais para cães e gatos"
+            ]
+          },
+          {
+            "titulo_h3": "Exames, vacinas e prevenção",
+            "foco_produtos_conteudo": "Para diagnosticar com segurança e prevenir doenças, a clínica oferece hemograma, exame de urina, coproparasitológico, avaliação da função hepática, citologia, antibiograma, ultrassom, raio-x, ecocardiograma e endoscopia. Cães e gatos também contam com vacinas V10 e V12, nacionais e importadas, além de limpeza dentária para combater tártaro, mau hálito e gengivite.",
+            "detalhes_especificos_h4": [
+              "Vacinas V10 e V12 para cães e gatos, nacionais e importadas",
+              "Limpeza dentária para prevenir tártaro, placa bacteriana e gengivite"
+            ]
+          }
+        ]
+      },
+      "secao_localizacao_h2": {
+        "titulo_h2": "Veterinário em Itaquaquecetuba, na Estância Fraternidade",
+        "chamada_local_conteudo": "A clínica fica na Avenida Turmalinas, 855, Estância Fraternidade, Itaquaquecetuba - SP, e atende de segunda a sexta, das 9h às 18h, e aos sábados, das 9h às 17h. Para agendar consulta, castração ou exame, ou para solicitar o táxi dog que busca e leva seu pet em casa, chame no WhatsApp (11) 91020-3909 ou acompanhe o Instagram @clinicaamorporpatinhas."
+      }
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Equipe de veterinários capacitados e atendimento acolhedor para cães e gatos",
+      "Localização na Avenida Turmalinas, em Itaquaquecetuba, com agendamento fácil pelo WhatsApp",
+      "Estrutura completa com exames, ultrassom, raio-x, cirurgias, vacinas e farmácia veterinária",
+      "Preço acessível, atestado de viagem e táxi dog para mais praticidade ao tutor"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "https://r.mobirisesite.com/1198505/assets/images/logo-clinica-3d-sem-fundo.png",
+        "nome_arquivo_webp": "logo-clinica-veterinaria-amor-por-patinhas-itaquaquecetuba.webp",
+        "alt_descricao": "Logo da Clínica Veterinária Amor por Patinhas, clínica popular para cães e gatos em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "https://r.mobirisesite.com/1198505/assets/images/equipe-sem-fundo-1.png",
+        "nome_arquivo_webp": "equipe-veterinaria-amor-por-patinhas-itaquaquecetuba.webp",
+        "alt_descricao": "Equipe de veterinários da clínica Amor por Patinhas na Estância Fraternidade, Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "https://r.mobirisesite.com/1198505/assets/images/duwlimxkbug550b6kj4awp18m.jpg",
+        "nome_arquivo_webp": "castracao-caes-gatos-itaquaquecetuba.webp",
+        "alt_descricao": "Castração de cães e gatos com preço acessível na clínica veterinária popular de Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "https://r.mobirisesite.com/1198505/assets/images/dscn4108.webp",
+        "nome_arquivo_webp": "taxi-dog-clinica-veterinaria-itaquaquecetuba.webp",
+        "alt_descricao": "Serviço de táxi dog da clínica veterinária Amor por Patinhas buscando pets em Itaquaquecetuba - SP"
+      }
+    ],
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Qual o horário de funcionamento da Clínica Amor por Patinhas em Itaquaquecetuba?",
+        "resposta": "A clínica atende de segunda a sexta, das 9h às 18h, e aos sábados, das 9h às 17h. Para agendar, chame no WhatsApp (11) 91020-3909."
+      },
+      {
+        "pergunta": "Onde fica a Clínica Veterinária Amor por Patinhas?",
+        "resposta": "Fica na Avenida Turmalinas, 855, bairro Estância Fraternidade, em Itaquaquecetuba - SP. Em caso de dúvida para chegar, fale com a equipe pelo WhatsApp (11) 91020-3909."
+      },
+      {
+        "pergunta": "Quais serviços a clínica oferece e como agendo a castração do meu pet?",
+        "resposta": "A clínica oferece castração, cirurgias, exames, vacinas V10 e V12, limpeza dentária, farmácia veterinária, atestado de viagem e táxi dog. As castrações são agendadas às quartas e quintas-feiras, com vagas limitadas, pelo WhatsApp (11) 91020-3909."
+      }
+    ]
+  }
+}
