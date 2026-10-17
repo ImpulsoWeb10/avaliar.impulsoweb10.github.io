@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#07101e">
+<meta name="theme-color" content="#071f22">
 <meta name="description" content="Clínica veterinária popular em Itaquaquecetuba - SP: castração, vacinas, exames e cirurgias com preço acessível. Agende pelo WhatsApp e cuide do seu pet!">
 <meta name="keywords" content="Clínica Veterinária Popular, Itaquaquecetuba / SP, Clínica Veterinária Amor por Patinhas">
 <meta name="author" content="ImpulsoWeb10">
@@ -48,12 +48,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{width:100%}
-body{font-family:'DM Sans',sans-serif;background:#07101e;color:#e8e2d8;min-height:100vh;min-height:100dvh;width:100%;display:flex;flex-direction:column;align-items:center;padding:max(.7rem,env(safe-area-inset-top)) .6rem max(.7rem,env(safe-area-inset-bottom));overflow-x:hidden;position:relative;perspective:1200px}
-a:focus-visible,button:focus-visible{outline:2px solid #ffe082;outline-offset:3px}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,169,110,0.07) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%, rgba(17,40,80,0.6) 0%, transparent 60%);pointer-events:none;z-index:0}
+body{font-family:'DM Sans',sans-serif;background:#071f22;color:#eaf6f4;min-height:100vh;min-height:100dvh;width:100%;display:flex;flex-direction:column;align-items:center;padding:max(.7rem,env(safe-area-inset-top)) .6rem max(.7rem,env(safe-area-inset-bottom));overflow-x:hidden;position:relative;perspective:1200px}
+a:focus-visible,button:focus-visible{outline:2px solid #ffd2a1;outline-offset:3px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%, rgba(255,159,74,0.13) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%, rgba(10,90,90,0.55) 0%, transparent 60%);pointer-events:none;z-index:0}
 .app-wrapper{display:flex;flex-direction:column;align-items:center;width:100%;max-width:480px;margin:auto 0;position:relative;z-index:1}
-.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,#102040 0%,#0b1a2e 100%);border:2px solid #ffffff;border-radius:24px;box-shadow:0 0 10px #ffffff,0 0 20px rgba(255,255,255,.8),0 0 30px rgba(255,255,255,.35),0 15px 35px rgba(0,0,0,.6);padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
-.secret-back{position:absolute;inset:0;width:100%;height:100%;background:#050b14;border-radius:22px;transform:rotateY(180deg);backface-visibility:hidden;z-index:2;transform-style:preserve-3d;overflow:hidden}
+.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,#0f3b3f 0%,#0a2a2e 100%);border:2px solid #ffffff;border-radius:24px;box-shadow:0 0 10px #ffffff,0 0 20px rgba(255,255,255,.8),0 0 30px rgba(255,255,255,.35),0 15px 35px rgba(0,0,0,.6);padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
+.secret-back{position:absolute;inset:0;width:100%;height:100%;background:#050f11;border-radius:22px;transform:rotateY(180deg);backface-visibility:hidden;z-index:2;transform-style:preserve-3d;overflow:hidden}
 .back-layer{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;border-radius:22px}
 .back-layer-fundo{transform:translateZ(-20px)}
 .back-layer-mago{transform:translateZ(30px)}
@@ -64,21 +64,22 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .layer-front{transform:translateZ(55px);transform-style:preserve-3d;filter:drop-shadow(0 10px 15px rgba(0,0,0,.5));transition:transform .4s ease}
 .layer-pop{transform:translateZ(75px);transform-style:preserve-3d;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6));transition:transform .4s ease}
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem}
-.logo-frame{position:relative;border-radius:14px;overflow:hidden;display:inline-block;animation:logo-pulse 2.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(201,169,110,.5)}
+.logo-frame{position:relative;border-radius:14px;overflow:hidden;display:inline-block;animation:logo-pulse 2.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,159,74,.5)}
 .logo-frame::after{content:'';position:absolute;top:0;left:-110%;width:55%;height:100%;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:skewX(-18deg);animation:logo-shimmer 2.6s ease-in-out infinite;pointer-events:none;z-index:2}
-@keyframes logo-pulse{0%{box-shadow:0 0 0 0 rgba(201,169,110,.55),0 6px 20px rgba(201,169,110,.25)}55%{box-shadow:0 0 0 12px rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.1)}100%{box-shadow:0 0 0 0 rgba(201,169,110,0),0 6px 20px rgba(201,169,110,.25)}}
+@keyframes logo-pulse{0%{box-shadow:0 0 0 0 rgba(255,159,74,.55),0 6px 20px rgba(255,159,74,.25)}55%{box-shadow:0 0 0 12px rgba(255,159,74,0),0 6px 20px rgba(255,159,74,.1)}100%{box-shadow:0 0 0 0 rgba(255,159,74,0),0 6px 20px rgba(255,159,74,.25)}}
 @keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
-.logo-img{display:block;width:180px;height:auto;max-height:90px;border-radius:12px;border:2px solid rgba(201,169,110,.4);object-fit:contain;background:rgba(201,169,110,.06);position:relative;z-index:1}
-.logo-img-fallback{width:160px;height:66px;border-radius:12px;border:2px solid rgba(201,169,110,.4);background:rgba(201,169,110,.06);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c9a96e;font-weight:600;letter-spacing:.08em;position:relative;z-index:1}
-.brand{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#f0ece5;letter-spacing:.06em;line-height:1.1}
-.brand em{color:#c9a96e;font-style:italic}
-.tagline{margin-top:.25rem;font-size:.78rem;color:#9bb5d4;font-weight:400;letter-spacing:.03em}
+.logo-img{display:block;width:180px;height:auto;max-height:90px;border-radius:12px;border:2px solid rgba(255,159,74,.4);object-fit:contain;background:rgba(255,159,74,.06);position:relative;z-index:1}
+.logo-img-fallback{width:160px;height:66px;border-radius:12px;border:2px solid rgba(255,159,74,.4);background:rgba(255,159,74,.06);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#ff9f4a;font-weight:600;letter-spacing:.08em;position:relative;z-index:1}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff4e8;letter-spacing:.06em;line-height:1.1}
+.brand em{color:#ff9f4a;font-style:italic}
+.tagline{margin-top:.25rem;font-size:.78rem;color:#a9d8d3;font-weight:400;letter-spacing:.03em}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
-.chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;color:#d9e4f2;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.28rem .65rem}
-.chip svg{width:13px;height:13px;flex-shrink:0;stroke:#c9a96e;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;color:#e4f5f2;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.28rem .65rem}
+.chip svg{width:13px;height:13px;flex-shrink:0;stroke:#ff9f4a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .stars-cta{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-decoration:none;padding:.35rem .9rem .45rem;border-radius:18px;-webkit-tap-highlight-color:transparent;transition:transform .15s}
 .stars-cta:active{transform:scale(.97)}
 .stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.g-logo{width:30px;height:30px;flex-shrink:0;background:#fff;border-radius:50%;padding:4px;margin-right:.35rem;box-shadow:0 0 10px rgba(255,255,255,.35)}
 .star{font-size:2.2rem;line-height:1;color:#ffd700;text-shadow:0 0 12px rgba(255,215,0,.5);animation:star-wave 2.6s ease-in-out infinite}
 .star:nth-child(2){animation-delay:.12s}
 .star:nth-child(3){animation-delay:.24s}
@@ -87,7 +88,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 @keyframes star-wave{0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}}
 .stars-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em}
 .stars-label svg{width:15px;height:15px;flex-shrink:0}
-.proof{font-size:.76rem;color:#ffe082;font-weight:700}
+.proof{font-size:.76rem;color:#ffd2a1;font-weight:700}
 .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
 .btn-act{display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:46px;border-radius:50px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;text-decoration:none;transition:transform .2s}
 .btn-act:hover{transform:translateY(-2px)}
@@ -100,59 +101,78 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .social-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.3);transition:border-color .2s,box-shadow .2s}
 .social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .social-icon svg{width:20px;height:20px}
-.social-label{font-size:.68rem;color:#9bb5d4;letter-spacing:.03em}
-.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#d0dce8;font-weight:500}
-.hours .dot{width:8px;height:8px;border-radius:50%;background:#8ba4c4;flex-shrink:0}
+.social-label{font-size:.68rem;color:#a9d8d3;letter-spacing:.03em}
+.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#d5ece8;font-weight:500}
+.hours .dot{width:8px;height:8px;border-radius:50%;background:#8fc4be;flex-shrink:0}
 .hours.open .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
 .hours.closed .dot{background:#f87171}
-.address{font-size:.74rem;color:#8ba4c4;line-height:1.4;cursor:pointer;transition:color .2s;position:relative;display:inline-block}
-.address:hover{color:#ffe082}
-.address::after{content:'(Copiar)';display:block;font-size:.6rem;color:#c9a96e;opacity:.8;margin-top:-1px}
-.ticker-banner{width:100%;overflow:hidden;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.35);border-radius:8px;padding:.35rem 0;display:flex}
+.address{font-size:.74rem;color:#8fc4be;line-height:1.4;cursor:pointer;transition:color .2s;position:relative;display:inline-block}
+.address:hover{color:#ffd2a1}
+.address::after{content:'(Copiar)';display:block;font-size:.6rem;color:#ff9f4a;opacity:.8;margin-top:-1px}
+.ticker-banner{width:100%;overflow:hidden;background:rgba(255,159,74,.15);border:1px solid rgba(255,159,74,.35);border-radius:8px;padding:.35rem 0;display:flex}
 .ticker-track{display:flex;width:max-content;animation:infinite-scroll 36s linear infinite}
-.ticker-item{font-size:.76rem;color:#fce8bd;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
+.ticker-item{font-size:.76rem;color:#ffe0c0;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
 @keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.footer{font-size:.72rem;color:#d0dce8;display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
+.footer{font-size:.72rem;color:#d5ece8;display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
 .footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
-.footer-promo a{color:#ffe082;text-decoration:none;font-weight:700;border-bottom:1px solid #ffe082;padding-bottom:1px}
+.footer-promo a{color:#ffd2a1;text-decoration:none;font-weight:700;border-bottom:1px solid #ffd2a1;padding-bottom:1px}
 .footer-promo a:hover{color:#fff;border-color:#fff}
-.footer-dev{font-size:.7rem;color:#b0c4de;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
-.footer-dev a{color:#64b5f6;text-decoration:none;font-weight:700}
-.footer-dev a:hover{color:#90caf9;text-decoration:underline}
-@keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(201,169,110,.4);border-color:rgba(201,169,110,.5)}50%{box-shadow:0 0 15px rgba(201,169,110,.8);border-color:#ffe082}100%{box-shadow:0 0 5px rgba(201,169,110,.4);border-color:rgba(201,169,110,.5)}}
-.btn-gyro{background:rgba(255,255,255,.08);color:#ffe082;border:1px solid rgba(201,169,110,.4);border-radius:14px;padding:.3rem .7rem;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.7}
-.btn-gyro:hover,.btn-gyro.active{background:rgba(201,169,110,.25);color:#ffffff;opacity:1}
-.btn-gyro.active{background:linear-gradient(135deg,#c9a96e 0%,#b89350 100%);color:#ffffff;border-color:#ffe082;box-shadow:0 0 20px rgba(201,169,110,.9);animation:none}
-.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid #fff;border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,#102040 0%,#0b1a2e 100%);color:#e8e2d8;padding:0;box-shadow:0 -6px 30px rgba(255,255,255,.25);font-family:'DM Sans',sans-serif}
-.sheet::backdrop{background:rgba(3,8,16,.74)}
+.footer-dev{font-size:.7rem;color:#b5dcd6;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-dev a{color:#7ee0d0;text-decoration:none;font-weight:700}
+.footer-dev a:hover{color:#b8f0e6;text-decoration:underline}
+@keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(255,159,74,.4);border-color:rgba(255,159,74,.5)}50%{box-shadow:0 0 15px rgba(255,159,74,.8);border-color:#ffd2a1}100%{box-shadow:0 0 5px rgba(255,159,74,.4);border-color:rgba(255,159,74,.5)}}
+.btn-gyro{background:rgba(255,255,255,.08);color:#ffd2a1;border:1px solid rgba(255,159,74,.4);border-radius:14px;padding:.3rem .7rem;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.7}
+.btn-gyro:hover,.btn-gyro.active{background:rgba(255,159,74,.25);color:#ffffff;opacity:1}
+.btn-gyro.active{background:linear-gradient(135deg,#ff9f4a 0%,#e07f22 100%);color:#ffffff;border-color:#ffd2a1;box-shadow:0 0 20px rgba(255,159,74,.9);animation:none}
+.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid #fff;border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,#0f3b3f 0%,#0a2a2e 100%);color:#eaf6f4;padding:0;box-shadow:0 -6px 30px rgba(255,255,255,.25);font-family:'DM Sans',sans-serif}
+.sheet::backdrop{background:rgba(2,14,15,.78)}
 .sheet[open]{animation:sheet-up .28s ease-out}
 @keyframes sheet-up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#f0ece5;letter-spacing:.04em}
-.sheet h3{font-size:.9rem;font-weight:700;color:#c9a96e;margin-bottom:.4rem}
-.sheet p{font-size:.82rem;line-height:1.55;color:#c9d6e6}
-.sheet a.inline{color:#ffe082;font-weight:700;text-decoration:none;border-bottom:1px solid #ffe082}
+.sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff4e8;letter-spacing:.04em}
+.sheet h3{font-size:.9rem;font-weight:700;color:#ff9f4a;margin-bottom:.4rem}
+.sheet p{font-size:.82rem;line-height:1.55;color:#cbe8e4}
+.sheet a.inline{color:#ffd2a1;font-weight:700;text-decoration:none;border-bottom:1px solid #ffd2a1}
 .sheet-close{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;font-family:inherit}
 .sheet-close:hover{background:rgba(255,255,255,.18)}
 .svc-list{list-style:none;display:grid;gap:.5rem}
-.svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:#e8e2d8;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem}
-.svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:#c9a96e;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:#eaf6f4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem}
+.svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:#ff9f4a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .gallery{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.gallery img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;border:1px solid rgba(201,169,110,.5)}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;border:1px solid rgba(255,159,74,.5)}
+.gallery img{cursor:zoom-in}
+.rota-row{display:flex;justify-content:center;gap:2rem;margin-top:.7rem}
+.rota-btn{display:flex;flex-direction:column;align-items:center;gap:.35rem;text-decoration:none;transition:transform .2s}
+.rota-btn:hover{transform:translateY(-3px)}
+.rota-circle{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.rota-circle svg{width:30px;height:30px}
+.rota-google{background:#fff}
+.rota-waze{background:#33ccff}
+.rota-label{font-size:.78rem;font-weight:700;color:#fff4e8;letter-spacing:.02em}
+.img-modal{position:fixed;inset:0;margin:auto;padding:0;border:2px solid #fff;border-radius:18px;background:#fff;overflow:hidden;width:min(88vw,78vh,560px);width:min(88vw,78dvh,560px);aspect-ratio:1/1;max-width:none;max-height:none;box-shadow:0 0 30px rgba(255,255,255,.35)}
+.img-modal::backdrop{background:rgba(2,14,15,.88)}
+.img-modal[open]{animation:sheet-up .22s ease-out}
+.img-square{position:relative;width:100%;height:100%;background:#fff}
+.img-square>img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+.img-btn{background:rgba(7,31,34,.88);color:#fff4e8;border:1.5px solid rgba(255,159,74,.8);border-radius:50px;padding:.5rem .95rem;font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;min-height:40px}
+.img-btn:hover{background:#e07f22;color:#fff}
+.img-close{position:absolute;top:.6rem;right:.6rem}
+.img-nav{position:absolute;left:.6rem;right:.6rem;bottom:.6rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.img-count{font-size:.75rem;font-weight:700;color:#fff;background:rgba(7,31,34,.88);border-radius:50px;padding:.3rem .65rem}
 .nav-buttons-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}
 .btn-nav-map, .btn-nav-waze{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;transition:transform .2s, box-shadow .2s;padding:0 .4rem}
 .btn-nav-map:hover, .btn-nav-waze:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.btn-nav-map{background:#1a2030;color:#ffffff;border:1.5px solid rgba(66,133,244,.6)}
-.btn-nav-waze{background:#10222a;color:#ffffff;border:1.5px solid rgba(51,204,255,.6)}
+.btn-nav-map{background:#0f3b3f;color:#ffffff;border:1.5px solid rgba(255,159,74,.55)}
+.btn-nav-waze{background:#0f3b3f;color:#ffffff;border:1.5px solid rgba(255,159,74,.55)}
 .faq-container{display:flex;flex-direction:column;gap:.45rem}
 .faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;transition:background .2s, border-color .2s}
-.faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(201,169,110,.4)}
-.faq-question{font-size:.82rem;font-weight:700;color:#f0ece5;padding:.65rem .8rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(255,159,74,.4)}
+.faq-question{font-size:.82rem;font-weight:700;color:#fff4e8;padding:.65rem .8rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;user-select:none}
 .faq-question::-webkit-details-marker{display:none}
-.faq-question::after{content:'+';font-size:1.1rem;color:#c9a96e;font-weight:700;transition:transform .2s}
+.faq-question::after{content:'+';font-size:1.1rem;color:#ff9f4a;font-weight:700;transition:transform .2s}
 .faq-item[open] .faq-question::after{content:'−'}
-.faq-answer{font-size:.78rem;line-height:1.5;color:#c9d6e6;padding:0 .8rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;padding-top:.45rem}
+.faq-answer{font-size:.78rem;line-height:1.5;color:#cbe8e4;padding:0 .8rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;padding-top:.45rem}
 .btn-share{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:46px;background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:50px;font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer}
 .btn-share:hover{background:rgba(255,255,255,.16)}
 .btn-share svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -160,17 +180,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .bg-seo{display:none}
 @media (min-width:1024px){
   html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1}
-  html::before{background:radial-gradient(ellipse 34% 85% at 50% 50%,rgba(7,16,30,.94) 0%,rgba(7,16,30,.7) 55%,rgba(7,16,30,0) 100%),radial-gradient(ellipse 50% 40% at 50% 0%,rgba(201,169,110,.10) 0%,transparent 70%),linear-gradient(100deg,rgba(58,92,110,.55) 0%,rgba(58,92,110,0) 30%),linear-gradient(260deg,rgba(150,88,62,.42) 0%,rgba(150,88,62,0) 28%),linear-gradient(115deg,transparent 40%,rgba(201,169,110,.05) 50%,transparent 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .012' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .5  0 0 0 0 .62  0 0 0 1.1 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)' opacity='.35'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 7px),linear-gradient(135deg,#0a1830 0%,#07101e 50%,#0d1c30 100%);background-size:auto,auto,auto,auto,auto,260px 260px,900px 900px,auto,auto}
-  .bg-seo{display:flex;justify-content:space-between;align-items:stretch;position:absolute;top:2rem;left:0;right:0;height:calc(100vh - 4rem);overflow:hidden;padding:0 3vw;z-index:0;pointer-events:none;font-family:'DM Sans',sans-serif;color:rgba(232,226,216,.6)}
+  html::before{background:radial-gradient(ellipse 34% 85% at 50% 50%,rgba(7,31,34,.94) 0%,rgba(7,31,34,.7) 55%,rgba(7,31,34,0) 100%),radial-gradient(ellipse 50% 40% at 50% 0%,rgba(255,159,74,.10) 0%,transparent 70%),linear-gradient(100deg,rgba(20,120,115,.55) 0%,rgba(20,120,115,0) 30%),linear-gradient(260deg,rgba(255,140,60,.42) 0%,rgba(255,140,60,0) 28%),linear-gradient(115deg,transparent 40%,rgba(255,159,74,.05) 50%,transparent 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .012' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2  0 0 0 0 .6  0 0 0 0 .58  0 0 0 1.1 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)' opacity='.35'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 7px),linear-gradient(135deg,#0b3236 0%,#071f22 50%,#0c2b2f 100%);background-size:auto,auto,auto,auto,auto,260px 260px,900px 900px,auto,auto}
+  .bg-seo{display:flex;justify-content:space-between;align-items:stretch;position:absolute;top:2rem;left:0;right:0;height:calc(100vh - 4rem);overflow:hidden;padding:0 3vw;z-index:0;pointer-events:none;font-family:'DM Sans',sans-serif;color:rgba(234,246,244,.6)}
   .bg-seo>div{width:clamp(190px,calc((100vw - 480px)/2 - 7vw),380px);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
   .bg-seo>div:last-child{text-align:right}
   .bg-seo h1, .bg-seo h2, .bg-seo p{margin:0}
-  .bg-seo h1{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.06em;line-height:1.15;color:rgba(201,169,110,.85)}
-  .bg-seo h2{margin-top:1.1rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:rgba(201,169,110,.7)}
+  .bg-seo h1{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.06em;line-height:1.15;color:rgba(255,159,74,.85)}
+  .bg-seo h2{margin-top:1.1rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:rgba(255,159,74,.7)}
   .bg-seo h1+h2{margin-top:.5rem}
   .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
   .bg-seo .fotos{display:flex;gap:.6rem}
-  .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(201,169,110,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
+  .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid rgba(255,159,74,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
   .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
 }
 </style>
@@ -195,12 +215,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
       <div class="chips layer-back" aria-label="Produtos">
-        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Consultas veterinárias, castração de cães e gatos, cirurgias, exames laboratoriais, vacinas V10 e V12, limpeza dentária, farmácia veterinária, atestado de viagem, táxi dog</span>
-        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/></svg>Qualidade</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>Consultas veterinárias, castração de cães e gatos, cirurgias, exames laboratoriais, vacinas V10 e V12, limpeza dentária, farmácia veterinária, atestado de viagem, táxi dog</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Qualidade</span>
       </div>
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
         <a href="https://g.page/r/CS5Xk3_P3_i7EAE/review">
-          <span class="stars-row" aria-hidden="true"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span>
+          <span class="stars-row" aria-hidden="true"><svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span>
           <span class="stars-label">Toque nas estrelas e avalie no Google</span>
         </a>
       </div>
@@ -214,7 +234,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <span class="social-label">Instagram</span>
         </a>
         <a href="https://www.google.com/maps/search/?api=1&amp;query=Avenida%20Turmalinas%2C%20855%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%20Itaquaquecetuba%20%2F%20SP" class="social-btn" target="_blank" rel="noopener">
-          <div class="social-icon" style="background:#1a2030;"><svg viewBox="0 0 24 24" fill="#EA4335"><circle cx="12" cy="12" r="10"/></svg></div>
+          <div class="social-icon" style="background:#0f3b3f;"><svg viewBox="0 0 24 24" fill="#EA4335"><circle cx="12" cy="12" r="10"/></svg></div>
           <span class="social-label">Maps</span>
         </a>
         <button type="button" class="social-btn" onclick="salvarContato()">
@@ -222,7 +242,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <span class="social-label">Salvar</span>
         </button>
         <button type="button" class="social-btn" onclick="abrirMais()">
-          <div class="social-icon" style="background:#2a2310;"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          <div class="social-icon" style="background:#3a2410;"><svg viewBox="0 0 24 24" fill="none" stroke="#ff9f4a" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
           <span class="social-label">Ver mais</span>
         </button>
       </div>
@@ -250,14 +270,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <section>
       <h3>O que você encontra</h3>
-      <ul class="svc-list"><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Equipe de veterinários capacitados e atendimento acolhedor para cães e gatos</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Localização na Avenida Turmalinas, em Itaquaquecetuba, com agendamento fácil pelo WhatsApp</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Estrutura completa com exames, ultrassom, raio-x, cirurgias, vacinas e farmácia veterinária</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg>Preço acessível, atestado de viagem e táxi dog para mais praticidade ao tutor</li></ul>
+      <ul class="svc-list"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Equipe de veterinários capacitados e atendimento acolhedor para cães e gatos</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Localização na Avenida Turmalinas, em Itaquaquecetuba, com agendamento fácil pelo WhatsApp</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z"/></svg>Estrutura completa com exames, ultrassom, raio-x, cirurgias, vacinas e farmácia veterinária</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"/></svg>Preço acessível, atestado de viagem e táxi dog para mais praticidade ao tutor</li></ul>
     </section>
     <section>
       <h3>Endereço e rotas</h3>
       <p>Avenida Turmalinas, 855, Estância Fraternidade, Itaquaquecetuba - SP<br>Itaquaquecetuba / SP</p>
-      <div class="nav-buttons-grid">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Avenida%20Turmalinas%2C%20855%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%20Itaquaquecetuba%20%2F%20SP" class="btn-nav-map" target="_blank" rel="noopener">Abrir no Google</a>
-        <a href="https://waze.com/ul?q=Avenida%20Turmalinas%2C%20855%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%20Itaquaquecetuba%20%2F%20SP" class="btn-nav-waze" target="_blank" rel="noopener">Abrir no Waze</a>
+      <div class="rota-row">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Avenida%20Turmalinas%2C%20855%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%20Itaquaquecetuba%20%2F%20SP" class="rota-btn" target="_blank" rel="noopener" aria-label="Abrir no Google Maps">
+          <span class="rota-circle rota-google"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg></span>
+          <span class="rota-label">Maps</span>
+        </a>
+        <a href="https://waze.com/ul?q=Avenida%20Turmalinas%2C%20855%2C%20Est%C3%A2ncia%20Fraternidade%2C%20Itaquaquecetuba%20-%20SP%20Itaquaquecetuba%20%2F%20SP" class="rota-btn" target="_blank" rel="noopener" aria-label="Abrir no Waze">
+          <span class="rota-circle rota-waze"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c-4.4 0-8 3.1-8 7 0 2 1 3.8 2.6 5.1-.1.9-.5 1.7-1.1 2.4 1.3.1 2.5-.3 3.5-1 .9.3 1.9.5 3 .5 4.4 0 8-3.1 8-7s-3.6-7-8-7z" fill="#fff"/><circle cx="9.5" cy="10.5" r="1.1" fill="#0795c7"/><circle cx="14.5" cy="10.5" r="1.1" fill="#0795c7"/><path d="M9.5 13.5c1.4 1.2 3.6 1.2 5 0" stroke="#0795c7" fill="none" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <span class="rota-label">Waze</span>
+        </a>
       </div>
     </section>
     <section>
@@ -280,13 +306,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
             </div>
     </section>
     <section class="gallery">
-      <img src="logo-clinica-veterinaria-amor-por-patinhas-itaquaquecetuba.png" alt="Logo da Clínica Veterinária Amor por Patinhas, clínica popular para cães e gatos em Itaquaquecetuba - SP" loading="lazy" decoding="async">
-      <img src="equipe-veterinaria-amor-por-patinhas-itaquaquecetuba.png" alt="Equipe de veterinários da clínica Amor por Patinhas na Estância Fraternidade, Itaquaquecetuba - SP" loading="lazy" decoding="async">
-      <img src="castracao-caes-gatos-itaquaquecetuba.png" alt="Castração de cães e gatos com preço acessível na clínica veterinária popular de Itaquaquecetuba - SP" loading="lazy" decoding="async">
-      <img src="taxi-dog-clinica-veterinaria-itaquaquecetuba.png" alt="Serviço de táxi dog da clínica veterinária Amor por Patinhas buscando pets em Itaquaquecetuba - SP" loading="lazy" decoding="async">
+      <img data-idx="0" tabindex="0" role="button" src="logo-clinica-veterinaria-amor-por-patinhas-itaquaquecetuba.png" alt="Logo da Clínica Veterinária Amor por Patinhas, clínica popular para cães e gatos em Itaquaquecetuba - SP" loading="lazy" decoding="async">
+      <img data-idx="1" tabindex="0" role="button" src="equipe-veterinaria-amor-por-patinhas-itaquaquecetuba.png" alt="Equipe de veterinários da clínica Amor por Patinhas na Estância Fraternidade, Itaquaquecetuba - SP" loading="lazy" decoding="async">
+      <img data-idx="2" tabindex="0" role="button" src="castracao-caes-gatos-itaquaquecetuba.png" alt="Castração de cães e gatos com preço acessível na clínica veterinária popular de Itaquaquecetuba - SP" loading="lazy" decoding="async">
+      <img data-idx="3" tabindex="0" role="button" src="taxi-dog-clinica-veterinaria-itaquaquecetuba.png" alt="Serviço de táxi dog da clínica veterinária Amor por Patinhas buscando pets em Itaquaquecetuba - SP" loading="lazy" decoding="async">
     </section>
     <button type="button" class="btn-share" onclick="compartilhar()">Compartilhar este link</button>
     <p class="toast" id="toast"></p>
+  </div>
+</dialog>
+<dialog class="img-modal" id="imgModal" aria-label="Imagem ampliada">
+  <div class="img-square">
+    <img id="imgModalImg" src="" alt="">
+    <button type="button" class="img-btn img-close" onclick="fecharImg()" aria-label="Fechar">✕ Fechar</button>
+    <div class="img-nav">
+      <button type="button" class="img-btn" onclick="voltarImg()" aria-label="Voltar">‹ Voltar</button>
+      <span class="img-count" id="imgCount">1/4</span>
+      <button type="button" class="img-btn" onclick="proximaImg()" aria-label="Próxima">Próxima ›</button>
+    </div>
   </div>
 </dialog>
 <aside class="bg-seo">
@@ -311,6 +348,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   function abrirMais(){ if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open',''); }
   function fecharMais(){ if (typeof sheet.close === 'function') sheet.close(); else sheet.removeAttribute('open'); }
   sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
+  /* GALERIA: clique na imagem abre modal quadrado no centro */
+  const imgModal = document.getElementById('imgModal');
+  const imgModalImg = document.getElementById('imgModalImg');
+  const imgCount = document.getElementById('imgCount');
+  const galeria = Array.from(document.querySelectorAll('.gallery img'));
+  let imgAtual = 0;
+  function mostrarImg(i){
+    imgAtual = (i + galeria.length) % galeria.length;
+    imgModalImg.src = galeria[imgAtual].getAttribute('src');
+    imgModalImg.alt = galeria[imgAtual].alt;
+    imgCount.textContent = (imgAtual + 1) + '/' + galeria.length;
+  }
+  function abrirImg(i){
+    mostrarImg(i);
+    if (typeof imgModal.showModal === 'function') imgModal.showModal(); else imgModal.setAttribute('open','');
+  }
+  function fecharImg(){ if (typeof imgModal.close === 'function') imgModal.close(); else imgModal.removeAttribute('open'); }
+  function voltarImg(){ mostrarImg(imgAtual - 1); }
+  function proximaImg(){ mostrarImg(imgAtual + 1); }
+  galeria.forEach(function(img, i){
+    img.addEventListener('click', function(){ abrirImg(i); });
+    img.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirImg(i); } });
+  });
+  imgModal.addEventListener('click', function(e){ if (e.target === imgModal) fecharImg(); });
+  imgModal.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') voltarImg();
+    if (e.key === 'ArrowRight') proximaImg();
+  });
   function salvarContato(){
     const vcard = ['BEGIN:VCARD','VERSION:3.0','FN:Clínica Veterinária Amor por Patinhas','ORG:Clínica Veterinária Amor por Patinhas','TEL;TYPE=WORK,VOICE:+5511910203909','ADR;TYPE=WORK:;;Avenida Turmalinas, 855, Estância Fraternidade, Itaquaquecetuba - SP;Itaquaquecetuba / SP;;Brasil','URL:' + PAGE_URL,'END:VCARD'].join('\r\n');
     const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
