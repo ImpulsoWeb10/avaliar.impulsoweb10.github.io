@@ -1,0 +1,92 @@
+{
+  "dados_formulario_base": {
+    "placeId": "",
+    "nomeEmpresa": "Sorvetes e Açaí Alegria",
+    "whatsapp": "5511910736460",
+    "instagram": "",
+    "cidadeEstado": "Mogi das Cruzes / SP",
+    "enderecoCompleto": "Avenida Cavalheiro Nami Jafet, 343 - Vila Industrial, Mogi das Cruzes - SP, 08770-440",
+    "segmento": "Distribuidora de Sorvetes, Sorveteria e Açaiteria",
+    "produtosPrincipais": "Açaí na tigela, sorvetes de massa, picolés, milk-shakes, copo de açaí com complementos, atendimento no atacado e varejo"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/sorvetes-e-acai-alegria/index.html",
+      "h1": "Açaiteria e Sorveteria em Mogi das Cruzes - Sorvetes e Açaí Alegria",
+      "meta_description": "Sorvetes e açaí cremoso na Vila Industrial em Mogi das Cruzes - SP! Atacado e varejo. Peça pelo WhatsApp (11) 91073-6460 ou venha saborear!"
+    },
+    "arquitetura_h2_h4": {
+      "secao_principal_h2": {
+        "titulo_h2": "Sorvetes e Açaí Alegria: sabor, tradição e qualidade em Mogi das Cruzes",
+        "introducao_bloco": "A Sorvetes e Açaí Alegria é referência em Mogi das Cruzes na fabricação e distribuição de açaí e sorvetes de alta qualidade. Nascida como uma pequena fábrica artesanal, a marca expandiu sua produção para atender tanto clientes finais quanto revendedores no atacado e varejo. Localizada na Vila Industrial, oferece opções geladas refrescantes, preparadas com ingredientes selecionados para proporcionar momentos de pura satisfação e alegria a cada colherada."
+      },
+      "secao_produtos_h2": {
+        "titulo_h2": "Cardápio completo de sorvetes, picolés e açaí",
+        "subsecoes_h3": [
+          {
+            "titulo_h3": "Açaí cremoso e combinações personalizadas",
+            "foco_produtos_conteudo": "Nosso açaí é conhecido pela textura extremamente cremosa e sabor autêntico. Montado na hora no copo ou na tigela, você pode escolher diversos acompanhamentos saborosos, como leite em pó, granola crocante, caldas especiais e frutas frescas da estação.",
+            "detalhes_especificos_h4": [
+              "Açaí batido na hora com opções variadas de acompanhamentos",
+              "Montagem em copos, tigelas ou recipientes para viagem"
+            ]
+          },
+          {
+            "titulo_h3": "Sorvetes de massa, picolés e milk-shakes",
+            "foco_produtos_conteudo": "Oferecemos uma grande variedade de sabores de sorvete de massa, desde os clássicos como chocolate, creme e morango até criações exclusivas. Contamos também com picolés de fruta e ao leite, além de milk-shakes cremosos para todos os gostos.",
+            "detalhes_especificos_h4": [
+              "Variedade de sabores de sorvete de massa e picolés recheados",
+              "Atendimento especial para revenda, festas e eventos no atacado"
+            ]
+          }
+        ]
+      },
+      "secao_localizacao_h2": {
+        "titulo_h2": "Venha nos visitar na Vila Industrial em Mogi das Cruzes",
+        "chamada_local_conteudo": "A Sorvetes e Açaí Alegria está localizada na Avenida Cavalheiro Nami Jafet, 343, dentro do Supermercado Shibata na Vila Industrial, Mogi das Cruzes - SP. Venha nos visitar para se refrescar ou entre em contato pelo WhatsApp (11) 91073-6460 para tirar dúvidas sobre produtos e opções de revenda."
+      }
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Açaí puro e super cremoso com os melhores acompanhamentos",
+      "Grande variedade de sorvetes de massa, picolés e milk-shakes",
+      "Atendimento ao consumidor final e vendas no atacado para revendedores",
+      "Localização acessível na Vila Industrial em Mogi das Cruzes - SP com atendimento diário"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "acai-cremoso-com-frutas-mogi-das-cruzes.webp",
+        "alt_descricao": "Copo de açaí cremoso recheado com leite em pó e morangos na Sorvetes e Açaí Alegria em Mogi das Cruzes - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "sorvete-de-massa-sabores-variados-alegria.webp",
+        "alt_descricao": "Taça de sorvete de massa de diversos sabores na Sorvetes e Açaí Alegria na Vila Industrial"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "picoles-artesanais-atacado-varejo.webp",
+        "alt_descricao": "Picolés artesanais de frutas e ao leite da Sorvetes e Açaí Alegria em Mogi das Cruzes"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "loja-sorvetes-e-acai-alegria-shibata.webp",
+        "alt_descricao": "Atendimento e vitrine de sorvetes na Sorvetes e Açaí Alegria no Supermercado Shibata Mogi das Cruzes"
+      }
+    ],
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Qual é o horário de funcionamento da Sorvetes e Açaí Alegria?",
+        "resposta": "Funcionamos de segunda a domingo, das 11h30 às 20h00, atendendo durante todo o dia."
+      },
+      {
+        "pergunta": "Onde fica localizada a Sorvetes e Açaí Alegria em Mogi das Cruzes?",
+        "resposta": "Estamos localizados na Avenida Cavalheiro Nami Jafet, 343 - Vila Industrial, Mogi das Cruzes - SP (ao lado da rampa de acesso ao Supermercado Shibata)."
+      },
+      {
+        "pergunta": "A Sorvetes e Açaí Alegria vende sorvete no atacado para revenda?",
+        "resposta": "Sim! Além do atendimento em loja para consumo direto, trabalhamos com distribuição de sorvetes e açaí para eventos, comércios e revendedores."
+      }
+    ]
+  }
+}
