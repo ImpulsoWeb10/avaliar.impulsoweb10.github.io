@@ -82,7 +82,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn-act svg{width:18px;height:18px;flex-shrink:0}
 .btn-call{background:linear-gradient(135deg,#00e676 0%,#00c853 100%);color:#003311;box-shadow:0 4px 15px rgba(0,230,118,.3)}
 .btn-wa{background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);color:#ffffff;box-shadow:0 4px 15px rgba(37,211,102,.3);border:1.5px solid #a7ffeb}
-.social-row{display:flex;gap:.9rem;justify-content:center;align-items:flex-start}
+.social-row{display:flex;gap:.7rem;justify-content:center;align-items:flex-start}
 .social-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;transition:transform .2s}
 .social-btn:hover{transform:translateY(-3px)}
 .social-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,128,171,.5);transition:border-color .2s,box-shadow .2s}
@@ -101,7 +101,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ticker-item{font-size:.76rem;color:#ffedf1;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
 @keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .footer{font-size:.72rem;color:#fce4ec;display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
-.footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
+.footer-promo{font-size:.74rem;color:#ffffff;text-align:center;margin-bottom:1.5rem;padding-top:.2rem}
 .footer-promo a{color:#ffeb3b;text-decoration:none;font-weight:700;border-bottom:1px solid #ffeb3b;padding-bottom:1px;transition:color 0.3s ease}
 .footer-promo a:hover{color:#fff;border-color:#fff}
 .footer-dev{font-size:.7rem;color:#f8bbd0;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
@@ -240,6 +240,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   color: #ffffff;
 }
 
+.cardapio-modal{position:fixed;inset:0;background:rgba(20,4,22,.88);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease;backdrop-filter:blur(5px);padding:1rem}
+.cardapio-modal.active{opacity:1;pointer-events:auto}
+.cardapio-box{background:linear-gradient(175deg,#4A154B 0%,#28082a 100%);border:2px solid #ff80ab;border-radius:20px;width:100%;max-width:480px;max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;gap:.7rem;padding:1rem;box-shadow:0 10px 30px rgba(255,64,129,.4)}
+.cardapio-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.cardapio-head h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:600;letter-spacing:.04em}
+.cardapio-scroll{overflow-y:auto;border-radius:12px;border:1px solid rgba(255,128,171,.5);background:#fff;-webkit-overflow-scrolling:touch}
+.cardapio-scroll img{display:block;width:100%;height:auto}
+.cardapio-open{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;border-radius:50px;background:linear-gradient(135deg,#ff4081 0%,#c51162 100%);color:#fff;border:1.5px solid #ffeb3b;font-weight:700;font-size:.88rem;text-decoration:none}
 .bg-seo{display:none}
 @media (min-width:1024px){
   html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1}
@@ -299,6 +307,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <div class="social-icon" style="background:#3d0f40;"><i class="fa-brands fa-instagram"></i></div>
           <span class="social-label">Instagram</span>
         </a>
+        <button type="button" class="social-btn" onclick="abrirCardapio()">
+          <div class="social-icon" style="background:#3d0f40;"><i class="fa-solid fa-utensils" style="color:#ffeb3b;"></i></div>
+          <span class="social-label">Cardápio</span>
+        </button>
         <a href="https://www.google.com/maps/place/Sorvetes+e+A%C3%A7a%C3%AD+Alegria/@-23.5236658,-46.2091536,17z/data=!3m1!5s0x94cdd8088b2992b5:0x12eb7e8b35bedec6!4m14!1m7!3m6!1s0x94cdd807d8166a6b:0xfa3133e24670b4a3!2sShibata+Supermercados+-+Mogi+(Vila+Industrial)!8m2!3d-23.5236658!4d-46.2065787!16s%2Fg%2F1hc6zq037!3m5!1s0x94cdd9d06421bb17:0x3798951837600fbf!8m2!3d-23.524416!4d-46.2071764!16s%2Fg%2F11s1tzjg_2?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" class="social-btn" target="_blank" rel="noopener">
           <div class="social-icon" style="background:#3d0f40;"><i class="fa-solid fa-location-dot" style="color:#ff5252;"></i></div>
           <span class="social-label">Maps</span>
@@ -396,6 +408,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </div>
 
+<div class="cardapio-modal" id="cardapioModal" onclick="if(event.target===this)fecharCardapio()">
+  <div class="cardapio-box" role="dialog" aria-label="Cardápio">
+    <div class="cardapio-head">
+      <h3>Cardápio</h3>
+      <button type="button" class="sheet-close" onclick="fecharCardapio()" aria-label="Fechar">×</button>
+    </div>
+    <div class="cardapio-scroll">
+      <img src="cardapio-sorveteria-alegria.png" alt="Cardápio da Sorvetes e Açaí Alegria em Mogi das Cruzes - SP" loading="lazy" decoding="async">
+    </div>
+    <a class="cardapio-open" href="cardapio-sorveteria-alegria.png" target="_blank" rel="noopener"><i class="fa-solid fa-magnifying-glass-plus"></i> Abrir em tamanho maior</a>
+  </div>
+</div>
+
 <aside class="bg-seo">
   <div>
     <div class="txt">
@@ -430,6 +455,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     const modal = document.getElementById('reviewModal');
     modal.classList.remove('active');
   }
+
+  function abrirCardapio(){ document.getElementById('cardapioModal').classList.add('active'); }
+  function fecharCardapio(){ document.getElementById('cardapioModal').classList.remove('active'); }
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') fecharCardapio(); });
 
   function salvarContato(){
     const vcard = ['BEGIN:VCARD','VERSION:3.0','FN:Sorvetes e Açaí Alegria','ORG:Sorvetes e Açaí Alegria','TEL;TYPE=WORK,VOICE:+5511910736460','ADR;TYPE=WORK:;;Av. Cavalheiro Nami Jafet, 343 - Vila Industrial, Mogi das Cruzes - SP, 08770-440 (Dentro do Mercado Shibata);Mogi das Cruzes / SP;;Brasil','URL:' + PAGE_URL,'END:VCARD'].join('\r\n');
