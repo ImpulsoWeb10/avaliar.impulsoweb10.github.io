@@ -147,7 +147,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn-share i{font-size:1rem}
 .toast{min-height:1.1em;text-align:center;font-size:.78rem;color:#00e676}
 
-/* MODAL DE AGRADECIMENTO PARA AVALIAÇÃO */
+/* MODAL DE AGRADECIMENTO E AVALIAÇÃO DO GOOGLE (COM BOTÃO MANUAL) */
 .review-modal {
   position: fixed;
   inset: 0;
@@ -197,23 +197,47 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   font-size: 0.88rem;
   line-height: 1.5;
   color: #f8bbd0;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 .review-modal-highlight {
   color: #ffeb3b;
   font-weight: 700;
 }
-.review-modal-spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(255, 128, 171, 0.3);
-  border-top-color: #ff80ab;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto;
+.btn-review-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 48px;
+  background: linear-gradient(135deg, #ff4081 0%, #c51162 100%);
+  color: #ffffff;
+  border: 1.5px solid #ffeb3b;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 0.8rem;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.btn-review-go:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+.btn-review-close {
+  background: none;
+  border: none;
+  color: #f8bbd0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.3rem;
+}
+.btn-review-close:hover {
+  color: #ffffff;
 }
 
 .bg-seo{display:none}
@@ -268,7 +292,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
       <div class="cta-row layer-front">
         <a href="tel:+5511910736460" class="btn-act btn-call"><i class="fa-solid fa-phone"></i> Ligar agora</a>
-        <a href="https://wa.me/5511910736460?text=Olá!%20Vim%20através%20do%20link%20da%20Loja%20de%20Mogi%20das%20Cruzes%20no%20site." class="btn-act btn-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/5511910736460?text=Olá!%20Vim%20através%20do%20link%20personalizado%20da%20ImpulsoWeb10." class="btn-act btn-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
       </div>
       <div class="social-row layer-front">
         <a href="https://www.instagram.com/fabricasorvetesalegria" class="social-btn" target="_blank" rel="noopener">
@@ -298,7 +322,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
       <footer class="footer layer-back">
-        <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20através%20do%20link%20da%20Loja%20de%20Mogi%20das%20Cruzes%20no%20site." target="_blank" rel="noopener">Saiba mais <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.65rem;"></i></a></p>
+        <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044?text=Olá!%20Vim%20através%20do%20link%20personalizado%20da%20ImpulsoWeb10." target="_blank" rel="noopener">Saiba mais <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.65rem;"></i></a></p>
         <p class="footer-dev"><span>Desenvolvido por ImpulsoWeb10</span><button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button></p>
       </footer>
     </div>
@@ -357,7 +381,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </dialog>
 
-<!-- MODAL DE AGRADECIMENTO E AVALIAÇÃO DO GOOGLE -->
+<!-- MODAL DE AGRADECIMENTO E AVALIAÇÃO COM BOTÃO MANUAL -->
 <div class="review-modal" id="reviewModal">
   <div class="review-modal-content">
     <div class="review-modal-icon">
@@ -365,7 +389,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <h3>Muito obrigado pela preferência!</h3>
     <p>A sua avaliação é essencial para o nosso crescimento. Se possível, por gentileza, <span class="review-modal-highlight">compartilhe uma foto da nossa loja ou do seu sorvete/açaí</span> — isso nos ajuda imensamente! ❤️</p>
-    <div class="review-modal-spinner"></div>
+    <a href="https://search.google.com/local/writereview?placeid=ChIJF7shZNDZzZQRvw9gNxiVmDc" target="_blank" rel="noopener" class="btn-review-go">
+      <i class="fa-solid fa-star"></i> Avalie-nos agora
+    </a>
+    <button type="button" class="btn-review-close" onclick="fecharModalAvaliacao()">Fechar</button>
   </div>
 </div>
 
@@ -392,16 +419,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   function fecharMais(){ if (typeof sheet.close === 'function') sheet.close(); else sheet.removeAttribute('open'); }
   sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
   
-  // Função do Modal Elegante de Avaliação com Agradecimento e Redirecionamento de 3 Segundos
+  // Funções do Modal de Avaliação com Botão Manual
   function abrirModalAvaliacao(e) {
     e.preventDefault();
     const modal = document.getElementById('reviewModal');
     modal.classList.add('active');
-    
-    setTimeout(function() {
-      window.open("https://search.google.com/local/writereview?placeid=ChIJF7shZNDZzZQRvw9gNxiVmDc", "_blank");
-      modal.classList.remove('active');
-    }, 5000);
+  }
+
+  function fecharModalAvaliacao() {
+    const modal = document.getElementById('reviewModal');
+    modal.classList.remove('active');
   }
 
   function salvarContato(){
