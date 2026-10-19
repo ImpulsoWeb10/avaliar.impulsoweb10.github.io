@@ -567,6 +567,41 @@ body::before{
 }
 .btn-copy-pix svg { width: 18px; height: 18px; }
 
+
+/* ===== BLOCO MERCADO PAGO (dentro do modal Pix) ===== */
+.mp-block{
+  width:100%;
+  border:1.5px solid #009EE3;
+  border-radius:16px;
+  padding:1rem;
+  background:rgba(0,158,227,.08);
+  box-shadow:0 0 14px rgba(0,158,227,.25);
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  text-align:center;
+}
+.mp-title{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.95rem;color:#f0ece5}
+.mp-btn{
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  min-height:48px;border-radius:50px;
+  background:#009EE3;color:#fff;
+  border:1.5px solid rgba(255,255,255,.3);
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.92rem;
+  text-decoration:none;
+  box-shadow:0 4px 15px rgba(0,158,227,.4);
+  transition:transform .2s, background .2s, box-shadow .2s;
+}
+.mp-btn:hover{background:#008ac6;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,158,227,.55)}
+.mp-ok{font-size:.76rem;line-height:1.45;color:#4ade80;font-weight:500}
+.mp-ok strong{color:#86efac}
+.mp-hint{font-size:.72rem;line-height:1.45;color:#9bb5d4}
+.pix-sep{
+  display:flex;align-items:center;gap:.6rem;width:100%;
+  font-size:.72rem;color:#9bb5d4;letter-spacing:.04em;
+}
+.pix-sep::before,.pix-sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.18)}
+
 /* ===== PAINEL DE SELEÇÃO DE TEMA (5 CORES) ===== */
 .theme-modal {
   position: fixed;
@@ -953,6 +988,19 @@ body::before{
       <h2 id="pixTitulo">Pagamento via Pix</h2>
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
     </div>
+
+    <!-- Início do Bloco de Pagamento Pix - Mercado Pago -->
+    <div class="mp-block">
+      <p class="mp-title">🎨 Finalizar Pagamento do Pedido</p>
+      <a href="https://link.mercadopago.com.br/tintasqualyquimy" class="mp-btn" target="_blank" rel="noopener">
+        ⚡ Pagar Agora via PIX
+      </a>
+      <p class="mp-ok">✓ <strong>Baixa Automática:</strong> O sistema identifica o pagamento na hora e altera o status para <strong>"Recebido"</strong>.</p>
+      <p class="mp-hint">Informe o valor do seu orçamento na tela que se abrir. A fábrica receberá a confirmação imediatamente.</p>
+    </div>
+    <!-- Fim do Bloco de Pagamento -->
+
+    <div class="pix-sep">ou pague pelo QR Code / chave</div>
 
     <div class="pix-img-container">
       <img src="Cartaz-de-agradecimento-com-QR-Code-Pix.png" alt="Cartaz QR Code Pix Tintas Qualy Quimy">
