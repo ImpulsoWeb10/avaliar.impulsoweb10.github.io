@@ -1,0 +1,92 @@
+{
+  "dados_formulario_base": {
+    "placeId": "ChIJ04CiWLN7zpQRCEaSxbtNwXw",
+    "nomeEmpresa": "CT Genesis Academy - Escola de Jiu Jitsu",
+    "whatsapp": "5511996195033",
+    "instagram": "gnsbjjmarengo",
+    "cidadeEstado": "Itaquaquecetuba / SP",
+    "enderecoCompleto": "Av. Gonçalves Dias, 600, Parque Residencial Marengo, Itaquaquecetuba - SP, CEP 08594-270",
+    "segmento": "Academia de Jiu-Jitsu",
+    "produtosPrincipais": "Jiu-jitsu infantil, jiu-jitsu juvenil, jiu-jitsu adulto, aulas em turmas por idade, desenvolvimento pessoal, disciplina, defesa pessoal, condicionamento físico"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://impulsoweb10.com.br/ct-genesis-academy/index.html",
+      "h1": "Academia de Jiu-Jitsu em Itaquaquecetuba - CT Genesis Academy",
+      "meta_description": "Jiu-jitsu para crianças, jovens e adultos no Parque Residencial Marengo, em Itaquaquecetuba - SP. Conheça a CT Genesis Academy e chame no WhatsApp!"
+    },
+    "arquitetura_h2_h4": {
+      "secao_principal_h2": {
+        "titulo_h2": "CT Genesis Academy: escola de jiu-jitsu que forma atletas e pessoas melhores",
+        "introducao_bloco": "A CT Genesis Academy é uma escola de desenvolvimento pessoal que usa o jiu-jitsu como principal ferramenta de transformação. Instalada na Av. Gonçalves Dias, 600, no Parque Residencial Marengo, em Itaquaquecetuba - SP, a academia recebe alunos de diferentes idades que buscam disciplina, defesa pessoal, condicionamento físico e um ambiente de respeito dentro e fora do tatame. Siga o professor no Instagram @gnsbjjmarengo e acompanhe a rotina da equipe."
+      },
+      "secao_produtos_h2": {
+        "titulo_h2": "Turmas de jiu-jitsu para cada fase da vida",
+        "subsecoes_h3": [
+          {
+            "titulo_h3": "Jiu-jitsu infantil e juvenil",
+            "foco_produtos_conteudo": "As turmas para crianças e adolescentes são divididas por faixa etária, o que torna o aprendizado mais seguro e adequado ao desenvolvimento de cada aluno. Entre quatro e catorze anos, os pequenos treinam coordenação motora, respeito às regras, autoconfiança e convivência em grupo, enquanto aprendem os fundamentos da arte suave sob orientação atenta dos instrutores.",
+            "detalhes_especificos_h4": [
+              "Turmas de 4 a 6 anos, 7 a 10 anos e 11 a 14 anos, às segundas e quartas-feiras",
+              "Foco em disciplina, respeito, concentração e autoconfiança"
+            ]
+          },
+          {
+            "titulo_h3": "Jiu-jitsu adulto",
+            "foco_produtos_conteudo": "Para quem tem 15 anos ou mais, as aulas adultas combinam técnica, treino de posições e condicionamento físico, atendendo tanto o iniciante que quer aprender defesa pessoal quanto o praticante que deseja evoluir de faixa. Os horários cobrem manhã e noite, o que facilita encaixar o treino na rotina de trabalho ou estudo.",
+            "detalhes_especificos_h4": [
+              "Segundas e quartas às 20h10, terças e quintas às 7h, sextas às 18h10 e 20h10",
+              "Treino técnico para defesa pessoal, preparo físico e evolução de graduação"
+            ]
+          }
+        ]
+      },
+      "secao_localizacao_h2": {
+        "titulo_h2": "Treine jiu-jitsu no Parque Residencial Marengo, em Itaquaquecetuba",
+        "chamada_local_conteudo": "A CT Genesis Academy fica na Av. Gonçalves Dias, 600, Parque Residencial Marengo, CEP 08594-270, em Itaquaquecetuba - SP, com aulas no fim da tarde e à noite, além de turma adulta pela manhã em dias específicos. Para conhecer a estrutura, tirar dúvidas sobre turmas e horários ou agendar sua visita, chame no WhatsApp (11) 99619-5033 e venha fazer parte da família Genesis."
+      }
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Ensino de jiu-jitsu com foco em desenvolvimento pessoal, disciplina e respeito",
+      "Academia na Av. Gonçalves Dias, em Itaquaquecetuba, com atendimento direto pelo WhatsApp",
+      "Turmas separadas por idade: crianças, adolescentes e adultos, em vários horários",
+      "Ambiente acolhedor para iniciantes, com treino que une defesa pessoal e condicionamento físico"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "fachada-ct-genesis-academy-itaquaquecetuba.webp",
+        "alt_descricao": "Fachada da CT Genesis Academy, escola de jiu-jitsu na Av. Gonçalves Dias, Parque Residencial Marengo, Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "aula-jiu-jitsu-infantil-itaquaquecetuba.webp",
+        "alt_descricao": "Aula de jiu-jitsu infantil no tatame da CT Genesis Academy em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "treino-jiu-jitsu-adulto-parque-marengo.webp",
+        "alt_descricao": "Treino de jiu-jitsu adulto na academia do Parque Residencial Marengo, em Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "equipe-ct-genesis-academy-jiu-jitsu.webp",
+        "alt_descricao": "Equipe e alunos da CT Genesis Academy reunidos após o treino de jiu-jitsu em Itaquaquecetuba - SP"
+      }
+    ],
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Quais são os horários das aulas de jiu-jitsu na CT Genesis Academy?",
+        "resposta": "As turmas infantis de 4 a 6 anos treinam às segundas e quartas às 18h30, e as de 7 a 10 e 11 a 14 anos às 19h10. A turma adulta (15+) treina às segundas e quartas às 20h10, às terças e quintas às 7h e às sextas às 18h10 e 20h10. Confirme os horários atualizados pelo WhatsApp (11) 99619-5033."
+      },
+      {
+        "pergunta": "Onde fica a CT Genesis Academy em Itaquaquecetuba?",
+        "resposta": "A academia fica na Av. Gonçalves Dias, 600, bairro Parque Residencial Marengo, CEP 08594-270, em Itaquaquecetuba - SP. Se precisar de ajuda para chegar, chame no WhatsApp (11) 99619-5033."
+      },
+      {
+        "pergunta": "Como faço para começar a treinar jiu-jitsu e quais turmas existem?",
+        "resposta": "Há turmas infantis (4 a 6, 7 a 10 e 11 a 14 anos) e turma adulta (15+). Para conhecer a academia, escolher o melhor horário e iniciar os treinos, fale pelo WhatsApp (11) 99619-5033 ou pelo Instagram @gnsbjjmarengo."
+      }
+    ]
+  }
+}
