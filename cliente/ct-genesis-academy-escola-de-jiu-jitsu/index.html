@@ -224,6 +224,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .theme-opt i{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:var(--c);transition:transform .2s,box-shadow .2s}
 .theme-opt:hover i{transform:scale(1.1)}
 .theme-opt.on i{border-color:#fff;box-shadow:0 0 0 3px var(--c),0 0 16px var(--c)}
+
+.thanks{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;border:none;background:transparent;overflow:hidden;padding:1rem;cursor:pointer}
+.thanks[open]{display:flex;align-items:center;justify-content:center}
+.thanks::backdrop{background:rgba(4,4,6,.0);-webkit-backdrop-filter:blur(0px);backdrop-filter:blur(0px);transition:background .6s ease,backdrop-filter .6s ease,-webkit-backdrop-filter .6s ease}
+.thanks.show::backdrop{background:rgba(4,4,6,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.thanks img{display:block;width:auto;height:auto;max-width:min(88vw,520px);max-height:calc(100dvh - 3rem);object-fit:contain;border-radius:16px;border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 4px rgba(var(--ac-rgb),.35),0 20px 60px rgba(0,0,0,.7);opacity:0;transform:scale(.12);transition:transform 1.5s cubic-bezier(.2,.9,.25,1.08),opacity .5s ease}
+.thanks.show img{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.thanks img{transition:opacity .3s ease;transform:none}}
 @media (min-width:1024px){
   html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1}
   html::before{background:radial-gradient(ellipse 34% 85% at 50% 50%,rgba(11,11,14,.94) 0%,rgba(11,11,14,.7) 55%,rgba(11,11,14,0) 100%),radial-gradient(ellipse 50% 40% at 50% 0%,rgba(var(--ac-rgb),.10) 0%,transparent 70%),linear-gradient(100deg,rgba(var(--ac-d-rgb),.55) 0%,rgba(var(--ac-d-rgb),0) 30%),linear-gradient(260deg,rgba(var(--ac-rgb),.42) 0%,rgba(var(--ac-rgb),0) 28%),linear-gradient(115deg,transparent 40%,rgba(var(--ac-rgb),.05) 50%,transparent 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E"),radial-gradient(ellipse 45% 35% at 15% 25%,rgba(var(--ac-rgb),.14) 0%,transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 7px),linear-gradient(135deg,#17171c 0%,#0b0b0e 50%,#131318 100%);background-size:auto,auto,auto,auto,auto,260px 260px,auto,auto,auto}
@@ -265,7 +273,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Qualidade</span>
       </div>
       <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
-        <a href="https://search.google.com/local/writereview?placeid=ChIJ04CiWLN7zpQRCEaSxbtNwXw" class="stars-cta" target="_blank" rel="noopener">
+        <a href="https://search.google.com/local/writereview?placeid=ChIJ04CiWLN7zpQRCEaSxbtNwXw" class="stars-cta" id="starsCta" target="_blank" rel="noopener">
           <span class="stars-row" aria-hidden="true"><svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span>
           <span class="stars-label">Toque nas estrelas e avalie no Google</span>
         </a>
@@ -377,6 +385,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="theme-opts" id="themeOpts"></div>
   </div>
 </dialog>
+<dialog class="thanks" id="thanksDlg" aria-label="Agradecimento"><img id="thanksImg" src="oss-jiu-jitsu-agradecimento.png" alt="Oss! Obrigado pela avaliação - CT Genesis Academy"></dialog>
 <aside class="bg-seo">
   <div>
     <div class="txt">
@@ -550,6 +559,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     tLogo = setTimeout(function(){ toquesLogo = 0; }, 2000);
     if (toquesLogo >= 5){ toquesLogo = 0; montarTema(); themeDlg.showModal(); }
   });
+
+  /* ESTRELAS: imagem de agradecimento cresce e, em seguida, abre a avaliação do Google */
+  const starsCta = document.getElementById('starsCta'), thanksDlg = document.getElementById('thanksDlg'), thanksImg = document.getElementById('thanksImg');
+  const URL_AVALIAR = starsCta.href;
+  const TEMPO_CRESCER = 1500, TEMPO_SEGURAR = 900;
+  let thanksBusy = false, tThanks;
+  (new Image()).src = thanksImg.getAttribute('src');
+  function irParaAvaliacao(){
+    clearTimeout(tThanks);
+    let w = null;
+    try { w = window.open(URL_AVALIAR, '_blank'); if (w) w.opener = null; } catch (e) {}
+    if (!w) { location.href = URL_AVALIAR; return; }
+    thanksDlg.classList.remove('show');
+    try { thanksDlg.close(); } catch (e) { thanksDlg.removeAttribute('open'); }
+    thanksBusy = false;
+  }
+  starsCta.addEventListener('click', function(e){
+    e.preventDefault();
+    if (thanksBusy) return;
+    thanksBusy = true;
+    thanksDlg.classList.remove('show');
+    if (typeof thanksDlg.showModal === 'function') thanksDlg.showModal(); else thanksDlg.setAttribute('open','');
+    void thanksImg.offsetWidth;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ thanksDlg.classList.add('show'); }); });
+    tThanks = setTimeout(irParaAvaliacao, TEMPO_CRESCER + TEMPO_SEGURAR);
+  });
+  thanksDlg.addEventListener('click', irParaAvaliacao);
+  thanksDlg.addEventListener('cancel', function(e){ e.preventDefault(); irParaAvaliacao(); });
 </script>
 </body>
 </html>
