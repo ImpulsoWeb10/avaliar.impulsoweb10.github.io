@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CT GNS BJJ | Jiu-Jitsu & Personal em Itaquaquecetuba</title>
-  <meta name="description" content="Centro de Treinamento de Jiu-Jitsu e Personal em Grupo no Marengo, Itaquaquecetuba.">
-  <meta name="theme-color" content="#0b0908">
+  <title>Genesis Academy Brazil | Jiu-Jitsu & Personal em Itaquaquecetuba</title>
+  <meta name="description" content="Escola de Brazilian Jiu-Jitsu Genesis Academy Brazil e Personal em Grupo no Marengo, Itaquaquecetuba.">
+  <meta name="theme-color" content="#ffffff">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +17,14 @@
       theme: {
         extend: {
           colors: {
-            ink: '#0b0908',
-            panel: '#14100e',
-            cardBg: '#1c1714',
-            line: '#2d2420',
-            bone: '#f3ece2',
-            gold: '#d9a441',
-            goldHover: '#c29032',
-            belt: '#d42a2a',
-            beltHover: '#b82020',
+            brandBlue: '#0052b4',      /* Azul Royal do Logo */
+            brandBlueDark: '#003a80',
+            brandSky: '#38b6ff',       /* Azul Claro do Logo */
+            brandGray: '#6e7a85',      /* Cinza do Anel do Logo */
+            brandDark: '#1a202c',
+            brandBg: '#f8fafc',        /* Fundo Claro e Limpo */
+            cardBg: '#ffffff',
+            line: '#e2e8f0',
             brandGreen: '#25d366'
           },
           fontFamily: {
@@ -38,56 +37,54 @@
   </script>
   
   <style>
-    body { background-color: #0b0908; color: #f3ece2; font-family: 'Figtree', sans-serif; }
-    :focus-visible { outline: 2px solid #d9a441; outline-offset: 3px; }
+    body { background-color: #f8fafc; color: #1a202c; font-family: 'Figtree', sans-serif; }
+    :focus-visible { outline: 2px solid #0052b4; outline-offset: 3px; }
     
-    /* Moldura Neon na Tela */
+    /* Moldura Suave ao Redor da Tela */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      border: 2px solid rgba(217, 164, 65, 0.25);
+      border: 2px solid rgba(0, 82, 180, 0.2);
       pointer-events: none;
       z-index: 999;
-      box-shadow: inset 0 0 20px rgba(217, 164, 65, 0.15), 0 0 20px rgba(217, 164, 65, 0.15);
+      box-shadow: inset 0 0 15px rgba(0, 82, 180, 0.05);
     }
     @media (max-width: 768px) {
       body::before { border-width: 1px; }
     }
 
     .tatami-pattern {
-      background-image: linear-gradient(rgba(243, 236, 226, 0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(243, 236, 226, 0.03) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(0, 82, 180, 0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 82, 180, 0.04) 1px, transparent 1px);
       background-size: 40px 40px;
     }
-    
+
+    /* Faixa de Jiu-Jitsu */
     .belt-stripe {
       position: relative;
-      height: 48px;
-      background: #000;
-      border-top: 2px solid #2d2420;
-      border-bottom: 2px solid #2d2420;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+      height: 44px;
+      background: #111827;
+      border-top: 2px solid #374151;
+      border-bottom: 2px solid #374151;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
     .belt-stripe .bar {
       position: absolute;
       top: -2px; bottom: -2px; right: 12%;
-      width: 100px;
+      width: 90px;
       background: #d42a2a;
       display: flex; gap: 6px; justify-content: center; align-items: center;
     }
-    .belt-stripe .bar i { display: block; width: 8px; height: 28px; background: #f3ece2; }
+    .belt-stripe .bar i { display: block; width: 7px; height: 26px; background: #ffffff; }
 
-    /* Botão Neon Profissional */
-    .btn-neon {
-      position: relative;
-      overflow: hidden;
+    /* Botão Iluminado */
+    .btn-brand {
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(217, 164, 65, 0.3);
-      border: 1px solid rgba(217, 164, 65, 0.5);
+      box-shadow: 0 4px 14px rgba(0, 82, 180, 0.25);
     }
-    .btn-neon:hover {
-      box-shadow: 0 0 25px rgba(217, 164, 65, 0.7), inset 0 0 10px rgba(217, 164, 65, 0.4);
+    .btn-brand:hover {
+      box-shadow: 0 6px 20px rgba(0, 82, 180, 0.4);
       transform: translateY(-2px);
     }
 
@@ -107,42 +104,45 @@
     <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
   </svg>
 
-  <!-- Navbar -->
-  <header class="sticky top-0 z-40 border-b border-line bg-ink/90 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
-      <a href="#topo" class="font-display text-2xl font-black tracking-wider text-bone">CT GNS <span class="text-belt">BJJ</span></a>
-      <nav class="hidden items-center gap-7 text-sm font-medium text-bone/80 md:flex">
-        <a class="hover:text-gold transition-colors" href="#modalidades">Modalidades</a>
-        <button id="openModalBtnNav" class="hover:text-gold transition-colors text-left cursor-pointer">Planos</button>
-        <a class="hover:text-gold transition-colors" href="#regras">Regras</a>
-        <a class="hover:text-gold transition-colors" href="#local">Localização</a>
+  <!-- Navbar Clara -->
+  <header class="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur shadow-sm">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+      <a href="#topo" class="flex items-center gap-3">
+        <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Academy Brazil Logo" class="h-10 w-10 object-contain">
+        <span class="font-display text-2xl font-black tracking-wider text-brandDark">GENESIS <span class="text-brandBlue">ACADEMY</span></span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
+        <a class="hover:text-brandBlue transition-colors" href="#modalidades">Modalidades</a>
+        <button id="openModalBtnNav" class="hover:text-brandBlue transition-colors text-left cursor-pointer">Planos</button>
+        <a class="hover:text-brandBlue transition-colors" href="#regras">Regras</a>
+        <a class="hover:text-brandBlue transition-colors" href="#local">Localização</a>
       </nav>
-      <a data-wa="Olá! Vim pelo site e quero agendar uma aula." target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-belt px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-beltHover">
+      <a data-wa="Olá! Vim pelo site da Genesis Academy Brazil e quero saber mais." target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brandBlue px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brandBlueDark">
         <svg class="h-4 w-4"><use href="#i-wa"/></svg>
-        <span class="hidden sm:inline">WhatsApp</span>
+        <span class="hidden sm:inline">Aula Experimental</span>
       </a>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section id="topo" class="tatami-pattern relative overflow-hidden bg-ink pt-12 md:pt-20 pb-16">
+  <section id="topo" class="tatami-pattern relative overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-50 pt-12 md:pt-20 pb-16">
     <div class="mx-auto max-w-6xl px-5">
       <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7 text-center lg:text-left">
-          <span class="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-gold mb-6 shadow-[0_0_10px_rgba(217,164,65,0.2)]">
-            Referência em Itaquaquecetuba
-          </span>
-          <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.95]">
-            Evolua Sua Mente <br><span class="text-gold drop-shadow-[0_0_20px_rgba(217,164,65,0.4)]">E Seu Corpo</span>
+          <div class="inline-flex items-center gap-2 rounded-full border border-brandBlue/30 bg-blue-100/60 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brandBlue mb-6 shadow-sm">
+            Escola de Jiu-Jitsu & Treinamento Físico
+          </div>
+          <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.95] text-brandDark">
+            Genesis Academy <br><span class="text-brandBlue">Brazil</span>
           </h1>
-          <p class="mt-6 text-base sm:text-xl text-bone/80 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Jiu-Jitsu de alto nível para todas as idades e treinamento Personalizado em grupo no Marengo.
+          <p class="mt-6 text-base sm:text-xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+            Formando campeões na vida e no tatame. A melhor estrutura de Jiu-Jitsu e Personal em Grupo em Itaquaquecetuba.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button id="openModalBtnHero" class="btn-neon rounded-full bg-gold px-8 py-4 font-bold text-ink uppercase tracking-wider text-sm">
+            <button id="openModalBtnHero" class="btn-brand rounded-full bg-brandBlue px-8 py-4 font-bold text-white uppercase tracking-wider text-sm">
               Ver Planos e Preços
             </button>
-            <a data-wa="Olá! Quero conhecer o CT GNS BJJ." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-bone/30 bg-panel px-8 py-4 font-semibold text-bone transition-all hover:border-gold hover:text-gold">
+            <a data-wa="Olá! Quero conhecer a Genesis Academy Brazil." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 shadow-sm transition-all hover:border-brandBlue hover:text-brandBlue">
               <svg class="h-5 w-5 fill-current text-brandGreen"><use href="#i-wa"/></svg>
               Falar no WhatsApp
             </a>
@@ -150,9 +150,9 @@
         </div>
 
         <div class="lg:col-span-5">
-          <div class="rounded-3xl border border-gold/40 bg-cardBg p-3 shadow-[0_0_30px_rgba(217,164,65,0.15)]">
-            <div class="relative h-80 sm:h-96 w-full overflow-hidden rounded-2xl">
-              <img src="https://images.unsplash.com/photo-1564415303232-212d31d04423?q=80&w=800&auto=format&fit=crop" alt="Jiu-Jitsu" class="h-full w-full object-cover">
+          <div class="rounded-3xl border border-slate-200 bg-white p-3 shadow-xl">
+            <div class="relative h-80 sm:h-96 w-full overflow-hidden rounded-2xl flex items-center justify-center bg-slate-100">
+              <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Academy Brazil Logo" class="h-64 w-64 object-contain drop-shadow-md">
             </div>
           </div>
         </div>
@@ -160,39 +160,39 @@
     </div>
   </section>
 
+  <!-- Faixa Decorativa -->
   <div class="relative z-25 -my-4 pointer-events-none" aria-hidden="true">
     <div class="belt-stripe -rotate-1"><div class="bar"><i></i><i></i><i></i><i></i></div></div>
   </div>
 
   <!-- Modal Flutuante de Planos -->
-  <div id="plansModal" class="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 backdrop-blur-md p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div id="modalContent" class="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-gold/50 bg-panel p-6 sm:p-10 shadow-[0_0_50px_rgba(217,164,65,0.25)] transform scale-95 transition-transform duration-300">
+  <div id="plansModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="modalContent" class="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-2xl transform scale-95 transition-transform duration-300">
       
-      <!-- Botão Fechar -->
-      <button id="closeModalBtn" class="absolute top-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-cardBg text-bone hover:border-gold hover:text-gold transition-colors">
+      <button id="closeModalBtn" class="absolute top-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
         <svg class="h-5 w-5"><use href="#i-x"/></svg>
       </button>
 
       <div class="text-center max-w-xl mx-auto">
-        <span class="text-xs font-bold uppercase tracking-widest text-gold">Tabela Oficial</span>
-        <h2 class="font-display text-4xl sm:text-5xl font-extrabold uppercase mt-1">Planos e Mensalidades</h2>
-        <p class="mt-2 text-sm text-bone/75">Escolha a periodicidade ideal. Quanto maior o compromisso, maior a economia.</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Tabela de Mensalidades</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold uppercase mt-1 text-brandDark">Planos Genesis Academy</h2>
+        <p class="mt-2 text-sm text-slate-600">Escolha a periodicidade que melhor se adapta aos seus objetivos.</p>
       </div>
 
       <!-- Abas de Periodicidade -->
       <div class="mt-8 flex justify-center">
-        <div id="tabs" role="group" class="inline-flex rounded-full border border-line bg-cardBg p-1.5 shadow-inner">
+        <div id="tabs" role="group" class="inline-flex rounded-full border border-slate-200 bg-slate-100 p-1.5 shadow-inner">
           <button data-per="anual" class="rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all">Anual</button>
           <button data-per="semestral" class="rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all">Semestral</button>
           <button data-per="livre" class="rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all">Sem Fidelidade</button>
         </div>
       </div>
 
-      <!-- Cards de Planos dentro do Modal -->
+      <!-- Cards no Modal -->
       <div id="cards" class="mt-8 grid gap-5 md:grid-cols-3"></div>
 
       <div class="mt-8 text-center">
-        <button id="closeModalBtnFooter" class="rounded-full border border-line px-8 py-3 text-xs font-bold uppercase tracking-wider text-bone/70 hover:border-gold hover:text-gold transition-colors">
+        <button id="closeModalBtnFooter" class="rounded-full border border-slate-300 px-8 py-3 text-xs font-bold uppercase tracking-wider text-slate-600 hover:bg-slate-100 transition-colors">
           Fechar Janela
         </button>
       </div>
@@ -200,44 +200,47 @@
   </div>
 
   <!-- Modalidades -->
-  <section id="modalidades" class="py-16 md:py-24 bg-ink">
+  <section id="modalidades" class="py-16 md:py-24 bg-white border-b border-line">
     <div class="mx-auto max-w-6xl px-5">
       <div class="text-center max-w-2xl mx-auto">
-        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase">Nossas <span class="text-belt">Modalidades</span></h2>
-        <p class="mt-3 text-bone/70 text-sm">Treinos estruturados para todas as idades e objetivos.</p>
+        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span class="text-brandBlue">Modalidades</span></h2>
+        <p class="mt-3 text-slate-600 text-sm">Treinos adaptados para todas as idades com metodologia reconhecida.</p>
       </div>
       <div class="mt-12 grid gap-8 md:grid-cols-3">
-        <div class="rounded-3xl border border-line bg-panel p-6 shadow-xl">
-          <h3 class="font-display text-3xl font-extrabold text-belt">Jiu-Jitsu Kids</h3>
-          <p class="mt-3 text-sm text-bone/75 leading-relaxed">A partir de 3 anos. Disciplina, foco e coordenação motora de forma lúdica e segura.</p>
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
+          <span class="text-xs font-bold uppercase tracking-widest text-red-600">A partir de 3 anos</span>
+          <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Jiu-Jitsu Kids</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Foco, disciplina, autoconfiança e desenvolvimento motor completo em um ambiente divertido e seguro.</p>
         </div>
-        <div class="rounded-3xl border border-line bg-panel p-6 shadow-xl">
-          <h3 class="font-display text-3xl font-extrabold text-gold">Jiu-Jitsu Adulto</h3>
-          <p class="mt-3 text-sm text-bone/75 leading-relaxed">Defesa pessoal, técnica refinada, condicionamento físico e alívio do estresse.</p>
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
+          <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Juvenil & Adulto</span>
+          <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Jiu-Jitsu Adulto</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Técnicas de defesa pessoal, condicionamento físico elevado, alívio do estresse e espírito de equipe.</p>
         </div>
-        <div class="rounded-3xl border border-line bg-panel p-6 shadow-xl">
-          <h3 class="font-display text-3xl font-extrabold text-bone">Personal em Grupo</h3>
-          <p class="mt-3 text-sm text-bone/75 leading-relaxed">Turmas de até 8 pessoas com horário fixo e avaliação física/bioimpedância inclusas.</p>
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
+          <span class="text-xs font-bold uppercase tracking-widest text-brandGray">Turmas Reduzidas</span>
+          <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Personal em Grupo</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Até 8 pessoas por horário com atenção individualizada, avaliação física e bioimpedância inclusas.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Regras -->
-  <section id="regras" class="border-y border-line bg-panel py-16 md:py-24">
+  <section id="regras" class="bg-slate-100/60 py-16 md:py-24 border-b border-line">
     <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-12 lg:items-start">
       <div class="lg:col-span-5">
-        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase">Regras dos <span class="text-gold">Planos</span></h2>
-        <p class="mt-4 text-bone/75 text-sm leading-relaxed">Tudo claro, sem letras miúdas. Conheça as condições contratuais.</p>
+        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Regras dos <span class="text-brandBlue">Planos</span></h2>
+        <p class="mt-4 text-slate-600 text-sm leading-relaxed">Garantimos total transparência. Tire suas dúvidas sobre fidelidade e cancelamentos.</p>
       </div>
       <div class="lg:col-span-7 space-y-4">
-        <details open class="rounded-2xl border border-line bg-ink p-6">
-          <summary class="flex items-center justify-between font-bold text-lg">Como funciona o pagamento? <svg class="plus-icon h-5 w-5 text-gold transition-transform"><use href="#i-plus"/></svg></summary>
-          <p class="mt-3 text-sm text-bone/75">Pagamento mensal recorrente em todos os planos.</p>
+        <details open class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Como é feito o pagamento? <svg class="plus-icon h-5 w-5 text-brandBlue transition-transform"><use href="#i-plus"/></svg></summary>
+          <p class="mt-3 text-sm text-slate-600">O pagamento é realizado mensalmente em todos os planos.</p>
         </details>
-        <details class="rounded-2xl border border-line bg-ink p-6">
-          <summary class="flex items-center justify-between font-bold text-lg">Qual a fidelidade? <svg class="plus-icon h-5 w-5 text-gold transition-transform"><use href="#i-plus"/></svg></summary>
-          <p class="mt-3 text-sm text-bone/75">Plano Anual: 12 meses. Semestral: 6 meses. Sem fidelidade: livre de contrato.</p>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Quais são as opções de fidelidade? <svg class="plus-icon h-5 w-5 text-brandBlue transition-transform"><use href="#i-plus"/></svg></summary>
+          <p class="mt-3 text-sm text-slate-600">Plano Anual: 12 meses. Plano Semestral: 6 meses. Plano Sem Fidelidade: total liberdade.</p>
         </details>
       </div>
     </div>
@@ -246,71 +249,73 @@
   <!-- Localização -->
   <section id="local" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
     <div class="text-center max-w-2xl mx-auto">
-      <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase">Duas Unidades</h2>
-      <p class="mt-3 text-bone/75 text-sm">Av. Gonçalves Dias, nº 600 e 608, Marengo, Itaquaquecetuba.</p>
+      <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span class="text-brandBlue">Unidades</span></h2>
+      <p class="mt-3 text-slate-600 text-sm">Avenida Gonçalves Dias, Marengo — Itaquaquecetuba / SP.</p>
     </div>
     <div class="mt-12 grid gap-8 lg:grid-cols-2">
-      <div class="rounded-3xl border border-line bg-panel p-6">
-        <h3 class="font-display text-3xl font-extrabold text-gold">Unidade Jiu-Jitsu (nº 608)</h3>
-        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+608,+Itaquaquecetuba" class="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-xs font-bold text-gold uppercase tracking-wider hover:bg-gold hover:text-ink transition-colors">
-          <svg class="h-4 w-4"><use href="#i-pin"/></svg> Como chegar
+      <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="font-display text-3xl font-extrabold text-brandBlue">Unidade Jiu-Jitsu (nº 608)</h3>
+        <p class="mt-2 text-sm text-slate-600">Especializada no ensino do Jiu-Jitsu para todas as idades.</p>
+        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+608,+Itaquaquecetuba" class="mt-5 inline-flex items-center gap-2 rounded-full border border-brandBlue px-5 py-2.5 text-xs font-bold text-brandBlue uppercase tracking-wider hover:bg-brandBlue hover:text-white transition-colors">
+          <svg class="h-4 w-4"><use href="#i-pin"/></svg> Ver no Google Maps
         </a>
       </div>
-      <div class="rounded-3xl border border-line bg-panel p-6">
-        <h3 class="font-display text-3xl font-extrabold text-belt">Unidade Personal (nº 600)</h3>
-        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+600,+Itaquaquecetuba" class="mt-4 inline-flex items-center gap-2 rounded-full border border-belt/50 px-5 py-2.5 text-xs font-bold text-belt uppercase tracking-wider hover:bg-belt hover:text-white transition-colors">
-          <svg class="h-4 w-4"><use href="#i-pin"/></svg> Como chegar
+      <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="font-display text-3xl font-extrabold text-brandDark">Unidade Personal (nº 600)</h3>
+        <p class="mt-2 text-sm text-slate-600">Estrutura voltada para treinamento funcional e musculação em grupo.</p>
+        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+600,+Itaquaquecetuba" class="mt-5 inline-flex items-center gap-2 rounded-full border border-slate-800 px-5 py-2.5 text-xs font-bold text-slate-800 uppercase tracking-wider hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="h-4 w-4"><use href="#i-pin"/></svg> Ver no Google Maps
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Cadastro Lindo e Charmoso -->
-  <section id="contato" class="border-t border-line bg-panel py-16 md:py-24">
+  <!-- Cadastro Charmoso -->
+  <section id="contato" class="border-t border-line bg-gradient-to-b from-blue-50/50 to-white py-16 md:py-24">
     <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-6">
-        <span class="text-xs font-bold uppercase tracking-widest text-gold">Agende sua visita</span>
-        <h2 class="mt-2 font-display text-4xl sm:text-6xl font-extrabold uppercase leading-tight">
-          Vamos iniciar seu treino hoje?
+        <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Agende Seu Treino</span>
+        <h2 class="mt-2 font-display text-4xl sm:text-6xl font-extrabold uppercase leading-tight text-brandDark">
+          Venha para a <span class="text-brandBlue">Genesis Academy</span>
         </h2>
-        <p class="mt-4 text-bone/75 text-sm leading-relaxed">
-          Preencha o formulário e fale diretamente com nossa equipe no WhatsApp de forma rápida e prática.
+        <p class="mt-4 text-slate-600 text-sm leading-relaxed">
+          Preencha abaixo para receber informações sobre os horários e garantir sua aula experimental gratuita.
         </p>
       </div>
 
       <div class="lg:col-span-6">
-        <form id="form" class="space-y-4 rounded-3xl border border-gold/40 bg-cardBg p-6 sm:p-8 shadow-[0_0_30px_rgba(217,164,65,0.1)]">
+        <form id="form" class="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-bone/80 mb-2">Seu Nome</label>
-            <input id="f-nome" type="text" required placeholder="Como podemos te chamar?" class="w-full rounded-xl border border-line bg-panel px-4 py-3.5 text-sm text-bone placeholder:text-bone/30 focus:border-gold focus:outline-none transition-colors">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Seu Nome</label>
+            <input id="f-nome" type="text" required placeholder="Como podemos te chamar?" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
           </div>
 
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-bone/80 mb-2">Modalidade de Interesse</label>
-            <select id="f-mod" class="w-full rounded-xl border border-line bg-panel px-4 py-3.5 text-sm text-bone focus:border-gold focus:outline-none transition-colors">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Modalidade de Interesse</label>
+            <select id="f-mod" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
               <option>Jiu-Jitsu Kids</option>
               <option>Jiu-Jitsu Juvenil e Adultos</option>
               <option>Personal em Grupo</option>
-              <option>Ainda não sei</option>
+              <option>Quero orientações</option>
             </select>
           </div>
 
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-bone/80 mb-2">Idade</label>
-              <input id="f-idade" type="text" placeholder="Ex.: 25 anos" class="w-full rounded-xl border border-line bg-panel px-4 py-3.5 text-sm text-bone placeholder:text-bone/30 focus:border-gold focus:outline-none transition-colors">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Idade</label>
+              <input id="f-idade" type="text" placeholder="Ex.: 25 anos" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-bone/80 mb-2">Horário Preferido</label>
-              <select id="f-hor" class="w-full rounded-xl border border-line bg-panel px-4 py-3.5 text-sm text-bone focus:border-gold focus:outline-none transition-colors">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Horário Preferido</label>
+              <select id="f-hor" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
                 <option>Manhã</option><option>Tarde</option><option>Noite</option><option>Flexível</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" class="btn-neon mt-2 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-6 py-4 font-bold text-ink uppercase tracking-wider text-sm">
+          <button type="submit" class="btn-brand mt-2 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-brandBlue px-6 py-4 font-bold text-white uppercase tracking-wider text-sm hover:bg-brandBlueDark">
             <svg class="h-5 w-5 fill-current text-brandGreen"><use href="#i-wa"/></svg>
-            Enviar pelo WhatsApp
+            Enviar via WhatsApp
           </button>
         </form>
       </div>
@@ -318,15 +323,20 @@
   </section>
 
   <!-- Rodapé -->
-  <footer class="border-t border-line/60 bg-ink px-5 py-10 text-center text-xs text-bone/50">
-    <p class="font-display text-2xl font-black text-bone">CT GNS <span class="text-belt">BJJ</span> 🥋💪</p>
-    <p class="mt-1">Av. Gonçalves Dias, 600 e 608, Marengo, Itaquaquecetuba / SP</p>
+  <footer class="border-t border-line bg-white px-5 py-10 text-center text-xs text-slate-500">
+    <div class="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Logo" class="h-8 w-8 object-contain">
+        <span class="font-display text-xl font-black text-brandDark">GENESIS ACADEMY BRAZIL</span>
+      </div>
+      <p>Av. Gonçalves Dias, 600 e 608 — Marengo, Itaquaquecetuba / SP</p>
+    </div>
   </footer>
 
-  <!-- Botão Flutuante -->
-  <div class="pointer-events-none fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-ink via-ink/90 to-transparent p-4 md:inset-x-auto md:bottom-6 md:right-6 md:bg-none md:p-0">
-    <a data-wa="Olá! Quero saber mais sobre o CT GNS BJJ." target="_blank" rel="noopener"
-       class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brandGreen px-6 py-4 font-bold text-ink shadow-2xl transition-all hover:scale-105 md:inline-flex md:w-auto">
+  <!-- Botão Flutuante de WhatsApp -->
+  <div class="pointer-events-none fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-white via-white/90 to-transparent p-4 md:inset-x-auto md:bottom-6 md:right-6 md:bg-none md:p-0">
+    <a data-wa="Olá! Gostaria de mais informações sobre a Genesis Academy Brazil." target="_blank" rel="noopener"
+       class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brandGreen px-6 py-4 font-bold text-white shadow-xl transition-all hover:scale-105 md:inline-flex md:w-auto">
       <svg class="h-6 w-6 fill-current"><use href="#i-wa"/></svg>
       <span>WhatsApp</span>
     </a>
@@ -339,9 +349,9 @@
     const formatBRL = val => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     const PLANOS_DATA = [
-      { nome: 'Jiu-Jitsu Kids', sub: 'A partir de 3 anos', cor: 'belt', preco: { anual: 139.99, semestral: 159.99, livre: 189.99 }, itens: ['Foco e disciplina', 'Aulas dinâmicas'] },
-      { nome: 'Jiu-Jitsu Adulto', sub: 'Juvenil e Adultos', cor: 'gold', preco: { anual: 149.99, semestral: 169.99, livre: 199.99 }, itens: ['Técnica e defesa pessoal', 'Condicionamento físico'] },
-      { nome: 'Personal Group', sub: 'Até 8 pessoas', cor: 'bone', preco: { anual: 154.99, semestral: 169.99, livre: 229.99 }, itens: ['Horário fixo', 'Bioimpedância inclusa'] }
+      { nome: 'Jiu-Jitsu Kids', sub: 'A partir de 3 anos', preco: { anual: 139.99, semestral: 159.99, livre: 189.99 }, itens: ['Foco e disciplina', 'Aulas dinâmicas e seguras'] },
+      { nome: 'Jiu-Jitsu Adulto', sub: 'Juvenil e Adultos', preco: { anual: 149.99, semestral: 169.99, livre: 199.99 }, itens: ['Técnica avançada e defesa pessoal', 'Condicionamento físico'] },
+      { nome: 'Personal Group', sub: 'Até 8 pessoas', preco: { anual: 154.99, semestral: 169.99, livre: 229.99 }, itens: ['Horário fixo semanal', 'Bioimpedância inclusa'] }
     ];
 
     const PERIODOS_CONFIG = {
@@ -358,22 +368,22 @@
         const v = p.preco[activePeriod];
         const eco = p.preco.livre - v;
         return `
-          <div class="rounded-2xl border border-line bg-cardBg p-6 flex flex-col justify-between shadow-lg">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 flex flex-col justify-between shadow-sm">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-gold">${p.sub}</span>
-              <h3 class="font-display text-2xl font-extrabold uppercase mt-1">${p.nome}</h3>
+              <span class="text-xs font-bold uppercase tracking-wider text-brandBlue">${p.sub}</span>
+              <h3 class="font-display text-2xl font-extrabold uppercase text-brandDark mt-1">${p.nome}</h3>
               <div class="mt-4 flex items-baseline gap-1">
-                <span class="font-display text-4xl font-black">${formatBRL(v)}</span>
-                <span class="text-xs text-bone/60">/mês</span>
+                <span class="font-display text-4xl font-black text-brandDark">${formatBRL(v)}</span>
+                <span class="text-xs text-slate-500">/mês</span>
               </div>
-              <p class="mt-1 text-xs text-bone/70">${PERIODOS_CONFIG[activePeriod].nota}</p>
-              <p class="mt-1 text-xs font-bold text-gold h-4">${eco > 0 ? 'Economia de ' + formatBRL(eco) + '/mês' : ''}</p>
+              <p class="mt-1 text-xs text-slate-500">${PERIODOS_CONFIG[activePeriod].nota}</p>
+              <p class="mt-1 text-xs font-bold text-brandBlue h-4">${eco > 0 ? 'Economia de ' + formatBRL(eco) + '/mês' : ''}</p>
             </div>
-            <ul class="my-6 space-y-2 text-xs text-bone/80">
-              ${p.itens.map(i => `<li class="flex items-center gap-2"><svg class="h-4 w-4 text-gold shrink-0"><use href="#i-check"/></svg> ${i}</li>`).join('')}
+            <ul class="my-6 space-y-2 text-xs text-slate-700">
+              ${p.itens.map(i => `<li class="flex items-center gap-2"><svg class="h-4 w-4 text-brandBlue shrink-0"><use href="#i-check"/></svg> ${i}</li>`).join('')}
             </ul>
-            <a target="_blank" rel="noopener" href="${waUrl(`Olá! Tenho interesse no plano ${p.nome} (${PERIODOS_CONFIG[activePeriod].rotulo}) por${formatBRL(v)}/mês.`)}"
-               class="rounded-xl bg-bone px-4 py-3 text-center font-bold text-ink uppercase tracking-wider text-xs hover:bg-gold transition-colors">
+            <a target="_blank" rel="noopener" href="${waUrl(`Olá! Tenho interesse no plano ${p.nome} (${PERIODOS_CONFIG[activePeriod].rotulo}) por${formatBRL(v)}/mês na Genesis Academy.`)}"
+               class="rounded-xl bg-brandBlue px-4 py-3 text-center font-bold text-white uppercase tracking-wider text-xs hover:bg-brandBlueDark transition-colors">
               Garantir Plano
             </a>
           </div>
@@ -384,7 +394,7 @@
     function renderTabs() {
       document.querySelectorAll('#tabs button').forEach(btn => {
         const on = btn.dataset.per === activePeriod;
-        btn.className = `rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${on ? 'bg-gold text-ink shadow' : 'text-bone/70 hover:text-bone'}`;
+        btn.className = `rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${on ? 'bg-brandBlue text-white shadow' : 'text-slate-600 hover:text-slate-900'}`;
       });
     }
 
@@ -423,14 +433,14 @@
     // WhatsApp links
     document.querySelectorAll('[data-wa]').forEach(el => el.href = waUrl(el.dataset.wa));
 
-    // Form
+    // Formulario
     document.getElementById('form').addEventListener('submit', e => {
       e.preventDefault();
       const nome = document.getElementById('f-nome').value.trim();
       const mod = document.getElementById('f-mod').value;
       const idade = document.getElementById('f-idade').value.trim() || 'Não informada';
       const hor = document.getElementById('f-hor').value;
-      const msg = `Olá! Meu nome é ${nome}. Quero saber sobre ${mod}. Idade: ${idade}. Horário: ${hor}.`;
+      const msg = `Olá! Meu nome é ${nome}. Tenho interesse na Genesis Academy Brazil:\n- Modalidade: ${mod}\n- Idade: ${idade}\n- Horário: ${hor}`;
       window.open(waUrl(msg), '_blank', 'noopener');
     });
   </script>
