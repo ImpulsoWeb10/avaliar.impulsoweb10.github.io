@@ -17,15 +17,11 @@
       theme: {
         extend: {
           colors: {
-            brandBlue: '#0052b4',      /* Azul Royal do Logo */
-            brandBlueDark: '#003a80',
-            brandSky: '#38b6ff',       /* Azul Claro do Logo */
-            brandGray: '#6e7a85',      /* Cinza do Anel do Logo */
-            brandDark: '#1a202c',
-            brandBg: '#f8fafc',        /* Fundo Claro e Limpo */
-            cardBg: '#ffffff',
-            line: '#e2e8f0',
-            brandGreen: '#25d366'
+            brandBlue: 'var(--c-primary)',
+            brandBlueDark: 'var(--c-primary-dark)',
+            brandSky: 'var(--c-accent)',
+            brandBg: 'var(--c-bg)',
+            brandDark: 'var(--c-dark)',
           },
           fontFamily: {
             display: ['"Big Shoulders Display"', 'Impact', 'sans-serif'],
@@ -37,21 +33,26 @@
   </script>
   
   <style>
-    body { background-color: #f8fafc; color: #1a202c; font-family: 'Figtree', sans-serif; }
-    :focus-visible { outline: 2px solid #0052b4; outline-offset: 3px; }
+    /* Variáveis dinâmicas de Cores Globais */
+    :root {
+      --c-primary: #0052b4;
+      --c-primary-dark: #003a80;
+      --c-accent: #38b6ff;
+      --c-bg: #f8fafc;
+      --c-dark: #1a202c;
+    }
+
+    body { background-color: var(--c-bg); color: var(--c-dark); font-family: 'Figtree', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+    :focus-visible { outline: 2px solid var(--c-primary); outline-offset: 3px; }
     
-    /* Moldura Suave ao Redor da Tela */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      border: 2px solid rgba(0, 82, 180, 0.2);
+      border: 2px solid var(--c-primary);
+      opacity: 0.2;
       pointer-events: none;
       z-index: 999;
-      box-shadow: inset 0 0 15px rgba(0, 82, 180, 0.05);
-    }
-    @media (max-width: 768px) {
-      body::before { border-width: 1px; }
     }
 
     .tatami-pattern {
@@ -60,7 +61,6 @@
       background-size: 40px 40px;
     }
 
-    /* Faixa de Jiu-Jitsu */
     .belt-stripe {
       position: relative;
       height: 44px;
@@ -78,13 +78,13 @@
     }
     .belt-stripe .bar i { display: block; width: 7px; height: 26px; background: #ffffff; }
 
-    /* Botão Iluminado */
     .btn-brand {
+      background-color: var(--c-primary);
       transition: all 0.3s ease;
-      box-shadow: 0 4px 14px rgba(0, 82, 180, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     }
     .btn-brand:hover {
-      box-shadow: 0 6px 20px rgba(0, 82, 180, 0.4);
+      background-color: var(--c-primary-dark);
       transform: translateY(-2px);
     }
 
@@ -104,12 +104,13 @@
     <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
   </svg>
 
-  <!-- Navbar Clara -->
-  <header class="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur shadow-sm">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur shadow-sm">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-      <a href="#topo" class="flex items-center gap-3">
-        <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Academy Brazil Logo" class="h-10 w-10 object-contain">
-        <span class="font-display text-2xl font-black tracking-wider text-brandDark">GENESIS <span class="text-brandBlue">ACADEMY</span></span>
+      <!-- LOGO COM DETETOR DE 5 CLIQUES -->
+      <a href="#topo" id="logoClick" class="flex items-center gap-3 cursor-pointer select-none" title="Clique 5 vezes rapidamente para abrir o seletor de temas!">
+        <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Academy Brazil Logo" class="h-10 w-10 object-contain pointer-events-none">
+        <span class="font-display text-2xl font-black tracking-wider text-brandDark">GENESIS <span style="color:var(--c-primary)">ACADEMY</span></span>
       </a>
       <nav class="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
         <a class="hover:text-brandBlue transition-colors" href="#modalidades">Modalidades</a>
@@ -117,7 +118,7 @@
         <a class="hover:text-brandBlue transition-colors" href="#regras">Regras</a>
         <a class="hover:text-brandBlue transition-colors" href="#local">Localização</a>
       </nav>
-      <a data-wa="Olá! Vim pelo site da Genesis Academy Brazil e quero saber mais." target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brandBlue px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brandBlueDark">
+      <a data-wa="Olá! Vim pelo site da Genesis Academy Brazil e quero saber mais." target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full btn-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md">
         <svg class="h-4 w-4"><use href="#i-wa"/></svg>
         <span class="hidden sm:inline">Aula Experimental</span>
       </a>
@@ -129,21 +130,21 @@
     <div class="mx-auto max-w-6xl px-5">
       <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 rounded-full border border-brandBlue/30 bg-blue-100/60 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brandBlue mb-6 shadow-sm">
-            Escola de Jiu-Jitsu & Treinamento Físico
+          <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-700 mb-6 shadow-sm">
+            💡 Dica: Clique 5 vezes na logo acima para mudar as cores da página!
           </div>
           <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.95] text-brandDark">
-            Genesis Academy <br><span class="text-brandBlue">Brazil</span>
+            Genesis Academy <br><span style="color:var(--c-primary)">Brazil</span>
           </h1>
           <p class="mt-6 text-base sm:text-xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
             Formando campeões na vida e no tatame. A melhor estrutura de Jiu-Jitsu e Personal em Grupo em Itaquaquecetuba.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button id="openModalBtnHero" class="btn-brand rounded-full bg-brandBlue px-8 py-4 font-bold text-white uppercase tracking-wider text-sm">
+            <button id="openModalBtnHero" class="rounded-full btn-brand px-8 py-4 font-bold text-white uppercase tracking-wider text-sm">
               Ver Planos e Preços
             </button>
-            <a data-wa="Olá! Quero conhecer a Genesis Academy Brazil." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 shadow-sm transition-all hover:border-brandBlue hover:text-brandBlue">
-              <svg class="h-5 w-5 fill-current text-brandGreen"><use href="#i-wa"/></svg>
+            <a data-wa="Olá! Quero conhecer a Genesis Academy Brazil." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 shadow-sm transition-all hover:border-brandBlue">
+              <svg class="h-5 w-5 fill-current text-emerald-500"><use href="#i-wa"/></svg>
               Falar no WhatsApp
             </a>
           </div>
@@ -165,16 +166,71 @@
     <div class="belt-stripe -rotate-1"><div class="bar"><i></i><i></i><i></i><i></i></div></div>
   </div>
 
+  <!-- MODAL SECRETO DE MUDANÇA DE COR -->
+  <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="themeModalContent" class="relative w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl transform scale-95 transition-transform duration-300">
+      <button id="closeThemeModal" class="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200">
+        <svg class="h-4 w-4"><use href="#i-x"/></svg>
+      </button>
+
+      <div class="text-center">
+        <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Painel de Customização</span>
+        <h3 class="font-display text-3xl font-extrabold uppercase mt-1 text-brandDark">Escolha o Tema</h3>
+        <p class="text-xs text-slate-500 mt-1">Selecione uma combinação elegante para atualizar toda a página instantaneamente.</p>
+      </div>
+
+      <div class="mt-6 space-y-3">
+        <button onclick="setTheme('blue')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-blue-600 bg-slate-50 transition-all group">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-[#0052b4] shadow"></span>
+            <span class="font-bold text-sm text-slate-700 group-hover:text-blue-600">Azul Royal Clássico (Original)</span>
+          </div>
+          <span class="text-xs text-slate-400">Ativo</span>
+        </button>
+
+        <button onclick="setTheme('gold')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-600 bg-slate-50 transition-all group">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-[#d9a441] shadow"></span>
+            <span class="font-bold text-sm text-slate-700 group-hover:text-amber-600">Dourado & Preto Premium</span>
+          </div>
+          <span class="text-xs text-slate-400">Luxo</span>
+        </button>
+
+        <button onclick="setTheme('emerald')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-emerald-600 bg-slate-50 transition-all group">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-[#059669] shadow"></span>
+            <span class="font-bold text-sm text-slate-700 group-hover:text-emerald-600">Verde Esmeralda Fitness</span>
+          </div>
+          <span class="text-xs text-slate-400">Moderno</span>
+        </button>
+
+        <button onclick="setTheme('dark')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-slate-700 bg-slate-900 text-white transition-all group">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-[#3b82f6] shadow"></span>
+            <span class="font-bold text-sm text-white">Dark Mode Total</span>
+          </div>
+          <span class="text-xs text-slate-400">Escuro</span>
+        </button>
+      </div>
+
+      <div class="mt-6 text-center">
+        <button onclick="closeThemeSelector()" class="w-full rounded-xl bg-slate-200 py-3 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-300">
+          Fechar Painel
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Flutuante de Planos -->
   <div id="plansModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div id="modalContent" class="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-2xl transform scale-95 transition-transform duration-300">
       
-      <button id="closeModalBtn" class="absolute top-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+      <button id="closeModalBtn" class="absolute top-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-600 hover:bg-slate-200">
         <svg class="h-5 w-5"><use href="#i-x"/></svg>
       </button>
 
       <div class="text-center max-w-xl mx-auto">
-        <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Tabela de Mensalidades</span>
+        <span class="text-xs font-bold uppercase tracking-widest" style="color:var(--c-primary)">Tabela de Mensalidades</span>
         <h2 class="font-display text-4xl sm:text-5xl font-extrabold uppercase mt-1 text-brandDark">Planos Genesis Academy</h2>
         <p class="mt-2 text-sm text-slate-600">Escolha a periodicidade que melhor se adapta aos seus objetivos.</p>
       </div>
@@ -192,7 +248,7 @@
       <div id="cards" class="mt-8 grid gap-5 md:grid-cols-3"></div>
 
       <div class="mt-8 text-center">
-        <button id="closeModalBtnFooter" class="rounded-full border border-slate-300 px-8 py-3 text-xs font-bold uppercase tracking-wider text-slate-600 hover:bg-slate-100 transition-colors">
+        <button id="closeModalBtnFooter" class="rounded-full border border-slate-300 px-8 py-3 text-xs font-bold uppercase tracking-wider text-slate-600 hover:bg-slate-100">
           Fechar Janela
         </button>
       </div>
@@ -200,25 +256,25 @@
   </div>
 
   <!-- Modalidades -->
-  <section id="modalidades" class="py-16 md:py-24 bg-white border-b border-line">
+  <section id="modalidades" class="py-16 md:py-24 bg-white border-b border-slate-200">
     <div class="mx-auto max-w-6xl px-5">
       <div class="text-center max-w-2xl mx-auto">
-        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span class="text-brandBlue">Modalidades</span></h2>
+        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span style="color:var(--c-primary)">Modalidades</span></h2>
         <p class="mt-3 text-slate-600 text-sm">Treinos adaptados para todas as idades com metodologia reconhecida.</p>
       </div>
       <div class="mt-12 grid gap-8 md:grid-cols-3">
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
           <span class="text-xs font-bold uppercase tracking-widest text-red-600">A partir de 3 anos</span>
           <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Jiu-Jitsu Kids</h3>
           <p class="mt-3 text-sm text-slate-600 leading-relaxed">Foco, disciplina, autoconfiança e desenvolvimento motor completo em um ambiente divertido e seguro.</p>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Juvenil & Adulto</span>
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-widest" style="color:var(--c-primary)">Juvenil & Adulto</span>
           <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Jiu-Jitsu Adulto</h3>
           <p class="mt-3 text-sm text-slate-600 leading-relaxed">Técnicas de defesa pessoal, condicionamento físico elevado, alívio do estresse e espírito de equipe.</p>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <span class="text-xs font-bold uppercase tracking-widest text-brandGray">Turmas Reduzidas</span>
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Turmas Reduzidas</span>
           <h3 class="font-display text-3xl font-extrabold text-brandDark mt-1">Personal em Grupo</h3>
           <p class="mt-3 text-sm text-slate-600 leading-relaxed">Até 8 pessoas por horário com atenção individualizada, avaliação física e bioimpedância inclusas.</p>
         </div>
@@ -227,19 +283,19 @@
   </section>
 
   <!-- Regras -->
-  <section id="regras" class="bg-slate-100/60 py-16 md:py-24 border-b border-line">
+  <section id="regras" class="bg-slate-100/60 py-16 md:py-24 border-b border-slate-200">
     <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-12 lg:items-start">
       <div class="lg:col-span-5">
-        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Regras dos <span class="text-brandBlue">Planos</span></h2>
+        <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Regras dos <span style="color:var(--c-primary)">Planos</span></h2>
         <p class="mt-4 text-slate-600 text-sm leading-relaxed">Garantimos total transparência. Tire suas dúvidas sobre fidelidade e cancelamentos.</p>
       </div>
       <div class="lg:col-span-7 space-y-4">
         <details open class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Como é feito o pagamento? <svg class="plus-icon h-5 w-5 text-brandBlue transition-transform"><use href="#i-plus"/></svg></summary>
+          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Como é feito o pagamento? <svg class="plus-icon h-5 w-5 transition-transform" style="color:var(--c-primary)"><use href="#i-plus"/></svg></summary>
           <p class="mt-3 text-sm text-slate-600">O pagamento é realizado mensalmente em todos os planos.</p>
         </details>
         <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Quais são as opções de fidelidade? <svg class="plus-icon h-5 w-5 text-brandBlue transition-transform"><use href="#i-plus"/></svg></summary>
+          <summary class="flex items-center justify-between font-bold text-lg text-brandDark">Quais são as opções de fidelidade? <svg class="plus-icon h-5 w-5 transition-transform" style="color:var(--c-primary)"><use href="#i-plus"/></svg></summary>
           <p class="mt-3 text-sm text-slate-600">Plano Anual: 12 meses. Plano Semestral: 6 meses. Plano Sem Fidelidade: total liberdade.</p>
         </details>
       </div>
@@ -249,14 +305,14 @@
   <!-- Localização -->
   <section id="local" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
     <div class="text-center max-w-2xl mx-auto">
-      <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span class="text-brandBlue">Unidades</span></h2>
+      <h2 class="font-display text-4xl sm:text-6xl font-extrabold uppercase text-brandDark">Nossas <span style="color:var(--c-primary)">Unidades</span></h2>
       <p class="mt-3 text-slate-600 text-sm">Avenida Gonçalves Dias, Marengo — Itaquaquecetuba / SP.</p>
     </div>
     <div class="mt-12 grid gap-8 lg:grid-cols-2">
       <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="font-display text-3xl font-extrabold text-brandBlue">Unidade Jiu-Jitsu (nº 608)</h3>
+        <h3 class="font-display text-3xl font-extrabold" style="color:var(--c-primary)">Unidade Jiu-Jitsu (nº 608)</h3>
         <p class="mt-2 text-sm text-slate-600">Especializada no ensino do Jiu-Jitsu para todas as idades.</p>
-        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+608,+Itaquaquecetuba" class="mt-5 inline-flex items-center gap-2 rounded-full border border-brandBlue px-5 py-2.5 text-xs font-bold text-brandBlue uppercase tracking-wider hover:bg-brandBlue hover:text-white transition-colors">
+        <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Av.+Gon%C3%A7alves+Dias,+608,+Itaquaquecetuba" class="mt-5 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors" style="border-color:var(--c-primary); color:var(--c-primary)">
           <svg class="h-4 w-4"><use href="#i-pin"/></svg> Ver no Google Maps
         </a>
       </div>
@@ -271,12 +327,12 @@
   </section>
 
   <!-- Cadastro Charmoso -->
-  <section id="contato" class="border-t border-line bg-gradient-to-b from-blue-50/50 to-white py-16 md:py-24">
+  <section id="contato" class="border-t border-slate-200 bg-gradient-to-b from-blue-50/50 to-white py-16 md:py-24">
     <div class="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-6">
-        <span class="text-xs font-bold uppercase tracking-widest text-brandBlue">Agende Seu Treino</span>
+        <span class="text-xs font-bold uppercase tracking-widest" style="color:var(--c-primary)">Agende Seu Treino</span>
         <h2 class="mt-2 font-display text-4xl sm:text-6xl font-extrabold uppercase leading-tight text-brandDark">
-          Venha para a <span class="text-brandBlue">Genesis Academy</span>
+          Venha para a <span style="color:var(--c-primary)">Genesis Academy</span>
         </h2>
         <p class="mt-4 text-slate-600 text-sm leading-relaxed">
           Preencha abaixo para receber informações sobre os horários e garantir sua aula experimental gratuita.
@@ -287,12 +343,12 @@
         <form id="form" class="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl">
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Seu Nome</label>
-            <input id="f-nome" type="text" required placeholder="Como podemos te chamar?" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
+            <input id="f-nome" type="text" required placeholder="Como podemos te chamar?" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none transition-colors">
           </div>
 
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Modalidade de Interesse</label>
-            <select id="f-mod" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
+            <select id="f-mod" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:bg-white focus:outline-none transition-colors">
               <option>Jiu-Jitsu Kids</option>
               <option>Jiu-Jitsu Juvenil e Adultos</option>
               <option>Personal em Grupo</option>
@@ -303,18 +359,18 @@
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Idade</label>
-              <input id="f-idade" type="text" placeholder="Ex.: 25 anos" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
+              <input id="f-idade" type="text" placeholder="Ex.: 25 anos" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none transition-colors">
             </div>
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Horário Preferido</label>
-              <select id="f-hor" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:border-brandBlue focus:bg-white focus:outline-none transition-colors">
+              <select id="f-hor" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 focus:bg-white focus:outline-none transition-colors">
                 <option>Manhã</option><option>Tarde</option><option>Noite</option><option>Flexível</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" class="btn-brand mt-2 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-brandBlue px-6 py-4 font-bold text-white uppercase tracking-wider text-sm hover:bg-brandBlueDark">
-            <svg class="h-5 w-5 fill-current text-brandGreen"><use href="#i-wa"/></svg>
+          <button type="submit" class="btn-brand mt-2 w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 font-bold text-white uppercase tracking-wider text-sm">
+            <svg class="h-5 w-5 fill-current text-emerald-400"><use href="#i-wa"/></svg>
             Enviar via WhatsApp
           </button>
         </form>
@@ -323,7 +379,7 @@
   </section>
 
   <!-- Rodapé -->
-  <footer class="border-t border-line bg-white px-5 py-10 text-center text-xs text-slate-500">
+  <footer class="border-t border-slate-200 bg-white px-5 py-10 text-center text-xs text-slate-500">
     <div class="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
         <img src="logo-ct-genesis-academy-escola-de-jiu-jitsu.png" alt="Genesis Logo" class="h-8 w-8 object-contain">
@@ -336,7 +392,7 @@
   <!-- Botão Flutuante de WhatsApp -->
   <div class="pointer-events-none fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-white via-white/90 to-transparent p-4 md:inset-x-auto md:bottom-6 md:right-6 md:bg-none md:p-0">
     <a data-wa="Olá! Gostaria de mais informações sobre a Genesis Academy Brazil." target="_blank" rel="noopener"
-       class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-brandGreen px-6 py-4 font-bold text-white shadow-xl transition-all hover:scale-105 md:inline-flex md:w-auto">
+       class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 py-4 font-bold text-white shadow-xl transition-all hover:scale-105 md:inline-flex md:w-auto">
       <svg class="h-6 w-6 fill-current"><use href="#i-wa"/></svg>
       <span>WhatsApp</span>
     </a>
@@ -348,6 +404,71 @@
     const waUrl = text => `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(text)}`;
     const formatBRL = val => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
+    // Sistema Secreto de 5 Cliques no Logo para Mudar Cores
+    let clickCount = 0;
+    let clickTimer = null;
+    const logoEl = document.getElementById('logoClick');
+    const themeModal = document.getElementById('themeModal');
+    const themeModalContent = document.getElementById('themeModalContent');
+
+    logoEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      clickCount++;
+      clearTimeout(clickTimer);
+      
+      if (clickCount >= 5) {
+        clickCount = 0;
+        openThemeSelector();
+      } else {
+        clickTimer = setTimeout(() => { clickCount = 0; }, 800);
+      }
+    });
+
+    function openThemeSelector() {
+      themeModal.classList.remove('opacity-0', 'pointer-events-none');
+      themeModalContent.classList.remove('scale-95');
+      themeModalContent.classList.add('scale-100');
+    }
+
+    function closeThemeSelector() {
+      themeModalContent.classList.remove('scale-100');
+      themeModalContent.classList.add('scale-95');
+      themeModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // Função que altera as variáveis CSS e atualiza TUDO na página de uma vez
+    function setTheme(themeName) {
+      const root = document.documentElement;
+      if (themeName === 'blue') {
+        root.style.setProperty('--c-primary', '#0052b4');
+        root.style.setProperty('--c-primary-dark', '#003a80');
+        root.style.setProperty('--c-accent', '#38b6ff');
+        root.style.setProperty('--c-bg', '#f8fafc');
+        root.style.setProperty('--c-dark', '#1a202c');
+      } else if (themeName === 'gold') {
+        root.style.setProperty('--c-primary', '#d9a441');
+        root.style.setProperty('--c-primary-dark', '#b3822a');
+        root.style.setProperty('--c-accent', '#f3ece2');
+        root.style.setProperty('--c-bg', '#0b0908');
+        root.style.setProperty('--c-dark', '#f3ece2');
+      } else if (themeName === 'emerald') {
+        root.style.setProperty('--c-primary', '#059669');
+        root.style.setProperty('--c-primary-dark', '#047857');
+        root.style.setProperty('--c-accent', '#34d399');
+        root.style.setProperty('--c-bg', '#f0fdf4');
+        root.style.setProperty('--c-dark', '#064e3b');
+      } else if (themeName === 'dark') {
+        root.style.setProperty('--c-primary', '#3b82f6');
+        root.style.setProperty('--c-primary-dark', '#2563eb');
+        root.style.setProperty('--c-accent', '#60a5fa');
+        root.style.setProperty('--c-bg', '#0f172a');
+        root.style.setProperty('--c-dark', '#f8fafc');
+      }
+      closeThemeSelector();
+      renderModalCards(); // Atualiza os cards com as novas cores
+    }
+
+    // Dados e Lógica dos Planos
     const PLANOS_DATA = [
       { nome: 'Jiu-Jitsu Kids', sub: 'A partir de 3 anos', preco: { anual: 139.99, semestral: 159.99, livre: 189.99 }, itens: ['Foco e disciplina', 'Aulas dinâmicas e seguras'] },
       { nome: 'Jiu-Jitsu Adulto', sub: 'Juvenil e Adultos', preco: { anual: 149.99, semestral: 169.99, livre: 199.99 }, itens: ['Técnica avançada e defesa pessoal', 'Condicionamento físico'] },
@@ -368,22 +489,22 @@
         const v = p.preco[activePeriod];
         const eco = p.preco.livre - v;
         return `
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 flex flex-col justify-between shadow-sm">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-sm">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-brandBlue">${p.sub}</span>
+              <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--c-primary)">${p.sub}</span>
               <h3 class="font-display text-2xl font-extrabold uppercase text-brandDark mt-1">${p.nome}</h3>
               <div class="mt-4 flex items-baseline gap-1">
                 <span class="font-display text-4xl font-black text-brandDark">${formatBRL(v)}</span>
                 <span class="text-xs text-slate-500">/mês</span>
               </div>
               <p class="mt-1 text-xs text-slate-500">${PERIODOS_CONFIG[activePeriod].nota}</p>
-              <p class="mt-1 text-xs font-bold text-brandBlue h-4">${eco > 0 ? 'Economia de ' + formatBRL(eco) + '/mês' : ''}</p>
+              <p class="mt-1 text-xs font-bold h-4" style="color:var(--c-primary)">${eco > 0 ? 'Economia de ' + formatBRL(eco) + '/mês' : ''}</p>
             </div>
             <ul class="my-6 space-y-2 text-xs text-slate-700">
-              ${p.itens.map(i => `<li class="flex items-center gap-2"><svg class="h-4 w-4 text-brandBlue shrink-0"><use href="#i-check"/></svg> ${i}</li>`).join('')}
+              ${p.itens.map(i => `<li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0" style="color:var(--c-primary)"><use href="#i-check"/></svg> ${i}</li>`).join('')}
             </ul>
             <a target="_blank" rel="noopener" href="${waUrl(`Olá! Tenho interesse no plano ${p.nome} (${PERIODOS_CONFIG[activePeriod].rotulo}) por${formatBRL(v)}/mês na Genesis Academy.`)}"
-               class="rounded-xl bg-brandBlue px-4 py-3 text-center font-bold text-white uppercase tracking-wider text-xs hover:bg-brandBlueDark transition-colors">
+               class="rounded-xl btn-brand px-4 py-3 text-center font-bold text-white uppercase tracking-wider text-xs">
               Garantir Plano
             </a>
           </div>
@@ -394,7 +515,8 @@
     function renderTabs() {
       document.querySelectorAll('#tabs button').forEach(btn => {
         const on = btn.dataset.per === activePeriod;
-        btn.className = `rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${on ? 'bg-brandBlue text-white shadow' : 'text-slate-600 hover:text-slate-900'}`;
+        btn.className = `rounded-full px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${on ? 'text-white shadow' : 'text-slate-600 hover:text-slate-900'}`;
+        if(on) { btn.style.backgroundColor = 'var(--c-primary)'; } else { btn.style.backgroundColor = 'transparent'; }
       });
     }
 
@@ -406,7 +528,7 @@
       });
     });
 
-    // Controle do Modal
+    // Controle do Modal de Planos
     const modal = document.getElementById('plansModal');
     const modalContent = document.getElementById('modalContent');
 
@@ -433,7 +555,7 @@
     // WhatsApp links
     document.querySelectorAll('[data-wa]').forEach(el => el.href = waUrl(el.dataset.wa));
 
-    // Formulario
+    // Formulário
     document.getElementById('form').addEventListener('submit', e => {
       e.preventDefault();
       const nome = document.getElementById('f-nome').value.trim();
