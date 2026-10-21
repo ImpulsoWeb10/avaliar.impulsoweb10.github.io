@@ -1,0 +1,183 @@
+{
+  "dados_formulario_base": {
+    "placeId": "ChIJZViz3idjzpQRvRMo3AFkYaM",
+    "nomeEmpresa": "Itapuã Center - Materiais de Construção",
+    "whatsapp": "5511945320614",
+    "instagram": "itapua_center",
+    "cidadeEstado": "Itaquaquecetuba / SP",
+    "enderecoCompleto": "Rua Epitácio Pessoa, 216, Jardim Itapuã, Itaquaquecetuba - SP, CEP 08579-040",
+    "segmento": "Loja de Materiais de Construção",
+    "produtosPrincipais": "Materiais básicos, cimento, areia, pedra, tijolos, telhas, materiais hidráulicos, ferramentas, acabamentos"
+  },
+  "conteudo_enriquecido_desktop": {
+    "seo_tags": {
+      "canonical": "https://avaliar.impulsoweb10.com.br/itapua-center/index.html",
+      "h1": "Materiais de Construção em Itaquaquecetuba - Itapuã Center",
+      "meta_description": "Encontre materiais de construção de qualidade em Itaquaquecetuba. O Itapuã Center oferece cimento, areia, tijolos e hidráulica no Jardim Itapuã. Confira!"
+    },
+    "arquitetura_h2_h4": {
+      "secao_principal_h2": {
+        "titulo_h2": "Itapuã Center: tudo para sua obra do alicerce ao acabamento",
+        "introducao_bloco": "O Itapuã Center é a sua loja completa de materiais de construção em Itaquaquecetuba - SP. Localizado na Rua Epitácio Pessoa, 216, no Jardim Itapuã, oferecemos um atendimento de excelência e produtos de alta qualidade para garantir o sucesso da sua reforma ou construção. Siga a loja no Instagram @itapua_center e acompanhe nossas novidades e ofertas exclusivas."
+      },
+      "secao_produtos_h2": {
+        "titulo_h2": "Produtos e soluções para todas as etapas da construção",
+        "subsecoes_h3": [
+          {
+            "titulo_h3": "Materiais básicos e hidráulicos",
+            "foco_produtos_conteudo": "Trabalhamos com uma linha completa de produtos essenciais para erguer ou reformar seu imóvel com segurança e durabilidade. Desde a fundação até as instalações hidráulicas, garantimos marcas confiáveis e entrega ágil para a sua obra.",
+            "detalhes_especificos_h4": [
+              "Areia, pedra, cimento, tijolos e telhas de qualidade",
+              "Tubos, conexões e materiais hidráulicos variados"
+            ]
+          },
+          {
+            "titulo_h3": "Ferramentas e acessórios",
+            "foco_produtos_conteudo": "Para profissionais e adeptos do faça você mesmo, dispomos de ferramentas e acessórios indispensáveis para o dia a dia na obra, assegurando praticidade e eficiência em cada detalhe.",
+            "detalhes_especificos_h4": [
+              "Ferramentas manuais e itens para manutenção",
+              "Atendimento especializado para orientar sua compra"
+            ]
+          }
+        ]
+      },
+      "secao_localizacao_h2": {
+        "titulo_h2": "Visite nossa loja no Jardim Itapuã, em Itaquaquecetuba",
+        "chamada_local_conteudo": "O Itapuã Center está situado na Rua Epitácio Pessoa, 216, Jardim Itapuã, CEP 08579-040, em Itaquaquecetuba - SP. Venha nos fazer uma visita ou tire suas dúvidas rapidamente pelo WhatsApp (11) 94532-0614. Estamos prontos para ajudar na sua construção!"
+      }
+    },
+    "lista_beneficios_o_que_encontra": [
+      "Amplo estoque de materiais básicos, hidráulicos e ferramentas para sua obra",
+      "Localização privilegiada no Jardim Itapuã, em Itaquaquecetuba - SP",
+      "Atendimento facilitado e personalizado direto pelo WhatsApp",
+      "Variedade de produtos com excelente custo-benefício para reformas e construções"
+    ],
+    "imagens_otimizadas_seo": [
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "fachada-itapua-center-materiais-construcao.webp",
+        "alt_descricao": "Fachada do Itapuã Center, loja de materiais de construção no Jardim Itapuã, Itaquaquecetuba - SP"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "materiais-basicos-construcao-itaquaquecetuba.webp",
+        "alt_descricao": "Estoque de materiais básicos de construção no Itapuã Center em Itaquaquecetuba"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "loja-ferramentas-hidraulica-itapua-center.webp",
+        "alt_descricao": "Corredor de ferramentas e materiais hidráulicos no Itapuã Center"
+      },
+      {
+        "url_original": "",
+        "nome_arquivo_webp": "equipe-atendimento-itapua-center.webp",
+        "alt_descricao": "Atendimento especializado aos clientes no Itapuã Center em Itaquaquecetuba - SP"
+      }
+    ],
+    "faq_perguntas_frequentes": [
+      {
+        "pergunta": "Quais são os horários de funcionamento do Itapuã Center?",
+        "resposta": "Funcionamos de segunda a sábado das 08:00 às 18:00, e aos domingos das 08:00 às 12:00. Confirme detalhes ou faça cotações pelo WhatsApp (11) 94532-0614."
+      },
+      {
+        "pergunta": "Onde fica localizado o Itapuã Center em Itaquaquecetuba?",
+        "resposta": "Nossa loja fica na Rua Epitácio Pessoa, 216, bairro Jardim Itapuã, CEP 08579-040, em Itaquaquecetuba - SP. Entre em contato pelo WhatsApp (11) 94532-0614 se precisar de orientações de rota."
+      },
+      {
+        "pergunta": "Como faço para solicitar um orçamento de materiais de construção?",
+        "resposta": "Você pode solicitar orçamentos e verificar a disponibilidade de produtos rapidamente falando conosco pelo WhatsApp (11) 94532-0614 ou acompanhando nosso perfil no Instagram @itapua_center."
+      }
+    ],
+    "schema_markup_json_ld": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": [
+            "LocalBusiness",
+            "HardwareStore"
+          ],
+          "@id": "https://avaliar.impulsoweb10.com.br/itapua-center/index.html#localbusiness",
+          "name": "Itapuã Center - Materiais de Construção",
+          "image": "https://avaliar.impulsoweb10.com.br/itapua-center/fachada-itapua-center-materiais-construcao.webp",
+          "telephone": "+5511945320614",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rua Epitácio Pessoa, 216",
+            "addressLocality": "Itaquaquecetuba",
+            "addressRegion": "SP",
+            "postalCode": "08579-040",
+            "addressCountry": "BR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.4831,
+            "longitude": -46.3475
+          },
+          "url": "https://avaliar.impulsoweb10.com.br/itapua-center/index.html",
+          "sameAs": [
+            "https://instagram.com/itapua_center",
+            "https://google.com/?q=ChIJItapuaCenterItaquaquecetuba"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "08:00",
+              "closes": "18:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Sunday"
+              ],
+              "opens": "08:00",
+              "closes": "12:00"
+            }
+          ],
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Itaquaquecetuba"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://avaliar.impulsoweb10.com.br/itapua-center/index.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Quais são os horários de funcionamento do Itapuã Center?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Funcionamos de segunda a sábado das 08:00 às 18:00, e aos domingos das 08:00 às 12:00. Confirme detalhes ou faça cotações pelo WhatsApp (11) 94532-0614."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Onde fica localizado o Itapuã Center em Itaquaquecetuba?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nossa loja fica na Rua Epitácio Pessoa, 216, bairro Jardim Itapuã, CEP 08579-040, em Itaquaquecetuba - SP. Entre em contato pelo WhatsApp (11) 94532-0614 se precisar de orientações de rota."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como faço para solicitar um orçamento de materiais de construção?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Você pode solicitar orçamentos e verificar a disponibilidade de produtos rapidamente falando conosco pelo WhatsApp (11) 94532-0614 ou acompanhando nosso perfil no Instagram @itapua_center."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
