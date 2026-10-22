@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-    // Configura os cabeçalhos para permitir que o seu site acesse a API (CORS)
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -19,25 +18,33 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Buscando o token que deixaremos escondido nas configurações da Vercel
         const tokenMP = process.env.MP_ACCESS_TOKEN;
 
-        const response = await fetch('https://mercadopago.com', {
+        // Estrutura JSON oficial exigida pela Orders API para pagamentos online via Pix
+        const response = await fetch('https://api.mercadopago.com/v1/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${tokenMP}`,
-                'X-Idempotency-Key': crypto.randomUUID() // Evita cobrança duplicada
+                'X-Idempotency-Key': crypto.randomUUID()
             },
             body: JSON.stringify({
+                type: "online",
+                total_amount: parseFloat(valor).toFixed(2),
                 processing_mode: "automatic",
-                data: {
-                    transaction_amount: parseFloat(valor),
-                    description: 'Pagamento Tintas Qualy Quimy',
-                    payment_method_id: 'pix',
-                    payer: {
-                        email: 'financeiro.qualyquimy@gmail.com' // Seu e-mail de controle
-                    }
+                transactions: {
+                    payments: [
+                        {
+                            amount: parseFloat(valor).toFixed(2),
+                            payment_method: {
+                                id: "pix",
+                                type: "bank_transfer"
+                            }
+                        }
+                    ]
+                },
+                payer: {
+                    email: 'financeiro.qualyquimy@gmail.com'
                 }
             })
         });
@@ -45,11 +52,17 @@ export default async function handler(req, res) {
         const data = await response.json();
 
         if (response.ok) {
-            // Devolve as chaves corretas do Pix direto para o seu HTML
-            return res.status(200).json({
-                copiaCola: data.point_of_interaction.transaction_data.qr_code,
-                qrCodeBase64: data.point_of_interaction.transaction_data.qr_code_base64
-            });
+            // Mapeamento correto dos dados de resposta da Orders API
+            const paymentInfo = data.transactions?.payments?.[0]?.payment_method;
+
+            if (paymentInfo && paymentInfo.qr_code_base64) {
+                return res.status(200).json({
+                    copiaCola: paymentInfo.qr_code,
+                    qrCodeBase64: paymentInfo.qr_code_base64
+                });
+            } else {
+                return res.status(500).json({ error: 'Dados do Pix não encontrados na resposta', detalhes: data });
+            }
         } else {
             return res.status(500).json({ error: 'Erro na API do Mercado Pago', detalhes: data });
         }
