@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 export default async function handler(req, res) {
     // Configuração de CORS para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -22,8 +24,8 @@ export default async function handler(req, res) {
     try {
         const tokenMP = process.env.MP_ACCESS_TOKEN;
 
-        // Requisição para a Orders API do Mercado Pago
-        const response = await fetch('https://api.mercadopago.com/v1/orders', {
+        // Requisição corrigida para a API de Pagamentos (Pix) do Mercado Pago
+        const response = await fetch('https://api.mercadopago.com/v1/payments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,35 +33,29 @@ export default async function handler(req, res) {
                 'X-Idempotency-Key': crypto.randomUUID()
             },
             body: JSON.stringify({
-                type: "online",
-                total_amount: parseFloat(valor),
-                processing_mode: "automatic",
-                transactions: {
-                    payments: [
-                        {
-                            amount: parseFloat(valor),
-                            payment_method: {
-                                id: "pix",
-                                type: "bank_transfer"
-                            }
-                        }
-                    ]
-                },
+                transaction_amount: parseFloat(valor),
+                description: 'Pagamento - Tintas Qualy Quimy',
+                payment_method_id: 'pix',
                 payer: {
-                    email: 'financeiro.qualyquimy@gmail.com'
+                    email: 'financeiro.qualyquimy@gmail.com',
+                    first_name: 'Cliente',
+                    last_name: 'Qualy Quimy'
                 }
             })
         });
 
-        const data = await response.json();
+        const data = response.ok ? await response.json() : null;
 
-        if (response.ok) {
-            const paymentInfo = data.transactions?.payments?.[0]?.payment_method;
+        if (response.ok && data) {
+            // Extrai o QR Code e o Copia e Cola da resposta correta do /v1/payments
+            const pointOfInteraction = data.point_of_interaction;
+            const qrCodeBase64 = pointOfInteraction?.transaction_data?.qr_code_base64;
+            const copiaCola = pointOfInteraction?.transaction_data?.qr_code;
 
-            if (paymentInfo && paymentInfo.qr_code_base64) {
+            if (qrCodeBase64 && copiaCola) {
                 return res.status(200).json({
-                    copiaCola: paymentInfo.qr_code,
-                    qrCodeBase64: paymentInfo.qr_code_base64
+                    copiaCola: copiaCola,
+                    qrCodeBase64: qrCodeBase64
                 });
             } else {
                 return res.status(500).json({ error: 'Dados do Pix não encontrados na resposta.', detalhes: data });
@@ -69,6 +65,6 @@ export default async function handler(req, res) {
         }
 
     } catch (error) {
-        return res.status(500).json({ error: 'Erro interno no servidor do Pix.' });
+        return res.status(500).json({ error: 'Erro interno no servidor do Pix.', detalhes: error.message });
     }
 }
