@@ -1555,6 +1555,43 @@ body::before{
     if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   });
 </script>
+<script>
+  // ⚠️ IMPORTANTE: Substitua 'ID_DO_PIX_AQUI' pela variável que o seu 
+  // script atual usa para guardar o ID do pagamento gerado!
+  const idDoPixGerado = typeof id_pagamento !== 'undefined' ? id_pagamento : "ID_DO_PIX_AQUI"; 
+
+  function verificarStatusDoPix() {
+    // Se ainda não gerou o ID do Pix na tela, não faz nada e espera
+    if (idDoPixGerado === "ID_DO_PIX_AQUI" || !idDoPixGerado) return;
+
+    // Consulta a rota status.js que criamos na Vercel
+    fetch(`/api/status?id=${idDoPixGerado}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.pago === true) {
+          // ==========================================
+          // 🚀 O QUE FAZER QUANDO O PIX FOR PAGO:
+          // ==========================================
+          
+          // Exemplo 1: Alerta na tela
+          alert("✅ Pagamento Pix confirmado com sucesso!");
+          
+          // Exemplo 2: Redirecionar para uma página de obrigado (se você tiver uma)
+          // window.location.href = "obrigado.html"; 
+          
+          // Exemplo 3: Esconder a área do QR Code e mostrar um sucesso (se aplicável)
+          // document.getElementById("area-qrcode").style.display = "none";
+          // document.getElementById("mensagem-sucesso").style.display = "block";
+
+          clearInterval(intervaloCheck); // Para de perguntar à Vercel para economizar recursos
+        }
+      })
+      .catch(err => console.error("Erro ao checar status do Pix:", err));
+  }
+
+  // Executa a checagem a cada 3 segundos (3000 milissegundos)
+  const intervaloCheck = setInterval(verificarStatusDoPix, 3000);
+</script>
 
 </body>
 </html>
