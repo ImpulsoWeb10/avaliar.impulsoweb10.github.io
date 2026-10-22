@@ -1454,7 +1454,7 @@ body::before{
       if (!idPixAtual) return;
 
       try {
-        const res = await fetch(`https://qualyquimy-pix.vercel.app/api/status?id=${idPixAtual}`);
+        const res = await fetch(`/api/status?id=${idPixAtual}`);
         const resultado = await res.json();
 
         if (resultado.pago === true || resultado.status === 'approved') {
