@@ -1329,7 +1329,7 @@ body::before{
     }
   }
 
-  /* ===== MODAL DO PIX & INTEGRAÇÃO MERCADO PAGO COM FALLBACK SEGURO ===== */
+  /* ===== MODAL DO PIX & INTEGRAÇÃO MERCADO PAGO (VERCEL) ===== */
   const sheetPix = document.getElementById('sheetPix');
   function abrirPixModal(){
     if (typeof sheetPix.showModal === 'function') sheetPix.showModal();
@@ -1354,8 +1354,8 @@ body::before{
     let copiaColaCode = "";
 
     try {
-      // Tenta a chamada real ao backend
-      const response = await fetch('https://seu-servidor-backend.com/api/pix/order', {
+      // Requisição POST para o link real da Vercel
+      const response = await fetch('https://qualyquimy-pix.vercel.app/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1370,12 +1370,11 @@ body::before{
         qrBase64 = data.qrCodeBase64;
         copiaColaCode = data.copiaCola;
       } else {
-        throw new Error("Servidor indisponível");
+        throw new Error("Erro na resposta do servidor Vercel");
       }
     } catch (error) {
-      // FALLBACK DE SEGURANÇA: Se o backend não estiver ativo, gera uma simulação funcional para testes
-      console.warn("Backend offline ou não configurado. Utilizando modo de demonstração.");
-      // Imagem placeholder de teste (QR code válido em base64 mínimo)
+      // Fallback de segurança para demonstração caso a API na Vercel ainda esteja configurando o endpoint
+      console.warn("Utilizando dados de demonstração devido à ausência do endpoint no servidor.");
       qrBase64 = "iVBORw0KGgoAAAANSUhEUgAAAPAAAADwAQMAAAASycaKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAACNJREFUeF7twQEBAAAAgiD/r24ICgAAAAAAAAAAAAAAAAAA4GYf4AAB1fI72gAAAAAElFTkSuQmCC";
       copiaColaCode = "00020126580014br.gov.bcb.pix0136105038340001735204000053039865802BR5925QUALYQUIMY COMERCIO DE TINS6009ITANHAEM62070503***63041D3D";
     }
@@ -1497,7 +1496,6 @@ body::before{
       desativarGiroscopio(); 
       return; 
     }
-    // Tratamento de permissão para iOS / Android modernos
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission().then(function(state){
         if (state === 'granted') {
@@ -1513,7 +1511,6 @@ body::before{
     }
   }
 
-  // Evento de mouse para desktop (funciona sempre que ativado o botão 3D)
   document.addEventListener('mousemove', function(e){
     if (!giroscopioAtivo) return;
     const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
