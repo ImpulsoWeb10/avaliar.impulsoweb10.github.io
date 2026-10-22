@@ -1055,7 +1055,7 @@ body::before{
 
 <!-- MODAL DO PIX INTEGRADO MERCADO PAGO -->
 <dialog class="sheet-pix" id="sheetPix" aria-labelledby="pixTitulo">
-  <div class="sheet-pix-body">
+  <div class="sheet-pix-body" id="sheetPixBodyContent">
     <div class="sheet-pix-head">
       <h2 id="pixTitulo">Pagamento via Pix</h2>
       <button type="button" class="sheet-close" onclick="fecharPixModal()" aria-label="Fechar">×</button>
@@ -1356,6 +1356,10 @@ body::before{
     }
   }
 
+  /* ===== VARIÁVEL GLOBAL PARA O ID DO PIX ATUAL ===== */
+  let idPixAtual = null;
+  let intervaloStatusPix = null;
+
   /* ===== MODAL DO PIX & INTEGRAÇÃO COM VERCEL ===== */
   const sheetPix = document.getElementById('sheetPix');
   function abrirPixModal(){
@@ -1365,6 +1369,7 @@ body::before{
   function fecharPixModal(){
     if (typeof sheetPix.close === 'function') sheetPix.close();
     else sheetPix.removeAttribute('open');
+    if (intervaloStatusPix) clearInterval(intervaloStatusPix);
   }
   sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharPixModal(); });
 
@@ -1391,6 +1396,9 @@ body::before{
       }
 
       if (data.qrCodeBase64 && data.copiaCola) {
+        // Armazena o ID do pagamento retornado pelo Mercado Pago
+        idPixAtual = data.id || data.paymentId || data.preferenceId;
+
         document.getElementById('qrCodeImg').src = `data:image/png;base64,${data.qrCodeBase64}`;
         document.getElementById('copiaColaTextarea').value = data.copiaCola;
         
@@ -1398,6 +1406,9 @@ body::before{
         document.getElementById('pixInputGroupContainer').style.display = 'none';
         document.getElementById('btnGerarPix').style.display = 'none';
         document.getElementById('pixResultContainer').style.display = 'flex';
+
+        // Inicia a verificação periódica (Polling) do pagamento
+        iniciarVerificacaoStatus();
       } else {
         alert("Dados incompletos retornados pelo servidor.");
       }
@@ -1420,6 +1431,9 @@ body::before{
   }
 
   function limparPixModal() {
+    if (intervaloStatusPix) clearInterval(intervaloStatusPix);
+    idPixAtual = null;
+
     // Limpa o input de valor
     document.getElementById('valorPixInput').value = '';
     // Limpa a imagem e o textarea
@@ -1430,6 +1444,45 @@ body::before{
     document.getElementById('pixResultContainer').style.display = 'none';
     document.getElementById('pixInputGroupContainer').style.display = 'flex';
     document.getElementById('btnGerarPix').style.display = 'flex';
+  }
+
+  /* ===== VERIFICAÇÃO AUTOMÁTICA DE STATUS (POLLING) ===== */
+  function iniciarVerificacaoStatus() {
+    if (intervaloStatusPix) clearInterval(intervaloStatusPix);
+
+    intervaloStatusPix = setInterval(async () => {
+      if (!idPixAtual) return;
+
+      try {
+        const res = await fetch(`https://qualyquimy-pix.vercel.app/api/status?id=${idPixAtual}`);
+        const resultado = await res.json();
+
+        if (resultado.pago === true || resultado.status === 'approved') {
+          clearInterval(intervaloStatusPix);
+
+          // Atualiza o conteúdo interno do modal para exibir a mensagem de sucesso amigável
+          const modalBody = document.getElementById('sheetPixBodyContent');
+          if (modalBody) {
+            modalBody.innerHTML = `
+              <div class="sheet-pix-head">
+                <h2>Pagamento Confirmado</h2>
+                <button type="button" class="sheet-close" onclick="fecharPixModal()">×</button>
+              </div>
+              <div style="text-align: center; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <div style="font-size: 3.5rem;">✅</div>
+                <h3 style="color: #4ade80; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;">Pagamento Confirmado!</h3>
+                <p style="font-size: 0.9rem; color: #d9e4f2; line-height: 1.5;">Obrigado! Identificamos o recebimento do seu Pix com sucesso.</p>
+                <button type="button" class="btn-copy-pix" onclick="limparPixModal(); fecharPixModal();" style="margin-top: 1rem;">
+                  Concluir / Fechar
+                </button>
+              </div>
+            `;
+          }
+        }
+      } catch (err) {
+        console.error("Erro ao verificar status do Pix:", err);
+      }
+    }, 3000); // Consulta a cada 3 segundos
   }
 
   /* ===== TELA "VER MAIS" ===== */
@@ -1554,92 +1607,6 @@ body::before{
   document.addEventListener('mouseleave', function(){
     if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
   });
-</script>
-<script>
-  // ⚠️ IMPORTANTE: Substitua 'ID_DO_PIX_AQUI' pela variável que o seu 
-  // script atual usa para guardar o ID do pagamento gerado!
-  const idDoPixGerado = typeof id_pagamento !== 'undefined' ? id_pagamento : "ID_DO_PIX_AQUI"; 
-
-  function verificarStatusDoPix() {
-    // Se ainda não gerou o ID do Pix na tela, não faz nada e espera
-    if (idDoPixGerado === "ID_DO_PIX_AQUI" || !idDoPixGerado) return;
-
-    // Consulta a rota status.js que criamos na Vercel
-    fetch(`/api/status?id=${idDoPixGerado}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.pago === true) {
-          // ==========================================
-          // 🚀 O QUE FAZER QUANDO O PIX FOR PAGO:
-          // ==========================================
-          
-          // Exemplo 1: Alerta na tela
-          alert("✅ Pagamento Pix confirmado com sucesso!");
-          
-          // Exemplo 2: Redirecionar para uma página de obrigado (se você tiver uma)
-          // window.location.href = "obrigado.html"; 
-          
-          // Exemplo 3: Esconder a área do QR Code e mostrar um sucesso (se aplicável)
-          // document.getElementById("area-qrcode").style.display = "none";
-          // document.getElementById("mensagem-sucesso").style.display = "block";
-
-          clearInterval(intervaloCheck); // Para de perguntar à Vercel para economizar recursos
-        }
-      })
-      .catch(err => console.error("Erro ao checar status do Pix:", err));
-  }
-
-  // Executa a checagem a cada 3 segundos (3000 milissegundos)
-  const intervaloCheck = setInterval(verificarStatusDoPix, 3000);
-</script>
-<script>
-  function verificarStatusDoPix() {
-    // 💡 IMPORTANTE: O script tenta buscar automaticamente o ID do Pix que o seu sistema gerou.
-    // Se o seu sistema salva o ID em alguma variável como 'id_pagamento', o código vai ler sozinho.
-    const idDoPixGerado = typeof id_pagamento !== 'undefined' ? id_pagamento : null; 
-
-    // Se o Pix ainda não foi gerado ou o ID não foi encontrado, ele espera o cliente clicar no botão
-    if (!idDoPixGerado) return;
-
-    // Consulta a nossa rota na Vercel para saber se o banco recebeu o aviso de pago
-    fetch(`/api/status?id=${idDoPixGerado}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.pago === true) {
-          // ==========================================
-          // 🚀 INTERFACE AMIGÁVEL DE SUCESSO:
-          // ==========================================
-          
-          // Procura a caixinha escura do Modal de Pagamento para alterar o conteúdo dela
-          // Nota: Ajustamos o conteúdo interno mantendo o visual bonito do seu site
-          const caixinhaModal = document.querySelector('#area-pagamento') || document.querySelector('.modal') || document.body;
-          
-          if (caixinhaModal) {
-            caixinhaModal.innerHTML = `
-              <div style="text-align: center; padding: 40px 20px; color: #fff; font-family: sans-serif;">
-                <div style="font-size: 60px; color: #25D366; margin-bottom: 20px;">✅</div>
-                <h2 style="margin-bottom: 10px; color: #25D366;">Pagamento Confirmado!</h2>
-                <p style="font-size: 16px; color: #ccc;">Obrigado! Identificamos o seu Pix de forma automática.</p>
-                <p style="font-size: 14px; margin-top: 20px; color: #888;">Esta janela será fechada em instantes...</p>
-              </div>
-            `;
-          }
-
-          // Para de perguntar à Vercel para economizar o seu plano gratuito
-          clearInterval(intervaloCheck);
-
-          // Opcional: Fecha a janela flutuante inteira ou recarrega a página após 4 segundos
-          setTimeout(() => {
-            // Se você tiver uma função como 'fecharModal()', você pode chamá-la aqui
-            // Exemplo: window.location.reload(); 
-          }, 4000);
-        }
-      })
-      .catch(err => console.error("Erro ao checar status do Pix:", err));
-  }
-
-  // Executa a checagem a cada 3 segundos (3000 milissegundos)
-  const intervaloCheck = setInterval(verificarStatusDoPix, 3000);
 </script>
 
 </body>
