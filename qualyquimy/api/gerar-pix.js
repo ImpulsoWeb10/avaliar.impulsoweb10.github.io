@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     try {
         const tokenMP = process.env.MP_ACCESS_TOKEN;
 
-        // Estrutura JSON oficial exigida pela Orders API para pagamentos online via Pix
+        // Requisição montada conforme o padrão oficial da Orders API para Pix
         const response = await fetch('https://api.mercadopago.com/v1/orders', {
             method: 'POST',
             headers: {
@@ -30,12 +30,12 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 type: "online",
-                total_amount: parseFloat(valor).toFixed(2),
+                total_amount: parseFloat(valor),
                 processing_mode: "automatic",
                 transactions: {
                     payments: [
                         {
-                            amount: parseFloat(valor).toFixed(2),
+                            amount: parseFloat(valor),
                             payment_method: {
                                 id: "pix",
                                 type: "bank_transfer"
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         const data = await response.json();
 
         if (response.ok) {
-            // Mapeamento correto dos dados de resposta da Orders API
+            // Correção aqui: Acessando o primeiro item da lista de pagamentos da Orders API
             const paymentInfo = data.transactions?.payments?.[0]?.payment_method;
 
             if (paymentInfo && paymentInfo.qr_code_base64) {
@@ -61,13 +61,13 @@ export default async function handler(req, res) {
                     qrCodeBase64: paymentInfo.qr_code_base64
                 });
             } else {
-                return res.status(500).json({ error: 'Dados do Pix não encontrados na resposta', detalhes: data });
+                return res.status(500).json({ error: 'Dados do Pix não encontrados na resposta.', detalhes: data });
             }
         } else {
-            return res.status(500).json({ error: 'Erro na API do Mercado Pago', detalhes: data });
+            return res.status(500).json({ error: 'Erro retornado pelo Mercado Pago.', detalhes: data });
         }
 
     } catch (error) {
-        return res.status(500).json({ error: 'Erro interno no servidor do Pix' });
+        return res.status(500).json({ error: 'Erro interno no servidor do Pix.' });
     }
 }
