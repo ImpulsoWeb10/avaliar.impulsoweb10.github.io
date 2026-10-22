@@ -1350,8 +1350,8 @@ body::before{
     }
 
     try {
-      // Apontando para o caminho correto dentro do projeto Vercel
-      const response = await fetch('https://qualyquimy-pix.vercel.app/qualyquimy/api/gerar-pix', {
+      // Substitua por este caminho exato:
+const response = await fetch('https://qualyquimy-pix.vercel.app/qualyquimy/api/gerar-pix', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ valor: parseFloat(valorDigitado) })
