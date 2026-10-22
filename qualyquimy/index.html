@@ -1209,7 +1209,7 @@ body::before{
   <div>
     <div class="txt">
       <h1>Tintas Qualy Quimy</h1>
-      <h2>Tintas, Massas e Texturas em Itaquaquecetuba - SP</h2>
+      <h2>Tintas, Massas e Texturas in Itaquaquecetuba - SP</h2>
       <p>Qualidade, confiança e compromisso: é assim que a Qualy Quimy atende pintores, construtores e quem está reformando em Itaquaquecetuba e no Alto Tietê. Em um só lugar você encontra tintas, massas, texturas, seladoras e esmaltes para um acabamento bem feito.</p>
       <h2>Massa PVA e Massa Acrílica</h2>
       <p>A massa PVA é indicada para nivelar e corrigir paredes internas antes da pintura. A massa acrílica resiste melhor à umidade e ao tempo, sendo a escolha para fachadas, muros e áreas externas. Com a preparação correta, a tinta rende mais e dura mais.</p>
@@ -1382,7 +1382,8 @@ body::before{
     }
 
     try {
-      const response = await fetch('https://qualyquimy-pix.vercel.app/api/gerar-pix', {
+      // Uso de caminho relativo para evitar erros de domínio
+      const response = await fetch('/api/gerar-pix', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ valor: parseFloat(valorDigitado) })
@@ -1454,7 +1455,8 @@ body::before{
       if (!idPixAtual) return;
 
       try {
-        const res = await fetch(`https://qualyquimy-pix.vercel.app/api/status?id=${idPixAtual}`);
+        // Uso de caminho relativo para garantir compatibilidade com qualquer domínio
+        const res = await fetch(`/api/status?id=${idPixAtual}`);
         const resultado = await res.json();
 
         if (resultado.pago === true || resultado.status === 'approved') {
