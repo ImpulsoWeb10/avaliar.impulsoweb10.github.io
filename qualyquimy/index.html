@@ -467,33 +467,32 @@ body::before{
   background: #16a34a;
 }
 
-/* ===== MODAL DO PIX DINÂMICO MERCADO PAGO ===== */
+/* ===== MODAL DO PIX DINÂMICO MERCADO PAGO (CENTRALIZADO) ===== */
 .sheet-pix {
   position: fixed;
-  inset: auto 0 0 0;
-  margin: 0 auto;
-  width: min(480px, 100%);
-  max-height: 95vh;
-  max-height: 95dvh;
+  inset: 0;
+  margin: auto;
+  width: min(480px, 92%);
+  max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
   border: 2px solid rgba(255,255,255,0.4);
-  border-bottom: none;
-  border-radius: 24px 24px 0 0;
+  border-radius: 24px;
   background: linear-gradient(175deg, #102040 0%, #0b1a2e 100%);
   color: #e8e2d8;
   padding: 0;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
   font-family: 'DM Sans', sans-serif;
 }
 .sheet-pix::backdrop { background: rgba(3, 8, 16, 0.8); backdrop-filter: blur(4px); }
-.sheet-pix[open] { animation: sheet-up .3s ease-out; }
+.sheet-pix[open] { animation: modal-center-up .3s ease-out; }
 
 .sheet-pix-body {
-  padding: 1.2rem 1.2rem calc(1.5rem + env(safe-area-inset-bottom));
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .8rem;
+  gap: .9rem;
   text-align: center;
 }
 .sheet-pix-head {
@@ -601,7 +600,7 @@ body::before{
 
 .pix-img-container {
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   background: #ffffff;
   border-radius: 14px;
   padding: 0.5rem;
@@ -616,14 +615,14 @@ body::before{
 
 .pix-textarea {
   width: 100%;
-  height: 70px;
+  height: 65px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 12px;
-  padding: 0.6rem;
+  padding: 0.5rem;
   color: #ffe082;
   font-family: monospace;
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   resize: none;
   outline: none;
 }
@@ -651,6 +650,29 @@ body::before{
   background: #16a34a;
 }
 .btn-copy-pix svg { width: 18px; height: 18px; }
+
+/* Botão de Limpar / Novo Pagamento */
+.btn-reset-pix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 40px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.btn-reset-pix:hover {
+  background: rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
 
 /* ===== PAINEL DE SELEÇÃO DE TEMA (5 CORES) ===== */
 .theme-modal {
@@ -1040,7 +1062,7 @@ body::before{
     </div>
 
     <!-- 1. Campo de entrada de valor numérico -->
-    <div class="pix-input-group">
+    <div class="pix-input-group" id="pixInputGroupContainer">
       <label for="valorPixInput">Digite o valor do orçamento:</label>
       <div class="pix-input-wrapper">
         <span class="pix-prefix">R$</span>
@@ -1049,7 +1071,7 @@ body::before{
     </div>
 
     <!-- 2. Botão Pagar Agora via PIX disparando processarEnvioPix() -->
-    <button type="button" class="mp-btn-generate" onclick="processarEnvioPix()">
+    <button type="button" class="mp-btn-generate" id="btnGerarPix" onclick="processarEnvioPix()">
       ⚡ Pagar Agora via PIX
     </button>
 
@@ -1070,6 +1092,11 @@ body::before{
       <button type="button" class="btn-copy-pix" onclick="copiarCodigoPixCopiaCola()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
         Copiar Código Pix Copia e Cola
+      </button>
+
+      <!-- Botão para Limpar / Novo Pagamento -->
+      <button type="button" class="btn-reset-pix" onclick="limparPixModal()">
+        🔄 Limpar / Novo Pagamento
       </button>
     </div>
 
@@ -1350,7 +1377,7 @@ body::before{
     }
 
     try {
-const response = await fetch('https://qualyquimy-pix.vercel.app/api/gerar-pix', {
+      const response = await fetch('https://qualyquimy-pix.vercel.app/api/gerar-pix', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ valor: parseFloat(valorDigitado) })
@@ -1366,6 +1393,10 @@ const response = await fetch('https://qualyquimy-pix.vercel.app/api/gerar-pix', 
       if (data.qrCodeBase64 && data.copiaCola) {
         document.getElementById('qrCodeImg').src = `data:image/png;base64,${data.qrCodeBase64}`;
         document.getElementById('copiaColaTextarea').value = data.copiaCola;
+        
+        // Esconde o campo de valor e o botão de gerar, e mostra o resultado com o botão limpar
+        document.getElementById('pixInputGroupContainer').style.display = 'none';
+        document.getElementById('btnGerarPix').style.display = 'none';
         document.getElementById('pixResultContainer').style.display = 'flex';
       } else {
         alert("Dados incompletos retornados pelo servidor.");
@@ -1382,10 +1413,23 @@ const response = await fetch('https://qualyquimy-pix.vercel.app/api/gerar-pix', 
     if (!copiaColaText) return;
     try {
       await navigator.clipboard.writeText(copiaColaText);
-      alert("Código Pix Copia e Cola copiado com sucesso!");
+      alert("Código Pix Copia e Cola copiado com sucesso!\n\nConferir os dados antes de confirmar o pix.");
     } catch (err) {
       alert("Não foi possível copiar o código automaticamente.");
     }
+  }
+
+  function limparPixModal() {
+    // Limpa o input de valor
+    document.getElementById('valorPixInput').value = '';
+    // Limpa a imagem e o textarea
+    document.getElementById('qrCodeImg').src = '';
+    document.getElementById('copiaColaTextarea').value = '';
+    
+    // Esconde o container de resultado e mostra novamente os campos iniciais
+    document.getElementById('pixResultContainer').style.display = 'none';
+    document.getElementById('pixInputGroupContainer').style.display = 'flex';
+    document.getElementById('btnGerarPix').style.display = 'flex';
   }
 
   /* ===== TELA "VER MAIS" ===== */
