@@ -1592,6 +1592,55 @@ body::before{
   // Executa a checagem a cada 3 segundos (3000 milissegundos)
   const intervaloCheck = setInterval(verificarStatusDoPix, 3000);
 </script>
+<script>
+  function verificarStatusDoPix() {
+    // 💡 IMPORTANTE: O script tenta buscar automaticamente o ID do Pix que o seu sistema gerou.
+    // Se o seu sistema salva o ID em alguma variável como 'id_pagamento', o código vai ler sozinho.
+    const idDoPixGerado = typeof id_pagamento !== 'undefined' ? id_pagamento : null; 
+
+    // Se o Pix ainda não foi gerado ou o ID não foi encontrado, ele espera o cliente clicar no botão
+    if (!idDoPixGerado) return;
+
+    // Consulta a nossa rota na Vercel para saber se o banco recebeu o aviso de pago
+    fetch(`/api/status?id=${idDoPixGerado}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.pago === true) {
+          // ==========================================
+          // 🚀 INTERFACE AMIGÁVEL DE SUCESSO:
+          // ==========================================
+          
+          // Procura a caixinha escura do Modal de Pagamento para alterar o conteúdo dela
+          // Nota: Ajustamos o conteúdo interno mantendo o visual bonito do seu site
+          const caixinhaModal = document.querySelector('#area-pagamento') || document.querySelector('.modal') || document.body;
+          
+          if (caixinhaModal) {
+            caixinhaModal.innerHTML = `
+              <div style="text-align: center; padding: 40px 20px; color: #fff; font-family: sans-serif;">
+                <div style="font-size: 60px; color: #25D366; margin-bottom: 20px;">✅</div>
+                <h2 style="margin-bottom: 10px; color: #25D366;">Pagamento Confirmado!</h2>
+                <p style="font-size: 16px; color: #ccc;">Obrigado! Identificamos o seu Pix de forma automática.</p>
+                <p style="font-size: 14px; margin-top: 20px; color: #888;">Esta janela será fechada em instantes...</p>
+              </div>
+            `;
+          }
+
+          // Para de perguntar à Vercel para economizar o seu plano gratuito
+          clearInterval(intervaloCheck);
+
+          // Opcional: Fecha a janela flutuante inteira ou recarrega a página após 4 segundos
+          setTimeout(() => {
+            // Se você tiver uma função como 'fecharModal()', você pode chamá-la aqui
+            // Exemplo: window.location.reload(); 
+          }, 4000);
+        }
+      })
+      .catch(err => console.error("Erro ao checar status do Pix:", err));
+  }
+
+  // Executa a checagem a cada 3 segundos (3000 milissegundos)
+  const intervaloCheck = setInterval(verificarStatusDoPix, 3000);
+</script>
 
 </body>
 </html>
