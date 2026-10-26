@@ -36,6 +36,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Fundo com iluminação elegante */
@@ -50,11 +52,11 @@ body::before {
   z-index: 0;
 }
 
-/* Header / Navbar */
+/* Header / Navbar Responsivo */
 header {
   position: fixed;
   top: 0; left: 0; width: 100%;
-  background: rgba(18, 5, 7, 0.85);
+  background: rgba(18, 5, 7, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -62,18 +64,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0.9rem 5%;
 }
 
 .nav-brand {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 700;
   color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 .nav-brand span { color: #ffb300; }
 
@@ -81,8 +83,8 @@ header {
   background: #25d366;
   color: #fff;
   font-weight: 700;
-  font-size: 0.85rem;
-  padding: 0.55rem 1.2rem;
+  font-size: clamp(0.78rem, 2vw, 0.88rem);
+  padding: 0.5rem 1rem;
   border-radius: 50px;
   text-decoration: none;
   display: inline-flex;
@@ -90,33 +92,35 @@ header {
   gap: 0.4rem;
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
   transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); }
-.nav-cta svg { width: 16px; height: 16px; fill: currentColor; }
+.nav-cta svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
 
-/* Container Principal */
+/* Container Principal Fluido */
 .container {
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
   position: relative;
   z-index: 1;
 }
 
-/* Seção Hero (Topo) */
+/* Seção Hero (Topo) Adaptável */
 .hero {
-  padding: 9rem 1.5rem 4rem;
+  padding: 8rem 0 4rem;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: 7rem 1rem 3rem;
+    padding: 7rem 0 3rem;
     gap: 2rem;
   }
 }
@@ -140,11 +144,11 @@ header {
   border-radius: 20px;
   width: fit-content;
 }
-@media(max-width: 768px) { .badge-tag { margin: 0 auto; } }
+@media(max-width: 900px) { .badge-tag { margin: 0 auto; } }
 
 .hero-title {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
   font-weight: 800;
   line-height: 1.15;
   color: #fff;
@@ -152,48 +156,47 @@ header {
 .hero-title span { color: #ffb300; }
 
 .hero-desc {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
   color: #e8d0c8;
   line-height: 1.6;
 }
 
 .hero-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
-@media(max-width: 768px) { .hero-actions { justify-content: center; flex-wrap: wrap; } }
+@media(max-width: 900px) { .hero-actions { justify-content: center; } }
 
-.btn-primary {
-  background: linear-gradient(135deg, #25d366, #1aab55);
-  color: #fff;
-  font-weight: 700;
-  padding: 0.9rem 1.8rem;
+.btn-primary, .btn-outline {
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+  justify-content: center;
+  padding: 0.85rem 1.2rem;
   border-radius: 50px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #25d366, #1aab55);
+  color: #fff;
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
-  font-size: 0.95rem;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5); }
-.btn-primary svg { width: 20px; height: 20px; fill: currentColor; }
+.btn-primary svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
 
 .btn-outline {
   background: rgba(255, 255, 255, 0.05);
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   color: #fff;
-  font-weight: 600;
-  padding: 0.9rem 1.8rem;
-  border-radius: 50px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  transition: all 0.2s;
-  font-size: 0.95rem;
 }
 .btn-outline:hover {
   background: rgba(255, 255, 255, 0.12);
@@ -201,11 +204,11 @@ header {
   transform: translateY(-2px);
 }
 
-/* Imagem Hero com Frame Sofisticado */
+/* Imagem Hero com Adaptação Completa */
 .hero-image-wrap {
   display: flex;
   justify-content: center;
-  position: relative;
+  width: 100%;
 }
 
 .hero-logo-box {
@@ -213,7 +216,7 @@ header {
   background: linear-gradient(175deg, #2a0b12 0%, #150407 100%);
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 24px;
-  padding: 2.5rem 2rem;
+  padding: 2.2rem 1.5rem;
   box-shadow: 0 0 30px rgba(229, 57, 53, 0.2), 0 20px 40px rgba(0,0,0,0.6);
   display: flex;
   flex-direction: column;
@@ -225,8 +228,9 @@ header {
 
 .hero-logo-box img {
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   height: auto;
+  max-height: 110px;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.3);
   object-fit: contain;
@@ -245,29 +249,31 @@ header {
   color: #ffb300;
 }
 
-/* Seção de Destaques / Produtos */
+/* Seções Padrão */
 .section {
-  padding: 5rem 1.5rem;
+  padding: 4.5rem 0;
 }
 .section-title {
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
   font-weight: 700;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 .section-title span { color: #ffb300; }
 .section-subtitle {
   text-align: center;
   color: #b89990;
-  font-size: 1rem;
+  font-size: 0.95rem;
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2.5rem;
+  padding: 0 1rem;
 }
 
+/* Grid de Cards Responsiva */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
@@ -278,7 +284,7 @@ header {
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
   transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 .card:hover {
@@ -287,70 +293,56 @@ header {
   box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(255,179,0,0.1);
 }
 
-.card-icon {
-  font-size: 2.5rem;
-}
+.card-icon { font-size: 2.3rem; }
+.card h3 { font-family: 'Poppins', sans-serif; font-size: 1.15rem; color: #fff; }
+.card p { font-size: 0.9rem; color: #d0b5ae; line-height: 1.5; }
 
-.card h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
-  color: #fff;
-}
-
-.card p {
-  font-size: 0.9rem;
-  color: #d0b5ae;
-  line-height: 1.5;
-}
-
-/* Seção de Avaliação Google em Destaque */
+/* Banner de Avaliação do Google */
 .google-banner {
   background: linear-gradient(135deg, #1e080d 0%, #2a0b12 100%);
   border: 1.5px solid rgba(251, 188, 5, 0.4);
   border-radius: 24px;
-  padding: 3rem 2rem;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-.google-stars {
-  font-size: 1.8rem;
-  color: #FBBC05;
-  letter-spacing: 0.2rem;
-}
+.google-stars { font-size: 1.6rem; color: #FBBC05; letter-spacing: 0.15rem; }
 
 .btn-google-big {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  justify-content: center;
+  gap: 0.7rem;
   background: #FBBC05;
   color: #1a0808;
   font-weight: 700;
-  padding: 1rem 2rem;
+  padding: 0.9rem 1.8rem;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   text-decoration: none;
   box-shadow: 0 4px 20px rgba(251, 188, 5, 0.3);
   transition: background 0.2s, transform 0.2s;
+  width: 100%;
+  max-width: 320px;
 }
 .btn-google-big:hover { background: #fcc419; transform: translateY(-2px); }
-.btn-google-big svg { width: 22px; height: 22px; }
+.btn-google-big svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-/* Seção de Endereço e Contato */
+/* Grid de Informações e Localização */
 .info-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 24px;
-  padding: 3rem 2.5rem;
+  padding: 2.5rem 2rem;
 }
-@media(max-width: 768px) { .info-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; } }
 
 .info-item {
   display: flex;
@@ -359,7 +351,7 @@ header {
 }
 .info-item h4 {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #ffb300;
   display: flex;
   align-items: center;
@@ -367,7 +359,7 @@ header {
 }
 .info-item p {
   color: #e8d0c8;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   line-height: 1.6;
 }
 
@@ -375,25 +367,25 @@ header {
 footer {
   background: #0d0204;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 3rem 1.5rem;
+  padding: 2.5rem 1.25rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-top: 4rem;
+  gap: 0.8rem;
+  margin-top: auto;
 }
 
 .footer-brand {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
 }
 .footer-brand span { color: #ffb300; }
 
 .footer-text {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #a88078;
   max-width: 450px;
   line-height: 1.5;
@@ -405,12 +397,13 @@ footer {
 }
 
 .footer-dev {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #7a5850;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   border-top: 1px solid rgba(255,255,255,0.05);
   width: 100%;
-  padding-top: 1.5rem;
+  max-width: 500px;
+  padding-top: 1.2rem;
 }
 .footer-dev a { color: #9c6c60; text-decoration: none; transition: color 0.2s; }
 .footer-dev a:hover { color: #fff; }
@@ -418,7 +411,7 @@ footer {
 </head>
 <body>
 
-<!-- Header Profissional -->
+<!-- Header Responsivo -->
 <header>
   <a href="#" class="nav-brand">Cantinho do <span>Salgado</span></a>
   <a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." class="nav-cta" target="_blank" rel="noopener">
@@ -450,9 +443,12 @@ footer {
 
     <div class="hero-image-wrap">
       <div class="hero-logo-box">
-        <!-- Uso do formato WebP otimizado -->
-        <img src="logo-cantinho-dos-salgados-itaqua.webp" alt="Logo Cantinho do Salgado" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <div style="display:none; font-family:'Poppins',sans-serif; font-size:1.2rem; color:#ffb300; font-weight:700;">Cantinho do Salgado</div>
+        <!-- Imagem WebP adaptada e responsiva -->
+        <picture>
+          <source srcset="logo-cantinho-do-salgado-itaqua.png" type="image/webp">
+          <img src="logo-cantinho-dos-salgados-itaqua.png" alt="Logo Cantinho do Salgado" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        </picture>
+        <div style="display:none; font-family:'Poppins',sans-serif; font-size:1.1rem; color:#ffb300; font-weight:700;">Cantinho do Salgado</div>
         <div class="hero-rating">
           <span>★★★★★</span>
           <span>Nota 5.0 no Google</span>
@@ -489,7 +485,7 @@ footer {
   <section class="section">
     <div class="google-banner">
       <div class="google-stars">★★★★★</div>
-      <h2 style="font-family:'Poppins',sans-serif; font-size: 1.6rem;">Adora nossos salgados? Deixe sua avaliação!</h2>
+      <h2 style="font-family:'Poppins',sans-serif; font-size: clamp(1.3rem, 2.5vw, 1.6rem);">Adora nossos salgados? Deixe sua avaliação!</h2>
       <p style="color: #e8d0c8; max-width: 500px; font-size: 0.95rem; line-height: 1.5;">
         Sua opinião sincera no Google nos ajuda a crescer e continuar levando o melhor sabor para a nossa comunidade.
       </p>
@@ -501,24 +497,24 @@ footer {
   </section>
 
   <!-- SEÇÃO DE ENDEREÇO E LOCALIZAÇÃO -->
-  <section class="section">
+  <section class="section" style="margin-bottom: 2rem;">
     <div class="info-grid">
       <div class="info-item">
         <h4>📍 Onde Estamos</h4>
         <p><strong>Avenida Ítalo Adami, 1809</strong><br>Vila Ursulina / Estação · Itaquaquecetuba - SP</p>
-        <p style="color: #b89990; font-size: 0.85rem; margin-top: 0.5rem;">Atendimento para retirada no local e delivery via WhatsApp.</p>
+        <p style="color: #b89990; font-size: 0.85rem; margin-top: 0.3rem;">Atendimento para retirada no local e delivery via WhatsApp.</p>
       </div>
       <div class="info-item">
         <h4>⏰ Horário de Funcionamento</h4>
         <p>Segunda a Sábado: Das 09:00 às 20:00<br>Domingos e Feriados: Consultar disponibilidade.</p>
-        <a href="https://www.google.com.br/search?q=Cantinho+do+Salgado&ludocid=17995966140013704184&lsig=AB86z5XVfixF_MJyNuQOgV5s0_F-" target="_blank" rel="noopener" style="color:#ffb300; text-decoration:none; font-weight:600; font-size:0.9rem; margin-top:0.5rem; display:inline-block;">Ver rota no Google Maps →</a>
+        <a href="https://www.google.com.br/search?q=Cantinho+do+Salgado&ludocid=17995966140013704184&lsig=AB86z5XVfixF_MJyNuQOgV5s0_F-" target="_blank" rel="noopener" style="color:#ffb300; text-decoration:none; font-weight:600; font-size:0.9rem; margin-top:0.3rem; display:inline-block;">Ver rota no Google Maps →</a>
       </div>
     </div>
   </section>
 
 </div>
 
-<!-- Rodapé -->
+<!-- Rodapé Responsivo -->
 <footer>
   <div class="footer-brand">Cantinho do <span>Salgado</span></div>
   <p class="footer-text">
