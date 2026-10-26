@@ -1,0 +1,77 @@
+{
+  "empresa": {
+    "nome": "Coxinhas da Diva",
+    "slug": "coxinhas-da-diva",
+    "slogan": "Salgados & Doces",
+    "cidade": "Itaquaquecetuba",
+    "estado": "SP",
+    "descricao_meta": "Coxinhas da Diva em Itaquaquecetuba — Salgados crocantes, quentinhos e deliciosos. Peça já pelo delivery ou retire no local!",
+    "endereco": {
+      "rua": "Rua Padre João Manoel",
+      "numero": "30",
+      "bairro": "Jd. Carolina",
+      "cidade": "Itaquaquecetuba",
+      "estado": "SP",
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=Rua+Padre+Joao+Manoel+30+Jardim+Carolina+Itaquaquecetuba+SP",
+      "google_review_url": "https://www.google.com/search?q=coxinha+da+diva#lrd=0x94ce7d5009425bfd:0x334a315650fdfb0f,3,,,,"
+    },
+    "contatos": {
+      "whatsapp_principal": "5511970463036",
+      "whatsapp_link": "https://wa.me/5511970463036?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20fazer%20um%20pedido%20de%20salgados!",
+      "instagram": "https://www.instagram.com/coxinhasdadiva/",
+      "cardapio_digital": "https://pedido.anota.ai/loja/coxinhas-da-diva"
+    }
+  },
+  "configuracoes_visuais": {
+    "cor_primaria": "#e53935",
+    "cor_secundaria": "#ffb300",
+    "fundo_principal": "#120507",
+    "logo_imagem": "coxinhadadiva.png",
+    "favicon": "favicon.ico"
+  },
+  "analytics": {
+    "google_tag_manager_id": "G-SJ9EEX0R5J"
+  },
+  "perguntas_frequentes": [
+    {
+      "pergunta": "Como posso fazer meu pedido?",
+      "icone": "🥟",
+      "resposta": "Você pode fazer seu pedido diretamente pelo nosso WhatsApp ou pelo Cardápio Digital Anota AI para receber no conforto de sua casa!",
+      "texto_botao_cta": "Pedir pelo WhatsApp",
+      "mensagem_whatsapp": "Olá! Gostaria de fazer um pedido de salgados com vocês."
+    },
+    {
+      "pergunta": "Quais tipos de salgados vocês vendem?",
+      "icone": "🍗",
+      "resposta": "Temos coxinhas crocantes, mini salgados sortidos, kibes recheados, bolinhas de queijo e opções de doces incríveis!",
+      "texto_botao_cta": "Ver Cardápio Completo",
+      "mensagem_whatsapp": "Olá! Gostaria de saber os sabores de salgados e doces disponíveis hoje."
+    },
+    {
+      "pergunta": "Vocês fazem entregas na minha região?",
+      "icone": "🛵",
+      "resposta": "Entregamos em Itaquaquecetuba, Arujá e regiões próximas. Entre em contato informando seu endereço para consultar a taxa de entrega.",
+      "texto_botao_cta": "Consultar taxa de entrega",
+      "mensagem_whatsapp": "Olá! Gostaria de verificar a taxa de entrega para o meu endereço."
+    },
+    {
+      "pergunta": "Aceitam encomendas para festas e eventos?",
+      "icone": "🎉",
+      "resposta": "Sim! Temos centos de mini salgados fritos na hora para deixar sua festa ainda mais saborosa. Faça seu orçamento antecedido.",
+      "texto_botao_cta": "Solicitar Orçamento de Festa",
+      "mensagem_whatsapp": "Olá! Gostaria de fazer um orçamento de salgados para evento/festa."
+    },
+    {
+      "pergunta": "Quais são as formas de pagamento?",
+      "icone": "💳",
+      "resposta": "Aceitamos PIX, cartões de débito e crédito, e dinheiro. Pague com total praticidade no momento do pedido ou na entrega.",
+      "texto_botao_cta": "Fazer Pedido",
+      "mensagem_whatsapp": "Olá! Quero tirar dúvidas sobre o pagamento e fazer um pedido."
+    }
+  ],
+  "desenvolvimento": {
+    "empresa_parceira": "ImpulsoWeb10",
+    "site_parceiro": "https://avaliar.impulsoweb10.com.br",
+    "whatsapp_parceiro": "5511954950044"
+  }
+}
