@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://avaliar.impulsoweb10.com.br/motos/">
     <meta property="og:title" content="Takehana Mecânica de Motos | Oficina Especializada em Motos">
     <meta property="og:description" content="Manutenção preventiva, revisão completa, troca de óleo e consertos especializados em Itaquaquecetuba.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:image" content="https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png">
 
     <!-- Tailwind CSS CDN otimizado -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -54,7 +54,7 @@
       "@context": "https://schema.org",
       "@type": "AutoRepair",
       "name": "Takehana Mecânica de Motos",
-      "image": "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop",
+      "image": "https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png",
       "url": "https://avaliar.impulsoweb10.com.br/motos/",
       "telephone": "5511999999999",
       "address": {
@@ -615,14 +615,14 @@
 
     <!-- Configuração Centralizada e Scripts de Produção Seguros -->
     <script>
-        // CONFIGURAÇÃO CENTRALIZADA COM OS DADOS DA TAKEHANA
+        // CONFIGURAÇÃO CENTRALIZADA COM O LINK DO EMBLEMA NA MENSAGEM DO WHATSAPP
         const SITE_CONFIG = {
             whatsappNumber: "5511999999999", // Atualize aqui quando tiver o número oficial
-            defaultMessage: "Olá! Vim pelo site e gostaria de mais informações sobre os serviços da oficina.",
+            defaultMessage: "Olá! Vim pelo site e gostaria de mais informações sobre os serviços da Takehana Mecânica de Motos.\n\n📷 Emblema oficial: https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png",
             domain: "avaliar.impulsoweb10.com.br"
         };
 
-        // Atualizar dinamicamente os links de WhatsApp com o número configurado
+        // Atualizar dinamicamente os links de WhatsApp com o número e a mensagem configurados
         document.querySelectorAll('.whatsapp-cta').forEach(el => {
             el.setAttribute('href', `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(SITE_CONFIG.defaultMessage)}`);
             el.setAttribute('target', '_blank');
@@ -710,7 +710,7 @@
                 
                 const badge = document.createElement('span');
                 badge.className = 'absolute top-3 right-3 bg-racing-700 text-white text-xs font-bold px-3 py-1 rounded-full border border-racing-600';
-.priceTag;
+                badge.textContent = p.priceTag;
 
                 imgContainer.appendChild(img);
                 imgContainer.appendChild(badge);
@@ -730,7 +730,7 @@
                 actionDiv.className = 'p-5 sm:p-6 pt-0';
 
                 const link = document.createElement('a');
-                const msg = `Olá! Gostaria de saber mais sobre o produto: ${p.name}`;
+                const msg = `Olá! Gostaria de consultar sobre o produto: ${p.name}\n\n📷 Emblema oficial: https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png`;
                 link.href = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
@@ -778,7 +778,7 @@
         document.querySelectorAll('.service-inquiry-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const serviceName = btn.getAttribute('data-service');
-                const serviceMsg = `Olá! Gostaria de agendar uma manutenção ou orçamento para minha moto (${serviceName}).`;
+                const serviceMsg = `Olá! Gostaria de agendar uma manutenção ou orçamento para minha moto (${serviceName}).\n\n📷 Emblema oficial: https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png`;
                 btn.setAttribute('href', `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(serviceMsg)}`);
                 btn.setAttribute('target', '_blank');
                 btn.setAttribute('rel', 'noopener noreferrer');
@@ -801,7 +801,7 @@
                 return;
             }
 
-            const message = `Olá! Meu nome é *${name}* (Tel: ${phone}).\nEstou com uma moto *${model}* (${year}).\nServiço desejado: *${service}*.\nDetalhes: ${desc || 'Nenhum detalhe adicional.'}`;
+            const message = `Olá! Meu nome é *${name}* (Tel: ${phone}).\nEstou com uma moto *${model}* (${year}).\nServiço desejado: *${service}*.\nDetalhes: ${desc || 'Nenhum detalhe adicional.'}\n\n📷 Emblema oficial: https://avaliar.impulsoweb10.com.br/motos/emblema-takehana.png`;
             
             const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
