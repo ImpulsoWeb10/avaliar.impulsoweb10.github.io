@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nome da Oficina] | Oficina Mecânica & Preparação de Motos</title>
+    <meta name="description" content="Oficina mecânica especializada em manutenção preventiva, corretiva e diagnóstico avançado para motocicletas. Solicite seu orçamento via WhatsApp!">
+    <link rel="canonical" href="https://[seu-dominio-aqui].com.br/">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://[seu-dominio-aqui].com.br/">
+    <meta property="og:title" content="[Nome da Oficina] | Oficina Especializada em Motos">
+    <meta property="og:description" content="Manutenção especializada, diagnóstico avançado e preparação com padrão profissional.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Tailwind CSS CDN otimizado para produção -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        racing: {
+                            900: '#0a0a0a',
+                            800: '#121212',
+                            700: '#1a1a1a',
+                            600: '#262626',
+                            red: '#e50914',
+                            orange: '#ff5500',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-racing { font-family: 'Montserrat', sans-serif; }
+    </style>
+
+    <!-- Schema.org LocalBusiness (Ajustado com placeholders explícitos para dados pendentes) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "[Nome da Oficina - PENDENTE]",
+      "image": "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop",
+      "url": "https://[seu-dominio-aqui].com.br/",
+      "telephone": "[TELEFONE_PENDENTE]",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "[ENDEREÇO_PENDENTE]",
+        "addressLocality": "[CIDADE_PENDENTE]",
+        "addressRegion": "[UF_PENDENTE]",
+        "postalCode": "[CEP_PENDENTE]",
+        "addressCountry": "BR"
+      },
+      "priceRange": "$$"
+    }
+    </script>
+</head>
+<body class="bg-racing-900 text-gray-100 antialiased selection:bg-racing-red selection:text-white">
+
+    <!-- 1. Cabeçalho -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-racing-900/90 backdrop-blur-md border-b border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-racing-red flex items-center justify-center text-white font-racing font-black text-xl shadow-lg shadow-racing-red/30 group-hover:scale-105 transition-transform" aria-hidden="true">
+                    <i class="fa-solid fa-motorcycle"></i>
+                </div>
+                <div>
+                    <span class="font-racing font-black text-xl tracking-wider text-white">[NOME DA <span class="text-racing-red">OFICINA</span>]</span>
+                    <span class="block text-[10px] tracking-widest text-gray-400 uppercase font-semibold">Motors & Racing</span>
+                </div>
+            </a>
+
+            <!-- Navegação Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300" aria-label="Navegação Principal">
+                <a href="#servicos" class="hover:text-racing-red transition-colors">Serviços</a>
+                <a href="#categorias" class="hover:text-racing-red transition-colors">Especialidades</a>
+                <a href="#catalogo" class="hover:text-racing-red transition-colors">Catálogo Demonstrativo</a>
+                <a href="#processo" class="hover:text-racing-red transition-colors">Como Funciona</a>
+                <a href="#galeria" class="hover:text-racing-red transition-colors">Galeria</a>
+                <a href="#faq" class="hover:text-racing-red transition-colors">FAQ</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#orcamento" class="bg-racing-red hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-lg shadow-racing-red/20 flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i> Orçamento Rápido
+                </a>
+            </div>
+
+            <!-- Botão Menu Mobile -->
+            <button id="mobile-menu-btn" aria-label="Abrir Menu de Navegação" aria-expanded="false" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none focus:ring-2 focus:ring-racing-red rounded-lg p-1">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-racing-800 border-b border-racing-600 px-4 pt-2 pb-6 space-y-3">
+            <a href="#servicos" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">Serviços</a>
+            <a href="#categorias" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">Especialidades</a>
+            <a href="#catalogo" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">Catálogo Demonstrativo</a>
+            <a href="#processo" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">Como Funciona</a>
+            <a href="#galeria" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">Galeria</a>
+            <a href="#faq" class="block py-2 text-gray-300 hover:text-racing-red font-medium mobile-link">FAQ</a>
+            <a href="#orcamento" class="block w-full text-center bg-racing-red text-white py-3 rounded-lg font-semibold mobile-link">
+                <i class="fa-brands fa-whatsapp mr-2" aria-hidden="true"></i> Solicitar Orçamento
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-gradient-to-br from-racing-900 via-racing-800 to-black">
+        <div class="absolute inset-0 z-0 opacity-40 bg-cover bg-center mix-blend-luminosity" style="background-image: url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1920&auto=format&fit=crop');" role="img" aria-label="Oficina de motocicletas em plano de fundo"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-racing-900 via-racing-900/60 to-transparent" aria-hidden="true"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-racing-red/10 border border-racing-red/30 text-racing-red text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-racing-red animate-pulse" aria-hidden="true"></span> Oficina Mecânica Especializada
+                </div>
+                <h1 class="font-racing font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-none">
+                    Performance e Cuidado Para a Sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-racing-red to-orange-500">Motocicleta</span>
+                </h1>
+                <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal">
+                    Manutenção preventiva, diagnóstico técnico e serviços especializados com padrão profissional e atendimento transparente.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#orcamento" class="whatsapp-cta w-full sm:w-auto bg-racing-red hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-racing-red/30 transition-all flex items-center justify-center gap-3 text-base focus:ring-2 focus:ring-white">
+                        <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i> Falar com Mecânico Responsável
+                    </a>
+                    <a href="#servicos" class="w-full sm:w-auto bg-racing-700/80 hover:bg-racing-600 text-white font-semibold px-8 py-4 rounded-xl border border-racing-600 transition-all flex items-center justify-center text-base focus:ring-2 focus:ring-white">
+                        Conhecer Serviços
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-racing-600/50 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <span class="block font-racing font-black text-2xl text-white">Profissional</span>
+                        <span class="text-xs text-gray-400">Atendimento Dedicado</span>
+                    </div>
+                    <div>
+                        <span class="block font-racing font-black text-2xl text-white">Garantia</span>
+                        <span class="text-xs text-gray-400">Em Serviços Executados</span>
+                    </div>
+                    <div>
+                        <span class="block font-racing font-black text-2xl text-white">Ferramentas</span>
+                        <span class="text-xs text-gray-400">Padrão Técnico</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5 relative">
+                <div class="relative rounded-2xl overflow-hidden border border-racing-600 shadow-2xl shadow-black/80 group">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=800&auto=format&fit=crop" alt="Motocicleta em manutenção na oficina" loading="lazy" width="800" height="480" class="w-full h-[400px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-racing-900 via-transparent to-transparent" aria-hidden="true"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-racing-900/80 backdrop-blur-md border border-racing-600 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-racing-red/20 flex items-center justify-center text-racing-red text-xl" aria-hidden="true">
+                            <i class="fa-solid fa-wrench"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Diagnóstico Técnico</h4>
+                            <p class="text-xs text-gray-300">Análise criteriosa e verificação de itens vitais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Diferenciais da Oficina -->
+    <section class="py-20 bg-racing-800 border-y border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Nossos Diferenciais</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Rigidez Técnica e Transparência</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Combinamos experiência e cuidado minucioso para assegurar o funcionamento ideal da sua moto.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-racing-700/50 border border-racing-600/60 hover:border-racing-red/50 transition-all group">
+                    <div class="w-14 h-14 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-2xl mb-6 group-hover:bg-racing-red group-hover:text-white transition-all" aria-hidden="true">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-xl text-white mb-3">Orçamento Transparente</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Apresentação clara de valores e serviços necessários antes de iniciar qualquer intervenção na moto.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-racing-700/50 border border-racing-600/60 hover:border-racing-red/50 transition-all group">
+                    <div class="w-14 h-14 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-2xl mb-6 group-hover:bg-racing-red group-hover:text-white transition-all" aria-hidden="true">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-xl text-white mb-3">Qualidade e Garantia</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Utilização de insumos recomendados e peças de procedência confiável com garantia aplicada.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-racing-700/50 border border-racing-600/60 hover:border-racing-red/50 transition-all group">
+                    <div class="w-14 h-14 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-2xl mb-6 group-hover:bg-racing-red group-hover:text-white transition-all" aria-hidden="true">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-xl text-white mb-3">Pontualidade nos Prazos</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Comprometimento com o prazo combinado para que você não fique a pé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Serviços Especializados -->
+    <section id="servicos" class="py-20 bg-racing-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Nossos Serviços</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Soluções Completas para sua Moto</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Serviços executados com rigor técnico, ferramentas adequadas e atenção a cada detalhe.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card Serviço 1 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1591637354859-99411d3319be?q=80&w=600&auto=format&fit=crop" alt="Revisão Completa" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Revisão Completa</h3>
+                        <p class="text-gray-400 text-sm mb-6">Verificação integral de itens de segurança, motor, transmissão e sistema de rodagem.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Revisão Completa">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+                <!-- Card Serviço 2 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=600&auto=format&fit=crop" alt="Manutenção Preventiva" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Manutenção Preventiva</h3>
+                        <p class="text-gray-400 text-sm mb-6">Troca de óleo, substituição de filtros, velas, regulagens e limpeza de componentes.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Manutenção Preventiva">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+                <!-- Card Serviço 3 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=600&auto=format&fit=crop" alt="Diagnóstico e Injeção" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Diagnóstico & Injeção</h3>
+                        <p class="text-gray-400 text-sm mb-6">Verificação de falhas, análise de sensores e controle do sistema de injeção eletrônica.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Diagnóstico e Injeção">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+                <!-- Card Serviço 4 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop" alt="Freios e Suspensão" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Freios & Suspensão</h3>
+                        <p class="text-gray-400 text-sm mb-6">Troca de pastilhas, discos, fluido de freio, retentores e ajuste de amortecedores.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Freios e Suspensão">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+                <!-- Card Serviço 5 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=600&auto=format&fit=crop" alt="Pneus e Rodagem" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Pneus & Rodagem</h3>
+                        <p class="text-gray-400 text-sm mb-6">Substituição de pneus, verificação de aros, alinhamento e balanceamento de rodas.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Pneus e Rodagem">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+                <!-- Card Serviço 6 -->
+                <div class="bg-racing-800 rounded-2xl p-6 border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 rounded-xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1543633513-e290f6b4847e?q=80&w=600&auto=format&fit=crop" alt="Manutenção Geral" loading="lazy" width="600" height="192" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="font-racing font-bold text-xl text-white mb-2">Manutenção Geral</h3>
+                        <p class="text-gray-400 text-sm mb-6">Soluções para motor, elétrica, transmissão e ajustes customizados conforme necessidade.</p>
+                    </div>
+                    <a href="#orcamento" class="service-inquiry-btn w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2" data-service="Manutenção Geral">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçar Serviço
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Categorias de Motos Atendidas -->
+    <section id="categorias" class="py-20 bg-racing-800 border-t border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Atendimento Amplo</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Diferentes Estilos de Motocicletas</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Estrutura preparada para atender variados modelos e cilindradas com segurança.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-racing-700/40 p-6 rounded-2xl border border-racing-600 text-center hover:border-racing-red transition-all group">
+                    <div class="text-4xl text-racing-red mb-4 group-hover:scale-110 transition-transform" aria-hidden="true">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-1">Street & Naked</h3>
+                    <p class="text-xs text-gray-400">Motos urbanas e de média cilindrada.</p>
+                </div>
+                <div class="bg-racing-700/40 p-6 rounded-2xl border border-racing-600 text-center hover:border-racing-red transition-all group">
+                    <div class="text-4xl text-racing-red mb-4 group-hover:scale-110 transition-transform" aria-hidden="true">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-1">Trail & Big Trail</h3>
+                    <p class="text-xs text-gray-400">Uso misto e aventura.</p>
+                </div>
+                <div class="bg-racing-700/40 p-6 rounded-2xl border border-racing-600 text-center hover:border-racing-red transition-all group">
+                    <div class="text-4xl text-racing-red mb-4 group-hover:scale-110 transition-transform" aria-hidden="true">
+                        <i class="fa-solid fa-road"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-1">Custom & Touring</h3>
+                    <p class="text-xs text-gray-400">Estradas e estilo clássico.</p>
+                </div>
+                <div class="bg-racing-700/40 p-6 rounded-2xl border border-racing-600 text-center hover:border-racing-red transition-all group">
+                    <div class="text-4xl text-racing-red mb-4 group-hover:scale-110 transition-transform" aria-hidden="true">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-1">Scooter & CUB</h3>
+                    <p class="text-xs text-gray-400">Praticidade para o dia a dia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Catálogo Demonstrativo de Peças e Acessórios -->
+    <section id="catalogo" class="py-20 bg-racing-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Itens Demonstrativos</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Catálogo de Produtos & Insumos</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Exemplo demonstrativo de itens e lubrificantes. Consulte valores e disponibilidade real via WhatsApp.</p>
+            </div>
+
+            <!-- Controles de Busca e Filtros -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+                <div class="w-full md:w-96 relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400" aria-hidden="true">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="product-search" placeholder="Pesquisar item demonstrativo..." aria-label="Pesquisar item demonstrativo" class="w-full pl-11 pr-4 py-3 bg-racing-800 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm">
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto" role="group" aria-label="Filtros de categoria">
+                    <button data-filter="all" class="filter-btn px-4 py-2 bg-racing-red text-white rounded-lg text-sm font-semibold transition-all">Todos</button>
+                    <button data-filter="oleo" class="filter-btn px-4 py-2 bg-racing-800 hover:bg-racing-700 text-gray-300 rounded-lg text-sm font-semibold transition-all border border-racing-600">Óleos & Fluidos</button>
+                    <button data-filter="transmissao" class="filter-btn px-4 py-2 bg-racing-800 hover:bg-racing-700 text-gray-300 rounded-lg text-sm font-semibold transition-all border border-racing-600">Transmissão</button>
+                    <button data-filter="frenagem" class="filter-btn px-4 py-2 bg-racing-800 hover:bg-racing-700 text-gray-300 rounded-lg text-sm font-semibold transition-all border border-racing-600">Frenagem</button>
+                    <button data-filter="filtro" class="filter-btn px-4 py-2 bg-racing-800 hover:bg-racing-700 text-gray-300 rounded-lg text-sm font-semibold transition-all border border-racing-600">Filtros</button>
+                </div>
+            </div>
+
+            <!-- Grid de Produtos (Renderização com textContent seguro contra XSS) -->
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Preenchido via JavaScript seguro -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Processo de Atendimento em 4 Etapas -->
+    <section id="processo" class="py-20 bg-racing-800 border-t border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Simples e Organizado</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Como Funciona o Atendimento</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Etapas claras para garantir tranquilidade e agilidade ao cuidar da sua motocicleta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-racing-700/30 border border-racing-600 relative">
+                    <span class="absolute top-4 right-4 font-racing font-black text-3xl text-racing-red/20" aria-hidden="true">01</span>
+                    <div class="w-12 h-12 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-xl mb-4 font-bold" aria-hidden="true">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-2">1. Contato Prévio</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Você nos envia mensagem informando o modelo da moto e o serviço necessário.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-racing-700/30 border border-racing-600 relative">
+                    <span class="absolute top-4 right-4 font-racing font-black text-3xl text-racing-red/20" aria-hidden="true">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-xl mb-4 font-bold" aria-hidden="true">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-2">2. Análise Técnica</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Avaliação detalhada da motocicleta e apresentação de orçamento prévio.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-racing-700/30 border border-racing-600 relative">
+                    <span class="absolute top-4 right-4 font-racing font-black text-3xl text-racing-red/20" aria-hidden="true">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-xl mb-4 font-bold" aria-hidden="true">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-2">3. Execução</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Realização do serviço com ferramentas adequadas e padrão técnico.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-racing-700/30 border border-racing-600 relative">
+                    <span class="absolute top-4 right-4 font-racing font-black text-3xl text-racing-red/20" aria-hidden="true">04</span>
+                    <div class="w-12 h-12 rounded-xl bg-racing-red/10 text-racing-red flex items-center justify-center text-xl mb-4 font-bold" aria-hidden="true">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                    </div>
+                    <h3 class="font-racing font-bold text-lg text-white mb-2">4. Retirada</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Testes finais, entrega e orientações sobre a manutenção realizada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Formulário de Orçamento para WhatsApp -->
+    <section id="orcamento" class="py-20 bg-racing-900 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-racing-800 rounded-3xl p-8 sm:p-12 border border-racing-600/60 shadow-2xl">
+                <div class="text-center max-w-xl mx-auto mb-10 space-y-3">
+                    <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Canal Direto</span>
+                    <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Solicitar Orçamento</h2>
+                    <p class="text-gray-400 text-sm">Preencha os campos abaixo. O sistema montará uma mensagem automatizada para envio via WhatsApp.</p>
+                </div>
+
+                <form id="whatsapp-form" class="space-y-6" novalidate>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="client-name" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Seu Nome *</label>
+                            <input type="text" id="client-name" required placeholder="Ex: Carlos Silva" class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm">
+                        </div>
+                        <div>
+                            <label for="client-phone" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Telefone / WhatsApp *</label>
+                            <input type="tel" id="client-phone" required placeholder="Ex: (11) 99999-9999" class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="bike-model" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Modelo da Moto *</label>
+                            <input type="text" id="bike-model" required placeholder="Ex: Honda CB 500F" class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm">
+                        </div>
+                        <div>
+                            <label for="bike-year" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Ano da Moto *</label>
+                            <input type="text" id="bike-year" required placeholder="Ex: 2022" class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="service-type" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Serviço Desejado *</label>
+                        <select id="service-type" required class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white focus:outline-none focus:border-racing-red text-sm">
+                            <option value="">Selecione o serviço...</option>
+                            <option value="Revisão Completa">Revisão Completa</option>
+                            <option value="Manutenção Preventiva">Manutenção Preventiva</option>
+                            <option value="Diagnóstico e Injeção">Diagnóstico & Injeção</option>
+                            <option value="Freios e Suspensão">Freios & Suspensão</option>
+                            <option value="Pneus e Rodagem">Pneus & Rodagem</option>
+                            <option value="Manutenção Geral / Outros">Manutenção Geral / Outros</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="service-desc" class="block text-xs font-semibold text-gray-300 uppercase mb-2">Observações / Sintomas</label>
+                        <textarea id="service-desc" rows="4" placeholder="Descreva eventuais barulhos ou detalhes relevantes..." class="w-full px-4 py-3 bg-racing-900 border border-racing-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-racing-red text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-racing-red hover:bg-red-700 text-white font-bold py-4 rounded-xl shadow-xl shadow-racing-red/30 transition-all flex items-center justify-center gap-3 text-base focus:ring-2 focus:ring-white">
+                        <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i> Enviar Mensagem para WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Galeria de Fotos -->
+    <section id="galeria" class="py-20 bg-racing-800 border-t border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Ambiente</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Galeria de Fotos</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Organização e cuidado profissional em nossa estrutura.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-racing-600 group h-64">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600&auto=format&fit=crop" alt="Área de trabalho da oficina" loading="lazy" width="600" height="256" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-racing-600 group h-64">
+                    <img src="https://images.unsplash.com/photo-1591637354859-99411d3319be?q=80&w=600&auto=format&fit=crop" alt="Equipamentos e ferramentas" loading="lazy" width="600" height="256" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-racing-600 group h-64">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=600&auto=format&fit=crop" alt="Manutenção em andamento" loading="lazy" width="600" height="256" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Perguntas Frequentes (FAQ) com Acessibilidade Corrigida -->
+    <section id="faq" class="py-20 bg-racing-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-racing-red text-xs font-semibold uppercase tracking-widest">Esclarecimentos</span>
+                <h2 class="font-racing font-extrabold text-3xl sm:text-4xl text-white uppercase">Perguntas Frequentes</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Dúvidas comuns sobre agendamento, prazos e funcionamento.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-racing-800 rounded-2xl border border-racing-600 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-racing font-bold text-white flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-racing-red" aria-expanded="false">
+                        <span>Preciso agendar horário ou posso levar a moto direto?</span>
+                        <i class="fa-solid fa-chevron-down text-racing-red transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-gray-300 text-sm leading-relaxed border-t border-racing-600/50 pt-3">
+                        Recomendamos contato prévio via WhatsApp para organizarmos os horários e garantirmos agilidade na avaliação e execução do serviço.
+                    </div>
+                </div>
+                <div class="bg-racing-800 rounded-2xl border border-racing-600 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-racing font-bold text-white flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-racing-red" aria-expanded="false">
+                        <span>Qual o prazo médio para serviços de revisão?</span>
+                        <i class="fa-solid fa-chevron-down text-racing-red transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-gray-300 text-sm leading-relaxed border-t border-racing-600/50 pt-3">
+                        Revisões periódicas costumam ser finalizadas no mesmo dia (sob agendamento prévio). Intervenções complexas em motores requerem análise específica de prazo.
+                    </div>
+                </div>
+                <div class="bg-racing-800 rounded-2xl border border-racing-600 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-racing font-bold text-white flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-racing-red" aria-expanded="false">
+                        <span>Os serviços possuem garantia?</span>
+                        <i class="fa-solid fa-chevron-down text-racing-red transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-gray-300 text-sm leading-relaxed border-t border-racing-600/50 pt-3">
+                        Sim, todos os serviços mecânicos realizados contam com garantia documentada para sua total tranquilidade.
+                    </div>
+                </div>
+                <div class="bg-racing-800 rounded-2xl border border-racing-600 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-racing font-bold text-white flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-racing-red" aria-expanded="false">
+                        <span>Quais formas de pagamento são aceitas?</span>
+                        <i class="fa-solid fa-chevron-down text-racing-red transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-gray-300 text-sm leading-relaxed border-t border-racing-600/50 pt-3">
+                        Aceitamos Pix, transferências e cartões (consulte condições diretamente com nossa equipe).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Chamada Final para Agendamento -->
+    <section class="py-20 bg-gradient-to-r from-racing-red to-orange-600 text-white text-center relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+            <h2 class="font-racing font-black text-3xl sm:text-5xl uppercase tracking-tight">Sua Moto Em Boas Mãos</h2>
+            <p class="text-white/90 text-base sm:text-lg max-w-2xl mx-auto">Garanta a segurança, o desempenho e a durabilidade da sua motocicleta com quem entende do assunto.</p>
+            <div class="pt-4">
+                <a href="#orcamento" class="whatsapp-cta bg-racing-900 hover:bg-black text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all inline-flex items-center gap-3 text-base focus:ring-2 focus:ring-white">
+                    <i class="fa-brands fa-whatsapp text-2xl text-green-500" aria-hidden="true"></i> Solicitar Atendimento Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Rodapé com Configuração Centralizada -->
+    <footer class="bg-black text-gray-400 py-16 border-t border-racing-600/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-racing-red flex items-center justify-center text-white font-racing font-black text-xl" aria-hidden="true">
+                        <i class="fa-solid fa-motorcycle"></i>
+                    </div>
+                    <span class="font-racing font-black text-xl tracking-wider text-white">[NOME DA OFICINA]</span>
+                </div>
+                <p class="text-sm text-gray-400 leading-relaxed">Oficina mecânica especializada em manutenção preventiva, corretiva e serviços automotivos para motocicletas.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="font-racing font-bold text-white text-base uppercase tracking-wider">Horário de Funcionamento</h4>
+                <ul class="text-sm space-y-2">
+                    <li class="flex justify-between"><span>Segunda a Sexta:</span> <span class="text-white">[Horário Pendente]</span></li>
+                    <li class="flex justify-between"><span>Sábado:</span> <span class="text-white">[Horário Pendente]</span></li>
+                    <li class="flex justify-between"><span>Domingo:</span> <span class="text-racing-red">Fechado</span></li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="font-racing font-bold text-white text-base uppercase tracking-wider">Localização & Contato</h4>
+                <p class="text-sm leading-relaxed" id="footer-contact-info">
+                    Endereço: [Endereço Completo Pendente]<br>
+                    Telefone/WhatsApp: [Aguardando Confirmação]<br>
+                    E-mail: [E-mail Pendente]
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-racing-600/30 text-center text-xs text-gray-500">
+            &copy; 2026 [Nome da Oficina]. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- 13. Botão Flutuante de WhatsApp (Pendente até confirmação de número) -->
+    <a href="#orcamento" aria-label="Solicitar orçamento via WhatsApp" class="whatsapp-cta fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition-transform hover:scale-110 focus:ring-2 focus:ring-white">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <!-- Configuração Centralizada e Scripts de Produção Seguros -->
+    <script>
+        // CONFIGURAÇÃO CENTRALIZADA (Edite aqui quando os dados reais forem fornecidos)
+        const SITE_CONFIG = {
+            whatsappNumber: "5511999999999", // Placeholder pendente até confirmação
+            defaultMessage: "Olá, gostaria de solicitar um orçamento para minha moto.",
+            domain: "[seu-dominio-aqui].com.br"
+        };
+
+        // Atualizar dinamicamente os links de WhatsApp com o número configurado
+        document.querySelectorAll('.whatsapp-cta').forEach(el => {
+            el.setAttribute('href', `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(SITE_CONFIG.defaultMessage)}`);
+            el.setAttribute('target', '_blank');
+            el.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        // Menu Mobile Toggle com acessibilidade
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', !isHidden);
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // FAQ Accordion Corrigido com controle de aria-expanded
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isHidden = content.classList.toggle('hidden');
+                btn.setAttribute('aria-expanded', !isHidden);
+                const icon = btn.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Catálogo Demonstrativo (Dados protegidos contra XSS utilizando textContent)
+        const demoProducts = [
+            { id: 1, name: "Óleo Exemplo 10W30 Semi-Sintético", category: "oleo", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=500&auto=format&fit=crop" },
+            { id: 2, name: "Kit Transmissão Demonstrativo", category: "transmissao", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=500&auto=format&fit=crop" },
+            { id: 3, name: "Pastilha de Freio (Exemplo)", category: "frenagem", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=500&auto=format&fit=crop" },
+            { id: 4, name: "Filtro de Ar Demonstrativo", category: "filtro", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1591637354859-99411d3319be?q=80&w=500&auto=format&fit=crop" },
+            { id: 5, name: "Óleo Sintético Demonstrativo", category: "oleo", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=500&auto=format&fit=crop" },
+            { id: 6, name: "Fluido de Freio Demonstrativo", category: "frenagem", priceTag: "Consulte Valor", image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=500&auto=format&fit=crop" }
+        ];
+
+        const productsGrid = document.getElementById('products-grid');
+        const searchInput = document.getElementById('product-search');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        function renderProducts() {
+            productsGrid.innerHTML = ''; // Limpa o container de forma segura
+            
+            const filtered = demoProducts.filter(p => {
+                const matchesCategory = currentFilter === 'all' || p.category === currentFilter;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                const emptyMsg = document.createElement('div');
+                emptyMsg.className = 'col-span-full text-center py-12 text-gray-400';
+                emptyMsg.textContent = 'Nenhum item encontrado com esses termos.';
+                productsGrid.appendChild(emptyMsg);
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-racing-800 rounded-2xl overflow-hidden border border-racing-600/40 hover:border-racing-red/50 transition-all flex flex-col justify-between';
+
+                const innerDiv = document.createElement('div');
+                
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'h-48 overflow-hidden relative';
+                
+                const img = document.createElement('img');
+                img.src = p.image;
+                img.alt = p.name;
+                img.loading = 'lazy';
+                img.width = 500;
+                img.height = 192;
+                img.className = 'w-full h-full object-cover hover:scale-105 transition-transform duration-500';
+                
+                const badge = document.createElement('span');
+                badge.className = 'absolute top-3 right-3 bg-racing-700 text-white text-xs font-bold px-3 py-1 rounded-full border border-racing-600';
+                badge.textContent = p.priceTag;
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(badge);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'p-6';
+                
+                const title = document.createElement('h3');
+                title.className = 'font-racing font-bold text-lg text-white mb-4';
+                title.textContent = p.name;
+
+                contentDiv.appendChild(title);
+                innerDiv.appendChild(imgContainer);
+                innerDiv.appendChild(contentDiv);
+
+                const actionDiv = document.createElement('div');
+                actionDiv.className = 'p-6 pt-0';
+
+                const link = document.createElement('a');
+                const msg = `Olá, gostaria de consultar a disponibilidade e valor real do item demonstrativo: ${p.name}`;
+                link.href = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'w-full py-3 bg-racing-700 hover:bg-racing-red text-white text-center rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2';
+                
+                const icon = document.createElement('i');
+                icon.className = 'fa-brands fa-whatsapp text-lg';
+                icon.setAttribute('aria-hidden', 'true');
+                
+                link.appendChild(icon);
+                link.appendChild(document.createTextNode(' Consultar Disponibilidade'));
+
+                actionDiv.appendChild(link);
+
+                card.appendChild(innerDiv);
+                card.appendChild(actionDiv);
+
+                productsGrid.appendChild(card);
+            });
+        }
+
+        // Eventos de Filtro
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-racing-red', 'text-white');
+                    b.classList.add('bg-racing-800', 'text-gray-300', 'border', 'border-racing-600');
+                });
+                btn.classList.remove('bg-racing-800', 'text-gray-300', 'border', 'border-racing-600');
+                btn.classList.add('bg-racing-red', 'text-white');
+                currentFilter = btn.getAttribute('data-filter');
+                renderProducts();
+            });
+        });
+
+        // Evento de Busca
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderProducts();
+        });
+
+        // Inicializar Catálogo
+        renderProducts();
+
+        // Manipulador para botões de serviço individuais
+        document.querySelectorAll('.service-inquiry-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const serviceName = btn.getAttribute('data-service');
+                const serviceMsg = `Olá, gostaria de solicitar um orçamento para o serviço de ${serviceName}.`;
+                btn.setAttribute('href', `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(serviceMsg)}`);
+                btn.setAttribute('target', '_blank');
+                btn.setAttribute('rel', 'noopener noreferrer');
+            });
+        });
+
+        // Envio do Formulário de Orçamento para WhatsApp com Validação Segura
+        const whatsappForm = document.getElementById('whatsapp-form');
+        whatsappForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('client-name').value.trim();
+            const phone = document.getElementById('client-phone').value.trim();
+            const model = document.getElementById('bike-model').value.trim();
+            const year = document.getElementById('bike-year').value.trim();
+            const service = document.getElementById('service-type').value;
+            const desc = document.getElementById('service-desc').value.trim();
+
+            if (!name || !phone || !model || !year || !service) {
+                alert('Por favor, preencha todos os campos obrigatórios (*).');
+                return;
+            }
+
+            const message = `Olá, meu nome é *${name}* (Tel: ${phone}).\nEstou com uma moto *${model}* (${year}).\nServiço desejado: *${service}*.\nDetalhes: ${desc || 'Nenhum detalhe adicional.'}`;
+            
+            const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
