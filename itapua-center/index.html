@@ -1,147 +1,526 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação Itapuã Center</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e0c">
+<meta name="description" content="Materiais de construção no Jardim Itapuã, em Itaquaquecetuba - SP. Conheça a Itapuã Center e chame no WhatsApp!">
+<meta name="keywords" content="Materiais de Construção, Itaquaquecetuba / SP, Itapuã Center">
+<meta name="author" content="ImpulsoWeb10">
+<link rel="canonical" href="https://impulsoweb10.com.br/itapua-center/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Materiais de Construção em Itaquaquecetuba - Itapuã Center">
+<meta property="og:description" content="Tudo para sua construção, reforma e acabamento no Jardim Itapuã, em Itaquaquecetuba - SP. Chame no WhatsApp!">
+<meta property="og:image" content="logo-itapua-center.webp">
+<meta property="og:locale" content="pt_BR">
+<title>Itapuã Center | Materiais de Construção em Itaquaquecetuba</title>
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        .container { max-width: 420px; width: 100%; background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px); padding: 40px 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); text-align: center; }
-        .logo { width: 150px; height: 100px; object-fit: contain; padding: 10px; border-radius: 22px; border: 3px solid #facc15; background: white; margin: 0 auto 20px; }
-        h1 { font-size: 26px; margin-bottom: 5px; color: #fff; }
-        h2 { font-size: 17px; color: #facc15; margin-bottom: 25px; font-weight: normal; }
-        .rating-box { margin-bottom: 25px; display: flex; justify-content: center; gap: 8px; }
-        .star-btn { font-size: 40px; color: #475569; cursor: pointer; transition: 0.3s; }
-        .star-btn.active { color: #facc15; transform: scale(1.25); text-shadow: 0 0 20px rgba(250, 204, 21, 0.6); }
-        .botao { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; font-size: 16px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; margin-bottom: 10px; }
-        .google { background: #facc15; color: #000; animation: pulse 2s infinite; }
-        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
-        .hidden { display: none; }
-        
-        /* MODAL LINDÃO */
-        #modal-instrucao {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.96); display: none; align-items: center;
-            justify-content: center; z-index: 10000; padding: 25px;
-        }
-        .modal-card {
-            background: #1e293b; padding: 35px 25px; border-radius: 35px;
-            border: 2px solid #facc15; text-align: center; max-width: 380px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        .modal-card i { font-size: 50px; color: #facc15; margin-bottom: 15px; display: block; }
-        .modal-card p { font-size: 17px; line-height: 1.6; color: #f8fafc; margin-bottom: 25px; font-weight: 500; }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Itapuã Center Material de Construção LTDA",
+  "image": "logo-itapua-center.webp",
+  "url": "https://impulsoweb10.com.br/itapua-center/",
+  "telephone": "+5511945320614",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Epitácio Pessoa, 216, Jardim Itapuã",
+    "addressLocality": "Itaquaquecetuba / SP",
+    "postalCode": "08579-040",
+    "addressCountry": "BR"
+  },
+  "sameAs": ["https://www.instagram.com/itapua_center/"]
+}
+</script>
 
-        @keyframes bounceIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); } 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); } }
-        
-        .img-resultado { width: 100%; max-height: 180px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.1); }
-        .footer { margin-top: 35px; font-size: 13px; color: #ffffff; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 25px; }
-    </style>
+<script>
+const PALETAS=[
+  {id:'verde',nome:'Verde Neon',ac:'#22c55e',l:'#86efac',m:'#4ade80',xl:'#d3fbe2',d:'#15803d',bg:'#0f2a1c',rgb:'34,197,94',drgb:'20,110,50',xrgb:'10,70,30',fixo:false}
+];
+function hexRgb(h){h=h.replace('#','');return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]}
+function misturar(a,b,t){var x=hexRgb(a),y=hexRgb(b);return 'rgb('+x.map(function(v,i){return Math.round(y[i]+(v-y[i])*t)}).join(',')+')'}
+function rgbDe(c){return c.replace(/[^\d,]/g,'')}
+function aplicarTema(id){
+  const p=PALETAS[0], s=document.documentElement.style;
+  s.setProperty('--ac',p.ac);s.setProperty('--ac-l',p.l);s.setProperty('--ac-m',p.m);s.setProperty('--ac-xl',p.xl);
+  s.setProperty('--ac-d',p.d);s.setProperty('--ac-bg',p.bg);s.setProperty('--ac-rgb',p.rgb);
+  s.setProperty('--ac-d-rgb',p.drgb);s.setProperty('--ac-x-rgb',p.xrgb);
+  var fr=p.m,in1=misturar(p.ac,'#1c1c22',.13),in2=misturar(p.ac,'#0e0e11',.08),o1=misturar(p.ac,'#17171c',.2),o2=misturar(p.ac,'#0b0b0e',.12),o3=misturar(p.d,'#131318',.2);
+  var frRgb=hexRgb(fr).join(',');
+  s.setProperty('--fr',fr);s.setProperty('--fr-rgb',frRgb);
+  s.setProperty('--in1',in1);s.setProperty('--in2',in2);
+  s.setProperty('--out1',o1);s.setProperty('--out2',o2);s.setProperty('--out3',o3);
+  s.setProperty('--out-rgb',rgbDe(o2.charAt(0)==='#'?'rgb('+hexRgb(o2).join(',')+')':o2));
+  var mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.setAttribute('content',o2);
+  return p.id;
+}
+aplicarTema('verde');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#22c55e;--ac-l:#86efac;--ac-m:#4ade80;--ac-xl:#d3fbe2;--ac-d:#15803d;--ac-bg:#0f2a1c;--ac-rgb:34,197,94;--ac-d-rgb:20,110,50;--ac-x-rgb:10,70,30;--fr:#4ade80;--fr-rgb:74,222,128;--in1:#102217;--in2:#09140e;--out1:#12281b;--out2:#0a1710;--out3:#0d1f15;--out-rgb:10,23,16}
+html{width:100%;height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--out2);color:#ececf0;height:100vh;height:100dvh;width:100%;padding:max(.7rem,env(safe-area-inset-top)) .6rem max(.7rem,env(safe-area-inset-bottom));overflow:hidden;position:relative;perspective:1200px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ac-l);outline-offset:3px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%, rgba(var(--ac-rgb),0.18) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%, rgba(var(--ac-x-rgb),0.5) 0%, transparent 60%);pointer-events:none;z-index:0}
+
+.app-wrapper{position:absolute;top:50%;left:50%;width:min(calc(100vw - 1.2rem),480px);transform:translate(-50%,calc(-50% + var(--ly,0px))) scale(var(--s,1));transform-origin:center;z-index:1}
+.ready .app-wrapper{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.sheet-open .app-wrapper{--ly:-3.2vh}
+
+.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,var(--in1) 0%,var(--in2) 100%);border:2px solid var(--fr);border-radius:24px;box-shadow:0 0 12px var(--fr),0 0 24px rgba(var(--fr-rgb),.6),0 0 35px rgba(var(--fr-rgb),.3),0 15px 35px rgba(0,0,0,.6);padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
+
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;flex:1 1 auto;gap:.9rem;width:100%;transform-style:preserve-3d;backface-visibility:hidden}
+.layer-back{transform:translateZ(15px);transform-style:preserve-3d;transition:transform .4s ease}
+.layer-mid{transform:translateZ(35px);transform-style:preserve-3d;transition:transform .4s ease}
+.layer-front{transform:translateZ(55px);transform-style:preserve-3d;filter:drop-shadow(0 10px 15px rgba(0,0,0,.5));transition:transform .4s ease}
+.layer-pop{transform:translateZ(75px);transform-style:preserve-3d;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6));transition:transform .4s ease}
+
+/* LOGO RETANGULAR COM EFEITO NEON */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.logo-frame{position:relative;border-radius:14px;overflow:hidden;display:inline-block;animation:logo-pulse 2.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(var(--ac-rgb),.5)}
+.logo-frame::after{content:'';position:absolute;top:0;left:-110%;width:55%;height:100%;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:skewX(-18deg);animation:logo-shimmer 2.6s ease-in-out infinite;pointer-events:none;z-index:2}
+@keyframes logo-pulse{0%{box-shadow:0 0 0 0 rgba(var(--ac-rgb),.55),0 6px 20px rgba(var(--ac-rgb),.25)}55%{box-shadow:0 0 0 12px rgba(var(--ac-rgb),0),0 6px 20px rgba(var(--ac-rgb),.1)}100%{box-shadow:0 0 0 0 rgba(var(--ac-rgb),0),0 6px 20px rgba(var(--ac-rgb),.25)}}
+@keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
+
+.logo-img{display:block;width:180px;height:75px;border-radius:12px;border:2px solid rgba(var(--ac-rgb),.8);object-fit:cover;background:#0d1f14;position:relative;z-index:1}
+.logo-img-fallback{width:180px;height:75px;border-radius:12px;border:2px solid rgba(var(--ac-rgb),.8);background:#0d1f14;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;color:var(--ac);font-weight:700;position:relative;z-index:1;text-align:center;padding:0 .5rem}
+
+.brand{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:700;color:#ffffff;letter-spacing:.02em;line-height:1.1}
+.brand em{color:var(--ac-m);font-style:normal}
+.tagline{margin-top:.2rem;font-size:.78rem;color:#b8d8c3;font-weight:500;letter-spacing:.02em}
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;color:#f0fbf4;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.28rem .65rem}
+.chip svg{width:13px;height:13px;flex-shrink:0;stroke:var(--ac);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.stars-cta{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-decoration:none;padding:.35rem .9rem .45rem;border-radius:18px;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.stars-cta:active{transform:scale(.97)}
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.g-logo{width:30px;height:30px;flex-shrink:0;background:#fff;border-radius:50%;padding:4px;margin-right:.35rem;box-shadow:0 0 10px rgba(255,255,255,.35)}
+.star{font-size:2rem;line-height:1;color:#ffd700;text-shadow:0 0 12px rgba(255,215,0,.5);animation:star-wave 2.6s ease-in-out infinite}
+.star:nth-child(2){animation-delay:.12s}
+.star:nth-child(3){animation-delay:.24s}
+.star:nth-child(4){animation-delay:.36s}
+.star:nth-child(5){animation-delay:.48s}
+@keyframes star-wave{0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}}
+.stars-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em}
+
+/* BOTÕES DE AÇÃO PRINCIPAIS */
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
+.btn-act{display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:46px;border-radius:50px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;text-decoration:none;transition:transform .2s, box-shadow .2s;border:none;cursor:pointer}
+.btn-act:hover{transform:translateY(-2px)}
+.btn-act svg{width:18px;height:18px;flex-shrink:0}
+.btn-call{background:#22c55e;color:#04210f;box-shadow:0 4px 15px rgba(34,197,94,.3)}
+.btn-wa{background:#0d2818;color:#d9ffe8;border:1.5px solid #25d366;box-shadow:0 4px 15px rgba(37,211,102,.2)}
+
+/* BOTÃO PIX STONE PERSONALIZADO */
+.btn-pix-stone{
+  width:100%;
+  min-height:48px;
+  background:linear-gradient(135deg, #004d32 0%, #00281b 100%);
+  border:1.5px solid #00d982;
+  border-radius:50px;
+  color:#ffffff;
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;
+  font-size:.9rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(0, 217, 130, 0.25);
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+  margin-top:.2rem;
+}
+.btn-pix-stone:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 22px rgba(0, 217, 130, 0.4);
+  border-color:#53ffb3;
+}
+.btn-pix-stone svg{width:20px;height:20px;fill:#00d982}
+
+/* REDES SOCIAIS */
+.social-row{display:flex;gap:.9rem;justify-content:center;align-items:flex-start}
+.social-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;transition:transform .2s}
+.social-btn:hover{transform:translateY(-3px)}
+.social-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.3);transition:border-color .2s,box-shadow .2s}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:#b8d8c3;letter-spacing:.03em}
+
+.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#dcdce0;font-weight:500}
+.hours .dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;flex-shrink:0}
+
+.address{font-size:.74rem;color:#a3c9b0;line-height:1.4;cursor:pointer;transition:color .2s;position:relative;display:inline-block}
+.address:hover{color:var(--ac-l)}
+.address::after{content:'(Toque para copiar)';display:block;font-size:.62rem;color:var(--ac-m);opacity:.9;margin-top:1px}
+
+.ticker-banner{width:100%;overflow:hidden;background:rgba(var(--ac-rgb),.15);border:1px solid rgba(var(--ac-rgb),.35);border-radius:8px;padding:.35rem 0;display:flex}
+.ticker-track{display:flex;width:max-content;animation:infinite-scroll 36s linear infinite}
+.ticker-item{font-size:.76rem;color:var(--ac-xl);font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
+@keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.footer{font-size:.72rem;color:#dcdce0;display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
+.footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
+.footer-promo a{color:var(--ac-l);text-decoration:none;font-weight:700;border-bottom:1px solid var(--ac-l);padding-bottom:1px}
+.footer-dev{font-size:.7rem;color:#b5b5bd;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-dev a{color:var(--ac-m);text-decoration:none;font-weight:700}
+
+/* DIALOG / MODAL PADRÃO E PIX */
+.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid var(--fr);border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,var(--in1) 0%,var(--in2) 100%);color:#ececf0;padding:0;box-shadow:0 -6px 30px rgba(var(--fr-rgb),.25);font-family:'DM Sans',sans-serif}
+.sheet::backdrop{background:rgba(5,5,7,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.sheet[open]{animation:sheet-up .38s cubic-bezier(.2,.9,.3,1)}
+@keyframes sheet-up{from{transform:translateY(70px);opacity:0}to{transform:none;opacity:1}}
+.sheet-body{padding:1.2rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sheet h2{font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:700;color:#ffffff}
+.sheet h3{font-size:.9rem;font-weight:700;color:var(--ac-m);margin-bottom:.4rem}
+.sheet p{font-size:.82rem;line-height:1.55;color:#d4d4da}
+.sheet-close{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* ESTILO ESPECÍFICO MODAL PIX STONE */
+.pix-card{
+  background:rgba(0, 77, 50, 0.25);
+  border:1.5px solid #00d982;
+  border-radius:16px;
+  padding:1.2rem;
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+  text-align:left;
+}
+.pix-info-group{display:flex;flex-direction:column;gap:.2rem}
+.pix-label{font-size:.72rem;color:#a3e6c0;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.pix-value{font-size:.95rem;color:#ffffff;font-weight:700}
+.pix-key-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#041a12;
+  border:1px dashed #00d982;
+  border-radius:10px;
+  padding:.6rem .8rem;
+  margin-top:.2rem;
+}
+.btn-copy-pix{
+  background:#00d982;
+  color:#00281b;
+  border:none;
+  padding:.45rem .85rem;
+  border-radius:20px;
+  font-weight:700;
+  font-size:.78rem;
+  cursor:pointer;
+  transition:background .2s;
+}
+.btn-copy-pix:hover{background:#53ffb3}
+
+.pix-notice{
+  background:rgba(255,215,0,0.1);
+  border:1px solid rgba(255,215,0,0.3);
+  border-radius:12px;
+  padding:.8rem;
+  font-size:.78rem;
+  color:#ffe885;
+  line-height:1.45;
+  text-align:center;
+}
+
+.btn-confirm-pix{
+  width:100%;
+  min-height:46px;
+  background:linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+  color:#ffffff;
+  border:none;
+  border-radius:50px;
+  font-weight:700;
+  font-size:.9rem;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(34,197,94,.3);
+}
+
+.svc-list{list-style:none;display:grid;gap:.5rem}
+.svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:#ececf0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem}
+.svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:var(--ac);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.rota-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.4rem}
+.rota-btn{display:flex;align-items:center;gap:.55rem;padding:.5rem .65rem;border-radius:16px;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--ac-bg) 0%,#17171c 100%);border:1.5px solid rgba(var(--ac-rgb),.7)}
+.rota-circle{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.85)}
+.rota-circle svg{width:20px;height:20px}
+.rota-google{background:#fff}
+.rota-waze{background:#33ccff}
+.rota-txt{display:flex;flex-direction:column;line-height:1.15;text-align:left}
+.rota-txt strong{font-size:.8rem;font-weight:700;color:#fff}
+.rota-txt small{font-size:.65rem;color:var(--ac-l);font-weight:500}
+
+.faq-container{display:flex;flex-direction:column;gap:.45rem}
+.faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.faq-question{font-size:.82rem;font-weight:700;color:#ffffff;padding:.65rem .8rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}
+.faq-question::-webkit-details-marker{display:none}
+.faq-question::after{content:'+';font-size:1.1rem;color:var(--ac);font-weight:700}
+.faq-item[open] .faq-question::after{content:'−'}
+.faq-answer{font-size:.78rem;line-height:1.5;color:#d4d4da;padding:0 .8rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;padding-top:.45rem}
+
+.bg-seo{display:none}
+@media (min-width:1024px){
+  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid var(--fr);max-height:86vh}
+}
+</style>
 </head>
 <body>
 
-<div id="modal-instrucao">
-    <div class="modal-card">
-        <i class="fab fa-instagram"></i>
-        <p>"Após nos avaliar no Google, por gentileza, nos siga na página do Instagram que está aberta, assim que voltar na página."</p>
-        <button onclick="prosseguirParaGoogle()" class="botao google">
-            <i class="fab fa-google"></i> OK, VAMOS AVALIAR!
-        </button>
-    </div>
-</div>
+<div class="app-wrapper">
+  <div class="device-frame" id="deviceFrame">
+    <div class="page">
+      
+      <!-- LOGO RETANGULAR ITAPUÃ CENTER -->
+      <div class="logo-wrap layer-mid">
+        <div class="logo-frame" id="logoFrame">
+          <img class="logo-img" src="logo-itapua-center.webp" alt="Logo Itapuã Center" width="180" height="75" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none;">Itapuã Center</div>
+        </div>
+        <div>
+          <div class="brand">Itapuã <em>Center</em></div>
+          <div class="tagline">Materiais de Construção · Itaquaquecetuba / SP</div>
+        </div>
+      </div>
 
-<div class="container">
-    <img src="logo.png" class="logo" alt="Logo">
-    <h1>Itapuã Center</h1>
-    <h2>Materiais de Construção</h2>
-    
-    <p id="instrucao">Toque nas estrelas para avaliar nosso atendimento:</p>
+      <!-- CHIPS / PRODUTOS -->
+      <div class="chips layer-back" aria-label="Categorias">
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Construção</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Reforma</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Acabamento</span>
+      </div>
 
-    <div class="rating-box">
-        <i class="fas fa-star star-btn" onclick="avaliar(1)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(2)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(3)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(4)"></i>
-        <i class="fas fa-star star-btn" onclick="avaliar(5)"></i>
-    </div>
-
-    <div id="feedback-bom" class="hidden">
-        <img src="itapua-center.png" class="img-resultado">
-        <p style="font-size: 18px; margin-bottom: 15px;">Ficamos felizes! 🎉</p>
-        
-        <button onclick="abrirModalInstrucao()" class="botao google">
-            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-        </button>
-
-        <a href="https://www.instagram.com/itapua_center?utm_source=qr&igsh=MW9vbDl1OGtsbGU4Yw==" target="_blank" class="botao instagram">
-            <i class="fab fa-instagram"></i> NOS SIGA NO INSTAGRAM
+      <!-- AVALIAÇÃO GOOGLE -->
+      <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+        <a href="https://g.page/r/CWSPsbcmiCwZEBM/review/" class="stars-cta" id="starsCta" target="_blank" rel="noopener">
+          <span class="stars-row" aria-hidden="true">
+            <svg class="g-logo" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </span>
+          <span class="stars-label">Toque para avaliar no Google</span>
         </a>
-    </div>
+      </div>
 
-    <div id="feedback-ruim" class="hidden">
-        <p>Pedimos desculpas... 😔</p>
-        <textarea id="texto-melhoria" style="width:100%; background:rgba(255,255,255,0.1); border-radius:15px; color:white; padding:15px; margin-top:10px; border:1px solid rgba(255,255,255,0.2);" placeholder="O que ocorreu?"></textarea>
-        <button onclick="enviarWhatsApp()" class="botao" style="background:#22c55e; color:white; margin-top:10px;">FALAR COM O GERENTE</button>
-    </div>
+      <!-- BOTÕES DE CONTATO -->
+      <div class="cta-row layer-front">
+        <a href="tel:+551147260719" class="btn-act btn-call">Ligar agora</a>
+        <a href="https://wa.me/5511945320614?text=Olá!%20Vim%20pelo%20site%20da%20Itapuã%20Center." class="btn-act btn-wa" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
 
-    <div class="footer">
-        <div>🔒 CONEXÃO PROTEGIDA | © 2026</div>
-        <div>Desenvolvido por: <a href="https://impulsoweb10.com.br/" target="_blank" style="color:#22c55e; text-decoration:none; font-weight:800;">ImpulsoWeb10</a></div>
+      <!-- BOTÃO PIX STONE PERSONALIZADO -->
+      <div style="width:100%" class="layer-front">
+        <button type="button" class="btn-pix-stone" onclick="abrirModalPix()">
+          <svg viewBox="0 0 24 24"><path d="M12 2L3.5 10.5 12 19l8.5-8.5L12 2zm0 3.8l5.7 5.7-5.7 5.7-5.7-5.7 5.7-5.7z"/></svg>
+          Pagar via PIX (Banco Stone)
+        </button>
+      </div>
+
+      <!-- REDES SOCIAIS / MAIS -->
+      <div class="social-row layer-front">
+        <a href="https://www.instagram.com/itapua_center/" class="social-btn" target="_blank" rel="noopener">
+          <div class="social-icon" style="background:#1a2e22;"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#22c55e" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="#22c55e" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#22c55e"/></svg></div>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Itapua+Center%2C+Rua+Epitacio+Pessoa%2C+216%2C+Itaquaquecetuba%2C+SP" class="social-btn" target="_blank" rel="noopener">
+          <div class="social-icon" style="background:#102418;"><svg viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <span class="social-label">Maps</span>
+        </a>
+        <button type="button" class="social-btn" onclick="salvarContato()">
+          <div class="social-icon" style="background:#12281b;"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <span class="social-label">Salvar</span>
+        </button>
+        <button type="button" class="social-btn" onclick="abrirMais()">
+          <div class="social-icon" style="background:#12281b;"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          <span class="social-label">Ver mais</span>
+        </button>
+      </div>
+
+      <div class="hours layer-back" id="hours"><span class="dot"></span><span>Seg a Sex: 9h às 18h | Sáb: 8h às 15h</span></div>
+      <div class="address layer-back" onclick="copiarEndereco()">
+        <span>Rua Epitácio Pessoa, 216 - Jardim Itapuã</span><br>Itaquaquecetuba / SP - CEP 08579-040
+      </div>
+
+      <div class="ticker-banner layer-mid" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">Itapuã Center • Materiais de Construção • Reforma e Acabamento • Jardim Itapuã - Itaquaquecetuba / SP • Atendimento via WhatsApp.</span>
+        </div>
+      </div>
+
+      <footer class="footer layer-back">
+        <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20este%20modelo%20no%20Itapuã%20Center%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Saiba mais</a></p>
+        <p class="footer-dev"><span>Desenvolvido por ImpulsoWeb10</span></p>
+      </footer>
+
     </div>
+  </div>
 </div>
+
+<!-- MODAL PIX STONE ELEGANTE -->
+<dialog class="sheet" id="sheetPix">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <h2 style="display:flex;align-items:center;gap:.5rem;color:#00d982">
+        <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#00d982"><path d="M12 2L3.5 10.5 12 19l8.5-8.5L12 2zm0 3.8l5.7 5.7-5.7 5.7-5.7-5.7 5.7-5.7z"/></svg>
+        Pagamento PIX (Stone)
+      </h2>
+      <button type="button" class="sheet-close" onclick="fecharModalPix()">×</button>
+    </div>
+
+    <div class="pix-card">
+      <div class="pix-info-group">
+        <span class="pix-label">Banco Destino</span>
+        <span class="pix-value">Stone Pagamentos</span>
+      </div>
+      <div class="pix-info-group">
+        <span class="pix-label">Nome do Favorecido</span>
+        <span class="pix-value">Itapuã Center Material de Construção LTDA</span>
+      </div>
+      <div class="pix-info-group">
+        <span class="pix-label">Chave PIX (Celular)</span>
+        <div class="pix-key-box">
+          <span class="pix-value" style="color:#53ffb3;font-family:monospace;font-size:1.05rem" id="pixKeyText">11 94532 0614</span>
+          <button type="button" class="btn-copy-pix" id="btnCopyPix" onclick="copiarChavePix()">Copiar Chave</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pix-notice">
+      💛 <strong>Agradecemos a sua preferência!</strong><br>
+      Por favor, confira atentamente os dados do destinatário e o valor do pagamento no seu aplicativo do banco antes de confirmar a transferência.
+    </div>
+
+    <button type="button" class="btn-confirm-pix" onclick="fecharModalPix()">OK, Entendi!</button>
+  </div>
+</dialog>
+
+<!-- MODAL INFORMAÇÕES ADICIONAIS -->
+<dialog class="sheet" id="sheetMais">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <h2>Itapuã Center</h2>
+      <button type="button" class="sheet-close" onclick="fecharMais()">×</button>
+    </div>
+    <section>
+      <h3>Sobre a Loja</h3>
+      <p>A Itapuã Center é a sua loja completa de materiais de construção, reforma e acabamento no Jardim Itapuã, em Itaquaquecetuba. Oferecemos variedade, ótimos preços e atendimento rápido via WhatsApp.</p>
+    </section>
+    <section>
+      <h3>Produtos e Serviços</h3>
+      <ul class="svc-list">
+        <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Materiais básicos (Cimento, areia, pedra, tijolos)</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Hidráulica e Elétrica completa</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Tintas e Acessórios para pintura</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Ferramentas e Acabamentos</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Endereço e Rotas</h3>
+      <p>Rua Epitácio Pessoa, 216 - Jardim Itapuã, Itaquaquecetuba - SP, CEP 08579-040</p>
+      <div class="rota-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Itapua+Center%2C+Rua+Epitacio+Pessoa%2C+216%2C+Itaquaquecetuba%2C+SP" class="rota-btn" target="_blank" rel="noopener">
+          <span class="rota-circle rota-google"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg></span>
+          <span class="rota-txt"><strong>Google Maps</strong><small>Abrir rota</small></span>
+        </a>
+        <a href="https://waze.com/ul?q=Itapua+Center+Rua+Epitacio+Pessoa+216+Itaquaquecetuba+SP" class="rota-btn" target="_blank" rel="noopener">
+          <span class="rota-circle rota-waze"><svg viewBox="0 0 24 24"><path d="M12 4c-4.4 0-8 3.1-8 7 0 2 1 3.8 2.6 5.1-.1.9-.5 1.7-1.1 2.4 1.3.1 2.5-.3 3.5-1 .9.3 1.9.5 3 .5 4.4 0 8-3.1 8-7s-3.6-7-8-7z" fill="#fff"/><circle cx="9.5" cy="10.5" r="1.1" fill="#0795c7"/><circle cx="14.5" cy="10.5" r="1.1" fill="#0795c7"/><path d="M9.5 13.5c1.4 1.2 3.6 1.2 5 0" stroke="#0795c7" fill="none" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <span class="rota-txt"><strong>Waze</strong><small>Abrir rota</small></span>
+        </a>
+      </div>
+    </section>
+    <section>
+      <h3>Perguntas Frequentes (FAQ)</h3>
+      <div class="faq-container">
+        <details class="faq-item">
+          <summary class="faq-question">Quais são os horários de funcionamento?</summary>
+          <div class="faq-answer">Segunda, terça, quarta e sexta das 09h às 18h. Quinta das 09h às 17h. Sábado das 08h às 15h. Domingo das 08h às 12h.</div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">Como consultar preços e materiais disponíveis?</summary>
+          <div class="faq-answer">Você pode chamar nossa equipe diretamente pelo WhatsApp no número (11) 94532-0614 para fazer orçamentos e tirar dúvidas sobre entregas.</div>
+        </details>
+      </div>
+    </section>
+  </div>
+</dialog>
 
 <script>
-    let notaSelecionada = 0;
-    const urlGoogle = "https://g.page/r/CWSPsbcmiCwZEBM/review/";
-    const urlInsta = "https://www.instagram.com/itapua_center?utm_source=qr&igsh=MW9vbDl1OGtsbGU4Yw==";
+  const PAGE_URL = location.href.split('#')[0].split('?')[0];
 
-    function avaliar(n) {
-        notaSelecionada = n;
-        document.querySelectorAll('.star-btn').forEach((s, i) => { i < n ? s.classList.add('active') : s.classList.remove('active'); });
-        document.getElementById('instrucao').classList.add('hidden');
-        
-        if (n >= 4) {
-            document.getElementById('feedback-bom').classList.remove('hidden');
-            document.getElementById('feedback-ruim').classList.add('hidden');
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-        } else {
-            document.getElementById('feedback-ruim').classList.remove('hidden');
-            document.getElementById('feedback-bom').classList.add('hidden');
-        }
+  async function copiarEndereco() {
+    try { await navigator.clipboard.writeText("Rua Epitácio Pessoa, 216 - Jardim Itapuã, Itaquaquecetuba - SP, 08579-040"); alert("Endereço copiado!"); } catch (err) {}
+  }
+
+  /* MODAL INFORMAÇÕES */
+  const sheetMais = document.getElementById('sheetMais');
+  function abrirMais(){ document.body.classList.add('sheet-open'); if (typeof sheetMais.showModal === 'function') sheetMais.showModal(); else sheetMais.setAttribute('open',''); }
+  function fecharMais(){ document.body.classList.remove('sheet-open'); if (typeof sheetMais.close === 'function') sheetMais.close(); else sheetMais.removeAttribute('open'); }
+  sheetMais.addEventListener('click', function(e){ if (e.target === sheetMais) fecharMais(); });
+
+  /* MODAL PIX STONE */
+  const sheetPix = document.getElementById('sheetPix');
+  function abrirModalPix(){ document.body.classList.add('sheet-open'); if (typeof sheetPix.showModal === 'function') sheetPix.showModal(); else sheetPix.setAttribute('open',''); }
+  function fecharModalPix(){ document.body.classList.remove('sheet-open'); if (typeof sheetPix.close === 'function') sheetPix.close(); else sheetPix.removeAttribute('open'); }
+  sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharModalPix(); });
+
+  async function copiarChavePix() {
+    try {
+      await navigator.clipboard.writeText("11945320614");
+      const btn = document.getElementById('btnCopyPix');
+      btn.innerText = "Copiado!";
+      btn.style.background = "#53ffb3";
+      setTimeout(() => {
+        btn.innerText = "Copiar Chave";
+        btn.style.background = "#00d982";
+      }, 2500);
+    } catch (err) {
+      alert("Não foi possível copiar automaticamente. Chave: 11 94532 0614");
     }
+  }
 
-    // DISPARA O MODAL QUANDO CLICA NO BOTÃO DO GOOGLE
-    function abrirModalInstrucao() {
-        document.getElementById('modal-instrucao').style.display = 'flex';
+  function salvarContato(){
+    const vcard = ['BEGIN:VCARD','VERSION:3.0','FN:Itapuã Center','ORG:Itapuã Center Material de Construção LTDA','TEL;TYPE=WORK,VOICE:+5511945320614','ADR;TYPE=WORK:;;Rua Epitácio Pessoa, 216, Jardim Itapuã;Itaquaquecetuba / SP;;08579-040;Brasil','URL:' + PAGE_URL,'END:VCARD'].join('\r\n');
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'itapua-center.vcf'; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  /* AJUSTE RESPONSIVO AUTOMÁTICO */
+  const wrap = document.querySelector('.app-wrapper');
+  const frame = document.getElementById('deviceFrame');
+  function ajustar(){
+    const b = document.body, cs = getComputedStyle(b);
+    const pt = parseFloat(cs.paddingTop)||0, pb = parseFloat(cs.paddingBottom)||0;
+    const pl = parseFloat(cs.paddingLeft)||0, pr = parseFloat(cs.paddingRight)||0;
+    const aw = b.clientWidth - pl - pr, ah = b.clientHeight - pt - pb;
+    const baseW = Math.min(aw, 480);
+    frame.style.minHeight = '0px';
+    let s = 1;
+    for (let i = 0; i < 5; i++){
+      wrap.style.width = (baseW / s) + 'px';
+      const n = Math.max(.5, Math.min(1, ah / frame.offsetHeight));
+      const parar = Math.abs(n - s) < .004;
+      s = n;
+      if (parar) break;
     }
-
-    // DISPARA OS LINKS AO CLICAR NO "OK" DO MODAL
-    function prosseguirParaGoogle() {
-        // Abre o Google
-        window.open(urlGoogle, '_blank');
-        
-        // Esconde o modal
-        document.getElementById('modal-instrucao').style.display = 'none';
-
-        // Abre o Instagram em segundo plano após 2 segundos
-        setTimeout(() => {
-            window.open(urlInsta, '_blank');
-        }, 2000);
-    }
-
-    function enviarWhatsApp() {
-        const texto = document.getElementById('texto-melhoria').value;
-        if (!texto) { alert("Por favor, conte-nos."); return; }
-        window.open(`https://wa.me/5511945320614?text=Feedback Itapuã Center (${notaSelecionada} estrelas): ${texto}`, '_blank');
-    }
+    wrap.style.width = (baseW / s) + 'px';
+    frame.style.minHeight = (ah / s) + 'px';
+    wrap.style.setProperty('--s', s);
+    wrap.style.left = (pl + aw / 2) + 'px';
+    wrap.style.top = (pt + ah / 2) + 'px';
+  }
+  ajustar();
+  window.addEventListener('resize', ajustar);
+  window.addEventListener('load', function(){ ajustar(); setTimeout(function(){ document.documentElement.classList.add('ready'); }, 50); });
 </script>
 </body>
 </html>
