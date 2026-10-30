@@ -174,6 +174,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .footer-dev{font-size:.7rem;color:#b5b5bd;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
 .footer-dev a{color:var(--ac-m);text-decoration:none;font-weight:700}
 
+/* BOTÃO TOGGLE 3D */
+@keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(var(--ac-rgb),.4);border-color:rgba(var(--ac-rgb),.5)}50%{box-shadow:0 0 15px rgba(var(--ac-rgb),.8);border-color:var(--ac-l)}100%{box-shadow:0 0 5px rgba(var(--ac-rgb),.4);border-color:rgba(var(--ac-rgb),.5)}}
+.btn-gyro{background:rgba(255,255,255,.08);color:var(--ac-l);border:1px solid rgba(var(--ac-rgb),.4);border-radius:14px;padding:.3rem .7rem;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.8}
+.btn-gyro:hover,.btn-gyro.active{background:rgba(var(--ac-rgb),.25);color:#ffffff;opacity:1}
+.btn-gyro.active{background:linear-gradient(135deg,var(--ac) 0%,var(--ac-d) 100%);color:#ffffff;border-color:var(--ac-l);box-shadow:0 0 20px rgba(var(--ac-rgb),.9);animation:none}
+
 /* DIALOG MODAL CENTRALIZADO COM BORDA NEON */
 .sheet{
   position:fixed;
@@ -372,7 +378,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
       <footer class="footer layer-back">
         <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044?text=Olá!%20Vi%20este%20modelo%20no%20Itapuã%20Center%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Saiba mais</a></p>
-        <p class="footer-dev"><span>Desenvolvido por ImpulsoWeb10</span></p>
+        <p class="footer-dev">
+          <span>Desenvolvido por ImpulsoWeb10</span>
+          <button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button>
+        </p>
       </footer>
 
     </div>
@@ -507,9 +516,54 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'itapua-center.vcf'; document.body.appendChild(a); a.click(); a.remove();
   }
 
+  /* CÓDIGO DO EFEITO 3D (GIROSCÓPIO E MOUSE) */
+  const frame = document.getElementById('deviceFrame');
+  const btnGyro = document.getElementById('toggleGyro');
+  let giroscopioAtivo = false;
+  const configNivel1_5 = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
+
+  function handleOrientation(e){
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
+    let x = Math.min(Math.max(e.gamma, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
+    let y = Math.min(Math.max(e.beta - 45, -configNivel1_5.anguloMax), configNivel1_5.anguloMax);
+    frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeCelular) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeCelular) + 'deg)';
+  }
+  function ativandoOorientacao(){
+    window.addEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = true;
+    btnGyro.innerText = 'Efeito 3D: ON';
+    btnGyro.classList.add('active');
+  }
+  function desativarGiroscopio(){
+    window.removeEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = false;
+    btnGyro.innerText = 'Efeito 3D: OFF';
+    btnGyro.classList.remove('active');
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+  function alternarGiroscopio(){
+    if (giroscopioAtivo) { desativarGiroscopio(); return; }
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(function(state){
+        if (state === 'granted') ativandoOorientacao();
+        else alert('Permissão de orientação negada.');
+      }).catch(function(){ ativandoOorientacao(); });
+    } else {
+      ativandoOorientacao();
+    }
+  }
+  document.addEventListener('mousemove', function(e){
+    if (!giroscopioAtivo) return;
+    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+    frame.style.transform = 'rotateY(' + (x * configNivel1_5.intensidadeMouse) + 'deg) rotateX(' + (-y * configNivel1_5.intensidadeMouse) + 'deg)';
+  });
+  document.addEventListener('mouseleave', function(){
+    if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  });
+
   /* AJUSTE RESPONSIVO AUTOMÁTICO */
   const wrap = document.querySelector('.app-wrapper');
-  const frame = document.getElementById('deviceFrame');
   function ajustar(){
     const b = document.body, cs = getComputedStyle(b);
     const pt = parseFloat(cs.paddingTop)||0, pb = parseFloat(cs.paddingBottom)||0;
