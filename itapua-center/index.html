@@ -73,7 +73,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 .app-wrapper{position:absolute;top:50%;left:50%;width:min(calc(100vw - 1.2rem),480px);transform:translate(-50%,calc(-50% + var(--ly,0px))) scale(var(--s,1));transform-origin:center;z-index:1}
 .ready .app-wrapper{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.sheet-open .app-wrapper{--ly:-3.2vh}
 
 .device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,var(--in1) 0%,var(--in2) 100%);border:2px solid var(--fr);border-radius:24px;box-shadow:0 0 12px var(--fr),0 0 24px rgba(var(--fr-rgb),.6),0 0 35px rgba(var(--fr-rgb),.3),0 15px 35px rgba(0,0,0,.6);padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
 
@@ -108,7 +107,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .star{font-size:2rem;line-height:1;color:#ffd700;text-shadow:0 0 12px rgba(255,215,0,.5);animation:star-wave 2.6s ease-in-out infinite}
 .star:nth-child(2){animation-delay:.12s}
 .star:nth-child(3){animation-delay:.24s}
-.star:nth-child(4){animation-delay:.36s}
+.star:nth-child(4){animation-delay:.24s}
 .star:nth-child(5){animation-delay:.48s}
 @keyframes star-wave{0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}}
 .stars-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em}
@@ -121,7 +120,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn-call{background:#22c55e;color:#04210f;box-shadow:0 4px 15px rgba(34,197,94,.3)}
 .btn-wa{background:#0d2818;color:#d9ffe8;border:1.5px solid #25d366;box-shadow:0 4px 15px rgba(37,211,102,.2)}
 
-/* BOTÃO PIX STONE PERSONALIZADO */
+/* BOTÃO PIX STONE CENTRALIZADO E EM DESTAQUE */
 .btn-pix-stone{
   width:100%;
   min-height:48px;
@@ -175,27 +174,46 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .footer-dev{font-size:.7rem;color:#b5b5bd;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
 .footer-dev a{color:var(--ac-m);text-decoration:none;font-weight:700}
 
-/* DIALOG / MODAL PADRÃO E PIX */
-.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid var(--fr);border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,var(--in1) 0%,var(--in2) 100%);color:#ececf0;padding:0;box-shadow:0 -6px 30px rgba(var(--fr-rgb),.25);font-family:'DM Sans',sans-serif}
-.sheet::backdrop{background:rgba(5,5,7,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.sheet[open]{animation:sheet-up .38s cubic-bezier(.2,.9,.3,1)}
-@keyframes sheet-up{from{transform:translateY(70px);opacity:0}to{transform:none;opacity:1}}
-.sheet-body{padding:1.2rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
+/* DIALOG MODAL CENTRALIZADO COM BORDA NEON */
+.sheet{
+  position:fixed;
+  inset:0;
+  margin:auto;
+  width:min(420px, 92vw);
+  max-height:85vh;
+  border:2px solid var(--fr);
+  border-radius:24px;
+  background:linear-gradient(175deg, var(--in1) 0%, var(--in2) 100%);
+  color:#ececf0;
+  padding:0;
+  box-shadow:0 0 25px rgba(var(--fr-rgb), 0.4), 0 0 50px rgba(0, 0, 0, 0.8);
+  font-family:'DM Sans', sans-serif;
+  overflow-y:auto;
+}
+.sheet::backdrop{
+  background:rgba(5, 5, 7, 0.85);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.sheet[open]{animation:modal-pop .3s cubic-bezier(.2, .9, .3, 1)}
+@keyframes modal-pop{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+
+.sheet-body{padding:1.4rem;display:flex;flex-direction:column;gap:1.1rem}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.sheet h2{font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:700;color:#ffffff}
+.sheet h2{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:700;color:#ffffff}
 .sheet h3{font-size:.9rem;font-weight:700;color:var(--ac-m);margin-bottom:.4rem}
 .sheet p{font-size:.82rem;line-height:1.55;color:#d4d4da}
 .sheet-close{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 /* ESTILO ESPECÍFICO MODAL PIX STONE */
 .pix-card{
-  background:rgba(0, 77, 50, 0.25);
+  background:rgba(0, 77, 50, 0.3);
   border:1.5px solid #00d982;
   border-radius:16px;
   padding:1.2rem;
   display:flex;
   flex-direction:column;
-  gap:.8rem;
+  gap:.85rem;
   text-align:left;
 }
 .pix-info-group{display:flex;flex-direction:column;gap:.2rem}
@@ -269,11 +287,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .faq-question::after{content:'+';font-size:1.1rem;color:var(--ac);font-weight:700}
 .faq-item[open] .faq-question::after{content:'−'}
 .faq-answer{font-size:.78rem;line-height:1.5;color:#d4d4da;padding:0 .8rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;padding-top:.45rem}
-
-.bg-seo{display:none}
-@media (min-width:1024px){
-  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid var(--fr);max-height:86vh}
-}
 </style>
 </head>
 <body>
@@ -318,7 +331,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <a href="https://wa.me/5511945320614?text=Olá!%20Vim%20pelo%20site%20da%20Itapuã%20Center." class="btn-act btn-wa" target="_blank" rel="noopener">WhatsApp</a>
       </div>
 
-      <!-- BOTÃO PIX STONE PERSONALIZADO -->
+      <!-- BOTÃO PIX STONE CENTRALIZADO -->
       <div style="width:100%" class="layer-front">
         <button type="button" class="btn-pix-stone" onclick="abrirModalPix()">
           <svg viewBox="0 0 24 24"><path d="M12 2L3.5 10.5 12 19l8.5-8.5L12 2zm0 3.8l5.7 5.7-5.7 5.7-5.7-5.7 5.7-5.7z"/></svg>
@@ -366,7 +379,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </div>
 
-<!-- MODAL PIX STONE ELEGANTE -->
+<!-- MODAL PIX STONE ELEGANTE CENTRALIZADO -->
 <dialog class="sheet" id="sheetPix">
   <div class="sheet-body">
     <div class="sheet-head">
@@ -404,7 +417,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </dialog>
 
-<!-- MODAL INFORMAÇÕES ADICIONAIS -->
+<!-- MODAL INFORMAÇÕES ADICIONAIS CENTRALIZADO -->
 <dialog class="sheet" id="sheetMais">
   <div class="sheet-body">
     <div class="sheet-head">
@@ -463,14 +476,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
   /* MODAL INFORMAÇÕES */
   const sheetMais = document.getElementById('sheetMais');
-  function abrirMais(){ document.body.classList.add('sheet-open'); if (typeof sheetMais.showModal === 'function') sheetMais.showModal(); else sheetMais.setAttribute('open',''); }
-  function fecharMais(){ document.body.classList.remove('sheet-open'); if (typeof sheetMais.close === 'function') sheetMais.close(); else sheetMais.removeAttribute('open'); }
+  function abrirMais(){ if (typeof sheetMais.showModal === 'function') sheetMais.showModal(); else sheetMais.setAttribute('open',''); }
+  function fecharMais(){ if (typeof sheetMais.close === 'function') sheetMais.close(); else sheetMais.removeAttribute('open'); }
   sheetMais.addEventListener('click', function(e){ if (e.target === sheetMais) fecharMais(); });
 
   /* MODAL PIX STONE */
   const sheetPix = document.getElementById('sheetPix');
-  function abrirModalPix(){ document.body.classList.add('sheet-open'); if (typeof sheetPix.showModal === 'function') sheetPix.showModal(); else sheetPix.setAttribute('open',''); }
-  function fecharModalPix(){ document.body.classList.remove('sheet-open'); if (typeof sheetPix.close === 'function') sheetPix.close(); else sheetPix.removeAttribute('open'); }
+  function abrirModalPix(){ if (typeof sheetPix.showModal === 'function') sheetPix.showModal(); else sheetPix.setAttribute('open',''); }
+  function fecharModalPix(){ if (typeof sheetPix.close === 'function') sheetPix.close(); else sheetPix.removeAttribute('open'); }
   sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharModalPix(); });
 
   async function copiarChavePix() {
