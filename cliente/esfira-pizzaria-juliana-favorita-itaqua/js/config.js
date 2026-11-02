@@ -14,13 +14,13 @@ const SITE_CONFIG = {
     whatsappFormatado: "(11) 95833-8379",
     instagram: "pizzariajulianaefavorita",
     instagramUrl: "https://www.instagram.com/pizzariajulianaefavorita/",
-    domain: "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita"
+    domain: "https://impulsoweb10.com.br/esfira-pizzaria-juliana-favorita-itaqua"
   },
 
   seo: {
     h1: "Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita",
     metaDescription: "Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor, peça pelo WhatsApp (11) 95833-8379 e receba em casa. Clique e faça seu pedido agora!",
-    canonical: "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html"
+    canonical: "https://impulsoweb10.com.br/esfira-pizzaria-juliana-favorita-itaqua/index.html"
   },
 
   mensagensWhatsapp: {
