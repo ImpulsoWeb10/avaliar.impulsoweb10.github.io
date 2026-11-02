@@ -76,7 +76,7 @@ const SITE_CONFIG = {
   faq: [
     {
       pergunta: "Qual o horário de funcionamento da Pizzaria Juliana e Favorita em Itaquaquecetuba?",
-      resposta: "Funcionamos de terça a domingo das 18:00 às 23:50. Na segunda-feira estamos fechados (Dia de Finados). Para confirmar o atendimento de hoje, chame no WhatsApp (11) 95833-8379."
+      resposta: "Funcionamos de terça-feira a domingo, das 18:00 às 23:50. Na segunda-feira (Dia de Finados) a pizzaria permanece fechada."
     },
     {
       pergunta: "Onde fica a Pizzaria Juliana e Favorita e ela faz entrega?",
