@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/sitemap.xml
