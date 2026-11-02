@@ -14,14 +14,26 @@ const SITE_CONFIG = {
     whatsappFormatado: "(11) 95833-8379",
     instagram: "pizzariajulianaefavorita",
     instagramUrl: "https://www.instagram.com/pizzariajulianaefavorita/",
-    domain: "https://impulsoweb10.com.br/esfira-pizzaria-juliana-favorita-itaqua"
+    cardapioDigital: "https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf",
+    sistemaAvaliacao: "https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/",
+    domain: "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita"
   },
 
   seo: {
     h1: "Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita",
-    metaDescription: "Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor, peça pelo WhatsApp (11) 95833-8379 e receba em casa. Clique e faça seu pedido agora!",
-    canonical: "https://impulsoweb10.com.br/esfira-pizzaria-juliana-favorita-itaqua/index.html"
+    metaDescription: "Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor no cardápio digital, peça pelo WhatsApp (11) 95833-8379 e receba em casa.",
+    canonical: "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html"
   },
+
+  horarios: [
+    { dia: "Segunda-feira", horario: "Fechado (Dia de Finados)" },
+    { dia: "Terça-feira", horario: "18:00 – 23:50" },
+    { dia: "Quarta-feira", horario: "18:00 – 23:50" },
+    { dia: "Quinta-feira", horario: "18:00 – 23:50" },
+    { dia: "Sexta-feira", horario: "18:00 – 23:50" },
+    { dia: "Sábado", horario: "18:00 – 23:50" },
+    { dia: "Domingo", horario: "18:00 – 23:50" }
+  ],
 
   mensagensWhatsapp: {
     geral: "Olá! Vim pelo site da Pizzaria Juliana e Favorita e gostaria de conhecer o cardápio e fazer um pedido.",
@@ -48,7 +60,7 @@ const SITE_CONFIG = {
     salgadas: [
       { id: "mussarela", nome: "Mussarela", descricao: "Queijo mussarela derretido, molho de tomate especial e rodelas de tomate fresco com orégano." },
       { id: "calabresa", nome: "Calabresa", descricao: "Fatias selecionadas de calabresa, cebola fresca, azeitonas e molho de tomate temperado." },
-      { id: "frango-catupiry", nome: "Frango com Requeijão", descricao: "Frango desfado bem temperado coberto com requeijão cremoso e assado no ponto." },
+      { id: "frango-catupiry", nome: "Frango com Requeijão", descricao: "Frango desfiado bem temperado coberto com requeijão cremoso e assado no ponto." },
       { id: "portuguesa", nome: "Portuguesa", descricao: "Mussarela, presunto, ovos, cebola, ervilha, azeitonas e toque de orégano." }
     ],
     doces: [
@@ -64,7 +76,7 @@ const SITE_CONFIG = {
   faq: [
     {
       pergunta: "Qual o horário de funcionamento da Pizzaria Juliana e Favorita em Itaquaquecetuba?",
-      resposta: "Os horários e dias de atendimento podem variar. Para confirmar se a pizzaria está aberta e receber o seu pedido, chame no WhatsApp (11) 95833-8379."
+      resposta: "Funcionamos de terça a domingo das 18:00 às 23:50. Na segunda-feira estamos fechados (Dia de Finados). Para confirmar o atendimento de hoje, chame no WhatsApp (11) 95833-8379."
     },
     {
       pergunta: "Onde fica a Pizzaria Juliana e Favorita e ela faz entrega?",
@@ -72,7 +84,11 @@ const SITE_CONFIG = {
     },
     {
       pergunta: "Como faço o pedido e quais produtos posso escolher?",
-      resposta: "O pedido é feito pelo WhatsApp (11) 95833-8379. Você pode escolher pizzas salgadas e doces, pedir meio a meio, adicionar borda recheada e incluir refrigerantes na mesma compra."
+      resposta: "Você pode fazer o pedido diretamente pelo nosso cardápio digital no Zesto ou pelo WhatsApp (11) 95833-8379."
+    },
+    {
+      pergunta: "Como faço para avaliar o atendimento e o pedido?",
+      resposta: "Sua opinião é muito importante! Você pode deixar seu feedback através do nosso sistema de atendimento e avaliação oficial: https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/"
     }
   ]
 };
