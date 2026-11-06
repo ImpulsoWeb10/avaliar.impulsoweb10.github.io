@@ -69,10 +69,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .status.fechado i{background:#FF6B5E;box-shadow:0 0 0 4px rgba(255,107,94,.25)}
 
 /* ---------- Layout ---------- */
-.layout{
-  max-width:1120px;margin:22px auto 0;padding:0 16px;
-  display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:start;
-}
+.layout{max-width:760px;margin:22px auto 0;padding:0 16px}
 
 /* ---------- Abas ---------- */
 .abas{
@@ -135,22 +132,13 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .qtd .menos[disabled]{opacity:.35;cursor:default}
 .qtd output{min-width:28px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
 
-/* ---------- Cardápios em imagem ---------- */
-.galeria{margin-top:30px}
-.galeria h2{font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:600;margin-bottom:4px}
-.galeria p{color:var(--suave);font-size:.88rem;margin-bottom:12px}
-.thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.thumb{border:0;background:none;padding:0;text-align:left}
-.thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:var(--r-card);box-shadow:var(--sombra);display:block}
-.thumb span{display:block;margin-top:6px;font-size:.85rem;font-weight:600}
-
 /* ---------- Pedido ---------- */
-.pedido{position:sticky;top:14px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 28px);overflow-y:auto;padding:2px}
+.pedido{display:none;flex-direction:column;gap:14px;margin-top:28px;scroll-margin-top:14px}
+.pedido.visivel{display:flex}
 .painel{background:var(--branco);border-radius:var(--r-card);box-shadow:var(--sombra);padding:18px}
 .painel h2{font-family:'Fraunces',Georgia,serif;font-size:1.15rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .painel h2 i{color:var(--tomate);font-size:1rem}
 .painel h3{font-size:.9rem;font-weight:700;margin:16px 0 8px}
-.drawer-head{display:none}
 
 .linha-item{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px dashed var(--linha);font-size:.9rem}
 .linha-item b{font-weight:600}
@@ -192,57 +180,45 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .btn-zap:hover{background:#198F48}
 .btn-zap i{font-size:1.35rem}
 
-/* ---------- Barra mobile ---------- */
+/* ---------- Barra inferior ---------- */
 .barra{
   display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;
   background:var(--floresta);color:#fff;border-top:3px solid var(--ouro);
   padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
   align-items:center;justify-content:space-between;gap:12px;
 }
+.barra.visivel{display:flex}
+.barra-in{width:100%;max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .barra .resumo small{display:block;color:#BFD3C6;font-size:.78rem}
 .barra .resumo strong{font-size:1.2rem}
 .barra button{background:var(--ouro);color:var(--floresta);border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:.95rem}
-.fundo{display:none;position:fixed;inset:0;background:rgba(10,25,16,.6);z-index:50}
-
-/* ---------- Lightbox ---------- */
-.lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(8,20,13,.92);padding:20px;align-items:center;justify-content:center}
-.lightbox.aberto{display:flex}
-.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
-.lightbox button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:1.1rem}
 
 /* ---------- Modal admin ---------- */
 .modal{display:none;position:fixed;inset:0;z-index:110;background:rgba(8,20,13,.65);align-items:center;justify-content:center;padding:16px}
 .modal.aberto{display:flex}
 .modal .painel{width:100%;max-width:420px}
 
-.rodape{max-width:1120px;margin:34px auto 0;padding:0 16px;text-align:center;color:var(--suave);font-size:.8rem}
+
+/* ---------- Rodapé ---------- */
+.rodape{max-width:760px;margin:36px auto 0;padding:22px 16px 0;border-top:1px solid var(--linha);text-align:center;color:var(--suave);font-size:.85rem}
+.rodape a.aval{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;
+  background:var(--branco);border:1.5px solid var(--linha);border-radius:999px;
+  padding:10px 18px;color:var(--floresta);font-weight:700;text-decoration:none;
+}
+.rodape a.aval i{color:var(--ouro)}
+.rodape a.aval:hover{border-color:var(--verde)}
+.rodape address{font-style:normal;line-height:1.6}
+.rodape a.mapa{color:var(--suave);text-decoration:none}
+.rodape a.mapa i{color:var(--tomate);margin-right:4px}
+.rodape a.mapa:hover{color:var(--floresta);text-decoration:underline}
+.rodape small{display:block;margin-top:8px;font-size:.78rem}
 
 /* ---------- Responsivo ---------- */
-@media (max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .barra{display:flex}
-  .pedido{
-    position:fixed;left:0;right:0;bottom:0;z-index:60;top:auto;
-    max-height:88vh;background:var(--papel);border-radius:20px 20px 0 0;
-    padding:0 14px calc(18px + env(safe-area-inset-bottom,0px));
-    transform:translateY(105%);transition:transform .28s ease;
-    box-shadow:0 -10px 40px rgba(0,0,0,.3);
-  }
-  .pedido.aberto{transform:translateY(0)}
-  .fundo.aberto{display:block}
-  .drawer-head{
-    display:flex;align-items:center;justify-content:space-between;
-    position:sticky;top:0;background:var(--papel);padding:16px 2px 8px;z-index:2;
-  }
-  .drawer-head strong{font-family:'Fraunces',Georgia,serif;font-size:1.15rem}
-  .drawer-head button{width:38px;height:38px;border-radius:50%;border:0;background:#E7E3D6}
-  .topo img{width:104px}
-}
 @media (max-width:420px){
   .aba strong{font-size:.85rem}
   .item{padding:12px 12px;gap:10px}
   .item-cod{display:none}
-  .thumbs{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;scroll-behavior:auto!important}
@@ -288,29 +264,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
     </div>
 
     <div class="lista" id="lista" role="tabpanel"></div>
-
-    <section class="galeria">
-      <h2>Cardápios em imagem</h2>
-      <p>Toque para ampliar.</p>
-      <div class="thumbs">
-        <button class="thumb" data-img="cardapio-esfihas.jpg">
-          <img src="cardapio-esfihas.jpg" alt="Cardápio de esfihas tradicionais com códigos e preços" loading="lazy">
-          <span>Tabela de sabores e preços</span>
-        </button>
-        <button class="thumb" data-img="promo-catupiry.jpg">
-          <img src="promo-catupiry.jpg" alt="Esfihas com Catupiry Original a R$ 4,50 cada" loading="lazy">
-          <span>Esfihas com Catupiry Original</span>
-        </button>
-      </div>
-    </section>
   </main>
 
-  <aside class="pedido" id="pedido" aria-label="Seu pedido">
-    <div class="drawer-head">
-      <strong>Seu pedido</strong>
-      <button type="button" id="fechar-pedido" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
+  <section class="pedido" id="pedido" aria-label="Seu pedido">
     <section class="painel">
       <h2><i class="fa-solid fa-basket-shopping"></i> Resumo do pedido</h2>
       <div id="itens"></div>
@@ -363,23 +319,28 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 
       <button class="btn-zap" type="button" id="enviar"><i class="fa-brands fa-whatsapp"></i> Enviar pedido pelo WhatsApp</button>
     </section>
-  </aside>
+  </section>
 </div>
 
 <footer class="rodape">
-  Favorita Pizzaria · Preços sujeitos a alteração sem aviso prévio.
+  <a class="aval" href="https://avaliar.impulsoweb10.com.br/cliente/pizzaria-juliana-favorita/" target="_blank" rel="noopener">
+    <i class="fa-solid fa-star"></i> Avaliação Pizzaria Favorita
+  </a>
+  <address>
+    <strong>Pizzaria Juliana</strong><br>
+    <a class="mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Estr.%20Promiss%C3%A3o%2C%208%20-%20Jardim%20Carolina%2C%20Itaquaquecetuba%20-%20SP%2C%2008588-310%20Itaquaquecetuba%20%2F%20SP" target="_blank" rel="noopener">
+      <i class="fa-solid fa-location-dot"></i> Estr. Promissão, 8 - Jardim Carolina<br>
+      Itaquaquecetuba - SP, 08588-310
+    </a>
+  </address>
+  <small>Preços sujeitos a alteração sem aviso prévio.</small>
 </footer>
 
-<div class="fundo" id="fundo"></div>
-
 <div class="barra" id="barra">
-  <div class="resumo"><small><span id="b-qtd">0</span> itens</small><strong id="b-total">R$ 0,00</strong></div>
-  <button type="button" id="abrir-pedido">Ver pedido <i class="fa-solid fa-chevron-up"></i></button>
-</div>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Imagem ampliada">
-  <button type="button" id="lb-fechar" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
-  <img id="lb-img" alt="">
+  <div class="barra-in">
+    <div class="resumo"><small><span id="b-qtd">0</span> itens no pedido</small><strong id="b-total">R$ 0,00</strong></div>
+    <button type="button" id="abrir-pedido">Ver resumo <i class="fa-solid fa-chevron-down"></i></button>
+  </div>
 </div>
 
 <!-- Painel do dono: abra o site com #admin no final do endereço -->
@@ -467,7 +428,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
     set:function(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   };
 
-  let config = { taxa:5.00, fone:'5511954950044', status:'ABERTO' };
+  let config = { taxa:5.00, fone:'5511958338379', status:'ABERTO' };
   try{ Object.assign(config, JSON.parse(store.get('fav_config')||'{}')); }catch(e){}
 
   let carrinho = {};
@@ -568,6 +529,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
     $('t-total').textContent = brl(t.total);
     $('b-qtd').textContent = t.qtd;
     $('b-total').textContent = brl(t.total);
+    $('pedido').classList.toggle('visivel', t.qtd > 0);
+    $('barra').classList.toggle('visivel', t.qtd > 0);
   }
 
   /* ================= EVENTOS ================= */
@@ -637,25 +600,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
     }).catch(function(){});
   }
 
-  // gaveta mobile
-  function abrirPedido(){ $('pedido').classList.add('aberto'); $('fundo').classList.add('aberto'); }
-  function fecharPedido(){ $('pedido').classList.remove('aberto'); $('fundo').classList.remove('aberto'); }
-  $('abrir-pedido').addEventListener('click', abrirPedido);
-  $('fechar-pedido').addEventListener('click', fecharPedido);
-  $('fundo').addEventListener('click', fecharPedido);
-
-  // lightbox
-  document.querySelectorAll('.thumb').forEach(function(b){
-    b.addEventListener('click', function(){
-      $('lb-img').src = b.dataset.img;
-      $('lb-img').alt = b.querySelector('img').alt;
-      $('lightbox').classList.add('aberto');
-    });
+  // barra inferior: leva ao resumo
+  $('abrir-pedido').addEventListener('click', function(){
+    $('pedido').scrollIntoView({behavior:'smooth', block:'start'});
   });
-  function fechaLb(){ $('lightbox').classList.remove('aberto'); }
-  $('lb-fechar').addEventListener('click', fechaLb);
-  $('lightbox').addEventListener('click', function(e){ if(e.target.id==='lightbox') fechaLb(); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ fechaLb(); fecharPedido(); } });
 
   /* ================= STATUS / ADMIN ================= */
   function renderStatus(){
