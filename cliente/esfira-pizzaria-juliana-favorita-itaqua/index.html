@@ -114,30 +114,40 @@
             padding-bottom: 8px;
         }
 
-        /* BOTÕES DE CATEGORIAS ESPECIAIS */
+        /* 3 BOTÕES DE CATEGORIAS ELEGANTES */
         .special-categories {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
             margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .special-categories {
+                grid-template-columns: 1fr;
+            }
         }
 
         .special-cat-btn {
             background: linear-gradient(135deg, var(--vermelho), #900);
             color: white;
             border: 2px solid var(--dourado);
-            padding: 15px;
+            padding: 14px 10px;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             box-shadow: var(--sombra);
             transition: 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
+        }
+
+        .special-cat-btn.catupiry {
+            background: linear-gradient(135deg, #008A16, #004d0c);
         }
 
         .special-cat-btn.doces {
@@ -150,7 +160,7 @@
         }
 
         .special-cat-btn i {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--dourado);
         }
 
@@ -279,23 +289,7 @@
             text-align: center;
         }
 
-        @media (max-width: 900px) {
-            .counter-controls {
-                display: none;
-            }
-            .product-card {
-                cursor: pointer;
-            }
-            .product-card::after {
-                content: "\f054";
-                font-family: "Font Awesome 6 Free";
-                font-weight: 900;
-                color: var(--dourado);
-                font-size: 0.9rem;
-            }
-        }
-
-        /* MODAIS GERAIS */
+        /* MODAIS ELEGANTES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -309,7 +303,7 @@
 
         .modal-box {
             background: white;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             padding: 25px;
             border-radius: 16px;
@@ -671,17 +665,22 @@
         
         <div class="products-section">
             
-            <!-- BOTÕES DE CATEGORIAS ESPECIAIS (CATUPIRY E DOCES) -->
+            <!-- 3 BOTÕES DE CATEGORIAS PRINCIPAIS -->
             <div class="special-categories">
-                <div class="special-cat-btn" onclick="openCategoryModal('catupiry')">
+                <div class="special-cat-btn" onclick="openCategoryModal('tradicional')">
+                    <i class="fa-solid fa-pizza-slice"></i>
+                    Esfihas Tradicionais
+                    <span style="font-size: 0.75rem; color: #ffeb3b;">Ver Sabores</span>
+                </div>
+                <div class="special-cat-btn catupiry" onclick="openCategoryModal('catupiry')">
                     <i class="fa-solid fa-cheese"></i>
-                    Esfihas com Catupiry Original
-                    <span style="font-size: 0.75rem; color: #ffeb3b;">R$ 4,50 cada[cite: 3]</span>
+                    Com Catupiry Original
+                    <span style="font-size: 0.75rem; color: #ffeb3b;">R$ 4,50 cada[cite: 7]</span>
                 </div>
                 <div class="special-cat-btn doces" onclick="openCategoryModal('doces')">
                     <i class="fa-solid fa-cookie-bite"></i>
                     Esfihas Doces
-                    <span style="font-size: 0.75rem; color: #ffeb3b;">A partir de R$ 5,00[cite: 4]</span>
+                    <span style="font-size: 0.75rem; color: #ffeb3b;">A partir de R$ 5,00[cite: 9]</span>
                 </div>
             </div>
 
@@ -694,10 +693,14 @@
             </div>
 
             <div class="section-title">
-                <i class="fa-solid fa-pizza-slice"></i> TODAS AS ESFIHAS SALGADAS
+                <i class="fa-solid fa-fire"></i> ITENS SELECIONADOS RECENTES
             </div>
 
-            <div class="products-grid" id="products-container"></div>
+            <div class="products-grid" id="products-container">
+                <p style="text-align: center; color: #666; font-size: 0.9rem; padding: 15px; background: white; border-radius: 8px;">
+                    Clique nos botões acima para abrir os sabores e escolher suas esfihas!
+                </p>
+            </div>
         </div>
 
         <div class="cart-section" id="cart-section">
@@ -721,7 +724,7 @@
                 </table>
 
                 <div id="receipt-empty-msg" class="empty-cart-msg">
-                    Seu carrinho está vazio.<br>Selecione suas esfihas ao lado!
+                    Seu carrinho está vazio.<br>Selecione suas esfihas acima!
                 </div>
 
                 <div class="receipt-divider"></div>
@@ -838,38 +841,20 @@
         </div>
     </div>
 
-    <!-- MODAL PARA PRODUTO INDIVIDUAL -->
-    <div class="modal-overlay" id="product-modal">
-        <div class="modal-box">
-            <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></span>
-            <span class="product-code" id="modal-code">CÓD. 38</span>
-            <h3 id="modal-title" style="margin-top: 8px;">CARNE</h3>
-            <div class="price" id="modal-price">R$ 3,50</div>
-            
-            <div class="modal-counter-box">
-                <button class="btn-counter minus" onclick="changeModalQty(-1)">-</button>
-                <span class="counter-value" id="modal-qty" style="font-size: 1.3rem;">1</span>
-                <button class="btn-counter plus" onclick="changeModalQty(1)">+</button>
-            </div>
-
-            <button class="btn-modal-add" onclick="confirmModalItem()">CONFIRMAR / ADICIONAR</button>
-        </div>
-    </div>
-
-    <!-- MODAL PARA CATEGORIAS ESPECIAIS (CATUPIRY / DOCES) -->
+    <!-- MODAL PARA ESCOLHER SABORES -->
     <div class="modal-overlay" id="category-modal">
         <div class="modal-box">
             <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></span>
             <h3 id="cat-modal-title" style="margin-top: 5px; color: var(--verde);">ESCOLHA SUA ESFIHA</h3>
-            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Toque na quantidade desejada para cada sabor</p>
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Toque em + ou - para definir as quantidades</p>
             
-            <div id="cat-modal-items-list" style="margin-bottom: 20px; max-height: 50vh; overflow-y: auto;"></div>
+            <div id="cat-modal-items-list" style="margin-bottom: 20px; max-height: 55vh; overflow-y: auto; text-align: left;"></div>
 
-            <button class="btn-modal-add" onclick="closeCategoryModal()">CONCLUIR SELEÇÃO</button>
+            <button class="btn-modal-add" onclick="closeCategoryModal()">CONCLUIR E VER PEDIDO</button>
         </div>
     </div>
 
-    <!-- BARRA FIXA BOTTOM PARA MOBILES -->
+    <!-- BARRA FIXA MOBILE -->
     <div class="mobile-bar">
         <div class="mobile-bar-info">
             <span>ITENS: <b id="mobile-count">0</b></span>
@@ -913,48 +898,52 @@
     </div>
 
     <script>
+        // BASE DE DADOS COMPLETA COM AS 3 CATEGORIAS OFICIAIS
         const defaultProducts = [
-            { code: "C01", name: "ATUM SEM CEBOLA E CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
-            { code: "C02", name: "DOIS QUEIJOS (MUSSARELA E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },
-            { code: "C03", name: "BRÓCOLIS COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
-            { code: "C04", name: "CAIPIRA (FRANGO, MILHO E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },
-            { code: "C05", name: "CALABRESA COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
-            { code: "C06", name: "CATUPIRY ORIGINAL COM MILHO", price: 4.50, category: "catupiry" },
-            { code: "C07", name: "CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
+            // Categoria: Com Catupiry Original[cite: 7]
+            { code: "C01", name: "ATUM SEM CEBOLA E CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C02", name: "DOIS QUEIJOS (MUSSARELA E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C03", name: "BRÓCOLIS COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C04", name: "CAIPIRA (FRANGO, MILHO E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C05", name: "CALABRESA COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C06", name: "CATUPIRY ORIGINAL COM MILHO", price: 4.50, category: "catupiry" },[cite: 7]
+            { code: "C07", name: "CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
 
-            { code: "D01", name: "CHOCOLATE AO LEITE", price: 5.00, category: "doces" },[cite: 4]
-            { code: "D02", name: "CHOCOLATE AO LEITE C/ CONFETE", price: 6.00, category: "doces" },[cite: 4]
-            { code: "D03", name: "BRIGADEIRO", price: 6.00, category: "doces" },[cite: 4]
+            // Categoria: Esfihas Doces[cite: 9]
+            { code: "D01", name: "CHOCOLATE AO LEITE", price: 5.00, category: "doces" },[cite: 9]
+            { code: "D02", name: "CHOCOLATE AO LEITE C/ CONFETE", price: 6.00, category: "doces" },[cite: 9]
+            { code: "D03", name: "BRIGADEIRO", price: 6.00, category: "doces" },[cite: 9]
 
-            { code: "38",  name: "CARNE", price: 3.50, category: "tradicional" },
-            { code: "39",  name: "QUEIJO", price: 3.50, category: "tradicional" },
-            { code: "85",  name: "CALABRESA", price: 3.50, category: "tradicional" },
-            { code: "71",  name: "PALMITO", price: 4.00, category: "tradicional" },
-            { code: "144", name: "BAURU", price: 3.80, category: "tradicional" },
-            { code: "142", name: "FRANGO C/ CATUPIRY", price: 3.80, category: "tradicional" },
-            { code: "143", name: "ESCAROLA", price: 3.80, category: "tradicional" },
-            { code: "87",  name: "ATUM", price: 3.80, category: "tradicional" },
-            { code: "74",  name: "MISTA (CALABRESA C/ QUEIJO)", price: 4.00, category: "tradicional" },
-            { code: "90",  name: "MISTA SEM CEBOLA", price: 4.00, category: "tradicional" },
-            { code: "69",  name: "CALABRESA C/ CATUPIRY", price: 4.00, category: "tradicional" },
-            { code: "41",  name: "CALABRESA SEM CEBOLA", price: 4.00, category: "tradicional" },
-            { code: "75",  name: "QUEIJO COM BACON", price: 4.00, category: "tradicional" },
-            { code: "78",  name: "DOIS QUEIJOS", price: 4.00, category: "tradicional" },
-            { code: "77",  name: "ATUM COM CATUPIRY", price: 4.00, category: "tradicional" },
-            { code: "79",  name: "FRANGO COM QUEIJO", price: 3.80, category: "tradicional" },
-            { code: "76",  name: "ATUM COM QUEIJO", price: 4.00, category: "tradicional" },
-            { code: "73",  name: "CATUPIRY COM MILHO", price: 3.80, category: "tradicional" },
-            { code: "72",  name: "QUEIJO COM MILHO", price: 3.80, category: "tradicional" },
-            { code: "132", name: "CALABRESA S/ CEBOLA C/ CATU.", price: 4.00, category: "tradicional" },
-            { code: "112", name: "CAIPIRA", price: 4.00, category: "tradicional" },
-            { code: "146", name: "CAIPIRA COM QUEIJO", price: 3.80, category: "tradicional" },
-            { code: "144b",name: "BRÓCOLIS", price: 3.80, category: "tradicional" },
-            { code: "88",  name: "ESCAROLA C/ QUEIJO E BACON", price: 4.00, category: "tradicional" },
-            { code: "228", name: "ESCAROLA C/ BACON E CATU. ORI.", price: 4.50, category: "tradicional" },
-            { code: "181", name: "CARNE COM CHEDDAR", price: 3.80, category: "tradicional" },
-            { code: "99",  name: "CARNE COM QUEIJO", price: 4.00, category: "tradicional" },
-            { code: "147", name: "ATUM C/ QUEIJO E CEBOLA", price: 4.00, category: "tradicional" },
-            { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00, category: "tradicional" }
+            // Categoria: Esfihas Tradicionais[cite: 8]
+            { code: "38",  name: "CARNE", price: 3.50, category: "tradicional" },[cite: 8]
+            { code: "39",  name: "QUEIJO", price: 3.50, category: "tradicional" },[cite: 8]
+            { code: "85",  name: "CALABRESA", price: 3.50, category: "tradicional" },[cite: 8]
+            { code: "71",  name: "PALMITO", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "144", name: "BAURU", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "142", name: "FRANGO C/ CATUPIRY", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "143", name: "ESCAROLA", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "87",  name: "ATUM", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "74",  name: "MISTA (CALABRESA C/ QUEIJO)", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "90",  name: "MISTA SEM CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "69",  name: "CALABRESA C/ CATUPIRY", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "41",  name: "CALABRESA SEM CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "75",  name: "QUEIJO COM BACON", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "78",  name: "DOIS QUEIJOS", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "77",  name: "ATUM COM CATUPIRY", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "79",  name: "FRANGO COM QUEIJO", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "76",  name: "ATUM COM QUEIJO", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "73",  name: "CATUPIRY COM MILHO", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "72",  name: "QUEIJO COM MILHO", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "132", name: "CALABRESA S/ CEBOLA C/ CATU.", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "112", name: "CAIPIRA", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "146", name: "CAIPIRA COM QUEIJO", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "144b",name: "BRÓCOLIS", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "88",  name: "ESCAROLA C/ QUEIJO E BACON", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "228", name: "ESCAROLA C/ BACON E CATU. ORI.", price: 4.50, category: "tradicional" },[cite: 8]
+            { code: "181", name: "CARNE COM CHEDDAR", price: 3.80, category: "tradicional" },[cite: 8]
+            { code: "99",  name: "CARNE COM QUEIJO", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "147", name: "ATUM C/ QUEIJO E CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
+            { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00, category: "tradicional" }[cite: 8]
         ];
 
         let cart = {};
@@ -966,80 +955,11 @@
             status: "ABERTO"
         };
 
-        let currentModalIndex = null;
-        let tempModalQty = 1;
-
         document.addEventListener("DOMContentLoaded", () => {
-            renderProducts();
             updateReceipt();
         });
 
-        function renderProducts() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
-
-            defaultProducts.forEach((prod, index) => {
-                if (prod.category !== 'tradicional') return;
-
-                const qty = cart[index] || 0;
-                const isSelected = qty > 0 ? 'selected' : '';
-
-                const cardHtml = `
-                    <div class="product-card ${isSelected}" id="product-card-${index}" onclick="handleProductClick(${index})">
-                        <div class="product-info">
-                            <span class="product-code">CÓD. ${prod.code}</span>
-                            <div class="product-name">${prod.name}</div>
-                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')} ${qty > 0 ? `(<b>${qty}x</b>)` : ''}</div>
-                        </div>
-                        <div class="counter-controls" onclick="event.stopPropagation()">
-                            <button class="btn-counter minus" onclick="updateQty(${index}, -1)">-</button>
-                            <span class="counter-value" id="qty-${index}">${qty}</span>
-                            <button class="btn-counter plus" onclick="updateQty(${index}, 1)">+</button>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHtml);
-            });
-        }
-
-        function handleProductClick(index) {
-            if (window.innerWidth <= 900) {
-                openProductModal(index);
-            }
-        }
-
-        function openProductModal(index) {
-            currentModalIndex = index;
-            const prod = defaultProducts[index];
-            tempModalQty = cart[index] || 1;
-
-            document.getElementById('modal-code').innerText = `CÓD. ${prod.code}`;
-            document.getElementById('modal-title').innerText = prod.name;
-            document.getElementById('modal-price').innerText = `R$ ${prod.price.toFixed(2).replace('.', ',')}`;
-            document.getElementById('modal-qty').innerText = tempModalQty;
-
-            document.getElementById('product-modal').style.display = 'flex';
-        }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').style.display = 'none';
-        }
-
-        function changeModalQty(delta) {
-            tempModalQty += delta;
-            if (tempModalQty < 1) tempModalQty = 1;
-            document.getElementById('modal-qty').innerText = tempModalQty;
-        }
-
-        function confirmModalItem() {
-            if (currentModalIndex !== null) {
-                cart[currentModalIndex] = tempModalQty;
-                renderProducts();
-                updateReceipt();
-                closeProductModal();
-            }
-        }
-
+        // ABRIR MODAL COM OS ITENS DA CATEGORIA SELECIONADA
         window.openCategoryModal = function(categoryKey) {
             const modalList = document.getElementById('cat-modal-items-list');
             const modalTitle = document.getElementById('cat-modal-title');
@@ -1047,8 +967,10 @@
 
             if (categoryKey === 'catupiry') {
                 modalTitle.innerText = "ESFIHAS COM CATUPIRY ORIGINAL";
-            } else {
+            } else if (categoryKey === 'doces') {
                 modalTitle.innerText = "ESFIHAS DOCES";
+            } else {
+                modalTitle.innerText = "ESFIHAS TRADICIONAIS";
             }
 
             defaultProducts.forEach((prod, index) => {
@@ -1057,13 +979,13 @@
                     const itemHtml = `
                         <div class="category-item-row">
                             <div class="category-item-info">
-                                <h4>${prod.name}</h4>
+                                <h4><span style="background:var(--preto); color:var(--dourado); padding:2px 6px; border-radius:4px; font-size:0.7rem;">CÓD. ${prod.code}</span> ${prod.name}</h4>
                                 <span>R$ ${prod.price.toFixed(2).replace('.', ',')}</span>
                             </div>
                             <div class="counter-controls">
-                                <button class="btn-counter minus" onclick="updateCategoryItemQty(${index}, -1)">-</button>
-                                <span class="counter-value" id="cat-qty-${index}">${qty}</span>
-                                <button class="btn-counter plus" onclick="updateCategoryItemQty(${index}, 1)">+</button>
+                                <button class="btn-counter minus" onclick="updateItemQty(${index}, -1, '${categoryKey}')">-</button>
+                                <span class="counter-value" id="modal-qty-${index}">${qty}</span>
+                                <button class="btn-counter plus" onclick="updateItemQty(${index}, 1, '${categoryKey}')">+</button>
                             </div>
                         </div>
                     `;
@@ -1076,36 +998,62 @@
 
         window.closeCategoryModal = function() {
             document.getElementById('category-modal').style.display = 'none';
-            renderProducts();
+            renderSelectedSummary();
             updateReceipt();
         };
 
-        window.updateCategoryItemQty = function(index, delta) {
+        window.updateItemQty = function(index, delta, categoryKey) {
             const currentQty = cart[index] || 0;
             const newQty = currentQty + delta;
 
             if (newQty <= 0) {
                 delete cart[index];
-                document.getElementById(`cat-qty-${index}`).innerText = 0;
+                if(document.getElementById(`modal-qty-${index}`)) {
+                    document.getElementById(`modal-qty-${index}`).innerText = 0;
+                }
             } else {
                 cart[index] = newQty;
-                document.getElementById(`cat-qty-${index}`).innerText = newQty;
+                if(document.getElementById(`modal-qty-${index}`)) {
+                    document.getElementById(`modal-qty-${index}`).innerText = newQty;
+                }
             }
             updateReceipt();
         };
 
-        function updateQty(index, delta) {
-            const currentQty = cart[index] || 0;
-            const newQty = currentQty + delta;
+        // EXIBE OS ITENS ADICIONADOS RECENTES NA TELA PRINCIPAL
+        function renderSelectedSummary() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
 
-            if (newQty <= 0) {
-                delete cart[index];
-            } else {
-                cart[index] = newQty;
+            const keys = Object.keys(cart);
+            if (keys.length === 0) {
+                container.innerHTML = `
+                    <p style="text-align: center; color: #666; font-size: 0.9rem; padding: 15px; background: white; border-radius: 8px;">
+                        Nenhum item selecionado no momento. Clique nos botões acima para escolher!
+                    </p>
+                `;
+                return;
             }
 
-            renderProducts();
-            updateReceipt();
+            keys.forEach(idx => {
+                const prod = defaultProducts[idx];
+                const qty = cart[idx];
+                const cardHtml = `
+                    <div class="product-card selected" id="product-card-${idx}">
+                        <div class="product-info">
+                            <span class="product-code">CÓD. ${prod.code}</span>
+                            <div class="product-name">${prod.name}</div>
+                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')} (<b>${qty}x</b>)</div>
+                        </div>
+                        <div class="counter-controls">
+                            <button class="btn-counter minus" onclick="updateItemQty(${idx}, -1)">-</button>
+                            <span class="counter-value">${qty}</span>
+                            <button class="btn-counter plus" onclick="updateItemQty(${idx}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
         }
 
         function updateReceipt() {
@@ -1148,13 +1096,14 @@
             document.getElementById('receipt-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('mobile-count').innerText = totalItems;
             document.getElementById('mobile-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+
+            renderSelectedSummary();
         }
 
         function clearCart() {
             if (Object.keys(cart).length === 0) return;
             if (confirm("Deseja realmente limpar todo o seu pedido?")) {
                 cart = {};
-                renderProducts();
                 updateReceipt();
             }
         }
