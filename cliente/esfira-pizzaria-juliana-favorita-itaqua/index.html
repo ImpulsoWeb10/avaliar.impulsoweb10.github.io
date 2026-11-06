@@ -1,1256 +1,750 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SXPW22DT2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-6SXPW22DT2');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Digital — Favorita Pizzaria</title>
-    <!-- Font Awesome para Ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --verde: #008A16;
-            --vermelho: #C30101;
-            --creme: #FEF9E3;
-            --preto: #0C0201;
-            --dourado: #EEA947;
-            --cinza-claro: #f4f4f4;
-            --sombra: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--creme);
-            color: var(--preto);
-            padding-bottom: 90px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--preto), #220503);
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-            border-bottom: 5px solid var(--dourado);
-            position: relative;
-            box-shadow: var(--sombra);
-        }
-
-        .logo-container img {
-            max-width: 170px;
-            height: auto;
-            filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.5));
-            transition: transform 0.3s;
-        }
-
-        header h1 {
-            color: var(--dourado);
-            font-size: 1.8rem;
-            margin-top: 10px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        header p.subtitle {
-            font-size: 0.95rem;
-            color: #ddd;
-            margin-bottom: 12px;
-        }
-
-        .badge-status {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: var(--verde);
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .badge-status.fechado {
-            background-color: var(--vermelho);
-        }
-
-        .main-container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 15px;
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 25px;
-        }
-
-        @media (max-width: 900px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .section-title {
-            color: var(--vermelho);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 8px;
-        }
-
-        /* 3 BOTÕES DE CATEGORIAS ELEGANTES */
-        .special-categories {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 600px) {
-            .special-categories {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .special-cat-btn {
-            background: linear-gradient(135deg, var(--vermelho), #900);
-            color: white;
-            border: 2px solid var(--dourado);
-            padding: 14px 10px;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: var(--sombra);
-            transition: 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .special-cat-btn.catupiry {
-            background: linear-gradient(135deg, #008A16, #004d0c);
-        }
-
-        .special-cat-btn.doces {
-            background: linear-gradient(135deg, #b8860b, #5c4033);
-        }
-
-        .special-cat-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
-        }
-
-        .special-cat-btn i {
-            font-size: 1.3rem;
-            color: var(--dourado);
-        }
-
-        .cardapio-original-box {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: var(--sombra);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .btn-toggle-img {
-            background-color: var(--dourado);
-            color: var(--preto);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .img-cardapio-oficial {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        /* LISTA DE PRODUTOS */
-        .products-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 5px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .product-card.selected {
-            border-left-color: var(--verde);
-            background-color: #f0fdf4;
-        }
-
-        .product-info {
-            flex: 1;
-        }
-
-        .product-code {
-            font-size: 0.75rem;
-            background: var(--preto);
-            color: var(--dourado);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 4px;
-        }
-
-        .product-name {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--preto);
-        }
-
-        .product-price {
-            color: var(--verde);
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-top: 2px;
-        }
-
-        .counter-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--cinza-claro);
-            padding: 5px 10px;
-            border-radius: 25px;
-        }
-
-        .btn-counter {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: none;
-            background: white;
-            color: var(--preto);
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-counter.plus {
-            background-color: var(--verde);
-            color: white;
-        }
-
-        .btn-counter.minus {
-            background-color: var(--vermelho);
-            color: white;
-        }
-
-        .counter-value {
-            font-weight: 700;
-            font-size: 1rem;
-            min-width: 24px;
-            text-align: center;
-        }
-
-        /* MODAIS ELEGANTES */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-box {
-            background: white;
-            max-width: 500px;
-            width: 100%;
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: scaleUp 0.2s ease-in-out;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        @keyframes scaleUp {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-box h3 {
-            color: var(--vermelho);
-            margin-bottom: 5px;
-        }
-
-        .modal-box .price {
-            font-size: 1.2rem;
-            color: var(--verde);
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .modal-counter-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .btn-modal-add {
-            width: 100%;
-            background: var(--verde);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .category-item-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-            gap: 10px;
-        }
-
-        .category-item-info h4 {
-            font-size: 0.9rem;
-            color: var(--preto);
-            line-height: 1.2;
-        }
-
-        .category-item-info span {
-            font-size: 0.85rem;
-            color: var(--verde);
-            font-weight: 700;
-        }
-
-        /* CUPOM DE SUPERMERCADO */
-        .cart-section {
-            position: sticky;
-            top: 20px;
-        }
-
-        .receipt-container {
-            background: #fff;
-            padding: 25px 20px;
-            border-radius: 2px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            font-family: 'Courier Prime', monospace;
-            position: relative;
-            background-image: radial-gradient(#eee 10%, transparent 11%);
-            background-size: 10px 10px;
-            background-color: #fffef5;
-            border-top: 8px solid var(--vermelho);
-        }
-
-        .receipt-container::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            height: 10px;
-            background: linear-gradient(-45deg, transparent 5px, #fffef5 0), linear-gradient(45deg, transparent 5px, #fffef5 0);
-            background-size: 10px 10px;
-        }
-
-        .receipt-header {
-            text-align: center;
-            border-bottom: 2px dashed #888;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-
-        .receipt-header h2 {
-            font-family: 'Courier Prime', monospace;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .receipt-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-        }
-
-        .receipt-table th {
-            text-align: left;
-            border-bottom: 1px dashed #888;
-            padding-bottom: 5px;
-        }
-
-        .receipt-table td {
-            padding: 6px 0;
-        }
-
-        .receipt-divider {
-            border-top: 2px dashed #888;
-            margin: 12px 0;
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .receipt-total {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--preto);
-            margin-top: 8px;
-        }
-
-        .btn-clear {
-            width: 100%;
-            background: transparent;
-            border: 1px dashed var(--vermelho);
-            color: var(--vermelho);
-            padding: 8px;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.2s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .checkout-box {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: var(--sombra);
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.2s;
-        }
-
-        .form-control:focus {
-            border-color: var(--verde);
-            box-shadow: 0 0 0 3px rgba(0,138,22,0.15);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .radio-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .radio-card {
-            border: 2px solid #ddd;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .radio-card.active {
-            border-color: var(--verde);
-            background-color: #f0fdf4;
-            color: var(--verde);
-        }
-
-        .pix-alert {
-            background-color: #e8f5e9;
-            border-left: 4px solid var(--verde);
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .btn-whatsapp {
-            width: 100%;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .mobile-bar {
-            display: none;
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--preto);
-            color: white;
-            padding: 12px 20px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-            z-index: 999;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 3px solid var(--dourado);
-        }
-
-        .mobile-bar-info {
-            font-size: 0.9rem;
-        }
-
-        .mobile-bar-info strong {
-            color: var(--dourado);
-            font-size: 1.1rem;
-            display: block;
-        }
-
-        .btn-mobile-view {
-            background: var(--verde);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        @media (max-width: 900px) {
-            .mobile-bar {
-                display: flex;
-            }
-        }
-
-        .admin-btn-trigger {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 100;
-        }
-
-        .modal-admin {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-
-        .modal-content {
-            background: white;
-            max-width: 500px;
-            width: 100%;
-            padding: 25px;
-            border-radius: 12px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .empty-cart-msg {
-            text-align: center;
-            color: #777;
-            padding: 20px 0;
-            font-style: italic;
-        }
-    </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SXPW22DT2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6SXPW22DT2');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E3B21">
+<title>Cardápio de Esfihas — Favorita Pizzaria</title>
+<meta name="description" content="Faça seu pedido de esfihas da Favorita Pizzaria: tradicionais, com Catupiry Original e doces. Pedido direto pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --floresta:#0E3B21;
+  --verde:#1B7A3C;
+  --verde-claro:#E6F3EA;
+  --tomate:#C42A1F;
+  --ouro:#E9A93B;
+  --papel:#F6F3EA;
+  --branco:#FFFFFF;
+  --tinta:#1D2A22;
+  --suave:#66736B;
+  --linha:#E3E0D5;
+  --r-card:14px;
+  --r-ctl:10px;
+  --sombra:0 1px 2px rgba(14,59,33,.06),0 8px 24px rgba(14,59,33,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--papel);
+  color:var(--tinta);
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));
+}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--ouro);outline-offset:2px}
+
+/* ---------- Cabeçalho ---------- */
+.topo{
+  background:var(--floresta);
+  color:#fff;
+  padding:calc(18px + env(safe-area-inset-top,0px)) 20px 22px;
+  border-bottom:4px solid var(--ouro);
+}
+.topo-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.topo img{width:132px;height:auto;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.35);display:block}
+.topo-txt{flex:1;min-width:230px}
+.topo h1{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(1.55rem,4.2vw,2.3rem);line-height:1.1;letter-spacing:-.01em}
+.topo p{color:#C9DACF;margin-top:6px;font-size:.98rem;max-width:46ch}
+.status{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;
+  font-size:.85rem;font-weight:600;padding:6px 14px 6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);
+}
+.status i{width:9px;height:9px;border-radius:50%;background:#46D36E;box-shadow:0 0 0 4px rgba(70,211,110,.25)}
+.status.fechado i{background:#FF6B5E;box-shadow:0 0 0 4px rgba(255,107,94,.25)}
+
+/* ---------- Layout ---------- */
+.layout{
+  max-width:1120px;margin:22px auto 0;padding:0 16px;
+  display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:start;
+}
+
+/* ---------- Abas ---------- */
+.abas{
+  position:sticky;top:0;z-index:20;
+  background:var(--papel);
+  padding:10px 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+}
+.aba{
+  background:var(--branco);border:1.5px solid var(--linha);border-radius:var(--r-card);
+  padding:11px 8px;text-align:center;color:var(--tinta);
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.aba strong{font-size:.95rem;font-weight:700}
+.aba small{font-size:.76rem;color:var(--suave)}
+.aba[aria-selected="true"]{background:var(--floresta);border-color:var(--floresta);color:#fff}
+.aba[aria-selected="true"] small{color:#CFE2D5}
+
+.busca{position:relative;margin:4px 0 14px}
+.busca i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--suave)}
+.busca input{
+  width:100%;padding:13px 14px 13px 40px;border:1.5px solid var(--linha);border-radius:var(--r-ctl);
+  font:inherit;font-size:.95rem;background:var(--branco)
+}
+
+.cab-lista{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.cab-lista h2{font-family:'Fraunces',Georgia,serif;font-size:1.3rem;font-weight:600}
+.cab-lista span{font-size:.85rem;color:var(--suave)}
+
+/* ---------- Lista de sabores ---------- */
+.lista{background:var(--branco);border-radius:var(--r-card);box-shadow:var(--sombra);overflow:hidden}
+.item{
+  display:flex;align-items:center;gap:14px;padding:13px 16px;
+  border-bottom:1px solid var(--linha);
+  border-left:4px solid transparent;
+  transition:background .15s,border-color .15s;
+}
+.item:last-child{border-bottom:0}
+.item.on{background:var(--verde-claro);border-left-color:var(--verde)}
+.item-cod{
+  flex:none;min-width:44px;text-align:center;
+  font-size:.74rem;font-weight:700;color:var(--floresta);
+  background:#F1EEE3;border-radius:6px;padding:3px 6px;
+}
+.item-info{flex:1;min-width:0}
+.item-nome{font-weight:600;font-size:.97rem;line-height:1.3}
+.item-preco{font-size:.9rem;color:var(--verde);font-weight:700;margin-top:1px}
+.vazio{padding:28px 16px;text-align:center;color:var(--suave)}
+
+/* ---------- Contador ---------- */
+.qtd{display:flex;align-items:center;gap:4px;flex:none}
+.qtd button{
+  width:36px;height:36px;border-radius:50%;border:0;font-size:1.05rem;font-weight:700;
+  display:grid;place-items:center;transition:transform .1s,background .15s;
+}
+.qtd button:active{transform:scale(.92)}
+.qtd .mais{background:var(--verde);color:#fff}
+.qtd .menos{background:#F1EEE3;color:var(--tinta)}
+.qtd .menos[disabled]{opacity:.35;cursor:default}
+.qtd output{min-width:28px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ---------- Cardápios em imagem ---------- */
+.galeria{margin-top:30px}
+.galeria h2{font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:600;margin-bottom:4px}
+.galeria p{color:var(--suave);font-size:.88rem;margin-bottom:12px}
+.thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.thumb{border:0;background:none;padding:0;text-align:left}
+.thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:var(--r-card);box-shadow:var(--sombra);display:block}
+.thumb span{display:block;margin-top:6px;font-size:.85rem;font-weight:600}
+
+/* ---------- Pedido ---------- */
+.pedido{position:sticky;top:14px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 28px);overflow-y:auto;padding:2px}
+.painel{background:var(--branco);border-radius:var(--r-card);box-shadow:var(--sombra);padding:18px}
+.painel h2{font-family:'Fraunces',Georgia,serif;font-size:1.15rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.painel h2 i{color:var(--tomate);font-size:1rem}
+.painel h3{font-size:.9rem;font-weight:700;margin:16px 0 8px}
+.drawer-head{display:none}
+
+.linha-item{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px dashed var(--linha);font-size:.9rem}
+.linha-item b{font-weight:600}
+.linha-item .sub{color:var(--suave);font-size:.8rem}
+.linha-item .val{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.carrinho-vazio{text-align:center;color:var(--suave);padding:18px 0;font-size:.92rem}
+.totais{margin-top:10px}
+.totais div{display:flex;justify-content:space-between;font-size:.92rem;padding:3px 0;color:var(--suave)}
+.totais .total{color:var(--tinta);font-size:1.2rem;font-weight:700;border-top:2px solid var(--tinta);margin-top:6px;padding-top:9px}
+.limpar{margin-top:10px;width:100%;background:none;border:0;color:var(--tomate);font-weight:600;font-size:.85rem;padding:6px}
+
+.campo{margin-bottom:12px}
+.campo label{display:block;font-size:.82rem;font-weight:600;margin-bottom:4px}
+.campo input,.campo select{
+  width:100%;padding:11px 12px;border:1.5px solid var(--linha);border-radius:var(--r-ctl);
+  font:inherit;font-size:.93rem;background:#fff;color:var(--tinta)
+}
+.campo input:focus{border-color:var(--verde)}
+.campo input.erro{border-color:var(--tomate);background:#FFF5F4}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opcoes{display:grid;gap:8px;margin-bottom:6px}
+.opcoes.d2{grid-template-columns:1fr 1fr}
+.opcoes.d3{grid-template-columns:repeat(3,1fr)}
+.opcao{
+  border:1.5px solid var(--linha);background:#fff;border-radius:var(--r-ctl);padding:11px 6px;
+  font-size:.84rem;font-weight:600;color:var(--tinta);
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+}
+.opcao[aria-pressed="true"]{border-color:var(--verde);background:var(--verde-claro);color:var(--floresta)}
+.aviso{
+  display:none;margin-top:8px;font-size:.82rem;color:var(--floresta);
+  background:var(--verde-claro);border-radius:var(--r-ctl);padding:10px 12px;
+}
+.btn-zap{
+  width:100%;margin-top:14px;border:0;border-radius:var(--r-ctl);background:#1FA855;color:#fff;
+  padding:15px;font-size:1.02rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .15s;
+}
+.btn-zap:hover{background:#198F48}
+.btn-zap i{font-size:1.35rem}
+
+/* ---------- Barra mobile ---------- */
+.barra{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:var(--floresta);color:#fff;border-top:3px solid var(--ouro);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  align-items:center;justify-content:space-between;gap:12px;
+}
+.barra .resumo small{display:block;color:#BFD3C6;font-size:.78rem}
+.barra .resumo strong{font-size:1.2rem}
+.barra button{background:var(--ouro);color:var(--floresta);border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:.95rem}
+.fundo{display:none;position:fixed;inset:0;background:rgba(10,25,16,.6);z-index:50}
+
+/* ---------- Lightbox ---------- */
+.lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(8,20,13,.92);padding:20px;align-items:center;justify-content:center}
+.lightbox.aberto{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.lightbox button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:1.1rem}
+
+/* ---------- Modal admin ---------- */
+.modal{display:none;position:fixed;inset:0;z-index:110;background:rgba(8,20,13,.65);align-items:center;justify-content:center;padding:16px}
+.modal.aberto{display:flex}
+.modal .painel{width:100%;max-width:420px}
+
+.rodape{max-width:1120px;margin:34px auto 0;padding:0 16px;text-align:center;color:var(--suave);font-size:.8rem}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .barra{display:flex}
+  .pedido{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;top:auto;
+    max-height:88vh;background:var(--papel);border-radius:20px 20px 0 0;
+    padding:0 14px calc(18px + env(safe-area-inset-bottom,0px));
+    transform:translateY(105%);transition:transform .28s ease;
+    box-shadow:0 -10px 40px rgba(0,0,0,.3);
+  }
+  .pedido.aberto{transform:translateY(0)}
+  .fundo.aberto{display:block}
+  .drawer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;background:var(--papel);padding:16px 2px 8px;z-index:2;
+  }
+  .drawer-head strong{font-family:'Fraunces',Georgia,serif;font-size:1.15rem}
+  .drawer-head button{width:38px;height:38px;border-radius:50%;border:0;background:#E7E3D6}
+  .topo img{width:104px}
+}
+@media (max-width:420px){
+  .aba strong{font-size:.85rem}
+  .item{padding:12px 12px;gap:10px}
+  .item-cod{display:none}
+  .thumbs{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
 
-    <button class="admin-btn-trigger" onclick="openAdmin()" title="Área Administrativa">
-        <i class="fa-solid fa-gear"></i>
-    </button>
+<header class="topo">
+  <div class="topo-in">
+    <img src="logo-favorita.png" alt="Favorita Pizzaria" width="132" height="87">
+    <div class="topo-txt">
+      <h1>Cardápio de Esfihas</h1>
+      <p>Escolha seus sabores, monte o pedido e finalize direto pelo WhatsApp.</p>
+      <span class="status" id="status"><i></i><span id="status-txt">Aberto para pedidos</span></span>
+    </div>
+  </div>
+</header>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo-favorita.png" alt="Favorita Pizzaria Logo Oficial" id="main-logo">
-        </div>
-        <h1>CARDÁPIO DIGITAL</h1>
-        <p class="subtitle">Escolha seus sabores favoritos de esfihas</p>
-        <span class="badge-status" id="status-badge"><i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO</span>
-    </header>
+<div class="layout">
 
-    <div class="main-container">
-        
-        <div class="products-section">
-            
-            <!-- 3 BOTÕES DE CATEGORIAS PRINCIPAIS -->
-            <div class="special-categories">
-                <div class="special-cat-btn" onclick="openCategoryModal('tradicional')">
-                    <i class="fa-solid fa-pizza-slice"></i>
-                    Esfihas Tradicionais
-                    <span style="font-size: 0.75rem; color: #ffeb3b;">Ver Sabores</span>
-                </div>
-                <div class="special-cat-btn catupiry" onclick="openCategoryModal('catupiry')">
-                    <i class="fa-solid fa-cheese"></i>
-                    Com Catupiry Original
-                    <span style="font-size: 0.75rem; color: #ffeb3b;">R$ 4,50 cada[cite: 7]</span>
-                </div>
-                <div class="special-cat-btn doces" onclick="openCategoryModal('doces')">
-                    <i class="fa-solid fa-cookie-bite"></i>
-                    Esfihas Doces
-                    <span style="font-size: 0.75rem; color: #ffeb3b;">A partir de R$ 5,00[cite: 9]</span>
-                </div>
-            </div>
-
-            <div class="cardapio-original-box">
-                <button class="btn-toggle-img" onclick="toggleCardapioImg()">
-                    <i class="fa-solid fa-image"></i> Ver Cardápio Físico Original
-                </button>
-                <br>
-                <img src="cardapio-esfihas.png" alt="Cardápio Oficial Favorita" class="img-cardapio-oficial" id="img-cardapio-oficial">
-            </div>
-
-            <div class="section-title">
-                <i class="fa-solid fa-fire"></i> ITENS SELECIONADOS RECENTES
-            </div>
-
-            <div class="products-grid" id="products-container">
-                <p style="text-align: center; color: #666; font-size: 0.9rem; padding: 15px; background: white; border-radius: 8px;">
-                    Clique nos botões acima para abrir os sabores e escolher suas esfihas!
-                </p>
-            </div>
-        </div>
-
-        <div class="cart-section" id="cart-section">
-            <div class="receipt-container">
-                <div class="receipt-header">
-                    <h2>FAVORITA PIZZARIA</h2>
-                    <p style="font-size: 0.75rem;">SABOR QUE CONQUISTA</p>
-                    <p style="font-size: 0.75rem; margin-top: 4px;">*** RESUMO DO PEDIDO ***</p>
-                </div>
-
-                <table class="receipt-table">
-                    <thead>
-                        <tr>
-                            <th>CÓD</th>
-                            <th>PRODUTO</th>
-                            <th style="text-align: center;">QTD</th>
-                            <th style="text-align: right;">VALOR</th>
-                        </tr>
-                    </thead>
-                    <tbody id="receipt-items"></tbody>
-                </table>
-
-                <div id="receipt-empty-msg" class="empty-cart-msg">
-                    Seu carrinho está vazio.<br>Selecione suas esfihas acima!
-                </div>
-
-                <div class="receipt-divider"></div>
-
-                <div class="receipt-row">
-                    <span>SUBTOTAL:</span>
-                    <span id="receipt-subtotal">R$ 0,00</span>
-                </div>
-                <div class="receipt-row">
-                    <span>TAXA ENTREGA:</span>
-                    <span id="receipt-delivery">R$ 0,00</span>
-                </div>
-
-                <div class="receipt-divider"></div>
-
-                <div class="receipt-row receipt-total">
-                    <span>TOTAL:</span>
-                    <span id="receipt-total">R$ 0,00</span>
-                </div>
-
-                <button class="btn-clear" onclick="clearCart()">
-                    <i class="fa-solid fa-trash"></i> LIMPAR PEDIDO
-                </button>
-            </div>
-
-            <div class="checkout-box">
-                <div class="section-title" style="font-size: 1.1rem;">
-                    <i class="fa-solid fa-user"></i> SEUS DADOS
-                </div>
-
-                <div class="form-group">
-                    <label>Seu Nome *</label>
-                    <input type="text" id="cust-name" class="form-control" placeholder="Digite seu nome completo">
-                </div>
-                <div class="form-group">
-                    <label>Telefone / WhatsApp *</label>
-                    <input type="tel" id="cust-phone" class="form-control" placeholder="(11) 99999-9999">
-                </div>
-
-                <div class="section-title" style="font-size: 1.1rem; margin-top: 15px;">
-                    <i class="fa-solid fa-truck-fast"></i> ENTREGA OU RETIRADA
-                </div>
-
-                <div class="radio-options">
-                    <div class="radio-card active" id="opt-entrega" onclick="setDeliveryType('entrega')">
-                        <i class="fa-solid fa-house"></i>
-                        ENTREGA EM CASA
-                    </div>
-                    <div class="radio-card" id="opt-retirada" onclick="setDeliveryType('retirada')">
-                        <i class="fa-solid fa-store"></i>
-                        RETIRAR NO LOCAL
-                    </div>
-                </div>
-
-                <div id="address-fields">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>CEP</label>
-                            <input type="text" id="addr-cep" class="form-control" placeholder="00000-000">
-                        </div>
-                        <div class="form-group">
-                            <label>Número *</label>
-                            <input type="text" id="addr-num" class="form-control" placeholder="Nº">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Rua / Logradouro *</label>
-                        <input type="text" id="addr-street" class="form-control" placeholder="Nome da sua rua">
-                    </div>
-                    <div class="form-group">
-                        <label>Bairro *</label>
-                        <input type="text" id="addr-bairro" class="form-control" placeholder="Seu bairro">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Complemento</label>
-                            <input type="text" id="addr-comp" class="form-control" placeholder="Apto, Bloco">
-                        </div>
-                        <div class="form-group">
-                            <label>Referência</label>
-                            <input type="text" id="addr-ref" class="form-control" placeholder="Ponto de ref.">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-title" style="font-size: 1.1rem; margin-top: 15px;">
-                    <i class="fa-solid fa-credit-card"></i> FORMA DE PAGAMENTO
-                </div>
-
-                <div class="radio-options" style="grid-template-columns: 1fr 1fr 1fr;">
-                    <div class="radio-card active" id="pay-pix" onclick="setPayment('PIX')">
-                        <i class="fa-brands fa-pix"></i>
-                        PIX
-                    </div>
-                    <div class="radio-card" id="pay-credito" onclick="setPayment('Cartão de Crédito')">
-                        <i class="fa-solid fa-credit-card"></i>
-                        CRÉDITO
-                    </div>
-                    <div class="radio-card" id="pay-debito" onclick="setPayment('Cartão de Débito')">
-                        <i class="fa-solid fa-money-check-dollar"></i>
-                        DÉBITO
-                    </div>
-                </div>
-
-                <div class="pix-alert" id="pix-alert">
-                    <i class="fa-solid fa-circle-info"></i> As instruções da chave PIX para pagamento serão enviadas pelo atendente na confirmação pelo WhatsApp.
-                </div>
-
-                <button class="btn-whatsapp" onclick="sendOrder()">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
-                    FINALIZAR PEDIDO NO WHATSAPP
-                </button>
-            </div>
-        </div>
+  <main>
+    <div class="abas" role="tablist" aria-label="Categorias">
+      <button class="aba" role="tab" id="aba-tradicional" aria-selected="true" data-cat="tradicional">
+        <strong>Tradicionais</strong><small>R$ 3,50 a R$ 4,50</small>
+      </button>
+      <button class="aba" role="tab" id="aba-catupiry" aria-selected="false" data-cat="catupiry">
+        <strong>Com Catupiry</strong><small>R$ 4,50 cada</small>
+      </button>
+      <button class="aba" role="tab" id="aba-doces" aria-selected="false" data-cat="doces">
+        <strong>Doces</strong><small>R$ 5,00 a R$ 6,00</small>
+      </button>
     </div>
 
-    <!-- MODAL PARA ESCOLHER SABORES -->
-    <div class="modal-overlay" id="category-modal">
-        <div class="modal-box">
-            <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></span>
-            <h3 id="cat-modal-title" style="margin-top: 5px; color: var(--verde);">ESCOLHA SUA ESFIHA</h3>
-            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Toque em + ou - para definir as quantidades</p>
-            
-            <div id="cat-modal-items-list" style="margin-bottom: 20px; max-height: 55vh; overflow-y: auto; text-align: left;"></div>
-
-            <button class="btn-modal-add" onclick="closeCategoryModal()">CONCLUIR E VER PEDIDO</button>
-        </div>
+    <div class="busca">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" id="busca" placeholder="Buscar sabor ou código" aria-label="Buscar sabor ou código" autocomplete="off">
     </div>
 
-    <!-- BARRA FIXA MOBILE -->
-    <div class="mobile-bar">
-        <div class="mobile-bar-info">
-            <span>ITENS: <b id="mobile-count">0</b></span>
-            <strong id="mobile-total">R$ 0,00</strong>
-        </div>
-        <button class="btn-mobile-view" onclick="scrollToCart()">
-            VER MEU PEDIDO <i class="fa-solid fa-arrow-down"></i>
+    <div class="cab-lista">
+      <h2 id="lista-titulo">Esfihas tradicionais</h2>
+      <span id="lista-conta"></span>
+    </div>
+
+    <div class="lista" id="lista" role="tabpanel"></div>
+
+    <section class="galeria">
+      <h2>Cardápios em imagem</h2>
+      <p>Toque para ampliar.</p>
+      <div class="thumbs">
+        <button class="thumb" data-img="cardapio-esfihas.jpg">
+          <img src="cardapio-esfihas.jpg" alt="Cardápio de esfihas tradicionais com códigos e preços" loading="lazy">
+          <span>Tabela de sabores e preços</span>
         </button>
+        <button class="thumb" data-img="promo-catupiry.jpg">
+          <img src="promo-catupiry.jpg" alt="Esfihas com Catupiry Original a R$ 4,50 cada" loading="lazy">
+          <span>Esfihas com Catupiry Original</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <aside class="pedido" id="pedido" aria-label="Seu pedido">
+    <div class="drawer-head">
+      <strong>Seu pedido</strong>
+      <button type="button" id="fechar-pedido" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- MODAL ADMIN -->
-    <div class="modal-admin" id="admin-modal">
-        <div class="modal-content">
-            <div class="section-title" style="justify-content: space-between;">
-                <span><i class="fa-solid fa-sliders"></i> PAINEL DE CONFIGURAÇÕES</span>
-                <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAdmin()"></i>
-            </div>
-            
-            <div class="form-group">
-                <label>Status do Estabelecimento</label>
-                <select id="adm-status" class="form-control" onchange="updateAdminConfigs()">
-                    <option value="ABERTO">ABERTO</option>
-                    <option value="FECHADO">FECHADO</option>
-                </select>
-            </div>
+    <section class="painel">
+      <h2><i class="fa-solid fa-basket-shopping"></i> Resumo do pedido</h2>
+      <div id="itens"></div>
+      <div class="carrinho-vazio" id="vazio">Nenhuma esfiha selecionada ainda.</div>
+      <div class="totais">
+        <div><span>Subtotal</span><span id="t-sub">R$ 0,00</span></div>
+        <div><span>Taxa de entrega</span><span id="t-ent">R$ 0,00</span></div>
+        <div class="total"><span>Total</span><span id="t-total">R$ 0,00</span></div>
+      </div>
+      <button class="limpar" type="button" id="limpar"><i class="fa-regular fa-trash-can"></i> Limpar pedido</button>
+    </section>
 
-            <div class="form-group">
-                <label>Taxa de Entrega (R$)</label>
-                <input type="number" step="0.50" id="adm-delivery" class="form-control" value="5.00" onchange="updateAdminConfigs()">
-            </div>
+    <section class="painel">
+      <h2><i class="fa-solid fa-user"></i> Seus dados</h2>
+      <div class="campo">
+        <label for="nome">Nome *</label>
+        <input id="nome" type="text" autocomplete="name" placeholder="Seu nome">
+      </div>
+      <div class="campo">
+        <label for="fone">WhatsApp *</label>
+        <input id="fone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999">
+      </div>
 
-            <div class="form-group">
-                <label>Número WhatsApp (com DDD)</label>
-                <input type="text" id="adm-phone" class="form-control" value="5511958338379" onchange="updateAdminConfigs()">
-            </div>
+      <h3>Como quer receber?</h3>
+      <div class="opcoes d2">
+        <button type="button" class="opcao" id="opt-entrega" aria-pressed="true"><i class="fa-solid fa-motorcycle"></i>Entrega</button>
+        <button type="button" class="opcao" id="opt-retirada" aria-pressed="false"><i class="fa-solid fa-store"></i>Retirar no local</button>
+      </div>
 
-            <button class="btn-clear" style="border-style: solid; margin-top: 15px;" onclick="closeAdmin()">
-                FECHAR PAINEL
-            </button>
+      <div id="endereco" style="margin-top:12px">
+        <div class="duo">
+          <div class="campo"><label for="cep">CEP</label><input id="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000"></div>
+          <div class="campo"><label for="num">Número *</label><input id="num" placeholder="Nº"></div>
         </div>
+        <div class="campo"><label for="rua">Rua *</label><input id="rua" autocomplete="address-line1" placeholder="Nome da rua"></div>
+        <div class="campo"><label for="bairro">Bairro *</label><input id="bairro" placeholder="Seu bairro"></div>
+        <div class="duo">
+          <div class="campo"><label for="comp">Complemento</label><input id="comp" placeholder="Apto, bloco"></div>
+          <div class="campo"><label for="ref">Referência</label><input id="ref" placeholder="Ponto de referência"></div>
+        </div>
+      </div>
+
+      <h3>Pagamento</h3>
+      <div class="opcoes d3">
+        <button type="button" class="opcao" id="pay-pix" aria-pressed="true"><i class="fa-brands fa-pix"></i>Pix</button>
+        <button type="button" class="opcao" id="pay-credito" aria-pressed="false"><i class="fa-regular fa-credit-card"></i>Crédito</button>
+        <button type="button" class="opcao" id="pay-debito" aria-pressed="false"><i class="fa-solid fa-money-check-dollar"></i>Débito</button>
+      </div>
+      <div class="aviso" id="aviso-pix"><i class="fa-solid fa-circle-info"></i> A chave Pix será enviada pelo atendente na confirmação do pedido pelo WhatsApp.</div>
+
+      <button class="btn-zap" type="button" id="enviar"><i class="fa-brands fa-whatsapp"></i> Enviar pedido pelo WhatsApp</button>
+    </section>
+  </aside>
+</div>
+
+<footer class="rodape">
+  Favorita Pizzaria · Preços sujeitos a alteração sem aviso prévio.
+</footer>
+
+<div class="fundo" id="fundo"></div>
+
+<div class="barra" id="barra">
+  <div class="resumo"><small><span id="b-qtd">0</span> itens</small><strong id="b-total">R$ 0,00</strong></div>
+  <button type="button" id="abrir-pedido">Ver pedido <i class="fa-solid fa-chevron-up"></i></button>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Imagem ampliada">
+  <button type="button" id="lb-fechar" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lb-img" alt="">
+</div>
+
+<!-- Painel do dono: abra o site com #admin no final do endereço -->
+<div class="modal" id="admin">
+  <div class="painel">
+    <h2><i class="fa-solid fa-sliders"></i> Configurações da loja</h2>
+    <div class="campo">
+      <label for="adm-status">Status</label>
+      <select id="adm-status"><option value="ABERTO">Aberto</option><option value="FECHADO">Fechado</option></select>
     </div>
+    <div class="campo">
+      <label for="adm-taxa">Taxa de entrega (R$)</label>
+      <input id="adm-taxa" type="number" step="0.5" min="0">
+    </div>
+    <div class="campo">
+      <label for="adm-fone">WhatsApp da loja (com 55 + DDD)</label>
+      <input id="adm-fone" inputmode="numeric">
+    </div>
+    <button class="btn-zap" type="button" id="adm-ok" style="background:var(--floresta)">Salvar e fechar</button>
+  </div>
+</div>
 
-    <script>
-        // BASE DE DADOS COMPLETA COM AS 3 CATEGORIAS OFICIAIS
-        const defaultProducts = [
-            // Categoria: Com Catupiry Original[cite: 7]
-            { code: "C01", name: "ATUM SEM CEBOLA E CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C02", name: "DOIS QUEIJOS (MUSSARELA E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C03", name: "BRÓCOLIS COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C04", name: "CAIPIRA (FRANGO, MILHO E CATUPIRY ORIGINAL)", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C05", name: "CALABRESA COM CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C06", name: "CATUPIRY ORIGINAL COM MILHO", price: 4.50, category: "catupiry" },[cite: 7]
-            { code: "C07", name: "CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },[cite: 7]
+<script>
+(function(){
+  'use strict';
 
-            // Categoria: Esfihas Doces[cite: 9]
-            { code: "D01", name: "CHOCOLATE AO LEITE", price: 5.00, category: "doces" },[cite: 9]
-            { code: "D02", name: "CHOCOLATE AO LEITE C/ CONFETE", price: 6.00, category: "doces" },[cite: 9]
-            { code: "D03", name: "BRIGADEIRO", price: 6.00, category: "doces" },[cite: 9]
+  /* ================= PRODUTOS ================= */
+  const PRODUTOS = [
+    // Tradicionais
+    {cod:'38', nome:'Carne', preco:3.50, cat:'tradicional'},
+    {cod:'39', nome:'Queijo', preco:3.50, cat:'tradicional'},
+    {cod:'85', nome:'Calabresa', preco:3.50, cat:'tradicional'},
+    {cod:'71', nome:'Palmito', preco:4.00, cat:'tradicional'},
+    {cod:'144', nome:'Bauru', preco:3.80, cat:'tradicional'},
+    {cod:'142', nome:'Frango c/ Catupiry', preco:3.80, cat:'tradicional'},
+    {cod:'143', nome:'Escarola', preco:3.80, cat:'tradicional'},
+    {cod:'87', nome:'Atum', preco:3.80, cat:'tradicional'},
+    {cod:'74', nome:'Mista (calabresa c/ queijo)', preco:4.00, cat:'tradicional'},
+    {cod:'90', nome:'Mista sem cebola', preco:4.00, cat:'tradicional'},
+    {cod:'69', nome:'Calabresa c/ Catupiry', preco:4.00, cat:'tradicional'},
+    {cod:'41', nome:'Calabresa sem cebola', preco:4.00, cat:'tradicional'},
+    {cod:'75', nome:'Queijo com bacon', preco:4.00, cat:'tradicional'},
+    {cod:'78', nome:'Dois queijos', preco:4.00, cat:'tradicional'},
+    {cod:'77', nome:'Atum com Catupiry', preco:4.00, cat:'tradicional'},
+    {cod:'79', nome:'Frango com queijo', preco:3.80, cat:'tradicional'},
+    {cod:'76', nome:'Atum com queijo', preco:4.00, cat:'tradicional'},
+    {cod:'73', nome:'Catupiry com milho', preco:3.80, cat:'tradicional'},
+    {cod:'72', nome:'Queijo com milho', preco:3.80, cat:'tradicional'},
+    {cod:'132', nome:'Calabresa s/ cebola c/ Catupiry', preco:4.00, cat:'tradicional'},
+    {cod:'112', nome:'Caipira', preco:4.00, cat:'tradicional'},
+    {cod:'146', nome:'Caipira com queijo', preco:3.80, cat:'tradicional'},
+    {cod:'144', nome:'Brócolis', preco:3.80, cat:'tradicional', id:'144b'},
+    {cod:'88', nome:'Escarola c/ queijo e bacon', preco:4.00, cat:'tradicional'},
+    {cod:'228', nome:'Escarola c/ bacon e Catupiry Original', preco:4.50, cat:'tradicional'},
+    {cod:'181', nome:'Carne com cheddar', preco:3.80, cat:'tradicional'},
+    {cod:'99', nome:'Carne com queijo', preco:4.00, cat:'tradicional'},
+    {cod:'147', nome:'Atum c/ queijo e cebola', preco:4.00, cat:'tradicional'},
+    {cod:'182', nome:'Cheddar com Catupiry', preco:4.00, cat:'tradicional'},
 
-            // Categoria: Esfihas Tradicionais[cite: 8]
-            { code: "38",  name: "CARNE", price: 3.50, category: "tradicional" },[cite: 8]
-            { code: "39",  name: "QUEIJO", price: 3.50, category: "tradicional" },[cite: 8]
-            { code: "85",  name: "CALABRESA", price: 3.50, category: "tradicional" },[cite: 8]
-            { code: "71",  name: "PALMITO", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "144", name: "BAURU", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "142", name: "FRANGO C/ CATUPIRY", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "143", name: "ESCAROLA", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "87",  name: "ATUM", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "74",  name: "MISTA (CALABRESA C/ QUEIJO)", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "90",  name: "MISTA SEM CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "69",  name: "CALABRESA C/ CATUPIRY", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "41",  name: "CALABRESA SEM CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "75",  name: "QUEIJO COM BACON", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "78",  name: "DOIS QUEIJOS", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "77",  name: "ATUM COM CATUPIRY", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "79",  name: "FRANGO COM QUEIJO", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "76",  name: "ATUM COM QUEIJO", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "73",  name: "CATUPIRY COM MILHO", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "72",  name: "QUEIJO COM MILHO", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "132", name: "CALABRESA S/ CEBOLA C/ CATU.", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "112", name: "CAIPIRA", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "146", name: "CAIPIRA COM QUEIJO", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "144b",name: "BRÓCOLIS", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "88",  name: "ESCAROLA C/ QUEIJO E BACON", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "228", name: "ESCAROLA C/ BACON E CATU. ORI.", price: 4.50, category: "tradicional" },[cite: 8]
-            { code: "181", name: "CARNE COM CHEDDAR", price: 3.80, category: "tradicional" },[cite: 8]
-            { code: "99",  name: "CARNE COM QUEIJO", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "147", name: "ATUM C/ QUEIJO E CEBOLA", price: 4.00, category: "tradicional" },[cite: 8]
-            { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00, category: "tradicional" }[cite: 8]
-        ];
+    // Com Catupiry Original (R$ 4,50)
+    {cod:'C01', nome:'Atum sem cebola e Catupiry Original', preco:4.50, cat:'catupiry'},
+    {cod:'C02', nome:'Dois queijos', desc:'Mussarela e Catupiry Original', preco:4.50, cat:'catupiry'},
+    {cod:'C03', nome:'Brócolis com Catupiry Original', preco:4.50, cat:'catupiry'},
+    {cod:'C04', nome:'Caipira', desc:'Frango, milho e Catupiry Original', preco:4.50, cat:'catupiry'},
+    {cod:'C05', nome:'Calabresa com Catupiry Original', desc:'Calabresa temperada, cebola, tomate e Catupiry Original', preco:4.50, cat:'catupiry'},
+    {cod:'C06', nome:'Catupiry Original com milho', preco:4.50, cat:'catupiry'},
+    {cod:'C07', nome:'Catupiry Original', preco:4.50, cat:'catupiry'},
 
-        let cart = {};
-        let deliveryType = 'entrega';
-        let paymentMethod = 'PIX';
-        let config = {
-            deliveryFee: 5.00,
-            whatsappPhone: "5511958338379",
-            status: "ABERTO"
-        };
+    // Doces
+    {cod:'D01', nome:'Chocolate ao leite', preco:5.00, cat:'doces'},
+    {cod:'D02', nome:'Chocolate ao leite c/ confete', preco:6.00, cat:'doces'},
+    {cod:'D03', nome:'Brigadeiro', preco:6.00, cat:'doces'}
+  ];
+  PRODUTOS.forEach(function(p,i){ p.id = p.id || (p.cat + '-' + p.cod); });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            updateReceipt();
-        });
+  const TITULOS = {
+    tradicional:'Esfihas tradicionais',
+    catupiry:'Esfihas com Catupiry Original',
+    doces:'Esfihas doces'
+  };
 
-        // ABRIR MODAL COM OS ITENS DA CATEGORIA SELECIONADA
-        window.openCategoryModal = function(categoryKey) {
-            const modalList = document.getElementById('cat-modal-items-list');
-            const modalTitle = document.getElementById('cat-modal-title');
-            modalList.innerHTML = '';
+  /* ================= ESTADO ================= */
+  const store = {
+    get:function(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+    set:function(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  };
 
-            if (categoryKey === 'catupiry') {
-                modalTitle.innerText = "ESFIHAS COM CATUPIRY ORIGINAL";
-            } else if (categoryKey === 'doces') {
-                modalTitle.innerText = "ESFIHAS DOCES";
-            } else {
-                modalTitle.innerText = "ESFIHAS TRADICIONAIS";
-            }
+  let config = { taxa:5.00, fone:'5511958338379', status:'ABERTO' };
+  try{ Object.assign(config, JSON.parse(store.get('fav_config')||'{}')); }catch(e){}
 
-            defaultProducts.forEach((prod, index) => {
-                if (prod.category === categoryKey) {
-                    const qty = cart[index] || 0;
-                    const itemHtml = `
-                        <div class="category-item-row">
-                            <div class="category-item-info">
-                                <h4><span style="background:var(--preto); color:var(--dourado); padding:2px 6px; border-radius:4px; font-size:0.7rem;">CÓD. ${prod.code}</span> ${prod.name}</h4>
-                                <span>R$ ${prod.price.toFixed(2).replace('.', ',')}</span>
-                            </div>
-                            <div class="counter-controls">
-                                <button class="btn-counter minus" onclick="updateItemQty(${index}, -1, '${categoryKey}')">-</button>
-                                <span class="counter-value" id="modal-qty-${index}">${qty}</span>
-                                <button class="btn-counter plus" onclick="updateItemQty(${index}, 1, '${categoryKey}')">+</button>
-                            </div>
-                        </div>
-                    `;
-                    modalList.insertAdjacentHTML('beforeend', itemHtml);
-                }
-            });
+  let carrinho = {};
+  try{ carrinho = JSON.parse(store.get('fav_carrinho')||'{}') || {}; }catch(e){ carrinho = {}; }
+  // descarta ids que não existem mais
+  Object.keys(carrinho).forEach(function(id){ if(!PRODUTOS.some(function(p){return p.id===id;})) delete carrinho[id]; });
 
-            document.getElementById('category-modal').style.display = 'flex';
-        };
+  let categoria = 'tradicional';
+  let entrega = 'entrega';
+  let pagamento = 'PIX';
+  let termo = '';
 
-        window.closeCategoryModal = function() {
-            document.getElementById('category-modal').style.display = 'none';
-            renderSelectedSummary();
-            updateReceipt();
-        };
+  /* ================= UTIL ================= */
+  const $ = function(id){ return document.getElementById(id); };
+  const brl = function(v){ return 'R$ ' + v.toFixed(2).replace('.',','); };
+  const esc = function(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); };
+  const norm = function(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); };
+  const porId = function(id){ return PRODUTOS.find(function(p){return p.id===id;}); };
 
-        window.updateItemQty = function(index, delta, categoryKey) {
-            const currentQty = cart[index] || 0;
-            const newQty = currentQty + delta;
+  /* ================= LISTA ================= */
+  function renderLista(){
+    const alvo = $('lista');
+    const t = norm(termo.trim());
+    const itens = PRODUTOS.filter(function(p){
+      if(t) return norm(p.nome + ' ' + (p.desc||'') + ' ' + p.cod).indexOf(t) !== -1;
+      return p.cat === categoria;
+    });
 
-            if (newQty <= 0) {
-                delete cart[index];
-                if(document.getElementById(`modal-qty-${index}`)) {
-                    document.getElementById(`modal-qty-${index}`).innerText = 0;
-                }
-            } else {
-                cart[index] = newQty;
-                if(document.getElementById(`modal-qty-${index}`)) {
-                    document.getElementById(`modal-qty-${index}`).innerText = newQty;
-                }
-            }
-            updateReceipt();
-        };
+    $('lista-titulo').textContent = t ? 'Resultado da busca' : TITULOS[categoria];
+    $('lista-conta').textContent = itens.length + (itens.length===1 ? ' sabor' : ' sabores');
 
-        // EXIBE OS ITENS ADICIONADOS RECENTES NA TELA PRINCIPAL
-        function renderSelectedSummary() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
+    if(!itens.length){
+      alvo.innerHTML = '<div class="vazio">Nenhum sabor encontrado.</div>';
+      return;
+    }
 
-            const keys = Object.keys(cart);
-            if (keys.length === 0) {
-                container.innerHTML = `
-                    <p style="text-align: center; color: #666; font-size: 0.9rem; padding: 15px; background: white; border-radius: 8px;">
-                        Nenhum item selecionado no momento. Clique nos botões acima para escolher!
-                    </p>
-                `;
-                return;
-            }
+    alvo.innerHTML = itens.map(function(p){
+      const q = carrinho[p.id] || 0;
+      return '<div class="item'+(q?' on':'')+'" data-id="'+esc(p.id)+'">'+
+        '<span class="item-cod">'+esc(p.cod)+'</span>'+
+        '<div class="item-info">'+
+          '<div class="item-nome">'+esc(p.nome)+'</div>'+
+          (p.desc ? '<div style="font-size:.8rem;color:var(--suave)">'+esc(p.desc)+'</div>' : '')+
+          '<div class="item-preco">'+brl(p.preco)+'</div>'+
+        '</div>'+
+        '<div class="qtd">'+
+          '<button type="button" class="menos" data-acao="-" data-id="'+esc(p.id)+'" aria-label="Remover '+esc(p.nome)+'"'+(q?'':' disabled')+'>−</button>'+
+          '<output>'+q+'</output>'+
+          '<button type="button" class="mais" data-acao="+" data-id="'+esc(p.id)+'" aria-label="Adicionar '+esc(p.nome)+'">+</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
 
-            keys.forEach(idx => {
-                const prod = defaultProducts[idx];
-                const qty = cart[idx];
-                const cardHtml = `
-                    <div class="product-card selected" id="product-card-${idx}">
-                        <div class="product-info">
-                            <span class="product-code">CÓD. ${prod.code}</span>
-                            <div class="product-name">${prod.name}</div>
-                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')} (<b>${qty}x</b>)</div>
-                        </div>
-                        <div class="counter-controls">
-                            <button class="btn-counter minus" onclick="updateItemQty(${idx}, -1)">-</button>
-                            <span class="counter-value">${qty}</span>
-                            <button class="btn-counter plus" onclick="updateItemQty(${idx}, 1)">+</button>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHtml);
-            });
-        }
+  function atualizaLinha(id){
+    const linha = document.querySelector('#lista .item[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]');
+    if(!linha) return;
+    const q = carrinho[id] || 0;
+    linha.classList.toggle('on', q>0);
+    linha.querySelector('output').textContent = q;
+    linha.querySelector('.menos').disabled = !q;
+  }
 
-        function updateReceipt() {
-            const tbody = document.getElementById('receipt-items');
-            const emptyMsg = document.getElementById('receipt-empty-msg');
-            tbody.innerHTML = '';
+  /* ================= CARRINHO ================= */
+  function mudar(id, delta){
+    const q = Math.max(0, (carrinho[id]||0) + delta);
+    if(q) carrinho[id] = q; else delete carrinho[id];
+    store.set('fav_carrinho', JSON.stringify(carrinho));
+    atualizaLinha(id);
+    renderPedido();
+  }
 
-            let subtotal = 0;
-            let totalItems = 0;
-            const keys = Object.keys(cart);
+  function totais(){
+    let sub = 0, qtd = 0;
+    Object.keys(carrinho).forEach(function(id){
+      const p = porId(id); if(!p) return;
+      sub += p.preco * carrinho[id]; qtd += carrinho[id];
+    });
+    const taxa = (entrega==='entrega' && qtd>0) ? config.taxa : 0;
+    return { sub:sub, qtd:qtd, taxa:taxa, total:sub+taxa };
+  }
 
-            if (keys.length === 0) {
-                emptyMsg.style.display = 'block';
-            } else {
-                emptyMsg.style.display = 'none';
-            }
+  function renderPedido(){
+    const ids = Object.keys(carrinho);
+    $('itens').innerHTML = ids.map(function(id){
+      const p = porId(id); const q = carrinho[id];
+      return '<div class="linha-item">'+
+        '<div><b>'+esc(p.nome)+'</b><div class="sub">'+q+' × '+brl(p.preco)+' · cód. '+esc(p.cod)+'</div></div>'+
+        '<div class="val">'+brl(p.preco*q)+'</div>'+
+      '</div>';
+    }).join('');
+    $('vazio').style.display = ids.length ? 'none' : 'block';
+    $('limpar').style.display = ids.length ? 'block' : 'none';
 
-            keys.forEach(idx => {
-                const item = defaultProducts[idx];
-                const qty = cart[idx];
-                const itemTotal = item.price * qty;
-                subtotal += itemTotal;
-                totalItems += qty;
+    const t = totais();
+    $('t-sub').textContent = brl(t.sub);
+    $('t-ent').textContent = brl(t.taxa);
+    $('t-total').textContent = brl(t.total);
+    $('b-qtd').textContent = t.qtd;
+    $('b-total').textContent = brl(t.total);
+  }
 
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${item.code}</td>
-                    <td>${item.name}</td>
-                    <td style="text-align: center;">${qty}</td>
-                    <td style="text-align: right;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td>
-                `;
-                tbody.appendChild(tr);
-            });
+  /* ================= EVENTOS ================= */
+  $('lista').addEventListener('click', function(e){
+    const b = e.target.closest('button[data-acao]'); if(!b) return;
+    mudar(b.dataset.id, b.dataset.acao === '+' ? 1 : -1);
+  });
 
-            const currentDeliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0.00;
-            const grandTotal = subtotal + currentDeliveryFee;
+  document.querySelectorAll('.aba').forEach(function(a){
+    a.addEventListener('click', function(){
+      categoria = a.dataset.cat;
+      termo = ''; $('busca').value = '';
+      document.querySelectorAll('.aba').forEach(function(x){ x.setAttribute('aria-selected', x===a ? 'true':'false'); });
+      renderLista();
+    });
+  });
 
-            document.getElementById('receipt-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('receipt-delivery').innerText = `R$ ${currentDeliveryFee.toFixed(2).replace('.', ',')}`;
-            document.getElementById('receipt-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('mobile-count').innerText = totalItems;
-            document.getElementById('mobile-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+  $('busca').addEventListener('input', function(e){ termo = e.target.value; renderLista(); });
 
-            renderSelectedSummary();
-        }
+  $('limpar').addEventListener('click', function(){
+    if(!confirm('Deseja limpar todo o pedido?')) return;
+    carrinho = {}; store.set('fav_carrinho','{}');
+    renderLista(); renderPedido();
+  });
 
-        function clearCart() {
-            if (Object.keys(cart).length === 0) return;
-            if (confirm("Deseja realmente limpar todo o seu pedido?")) {
-                cart = {};
-                updateReceipt();
-            }
-        }
+  function setEntrega(tipo){
+    entrega = tipo;
+    $('opt-entrega').setAttribute('aria-pressed', tipo==='entrega');
+    $('opt-retirada').setAttribute('aria-pressed', tipo==='retirada');
+    $('endereco').style.display = tipo==='entrega' ? 'block' : 'none';
+    renderPedido();
+  }
+  $('opt-entrega').addEventListener('click', function(){ setEntrega('entrega'); });
+  $('opt-retirada').addEventListener('click', function(){ setEntrega('retirada'); });
 
-        function setDeliveryType(type) {
-            deliveryType = type;
-            const addrBox = document.getElementById('address-fields');
-            const btnEntrega = document.getElementById('opt-entrega');
-            const btnRetirada = document.getElementById('opt-retirada');
+  function setPag(m){
+    pagamento = m;
+    $('pay-pix').setAttribute('aria-pressed', m==='PIX');
+    $('pay-credito').setAttribute('aria-pressed', m==='Cartão de Crédito');
+    $('pay-debito').setAttribute('aria-pressed', m==='Cartão de Débito');
+    $('aviso-pix').style.display = m==='PIX' ? 'block' : 'none';
+  }
+  $('pay-pix').addEventListener('click', function(){ setPag('PIX'); });
+  $('pay-credito').addEventListener('click', function(){ setPag('Cartão de Crédito'); });
+  $('pay-debito').addEventListener('click', function(){ setPag('Cartão de Débito'); });
 
-            if (type === 'entrega') {
-                btnEntrega.classList.add('active');
-                btnRetirada.classList.remove('active');
-                addrBox.style.display = 'block';
-            } else {
-                btnRetirada.classList.add('active');
-                btnEntrega.classList.remove('active');
-                addrBox.style.display = 'none';
-            }
-            updateReceipt();
-        }
+  // máscaras
+  $('fone').addEventListener('input', function(e){
+    let v = e.target.value.replace(/\D/g,'').slice(0,11);
+    if(v.length>6) v = '('+v.slice(0,2)+') '+v.slice(2,v.length>10?7:6)+'-'+v.slice(v.length>10?7:6);
+    else if(v.length>2) v = '('+v.slice(0,2)+') '+v.slice(2);
+    e.target.value = v;
+  });
+  $('cep').addEventListener('input', function(e){
+    let v = e.target.value.replace(/\D/g,'').slice(0,8);
+    if(v.length>5) v = v.slice(0,5)+'-'+v.slice(5);
+    e.target.value = v;
+    if(v.length===9) buscaCep(v.replace('-',''));
+  });
+  function buscaCep(cep){
+    fetch('https://viacep.com.br/ws/'+cep+'/json/').then(function(r){return r.json();}).then(function(d){
+      if(d && !d.erro){
+        if(d.logradouro) $('rua').value = d.logradouro;
+        if(d.bairro) $('bairro').value = d.bairro;
+        $('num').focus();
+      }
+    }).catch(function(){});
+  }
 
-        function setPayment(method) {
-            paymentMethod = method;
-            document.getElementById('pay-pix').classList.remove('active');
-            document.getElementById('pay-credito').classList.remove('active');
-            document.getElementById('pay-debito').classList.remove('active');
-            
-            const pixAlert = document.getElementById('pix-alert');
+  // gaveta mobile
+  function abrirPedido(){ $('pedido').classList.add('aberto'); $('fundo').classList.add('aberto'); }
+  function fecharPedido(){ $('pedido').classList.remove('aberto'); $('fundo').classList.remove('aberto'); }
+  $('abrir-pedido').addEventListener('click', abrirPedido);
+  $('fechar-pedido').addEventListener('click', fecharPedido);
+  $('fundo').addEventListener('click', fecharPedido);
 
-            if (method === 'PIX') {
-                document.getElementById('pay-pix').classList.add('active');
-                pixAlert.style.display = 'block';
-            } else if (method === 'Cartão de Crédito') {
-                document.getElementById('pay-credito').classList.add('active');
-                pixAlert.style.display = 'none';
-            } else {
-                document.getElementById('pay-debito').classList.add('active');
-                pixAlert.style.display = 'none';
-            }
-        }
+  // lightbox
+  document.querySelectorAll('.thumb').forEach(function(b){
+    b.addEventListener('click', function(){
+      $('lb-img').src = b.dataset.img;
+      $('lb-img').alt = b.querySelector('img').alt;
+      $('lightbox').classList.add('aberto');
+    });
+  });
+  function fechaLb(){ $('lightbox').classList.remove('aberto'); }
+  $('lb-fechar').addEventListener('click', fechaLb);
+  $('lightbox').addEventListener('click', function(e){ if(e.target.id==='lightbox') fechaLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ fechaLb(); fecharPedido(); } });
 
-        function toggleCardapioImg() {
-            const img = document.getElementById('img-cardapio-oficial');
-            img.style.display = (img.style.display === 'block') ? 'none' : 'block';
-        }
+  /* ================= STATUS / ADMIN ================= */
+  function renderStatus(){
+    const aberto = config.status === 'ABERTO';
+    $('status').classList.toggle('fechado', !aberto);
+    $('status-txt').textContent = aberto ? 'Aberto para pedidos' : 'Fechado no momento';
+  }
 
-        function scrollToCart() {
-            document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
-        }
+  function abreAdmin(){
+    $('adm-status').value = config.status;
+    $('adm-taxa').value = config.taxa.toFixed(2);
+    $('adm-fone').value = config.fone;
+    $('admin').classList.add('aberto');
+  }
+  $('adm-ok').addEventListener('click', function(){
+    config.status = $('adm-status').value;
+    config.taxa = Math.max(0, parseFloat($('adm-taxa').value) || 0);
+    config.fone = $('adm-fone').value.replace(/\D/g,'');
+    store.set('fav_config', JSON.stringify(config));
+    $('admin').classList.remove('aberto');
+    renderStatus(); renderPedido();
+  });
+  if(location.hash === '#admin') abreAdmin();
+  window.addEventListener('hashchange', function(){ if(location.hash === '#admin') abreAdmin(); });
 
-        function sendOrder() {
-            const cartKeys = Object.keys(cart);
-            if (cartKeys.length === 0) {
-                alert("Por favor, selecione pelo menos 1 item para continuar!");
-                return;
-            }
+  /* ================= ENVIO ================= */
+  function marca(id, ruim){ $(id).classList.toggle('erro', !!ruim); }
 
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
+  $('enviar').addEventListener('click', function(){
+    const t = totais();
 
-            if (!name) {
-                alert("Por favor, informe seu Nome.");
-                document.getElementById('cust-name').focus();
-                return;
-            }
-            if (!phone) {
-                alert("Por favor, informe seu Telefone de contato.");
-                document.getElementById('cust-phone').focus();
-                return;
-            }
+    if(config.status !== 'ABERTO'){
+      alert('No momento estamos fechados. Volte em nosso horário de atendimento.');
+      return;
+    }
+    if(!t.qtd){
+      alert('Selecione pelo menos uma esfiha para continuar.');
+      return;
+    }
 
-            let addressText = "Retirada no Balcão do Estabelecimento";
-            if (deliveryType === 'entrega') {
-                const street = document.getElementById('addr-street').value.trim();
-                const num = document.getElementById('addr-num').value.trim();
-                const bairro = document.getElementById('addr-bairro').value.trim();
-                const cep = document.getElementById('addr-cep').value.trim();
-                const comp = document.getElementById('addr-comp').value.trim();
-                const ref = document.getElementById('addr-ref').value.trim();
+    const nome = $('nome').value.trim();
+    const fone = $('fone').value.trim();
+    marca('nome', !nome); marca('fone', fone.replace(/\D/g,'').length < 10);
+    if(!nome){ alert('Informe seu nome.'); $('nome').focus(); return; }
+    if(fone.replace(/\D/g,'').length < 10){ alert('Informe um WhatsApp válido com DDD.'); $('fone').focus(); return; }
 
-                if (!street || !num || !bairro) {
-                    alert("Por favor, preencha a Rua, Número e Bairro para entrega.");
-                    return;
-                }
+    let endereco = 'Retirada no balcão';
+    if(entrega === 'entrega'){
+      const rua = $('rua').value.trim(), num = $('num').value.trim(), bairro = $('bairro').value.trim();
+      marca('rua',!rua); marca('num',!num); marca('bairro',!bairro);
+      if(!rua || !num || !bairro){ alert('Preencha rua, número e bairro para a entrega.'); return; }
+      endereco = rua + ', nº ' + num + ' - ' + bairro;
+      if($('cep').value.trim()) endereco += ' (CEP ' + $('cep').value.trim() + ')';
+      if($('comp').value.trim()) endereco += ' - ' + $('comp').value.trim();
+      if($('ref').value.trim()) endereco += ' (Ref.: ' + $('ref').value.trim() + ')';
+    }
 
-                addressText = `${street}, Nº ${num} - ${bairro}`;
-                if (cep) addressText += ` (CEP: ${cep})`;
-                if (comp) addressText += ` - Comp: ${comp}`;
-                if (ref) addressText += ` (Ref: ${ref})`;
-            }
+    let linhas = '';
+    Object.keys(carrinho).forEach(function(id){
+      const p = porId(id); const q = carrinho[id];
+      linhas += q + 'x ' + p.nome + ' (cód. ' + p.cod + ') — ' + brl(p.preco*q) + '\n';
+    });
 
-            let subtotal = 0;
-            let itemsMessage = "";
+    let msg = '🍕 *FAVORITA PIZZARIA*\n*NOVO PEDIDO*\n\n';
+    msg += '*Cliente:* ' + nome + '\n*Telefone:* ' + fone + '\n\n';
+    msg += '*ITENS:*\n' + linhas + '\n';
+    msg += '*Subtotal:* ' + brl(t.sub) + '\n';
+    msg += '*Entrega:* ' + brl(t.taxa) + '\n';
+    msg += '*TOTAL:* ' + brl(t.total) + '\n\n';
+    msg += '*Recebimento:* ' + (entrega==='entrega' ? 'Entrega' : 'Retirar no local') + '\n';
+    msg += '*Endereço:* ' + endereco + '\n';
+    msg += '*Pagamento:* ' + pagamento + '\n\n';
+    msg += 'Aguardo a confirmação do pedido!';
 
-            cartKeys.forEach(idx => {
-                const item = defaultProducts[idx];
-                const qty = cart[idx];
-                const itemTotal = item.price * qty;
-                subtotal += itemTotal;
-                itemsMessage += `${qty}x ${item.name} — R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
-            });
+    if(typeof gtag === 'function') gtag('event','enviar_pedido_whatsapp',{value:t.total,currency:'BRL'});
+    window.open('https://wa.me/' + config.fone + '?text=' + encodeURIComponent(msg), '_blank');
+  });
 
-            const deliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0;
-            const total = subtotal + deliveryFee;
+  ['nome','fone','rua','num','bairro'].forEach(function(id){
+    $(id).addEventListener('input', function(){ marca(id,false); });
+  });
 
-            let msg = `🍕 *FAVORITA PIZZARIA*\n`;
-            msg += `*NOVO PEDIDO*\n\n`;
-            msg += `*Cliente:* ${name}\n`;
-            msg += `*Telefone:* ${phone}\n\n`;
-            msg += `*PRODUTOS:*\n${itemsMessage}\n`;
-            msg += `*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
-            msg += `*Entrega:* R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
-            msg += `*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
-            msg += `*Entrega ou retirada:* ${deliveryType === 'entrega' ? 'Entrega em Casa' : 'Retirar no Local'}\n`;
-            msg += `*Endereço:* ${addressText}\n`;
-            msg += `*Pagamento:* ${paymentMethod}\n\n`;
-            msg += `Aguardo confirmação do pedido!`;
-
-            const encodedMsg = encodeURIComponent(msg);
-            window.open(`https://wa.me/${config.whatsappPhone}?text=${encodedMsg}`, '_blank');
-        }
-
-        function openAdmin() {
-            document.getElementById('admin-modal').style.display = 'flex';
-        }
-
-        function closeAdmin() {
-            document.getElementById('admin-modal').style.display = 'none';
-        }
-
-        function updateAdminConfigs() {
-            config.status = document.getElementById('adm-status').value;
-            config.deliveryFee = parseFloat(document.getElementById('adm-delivery').value) || 0;
-            config.whatsappPhone = document.getElementById('adm-phone').value.trim();
-
-            const badge = document.getElementById('status-badge');
-            if (config.status === 'ABERTO') {
-                badge.className = 'badge-status';
-                badge.innerHTML = `<i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO`;
-            } else {
-                badge.className = 'badge-status fechado';
-                badge.innerHTML = `<i class="fa-solid fa-store-slash"></i> ESTABELECIMENTO FECHADO`;
-            }
-
-            updateReceipt();
-        }
-    </script>
+  /* ================= INÍCIO ================= */
+  setPag('PIX');
+  setEntrega('entrega');
+  renderStatus();
+  renderLista();
+  renderPedido();
+})();
+</script>
 </body>
 </html>
