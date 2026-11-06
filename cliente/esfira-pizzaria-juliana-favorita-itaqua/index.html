@@ -1,374 +1,1101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Tags Principais -->
-  <title>Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita</title>
-  <meta name="description" content="Pizza quentinha em Itaquaquecetuba - SP! Escolha o sabor no cardápio digital, peça pelo WhatsApp (11) 95833-8379 e receba em casa.">
-  <link rel="canonical" href="https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html">
-  <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital — Favorita Pizzaria</title>
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --verde: #008A16;
+            --vermelho: #C30101;
+            --creme: #FEF9E3;
+            --preto: #0C0201;
+            --dourado: #EEA947;
+            --cinza-claro: #f4f4f4;
+            --sombra: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita">
-  <meta property="og:description" content="Pizza quentinha em Itaquaquecetuba - SP! Peça pelo WhatsApp (11) 95833-8379 e receba em casa.">
-  <meta property="og:url" content="https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html">
-  <meta property="og:site_name" content="Pizzaria Juliana e Favorita">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-  <!-- Estilos e Fontes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+        body {
+            background-color: var(--creme);
+            color: var(--preto);
+            padding-bottom: 90px; /* Espaço para barra flutuante mobile */
+        }
 
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Pizzaria Juliana e Favorita",
-    "image": "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/assets/images/logo-pizzaria-favorita-juliana.png",
-    "@id": "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/#restaurant",
-    "url": "https://impulsoweb10.com.br/pizzaria-juliana-e-favorita/index.html",
-    "telephone": "+5511958338379",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Estr. Promissão, 8 - Jardim Carolina",
-      "addressLocality": "Itaquaquecetuba",
-      "addressRegion": "SP",
-      "postalCode": "08588-310",
-      "addressCountry": "BR"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "18:00",
-        "closes": "23:50"
-      }
-    ],
-    "servesCuisine": "Pizza",
-    "hasMenu": "https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf"
-  }
-  </script>
+        header {
+            background: linear-gradient(135deg, var(--preto), #220503);
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            border-bottom: 5px solid var(--dourado);
+            position: relative;
+            box-shadow: var(--sombra);
+        }
+
+        .logo-container img {
+            max-width: 170px;
+            height: auto;
+            filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.5));
+            transition: transform 0.3s;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.03);
+        }
+
+        header h1 {
+            color: var(--dourado);
+            font-size: 1.8rem;
+            margin-top: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        header p.subtitle {
+            font-size: 0.95rem;
+            color: #ddd;
+            margin-bottom: 12px;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: var(--verde);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .badge-status.fechado {
+            background-color: var(--vermelho);
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            color: var(--vermelho);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+        }
+
+        /* CARDÁPIO IMAGEM REFERÊNCIA TOGGLE */
+        .cardapio-original-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .btn-toggle-img {
+            background-color: var(--dourado);
+            color: var(--preto);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-toggle-img:hover {
+            background-color: #d89335;
+        }
+
+        .img-cardapio-oficial {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* LISTA DE PRODUTOS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 5px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .product-card.selected {
+            border-left-color: var(--verde);
+            background-color: #f0fdf4;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-code {
+            font-size: 0.75rem;
+            background: var(--preto);
+            color: var(--dourado);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .product-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--preto);
+        }
+
+        .product-price {
+            color: var(--verde);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--cinza-claro);
+            padding: 5px 10px;
+            border-radius: 25px;
+        }
+
+        .btn-counter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: var(--preto);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .btn-counter:active {
+            transform: scale(0.9);
+        }
+
+        .btn-counter.plus {
+            background-color: var(--verde);
+            color: white;
+        }
+
+        .btn-counter.minus {
+            background-color: var(--vermelho);
+            color: white;
+        }
+
+        .counter-value {
+            font-weight: 700;
+            font-size: 1rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* CUPOM DE SUPERMERCADO */
+        .cart-section {
+            position: sticky;
+            top: 20px;
+        }
+
+        .receipt-container {
+            background: #fff;
+            padding: 25px 20px;
+            border-radius: 2px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            font-family: 'Courier Prime', monospace;
+            position: relative;
+            background-image: radial-gradient(#eee 10%, transparent 11%);
+            background-size: 10px 10px;
+            background-color: #fffef5;
+            border-top: 8px solid var(--vermelho);
+        }
+
+        .receipt-container::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(-45deg, transparent 5px, #fffef5 0), linear-gradient(45deg, transparent 5px, #fffef5 0);
+            background-size: 10px 10px;
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px dashed #888;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .receipt-header h2 {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .receipt-table th {
+            text-align: left;
+            border-bottom: 1px dashed #888;
+            padding-bottom: 5px;
+        }
+
+        .receipt-table td {
+            padding: 6px 0;
+        }
+
+        .receipt-divider {
+            border-top: 2px dashed #888;
+            margin: 12px 0;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .receipt-total {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--preto);
+            margin-top: 8px;
+        }
+
+        .btn-clear {
+            width: 100%;
+            background: transparent;
+            border: 1px dashed var(--vermelho);
+            color: var(--vermelho);
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-clear:hover {
+            background-color: #fde8e8;
+        }
+
+        /* FORMULÁRIO DE PEDIDO */
+        .checkout-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--verde);
+            box-shadow: 0 0 0 3px rgba(0,138,22,0.15);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .radio-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .radio-card {
+            border: 2px solid #ddd;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .radio-card.active {
+            border-color: var(--verde);
+            background-color: #f0fdf4;
+            color: var(--verde);
+        }
+
+        .radio-card i {
+            font-size: 1.2rem;
+        }
+
+        .pix-alert {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--verde);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn-whatsapp {
+            width: 100%;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1eb956;
+            transform: translateY(-2px);
+        }
+
+        /* BARRA FIXA MOBILE */
+        .mobile-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--preto);
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 3px solid var(--dourado);
+        }
+
+        .mobile-bar-info {
+            font-size: 0.9rem;
+        }
+
+        .mobile-bar-info strong {
+            color: var(--dourado);
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .btn-mobile-view {
+            background: var(--verde);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-bar {
+                display: flex;
+            }
+        }
+
+        /* MODAL ADMIN */
+        .admin-btn-trigger {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .modal-admin {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            padding: 25px;
+            border-radius: 12px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: #777;
+            padding: 20px 0;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Cabeçalho -->
-  <header class="site-header" id="header">
-    <div class="container header-container">
-      <a href="#hero" class="brand-logo">
-        <img src="assets/images/logo-pizzaria-favorita-juliana.png" alt="Logo Pizzaria Juliana e Favorita" class="logo-img">
-      </a>
+    <!-- Botão Secreto Admin no Canto -->
+    <button class="admin-btn-trigger" onclick="openAdmin()" title="Área Administrativa">
+        <i class="fa-solid fa-gear"></i>
+    </button>
 
-      <nav class="main-nav" id="mainNav">
-        <ul>
-          <li><a href="#sobre">A Pizzaria</a></li>
-          <li><a href="#diferenciais">Diferenciais</a></li>
-          <li><a href="#cardapio">Cardápio</a></li>
-          <li><a href="#meio-a-meio">Meio a Meio</a></li>
-          <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#faq">Dúvidas & Horários</a></li>
-          <li><a href="#avaliacao">Avalie-nos</a></li>
-          <li><a href="#contato">Localização</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-          <span>Cardápio Digital (Zesto)</span>
-        </a>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero-section" id="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-container">
-      <div class="hero-content">
-        <span class="badge-tag">FORNO & SABOR EM ITAQUAQUECETUBA</span>
-        <h1 id="main-h1">Pizzaria em Itaquaquecetuba - Pizzaria Juliana e Favorita</h1>
-        <p class="hero-description">
-          Pizza quentinha, massa artesanal preparada no ponto certo, molho bem temperado e coberturas fartas entregues direto na sua casa em Itaquaquecetuba - SP.
-        </p>
-        <div class="hero-cta-group">
-          <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            <span>Ver Cardápio e Pedir Online</span>
-          </a>
-          <a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-            <span>⭐ Deixar sua Avaliação</span>
-          </a>
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="logo-container">
+            <!-- Imagem Oficial 3D da Favorita Pizzaria -->
+            <img src="logo-favorita.png" alt="Favorita Pizzaria Logo Oficial" id="main-logo">
         </div>
-      </div>
-    </div>
-  </section>
+        <h1>CARDÁPIO DIGITAL</h1>
+        <p class="subtitle">Escolha seus sabores favoritos de esfihas</p>
+        <span class="badge-status" id="status-badge"><i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO</span>
+    </header>
 
-  <!-- Apresentação da Pizzaria -->
-  <section class="section-padding bg-dark-card" id="sobre">
-    <div class="container">
-      <div class="grid-2-cols align-center">
-        <div class="section-text">
-          <span class="section-subtitle">CONHEÇA A CASA</span>
-          <h2>Pizzaria Juliana e Favorita: tradição de forno e sabor em Itaquaquecetuba</h2>
-          <p class="paragraph-lead">
-            A Pizzaria Juliana e Favorita é uma pizzaria de delivery que leva sabor caseiro para as mesas de Itaquaquecetuba, em São Paulo. Com massa preparada com cuidado, molho bem temperado e coberturas fartas, a casa atende famílias e grupos de amigos.
-          </p>
-          <div class="contact-quick-info">
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <div>
-                <strong>Endereço:</strong>
-                <p>Estr. Promissão, 8 - Jardim Carolina, Itaquaquecetuba - SP</p>
-              </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-container">
+        
+        <!-- COLUNA ESQUERDA: PRODUTOS -->
+        <div class="products-section">
+            
+            <!-- Visualizar Imagem Original -->
+            <div class="cardapio-original-box">
+                <button class="btn-toggle-img" onclick="toggleCardapioImg()">
+                    <i class="fa-solid fa-image"></i> Ver Cardápio Físico Original
+                </button>
+                <br>
+                <img src="cardapio-esfihas.png" alt="Cardápio Oficial Favorita" class="img-cardapio-oficial" id="img-cardapio-oficial">
             </div>
-          </div>
+
+            <div class="section-title">
+                <i class="fa-solid fa-pizza-slice"></i> ESFIHAS SALGADAS & DOCES
+            </div>
+
+            <!-- GRID DE PRODUTOS -->
+            <div class="products-grid" id="products-container">
+                <!-- Inserido dinamicamente via JS com dados fieis do cardápio -->
+            </div>
         </div>
-        <div class="image-frame">
-          <img src="assets/images/logo-pizzaria-favorita-juliana.png" alt="Pizzaria Juliana e Favorita Itaquaquecetuba" class="rounded-img logo-preview-box" loading="lazy">
+
+        <!-- COLUNA DIREITA: RECIBO + CHECKOUT -->
+        <div class="cart-section" id="cart-section">
+            
+            <!-- RECIBO CUPOM DE SUPERMERCADO -->
+            <div class="receipt-container">
+                <div class="receipt-header">
+                    <h2>FAVORITA PIZZARIA</h2>
+                    <p style="font-size: 0.75rem;">SABOR QUE CONQUISTA</p>
+                    <p style="font-size: 0.75rem; margin-top: 4px;">*** RESUMO DO PEDIDO ***</p>
+                </div>
+
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>CÓD</th>
+                            <th>PRODUTO</th>
+                            <th style="text-align: center;">QTD</th>
+                            <th style="text-align: right;">VALOR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipt-items">
+                        <!-- Itens do recibo aqui -->
+                    </tbody>
+                </table>
+
+                <div id="receipt-empty-msg" class="empty-cart-msg">
+                    Seu carrinho está vazio.<br>Selecione suas esfihas ao lado!
+                </div>
+
+                <div class="receipt-divider"></div>
+
+                <div class="receipt-row">
+                    <span>SUBTOTAL:</span>
+                    <span id="receipt-subtotal">R$ 0,00</span>
+                </div>
+                <div class="receipt-row">
+                    <span>TAXA ENTREGA:</span>
+                    <span id="receipt-delivery">R$ 0,00</span>
+                </div>
+
+                <div class="receipt-divider"></div>
+
+                <div class="receipt-row receipt-total">
+                    <span>TOTAL:</span>
+                    <span id="receipt-total">R$ 0,00</span>
+                </div>
+
+                <button class="btn-clear" onclick="clearCart()">
+                    <i class="fa-solid fa-trash"></i> LIMPAR PEDIDO
+                </button>
+            </div>
+
+            <!-- FORMULÁRIO DE ENTREGA E DADOS -->
+            <div class="checkout-box">
+                <div class="section-title" style="font-size: 1.1rem;">
+                    <i class="fa-solid fa-user"></i> SEUS DADOS
+                </div>
+
+                <div class="form-group">
+                    <label>Seu Nome *</label>
+                    <input type="text" id="cust-name" class="form-control" placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label>Telefone / WhatsApp *</label>
+                    <input type="tel" id="cust-phone" class="form-control" placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="section-title" style="font-size: 1.1rem; margin-top: 15px;">
+                    <i class="fa-solid fa-truck-fast"></i> ENTREGA OU RETIRADA
+                </div>
+
+                <div class="radio-options">
+                    <div class="radio-card active" id="opt-entrega" onclick="setDeliveryType('entrega')">
+                        <i class="fa-solid fa-house"></i>
+                        ENTREGA EM CASA
+                    </div>
+                    <div class="radio-card" id="opt-retirada" onclick="setDeliveryType('retirada')">
+                        <i class="fa-solid fa-store"></i>
+                        RETIRAR NO LOCAL
+                    </div>
+                </div>
+
+                <!-- ENDEREÇO (EXIBIDO SE ENTREGA) -->
+                <div id="address-fields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>CEP</label>
+                            <input type="text" id="addr-cep" class="form-control" placeholder="00000-000">
+                        </div>
+                        <div class="form-group">
+                            <label>Número *</label>
+                            <input type="text" id="addr-num" class="form-control" placeholder="Nº">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Rua / Logradouro *</label>
+                        <input type="text" id="addr-street" class="form-control" placeholder="Nome da sua rua">
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro *</label>
+                        <input type="text" id="addr-bairro" class="form-control" placeholder="Seu bairro">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <input type="text" id="addr-comp" class="form-control" placeholder="Apto, Bloco">
+                        </div>
+                        <div class="form-group">
+                            <label>Referência</label>
+                            <input type="text" id="addr-ref" class="form-control" placeholder="Ponto de ref.">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title" style="font-size: 1.1rem; margin-top: 15px;">
+                    <i class="fa-solid fa-credit-card"></i> FORMA DE PAGAMENTO
+                </div>
+
+                <div class="radio-options" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="radio-card active" id="pay-pix" onclick="setPayment('PIX')">
+                        <i class="fa-brands fa-pix"></i>
+                        PIX
+                    </div>
+                    <div class="radio-card" id="pay-credito" onclick="setPayment('Cartão de Crédito')">
+                        <i class="fa-solid fa-credit-card"></i>
+                        CRÉDITO
+                    </div>
+                    <div class="radio-card" id="pay-debito" onclick="setPayment('Cartão de Débito')">
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                        DÉBITO
+                    </div>
+                </div>
+
+                <div class="pix-alert" id="pix-alert">
+                    <i class="fa-solid fa-circle-info"></i> As instruções da chave PIX para pagamento serão enviadas pelo atendente na confirmação pelo WhatsApp.
+                </div>
+
+                <!-- BOTÃO FINALIZAR -->
+                <button class="btn-whatsapp" onclick="sendOrder()">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    FINALIZAR PEDIDO NO WHATSAPP
+                </button>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Seção de Benefícios -->
-  <section class="section-padding" id="diferenciais">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-subtitle">POR QUE PEDIR CONOSCO?</span>
-        <h2>O que você encontra na Pizzaria Juliana e Favorita</h2>
-      </div>
-      <div class="grid-4-cols" id="beneficiosGrid"></div>
+    <!-- BARRA FIXA BOTTOM PARA MOBILES -->
+    <div class="mobile-bar">
+        <div class="mobile-bar-info">
+            <span>ITENS: <b id="mobile-count">0</b></span>
+            <strong id="mobile-total">R$ 0,00</strong>
+        </div>
+        <button class="btn-mobile-view" onclick="scrollToCart()">
+            VER MEU PEDIDO <i class="fa-solid fa-arrow-down"></i>
+        </button>
     </div>
-  </section>
 
-  <!-- Cardápio Principal -->
-  <section class="section-padding bg-dark-card" id="cardapio">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-subtitle">NOSSO CARDÁPIO</span>
-        <h2>Cardápio de pizzas para todos os paladares</h2>
-        <p class="section-desc">Escolha seus sabores favoritos direto no nosso cardápio digital ou peça pelo WhatsApp.</p>
-      </div>
+    <!-- MODAL ÁREA ADMINISTRATIVA SIMPLES -->
+    <div class="modal-admin" id="admin-modal">
+        <div class="modal-content">
+            <div class="section-title" style="justify-content: space-between;">
+                <span><i class="fa-solid fa-sliders"></i> PAINEL DE CONFIGURAÇÕES</span>
+                <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAdmin()"></i>
+            </div>
+            
+            <div class="form-group">
+                <label>Status do Estabelecimento</label>
+                <select id="adm-status" class="form-control" onchange="updateAdminConfigs()">
+                    <option value="ABERTO">ABERTO</option>
+                    <option value="FECHADO">FECHADO</option>
+                </select>
+            </div>
 
-      <div class="menu-tabs">
-        <button class="tab-btn active" data-category="salgadas">Pizzas Salgadas</button>
-        <button class="tab-btn" data-category="doces">Pizzas Doces</button>
-        <button class="tab-btn" data-category="bordas">Bordas Recheadas</button>
-        <button class="tab-btn" data-category="bebidas">Bebidas</button>
-      </div>
+            <div class="form-group">
+                <label>Taxa de Entrega (R$)</label>
+                <input type="number" step="0.50" id="adm-delivery" class="form-control" value="5.00" onchange="updateAdminConfigs()">
+            </div>
 
-      <div class="menu-grid" id="menuGrid"></div>
-      
-      <div class="text-center" style="margin-top: 3rem;">
-        <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-          <span>Acessar Cardápio Completo no Zesto 🍕</span>
-        </a>
-      </div>
+            <div class="form-group">
+                <label>Número WhatsApp (com DDD)</label>
+                <input type="text" id="adm-phone" class="form-control" value="5511958338379" onchange="updateAdminConfigs()">
+            </div>
+
+            <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">
+                * Configurações salvas automaticamente nesta sessão local.
+            </p>
+
+            <button class="btn-clear" style="border-style: solid; margin-top: 15px;" onclick="closeAdmin()">
+                FECHAR PAINEL
+            </button>
+        </div>
     </div>
-  </section>
 
-  <!-- Avaliação -->
-  <section class="section-padding highlight-banner" id="avaliacao">
-    <div class="container">
-      <div class="banner-box" style="border-color: rgba(255, 183, 3, 0.5);">
-        <div class="banner-content">
-          <span class="badge-tag">SUA OPINIÃO IMPORTA</span>
-          <h2>Como foi sua experiência com a gente?</h2>
-          <p>Adoramos saber o que nossos clientes acham das nossas pizzas e do nosso delivery. Clique abaixo para enviar seu feedback ou avaliar nosso atendimento!</p>
-          <a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg pulse-btn">
-            <span>⭐ Avaliar a Pizzaria Juliana e Favorita</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- JAVASCRIPT LÓGICA DO SISTEMA -->
+    <script>
+        // BASE DE DADOS DOS PRODUTOS BASEADA EXATAMENTE NA IMAGEM ENVIADA
+        const defaultProducts = [
+            { code: "38",  name: "CARNE", price: 3.50 },
+            { code: "39",  name: "QUEIJO", price: 3.50 },
+            { code: "85",  name: "CALABRESA", price: 3.50 },
+            { code: "71",  name: "PALMITO", price: 4.00 },
+            { code: "144", name: "BAURU", price: 3.80 },
+            { code: "142", name: "FRANGO C/ CATUPIRY", price: 3.80 },
+            { code: "143", name: "ESCAROLA", price: 3.80 },
+            { code: "87",  name: "ATUM", price: 3.80 },
+            { code: "74",  name: "MISTA (CALABRESA C/ QUEIJO)", price: 4.00 },
+            { code: "90",  name: "MISTA SEM CEBOLA", price: 4.00 },
+            { code: "69",  name: "CALABRESA C/ CATUPIRY", price: 4.00 },
+            { code: "41",  name: "CALABRESA SEM CEBOLA", price: 4.00 },
+            { code: "75",  name: "QUEIJO COM BACON", price: 4.00 },
+            { code: "78",  name: "DOIS QUEIJOS", price: 4.00 },
+            { code: "77",  name: "ATUM COM CATUPIRY", price: 4.00 },
+            { code: "79",  name: "FRANGO COM QUEIJO", price: 3.80 },
+            { code: "76",  name: "ATUM COM QUEIJO", price: 4.00 },
+            { code: "73",  name: "CATUPIRY COM MILHO", price: 3.80 },
+            { code: "72",  name: "QUEIJO COM MILHO", price: 3.80 },
+            { code: "132", name: "CALABRESA S/ CEBOLA C/ CATU.", price: 4.00 },
+            { code: "112", name: "CAIPIRA", price: 4.00 },
+            { code: "146", name: "CAIPIRA COM QUEIJO", price: 3.80 },
+            { code: "144b",name: "BRÓCOLIS", price: 3.80 },
+            { code: "88",  name: "ESCAROLA C/ QUEIJO E BACON", price: 4.00 },
+            { code: "228", name: "ESCAROLA C/ BACON E CATU. ORI.", price: 4.50 },
+            { code: "181", name: "CARNE COM CHEDDAR", price: 3.80 },
+            { code: "99",  name: "CARNE COM QUEIJO", price: 4.00 },
+            { code: "147", name: "ATUM C/ QUEIJO E CEBOLA", price: 4.00 },
+            { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00 }
+        ];
 
-  <!-- Galeria -->
-  <section class="section-padding" id="galeria">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-subtitle">FOTOS REALÍSTICAS</span>
-        <h2>Galeria de Sabores</h2>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Pizza tradicional" loading="lazy">
-          <div class="gallery-caption">Pizza Tradicional</div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80" alt="Pizza com borda recheada" loading="lazy">
-          <div class="gallery-caption">Borda Recheada</div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Pizza doce" loading="lazy">
-          <div class="gallery-caption">Pizza Doce</div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80" alt="Delivery em Itaquaquecetuba" loading="lazy">
-          <div class="gallery-caption">Delivery Rápido</div>
-        </div>
-      </div>
-    </div>
-  </section>
+        // ESTADO DA APLICAÇÃO
+        let cart = {};
+        let deliveryType = 'entrega';
+        let paymentMethod = 'PIX';
+        let config = {
+            deliveryFee: 5.00,
+            whatsappPhone: "5511958338379",
+            status: "ABERTO"
+        };
 
-  <!-- FAQ Interativo & Horários -->
-  <section class="section-padding bg-dark-card" id="faq">
-    <div class="container container-narrow">
-      <div class="section-header text-center">
-        <span class="section-subtitle">TIRA-DÚVIDAS</span>
-        <h2>Perguntas Frequentes & Horários</h2>
-      </div>
-      
-      <!-- Tabela de Horários -->
-      <div class="hours-box" style="background: var(--bg-dark-elevated); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--border-color);">
-        <h3 style="margin-bottom: 1rem; color: var(--accent-gold); text-align: center;">🕒 Horário de Atendimento</h3>
-        <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Segunda-feira (Dia de Finados):</span> <strong style="color: #E63946;">Fechado</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Terça-feira:</span> <strong>18:00 – 23:50</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Quarta-feira:</span> <strong>18:00 – 23:50</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Quinta-feira:</span> <strong>18:00 – 23:50</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Sexta-feira:</span> <strong>18:00 – 23:50</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem;">
-            <span>Sábado:</span> <strong>18:00 – 23:50</strong>
-          </li>
-          <li style="display: flex; justify-content: space-between;">
-            <span>Domingo:</span> <strong>18:00 – 23:50</strong>
-          </li>
-        </ul>
-      </div>
+        // INICIALIZAÇÃO
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProducts();
+            updateReceipt();
+        });
 
-      <div class="faq-list" id="faqList"></div>
-    </div>
-  </section>
+        // RENDERIZAR LISTA DE PRODUTOS
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
 
-  <!-- Localização e Atendimento -->
-  <section class="section-padding" id="contato">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-subtitle">ATENDIMENTO & LOCALIZAÇÃO</span>
-        <h2>Peça pizza em Itaquaquecetuba</h2>
-      </div>
-      <div class="grid-2-cols align-center">
-        <div class="location-info">
-          <p class="paragraph-lead">
-            A Pizzaria Juliana e Favorita atende Itaquaquecetuba - SP por delivery. Faça seu pedido pelo nosso cardápio digital ou chame no WhatsApp.
-          </p>
-          <div class="info-block">
-            <strong>📍 Endereço:</strong>
-            <p>Estr. Promissão, 8 - Jardim Carolina, Itaquaquecetuba - SP, 08588-310</p>
-          </div>
-          <div class="info-block">
-            <strong>📱 WhatsApp:</strong>
-            <p><a href="https://wa.me/5511958338379" target="_blank" class="link-highlight">(11) 95833-8379</a></p>
-          </div>
-          <div class="info-block">
-            <strong>⭐ Avaliações e Feedback:</strong>
-            <p><a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" class="link-highlight">Deixar sua avaliação oficial</a></p>
-          </div>
-          <div class="cta-location" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank" class="btn btn-primary">
-              <span>Abrir Cardápio Digital</span>
-            </a>
-            <a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" class="btn btn-outline">
-              <span>⭐ Avaliar Atendimento</span>
-            </a>
-          </div>
-        </div>
-        <div class="map-box">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.887222105151!2d-46.3475!3d-23.465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7be3344f4c8d%3A0x17c0e6137d1d6c68!2sEstr.%20Promiss%C3%A3o%2C%208%20-%20Jardim%20Carolina%2C%20Itaquaquecetuba%20-%20SP%2C%2008588-310!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-            width="100%" 
-            height="350" 
-            style="border:0; border-radius: 12px;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </div>
-    </div>
-  </section>
+            defaultProducts.forEach((prod, index) => {
+                const qty = cart[index] || 0;
+                const isSelected = qty > 0 ? 'selected' : '';
 
-  <!-- Chamada Final CTA -->
-  <section class="final-cta">
-    <div class="container text-center">
-      <h2>Bateu a fome? Peça sua pizza agora mesmo!</h2>
-      <p>Acesse o cardápio digital ou deixe sua avaliação sobre nossos produtos.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg pulse-btn">
-          <span>Acessar Cardápio Zesto 🍕</span>
-        </a>
-        <a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-          <span>⭐ Avaliar Atendimento</span>
-        </a>
-      </div>
-    </div>
-  </section>
+                const cardHtml = `
+                    <div class="product-card ${isSelected}" id="product-card-${index}">
+                        <div class="product-info">
+                            <span class="product-code">CÓD. ${prod.code}</span>
+                            <div class="product-name">${prod.name}</div>
+                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')}</div>
+                        </div>
+                        <div class="counter-controls">
+                            <button class="btn-counter minus" onclick="updateQty(${index}, -1)">-</button>
+                            <span class="counter-value" id="qty-${index}">${qty}</span>
+                            <button class="btn-counter plus" onclick="updateQty(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
 
-  <!-- Rodapé Comercial -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="brand-logo">
-            <img src="assets/images/logo-pizzaria-favorita-juliana.png" alt="Logo" class="logo-img">
-          </div>
-          <p class="footer-about">
-            A Pizzaria Juliana e Favorita leva sabor caseiro e pizzas recheadas para Itaquaquecetuba - SP.
-          </p>
-        </div>
-        <div class="footer-col">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#sobre">A Pizzaria</a></li>
-            <li><a href="#cardapio">Cardápio</a></li>
-            <li><a href="#avaliacao">Avaliações</a></li>
-            <li><a href="#faq">Horários & Dúvidas</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Contato & Sistema</h4>
-          <p>📍 Estr. Promissão, 8 - Jardim Carolina, Itaquaquecetuba - SP</p>
-          <p>📱 WhatsApp: (11) 95833-8379</p>
-          <p>⭐ <a href="https://avaliar.impulsoweb10.com.br/cliente/esfira-pizzaria-juliana-favorita-itaqua/" target="_blank" class="link-highlight">Sistema de Avaliação</a></p>
-          <p>🌐 Zesto: <a href="https://pedido.zesto.menu/pt-BR/store/pizzaria-juliana-e-favorita/lgddmmpgpqgjqbljf" target="_blank">Cardápio Digital</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom text-center">
-        <p>&copy; 2026 Pizzaria Juliana e Favorita. Todos os direitos reservados.</p>
-        <p class="agency-credits">Desenvolvido com excelência por <a href="https://impulsoweb10.com.br" target="_blank">ImpulsoWeb10</a></p>
-      </div>
-    </div>
-  </footer>
+        // ALTERAR QUANTIDADE
+        function updateQty(index, delta) {
+            const currentQty = cart[index] || 0;
+            const newQty = currentQty + delta;
 
-  <!-- Botão Flutuante do WhatsApp -->
-  <a href="https://wa.me/5511958338379?text=Olá! Gostaria de fazer um pedido na Pizzaria Juliana e Favorita." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Conversar no WhatsApp">
-    <svg viewBox="0 0 32 32" class="whatsapp-icon">
-      <path d="M16 2a13.94 13.94 0 0 0-12 21.09L2 30l7.09-1.86A13.94 13.94 0 1 0 16 2zm7.65 19.86c-.32.9-1.85 1.7-2.58 1.76-.68.06-1.55.3-5.22-1.22-3.8-1.58-6.22-5.46-6.4-5.72-.18-.26-1.52-2.03-1.52-3.87s.96-2.74 1.3-3.11c.32-.36.72-.46.96-.46.24 0 .48 0 .68.01.22.01.52-.08.82.63.32.76 1.08 2.63 1.17 2.82.1.18.16.42.04.66-.12.24-.18.38-.36.6-.18.22-.38.48-.54.65-.18.18-.36.38-.16.73.2.36.91 1.5 1.96 2.43 1.35 1.2 2.49 1.57 2.85 1.75.36.18.57.15.78-.09.22-.24.91-1.06 1.15-1.42.24-.36.48-.3.8-.18.32.12 2.06.97 2.41 1.15.36.18.6.27.68.42.1.15.1 .87-.22 1.77z"/>
-    </svg>
-  </a>
+            if (newQty <= 0) {
+                delete cart[index];
+            } else {
+                cart[index] = newQty;
+            }
 
-  <!-- Scripts -->
-  <script src="js/config.js"></script>
-  <script src="js/main.js"></script>
+            // Atualiza número visualmente no card
+            document.getElementById(`qty-${index}`).innerText = cart[index] || 0;
+            
+            // Destaca ou desmarca o card
+            const card = document.getElementById(`product-card-${index}`);
+            if (cart[index] > 0) {
+                card.classList.add('selected');
+            } else {
+                card.classList.remove('selected');
+            }
+
+            updateReceipt();
+        }
+
+        // ATUALIZAÇÃO DO RECIBO (CUPOM DE SUPERMERCADO)
+        function updateReceipt() {
+            const tbody = document.getElementById('receipt-items');
+            const emptyMsg = document.getElementById('receipt-empty-msg');
+            tbody.innerHTML = '';
+
+            let subtotal = 0;
+            let totalItems = 0;
+
+            const keys = Object.keys(cart);
+
+            if (keys.length === 0) {
+                emptyMsg.style.display = 'block';
+            } else {
+                emptyMsg.style.display = 'none';
+            }
+
+            keys.forEach(idx => {
+                const item = defaultProducts[idx];
+                const qty = cart[idx];
+                const itemTotal = item.price * qty;
+                subtotal += itemTotal;
+                totalItems += qty;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.code}</td>
+                    <td>${item.name}</td>
+                    <td style="text-align: center;">${qty}</td>
+                    <td style="text-align: right;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const currentDeliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0.00;
+            const grandTotal = subtotal + currentDeliveryFee;
+
+            // Atualiza valores textuais
+            document.getElementById('receipt-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('receipt-delivery').innerText = `R$ ${currentDeliveryFee.toFixed(2).replace('.', ',')}`;
+            document.getElementById('receipt-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+
+            // Atualiza barra mobile
+            document.getElementById('mobile-count').innerText = totalItems;
+            document.getElementById('mobile-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        // LIMPAR TUDO
+        function clearCart() {
+            if (Object.keys(cart).length === 0) return;
+            if (confirm("Deseja realmente limpar todo o seu pedido?")) {
+                cart = {};
+                renderProducts();
+                updateReceipt();
+            }
+        }
+
+        // SELEÇÃO DE ENTREGA / RETIRADA
+        function setDeliveryType(type) {
+            deliveryType = type;
+            const addrBox = document.getElementById('address-fields');
+            const btnEntrega = document.getElementById('opt-entrega');
+            const btnRetirada = document.getElementById('opt-retirada');
+
+            if (type === 'entrega') {
+                btnEntrega.classList.add('active');
+                btnRetirada.classList.remove('active');
+                addrBox.style.display = 'block';
+            } else {
+                btnRetirada.classList.add('active');
+                btnEntrega.classList.remove('active');
+                addrBox.style.display = 'none';
+            }
+            updateReceipt();
+        }
+
+        // SELEÇÃO DE PAGAMENTO
+        function setPayment(method) {
+            paymentMethod = method;
+            document.getElementById('pay-pix').classList.remove('active');
+            document.getElementById('pay-credito').classList.remove('active');
+            document.getElementById('pay-debito').classList.remove('active');
+            
+            const pixAlert = document.getElementById('pix-alert');
+
+            if (method === 'PIX') {
+                document.getElementById('pay-pix').classList.add('active');
+                pixAlert.style.display = 'block';
+            } else if (method === 'Cartão de Crédito') {
+                document.getElementById('pay-credito').classList.add('active');
+                pixAlert.style.display = 'none';
+            } else {
+                document.getElementById('pay-debito').classList.add('active');
+                pixAlert.style.display = 'none';
+            }
+        }
+
+        // ALTERNAR EXIBIÇÃO DA IMAGEM DO CARDÁPIO ORIGINAL
+        function toggleCardapioImg() {
+            const img = document.getElementById('img-cardapio-oficial');
+            if (img.style.display === 'inline-block' || img.style.display === 'block') {
+                img.style.display = 'none';
+            } else {
+                img.style.display = 'block';
+            }
+        }
+
+        // SCROLL PARA O CARRINHO EM DISPOSITIVOS MOBILES
+        function scrollToCart() {
+            document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // DISPARAR PEDIDO VIA WHATSAPP
+        function sendOrder() {
+            // 1. Validação de Produtos
+            const cartKeys = Object.keys(cart);
+            if (cartKeys.length === 0) {
+                alert("Por favor, selecione pelo menos 1 item para continuar!");
+                return;
+            }
+
+            // 2. Validação dos Dados do Cliente
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+
+            if (!name) {
+                alert("Por favor, informe seu Nome.");
+                document.getElementById('cust-name').focus();
+                return;
+            }
+            if (!phone) {
+                alert("Por favor, informe seu Telefone de contato.");
+                document.getElementById('cust-phone').focus();
+                return;
+            }
+
+            // 3. Validação de Endereço (se entrega)
+            let addressText = "Retirada no Balcão do Estabelecimento";
+            if (deliveryType === 'entrega') {
+                const street = document.getElementById('addr-street').value.trim();
+                const num = document.getElementById('addr-num').value.trim();
+                const bairro = document.getElementById('addr-bairro').value.trim();
+                const cep = document.getElementById('addr-cep').value.trim();
+                const comp = document.getElementById('addr-comp').value.trim();
+                const ref = document.getElementById('addr-ref').value.trim();
+
+                if (!street || !num || !bairro) {
+                    alert("Por favor, preencha a Rua, Número e Bairro para entrega.");
+                    return;
+                }
+
+                addressText = `${street}, Nº ${num} - ${bairro}`;
+                if (cep) addressText += ` (CEP: ${cep})`;
+                if (comp) addressText += ` - Comp: ${comp}`;
+                if (ref) addressText += ` (Ref: ${ref})`;
+            }
+
+            // 4. Montar a mensagem no formato solicitado
+            let subtotal = 0;
+            let itemsMessage = "";
+
+            cartKeys.forEach(idx => {
+                const item = defaultProducts[idx];
+                const qty = cart[idx];
+                const itemTotal = item.price * qty;
+                subtotal += itemTotal;
+                itemsMessage += `${qty}x ${item.name} — R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+            });
+
+            const deliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0;
+            const total = subtotal + deliveryFee;
+
+            let msg = `🍕 *FAVORITA PIZZARIA*\n`;
+            msg += `*NOVO PEDIDO*\n\n`;
+            msg += `*Cliente:* ${name}\n`;
+            msg += `*Telefone:* ${phone}\n\n`;
+            msg += `*PRODUTOS:*\n${itemsMessage}\n`;
+            msg += `*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+            msg += `*Entrega:* R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
+            msg += `*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+            msg += `*Entrega ou retirada:* ${deliveryType === 'entrega' ? 'Entrega em Casa' : 'Retirar no Local'}\n`;
+            msg += `*Endereço:* ${addressText}\n`;
+            msg += `*Pagamento:* ${paymentMethod}\n\n`;
+            msg += `Aguardo confirmação do pedido!`;
+
+            // 5. Redirecionar para o WhatsApp
+            const encodedMsg = encodeURIComponent(msg);
+            const waUrl = `https://wa.me/${config.whatsappPhone}?text=${encodedMsg}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // LÓGICA DO PAINEL ADMIN
+        function openAdmin() {
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+
+        function closeAdmin() {
+            document.getElementById('admin-modal').style.display = 'none';
+        }
+
+        function updateAdminConfigs() {
+            const status = document.getElementById('adm-status').value;
+            const delivery = parseFloat(document.getElementById('adm-delivery').value) || 0;
+            const phone = document.getElementById('adm-phone').value.trim();
+
+            config.status = status;
+            config.deliveryFee = delivery;
+            config.whatsappPhone = phone;
+
+            const badge = document.getElementById('status-badge');
+            if (status === 'ABERTO') {
+                badge.className = 'badge-status';
+                badge.innerHTML = `<i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO`;
+            } else {
+                badge.className = 'badge-status fechado';
+                badge.innerHTML = `<i class="fa-solid fa-store-slash"></i> ESTABELECIMENTO FECHADO`;
+            }
+
+            updateReceipt();
+        }
+    </script>
 </body>
 </html>
