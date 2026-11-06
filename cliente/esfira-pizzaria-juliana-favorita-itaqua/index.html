@@ -30,7 +30,7 @@
         body {
             background-color: var(--creme);
             color: var(--preto);
-            padding-bottom: 90px; /* Espaço para barra flutuante mobile */
+            padding-bottom: 90px;
         }
 
         header {
@@ -48,10 +48,6 @@
             height: auto;
             filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.5));
             transition: transform 0.3s;
-        }
-
-        .logo-container img:hover {
-            transform: scale(1.03);
         }
 
         header h1 {
@@ -110,7 +106,6 @@
             padding-bottom: 8px;
         }
 
-        /* CARDÁPIO IMAGEM REFERÊNCIA TOGGLE */
         .cardapio-original-box {
             background: white;
             padding: 15px;
@@ -128,14 +123,9 @@
             border-radius: 25px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .btn-toggle-img:hover {
-            background-color: #d89335;
         }
 
         .img-cardapio-oficial {
@@ -222,11 +212,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
-        }
-
-        .btn-counter:active {
-            transform: scale(0.9);
         }
 
         .btn-counter.plus {
@@ -244,6 +229,83 @@
             font-size: 1rem;
             min-width: 24px;
             text-align: center;
+        }
+
+        /* AJUSTE MOBILE: NO CELULAR OS CARDS VIRAM BOTÕES QUE ABREM MODAL */
+        @media (max-width: 900px) {
+            .counter-controls {
+                display: none; /* Esconde os botões diretos no celular para economizar espaço */
+            }
+            .product-card {
+                cursor: pointer;
+            }
+            .product-card::after {
+                content: "\f054";
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                color: var(--dourado);
+                font-size: 0.9rem;
+            }
+        }
+
+        /* MODAL DE ESCOLHA NO CELULAR */
+        .modal-product {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-product-content {
+            background: white;
+            max-width: 380px;
+            width: 100%;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: scaleUp 0.2s ease-in-out;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-product-content h3 {
+            color: var(--vermelho);
+            margin-bottom: 5px;
+        }
+
+        .modal-product-content .price {
+            font-size: 1.2rem;
+            color: var(--verde);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn-modal-add {
+            width: 100%;
+            background: var(--verde);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
         /* CUPOM DE SUPERMERCADO */
@@ -339,11 +401,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .btn-clear:hover {
-            background-color: #fde8e8;
-        }
-
-        /* FORMULÁRIO DE PEDIDO */
         .checkout-box {
             background: white;
             padding: 20px;
@@ -412,10 +469,6 @@
             color: var(--verde);
         }
 
-        .radio-card i {
-            font-size: 1.2rem;
-        }
-
         .pix-alert {
             background-color: #e8f5e9;
             border-left: 4px solid var(--verde);
@@ -445,18 +498,10 @@
             transition: 0.3s;
         }
 
-        .btn-whatsapp:hover {
-            background-color: #1eb956;
-            transform: translateY(-2px);
-        }
-
-        /* BARRA FIXA MOBILE */
         .mobile-bar {
             display: none;
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: var(--preto);
             color: white;
             padding: 12px 20px;
@@ -493,7 +538,6 @@
             }
         }
 
-        /* MODAL ADMIN */
         .admin-btn-trigger {
             position: fixed;
             top: 10px;
@@ -539,15 +583,12 @@
 </head>
 <body>
 
-    <!-- Botão Secreto Admin no Canto -->
     <button class="admin-btn-trigger" onclick="openAdmin()" title="Área Administrativa">
         <i class="fa-solid fa-gear"></i>
     </button>
 
-    <!-- CABEÇALHO -->
     <header>
         <div class="logo-container">
-            <!-- Imagem Oficial 3D da Favorita Pizzaria -->
             <img src="logo-favorita.png" alt="Favorita Pizzaria Logo Oficial" id="main-logo">
         </div>
         <h1>CARDÁPIO DIGITAL</h1>
@@ -555,13 +596,9 @@
         <span class="badge-status" id="status-badge"><i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO</span>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <div class="main-container">
         
-        <!-- COLUNA ESQUERDA: PRODUTOS -->
         <div class="products-section">
-            
-            <!-- Visualizar Imagem Original -->
             <div class="cardapio-original-box">
                 <button class="btn-toggle-img" onclick="toggleCardapioImg()">
                     <i class="fa-solid fa-image"></i> Ver Cardápio Físico Original
@@ -574,16 +611,10 @@
                 <i class="fa-solid fa-pizza-slice"></i> ESFIHAS SALGADAS & DOCES
             </div>
 
-            <!-- GRID DE PRODUTOS -->
-            <div class="products-grid" id="products-container">
-                <!-- Inserido dinamicamente via JS com dados fieis do cardápio -->
-            </div>
+            <div class="products-grid" id="products-container"></div>
         </div>
 
-        <!-- COLUNA DIREITA: RECIBO + CHECKOUT -->
         <div class="cart-section" id="cart-section">
-            
-            <!-- RECIBO CUPOM DE SUPERMERCADO -->
             <div class="receipt-container">
                 <div class="receipt-header">
                     <h2>FAVORITA PIZZARIA</h2>
@@ -600,9 +631,7 @@
                             <th style="text-align: right;">VALOR</th>
                         </tr>
                     </thead>
-                    <tbody id="receipt-items">
-                        <!-- Itens do recibo aqui -->
-                    </tbody>
+                    <tbody id="receipt-items"></tbody>
                 </table>
 
                 <div id="receipt-empty-msg" class="empty-cart-msg">
@@ -632,7 +661,6 @@
                 </button>
             </div>
 
-            <!-- FORMULÁRIO DE ENTREGA E DADOS -->
             <div class="checkout-box">
                 <div class="section-title" style="font-size: 1.1rem;">
                     <i class="fa-solid fa-user"></i> SEUS DADOS
@@ -662,7 +690,6 @@
                     </div>
                 </div>
 
-                <!-- ENDEREÇO (EXIBIDO SE ENTREGA) -->
                 <div id="address-fields">
                     <div class="form-row">
                         <div class="form-group">
@@ -717,12 +744,29 @@
                     <i class="fa-solid fa-circle-info"></i> As instruções da chave PIX para pagamento serão enviadas pelo atendente na confirmação pelo WhatsApp.
                 </div>
 
-                <!-- BOTÃO FINALIZAR -->
                 <button class="btn-whatsapp" onclick="sendOrder()">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
                     FINALIZAR PEDIDO NO WHATSAPP
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA ESCOLHER QUANTIDADE NO CELULAR -->
+    <div class="modal-product" id="product-modal">
+        <div class="modal-product-content">
+            <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></span>
+            <span class="product-code" id="modal-code">CÓD. 38</span>
+            <h3 id="modal-title" style="margin-top: 8px;">CARNE</h3>
+            <div class="price" id="modal-price">R$ 3,50</div>
+            
+            <div class="modal-counter-box">
+                <button class="btn-counter minus" onclick="changeModalQty(-1)">-</button>
+                <span class="counter-value" id="modal-qty" style="font-size: 1.3rem;">1</span>
+                <button class="btn-counter plus" onclick="changeModalQty(1)">+</button>
+            </div>
+
+            <button class="btn-modal-add" onclick="confirmModalItem()">CONFIRMAR / ADICIONAR</button>
         </div>
     </div>
 
@@ -737,7 +781,7 @@
         </button>
     </div>
 
-    <!-- MODAL ÁREA ADMINISTRATIVA SIMPLES -->
+    <!-- MODAL ADMIN -->
     <div class="modal-admin" id="admin-modal">
         <div class="modal-content">
             <div class="section-title" style="justify-content: space-between;">
@@ -763,19 +807,13 @@
                 <input type="text" id="adm-phone" class="form-control" value="5511958338379" onchange="updateAdminConfigs()">
             </div>
 
-            <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">
-                * Configurações salvas automaticamente nesta sessão local.
-            </p>
-
             <button class="btn-clear" style="border-style: solid; margin-top: 15px;" onclick="closeAdmin()">
                 FECHAR PAINEL
             </button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LÓGICA DO SISTEMA -->
     <script>
-        // BASE DE DADOS DOS PRODUTOS BASEADA EXATAMENTE NA IMAGEM ENVIADA
         const defaultProducts = [
             { code: "38",  name: "CARNE", price: 3.50 },
             { code: "39",  name: "QUEIJO", price: 3.50 },
@@ -808,7 +846,6 @@
             { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00 }
         ];
 
-        // ESTADO DA APLICAÇÃO
         let cart = {};
         let deliveryType = 'entrega';
         let paymentMethod = 'PIX';
@@ -818,13 +855,14 @@
             status: "ABERTO"
         };
 
-        // INICIALIZAÇÃO
+        let currentModalIndex = null;
+        let tempModalQty = 1;
+
         document.addEventListener("DOMContentLoaded", () => {
             renderProducts();
             updateReceipt();
         });
 
-        // RENDERIZAR LISTA DE PRODUTOS
         function renderProducts() {
             const container = document.getElementById('products-container');
             container.innerHTML = '';
@@ -834,13 +872,13 @@
                 const isSelected = qty > 0 ? 'selected' : '';
 
                 const cardHtml = `
-                    <div class="product-card ${isSelected}" id="product-card-${index}">
+                    <div class="product-card ${isSelected}" id="product-card-${index}" onclick="handleProductClick(${index})">
                         <div class="product-info">
                             <span class="product-code">CÓD. ${prod.code}</span>
                             <div class="product-name">${prod.name}</div>
-                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')}</div>
+                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')} ${qty > 0 ? `(<b>${qty}x</b>)` : ''}</div>
                         </div>
-                        <div class="counter-controls">
+                        <div class="counter-controls" onclick="event.stopPropagation()">
                             <button class="btn-counter minus" onclick="updateQty(${index}, -1)">-</button>
                             <span class="counter-value" id="qty-${index}">${qty}</span>
                             <button class="btn-counter plus" onclick="updateQty(${index}, 1)">+</button>
@@ -851,7 +889,45 @@
             });
         }
 
-        // ALTERAR QUANTIDADE
+        // Lógica de clique: Desktop usa botões +/- direto, Celular abre o Modal Elegante
+        function handleProductClick(index) {
+            if (window.innerWidth <= 900) {
+                openProductModal(index);
+            }
+        }
+
+        function openProductModal(index) {
+            currentModalIndex = index;
+            const prod = defaultProducts[index];
+            tempModalQty = cart[index] || 1;
+
+            document.getElementById('modal-code').innerText = `CÓD. ${prod.code}`;
+            document.getElementById('modal-title').innerText = prod.name;
+            document.getElementById('modal-price').innerText = `R$ ${prod.price.toFixed(2).replace('.', ',')}`;
+            document.getElementById('modal-qty').innerText = tempModalQty;
+
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function changeModalQty(delta) {
+            tempModalQty += delta;
+            if (tempModalQty < 1) tempModalQty = 1;
+            document.getElementById('modal-qty').innerText = tempModalQty;
+        }
+
+        function confirmModalItem() {
+            if (currentModalIndex !== null) {
+                cart[currentModalIndex] = tempModalQty;
+                renderProducts();
+                updateReceipt();
+                closeProductModal();
+            }
+        }
+
         function updateQty(index, delta) {
             const currentQty = cart[index] || 0;
             const newQty = currentQty + delta;
@@ -862,21 +938,10 @@
                 cart[index] = newQty;
             }
 
-            // Atualiza número visualmente no card
-            document.getElementById(`qty-${index}`).innerText = cart[index] || 0;
-            
-            // Destaca ou desmarca o card
-            const card = document.getElementById(`product-card-${index}`);
-            if (cart[index] > 0) {
-                card.classList.add('selected');
-            } else {
-                card.classList.remove('selected');
-            }
-
+            renderProducts();
             updateReceipt();
         }
 
-        // ATUALIZAÇÃO DO RECIBO (CUPOM DE SUPERMERCADO)
         function updateReceipt() {
             const tbody = document.getElementById('receipt-items');
             const emptyMsg = document.getElementById('receipt-empty-msg');
@@ -884,7 +949,6 @@
 
             let subtotal = 0;
             let totalItems = 0;
-
             const keys = Object.keys(cart);
 
             if (keys.length === 0) {
@@ -913,17 +977,13 @@
             const currentDeliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0.00;
             const grandTotal = subtotal + currentDeliveryFee;
 
-            // Atualiza valores textuais
             document.getElementById('receipt-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('receipt-delivery').innerText = `R$ ${currentDeliveryFee.toFixed(2).replace('.', ',')}`;
             document.getElementById('receipt-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
-
-            // Atualiza barra mobile
             document.getElementById('mobile-count').innerText = totalItems;
             document.getElementById('mobile-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
         }
 
-        // LIMPAR TUDO
         function clearCart() {
             if (Object.keys(cart).length === 0) return;
             if (confirm("Deseja realmente limpar todo o seu pedido?")) {
@@ -933,7 +993,6 @@
             }
         }
 
-        // SELEÇÃO DE ENTREGA / RETIRADA
         function setDeliveryType(type) {
             deliveryType = type;
             const addrBox = document.getElementById('address-fields');
@@ -952,7 +1011,6 @@
             updateReceipt();
         }
 
-        // SELEÇÃO DE PAGAMENTO
         function setPayment(method) {
             paymentMethod = method;
             document.getElementById('pay-pix').classList.remove('active');
@@ -973,31 +1031,22 @@
             }
         }
 
-        // ALTERNAR EXIBIÇÃO DA IMAGEM DO CARDÁPIO ORIGINAL
         function toggleCardapioImg() {
             const img = document.getElementById('img-cardapio-oficial');
-            if (img.style.display === 'inline-block' || img.style.display === 'block') {
-                img.style.display = 'none';
-            } else {
-                img.style.display = 'block';
-            }
+            img.style.display = (img.style.display === 'block') ? 'none' : 'block';
         }
 
-        // SCROLL PARA O CARRINHO EM DISPOSITIVOS MOBILES
         function scrollToCart() {
             document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // DISPARAR PEDIDO VIA WHATSAPP
         function sendOrder() {
-            // 1. Validação de Produtos
             const cartKeys = Object.keys(cart);
             if (cartKeys.length === 0) {
                 alert("Por favor, selecione pelo menos 1 item para continuar!");
                 return;
             }
 
-            // 2. Validação dos Dados do Cliente
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
 
@@ -1012,7 +1061,6 @@
                 return;
             }
 
-            // 3. Validação de Endereço (se entrega)
             let addressText = "Retirada no Balcão do Estabelecimento";
             if (deliveryType === 'entrega') {
                 const street = document.getElementById('addr-street').value.trim();
@@ -1033,7 +1081,6 @@
                 if (ref) addressText += ` (Ref: ${ref})`;
             }
 
-            // 4. Montar a mensagem no formato solicitado
             let subtotal = 0;
             let itemsMessage = "";
 
@@ -1061,13 +1108,10 @@
             msg += `*Pagamento:* ${paymentMethod}\n\n`;
             msg += `Aguardo confirmação do pedido!`;
 
-            // 5. Redirecionar para o WhatsApp
             const encodedMsg = encodeURIComponent(msg);
-            const waUrl = `https://wa.me/${config.whatsappPhone}?text=${encodedMsg}`;
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/${config.whatsappPhone}?text=${encodedMsg}`, '_blank');
         }
 
-        // LÓGICA DO PAINEL ADMIN
         function openAdmin() {
             document.getElementById('admin-modal').style.display = 'flex';
         }
@@ -1077,16 +1121,12 @@
         }
 
         function updateAdminConfigs() {
-            const status = document.getElementById('adm-status').value;
-            const delivery = parseFloat(document.getElementById('adm-delivery').value) || 0;
-            const phone = document.getElementById('adm-phone').value.trim();
-
-            config.status = status;
-            config.deliveryFee = delivery;
-            config.whatsappPhone = phone;
+            config.status = document.getElementById('adm-status').value;
+            config.deliveryFee = parseFloat(document.getElementById('adm-delivery').value) || 0;
+            config.whatsappPhone = document.getElementById('adm-phone').value.trim();
 
             const badge = document.getElementById('status-badge');
-            if (status === 'ABERTO') {
+            if (config.status === 'ABERTO') {
                 badge.className = 'badge-status';
                 badge.innerHTML = `<i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO`;
             } else {
