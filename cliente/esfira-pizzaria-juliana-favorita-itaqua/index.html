@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SXPW22DT2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6SXPW22DT2');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio Digital — Favorita Pizzaria</title>
@@ -115,7 +106,7 @@
             padding-bottom: 8px;
         }
 
-        /* BOTÕES DE CATEGORIAS ESPECIAIS (DESTAQUE CATUPIRY E DOCES) */
+        /* BOTÕES DE CATEGORIAS ESPECIAIS */
         .special-categories {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -296,8 +287,8 @@
             }
         }
 
-        /* MODAL DE ESCOLHA DE PRODUTO / CATEGORIA */
-        .modal-product {
+        /* MODAIS GERAIS (ELEGANTES) */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -308,9 +299,9 @@
             padding: 20px;
         }
 
-        .modal-product-content {
+        .modal-box {
             background: white;
-            max-width: 420px;
+            max-width: 450px;
             width: 100%;
             padding: 25px;
             border-radius: 16px;
@@ -326,12 +317,12 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        .modal-product-content h3 {
+        .modal-box h3 {
             color: var(--vermelho);
             margin-bottom: 5px;
         }
 
-        .modal-product-content .price {
+        .modal-box .price {
             font-size: 1.2rem;
             color: var(--verde);
             font-weight: 700;
@@ -363,18 +354,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #eee;
             text-align: left;
+            gap: 10px;
         }
 
         .category-item-info h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--preto);
+            line-height: 1.2;
         }
 
         .category-item-info span {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--verde);
             font-weight: 700;
         }
@@ -839,8 +832,8 @@
     </div>
 
     <!-- MODAL PARA PRODUTO INDIVIDUAL (CELULAR) -->
-    <div class="modal-product" id="product-modal">
-        <div class="modal-product-content">
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal-box">
             <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></span>
             <span class="product-code" id="modal-code">CÓD. 38</span>
             <h3 id="modal-title" style="margin-top: 8px;">CARNE</h3>
@@ -857,13 +850,13 @@
     </div>
 
     <!-- MODAL PARA CATEGORIAS ESPECIAIS (CATUPIRY / DOCES) -->
-    <div class="modal-product" id="category-modal">
-        <div class="modal-product-content" style="max-width: 480px;">
+    <div class="modal-overlay" id="category-modal">
+        <div class="modal-box" style="max-width: 480px;">
             <span style="float: right; cursor: pointer; font-size: 1.2rem;" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></span>
             <h3 id="cat-modal-title" style="margin-top: 5px; color: var(--verde);">ESCOLHA SUA ESFIHA</h3>
             <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Toque na quantidade desejada para cada sabor</p>
             
-            <div id="cat-modal-items-list" style="margin-bottom: 20px;">
+            <div id="cat-modal-items-list" style="margin-bottom: 20px; max-height: 50vh; overflow-y: auto;">
                 <!-- Preenchido via JS -->
             </div>
 
@@ -915,7 +908,6 @@
     </div>
 
     <script>
-        // LISTA COMPLETA DE PRODUTOS INCLUINDO CATUPIRY ORIGINAL E DOCES
         const defaultProducts = [
             // Categoria Catupiry Original (R$ 4,50)[cite: 3]
             { code: "C01", name: "ATUM SEM CEBOLA E CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
@@ -927,9 +919,9 @@
             { code: "C07", name: "CATUPIRY ORIGINAL", price: 4.50, category: "catupiry" },
 
             // Categoria Doces[cite: 4]
-            { code: "D01", name: "CHOCOLATE AO LEITE", price: 5.00, category: "doces" },[cite: 4]
-            { code: "D02", name: "CHOCOLATE AO LEITE C/ CONFETE", price: 6.00, category: "doces" },[cite: 4]
-            { code: "D03", name: "BRIGADEIRO", price: 6.00, category: "doces" },[cite: 4]
+            { code: "D01", name: "CHOCOLATE AO LEITE", price: 5.00, category: "doces" },
+            { code: "D02", name: "CHOCOLATE AO LEITE C/ CONFETE", price: 6.00, category: "doces" },
+            { code: "D03", name: "BRIGADEIRO", price: 6.00, category: "doces" },
 
             // Salgadas Tradicionais
             { code: "38",  name: "CARNE", price: 3.50, category: "tradicional" },
@@ -960,356 +952,3 @@
             { code: "181", name: "CARNE COM CHEDDAR", price: 3.80, category: "tradicional" },
             { code: "99",  name: "CARNE COM QUEIJO", price: 4.00, category: "tradicional" },
             { code: "147", name: "ATUM C/ QUEIJO E CEBOLA", price: 4.00, category: "tradicional" },
-            { code: "182", name: "CHEDDAR COM CATUPIRY", price: 4.00, category: "tradicional" }
-        ];
-
-        let cart = {};
-        let deliveryType = 'entrega';
-        let paymentMethod = 'PIX';
-        let config = {
-            deliveryFee: 5.00,
-            whatsappPhone: "5511958338379",
-            status: "ABERTO"
-        };
-
-        let currentModalIndex = null;
-        let tempModalQty = 1;
-
-        document.addEventListener("DOMContentLoaded", () => {
-            renderProducts();
-            updateReceipt();
-        });
-
-        function renderProducts() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
-
-            // Renderiza apenas as tradicionais na lista principal (as especiais ficam nos botões de cima e modais)
-            defaultProducts.forEach((prod, index) => {
-                if (prod.category !== 'tradicional') return;
-
-                const qty = cart[index] || 0;
-                const isSelected = qty > 0 ? 'selected' : '';
-
-                const cardHtml = `
-                    <div class="product-card ${isSelected}" id="product-card-${index}" onclick="handleProductClick(${index})">
-                        <div class="product-info">
-                            <span class="product-code">CÓD. ${prod.code}</span>
-                            <div class="product-name">${prod.name}</div>
-                            <div class="product-price">R$ ${prod.price.toFixed(2).replace('.', ',')} ${qty > 0 ? `(<b>${qty}x</b>)` : ''}</div>
-                        </div>
-                        <div class="counter-controls" onclick="event.stopPropagation()">
-                            <button class="btn-counter minus" onclick="updateQty(${index}, -1)">-</button>
-                            <span class="counter-value" id="qty-${index}">${qty}</span>
-                            <button class="btn-counter plus" onclick="updateQty(${index}, 1)">+</button>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHtml);
-            });
-        }
-
-        function handleProductClick(index) {
-            if (window.innerWidth <= 900) {
-                openProductModal(index);
-            }
-        }
-
-        function openProductModal(index) {
-            currentModalIndex = index;
-            const prod = defaultProducts[index];
-            tempModalQty = cart[index] || 1;
-
-            document.getElementById('modal-code').innerText = `CÓD. ${prod.code}`;
-            document.getElementById('modal-title').innerText = prod.name;
-            document.getElementById('modal-price').innerText = `R$ ${prod.price.toFixed(2).replace('.', ',')}`;
-            document.getElementById('modal-qty').innerText = tempModalQty;
-
-            document.getElementById('product-modal').style.display = 'flex';
-        }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').style.display = 'none';
-        }
-
-        function changeModalQty(delta) {
-            tempModalQty += delta;
-            if (tempModalQty < 1) tempModalQty = 1;
-            document.getElementById('modal-qty').innerText = tempModalQty;
-        }
-
-        function confirmModalItem() {
-            if (currentModalIndex !== null) {
-                cart[currentModalIndex] = tempModalQty;
-                renderProducts();
-                updateReceipt();
-                closeProductModal();
-            }
-        }
-
-        // MODAL DE CATEGORIA ESPECIAL (CATUPIRY OU DOCES)
-        function openCategoryModal(categoryKey) {
-            const modalList = document.getElementById('cat-modal-items-list');
-            const modalTitle = document.getElementById('cat-modal-title');
-            modalList.innerHTML = '';
-
-            if (categoryKey === 'catupiry') {
-                modalTitle.innerText = "ESFIHAS COM CATUPIRY ORIGINAL";
-            } else {
-                modalTitle.innerText = "ESFIHAS DOCES";
-            }
-
-            defaultProducts.forEach((prod, index) => {
-                if (prod.category === categoryKey) {
-                    const qty = cart[index] || 0;
-                    const itemHtml = `
-                        <div class="category-item-row">
-                            <div class="category-item-info">
-                                <h4>${prod.name}</h4>
-                                <span>R$ ${prod.price.toFixed(2).replace('.', ',')}</span>
-                            </div>
-                            <div class="counter-controls">
-                                <button class="btn-counter minus" onclick="updateCategoryItemQty(${index}, -1, '${categoryKey}')">-</button>
-                                <span class="counter-value" id="cat-qty-${index}">${qty}</span>
-                                <button class="btn-counter plus" onclick="updateCategoryItemQty(${index}, 1, '${categoryKey}')">+</button>
-                            </div>
-                        </div>
-                    `;
-                    modalList.insertAdjacentHTML('beforeend', itemHtml);
-                }
-            });
-
-            document.getElementById('category-modal').style.display = 'flex';
-        }
-
-        function closeCategoryModal() {
-            document.getElementById('category-modal').style.display = 'none';
-            renderProducts();
-            updateReceipt();
-        }
-
-        function updateCategoryItemQty(index, delta, categoryKey) {
-            const currentQty = cart[index] || 0;
-            const newQty = currentQty + delta;
-
-            if (newQty <= 0) {
-                delete cart[index];
-                document.getElementById(`cat-qty-${index}`).innerText = 0;
-            } else {
-                cart[index] = newQty;
-                document.getElementById(`cat-qty-${index}`).innerText = newQty;
-            }
-            updateReceipt();
-        }
-
-        function updateQty(index, delta) {
-            const currentQty = cart[index] || 0;
-            const newQty = currentQty + delta;
-
-            if (newQty <= 0) {
-                delete cart[index];
-            } else {
-                cart[index] = newQty;
-            }
-
-            renderProducts();
-            updateReceipt();
-        }
-
-        function updateReceipt() {
-            const tbody = document.getElementById('receipt-items');
-            const emptyMsg = document.getElementById('receipt-empty-msg');
-            tbody.innerHTML = '';
-
-            let subtotal = 0;
-            let totalItems = 0;
-            const keys = Object.keys(cart);
-
-            if (keys.length === 0) {
-                emptyMsg.style.display = 'block';
-            } else {
-                emptyMsg.style.display = 'none';
-            }
-
-            keys.forEach(idx => {
-                const item = defaultProducts[idx];
-                const qty = cart[idx];
-                const itemTotal = item.price * qty;
-                subtotal += itemTotal;
-                totalItems += qty;
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${item.code}</td>
-                    <td>${item.name}</td>
-                    <td style="text-align: center;">${qty}</td>
-                    <td style="text-align: right;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            const currentDeliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0.00;
-            const grandTotal = subtotal + currentDeliveryFee;
-
-            document.getElementById('receipt-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('receipt-delivery').innerText = `R$ ${currentDeliveryFee.toFixed(2).replace('.', ',')}`;
-            document.getElementById('receipt-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('mobile-count').innerText = totalItems;
-            document.getElementById('mobile-total').innerText = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
-        }
-
-        function clearCart() {
-            if (Object.keys(cart).length === 0) return;
-            if (confirm("Deseja realmente limpar todo o seu pedido?")) {
-                cart = {};
-                renderProducts();
-                updateReceipt();
-            }
-        }
-
-        function setDeliveryType(type) {
-            deliveryType = type;
-            const addrBox = document.getElementById('address-fields');
-            const btnEntrega = document.getElementById('opt-entrega');
-            const btnRetirada = document.getElementById('opt-retirada');
-
-            if (type === 'entrega') {
-                btnEntrega.classList.add('active');
-                btnRetirada.classList.remove('active');
-                addrBox.style.display = 'block';
-            } else {
-                btnRetirada.classList.add('active');
-                btnEntrega.classList.remove('active');
-                addrBox.style.display = 'none';
-            }
-            updateReceipt();
-        }
-
-        function setPayment(method) {
-            paymentMethod = method;
-            document.getElementById('pay-pix').classList.remove('active');
-            document.getElementById('pay-credito').classList.remove('active');
-            document.getElementById('pay-debito').classList.remove('active');
-            
-            const pixAlert = document.getElementById('pix-alert');
-
-            if (method === 'PIX') {
-                document.getElementById('pay-pix').classList.add('active');
-                pixAlert.style.display = 'block';
-            } else if (method === 'Cartão de Crédito') {
-                document.getElementById('pay-credito').classList.add('active');
-                pixAlert.style.display = 'none';
-            } else {
-                document.getElementById('pay-debito').classList.add('active');
-                pixAlert.style.display = 'none';
-            }
-        }
-
-        function toggleCardapioImg() {
-            const img = document.getElementById('img-cardapio-oficial');
-            img.style.display = (img.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function scrollToCart() {
-            document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function sendOrder() {
-            const cartKeys = Object.keys(cart);
-            if (cartKeys.length === 0) {
-                alert("Por favor, selecione pelo menos 1 item para continuar!");
-                return;
-            }
-
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-
-            if (!name) {
-                alert("Por favor, informe seu Nome.");
-                document.getElementById('cust-name').focus();
-                return;
-            }
-            if (!phone) {
-                alert("Por favor, informe seu Telefone de contato.");
-                document.getElementById('cust-phone').focus();
-                return;
-            }
-
-            let addressText = "Retirada no Balcão do Estabelecimento";
-            if (deliveryType === 'entrega') {
-                const street = document.getElementById('addr-street').value.trim();
-                const num = document.getElementById('addr-num').value.trim();
-                const bairro = document.getElementById('addr-bairro').value.trim();
-                const cep = document.getElementById('addr-cep').value.trim();
-                const comp = document.getElementById('addr-comp').value.trim();
-                const ref = document.getElementById('addr-ref').value.trim();
-
-                if (!street || !num || !bairro) {
-                    alert("Por favor, preencha a Rua, Número e Bairro para entrega.");
-                    return;
-                }
-
-                addressText = `${street}, Nº ${num} - ${bairro}`;
-                if (cep) addressText += ` (CEP: ${cep})`;
-                if (comp) addressText += ` - Comp: ${comp}`;
-                if (ref) addressText += ` (Ref: ${ref})`;
-            }
-
-            let subtotal = 0;
-            let itemsMessage = "";
-
-            cartKeys.forEach(idx => {
-                const item = defaultProducts[idx];
-                const qty = cart[idx];
-                const itemTotal = item.price * qty;
-                subtotal += itemTotal;
-                itemsMessage += `${qty}x ${item.name} — R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
-            });
-
-            const deliveryFee = (deliveryType === 'entrega') ? config.deliveryFee : 0;
-            const total = subtotal + deliveryFee;
-
-            let msg = `🍕 *FAVORITA PIZZARIA*\n`;
-            msg += `*NOVO PEDIDO*\n\n`;
-            msg += `*Cliente:* ${name}\n`;
-            msg += `*Telefone:* ${phone}\n\n`;
-            msg += `*PRODUTOS:*\n${itemsMessage}\n`;
-            msg += `*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
-            msg += `*Entrega:* R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
-            msg += `*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
-            msg += `*Entrega ou retirada:* ${deliveryType === 'entrega' ? 'Entrega em Casa' : 'Retirar no Local'}\n`;
-            msg += `*Endereço:* ${addressText}\n`;
-            msg += `*Pagamento:* ${paymentMethod}\n\n`;
-            msg += `Aguardo confirmação do pedido!`;
-
-            const encodedMsg = encodeURIComponent(msg);
-            window.open(`https://wa.me/${config.whatsappPhone}?text=${encodedMsg}`, '_blank');
-        }
-
-        function openAdmin() {
-            document.getElementById('admin-modal').style.display = 'flex';
-        }
-
-        function closeAdmin() {
-            document.getElementById('admin-modal').style.display = 'none';
-        }
-
-        function updateAdminConfigs() {
-            config.status = document.getElementById('adm-status').value;
-            config.deliveryFee = parseFloat(document.getElementById('adm-delivery').value) || 0;
-            config.whatsappPhone = document.getElementById('adm-phone').value.trim();
-
-            const badge = document.getElementById('status-badge');
-            if (config.status === 'ABERTO') {
-                badge.className = 'badge-status';
-                badge.innerHTML = `<i class="fa-solid fa-store"></i> ESTABELECIMENTO ABERTO`;
-            } else {
-                badge.className = 'badge-status fechado';
-                badge.innerHTML = `<i class="fa-solid fa-store-slash"></i> ESTABELECIMENTO FECHADO`;
-            }
-
-            updateReceipt();
-        }
-    </script>
-</body>
-</html>
