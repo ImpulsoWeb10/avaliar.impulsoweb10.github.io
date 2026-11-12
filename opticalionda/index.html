@@ -1,229 +1,527 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Óptica Lionda | Avalie nossa Qualidade</title>
-
-    <meta name="description" content="Especialistas em Lentes de Grau e Armações Modernas. Sua saúde visual é nossa prioridade na Óptica Lionda.">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 15px;
-        }
-
-        .container {
-            max-width: 420px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(12px);
-            padding: 30px 20px;
-            border-radius: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            text-align: center;
-        }
-
-        /* LOGO COM RESPIRO AJUSTADO */
-        .logo { 
-            width: 160px; 
-            height: auto; 
-            object-fit: contain; 
-            padding: 5px;
-            border-radius: 22px;
-            border: 3px solid #facc15; 
-            background: white; 
-            margin: 0 auto 15px;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: block;
-        }
-
-        /* DIMINUI NA SEGUNDA TELA */
-        .logo-compacta {
-            transform: scale(0.7);
-            margin-bottom: -10px;
-        }
-
-        h1 { font-size: 24px; margin-bottom: 2px; color: #fff; }
-        h2 { font-size: 15px; color: #facc15; margin-bottom: 20px; font-weight: normal; }
-        
-        #instrucao { font-size: 16px; font-weight: 700; color: #facc15; min-height: 24px; margin-bottom: 15px; }
-
-        .rating-box { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; }
-        .star-btn {
-            font-size: 40px; color: #475569; cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .star-btn.active { color: #facc15; transform: scale(1.15); text-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
-
-        /* IMAGEM QUE SURGE DO ZERO E PULSA */
-        .img-comemorativa {
-            width: 90%; 
-            height: 140px; 
-            object-fit: cover; 
-            border-radius: 20px;
-            margin: 0 auto 15px; 
-            border: 2px solid #facc15;
-            display: block;
-            opacity: 0;
-            transform: scale(0);
-            animation: surgirEPulsar 2.5s forwards ease-out;
-        }
-
-        @keyframes surgirEPulsar {
-            0% { opacity: 0; transform: scale(0); }
-            40% { opacity: 1; transform: scale(1.05); }
-            60% { transform: scale(1); }
-            80% { transform: scale(1.03); box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        textarea {
-            width: 100%; background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 15px;
-            color: white; padding: 12px; margin-bottom: 12px;
-            resize: none; outline: none; font-family: inherit;
-        }
-
-        .botao {
-            position: relative; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 16px; border-radius: 50px;
-            font-weight: 800; font-size: 15px; text-decoration: none;
-            transition: 0.3s; border: none; cursor: pointer;
-            margin-bottom: 10px;
-        }
-
-        /* BOTAO AMARELO COM BRILHO E PULSO */
-        .google { background: #facc15; color: #000; animation: pulsarBtn 2s infinite; }
-        .google::after {
-            content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-            transform: skewX(-20deg); animation: brilhoPassando 3s infinite;
-        }
-
-        .whatsapp { background: #22c55e; color: white; }
-
-        @keyframes brilhoPassando { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
-        @keyframes pulsarBtn { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-
-        .hidden { display: none; }
-
-        .footer { 
-            margin-top: 25px; font-size: 11px; color: #cbd5e1; 
-            border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;
-            line-height: 1.6;
-        }
-        
-        .venda-link { color: #facc15; text-decoration: none; font-weight: 700; font-size: 12px; display: inline-block; margin-top: 10px;}
-        .marca-footer { color: #22c55e; text-decoration: none; font-weight: 800; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="Ótica Lionda em Itaquaquecetuba - SP. Óculos de grau, óculos de sol, lentes multifocais, lentes de contato e atendimento especializado no Perobal e Parque Piratininga.">
+<meta name="keywords" content="Ótica em Itaquaquecetuba, Ótica Lionda, óculos de grau, óculos de sol, lentes multifocais, lentes de contato, Perobal, Parque Piratininga">
+<meta name="author" content="ImpulsoWeb10">
+<link rel="canonical" href="https://avaliar.impulsoweb10.com.br/opticalionda/">
+<link rel="icon" href="favicon.ico">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://avaliar.impulsoweb10.com.br/opticalionda/">
+<meta property="og:title" content="Ótica em Itaquaquecetuba - SP | Ótica Lionda">
+<meta property="og:description" content="Ótica Lionda em Itaquaquecetuba - SP. Óculos de grau, óculos de sol, lentes multifocais, lentes de contato e atendimento especializado no Perobal e Parque Piratininga.">
+<meta property="og:image" content="https://avaliar.impulsoweb10.com.br/opticalionda/logo.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<title>Ótica em Itaquaquecetuba - SP | Ótica Lionda</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Optician",
+  "name": "Ótica Lionda",
+  "image": "https://avaliar.impulsoweb10.com.br/opticalionda/logo.png",
+  "@id": "https://avaliar.impulsoweb10.com.br/opticalionda/#store",
+  "url": "https://avaliar.impulsoweb10.com.br/opticalionda/",
+  "telephone": "+5511999822103",
+  "description": "Estilo, conforto e cuidado completo para a sua visão em Itaquaquecetuba",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Estrada Pedro da Cunha Albuquerque Lopes, 2235",
+    "addressLocality": "Itaquaquecetuba",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "18:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:30", "closes": "16:00" }
+  ],
+  "sameAs": ["https://www.instagram.com/opticalionda2/"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Quais são os endereços e horários de atendimento?", "acceptedAnswer": { "@type": "Answer", "text": "Atendemos na Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal (Seg a Sex das 09:30 às 18:30 e Sáb das 09:30 às 16:00) e também na R. Joaquim Caetano - Parque Piratininga (Seg a Sex das 09:00 às 18:00 e Sáb das 09:00 às 15:00)." } },
+    { "@type": "Question", "name": "Vocês fazem orçamento de receita pelo WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! Basta enviar uma foto legível da sua receita oftalmológica pelo nosso WhatsApp que nossa equipe apresenta as melhores opções de lentes e armações para você." } },
+    { "@type": "Question", "name": "Quais tipos de lentes e armações vocês trabalham?", "acceptedAnswer": { "@type": "Answer", "text": "Trabalhamos com lentes visão simples, multifocais, antirreflexo, filtro de luz azul, fotossensíveis, lentes de contato e diversas marcas de armações de grau e solares." } },
+    { "@type": "Question", "name": "Vocês realizam ajustes e manutenção em óculos?", "acceptedAnswer": { "@type": "Answer", "text": "Sim, realizamos ajustes anatômicos, troca de plaquetas, parafusos e pequenos reparos para garantir o máximo conforto no uso diário do seu óculos." } }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0f172a;--primary-2:#1e293b;--accent:#eab308;--accent-soft:#fde047;--bg:#f8fafc;--muted:#94a3b8;--text-soft:#cbd5e1}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{width:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--primary);color:var(--bg);min-height:100vh;min-height:100dvh;width:100%;display:flex;flex-direction:column;align-items:center;padding:max(.7rem,env(safe-area-inset-top)) .6rem max(.7rem,env(safe-area-inset-bottom));overflow-x:hidden;position:relative;perspective:1200px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 20%, rgba(234,179,8,0.09) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%, rgba(30,41,59,0.8) 0%, transparent 60%);pointer-events:none;z-index:0}
+.app-wrapper{display:flex;flex-direction:column;align-items:center;width:100%;max-width:480px;margin:auto 0;position:relative;z-index:1}
+.device-frame{position:relative;z-index:1;width:100%;background:linear-gradient(175deg,var(--primary-2) 0%,var(--primary) 100%);border:2px solid #ffffff;border-radius:24px;box-shadow:0 0 10px #ffffff,0 0 20px rgba(255,255,255,.8),0 0 30px rgba(255,255,255,.35),0 15px 35px rgba(0,0,0,.6);padding:1.3rem 1.2rem 1.1rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175,.885,.32,1.275);will-change:transform}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.9rem;width:100%;transform-style:preserve-3d;backface-visibility:hidden}
+.layer-back{transform:translateZ(15px);transform-style:preserve-3d}
+.layer-mid{transform:translateZ(35px);transform-style:preserve-3d}
+.layer-front{transform:translateZ(55px);transform-style:preserve-3d;filter:drop-shadow(0 10px 15px rgba(0,0,0,.5))}
+.layer-pop{transform:translateZ(75px);transform-style:preserve-3d;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6))}
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.logo-frame{position:relative;border-radius:14px;overflow:hidden;display:inline-block;animation:logo-pulse 2.6s ease-in-out infinite}
+.logo-frame::after{content:'';position:absolute;top:0;left:-110%;width:55%;height:100%;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:skewX(-18deg);animation:logo-shimmer 2.6s ease-in-out infinite;pointer-events:none;z-index:2}
+@keyframes logo-pulse{0%{box-shadow:0 0 0 0 rgba(234,179,8,.55),0 6px 20px rgba(234,179,8,.25)}55%{box-shadow:0 0 0 12px rgba(234,179,8,0),0 6px 20px rgba(234,179,8,.1)}100%{box-shadow:0 0 0 0 rgba(234,179,8,0),0 6px 20px rgba(234,179,8,.25)}}
+@keyframes logo-shimmer{0%{left:-110%}45%,100%{left:160%}}
+.logo-img{display:block;width:160px;height:auto;max-height:72px;border-radius:12px;border:2px solid rgba(234,179,8,.45);object-fit:contain;background:rgba(234,179,8,.06);position:relative;z-index:1}
+.logo-img-fallback{width:160px;height:66px;border-radius:12px;border:2px solid rgba(234,179,8,.45);background:rgba(234,179,8,.06);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--accent);font-weight:600;letter-spacing:.08em;position:relative;z-index:1}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--bg);letter-spacing:.06em;line-height:1.1}
+.brand em{color:var(--accent);font-style:italic}
+.tagline{margin-top:.3rem;font-size:.78rem;color:var(--muted);font-weight:400;letter-spacing:.02em;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;color:#e2e8f0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.28rem .65rem}
+.chip svg{width:13px;height:13px;flex-shrink:0;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stars-cta{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-decoration:none;padding:.35rem .9rem .45rem;border-radius:18px;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.stars-cta:active{transform:scale(.97)}
+.stars-row{display:flex;align-items:center;gap:.3rem;justify-content:center}
+.star{font-size:2.2rem;line-height:1;color:#ffd700;text-shadow:0 0 12px rgba(255,215,0,.5);animation:star-wave 2.6s ease-in-out infinite}
+.star:nth-child(2){animation-delay:.12s}
+.star:nth-child(3){animation-delay:.24s}
+.star:nth-child(4){animation-delay:.36s}
+.star:nth-child(5){animation-delay:.48s}
+@keyframes star-wave{0%,55%,100%{transform:translateY(0) scale(1);filter:brightness(1)}25%{transform:translateY(-5px) scale(1.14);filter:brightness(1.3)}}
+.stars-label{font-size:.82rem;font-weight:700;color:#ffffff;letter-spacing:.01em}
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
+.btn-act{display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:46px;border-radius:50px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;text-decoration:none;transition:transform .2s}
+.btn-act:hover{transform:translateY(-2px)}
+.btn-call{background:#22c55e;color:#04210f}
+.btn-wa{background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366}
+.btn-pix{grid-column:1 / -1;background:#0e2a2a;color:#d5f7f3;border:1.5px solid #32bcad;cursor:pointer;width:100%}
+.social-row{display:flex;gap:.9rem;justify-content:center;align-items:flex-start}
+.social-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;transition:transform .2s}
+.social-btn:hover{transform:translateY(-3px)}
+.social-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.3);transition:border-color .2s,box-shadow .2s}
+.social-btn:hover .social-icon{border-color:rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.social-icon svg{width:20px;height:20px}
+.social-label{font-size:.68rem;color:var(--muted);letter-spacing:.03em}
+.hours{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.74rem;color:#e2e8f0;font-weight:500;line-height:1.35}
+.hours .dot{width:8px;height:8px;border-radius:50%;background:#94a3b8;flex-shrink:0}
+.hours.open .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
+.hours.closed .dot{background:#f87171}
+.address{font-size:.74rem;color:var(--muted);line-height:1.4;cursor:pointer;transition:color .2s;position:relative;display:inline-block}
+.address:hover{color:var(--accent-soft)}
+.address::after{content:'(Copiar)';display:block;font-size:.6rem;color:var(--accent);opacity:.8;margin-top:-1px}
+.ticker-banner{width:100%;overflow:hidden;background:rgba(234,179,8,.14);border:1px solid rgba(234,179,8,.4);border-radius:8px;padding:.35rem 0;display:flex}
+.ticker-track{display:flex;width:max-content;animation:infinite-scroll 40s linear infinite}
+.ticker-item{font-size:.76rem;color:#fef3c7;font-weight:500;letter-spacing:.03em;padding-right:2rem;white-space:nowrap}
+@keyframes infinite-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.logo-frame,.logo-frame::after,.star,.ticker-track,.btn-gyro{animation:none}}
+.footer{font-size:.72rem;color:#e2e8f0;display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:.7rem}
+.footer-promo{font-size:.74rem;color:#ffffff;text-align:center}
+.footer-promo a{color:var(--accent-soft);text-decoration:none;font-weight:700;border-bottom:1px solid var(--accent-soft);padding-bottom:1px}
+.footer-promo a:hover{color:#fff;border-color:#fff}
+.footer-dev{font-size:.7rem;color:var(--text-soft);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-dev a{color:var(--accent-soft);text-decoration:none;font-weight:700}
+.footer-dev a:hover{text-decoration:underline}
+@keyframes neon-pulse{0%{box-shadow:0 0 5px rgba(234,179,8,.4);border-color:rgba(234,179,8,.5)}50%{box-shadow:0 0 15px rgba(234,179,8,.8);border-color:var(--accent-soft)}100%{box-shadow:0 0 5px rgba(234,179,8,.4);border-color:rgba(234,179,8,.5)}}
+.btn-gyro{background:rgba(255,255,255,.08);color:var(--accent-soft);border:1px solid rgba(234,179,8,.4);border-radius:14px;padding:.3rem .7rem;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:600;transition:all .3s ease;animation:neon-pulse 2s infinite ease-in-out;opacity:.7}
+.btn-gyro:hover,.btn-gyro.active{background:rgba(234,179,8,.25);color:#ffffff;opacity:1}
+.btn-gyro.active{background:linear-gradient(135deg,#eab308 0%,#ca8a04 100%);color:#0f172a;border-color:var(--accent-soft);box-shadow:0 0 20px rgba(234,179,8,.9);animation:none}
+.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(520px,100%);max-width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;border:2px solid #fff;border-bottom:none;border-radius:22px 22px 0 0;background:linear-gradient(175deg,var(--primary-2) 0%,var(--primary) 100%);color:var(--bg);padding:0;box-shadow:0 -6px 30px rgba(255,255,255,.25);font-family:'DM Sans',sans-serif}
+.sheet::backdrop{background:rgba(2,6,23,.78)}
+.sheet[open]{animation:sheet-up .28s ease-out}
+@keyframes sheet-up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet-body{padding:1.1rem 1.2rem calc(1.3rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:1.1rem}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sheet h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--bg);letter-spacing:.04em}
+.sheet h3{font-size:.9rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.sheet p{font-size:.82rem;line-height:1.55;color:var(--text-soft)}
+.sheet p strong{color:var(--bg)}
+.sheet-close{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;font-family:inherit}
+.sheet-close:hover{background:rgba(255,255,255,.18)}
+.svc-list{list-style:none;display:grid;gap:.5rem}
+.svc-list li{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:var(--bg);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.55rem .75rem;text-align:left}
+.svc-list svg{width:18px;height:18px;flex-shrink:0;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.units{display:grid;gap:.6rem}
+.unit{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.65rem .8rem;text-align:left}
+.unit-name{font-size:.84rem;font-weight:700;color:var(--bg);margin-bottom:.15rem}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#fff;border-radius:12px;border:1px solid rgba(234,179,8,.5)}
+.nav-buttons-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}
+.btn-nav-map,.btn-nav-waze{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;transition:transform .2s, box-shadow .2s;padding:0 .4rem}
+.btn-nav-map:hover,.btn-nav-waze:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.btn-nav-map{background:#1a2030;color:#ffffff;border:1.5px solid rgba(66,133,244,.6)}
+.btn-nav-waze{background:#10222a;color:#ffffff;border:1.5px solid rgba(51,204,255,.6)}
+.faq-container{display:flex;flex-direction:column;gap:.45rem}
+.faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;transition:background .2s, border-color .2s;text-align:left}
+.faq-item[open]{background:rgba(255,255,255,.08);border-color:rgba(234,179,8,.45)}
+.faq-question{font-size:.82rem;font-weight:700;color:var(--bg);padding:.65rem .8rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.6rem;user-select:none}
+.faq-question::-webkit-details-marker{display:none}
+.faq-question::after{content:'+';font-size:1.1rem;color:var(--accent);font-weight:700;flex-shrink:0}
+.faq-item[open] .faq-question::after{content:'−'}
+.faq-answer{font-size:.78rem;line-height:1.5;color:var(--text-soft);padding:.45rem .8rem .8rem;border-top:1px solid rgba(255,255,255,.06)}
+.faq-cta{display:flex;align-items:center;justify-content:center;margin-top:.65rem;min-height:40px;border-radius:50px;background:#0f2a1c;color:#d9ffe8;border:1.5px solid #25d366;font-weight:700;font-size:.78rem;text-decoration:none;padding:0 .8rem;text-align:center}
+.faq-cta:hover{background:#14391f}
+.btn-share{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:46px;background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:50px;font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer}
+.btn-share:hover{background:rgba(255,255,255,.16)}
+.toast{min-height:1.1em;text-align:center;font-size:.78rem;color:#4ade80}
+.pix-box{display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center}
+.pix-qr{background:#fff;padding:.6rem;border-radius:14px;border:2px solid #32bcad}
+.pix-qr img{display:block;width:180px;height:180px}
+.pix-info{width:100%;display:grid;gap:.45rem;text-align:left}
+.pix-info div{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:.5rem .75rem}
+.pix-info dt{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.pix-info dd{font-size:.88rem;color:var(--bg);word-break:break-all;margin-top:.1rem}
+.btn-share:disabled{opacity:.45;cursor:not-allowed}
+.bg-seo{display:none}
+@media (min-width:1024px){
+  html::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 34% 85% at 50% 50%,rgba(15,23,42,.94) 0%,rgba(15,23,42,.7) 55%,rgba(15,23,42,0) 100%),radial-gradient(ellipse 50% 40% at 50% 0%,rgba(234,179,8,.12) 0%,transparent 70%),linear-gradient(100deg,rgba(51,65,85,.5) 0%,rgba(51,65,85,0) 30%),linear-gradient(260deg,rgba(161,98,7,.3) 0%,rgba(161,98,7,0) 28%),linear-gradient(135deg,#0f172a 0%,#0b1120 50%,#111c33 100%)}
+  .bg-seo{display:flex;justify-content:space-between;align-items:stretch;position:absolute;top:2rem;left:0;right:0;height:calc(100vh - 4rem);overflow:hidden;padding:0 3vw;z-index:0;pointer-events:none;font-family:'DM Sans',sans-serif;color:rgba(248,250,252,.6)}
+  .bg-seo>div{width:clamp(190px,calc((100vw - 480px)/2 - 7vw),380px);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
+  .bg-seo>div:last-child{text-align:right}
+  .bg-seo h1,.bg-seo h2,.bg-seo p{margin:0}
+  .bg-seo h1{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;letter-spacing:.06em;line-height:1.15;color:rgba(234,179,8,.9)}
+  .bg-seo h2{margin-top:1.1rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:rgba(234,179,8,.75)}
+  .bg-seo h1+h2{margin-top:.5rem}
+  .bg-seo p{margin-top:.4rem;font-size:.74rem;line-height:1.6;letter-spacing:.01em}
+  .bg-seo .fotos{display:flex;gap:.6rem}
+  .bg-seo .fotos img{flex:1 1 0;min-width:0;width:50%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#fff;border:1px solid rgba(234,179,8,.5);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:.94}
+  .sheet{inset:0;margin:auto;border-radius:22px;border-bottom:2px solid #fff;max-height:86vh;max-height:86dvh}
+}
+</style>
 </head>
 <body>
-
-<div class="container">
-    <img src="opticalionda.png" class="logo" id="main-logo" alt="Óptica Lionda">
-
-    <h1 id="main-title">Óptica Lionda</h1>
-    <h2 id="sub-title">Excelência em Saúde Visual</h2>
-    
-    <p id="instrucao">Como foi sua experiência hoje?</p>
-
-    <div class="rating-box">
-        <i class="fas fa-star star-btn" onmouseover="setFrase(1)" onclick="avaliar(1)"></i>
-        <i class="fas fa-star star-btn" onmouseover="setFrase(2)" onclick="avaliar(2)"></i>
-        <i class="fas fa-star star-btn" onmouseover="setFrase(3)" onclick="avaliar(3)"></i>
-        <i class="fas fa-star star-btn" onmouseover="setFrase(4)" onclick="avaliar(4)"></i>
-        <i class="fas fa-star star-btn" onmouseover="setFrase(5)" onclick="avaliar(5)"></i>
-    </div>
-
-    <div id="feedback-bom" class="hidden">
-        <img src="casal-oculos.png" class="img-comemorativa" id="img-sucesso">
-        <p style="font-size: 17px; margin-bottom: 15px;">Ficamos muito felizes! 🎉</p>
- <a href="https://www.google.com/maps/place/%C3%93tica+Lionda/@-23.4210109,-46.3495786,17z/data=!4m8!3m7!1s0x94ce7d399227cfdd:0xd2612d44d239ba82!8m2!3d-23.4210109!4d-46.3495786!9m1!1b1!16s%2Fg%2F11k6sxfh2t?entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D"
-            <i class="fab fa-google"></i> AVALIAR NO GOOGLE
-        </a>
-    </div>
-
-    <div id="feedback-ruim" class="hidden">
-        <p style="font-size: 18px; margin-bottom: 12px; color: #facc15;" id="msg-desculpa">Sentimos muito... 😔</p>
-        <textarea id="texto-melhoria" rows="3" placeholder="Conte para nós como podemos melhorar..."></textarea>
-        <button onclick="enviarWhatsApp()" class="botao whatsapp">
-            <i class="fab fa-whatsapp"></i> FALAR COM O GERENTE
-        </button>
-    </div>
-
-    <div class="footer">
+<div class="app-wrapper">
+  <div class="device-frame" id="deviceFrame">
+    <div class="page">
+      <div class="logo-wrap layer-mid">
+        <div class="logo-frame">
+          <img class="logo-img" src="logo.png" alt="Logo Ótica Lionda" width="160" height="72" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="logo-img-fallback" style="display:none;">Ótica Lionda</div>
+        </div>
         <div>
-            <b>📍 R. Joaquim Caetano - Parque Piratininga</b><br>
-            Itaquaquecetuba - SP, 08583-670<br>
-            📞 Telefone: (11) 97131-9233
+          <div class="brand">Ótica <em>Lionda</em></div>
+          <div class="tagline">Estilo, conforto e cuidado completo para a sua visão em Itaquaquecetuba</div>
         </div>
-
-        <a href="https://wa.me/5511954950044?text=Olá, quero um link 'assim' personalizado para minha empresa!" target="_blank" class="venda-link">
-            Deseja um link "assim" personalizado para sua empresa? Saiba mais
+      </div>
+      <div class="chips layer-back" aria-label="Produtos e serviços">
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Óculos de grau</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Óculos de sol</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>Lentes multifocais</span>
+        <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>Lentes de contato</span>
+      </div>
+      <div class="layer-pop" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+        <a href="https://g.page/r/CdJhLS1E6Tm6EBE/review" class="stars-cta" target="_blank" rel="noopener">
+          <span class="stars-row" aria-hidden="true"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span>
+          <span class="stars-label">Toque nas estrelas e avalie no Google</span>
         </a>
-
-        <div style="margin-top: 15px; opacity: 0.8;">
-            © 2026 | Desenvolvido por <a href="https://wa.me/5511954950044" target="_blank" class="marca-footer">ImpulsoWeb10</a>
+      </div>
+      <div class="cta-row layer-front">
+        <a href="tel:+5511999822103" class="btn-act btn-call">Ligar agora</a>
+        <a href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20%C3%93tica%20Lionda%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento." class="btn-act btn-wa" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="btn-act btn-pix" onclick="abrirPix()">Pagar com Pix</button>
+      </div>
+      <div class="social-row layer-front">
+        <a href="https://www.instagram.com/opticalionda2/" class="social-btn" target="_blank" rel="noopener">
+          <div class="social-icon" style="background:#2a1a2e;"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#cc2366" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="#cc2366" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="#cc2366"/></svg></div>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=%C3%93tica+Lionda+Estrada+Pedro+da+Cunha+Albuquerque+Lopes+2235+Itaquaquecetuba" class="social-btn" target="_blank" rel="noopener">
+          <div class="social-icon" style="background:#1a2030;"><svg viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span class="social-label">Maps</span>
+        </a>
+        <button type="button" class="social-btn" onclick="salvarContato()">
+          <div class="social-icon" style="background:#1a2a1a;"><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <span class="social-label">Salvar</span>
+        </button>
+        <button type="button" class="social-btn" onclick="abrirMais()">
+          <div class="social-icon" style="background:#2a2310;"><svg viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          <span class="social-label">Ver mais</span>
+        </button>
+      </div>
+      <div class="hours layer-back" id="hours"><span class="dot"></span><span id="hoursText">Perobal · Seg a sex 9h30–18h30 · Sáb 9h30–16h</span></div>
+      <div class="address layer-back" onclick="copiarEndereco()">
+        <span>Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal</span><br>Itaquaquecetuba / SP
+      </div>
+      <div class="ticker-banner layer-mid" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">Ótica Lionda • Óculos de grau • Óculos de sol • Lentes multifocais • Lentes de contato • Orçamento pelo WhatsApp • Perobal e Parque Piratininga • Itaquaquecetuba / SP •&nbsp;</span>
+          <span class="ticker-item">Ótica Lionda • Óculos de grau • Óculos de sol • Lentes multifocais • Lentes de contato • Orçamento pelo WhatsApp • Perobal e Parque Piratininga • Itaquaquecetuba / SP •&nbsp;</span>
         </div>
+      </div>
+      <footer class="footer layer-back">
+        <p class="footer-promo">Quer um link como este? <a href="https://wa.me/5511954950044" target="_blank" rel="noopener">Saiba mais</a></p>
+        <p class="footer-dev"><span>Desenvolvido por <a href="https://avaliar.impulsoweb10.com.br" target="_blank" rel="noopener">ImpulsoWeb10</a></span><button class="btn-gyro" id="toggleGyro" type="button" onclick="alternarGiroscopio()">Efeito 3D: OFF</button></p>
+      </footer>
     </div>
+  </div>
 </div>
 
+<dialog class="sheet" id="sheetMais" aria-label="Mais informações da Ótica Lionda">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <h2>Ótica Lionda</h2>
+      <button type="button" class="sheet-close" onclick="fecharMais()" aria-label="Fechar">×</button>
+    </div>
+    <section>
+      <h3>O que você encontra</h3>
+      <ul class="svc-list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Armações de grau e óculos solares de diversas marcas</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>Lentes visão simples, multifocais, antirreflexo, filtro de luz azul e fotossensíveis</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>Lentes de contato</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.6-.6-2.6Z"/></svg>Ajustes e manutenção para mais conforto no dia a dia</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>Orçamento rápido pelo WhatsApp: envie a foto da sua receita</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Unidades e horários</h3>
+      <div class="units">
+        <div class="unit">
+          <div class="unit-name">Unidade Perobal</div>
+          <p>Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal, Itaquaquecetuba - SP<br><strong>Seg a Sex:</strong> 09:30 às 18:30 · <strong>Sáb:</strong> 09:30 às 16:00</p>
+          <div class="nav-buttons-grid">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%C3%93tica+Lionda+Estrada+Pedro+da+Cunha+Albuquerque+Lopes+2235+Itaquaquecetuba" class="btn-nav-map" target="_blank" rel="noopener">Abrir no Google</a>
+            <a href="https://waze.com/ul?q=Estrada%20Pedro%20da%20Cunha%20Albuquerque%20Lopes%2C%202235%2C%20Perobal%2C%20Itaquaquecetuba%20-%20SP" class="btn-nav-waze" target="_blank" rel="noopener">Abrir no Waze</a>
+          </div>
+        </div>
+        <div class="unit">
+          <div class="unit-name">Unidade Parque Piratininga</div>
+          <p>R. Joaquim Caetano - Parque Piratininga, Itaquaquecetuba - SP<br><strong>Seg a Sex:</strong> 09:00 às 18:00 · <strong>Sáb:</strong> 09:00 às 15:00</p>
+          <div class="nav-buttons-grid">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%C3%93tica+Lionda+R.+Joaquim+Caetano+Parque+Piratininga+Itaquaquecetuba" class="btn-nav-map" target="_blank" rel="noopener">Abrir no Google</a>
+            <a href="https://waze.com/ul?q=R.%20Joaquim%20Caetano%2C%20Parque%20Piratininga%2C%20Itaquaquecetuba%20-%20SP" class="btn-nav-waze" target="_blank" rel="noopener">Abrir no Waze</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h3>Perguntas Frequentes (FAQ)</h3>
+      <div class="faq-container">
+        <details class="faq-item">
+          <summary class="faq-question"><span>📍 Quais são os endereços e horários de atendimento?</span></summary>
+          <div class="faq-answer">Atendemos na Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal (Seg a Sex das 09:30 às 18:30 e Sáb das 09:30 às 16:00) e também na R. Joaquim Caetano - Parque Piratininga (Seg a Sex das 09:00 às 18:00 e Sáb das 09:00 às 15:00).
+            <a class="faq-cta" href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20o%20hor%C3%A1rio%20de%20atendimento%20da%20%C3%93tica%20Lionda." target="_blank" rel="noopener">Falar com a Unidade Perobal</a>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question"><span>👓 Vocês fazem orçamento de receita pelo WhatsApp?</span></summary>
+          <div class="faq-answer">Sim! Basta enviar uma foto legível da sua receita oftalmológica pelo nosso WhatsApp que nossa equipe apresenta as melhores opções de lentes e armações para você.
+            <a class="faq-cta" href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Gostaria%20de%20enviar%20minha%20receita%20para%20fazer%20um%20or%C3%A7amento%20de%20%C3%B3culos." target="_blank" rel="noopener">Enviar Minha Receita</a>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question"><span>🕶️ Quais tipos de lentes e armações vocês trabalham?</span></summary>
+          <div class="faq-answer">Trabalhamos com lentes visão simples, multifocais, antirreflexo, filtro de luz azul, fotossensíveis, lentes de contato e diversas marcas de armações de grau e solares.
+            <a class="faq-cta" href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20os%20modelos%20de%20arma%C3%A7%C3%B5es%20e%20tipos%20de%20lentes%20dispon%C3%ADveis." target="_blank" rel="noopener">Ver Modelos e Lentes</a>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question"><span>🛠️ Vocês realizam ajustes e manutenção em óculos?</span></summary>
+          <div class="faq-answer">Sim, realizamos ajustes anatômicos, troca de plaquetas, parafusos e pequenos reparos para garantir o máximo conforto no uso diário do seu óculos.
+            <a class="faq-cta" href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Preciso%20fazer%20um%20ajuste%2Fmanuten%C3%A7%C3%A3o%20nos%20meus%20%C3%B3culos." target="_blank" rel="noopener">Agendar Ajuste</a>
+          </div>
+        </details>
+      </div>
+    </section>
+    <section class="gallery" id="gallery">
+      <img src="fachada-otica-lionda-itaquaquecetuba.webp" alt="Fachada da Ótica Lionda no Perobal, Itaquaquecetuba - SP" loading="lazy" decoding="async" onerror="this.remove()">
+      <img src="armacoes-oculos-de-grau-otica-lionda.webp" alt="Armações de óculos de grau na Ótica Lionda em Itaquaquecetuba" loading="lazy" decoding="async" onerror="this.remove()">
+      <img src="oculos-de-sol-otica-lionda.webp" alt="Óculos de sol na Ótica Lionda em Itaquaquecetuba" loading="lazy" decoding="async" onerror="this.remove()">
+      <img src="atendimento-otica-lionda.webp" alt="Atendimento especializado na Ótica Lionda em Itaquaquecetuba - SP" loading="lazy" decoding="async" onerror="this.remove()">
+    </section>
+    <button type="button" class="btn-share" onclick="compartilhar()">Compartilhar este link</button>
+    <p class="toast" id="toast" role="status"></p>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sheetPix" aria-label="Pagamento via Pix">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <h2>Pagar com Pix</h2>
+      <button type="button" class="sheet-close" onclick="fecharPix()" aria-label="Fechar">×</button>
+    </div>
+    <div class="pix-box">
+      <div id="pixQrWrap" class="pix-qr" style="display:none;"><img id="pixQr" alt="QR Code Pix da Ótica Lionda" width="180" height="180"></div>
+      <dl class="pix-info" id="pixInfo"></dl>
+      <p id="pixVazio">Os dados do Pix estarão disponíveis em breve. Para pagar agora, fale conosco pelo WhatsApp.</p>
+    </div>
+    <button type="button" class="btn-share" id="pixCopiar" onclick="copiarPix()">Copiar chave Pix</button>
+    <a class="faq-cta" href="https://wa.me/5511999822103?text=Ol%C3%A1!%20Quero%20fazer%20um%20pagamento%20via%20Pix%20na%20%C3%93tica%20Lionda." target="_blank" rel="noopener">Enviar comprovante pelo WhatsApp</a>
+    <p class="toast" id="toastPix" role="status"></p>
+  </div>
+</dialog>
+
+<aside class="bg-seo" aria-hidden="true">
+  <div>
+    <div class="txt">
+      <h1>Ótica Lionda</h1>
+      <h2>Ótica em Itaquaquecetuba / SP</h2>
+      <p>Estilo, conforto e cuidado completo para a sua visão. Óculos de grau, óculos de sol, lentes multifocais e lentes de contato no Perobal e no Parque Piratininga.</p>
+    </div>
+    <div class="fotos">
+      <img src="fachada-otica-lionda-itaquaquecetuba.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+      <img src="armacoes-oculos-de-grau-otica-lionda.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+    </div>
+  </div>
+</aside>
+
 <script>
-    let notaSelecionada = 0;
-    
-    const frasesAcalmar = {
-        1: "Sentimos muito. 😔 Vamos ouvir você para melhorar.",
-        2: "Sentimos muito. 😟 Sua opinião é essencial para nós.",
-        3: "Sentimos muito. 😐 Como podemos ser nota 10 para você?",
-        4: "Muito bom! 😊",
-        5: "Excelente! 😍"
-    };
+  /* Google Tag Manager: preencha o ID (ex.: "GTM-XXXXXXX") para ativar */
+  var GTM_ID = "";
+  if (GTM_ID) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    var gtmScript = document.createElement('script');
+    gtmScript.async = true;
+    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(GTM_ID);
+    document.head.appendChild(gtmScript);
+  }
 
-    function setFrase(n) {
-        if(notaSelecionada === 0) document.getElementById('instrucao').innerText = frasesAcalmar[n];
+  const PAGE_URL = location.href.split('#')[0].split('?')[0];
+  const ENDERECO = "Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal, Itaquaquecetuba - SP";
+
+  function mostrarToast(msg){
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    setTimeout(function(){ t.textContent = ''; }, 2500);
+  }
+
+  async function copiarEndereco() {
+    try { await navigator.clipboard.writeText(ENDERECO); alert("Endereço copiado!"); } catch (err) {}
+  }
+
+  const sheet = document.getElementById('sheetMais');
+  function abrirMais(){ if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open',''); }
+  function fecharMais(){ if (typeof sheet.close === 'function') sheet.close(); else sheet.removeAttribute('open'); }
+  sheet.addEventListener('click', function(e){ if (e.target === sheet) fecharMais(); });
+
+  function salvarContato(){
+    const vcard = ['BEGIN:VCARD','VERSION:3.0','FN:Ótica Lionda','ORG:Ótica Lionda','TEL;TYPE=WORK,VOICE:+5511999822103','ADR;TYPE=WORK:;;Estrada Pedro da Cunha Albuquerque Lopes, 2235;Itaquaquecetuba;SP;;Brasil','URL:' + PAGE_URL,'END:VCARD'].join('\r\n');
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'otica-lionda.vcf'; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  async function compartilhar(){
+    try {
+      if (navigator.share) { await navigator.share({ title: document.title, text: 'Ótica Lionda - Itaquaquecetuba / SP', url: PAGE_URL }); return; }
+      await navigator.clipboard.writeText(PAGE_URL); mostrarToast('Link copiado!');
+    } catch (err) {}
+  }
+
+  /* PIX: preencha os dados abaixo. Campos vazios não aparecem. */
+  const PIX = {
+    chave: "",        // chave Pix (CPF/CNPJ, telefone, e-mail ou aleatória)
+    tipo: "",         // ex.: "CNPJ", "Celular", "E-mail", "Chave aleatória"
+    titular: "",      // nome do recebedor
+    banco: "",        // ex.: "Nubank"
+    agencia: "",
+    conta: "",
+    qrcode: ""        // opcional: caminho da imagem do QR Code, ex.: "pix-qrcode.png"
+  };
+  const sheetPix = document.getElementById('sheetPix');
+  function abrirPix(){
+    const info = document.getElementById('pixInfo');
+    const campos = [['Tipo de chave', PIX.tipo], ['Chave Pix', PIX.chave], ['Titular', PIX.titular], ['Banco', PIX.banco], ['Agência', PIX.agencia], ['Conta', PIX.conta]];
+    info.innerHTML = '';
+    let tem = false;
+    campos.forEach(function(c){
+      if (!c[1]) return;
+      tem = true;
+      const d = document.createElement('div');
+      const dt = document.createElement('dt'); dt.textContent = c[0];
+      const dd = document.createElement('dd'); dd.textContent = c[1];
+      d.appendChild(dt); d.appendChild(dd); info.appendChild(d);
+    });
+    document.getElementById('pixVazio').style.display = tem ? 'none' : 'block';
+    document.getElementById('pixCopiar').disabled = !PIX.chave;
+    const wrap = document.getElementById('pixQrWrap');
+    if (PIX.qrcode) { document.getElementById('pixQr').src = PIX.qrcode; wrap.style.display = 'block'; } else { wrap.style.display = 'none'; }
+    if (typeof sheetPix.showModal === 'function') sheetPix.showModal(); else sheetPix.setAttribute('open','');
+  }
+  function fecharPix(){ if (typeof sheetPix.close === 'function') sheetPix.close(); else sheetPix.removeAttribute('open'); }
+  sheetPix.addEventListener('click', function(e){ if (e.target === sheetPix) fecharPix(); });
+  async function copiarPix(){
+    if (!PIX.chave) return;
+    const t = document.getElementById('toastPix');
+    try { await navigator.clipboard.writeText(PIX.chave); t.textContent = 'Chave Pix copiada!'; }
+    catch (err) { t.textContent = 'Não foi possível copiar. Copie manualmente.'; }
+    setTimeout(function(){ t.textContent = ''; }, 2500);
+  }
+
+  /* Status aberto/fechado (unidade Perobal, horário de Brasília) */
+  function atualizarHorario(){
+    const box = document.getElementById('hours');
+    const txt = document.getElementById('hoursText');
+    if (!box || !txt) return;
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', { timeZone:'America/Sao_Paulo', weekday:'short', hour:'2-digit', minute:'2-digit', hour12:false }).formatToParts(new Date());
+      const get = function(t){ return (parts.find(function(p){ return p.type === t; }) || {}).value; };
+      const dia = get('weekday');
+      const min = (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10);
+      let fecha = null, fechaTxt = '';
+      if (['Mon','Tue','Wed','Thu','Fri'].indexOf(dia) > -1) { fecha = 18 * 60 + 30; fechaTxt = '18h30'; }
+      else if (dia === 'Sat') { fecha = 16 * 60; fechaTxt = '16h'; }
+      const abre = 9 * 60 + 30;
+      if (fecha !== null && min >= abre && min < fecha) {
+        box.className = 'hours layer-back open';
+        txt.textContent = 'Aberto agora · Perobal fecha às ' + fechaTxt;
+      } else {
+        box.className = 'hours layer-back closed';
+        txt.textContent = 'Fechado agora · Seg a sex 9h30–18h30 · Sáb 9h30–16h';
+      }
+    } catch (err) {}
+  }
+  atualizarHorario();
+  setInterval(atualizarHorario, 60000);
+
+  /* EFEITO 3D (MOUSE E GIROSCÓPIO) */
+  const frame = document.getElementById('deviceFrame');
+  const btnGyro = document.getElementById('toggleGyro');
+  let giroscopioAtivo = false;
+  const cfg = { intensidadeCelular: 1.5, intensidadeMouse: 60, anguloMax: 60 };
+
+  function handleOrientation(e){
+    if (!giroscopioAtivo || e.gamma === null || e.beta === null) return;
+    let x = Math.min(Math.max(e.gamma, -cfg.anguloMax), cfg.anguloMax);
+    let y = Math.min(Math.max(e.beta - 45, -cfg.anguloMax), cfg.anguloMax);
+    frame.style.transform = 'rotateY(' + (x * cfg.intensidadeCelular) + 'deg) rotateX(' + (-y * cfg.intensidadeCelular) + 'deg)';
+  }
+  function ativarOrientacao(){
+    window.addEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = true;
+    btnGyro.innerText = 'Efeito 3D: ON';
+    btnGyro.classList.add('active');
+  }
+  function desativarGiroscopio(){
+    window.removeEventListener('deviceorientation', handleOrientation);
+    giroscopioAtivo = false;
+    btnGyro.innerText = 'Efeito 3D: OFF';
+    btnGyro.classList.remove('active');
+    frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+  function alternarGiroscopio(){
+    if (giroscopioAtivo) { desativarGiroscopio(); return; }
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(function(state){
+        if (state === 'granted') ativarOrientacao();
+        else alert('Permissão de orientação negada.');
+      }).catch(function(){ ativarOrientacao(); });
+    } else {
+      ativarOrientacao();
     }
-
-    function avaliar(n) {
-        notaSelecionada = n;
-        const stars = document.querySelectorAll('.star-btn');
-        stars.forEach((s, i) => { i < n ? s.classList.add('active') : s.classList.remove('active'); });
-
-        document.getElementById('main-logo').classList.add('logo-compacta');
-        document.getElementById('instrucao').classList.add('hidden');
-
-        if (n >= 4) {
-            document.getElementById('feedback-bom').classList.remove('hidden');
-            document.getElementById('feedback-ruim').classList.add('hidden');
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
-        } else {
-            document.getElementById('msg-desculpa').innerText = frasesAcalmar[n];
-            document.getElementById('feedback-ruim').classList.remove('hidden');
-            document.getElementById('feedback-bom').classList.add('hidden');
-        }
-    }
-
-    function enviarWhatsApp() {
-        const texto = document.getElementById('texto-melhoria').value;
-        if (!texto) { alert("Por favor, conte-nos como podemos melhorar."); return; }
-        window.open(`https://wa.me/5511971319233?text=Feedback Óptica Lionda (${notaSelecionada} estrelas): ${texto}`, '_blank');
-    }
+  }
+  document.addEventListener('mousemove', function(e){
+    if (!giroscopioAtivo) return;
+    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+    frame.style.transform = 'rotateY(' + (x * cfg.intensidadeMouse) + 'deg) rotateX(' + (-y * cfg.intensidadeMouse) + 'deg)';
+  });
+  document.addEventListener('mouseleave', function(){
+    if (giroscopioAtivo) frame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  });
 </script>
-
 </body>
 </html>
