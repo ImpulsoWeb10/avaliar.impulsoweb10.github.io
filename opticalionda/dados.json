@@ -1,0 +1,70 @@
+{
+  "empresa": {
+    "nome": "Ótica Lionda",
+    "slug": "otica-lionda",
+    "slogan": "Estilo, conforto e cuidado completo para a sua visão em Itaquaquecetuba",
+    "cidade": "Itaquaquecetuba",
+    "estado": "SP",
+    "descricao_meta": "Ótica Lionda em Itaquaquecetuba - SP. Óculos de grau, óculos de sol, lentes multifocais, lentes de contato e atendimento especializado no Perobal e Parque Piratininga.",
+    "endereco": {
+      "rua": "Estrada Pedro da Cunha Albuquerque Lopes",
+      "numero": "2235",
+      "bairro": "Perobal",
+      "cidade": "Itaquaquecetuba",
+      "estado": "SP",
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=Ótica+Lionda+Estrada+Pedro+da+Cunha+Albuquerque+Lopes+2235+Itaquaquecetuba",
+      "google_review_url": "https://g.page/r/CdJhLS1E6Tm6EBE/review"
+    },
+    "contatos": {
+      "whatsapp_principal": "5511999822103",
+      "whatsapp_link": "https://wa.me/5511999822103?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20%C3%93tica%20Lionda%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento.",
+      "instagram": "https://www.instagram.com/opticalionda2/",
+      "cardapio_digital": "https://avaliar.impulsoweb10.com.br/opticalionda/"
+    }
+  },
+  "configuracoes_visuais": {
+    "cor_primaria": "#0f172a",
+    "cor_secundaria": "#eab308",
+    "fundo_principal": "#f8fafc",
+    "logo_imagem": "logo.png",
+    "favicon": "favicon.ico"
+  },
+  "analytics": {
+    "google_tag_manager_id": ""
+  },
+  "perguntas_frequentes": [
+    {
+      "pergunta": "Quais são os endereços e horários de atendimento?",
+      "icone": "📍",
+      "resposta": "Atendemos na Estrada Pedro da Cunha Albuquerque Lopes, 2235 - Perobal (Seg a Sex das 09:30 às 18:30 e Sáb das 09:30 às 16:00) e também na R. Joaquim Caetano - Parque Piratininga (Seg a Sex das 09:00 às 18:00 e Sáb das 09:00 às 15:00).",
+      "texto_botao_cta": "Falar com a Unidade Perobal",
+      "mensagem_whatsapp": "Olá! Gostaria de confirmar o horário de atendimento da Ótica Lionda."
+    },
+    {
+      "pergunta": "Vocês fazem orçamento de receita pelo WhatsApp?",
+      "icone": "👓",
+      "resposta": "Sim! Basta enviar uma foto legível da sua receita oftalmológica pelo nosso WhatsApp que nossa equipe apresenta as melhores opções de lentes e armações para você.",
+      "texto_botao_cta": "Enviar Minha Receita",
+      "mensagem_whatsapp": "Olá! Gostaria de enviar minha receita para fazer um orçamento de óculos."
+    },
+    {
+      "pergunta": "Quais tipos de lentes e armações vocês trabalham?",
+      "icone": "🕶️",
+      "resposta": "Trabalhamos com lentes visão simples, multifocais, antirreflexo, filtro de luz azul, fotossensíveis, lentes de contato e diversas marcas de armações de grau e solares.",
+      "texto_botao_cta": "Ver Modelos e Lentes",
+      "mensagem_whatsapp": "Olá! Gostaria de conhecer os modelos de armações e tipos de lentes disponíveis."
+    },
+    {
+      "pergunta": "Vocês realizam ajustes e manutenção em óculos?",
+      "icone": "🛠️",
+      "resposta": "Sim, realizamos ajustes anatômicos, troca de plaquetas, parafusos e pequenos reparos para garantir o máximo conforto no uso diário do seu óculos.",
+      "texto_botao_cta": "Agendar Ajuste",
+      "mensagem_whatsapp": "Olá! Preciso fazer um ajuste/manutenção nos meus óculos."
+    }
+  ],
+  "desenvolvimento": {
+    "empresa_parceira": "ImpulsoWeb10",
+    "site_parceiro": "https://avaliar.impulsoweb10.com.br",
+    "whatsapp_parceiro": "5511954950044"
+  }
+}
