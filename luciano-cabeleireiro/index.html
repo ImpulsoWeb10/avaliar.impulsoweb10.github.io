@@ -97,6 +97,18 @@
 
         .btn-modal { background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
 
+        .btn-pix {
+            background: #222;
+            color: #facc15;
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-pix:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+        }
+
         /* ÍCONES SOCIAIS REDONDOS COM LABEL */
         .social-icons {
             display: flex;
@@ -166,6 +178,47 @@
 
         .btn-confirmar { background: #22c55e; color: white; margin-top: 10px; }
 
+        .pix-alerta {
+            background: rgba(250, 204, 21, 0.12);
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            color: #facc15;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .pix-box {
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+
+        .pix-label {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .pix-valor {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        .btn-copiar {
+            background: #facc15;
+            color: #000;
+            margin-top: 6px;
+            padding: 14px;
+        }
+
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
         .footer { margin-top: 30px; font-size: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: rgba(255,255,255,0.4); }
@@ -196,8 +249,12 @@
             <i class="fab fa-google"></i> AVALIAR NO GOOGLE
         </a>
 
-        <button onclick="abrirModal()" class="botao btn-modal">
-            <i class="far fa-calendar-alt"></i> AGENDAR PRÓXIMO VISUAL
+        <a href="https://temvagaprahoje.com.br/b/luciano" class="botao btn-modal" target="_blank" rel="noopener">
+            <i class="far fa-calendar-alt"></i> AGENDAMENTO
+        </a>
+
+        <button onclick="abrirModalPix()" class="botao btn-pix">
+            <i class="fas fa-qrcode"></i> PIX
         </button>
     </div>
 
@@ -237,6 +294,37 @@
     <div class="footer">
         <div>🔒 AMBIENTE SEGURO | © 2026</div>
         <div style="margin-top: 8px;">Desenvolvido por <a href="https://impulsoweb10.com.br/" style="color:#facc15; text-decoration:none; font-weight:700;">ImpulsoWeb10</a></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalPix">
+    <div class="modal-content">
+        <h3>Pagamento via PIX</h3>
+
+        <div class="pix-alerta">
+            <i class="fas fa-exclamation-circle"></i> Conferir os dados antes de concluir!
+        </div>
+
+        <div class="pix-box">
+            <span class="pix-label">Chave PIX (E-mail)</span>
+            <div class="pix-valor" id="chavePixEmail">payonline@jim.com</div>
+        </div>
+
+        <div class="pix-box">
+            <span class="pix-label">Instituição</span>
+            <div class="pix-valor">Cloudwalk IP Ltda</div>
+        </div>
+
+        <div class="pix-box">
+            <span class="pix-label">Favorecido</span>
+            <div class="pix-valor">Luciano de araujo santos</div>
+        </div>
+
+        <button onclick="copiarChavePix()" class="botao btn-copiar" id="btnCopiarPix">
+            <i class="far fa-copy"></i> COPIAR CHAVE PIX
+        </button>
+
+        <button onclick="fecharModalPix()" style="background:transparent; color:#888; border:none; width:100%; font-size:12px; cursor:pointer; margin-top:10px;">Voltar</button>
     </div>
 </div>
 
@@ -290,6 +378,29 @@
         }
     }
 
+    function abrirModalPix() {
+        document.getElementById('modalPix').style.display = 'flex';
+    }
+
+    function fecharModalPix() {
+        document.getElementById('modalPix').style.display = 'none';
+    }
+
+    function copiarChavePix() {
+        const chave = document.getElementById('chavePixEmail').innerText;
+        const btn = document.getElementById('btnCopiarPix');
+
+        navigator.clipboard.writeText(chave).then(() => {
+            const textoOriginal = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> CHAVE COPIADA!';
+            setTimeout(() => {
+                btn.innerHTML = textoOriginal;
+            }, 2000);
+        }).catch(() => {
+            alert("Chave PIX: " + chave);
+        });
+    }
+
     function abrirModal() {
         document.getElementById('modalAgendamento').style.display = 'flex';
     }
@@ -324,7 +435,9 @@
 
     window.onclick = function(event) {
         const modal = document.getElementById('modalAgendamento');
+        const modalPix = document.getElementById('modalPix');
         if (event.target == modal) fecharModal();
+        if (event.target == modalPix) fecharModalPix();
     }
 </script>
 
